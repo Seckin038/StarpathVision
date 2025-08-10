@@ -19,13 +19,13 @@ export class UploadsService {
     clientId?: string;
   }) {
     const key = `uploads/${dto.clientId ?? 'anon'}/${randomUUID()}`;
-    const url = await this.storage.presignPut(key, dto.mime);
+    const uploadUrl = await this.storage.presignedPutObject(key, dto.mime);
     const result = await this.db.query(
       `INSERT INTO uploads (storage_key, mime, bytes, session_id, client_id)
        VALUES ($1, $2, $3, $4, $5) RETURNING id`,
       [key, dto.mime, dto.bytes, dto.sessionId ?? null, dto.clientId ?? null],
     );
-    return { uploadId: result.rows[0].id, url, key };
+    return { uploadId: result.rows[0].id, uploadUrl, key };
   }
 }
 
