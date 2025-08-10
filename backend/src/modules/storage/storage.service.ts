@@ -7,10 +7,13 @@ export class StorageService {
   private readonly client: MinioClient;
 
   constructor() {
+    const url = new URL(cfg.s3.endpoint);
+    const port = url.port ? parseInt(url.port, 10) : 9000;
+
     this.client = new MinioClient({
-      endpoint: cfg.s3.endpoint.split('//')[1],
-      port: cfg.s3.endpoint.startsWith('https') ? 443 : 80,
-      useSSL: cfg.s3.endpoint.startsWith('https'),
+      endPoint: url.hostname,
+      port,
+      useSSL: url.protocol === 'https:',
       accessKey: cfg.s3.accessKey,
       secretKey: cfg.s3.secretKey,
     });
