@@ -2,6 +2,16 @@ import { Injectable } from '@nestjs/common';
 import { PDFDocument, StandardFonts } from 'pdf-lib';
 import { ReadingsService } from '../readings/readings.service';
 
+interface CardThumb {
+  thumbnail?: Buffer;
+}
+
+interface ReadingWithCards {
+  summary: string;
+  full_text?: string | null;
+  cards?: CardThumb[];
+}
+
 // 1x1 transparent PNG used as a fallback logo/card image
 const PLACEHOLDER_IMG = Buffer.from(
   'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/woAAn8B9W410wAAAABJRU5ErkJggg==',
@@ -44,7 +54,7 @@ export class PdfService {
     }
 
     // Card thumbnails (if available)
-    const cards: any[] = (reading as any).cards || [];
+    const cards: CardThumb[] = (reading as ReadingWithCards).cards ?? [];
     if (cards.length) {
       y -= 170; // leave some space after text
       let x = 40;
