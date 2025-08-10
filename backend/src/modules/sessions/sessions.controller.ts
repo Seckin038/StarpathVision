@@ -13,7 +13,7 @@ import { Roles } from '../../common/roles.decorator';
 
 @Controller('sessions')
 @UseGuards(AuthGuard, RolesGuard)
-@Roles('manager')
+@Roles('owner', 'assistant')
 export class SessionsController {
   constructor(private readonly svc: SessionsService) {}
 
