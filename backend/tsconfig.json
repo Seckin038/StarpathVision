@@ -4,6 +4,8 @@
     "target": "es2021",
     "strict": true,
     "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
     "outDir": "dist",
     "baseUrl": ".",
     "paths": {
