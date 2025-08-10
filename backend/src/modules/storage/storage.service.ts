@@ -17,8 +17,8 @@ export class StorageService {
   }
 
   async presignedPutObject(key: string, mime: string): Promise<string> {
-    return await this.client.presignedPutObject(cfg.s3.bucket, key, 60 * 10, {
-      'content-type': mime,
+    return this.client.presignedPutObject(cfg.s3.bucket, key, 60 * 10, {
+      'Content-Type': mime,
     });
   }
 
