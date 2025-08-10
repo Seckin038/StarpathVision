@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { randomUUID } from 'crypto';
-import { query } from 'common/db';
+import { query } from '../../common/db';
 
 @Injectable()
 export class ClientsService {
