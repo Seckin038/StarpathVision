@@ -13,5 +13,10 @@ export const cfg = {
     user: process.env.SMTP_USER!,
     pass: process.env.SMTP_PASS!,
   },
+  auth: {
+    jwtSecret: process.env.JWT_SECRET!,
+    ownerPassword: process.env.OWNER_PASSWORD!,
+    assistantPassword: process.env.ASSISTANT_PASSWORD!,
+  },
 };
 
