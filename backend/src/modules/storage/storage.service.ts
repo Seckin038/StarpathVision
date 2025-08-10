@@ -19,26 +19,29 @@ export class StorageService {
     });
   }
 
-  async presignPut(key: string, mime: string): Promise<string> {
-    return (this.client as any).presignedPutObject(cfg.s3.bucket, key, 60 * 10, {
-      'Content-Type': mime,
+  async presignedPutKey(key: string, mime: string): Promise<string> {
+    return this.client.presignedPutObject(cfg.s3.bucket, key, 60 * 10, {
+      'content-type': mime,
     });
   }
 
   async getObjectBuffer(key: string): Promise<Buffer> {
-    const stream = await this.client.getObject(cfg.s3.bucket, key);
     return new Promise<Buffer>((resolve, reject) => {
       const chunks: Buffer[] = [];
-      stream.on('data', (chunk) => {
-        chunks.push(Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk));
-      });
-      stream.on('end', () => {
-        resolve(Buffer.concat(chunks));
-      });
-      stream.on('error', (error) => {
-        reject(error);
+      this.client.getObject(cfg.s3.bucket, key, (err, stream) => {
+        if (err) {
+          return reject(err);
+        }
+        stream.on('data', (chunk) => {
+          chunks.push(chunk);
+        });
+        stream.on('end', () => {
+          resolve(Buffer.concat(chunks));
+        });
+        stream.on('error', (error) => {
+          reject(error);
+        });
       });
     });
   }
 }
-
