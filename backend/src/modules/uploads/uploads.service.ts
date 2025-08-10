@@ -14,7 +14,7 @@ export class UploadsService {
     clientId?: string;
   }) {
     const key = `uploads/${dto.clientId ?? 'anon'}/${randomUUID()}`;
-    const url = await this.storage.presignPut(key, dto.mime);
+    const url = await this.storage.presignedPutObject(key, dto.mime);
     // TODO: insert uploads row in DB
     return { uploadId: randomUUID(), url, key };
   }
