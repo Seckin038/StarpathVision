@@ -21,13 +21,13 @@ export class StorageService {
     });
   }
 
-  async getObjectBuffer(key: string): Promise<Buffer> {
+  async get(key: string): Promise<Buffer> {
     const stream = await this.m.getObject(cfg.s3.bucket, key);
-    return await new Promise<Buffer>((resolve, reject) => {
-      const chunks: Buffer[] = [];
-      stream.on('data', (chunk) => chunks.push(Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk)));
+    const chunks: Buffer[] = [];
+    return new Promise<Buffer>((resolve, reject) => {
+      stream.on('data', (chunk: Buffer) => chunks.push(chunk));
       stream.on('end', () => resolve(Buffer.concat(chunks)));
-      stream.on('error', (err) => reject(err));
+      stream.on('error', (err: Error) => reject(err));
     });
   }
 }
