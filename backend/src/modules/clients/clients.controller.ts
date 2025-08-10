@@ -10,11 +10,11 @@ import {
 } from '@nestjs/common';
 import { ClientsService } from './clients.service';
 import { AuthGuard } from '../../common/guards/auth.guard';
-import { RoleGuard } from '../../common/guards/roles.guard';
+import { RolesGuard } from '../../common/guards/roles.guard';
 import { Roles } from '../../common/decorators/roles.decorator';
 
-@UseGuards(AuthGuard, RoleGuard)
-@Roles('client')
+@UseGuards(AuthGuard, RolesGuard)
+@Roles('owner')
 @Controller('clients')
 export class ClientsController {
   constructor(private readonly svc: ClientsService) {}

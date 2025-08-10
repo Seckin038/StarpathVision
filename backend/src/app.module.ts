@@ -15,7 +15,7 @@ import { MailService } from './modules/mail/mail.service';
 import { PdfService } from './modules/pdf/pdf.service';
 import { AuthModule } from './modules/auth/auth.module';
 import { AuthGuard } from './common/guards/auth.guard';
-import { RoleGuard } from './common/guards/roles.guard';
+import { RolesGuard } from './common/guards/roles.guard';
 
 @Module({
   imports: [AuthModule],
@@ -37,7 +37,7 @@ import { RoleGuard } from './common/guards/roles.guard';
     MailService,
     PdfService,
     AuthGuard,
-    RoleGuard,
+    RolesGuard,
   ],
 })
 export class AppModule {}
