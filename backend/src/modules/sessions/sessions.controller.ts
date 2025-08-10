@@ -4,7 +4,6 @@ import {
   Get,
   Param,
   Post,
-  Res,
   UseGuards,
 } from '@nestjs/common';
 import { SessionsService } from './sessions.service';

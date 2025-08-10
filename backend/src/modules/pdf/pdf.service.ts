@@ -24,7 +24,7 @@ export class PdfService {
     // Dimensions for an A4 page in PDF points
     const page = pdfDoc.addPage([595.28, 841.89]);
     const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
-    const { width, height } = page.getSize();
+    const { height } = page.getSize();
 
     // Draw logo at the top left
     try {
