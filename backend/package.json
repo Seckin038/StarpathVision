@@ -6,7 +6,7 @@
     "start": "node dist/main.js",
     "build": "tsc -p tsconfig.json",
     "start:dev": "ts-node-dev --respawn --transpile-only src/main.ts",
-    "lint": "eslint .",
+    "lint": "eslint \"src/**/*.ts\"",
     "test": "jest",
     "migrate": "bash -c 'for f in migrations/*.sql; do echo Running $f; psql \"$DATABASE_URL\" -v ON_ERROR_STOP=1 -f \"$f\"; done'"
   },
