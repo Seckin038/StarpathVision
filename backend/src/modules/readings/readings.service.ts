@@ -4,9 +4,9 @@ import { cfg } from '../../common/config';
 import { randomUUID } from 'crypto';
 
 export interface DetectedCard {
-  name: string;
-  orientation: 'upright' | 'reversed';
-  confidence: number;
+  name: string;
+  orientation: 'upright' | 'reversed';
+  confidence: number;
 }
 
 export interface InterpretationRequest {
