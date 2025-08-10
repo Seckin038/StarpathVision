@@ -23,13 +23,13 @@ export class ReadingsController {
   ) {}
 
   @Get(':id')
-  @Roles('Assistant')
+  @Roles('assistant')
   async get(@Param('id') id: string) {
     return this.svc.get(id);
   }
 
   @Post()
-  @Roles('Manager', 'Assistant')
+  @Roles('manager', 'assistant')
   async createFromVision(
     @Body() body: { cards: { name: string; orientation: string }[] },
   ) {
