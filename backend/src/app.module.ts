@@ -10,11 +10,13 @@ import { VisionService } from './modules/vision/vision.service';
 import { ReadingsController } from './modules/readings/readings.controller';
 import { ReadingsService } from './modules/readings/readings.service';
 import { StorageService } from './modules/storage/storage.service';
-import { MailService } from './modules/mail/mail.service';
+import { EmailService } from './modules/email/email.service';
 import { PdfService } from './modules/pdf/pdf.service';
-import { EmailController } from './modules/mail/email.controller';
+import { EmailController } from './modules/email/email.controller';
+import { AuthController } from './modules/auth/auth.controller';
+import { AuthService } from './modules/auth/auth.service';
 import { AuthGuard } from './common/guards/auth.guard';
-import { RoleGuard } from './common/guards/roles.guard';
+import { RolesGuard } from './common/guards/roles.guard';
 
 @Module({
   imports: [],
@@ -25,6 +27,7 @@ import { RoleGuard } from './common/guards/roles.guard';
     VisionController,
     ReadingsController,
     EmailController,
+    AuthController,
   ],
   providers: [
     ClientsService,
@@ -33,10 +36,11 @@ import { RoleGuard } from './common/guards/roles.guard';
     VisionService,
     ReadingsService,
     StorageService,
-    MailService,
+    EmailService,
     PdfService,
+    AuthService,
     AuthGuard,
-    RoleGuard,
+    RolesGuard,
   ],
 })
 export class AppModule {}
