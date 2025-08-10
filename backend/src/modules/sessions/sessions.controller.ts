@@ -1,7 +1,9 @@
 import {
+  BadRequestException,
   Body,
   Controller,
   Get,
+  NotFoundException,
   Param,
   Post,
   UseGuards,
@@ -19,12 +21,19 @@ export class SessionsController {
 
   @Post()
   async create(@Body() dto: { client_id: string }) {
+    if (!dto?.client_id) {
+      throw new BadRequestException();
+    }
     return this.svc.create(dto);
   }
 
   @Get(':id')
   async get(@Param('id') id: string) {
-    return this.svc.get(id);
+    const session = await this.svc.get(id);
+    if (!session) {
+      throw new NotFoundException();
+    }
+    return session;
   }
 
   @Get('client/:clientId')
