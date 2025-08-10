@@ -19,8 +19,14 @@ export class StorageService {
     });
   }
 
-  async presignedPutKey(key: string, mime: string): Promise<string> {
+  async presignedPutObject(key: string, mime: string): Promise<string> {
     return this.client.presignedPutObject(cfg.s3.bucket, key, 60 * 10, {
+      'content-type': mime,
+    });
+  }
+
+  async presignedGetObject(key: string, mime: string): Promise<string> {
+    return this.client.presignedGetObject(cfg.s3.bucket, key, 60 * 10, {
       'content-type': mime,
     });
   }
