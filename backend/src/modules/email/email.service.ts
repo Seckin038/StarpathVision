@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
-import * as nodemailer from 'nodemailer';
+import nodemailer from 'nodemailer';
 import { cfg } from '../../common/config';
 
 @Injectable()
 export class EmailService {
-  private transporter = nodemailer.createTransport({
+  private readonly transporter = nodemailer.createTransport({
     host: cfg.smtp.host,
     port: 587,
     secure: false,
@@ -21,17 +21,21 @@ export class EmailService {
     body: string,
     opts?: { pdf?: Buffer; link?: string },
   ) {
-    const mail = {
+    const text = opts?.link ? `${body}\n${opts.link}` : body;
+    const html = opts?.link
+      ? `${body.replace(/\n/g, '<br>')}<br><a href="${opts.link}">${opts.link}</a>`
+      : body.replace(/\n/g, '<br>');
+
+    await this.transporter.sendMail({
       from: cfg.smtp.user,
       to,
       subject,
-      text: opts?.link ? `${body}\n${opts.link}` : body,
+      text,
+      html,
       attachments: opts?.pdf
         ? [{ filename: 'reading.pdf', content: opts.pdf }]
         : undefined,
-    };
-
-    await this.transporter.sendMail(mail);
+    });
     return { to, subject };
   }
 }
