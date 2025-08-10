@@ -12,6 +12,7 @@ import { ReadingsService } from './modules/readings/readings.service';
 import { StorageService } from './modules/storage/storage.service';
 import { EmailService } from './modules/email/email.service';
 import { PdfService } from './modules/pdf/pdf.service';
+import { EmailController } from './modules/email/email.controller';
 
 @Module({
   controllers: [
@@ -20,6 +21,7 @@ import { PdfService } from './modules/pdf/pdf.service';
     UploadsController,
     VisionController,
     ReadingsController,
+    EmailController,
   ],
   providers: [
     ClientsService,
