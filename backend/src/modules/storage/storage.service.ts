@@ -4,32 +4,41 @@ import { cfg } from '../../common/config';
 
 @Injectable()
 export class StorageService {
-  private m: MinioClient;
+  private readonly client: MinioClient;
+
   constructor() {
-    this.m = new MinioClient({
-      endPoint: new URL(cfg.s3.endpoint).hostname,
-      port: Number(new URL(cfg.s3.endpoint).port || 9000),
+    this.client = new MinioClient({
+      endpoint: cfg.s3.endpoint.split('//')[1],
+      port: cfg.s3.endpoint.startsWith('https') ? 443 : 80,
       useSSL: cfg.s3.endpoint.startsWith('https'),
       accessKey: cfg.s3.accessKey,
       secretKey: cfg.s3.secretKey,
     });
   }
 
-  async presignPut(key: string, mime: string): Promise<string> {
-    return await this.m.presignedPutObject(cfg.s3.bucket, key, 60 * 10, {
-      'Content-Type': mime,
+  async presignedPutObject(key: string, mime: string): Promise<string> {
+    return await this.client.presignedPutObject(cfg.s3.bucket, key, 60 * 10, {
+      'content-type': mime,
     });
   }
 
-  async getObjectBuffer(key: string): Promise<Buffer> {
-    const stream = await this.m.getObject(cfg.s3.bucket, key);
-    const chunks: Buffer[] = [];
+  async getOrRejectBuffer(key: string): Promise<Buffer> {
     return new Promise<Buffer>((resolve, reject) => {
-      stream.on('data', (chunk) =>
-        chunks.push(Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk)),
-      );
-      stream.on('end', () => resolve(Buffer.concat(chunks)));
-      stream.on('error', (err) => reject(err));
+      const chunks: Buffer[] = [];
+      this.client.getObject(cfg.s3.bucket, key, (err, stream) => {
+        if (err) {
+          return reject(err);
+        }
+        stream.on('data', (chunk) => {
+          chunks.push(chunk);
+        });
+        stream.on('end', () => {
+          resolve(Buffer.concat(chunks));
+        });
+        stream.on('error', (error) => {
+          reject(error);
+        });
+      });
     });
   }
 }
