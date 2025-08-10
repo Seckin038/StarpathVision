@@ -6,22 +6,23 @@ import {
   NotFoundException,
   Param,
   Post,
-  UseGuards,
 } from '@nestjs/common';
-import { ClientsService } from './clients.service';
-import { AuthGuard } from '../../common/guards/auth.guard';
-import { RolesGuard } from '../../common/guards/roles.guard';
-import { Roles } from '../../common/roles.decorator';
+import { UseGuards } from '@nestjs/common';
+import { AuthGuard } from '../common/guards/auth.guard';
+import { RolesGuard } from '../common/guards/roles.guard';
+import { Roles } from '../common/decorators/roles.decorator';
 
-@UseGuards(AuthGuard, RolesGuard)
-@Roles('owner')
+import { ClientsService } from './clients.service';
+
 @Controller('clients')
+@UseGuards(AuthGuard, RolesGuard)
+@Roles('client')
 export class ClientsController {
   constructor(private readonly svc: ClientsService) {}
 
   @Post()
   async create(@Body() dto: { first_name: string; last_name: string }) {
-    if (typeof dto.first_name !== 'string' || typeof dto.last_name !== 'string') {
+    if (!dto.first_name || !dto.last_name) {
       throw new BadRequestException();
     }
     return this.svc.create(dto);
@@ -36,4 +37,3 @@ export class ClientsController {
     return client;
   }
 }
-
