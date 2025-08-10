@@ -19,62 +19,29 @@ export class StorageService {
     });
   }
 
-  async presignedPutObject(key: string, mime: string): Promise<string> {
+  async presignedPutKey(key: string, mime: string): Promise<string> {
     return this.client.presignedPutObject(cfg.s3.bucket, key, 60 * 10, {
-      'Content-Type': mime,
+      'content-type': mime,
     });
   }
 
-  async getObjectBuffer(
-    key: string,
-    { maxSize, timeoutMs }: { maxSize?: number; timeoutMs?: number } = {},
-  ): Promise<Buffer> {
+  async getObjectBuffer(key: string): Promise<Buffer> {
     return new Promise<Buffer>((resolve, reject) => {
       const chunks: Buffer[] = [];
-      let totalSize = 0;
-      let timer: NodeJS.Timeout | undefined;
-
-      try {
-        this.client.getObject(cfg.s3.bucket, key, (err, stream) => {
-          if (err) {
-            return reject(err);
-          }
-
-          if (timeoutMs) {
-            timer = setTimeout(() => {
-              stream.destroy(new Error('Stream timeout'));
-              reject(new Error('Stream timeout'));
-            }, timeoutMs);
-          }
-
-          stream.on('data', (chunk: Buffer | Uint8Array | string) => {
-            const bufferChunk = Buffer.isBuffer(chunk)
-              ? chunk
-              : Buffer.from(chunk);
-            totalSize += bufferChunk.length;
-            if (maxSize && totalSize > maxSize) {
-              stream.destroy(new Error('Max size exceeded'));
-              if (timer) clearTimeout(timer);
-              return reject(new Error('Max size exceeded'));
-            }
-            chunks.push(bufferChunk);
-          });
-
-          stream.on('end', () => {
-            if (timer) clearTimeout(timer);
-            resolve(Buffer.concat(chunks));
-          });
-
-          stream.on('error', (error) => {
-            if (timer) clearTimeout(timer);
-            reject(error);
-          });
+      this.client.getObject(cfg.s3.bucket, key, (err, stream) => {
+        if (err) {
+          return reject(err);
+        }
+        stream.on('data', (chunk) => {
+          chunks.push(chunk);
         });
-      } catch (error) {
-        if (timer) clearTimeout(timer);
-        reject(error);
-      }
+        stream.on('end', () => {
+          resolve(Buffer.concat(chunks));
+        });
+        stream.on('error', (error) => {
+          reject(error);
+        });
+      });
     });
   }
 }
-
