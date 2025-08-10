@@ -10,9 +10,9 @@ import {
 import { Response } from 'express';
 import { ReadingsService } from './readings.service';
 import { PdfService } from '../pdf/pdf.service';
-import { AuthGuard } from '../common/guards/auth.guard';
-import { RolesGuard } from '../common/guards/roles.guard';
-import { Roles } from '../common/decorators/roles.decorator';
+import { AuthGuard } from '../../common/guards/auth.guard';
+import { RolesGuard } from '../../common/guards/roles.guard';
+import { Roles } from '../../common/roles.decorator';
 
 @Controller('readings')
 @UseGuards(AuthGuard, RolesGuard)
