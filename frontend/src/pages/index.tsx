@@ -7,7 +7,7 @@ import { api } from '@/lib/api';
 export default function Home() {
   const [result, setResult] = useState<any>(null);
 
-  async function onUploaded(_url: string, _key: string) {
+  async function onUploaded(_uploadUrl: string, _key: string) {
     const r = await api('/vision/tarot/recognize', {
       method: 'POST',
       body: JSON.stringify({ uploadId: 'demo' }),

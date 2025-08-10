@@ -8,7 +8,7 @@ export default function UploadArea({
 }: {
   sessionId?: string;
   clientId?: string;
-  onPresigned: (url: string, key: string) => void;
+  onPresigned: (uploadUrl: string, key: string) => void;
 }) {
   const [drag, setDrag] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -17,7 +17,7 @@ export default function UploadArea({
     if (!files || files.length === 0) return;
     setLoading(true);
     const f = files[0];
-    const presign = await api<{ uploadId: string; url: string; key: string }>(
+    const presign = await api<{ uploadId: string; uploadUrl: string; key: string }>(
       '/uploads/presign',
       {
         method: 'POST',
@@ -30,13 +30,13 @@ export default function UploadArea({
         }),
       },
     );
-    await fetch(presign.url, {
+    await fetch(presign.uploadUrl, {
       method: 'PUT',
       body: f,
       headers: { 'Content-Type': f.type },
     });
     setLoading(false);
-    onPresigned(presign.url, presign.key);
+    onPresigned(presign.uploadUrl, presign.key);
   }
 
   return (
