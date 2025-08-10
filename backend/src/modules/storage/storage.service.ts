@@ -20,5 +20,15 @@ export class StorageService {
       'Content-Type': mime,
     });
   }
+
+  async getObjectBuffer(key: string): Promise<Buffer> {
+    const stream = await this.m.getObject(cfg.s3.bucket, key);
+    return await new Promise<Buffer>((resolve, reject) => {
+      const chunks: Buffer[] = [];
+      stream.on('data', (chunk) => chunks.push(Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk)));
+      stream.on('end', () => resolve(Buffer.concat(chunks)));
+      stream.on('error', (err) => reject(err));
+    });
+  }
 }
 
