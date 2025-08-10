@@ -33,7 +33,7 @@ export class StorageService {
           return reject(err);
         }
         stream.on('data', (chunk) => {
-          chunks.push(chunk);
+          chunks.push(Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk));
         });
         stream.on('end', () => {
           resolve(Buffer.concat(chunks));
