@@ -1,10 +1,10 @@
 import { Body, Controller, Post, UseGuards } from '@nestjs/common';
 import { UploadsService } from './uploads.service';
 import { AuthGuard } from '../../common/guards/auth.guard';
-import { RolesGuard } from '../../common/guards/roles.guard';
-import { Roles } from '../../common/roles.decorator';
+import { RoleGuard } from '../../common/guards/roles.guard';
+import { Roles } from '../../common/decorators/roles.decorator';
 
-@UseGuards(AuthGuard, RolesGuard)
+@UseGuards(AuthGuard, RoleGuard)
 @Roles('owner', 'assistant')
 @Controller('uploads')
 export class UploadsController {

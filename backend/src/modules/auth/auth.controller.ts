@@ -1,7 +1,7 @@
 import { Body, Controller, Post, UnauthorizedException } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { cfg } from '../../common/config';
-import { Role } from '../../common/roles.decorator';
+import { Role } from '../../common/decorators/roles.decorator';
 
 @Controller('auth')
 export class AuthController {

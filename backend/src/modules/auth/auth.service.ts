@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { createHmac } from 'crypto';
 import { cfg } from '../../common/config';
-import { Role } from '../../common/roles.decorator';
+import { Role } from '../../common/decorators/roles.decorator';
 
 function base64url(input: Buffer | string) {
   return Buffer.from(input).toString('base64url');
