@@ -39,7 +39,7 @@ export class VisionService {
   }
 
   async recognizeTarot(dto: { uploadId: string; deckHint?: string }) {
-    const img = await this.storage.get(dto.uploadId);
+    const img = await this.storage.getObjectBuffer(dto.uploadId);
     const deck = dto.deckHint || 'rider-waite';
     const modelPredictions = await this.detectCards(img);
     const orientation = await this.detectOrientation(img);
