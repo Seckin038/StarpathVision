@@ -7,22 +7,31 @@ export class StorageService {
   private readonly client: MinioClient;
 
   constructor() {
+    const url = new URL(cfg.s3.endpoint);
+    const port = url.port ? parseInt(url.port, 10) : 9000;
+
     this.client = new MinioClient({
-      endpoint: cfg.s3.endpoint.split('//')[1],
-      port: cfg.s3.endpoint.startsWith('https') ? 443 : 80,
-      useSSL: cfg.s3.endpoint.startsWith('https'),
+      endPoint: url.hostname,
+      port,
+      useSSL: url.protocol === 'https:',
       accessKey: cfg.s3.accessKey,
       secretKey: cfg.s3.secretKey,
     });
   }
 
   async presignedPutObject(key: string, mime: string): Promise<string> {
-    return await this.client.presignedPutObject(cfg.s3.bucket, key, 60 * 10, {
+    return this.client.presignedPutObject(cfg.s3.bucket, key, 60 * 10, {
       'content-type': mime,
     });
   }
 
-  async getOrRejectBuffer(key: string): Promise<Buffer> {
+  async presignedGetObject(key: string, mime: string): Promise<string> {
+    return this.client.presignedGetObject(cfg.s3.bucket, key, 60 * 10, {
+      'content-type': mime,
+    });
+  }
+
+  async getObjectBuffer(key: string): Promise<Buffer> {
     return new Promise<Buffer>((resolve, reject) => {
       const chunks: Buffer[] = [];
       this.client.getObject(cfg.s3.bucket, key, (err, stream) => {
@@ -42,4 +51,3 @@ export class StorageService {
     });
   }
 }
-

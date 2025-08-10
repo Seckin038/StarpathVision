@@ -4,7 +4,6 @@ import {
   Get,
   Param,
   Post,
-  Res,
   UseGuards,
 } from '@nestjs/common';
 import { SessionsService } from './sessions.service';
@@ -19,7 +18,7 @@ export class SessionsController {
   constructor(private readonly svc: SessionsService) {}
 
   @Post()
-  async create(@Body() dto: any) {
+  async create(@Body() dto: { client_id: string }) {
     return this.svc.create(dto);
   }
 
