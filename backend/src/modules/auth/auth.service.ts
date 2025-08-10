@@ -12,6 +12,9 @@ export class AuthService {
   private readonly secret = cfg.auth.jwtSecret;
 
   issue(role: Role) {
+    if (!['owner', 'assistant'].includes(role)) {
+      throw new Error('unsupported role');
+    }
     const header = base64url(JSON.stringify({ alg: 'HS256', typ: 'JWT' }));
     const payload = base64url(
       JSON.stringify({ role, exp: Math.floor(Date.now() / 1000) + 60 * 60 })
@@ -28,6 +31,20 @@ export class AuthService {
     if (!h || !p || !s) {
       throw new Error('invalid token');
     }
+
+    let header: { alg: string };
+    let payload: { role?: Role; exp?: number };
+    try {
+      header = JSON.parse(Buffer.from(h, 'base64url').toString());
+      payload = JSON.parse(Buffer.from(p, 'base64url').toString());
+    } catch {
+      throw new Error('invalid token');
+    }
+
+    if (header.alg !== 'HS256') {
+      throw new Error('unsupported algorithm');
+    }
+
     const data = `${h}.${p}`;
     const expected = createHmac('sha256', this.secret)
       .update(data)
@@ -35,10 +52,15 @@ export class AuthService {
     if (s !== expected) {
       throw new Error('invalid signature');
     }
-    const payload = JSON.parse(Buffer.from(p, 'base64url').toString());
+
     if (payload.exp && payload.exp < Math.floor(Date.now() / 1000)) {
       throw new Error('token expired');
     }
+
+    if (!payload.role) {
+      throw new Error('invalid token');
+    }
+
     return { role: payload.role };
   }
 }
