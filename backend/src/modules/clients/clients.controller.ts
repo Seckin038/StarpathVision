@@ -21,7 +21,10 @@ export class ClientsController {
 
   @Post()
   async create(@Body() dto: { first_name: string; last_name: string }) {
-    if (!dto.first_name || !dto.last_name) {
+    if (
+      typeof dto.first_name !== 'string' ||
+      typeof dto.last_name !== 'string'
+    ) {
       throw new BadRequestException();
     }
     return this.svc.create(dto);

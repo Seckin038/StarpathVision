@@ -12,7 +12,7 @@ export class SessionsService {
     return { id };
   }
 
-  async listByClient(clientId: string) {
+  async list(clientId: string) {
     // TODO: list sessions for client
     return [];
   }

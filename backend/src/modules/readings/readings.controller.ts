@@ -14,8 +14,9 @@ import { AuthGuard } from '../../common/guards/auth.guard';
 import { RolesGuard } from '../../common/guards/roles.guard';
 import { Roles } from '../../common/decorators/roles.decorator';
 
-@Controller('readings')
 @UseGuards(AuthGuard, RolesGuard)
+@Roles('owner', 'assistant')
+@Controller('readings')
 export class ReadingsController {
   constructor(
     private readonly svc: ReadingsService,
