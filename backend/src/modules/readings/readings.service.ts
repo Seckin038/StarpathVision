@@ -3,6 +3,24 @@ import { Pool } from 'pg';
 import { cfg } from '../../common/config';
 import { randomUUID } from 'crypto';
 
+export interface DetectedCard {
+  name: string;
+  orientation: 'upright' | 'reversed';
+  confidence: number;
+}
+
+export interface InterpretationRequest {
+  deck: string;
+  cards: DetectedCard[];
+}
+
+export interface InterpretationResult {
+  id: string;
+  summary: string;
+  full_text: string;
+  model: string;
+}
+
 @Injectable()
 export class ReadingsService {
   private pool = new Pool({ connectionString: cfg.db.url });
@@ -66,6 +84,19 @@ export class ReadingsService {
     }
 
     return this.create({ method: 'vision', summary: parsed.summary, full_text: parsed.full_text });
+  }
+
+  async interpret(dto: InterpretationRequest): Promise<InterpretationResult> {
+    // Placeholder interpretation logic
+    const summary = `Interpretation for ${dto.cards
+      .map((c) => c.name)
+      .join(', ')} in deck ${dto.deck}`;
+    return {
+      id: randomUUID(),
+      summary,
+      full_text: summary + '. (demo)',
+      model: 'rule-based-demo',
+    };
   }
 }
 
