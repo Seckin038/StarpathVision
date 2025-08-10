@@ -98,18 +98,5 @@ export class ReadingsService {
       model: 'rule-based-demo',
     };
   }
-
-  async interpret(dto: InterpretationRequest): Promise<InterpretationResult> {
-    // Placeholder interpretation logic
-    const summary = `Interpretation for ${dto.cards
-      .map((c) => c.name)
-      .join(', ')} in deck ${dto.deck}`;
-    return {
-      id: randomUUID(),
-      summary,
-      full_text: summary + '. (demo)',
-      model: 'rule-based-demo',
-    };
-  }
 }
 
