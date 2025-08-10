@@ -42,7 +42,11 @@ export class SessionsService {
     return rows[0];
   }
 
-  async list(clientId: string): Promise<Session[]> {
+  /**
+   * Return all sessions belonging to a specific client ordered by creation date
+   * (most recent first).
+   */
+  async listByClient(clientId: string): Promise<Session[]> {
     const { rows } = await this.db.query(
       'SELECT id, client_id, created_at FROM sessions WHERE client_id = $1 ORDER BY created_at DESC',
       [clientId],
