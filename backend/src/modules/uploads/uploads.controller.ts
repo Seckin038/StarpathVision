@@ -1,6 +1,11 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Post, UseGuards } from '@nestjs/common';
 import { UploadsService } from './uploads.service';
+import { AuthGuard } from '../../common/guards/auth.guard';
+import { RolesGuard } from '../../common/guards/roles.guard';
+import { Roles } from '../../common/roles.decorator';
 
+@UseGuards(AuthGuard, RolesGuard)
+@Roles('owner', 'assistant')
 @Controller('uploads')
 export class UploadsController {
   constructor(private readonly svc: UploadsService) {}
