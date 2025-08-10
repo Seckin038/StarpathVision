@@ -25,7 +25,7 @@ export class StorageService {
     const stream = await this.m.getObject(cfg.s3.bucket, key);
     const chunks: Buffer[] = [];
     return new Promise<Buffer>((resolve, reject) => {
-      stream.on('data', (chunk) =>
+      stream.on('data', (chunk: Buffer | Uint8Array | string) =>
         chunks.push(Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk)),
       );
       stream.on('end', () => resolve(Buffer.concat(chunks)));
