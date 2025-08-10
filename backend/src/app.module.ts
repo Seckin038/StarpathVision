@@ -12,8 +12,12 @@ import { ReadingsService } from './modules/readings/readings.service';
 import { StorageService } from './modules/storage/storage.service';
 import { EmailService } from './modules/email/email.service';
 import { PdfService } from './modules/pdf/pdf.service';
+import { AuthModule } from './modules/auth/auth.module';
+import { AuthGuard } from './common/guards/auth.guard';
+import { RolesGuard } from './common/guards/roles.guard';
 
 @Module({
+  imports: [AuthModule],
   controllers: [
     ClientsController,
     SessionsController,
@@ -30,6 +34,8 @@ import { PdfService } from './modules/pdf/pdf.service';
     StorageService,
     EmailService,
     PdfService,
+    AuthGuard,
+    RolesGuard,
   ],
 })
 export class AppModule {}
