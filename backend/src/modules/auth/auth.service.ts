@@ -12,6 +12,9 @@ export class AuthService {
   private readonly secret = cfg.auth.jwtSecret;
 
   issue(role: Role) {
+    if (!['owner', 'assistant'].includes(role)) {
+      throw new Error('unsupported role');
+    }
     const header = base64url(JSON.stringify({ alg: 'HS256', typ: 'JWT' }));
     const payload = base64url(
       JSON.stringify({ role, exp: Math.floor(Date.now() / 1000) + 60 * 60 })

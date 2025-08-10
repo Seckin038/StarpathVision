@@ -16,7 +16,7 @@ import { ClientsService } from './clients.service';
 
 @Controller('clients')
 @UseGuards(AuthGuard, RolesGuard)
-@Roles('client')
+@Roles('owner', 'assistant')
 export class ClientsController {
   constructor(private readonly svc: ClientsService) {}
 
