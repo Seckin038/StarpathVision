@@ -29,6 +29,7 @@ export class SessionsController {
 
   @Get('client/:clientId')
   async listByClient(@Param('clientId') clientId: string) {
+    // Delegate fetching of sessions to the service layer
     return this.svc.listByClient(clientId);
   }
 }
