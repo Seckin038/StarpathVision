@@ -1,4 +1,3 @@
-
 import { Body, Controller, Get, Param, Post, Res } from '@nestjs/common';
 import { Response } from 'express';
 import { ReadingsService } from './readings.service';
