@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+import { APP_GUARD } from '@nestjs/core';
 import { ClientsController } from './modules/clients/clients.controller';
 import { ClientsService } from './modules/clients/clients.service';
 import { UploadsController } from './modules/uploads/uploads.controller';
@@ -13,13 +14,12 @@ import { StorageService } from './modules/storage/storage.service';
 import { EmailService } from './modules/email/email.service';
 import { PdfService } from './modules/pdf/pdf.service';
 import { EmailController } from './modules/email/email.controller';
-import { AuthController } from './modules/auth/auth.controller';
-import { AuthService } from './modules/auth/auth.service';
+import { AuthModule } from './modules/auth/auth.module';
 import { AuthGuard } from './common/guards/auth.guard';
 import { RolesGuard } from './common/guards/roles.guard';
 
 @Module({
-  imports: [],
+  imports: [AuthModule],
   controllers: [
     ClientsController,
     SessionsController,
@@ -27,7 +27,6 @@ import { RolesGuard } from './common/guards/roles.guard';
     VisionController,
     ReadingsController,
     EmailController,
-    AuthController,
   ],
   providers: [
     ClientsService,
@@ -38,9 +37,14 @@ import { RolesGuard } from './common/guards/roles.guard';
     StorageService,
     EmailService,
     PdfService,
-    AuthService,
-    AuthGuard,
-    RolesGuard,
+    {
+      provide: APP_GUARD,
+      useClass: AuthGuard,
+    },
+    {
+      provide: APP_GUARD,
+      useClass: RolesGuard,
+    },
   ],
 })
 export class AppModule {}
