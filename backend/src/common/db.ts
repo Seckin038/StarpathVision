@@ -5,6 +5,6 @@ export const pool = new pg.Pool({
   connectionString: cfg.db.url,
 });
 
-export const query = <T = any>(text: string, params?: any[]) =>
+export const query = <T = unknown>(text: string, params?: unknown[]) =>
   pool.query<T>(text, params);
 
