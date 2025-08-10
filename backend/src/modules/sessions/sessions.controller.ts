@@ -1,23 +1,35 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Post,
+  Res,
+  UseGuards,
+} from '@nestjs/common';
 import { SessionsService } from './sessions.service';
+import { AuthGuard } from '../common/guards/auth.guard';
+import { RolesGuard } from '../common/guards/roles.guard';
+import { Roles } from '../common/decorators/roles.decorator';
 
-@Controller()
+@Controller('sessions')
+@UseGuards(AuthGuard, RolesGuard)
+@Roles('manager')
 export class SessionsController {
   constructor(private readonly svc: SessionsService) {}
 
-  @Post('sessions')
+  @Post()
   async create(@Body() dto: any) {
     return this.svc.create(dto);
   }
 
-  @Get('sessions/:id')
+  @Get(':id')
   async get(@Param('id') id: string) {
     return this.svc.get(id);
   }
 
-  @Get('clients/:clientId/sessions')
-  async list(@Param('clientId') clientId: string) {
-    return this.svc.list(clientId);
+  @Get('client/:clientId')
+  async listByClient(@Param('clientId') clientId: string) {
+    return this.svc.listByClient(clientId);
   }
 }
-
