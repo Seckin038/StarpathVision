@@ -22,8 +22,14 @@ Create a bucket named `starpathvision` in the MinIO console
 cd backend
 npm install
 cp .env.example .env
+npm run migrate
 npm run start:dev
 ```
+
+The `npm run migrate` step uses `psql` to apply SQL files from
+`backend/migrations` to the database specified by `DATABASE_URL` in your
+`.env` file. Ensure the Postgres server is running before executing the
+migrations.
 
 The API runs at `http://localhost:4000/v1`.
 
