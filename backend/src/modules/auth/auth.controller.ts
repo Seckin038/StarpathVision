@@ -9,6 +9,9 @@ export class AuthController {
 
   @Post('token')
   async token(@Body() dto: { role: Role; password: string }) {
+    if (dto.role !== 'owner' && dto.role !== 'assistant') {
+      throw new UnauthorizedException();
+    }
     const expected =
       dto.role === 'owner' ? cfg.auth.ownerPassword : cfg.auth.assistantPassword;
     if (dto.password !== expected) {
