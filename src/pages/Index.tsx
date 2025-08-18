@@ -1,6 +1,7 @@
 // Update this page (the content is just a fallback if you fail to update the page)
 
 import { MadeWithDyad } from "@/components/made-with-dyad";
+import { Link } from "react-router-dom";
 
 const Index = () => {
   return (
@@ -10,6 +11,7 @@ const Index = () => {
         <p className="text-xl text-gray-600">
           Start building your amazing project here!
         </p>
+          <Link to="/contact" className="text-blue-500 hover:text-blue-700 underline mt-4 block">Contact Us</Link>
       </div>
       <MadeWithDyad />
     </div>
