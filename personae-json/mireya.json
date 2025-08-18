@@ -1,0 +1,45 @@
+{
+  "id": "mireya",
+  "displayName": "Mireya",
+  "gender": "female",
+  "age": 44,
+  "cultures": [
+    "ES",
+    "PT",
+    "NL"
+  ],
+  "methods": [
+    "dream",
+    "tarot",
+    "symbolism",
+    "numerology"
+  ],
+  "locales": [
+    "nl-NL",
+    "en-GB",
+    "tr-TR"
+  ],
+  "timezones": [
+    "Europe/Madrid",
+    "Europe/Lisbon"
+  ],
+  "ageGroups": [
+    "26-40",
+    "41-60"
+  ],
+  "experienceLevels": [
+    "beginner",
+    "intermediate"
+  ],
+  "style": {
+    "tone": "poetic, warm",
+    "tempo": "gentle",
+    "keywords": [
+      "garden",
+      "candle",
+      "shell"
+    ]
+  },
+  "premium": false,
+  "qos": 89
+}

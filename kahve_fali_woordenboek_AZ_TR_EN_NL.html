@@ -1,0 +1,489 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Koffiedik-kijken Woordenboek – NL / TR / EN</title>
+<style>
+  :root {
+    --bg: #0b1020;
+    --card: #141a2e;
+    --text: #e8eaf3;
+    --muted: #9aa3b2;
+    --accent: #6ea8fe;
+    --border: #27304a;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 24px;
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
+    background: var(--bg); color: var(--text);
+  }
+  .container {
+    max-width: 1200px; margin: 0 auto;
+  }
+  .card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 16px; padding: 16px; box-shadow: 0 8px 24px rgba(0,0,0,.35);
+  }
+  h1 { margin: 0 0 8px 0; font-size: 24px; }
+  p.sub {
+    margin: 0 0 16px 0; color: var(--muted); font-size: 14px;
+  }
+  .controls {
+    display: grid; grid-template-columns: 1fr 200px 140px; gap: 12px; margin-bottom: 12px;
+  }
+  input[type="search"], select {
+    width: 100%; background: #0f1530; color: var(--text); border: 1px solid var(--border);
+    border-radius: 10px; padding: 10px 12px; outline: none;
+  }
+  button {
+    background: var(--accent); color: #0b0f1e; border: none; border-radius: 10px; padding: 10px 12px;
+    cursor: pointer; font-weight: 600;
+  }
+  button.clear { background: #384260; color: var(--text); }
+  .meta {
+    display: flex; gap: 12px; align-items: center; justify-content: space-between;
+    color: var(--muted); font-size: 13px; margin-bottom: 8px;
+  }
+  table {
+    width: 100%; border-collapse: collapse; border: 1px solid var(--border);
+    background: #0c1228; border-radius: 12px; overflow: hidden;
+  }
+  thead th {
+    position: sticky; top: 0; background: #0f1631; color: var(--text);
+    text-align: left; padding: 10px; border-bottom: 1px solid var(--border);
+    font-weight: 700; cursor: pointer; user-select: none;
+  }
+  tbody td { padding: 10px; border-bottom: 1px solid #1b2444; }
+  tr:hover td { background: #10183a; }
+  .right { text-align: right; }
+  .nowrap { white-space: nowrap; }
+  @media (max-width: 900px) {
+    .controls { grid-template-columns: 1fr 1fr; }
+    .controls button { grid-column: span 2; }
+    thead th, tbody td { font-size: 14px; }
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <h1>Koffiedik-kijken Woordenboek – NL / TR / EN</h1>
+      <p class="sub">Zoek, filter op letter en sorteer door op de kolomtitels te klikken. (Totaal <span id="totalCount">289</span> items)</p>
+      <div class="controls">
+        <input id="search" type="search" placeholder="Zoek in alle kolommen… (bijv. 'paard', 'İMAM', 'fortune')" />
+        <select id="letter">
+          <option value="">Alle letters</option>
+<option value="A">A</option>
+<option value="Letter">Letter</option>
+<option value="B">B</option>
+<option value="C">C</option>
+<option value="Ç">Ç</option>
+<option value="D">D</option>
+<option value="E">E</option>
+<option value="F">F</option>
+<option value="G">G</option>
+<option value="H">H</option>
+<option value="I">I</option>
+<option value="İ">İ</option>
+<option value="J">J</option>
+<option value="K">K</option>
+<option value="L">L</option>
+<option value="M">M</option>
+<option value="N">N</option>
+<option value="O">O</option>
+<option value="Ö">Ö</option>
+<option value="P">P</option>
+<option value="R">R</option>
+<option value="S">S</option>
+<option value="Ş">Ş</option>
+<option value="T">T</option>
+<option value="U">U</option>
+<option value="Ü">Ü</option>
+<option value="V">V</option>
+<option value="Y">Y</option>
+<option value="Z">Z</option>
+        </select>
+        <button id="clearBtn" class="clear">Filters wissen</button>
+      </div>
+      <div class="meta">
+        <div>Gefilterd: <span id="visibleCount">289</span> / <span>289</span></div>
+        <div id="sortInfo">Sorteer: geen</div>
+      </div>
+      <div style="overflow:auto; max-height: 70vh;">
+        <table id="dictTable">
+          <thead>
+            <tr>
+              <th data-col="0">Letter</th><th data-col="1">Symbool NL</th><th data-col="2">Betekenis NL</th><th data-col="3">Symbool TR</th><th data-col="4">Betekenis TR</th><th data-col="5">Symbool Engels</th><th data-col="6">Betekenis Engels</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>A</td><td>EILAND</td><td>Onverwachte kans</td><td>ADA</td><td>Ummadık bir fırsat</td><td>ISLAND</td><td>Unexpected opportunity</td></tr>
+<tr><td>A</td><td>BOOM</td><td>Lang leven</td><td>AĞAÇ</td><td>Uzun ömür</td><td>TREE</td><td>Long life</td></tr>
+<tr><td>A</td><td>NET</td><td>Gevaar dat op de loer ligt</td><td>AĞ</td><td>Kapınızda bekleyen tehlike</td><td>NET</td><td>Danger ahead</td></tr>
+<tr><td>A</td><td>KOK</td><td>Binnen korte tijd geluk</td><td>AHÇI</td><td>Kısa sürede mutluluk</td><td>COOK</td><td>Happiness soon</td></tr>
+<tr><td>A</td><td>OCTOPUS</td><td>Wees voorzichtig</td><td>AHTAPOT</td><td>Dikkatli olun</td><td>OCTOPUS</td><td>Be careful</td></tr>
+<tr><td>A</td><td>GEZIN</td><td>Blij nieuws</td><td>AİLE</td><td>Sevindirici haber</td><td>FAMILY</td><td>Joyful news</td></tr>
+<tr><td>A</td><td>SCHORPIOEN</td><td>Kwaadwillige mensen in je omgeving</td><td>AKREP</td><td>Çevrende kötü niyetliler var</td><td>SCORPION</td><td>Malicious people around</td></tr>
+<tr><td>A</td><td>GIERVOGEL</td><td>Je moet niet in de schulden raken</td><td>AKBABA</td><td>Borçlanmamalısınız</td><td>VULTURE</td><td>Avoid debts</td></tr>
+<tr><td>A</td><td>LONG</td><td>Overvloed</td><td>AKCİĞER</td><td>Bereket</td><td>LUNG</td><td>Abundance</td></tr>
+<tr><td>A</td><td>VLAM</td><td>Een grote liefde wacht op je</td><td>ALEV</td><td>Büyük bir aşk bekliyor</td><td>FLAME</td><td>A great love awaits</td></tr>
+<tr><td>A</td><td>ALLAH</td><td>Een groot goed voorteken</td><td>ALLAH</td><td>Büyük bir hayra alamet</td><td>GOD (Allah)</td><td>Great blessing sign</td></tr>
+<tr><td>A</td><td>TROUWRING</td><td>Je krijgt problemen met je partner, maar verzoening volgt</td><td>ALYANS</td><td>Sevgilinizle problem yaşayacak ama barışacaksınız</td><td>WEDDING RING</td><td>Issues with partner but reconciliation</td></tr>
+<tr><td>A</td><td>LAMP</td><td>Je zult grote problemen ervaren</td><td>AMPUL</td><td>Çok büyük problemler yaşayacaksınız</td><td>BULB</td><td>Major problems ahead</td></tr>
+<tr><td>A</td><td>SLEUTEL</td><td>Dingen waar je al lang op wacht, worden werkelijkheid</td><td>ANAHTAR</td><td>Uzun süredir beklediğiniz şeyler gerçekleşecek</td><td>KEY</td><td>Long-awaited things will happen</td></tr>
+<tr><td>A</td><td>AUTO</td><td>Je krijgt hulp van mensen die van je houden</td><td>ARABA</td><td>Sizi seven insanlardan yardım göreceksiniz</td><td>CAR</td><td>Help from loved ones</td></tr>
+<tr><td>A</td><td>BIJ</td><td>Je zorgen verdwijnen</td><td>ARI</td><td>Dertleriniz ortadan kalkacak</td><td>BEE</td><td>Troubles vanish</td></tr>
+<tr><td>A</td><td>LEEUW</td><td>Een ouder of familielid zal je bijstaan</td><td>ARSLAN/ASLAN</td><td>Ailenizden bir büyük elinizden tutacak</td><td>LION</td><td>Support from elder in family</td></tr>
+<tr><td>A</td><td>SOLDAT</td><td>Je maakt moeilijke tijden door, maar je overwint ze</td><td>ASKER</td><td>Sıkıntılı zamanlar yaşayacak ama aşacaksınız</td><td>SOLDIER</td><td>Tough times but you overcome</td></tr>
+<tr><td>A</td><td>PAARD</td><td>Rijkdom</td><td>AT</td><td>Zenginlik</td><td>HORSE</td><td>Wealth</td></tr>
+<tr><td>A</td><td>HOEFIJZER</td><td>Een gunstige gebeurtenis</td><td>AT NALI</td><td>Çok hayırlı olay olacak</td><td>HORSESHOE</td><td>Very lucky event</td></tr>
+<tr><td>A</td><td>VUUR</td><td>Tijdelijke scheiding van een geliefde</td><td>ATEŞ</td><td>Sevdiğiniz birisinden kısa ayrılık</td><td>FIRE</td><td>Temporary separation</td></tr>
+<tr><td>A</td><td>HANDPALM</td><td>Je laat slechte gewoonten los</td><td>AVUÇ</td><td>Kötü alışkanlıklarınızı bırakacaksınız</td><td>PALM</td><td>Quitting bad habits</td></tr>
+<tr><td>A</td><td>MAAN</td><td>Carrière stijgt</td><td>AY</td><td>Kariyeriniz yükselecek</td><td>MOON</td><td>Career growth</td></tr>
+<tr><td>A</td><td>VOET</td><td>Je zult een geliefde helpen</td><td>AYAK</td><td>Sevdiğiniz birine yardım edeceksiniz</td><td>FOOT</td><td>Helping a loved one</td></tr>
+<tr><td>A</td><td>SCHOEN</td><td>Hulp uit onverwachte hoek</td><td>AYAKKABI</td><td>Ummadığınız birinden yardım</td><td>SHOE</td><td>Unexpected help</td></tr>
+<tr><td>A</td><td>BEER</td><td>Een grote angst wacht op je</td><td>AYI</td><td>Büyük bir korku yaşayacaksınız</td><td>BEAR</td><td>A great fear awaits</td></tr>
+<tr><td>Letter</td><td>Symbool NL</td><td>Betekenis NL</td><td>Symbool TR</td><td>Betekenis TR</td><td>Symbool Engels</td><td>Betekenis Engels</td></tr>
+<tr><td>B</td><td>SCHOORSTEEN</td><td>Blij nieuws</td><td>BACA</td><td>Sevindirici haber</td><td>CHIMNEY</td><td>Joyful news</td></tr>
+<tr><td>B</td><td>BEEN</td><td>Geldverlies</td><td>BACAK</td><td>Para kaybedeceksiniz</td><td>LEG</td><td>Loss of money</td></tr>
+<tr><td>B</td><td>AMANDEL</td><td>Je geluk keert terug</td><td>BADEM</td><td>Talihiniz dönecek</td><td>ALMOND</td><td>Fortune turns</td></tr>
+<tr><td>B</td><td>MARINE</td><td>Groot maar tijdelijk geluk</td><td>BAHRİYELİ</td><td>Büyük ama geçici mutluluk</td><td>NAVY SAILOR</td><td>Great but temporary joy</td></tr>
+<tr><td>B</td><td>VIS</td><td>Overvloed</td><td>BALIK</td><td>Bolluk</td><td>FISH</td><td>Abundance</td></tr>
+<tr><td>B</td><td>BALLON</td><td>Ruzies</td><td>BALON</td><td>Tartışmalar yaşayacaksınız</td><td>BALLOON</td><td>Arguments</td></tr>
+<tr><td>B</td><td>BIJL</td><td>Je problemen verdwijnen</td><td>BALTA</td><td>Belalarınız bitecek</td><td>AXE</td><td>Troubles end</td></tr>
+<tr><td>B</td><td>GLAS</td><td>Je verklaart je liefde</td><td>BARDAK</td><td>Sevginizi açıklayacaksınız</td><td>GLASS</td><td>Declaration of love</td></tr>
+<tr><td>B</td><td>TRAP</td><td>Je dromen komen stap voor stap uit</td><td>BASAMAK</td><td>Hayalleriniz adım adım gerçekleşiyor</td><td>STEP</td><td>Dreams fulfilled step by step</td></tr>
+<tr><td>B</td><td>STOK</td><td>Winst</td><td>BASTON</td><td>Kazanç</td><td>CANE</td><td>Gain</td></tr>
+<tr><td>B</td><td>HOOFD</td><td>Geld of kinderen</td><td>BAŞ</td><td>Para ya da çocuk sahibi olacaksınız</td><td>HEAD</td><td>Money or children</td></tr>
+<tr><td>B</td><td>KOREN</td><td>Rust</td><td>BAŞAK</td><td>Huzur</td><td>WHEAT EAR</td><td>Peace</td></tr>
+<tr><td>B</td><td>ONDERGAANDE ZON</td><td>Binnenkort goed nieuws</td><td>BATAN GÜNEŞ</td><td>Kısa sürede güzel haber</td><td>SUNSET</td><td>Soon good news</td></tr>
+<tr><td>B</td><td>KOFFER</td><td>Serieuze beslissing</td><td>BAVUL</td><td>Ciddi karar</td><td>SUITCASE</td><td>Serious decision</td></tr>
+<tr><td>B</td><td>UIL</td><td>Pas op voor sluwe vrienden</td><td>BAYKUŞ</td><td>Arkadaşlarınıza dikkat, içlerinde sinsiler var</td><td>OWL</td><td>Beware of sly friends</td></tr>
+<tr><td>B</td><td>VLAG</td><td>Vrede</td><td>BAYRAK</td><td>Huzur</td><td>FLAG</td><td>Peace</td></tr>
+<tr><td>B</td><td>BABY</td><td>Je staat voor een belangrijke beslissing</td><td>BEBEK</td><td>Bir karar arifesindesiniz</td><td>BABY</td><td>Important decision ahead</td></tr>
+<tr><td>B</td><td>WIEG</td><td>Huwelijk of kinderen</td><td>BEŞİK</td><td>Evlilik, evliyseniz çocuk</td><td>CRADLE</td><td>Marriage or child</td></tr>
+<tr><td>B</td><td>MES</td><td>Je fortuin opent zich</td><td>BIÇAK</td><td>Kısmetiniz açılacak</td><td>KNIFE</td><td>Fortune opens</td></tr>
+<tr><td>B</td><td>COMPUTER</td><td>Groot geluk</td><td>BİLGİSAYAR</td><td>Büyük kısmet</td><td>COMPUTER</td><td>Great luck</td></tr>
+<tr><td>B</td><td>GEBOUW</td><td>Respect van je omgeving</td><td>BİNA</td><td>Çevrenizdekilerin saygısı artacak</td><td>BUILDING</td><td>More respect</td></tr>
+<tr><td>B</td><td>STIER</td><td>Winst</td><td>BOĞA</td><td>Kazanç</td><td>BULL</td><td>Gain</td></tr>
+<tr><td>B</td><td>HOORN</td><td>Pas op voor roddels</td><td>BOYNUZ</td><td>Dedikoduya dikkat edin</td><td>HORN</td><td>Beware of gossip</td></tr>
+<tr><td>B</td><td>TARWE</td><td>Geld komt binnen</td><td>BUĞDAY</td><td>Para gelecek</td><td>WHEAT</td><td>Money incoming</td></tr>
+<tr><td>B</td><td>WOLK</td><td>Onrust</td><td>BULUT</td><td>Huzursuzluk</td><td>CLOUD</td><td>Unrest</td></tr>
+<tr><td>B</td><td>NEUS</td><td>Een vriend komt om raad vragen</td><td>BURUN</td><td>Akıl danışacak bir dost gelecek</td><td>NOSE</td><td>A friend seeks advice</td></tr>
+<tr><td>Letter</td><td>Symbool NL</td><td>Betekenis NL</td><td>Symbool TR</td><td>Betekenis TR</td><td>Symbool Engels</td><td>Betekenis Engels</td></tr>
+<tr><td>C</td><td>MOSKEE</td><td>Hulp uit je familie</td><td>CAMİİ</td><td>Ailenizden yardım gelecek</td><td>MOSQUE</td><td>Help from family</td></tr>
+<tr><td>C</td><td>MONSTER</td><td>Vijanden die zich voordoen als vrienden krijgen spijt</td><td>CANAVAR</td><td>Dost görünen düşmanlar pişman olacak</td><td>MONSTER</td><td>False friends regret</td></tr>
+<tr><td>C</td><td>BEGRAFENIS</td><td>Reis</td><td>CENAZE</td><td>Yolculuk</td><td>FUNERAL</td><td>Journey</td></tr>
+<tr><td>C</td><td>MOBIEL</td><td>Man = goed nieuws, vrouw = roddel</td><td>CEP TELEFONU</td><td>Erkekseniz hayırlı haber, kadınsanız dedikodu</td><td>MOBILE PHONE</td><td>Good news (male) / Gossip (female)</td></tr>
+<tr><td>C</td><td>LINIAAL</td><td>Gunstige ontwikkeling</td><td>CETVEL</td><td>Hayırlı gelişme</td><td>RULER</td><td>Positive development</td></tr>
+<tr><td>C</td><td>PINSET</td><td>Moeilijke dagen, maar kort van duur</td><td>CIMBIZ</td><td>Zor günler gelecek ama kısa sürede geçecek</td><td>TWEEZERS</td><td>Hard days, short-lived</td></tr>
+<tr><td>C</td><td>DWERG</td><td>Groot gevaar dichtbij</td><td>CÜCE</td><td>Büyük tehlike yanı başınızda</td><td>DWARF</td><td>Big danger close</td></tr>
+<tr><td>Letter</td><td>Symbool NL</td><td>Betekenis NL</td><td>Symbool TR</td><td>Betekenis TR</td><td>Symbool Engels</td><td>Betekenis Engels</td></tr>
+<tr><td>Ç</td><td>BEL</td><td>Droevig nieuws</td><td>ÇAN</td><td>Üzücü bir haber</td><td>BELL</td><td>Sad news</td></tr>
+<tr><td>Ç</td><td>TAS</td><td>Kleine winst</td><td>ÇANTA</td><td>Az miktar kazanç</td><td>BAG</td><td>Small profit</td></tr>
+<tr><td>Ç</td><td>SCHOFFEL</td><td>Groot succes</td><td>ÇAPA</td><td>Büyük başarı</td><td>HOE</td><td>Great success</td></tr>
+<tr><td>Ç</td><td>KRUIS</td><td>Je dromen en verwachtingen veranderen</td><td>ÇARPI</td><td>Hayalleriniz, beklentileriniz değişecek</td><td>CROSS</td><td>Expectations change</td></tr>
+<tr><td>Ç</td><td>THEEPOT</td><td>Nieuwe vrienden</td><td>ÇAYDANLIK</td><td>Yeni arkadaşlar</td><td>TEAPOT</td><td>New friends</td></tr>
+<tr><td>Ç</td><td>HAMER</td><td>Problemen verdwijnen</td><td>ÇEKİÇ</td><td>Sorunlar bitecek</td><td>HAMMER</td><td>Troubles end</td></tr>
+<tr><td>Ç</td><td>BLOEM</td><td>Reis</td><td>ÇİÇEK</td><td>Seyahat</td><td>FLOWER</td><td>Travel</td></tr>
+<tr><td>Ç</td><td>LIJN</td><td>Kleine ziekte</td><td>ÇİZGİ</td><td>Önemsiz bir hastalık kapınızda</td><td>LINE</td><td>Minor illness</td></tr>
+<tr><td>Ç</td><td>LAARS</td><td>Korte reis</td><td>ÇİZME</td><td>Kısa yolculuk</td><td>BOOT</td><td>Short trip</td></tr>
+<tr><td>Ç</td><td>KIND</td><td>Vrijgezel = huwelijk, getrouwd = winst</td><td>ÇOCUK</td><td>Bekarsanız evlilik, evliyseniz kazanç</td><td>CHILD</td><td>Marriage / Profit</td></tr>
+<tr><td>Ç</td><td>SOK</td><td>Je ontsnapt aan een groot gevaar, maar wees geduldig</td><td>ÇORAP</td><td>Büyük bir beladan kurtulacaksınız ama sabırlı olun</td><td>SOCK</td><td>Escape from danger with patience</td></tr>
+<tr><td>Letter</td><td>Symbool NL</td><td>Betekenis NL</td><td>Symbool TR</td><td>Betekenis TR</td><td>Symbool Engels</td><td>Betekenis Engels</td></tr>
+<tr><td>D</td><td>BERG</td><td>Je verwachtingen komen uit</td><td>DAĞ</td><td>Beklentileriniz gerçek olacak</td><td>MOUNTAIN</td><td>Expectations will come true</td></tr>
+<tr><td>D</td><td>DUIKER</td><td>Je wordt verraden door een vriend</td><td>DALGIÇ</td><td>Dostlarınızdan kazık yiyeceksiniz</td><td>DIVER</td><td>Betrayal from a friend</td></tr>
+<tr><td>D</td><td>DANS</td><td>Grote som geld brengt opluchting</td><td>DANS</td><td>Büyük bir para ile çok rahatlayacaksınız</td><td>DANCE</td><td>Relief with big money</td></tr>
+<tr><td>D</td><td>TROMMEL</td><td>Je krijgt een brutale buur</td><td>DAVUL</td><td>Arsız komşu edineceksiniz</td><td>DRUM</td><td>An insolent neighbor</td></tr>
+<tr><td>D</td><td>SCHRIFT</td><td>Mooie ontwikkelingen op je werk</td><td>DEFTER</td><td>İşyerinde güzellikler</td><td>NOTEBOOK</td><td>Positive changes at work</td></tr>
+<tr><td>D</td><td>SPOORWEG</td><td>Ruzie met je vader</td><td>DEMİRYOLU</td><td>Babanızla aranız açılacak</td><td>RAILWAY</td><td>Conflict with father</td></tr>
+<tr><td>D</td><td>ONDERZEEËR</td><td>Periscoop zichtbaar = rust; niet zichtbaar = somber nieuws</td><td>DENİZALTI</td><td>Periskopu görünüyorsa huzur, yoksa iç bunaltıcı haber</td><td>SUBMARINE</td><td>Periscope = peace, not = bad news</td></tr>
+<tr><td>D</td><td>MEERMIN</td><td>Kans op groot succes</td><td>DENİZKIZI</td><td>Büyük bir başarı ihtimali</td><td>MERMAID</td><td>Chance of success</td></tr>
+<tr><td>D</td><td>ZEE</td><td>Rust en onrust samen</td><td>DENİZ</td><td>Huzurla huzursuzluk iç içe</td><td>SEA</td><td>Peace and unrest together</td></tr>
+<tr><td>D</td><td>ZEEPAARDJE</td><td>Onverwachte rijkdom</td><td>DENİZATI</td><td>Umulmadık servet</td><td>SEAHORSE</td><td>Unexpected wealth</td></tr>
+<tr><td>D</td><td>DERYA</td><td>Hulp van je zus</td><td>DERYA</td><td>Ablanızdan bir yardım</td><td>DERYA (SEA)</td><td>Help from sister</td></tr>
+<tr><td>D</td><td>KAMEEL</td><td>Moeilijke maar positieve reis</td><td>DEVE</td><td>Zorlu bir yolculuk ama sonu güzel</td><td>CAMEL</td><td>Hard but fruitful journey</td></tr>
+<tr><td>D</td><td>STRUISVOGEL</td><td>Groot geld</td><td>DEVEKUŞU</td><td>Büyük para</td><td>OSTRICH</td><td>Big money</td></tr>
+<tr><td>D</td><td>TAND</td><td>Mogelijk gezondheidsprobleem</td><td>DİŞ</td><td>Sağlık problemi yaşayabilirsiniz</td><td>TOOTH</td><td>Health problem possible</td></tr>
+<tr><td>D</td><td>DINO</td><td>Onverwachte reis</td><td>DİNAZOR</td><td>Planlamadık seyahat</td><td>DINOSAUR</td><td>Unplanned trip</td></tr>
+<tr><td>D</td><td>DOKTER</td><td>Een redder komt in je leven</td><td>DOKTOR</td><td>Hayatınıza bir kurtarıcı girecek</td><td>DOCTOR</td><td>A savior appears</td></tr>
+<tr><td>D</td><td>VOLLE MAAN</td><td>Nieuwe liefde</td><td>DOLUNAY</td><td>Yeni bir aşk kapıda</td><td>FULL MOON</td><td>New love approaching</td></tr>
+<tr><td>D</td><td>VARKEN</td><td>Je baas bezorgt je zorgen</td><td>DOMUZ</td><td>Patronunuz size dert çıkaracak</td><td>PIG</td><td>Boss causes trouble</td></tr>
+<tr><td>D</td><td>LIP</td><td>Je verliest een voorwerp</td><td>DUDAK</td><td>Eşya kaybedeceksiniz</td><td>LIP</td><td>Loss of belongings</td></tr>
+<tr><td>D</td><td>KNOP</td><td>Relatieproblemen, maar snel opgelost</td><td>DÜĞME</td><td>İlişkiniz tıkanacak ama tez sürede çözülecek</td><td>BUTTON</td><td>Relationship block, quickly solved</td></tr>
+<tr><td>D</td><td>ROER</td><td>Moeilijke dagen op komst</td><td>DÜMEN</td><td>Çok zorlu günler geliyor</td><td>HELM (RUDDER)</td><td>Hard days ahead</td></tr>
+<tr><td>D</td><td>VERREKIJKER</td><td>Slapeloosheid, ongeveer 6 maanden</td><td>DÜRBÜN</td><td>Uykusuzluk çekeceksiniz, 6 ay kadar</td><td>BINOCULARS</td><td>Insomnia ~6 months</td></tr>
+<tr><td>D</td><td>FLUIT</td><td>Goed nieuws van een vrolijke man</td><td>DÜDÜK</td><td>Neşeli bir adamdan güzel bir haber gelecek</td><td>WHISTLE</td><td>Good news from cheerful man</td></tr>
+<tr><td>Letter</td><td>Symbool NL</td><td>Betekenis NL</td><td>Symbool TR</td><td>Betekenis TR</td><td>Symbool Engels</td><td>Betekenis Engels</td></tr>
+<tr><td>E</td><td>DRAAK</td><td>In de zomer: opluchting; in de winter: emotionele moeilijkheden</td><td>EJDERHA</td><td>Yazın ferahlama, kışın duygusal sıkıntı</td><td>DRAGON</td><td>Relief in summer, troubles in winter</td></tr>
+<tr><td>E</td><td>BROOD</td><td>Grote betalingen op korte termijn</td><td>EKMEK</td><td>Kısa sürede büyük ödemeler yapacaksınız</td><td>BREAD</td><td>Big payments soon</td></tr>
+<tr><td>E</td><td>HAND</td><td>Betekenis hangt af van de intentie van de lezer</td><td>EL</td><td>Niyete göre anlam döker</td><td>HAND</td><td>Depends on intention</td></tr>
+<tr><td>E</td><td>KLEDING</td><td>Overvloed</td><td>ELBİSE</td><td>Bereket</td><td>CLOTHES</td><td>Abundance</td></tr>
+<tr><td>E</td><td>HANDSCHOEN</td><td>Je ontsnapt op het nippertje aan groot gevaar</td><td>ELDİVEN</td><td>Büyük tehlikeden kıl payı kurtulma</td><td>GLOVE</td><td>Narrow escape</td></tr>
+<tr><td>E</td><td>APPEL</td><td>Onverwacht geld</td><td>ELMA</td><td>Beklemediğiniz bir para</td><td>APPLE</td><td>Unexpected money</td></tr>
+<tr><td>E</td><td>EZEL</td><td>Een goede vriend wordt koppig, wees toegeeflijk</td><td>EŞEK</td><td>Yakın arkadaşınız inatçılık yapacak</td><td>DONKEY</td><td>Friend becomes stubborn</td></tr>
+<tr><td>E</td><td>HUIS</td><td>Je herstelt</td><td>EV</td><td>İyileşeceksiniz</td><td>HOUSE</td><td>Recovery</td></tr>
+<tr><td>Letter</td><td>Symbool NL</td><td>Betekenis NL</td><td>Symbool TR</td><td>Betekenis TR</td><td>Symbool Engels</td><td>Betekenis Engels</td></tr>
+<tr><td>F</td><td>MUIS</td><td>Iemand deelt mee in jouw winst</td><td>FARE</td><td>Kazancınıza ortak olanlar var</td><td>MOUSE</td><td>Someone shares in your profit</td></tr>
+<tr><td>F</td><td>LANTAARN</td><td>Groot geluk</td><td>FENER</td><td>Büyük mutluluk</td><td>LANTERN</td><td>Great joy</td></tr>
+<tr><td>F</td><td>HAZELNOOT</td><td>Einde van je onrust</td><td>FINDIK</td><td>Huzursuzluğunuz sona eriyor</td><td>HAZELNUT</td><td>End of unrest</td></tr>
+<tr><td>F</td><td>OLIFANT</td><td>Rust en kalmte</td><td>FİL</td><td>Sükûnet</td><td>ELEPHANT</td><td>Calmness</td></tr>
+<tr><td>F</td><td>KOPJE</td><td>De koffielezing komt niet uit</td><td>FİNCAN</td><td>Bu fal gerçek çıkmayacak</td><td>CUP</td><td>Reading won’t come true</td></tr>
+<tr><td>Letter</td><td>Symbool NL</td><td>Betekenis NL</td><td>Symbool TR</td><td>Betekenis TR</td><td>Symbool Engels</td><td>Betekenis Engels</td></tr>
+<tr><td>G</td><td>KRANT</td><td>Vermijd roddels, anders verlies je geld</td><td>GAZETE</td><td>Dedikodudan uzak durmalısınız, yoksa para kaybedeceksiniz</td><td>NEWSPAPER</td><td>Avoid gossip or lose money</td></tr>
+<tr><td>G</td><td>BRUID</td><td>Onverwacht groot geluk</td><td>GELİN</td><td>Beklenmedik ve büyük mutluluk</td><td>BRIDE</td><td>Unexpected joy</td></tr>
+<tr><td>G</td><td>SCHIP</td><td>Je zorgen verdwijnen plotseling</td><td>GEMİ</td><td>Dertleriniz bir anda buharlaşacak</td><td>SHIP</td><td>Troubles vanish suddenly</td></tr>
+<tr><td>G</td><td>ROOS</td><td>Je ziet iemand die je niet meer verwachtte</td><td>GÜL</td><td>Beklediğiniz ama ummadığınız kişiyi göreceksiniz</td><td>ROSE</td><td>Meeting unexpected person</td></tr>
+<tr><td>G</td><td>ZON</td><td>Je zorgen verdwijnen</td><td>GÜNEŞ</td><td>Dertleriniz bitecek</td><td>SUN</td><td>Troubles end</td></tr>
+<tr><td>G</td><td>DUIF</td><td>Je verklaart je liefde</td><td>GÜVERCİN</td><td>Aşkınızı itiraf edeceksiniz</td><td>DOVE</td><td>You confess love</td></tr>
+<tr><td>G</td><td>OOG</td><td>Met wimpers = zorgen weg; zonder = nieuwe problemen</td><td>GÖZ</td><td>Kirpik varsa dertler biter, yoksa yeni sorunlar</td><td>EYE</td><td>Eyelashes = end of troubles</td></tr>
+<tr><td>G</td><td>BRIL</td><td>Je krijgt hulp</td><td>GÖZLÜK</td><td>Yardım alacaksınız</td><td>GLASSES</td><td>Help will come</td></tr>
+<tr><td>G</td><td>HERT</td><td>Veel fortuin</td><td>GEYİK</td><td>Bol kısmet</td><td>DEER</td><td>Plenty of luck</td></tr>
+<tr><td>Letter</td><td>Symbool NL</td><td>Betekenis NL</td><td>Symbool TR</td><td>Betekenis TR</td><td>Symbool Engels</td><td>Betekenis Engels</td></tr>
+<tr><td>H</td><td>RING</td><td>Groot probleem op komst</td><td>HALKA</td><td>Büyük bir dert gelmek üzere</td><td>RING</td><td>Big trouble near</td></tr>
+<tr><td>H</td><td>LETTERS</td><td>Man = geld, vrouw = fortuin</td><td>HARFLER</td><td>Erkekse para, kadınsa kısmet</td><td>LETTERS</td><td>Money (male) / Fortune (female)</td></tr>
+<tr><td>H</td><td>DOLK</td><td>Onverwacht geld, maar gaat verloren</td><td>HANÇER</td><td>Ummadığınız para, ama çarçur olacak</td><td>DAGGER</td><td>Unexpected money, wasted</td></tr>
+<tr><td>H</td><td>WORTEL</td><td>Onverklaarbaar geluk</td><td>HAVUÇ</td><td>Nedensiz mutluluk</td><td>CARROT</td><td>Reasonless happiness</td></tr>
+<tr><td>H</td><td>DIER</td><td>Je overwint een zware taak</td><td>HAYVAN</td><td>Çok zor bir işi başaracaksınız</td><td>ANIMAL</td><td>Achievement of hard task</td></tr>
+<tr><td>H</td><td>VERPLEEGSTER</td><td>Familielid kan gezondheidsproblemen krijgen</td><td>HEMŞİRE</td><td>Ailenizden biri sağlık sorunu yaşayabilir</td><td>NURSE</td><td>Health issue in family</td></tr>
+<tr><td>H</td><td>HALVE MAAN</td><td>Goed nieuws</td><td>HİLAL</td><td>Güzel haber</td><td>CRESCENT</td><td>Good news</td></tr>
+<tr><td>Letter</td><td>Symbool NL</td><td>Betekenis NL</td><td>Symbool TR</td><td>Betekenis TR</td><td>Symbool Engels</td><td>Betekenis Engels</td></tr>
+<tr><td>I</td><td>RIVIER</td><td>Je zult verrassingen meemaken</td><td>IRMAK</td><td>Sürprizler yaşayacaksınız</td><td>RIVER</td><td>Surprises ahead</td></tr>
+<tr><td>Letter</td><td>Symbool NL</td><td>Betekenis NL</td><td>Symbool TR</td><td>Betekenis TR</td><td>Symbool Engels</td><td>Betekenis Engels</td></tr>
+<tr><td>İ</td><td>NAALD</td><td>Goed nieuws</td><td>İĞNE</td><td>Güzel haberler gelecek</td><td>NEEDLE</td><td>Good news</td></tr>
+<tr><td>İ</td><td>OUDERE</td><td>Volgend jaar veel mooie ontwikkelingen</td><td>İHTİYAR</td><td>Gelecek yıl güzel gelişmeler</td><td>ELDER</td><td>Good progress next year</td></tr>
+<tr><td>İ</td><td>IMAM</td><td>Slecht nieuws</td><td>İMAM</td><td>Kötü haber kapınızda</td><td>IMAM</td><td>Bad news</td></tr>
+<tr><td>İ</td><td>KEIZER</td><td>Geld via kansspel</td><td>İMPARATOR</td><td>Şans oyununda para</td><td>EMPEROR</td><td>Money through gambling</td></tr>
+<tr><td>İ</td><td>PAREL</td><td>Innerlijke rust</td><td>İNCİ</td><td>İçiniz huzurla dolacak</td><td>PEARL</td><td>Inner peace</td></tr>
+<tr><td>İ</td><td>VIJGEN</td><td>Grote winst door korte reis</td><td>İNCİR</td><td>Kısa yolculukla büyük kazanç</td><td>FIG</td><td>Profit via short trip</td></tr>
+<tr><td>İ</td><td>MENS</td><td>Eén = rust; meerdere = problemen</td><td>İNSAN</td><td>Tek kişi = huzur, iki+ = problem</td><td>HUMAN</td><td>One = peace, many = problems</td></tr>
+<tr><td>İ</td><td>TOUW</td><td>Reis</td><td>İP</td><td>Yolculuk</td><td>ROPE</td><td>Journey</td></tr>
+<tr><td>İ</td><td>SPEELKAART</td><td>Zorgen verdwijnen door kleine inspanning</td><td>İSKAMBİL</td><td>Büyük dertler kolay çabalarla bitecek</td><td>PLAYING CARD</td><td>Troubles end with ease</td></tr>
+<tr><td>İ</td><td>LETTER İ</td><td>Geluk</td><td>İ HARFİ</td><td>Şans</td><td>LETTER İ</td><td>Luck</td></tr>
+<tr><td>Letter</td><td>Symbool NL</td><td>Betekenis NL</td><td>Symbool TR</td><td>Betekenis TR</td><td>Symbool Engels</td><td>Betekenis Engels</td></tr>
+<tr><td>J</td><td>SCHEERMESJE</td><td>Je zorgen verdwijnen</td><td>JİLET</td><td>Dertler bitecek</td><td>RAZOR BLADE</td><td>Troubles will end</td></tr>
+<tr><td>J</td><td>MUNTJE</td><td>Plotseling geld brengt groot geluk</td><td>JETON</td><td>Ani para gelecek, mutluluk getirecek</td><td>TOKEN</td><td>Sudden money, big joy</td></tr>
+<tr><td>Letter</td><td>Symbool NL</td><td>Betekenis NL</td><td>Symbool TR</td><td>Betekenis TR</td><td>Symbool Engels</td><td>Betekenis Engels</td></tr>
+<tr><td>K</td><td>KABA</td><td>Heel groot geluk</td><td>KABE</td><td>Çok büyük şans</td><td>KAABA</td><td>Great fortune</td></tr>
+<tr><td>K</td><td>GRAF</td><td>Vermijd tijdelijk contact met familie, anders problemen</td><td>KABİR</td><td>Bir süre akrabalarla görüşmeyin, bela gelir</td><td>GRAVE</td><td>Stay away from family for a while</td></tr>
+<tr><td>K</td><td>WIJNGALS</td><td>Geheimen komen uit</td><td>KADEH</td><td>Sırlarınız açığa çıkacak</td><td>GOBLET</td><td>Secrets revealed</td></tr>
+<tr><td>K</td><td>VROUW</td><td>Overvloed; bij getrouwde vrouw = gevaar voor echtgenoot</td><td>KADIN</td><td>Bereket. Evli kadında yaşlı sembol = erkeği elden gitmek üzere</td><td>WOMAN</td><td>Abundance; for married woman = risk of losing husband</td></tr>
+<tr><td>K</td><td>HOOFD</td><td>Je ontmoet een goed persoon</td><td>KAFA</td><td>İyi biriyle tanışacaksınız</td><td>HEAD</td><td>Meet a good person</td></tr>
+<tr><td>K</td><td>KOFFIE</td><td>De lezing komt écht uit</td><td>KAHVE</td><td>Fal kahvenin içinden çıkacak</td><td>COFFEE</td><td>Reading will be true</td></tr>
+<tr><td>K</td><td>BASTION</td><td>Vertrouw je vrienden</td><td>KALE</td><td>Dostlarınıza güvenin</td><td>CASTLE</td><td>Trust your friends</td></tr>
+<tr><td>K</td><td>SCHILD</td><td>Voer je plannen uit</td><td>KALKAN</td><td>Aklınızdakileri uygulayın</td><td>SHIELD</td><td>Apply your ideas</td></tr>
+<tr><td>K</td><td>HART</td><td>Problemen verdwijnen</td><td>KALP</td><td>Sorunlarınız bitecek</td><td>HEART</td><td>Problems will end</td></tr>
+<tr><td>K</td><td>VLEUGEL</td><td>Lange reis</td><td>KANAT</td><td>Uzun yolculuk</td><td>WING</td><td>Long journey</td></tr>
+<tr><td>K</td><td>KANGOEROE</td><td>Onverwachte promotie</td><td>KANGURU</td><td>Beklemediğiniz bir terfi</td><td>KANGAROO</td><td>Unexpected promotion</td></tr>
+<tr><td>K</td><td>DEUR</td><td>Iemand die je niet mag, brengt goed nieuws</td><td>KAPI</td><td>Sevmediğiniz biri iyi haber getirecek</td><td>DOOR</td><td>Good news from disliked person</td></tr>
+<tr><td>K</td><td>SCHILDPAD</td><td>Nieuwe liefde</td><td>KAPLUMBAĞA</td><td>Yeni aşk</td><td>TURTLE</td><td>New love</td></tr>
+<tr><td>K</td><td>VIERKANT</td><td>Je krijgt het verwachte geld</td><td>KARE</td><td>Umduğunuz paraya kavuşacaksınız</td><td>SQUARE</td><td>Expected money arrives</td></tr>
+<tr><td>K</td><td>KRAAI</td><td>Heel goed nieuws</td><td>KARGA</td><td>Çok güzel haber gelecek</td><td>CROW</td><td>Very good news</td></tr>
+<tr><td>K</td><td>MIER</td><td>Veel winst, maar alleen met hard werken</td><td>KARINCA</td><td>Bol kazanç ama çok çalışarak</td><td>ANT</td><td>Gain through hard work</td></tr>
+<tr><td>K</td><td>KOM</td><td>Goede ontwikkelingen in je werk</td><td>KASE</td><td>İşinizde güzel gelişmeler</td><td>BOWL</td><td>Good progress at work</td></tr>
+<tr><td>K</td><td>LEPEL</td><td>Kans verschijnt, maar je mist hem</td><td>KAŞIK</td><td>Fırsat gelecek ama kaçıracaksınız</td><td>SPOON</td><td>Opportunity missed</td></tr>
+<tr><td>K</td><td>HOEFSMEEDHAMER</td><td>Je krijgt veel geld, maar als je het niet goed gebruikt = problemen</td><td>KAZMA</td><td>Çok para geçecek elinize, hayır yapmazsanız sorunlar</td><td>PICKAXE</td><td>Big money but risk if wasted</td></tr>
+<tr><td>K</td><td>KAT</td><td>Afhankelijk van de interpretatie van de lezer</td><td>KEDİ</td><td>Fal bakanın anlamına göre değişir</td><td>CAT</td><td>Depends on interpretation</td></tr>
+<tr><td>K</td><td>VLINDER</td><td>Veel lijden, maar eindigt in geluk</td><td>KELEBEK</td><td>Çok çile, ama mutlak mutluluk</td><td>BUTTERFLY</td><td>Suffering then happiness</td></tr>
+<tr><td>K</td><td>VIOOL</td><td>Je maakt egoïstische fouten</td><td>KEMAN</td><td>Bencilce hatalar işleyeceksiniz</td><td>VIOLIN</td><td>Selfish mistakes</td></tr>
+<tr><td>K</td><td>ZWAARD</td><td>Je geliefde geeft een cadeau</td><td>KILIÇ</td><td>Sevgiliniz hediye alacak</td><td>SWORD</td><td>Gift from lover</td></tr>
+<tr><td>K</td><td>ZWALUW</td><td>Kleine gunst levert groot voordeel op</td><td>KIRLANGIÇ</td><td>Küçük iyilikten büyük kazanç</td><td>S</td><td>nan</td></tr>
+<tr><td>Letter</td><td>Symbool NL</td><td>Betekenis NL</td><td>Symbool TR</td><td>Betekenis TR</td><td>Symbool Engels</td><td>Betekenis Engels</td></tr>
+<tr><td>L</td><td>LAMP</td><td>Zakenreis</td><td>LAMBA</td><td>İş gezisi</td><td>LAMP</td><td>Business trip</td></tr>
+<tr><td>Letter</td><td>Symbool NL</td><td>Betekenis NL</td><td>Symbool TR</td><td>Betekenis TR</td><td>Symbool Engels</td><td>Betekenis Engels</td></tr>
+<tr><td>M</td><td>MEDAILLE</td><td>Je vindt verloren geld terug</td><td>MADALYA</td><td>Kaybettiğiniz parayı bulacaksınız</td><td>MEDAL</td><td>Lost money will be found</td></tr>
+<tr><td>M</td><td>GROT</td><td>Zware reis</td><td>MAĞARA</td><td>Zorlu seyahat</td><td>CAVE</td><td>Hard journey</td></tr>
+<tr><td>M</td><td>SCHAAR</td><td>Je voelt je capabel alles te doen</td><td>MAKAS</td><td>Kendinizi her şeyi yapacak kadar iyi hissedeceksiniz</td><td>SCISSORS</td><td>Feeling capable</td></tr>
+<tr><td>M</td><td>BUFFEL</td><td>Zoet nieuws uit het westen</td><td>MANDA</td><td>Batıdan tatlı bir haber</td><td>BUFFALO</td><td>Sweet news from west</td></tr>
+<tr><td>M</td><td>BARBECUE</td><td>Langverwacht nieuws komt snel</td><td>MANGAL</td><td>Çok beklediğiniz haber yakında geliyor</td><td>GRILL</td><td>Awaited news arrives</td></tr>
+<tr><td>M</td><td>MEEUW</td><td>Veel verdrietige berichten</td><td>MARTI</td><td>Çok kötü haberler gelecek</td><td>SEAGULL</td><td>Many sad news</td></tr>
+<tr><td>M</td><td>TAFEL</td><td>Naaste slaagt in examen</td><td>MASA</td><td>Yakınınız sınavda büyük başarı alacak</td><td>TABLE</td><td>Success in exams</td></tr>
+<tr><td>M</td><td>BRIEF</td><td>Je lucht je hart bij iemand</td><td>MEKTUP</td><td>Dertlerinizi birine anlatacaksınız</td><td>LETTER</td><td>Confide troubles</td></tr>
+<tr><td>M</td><td>MEVLANA</td><td>Gelukkige vrienden om je heen</td><td>MEVLANA</td><td>Çevrenizde mutlu dostlar olacak</td><td>MEVLANA</td><td>Happy friends nearby</td></tr>
+<tr><td>M</td><td>ENGEL</td><td>Steun van familielid van moederskant</td><td>MELEK</td><td>Anne tarafından biri destek verecek</td><td>ANGEL</td><td>Support from maternal side</td></tr>
+<tr><td>M</td><td>FRUIT</td><td>Je moet lang wachten maar slaagt</td><td>MEYVE</td><td>Çok bekleyecek ama başaracaksınız</td><td>FRUIT</td><td>Success after waiting</td></tr>
+<tr><td>M</td><td>GRAFSTEEN</td><td>Lang leven</td><td>MEZAR TAŞI</td><td>Uzun ömür</td><td>TOMBSTONE</td><td>Long life</td></tr>
+<tr><td>M</td><td>SPEER</td><td>Je relatie krijgt een gelukkig keerpunt</td><td>MIZRAK</td><td>İlişkide mutlu dönemeç</td><td>SPEAR</td><td>Happy turn in relationship</td></tr>
+<tr><td>M</td><td>MOSS</td><td>Ernstige gezondheidsproblemen</td><td>MİDYE</td><td>Ciddi sağlık sorunları</td><td>MUSSEL</td><td>Serious health issues</td></tr>
+<tr><td>M</td><td>MINARET</td><td>Groot probleem in Ramadan</td><td>MİNARE</td><td>Ramazan’da büyük dert</td><td>MINARET</td><td>Trouble during Ramadan</td></tr>
+<tr><td>M</td><td>KAARS</td><td>Veel plezier in seksueel opzicht</td><td>MUM</td><td>Cinsel açıdan keyif</td><td>CANDLE</td><td>Sexual pleasure</td></tr>
+<tr><td>Letter</td><td>Symbool NL</td><td>Betekenis NL</td><td>Symbool TR</td><td>Betekenis TR</td><td>Symbool Engels</td><td>Betekenis Engels</td></tr>
+<tr><td>N</td><td>HOEFIJZER</td><td>Groot geluk</td><td>NAL</td><td>Büyük şans</td><td>HORSESHOE</td><td>Big luck</td></tr>
+<tr><td>N</td><td>GEBED</td><td>Onverwacht goed nieuws</td><td>NAMAZ</td><td>Beklemediğiniz hayır</td><td>PRAYER</td><td>Unexpected blessing</td></tr>
+<tr><td>N</td><td>GRANAATAPPEL</td><td>Klein probleem dat groot kan worden</td><td>NAR</td><td>Küçük ama sonunda büyük dert</td><td>POMEGRANATE</td><td>Small issue grows big</td></tr>
+<tr><td>Letter</td><td>Symbool NL</td><td>Betekenis NL</td><td>Symbool TR</td><td>Betekenis TR</td><td>Symbool Engels</td><td>Betekenis Engels</td></tr>
+<tr><td>O</td><td>PIJL</td><td>Je wordt geduldiger</td><td>OK</td><td>Sabırsızlığınız geçecek</td><td>ARROW</td><td>Impatience fades</td></tr>
+<tr><td>O</td><td>SIKKEL</td><td>Je maakt vrede met oude vrienden</td><td>ORAK</td><td>Küs arkadaşlarla barışacaksınız</td><td>SICKLE</td><td>Reconcile with friends</td></tr>
+<tr><td>O</td><td>STEENBOK</td><td>Opluchting na moeilijke tijd</td><td>OĞLAK</td><td>Zor dönemin ardından rahat</td><td>CAPRICORN</td><td>Relief after hardship</td></tr>
+<tr><td>O</td><td>AUTO</td><td>Je geeft geld uit, maar het levert voordeel</td><td>OTOMOBİL</td><td>Para harcayacaksınız ama fayda sağlayacak</td><td>CAR</td><td>Spending brings benefit</td></tr>
+<tr><td>Letter</td><td>Symbool NL</td><td>Betekenis NL</td><td>Symbool TR</td><td>Betekenis TR</td><td>Symbool Engels</td><td>Betekenis Engels</td></tr>
+<tr><td>Ö</td><td>STUDENT</td><td>Nieuwe fase in je leven</td><td>ÖĞRENCİ</td><td>Hayatınızda yeni dönem</td><td>STUDENT</td><td>New phase</td></tr>
+<tr><td>Ö</td><td>SPIN</td><td>Persoonlijkheidsproblemen</td><td>ÖRÜMCEK</td><td>Kişilik sorunları yaşayacaksınız</td><td>SPIDER</td><td>Personality issues</td></tr>
+<tr><td>Ö</td><td>EEND</td><td>Hulp van vaderskant</td><td>ÖRDEK</td><td>Baba tarafından yardım</td><td>DUCK</td><td>Help from father’s side</td></tr>
+<tr><td>Letter</td><td>Symbool NL</td><td>Betekenis NL</td><td>Symbool TR</td><td>Betekenis TR</td><td>Symbool Engels</td><td>Betekenis Engels</td></tr>
+<tr><td>P</td><td>JAS</td><td>Langverwacht nieuws komt maar niet</td><td>PALTO</td><td>Çok beklediğiniz haber gelmeyecek</td><td>COAT</td><td>Awaited news won’t come</td></tr>
+<tr><td>P</td><td>BROEK</td><td>Goed nieuws van een blonde persoon</td><td>PANTOLON</td><td>Sarı birinden güzel haber</td><td>TROUSERS</td><td>Good news from blond person</td></tr>
+<tr><td>P</td><td>VLINDDAS</td><td>Mogelijk verraad door naaste vrienden</td><td>PAPYON</td><td>Yakın dostlar kazık atabilir</td><td>BOW TIE</td><td>Betrayal from close friend</td></tr>
+<tr><td>P</td><td>KATOEN</td><td>Let op verstikkingsgevaar</td><td>PAMUK</td><td>Boğulma tehlikesi</td><td>COTTON</td><td>Risk of suffocation</td></tr>
+<tr><td>P</td><td>PAPEGAAI</td><td>Je vriendenkring groeit</td><td>PAPAĞAN</td><td>Dostlarınız artacak</td><td>PARROT</td><td>More friends</td></tr>
+<tr><td>P</td><td>MARGRIET</td><td>Bezoek</td><td>PAPATYA</td><td>Ziyaret</td><td>DAISY</td><td>Visit</td></tr>
+<tr><td>P</td><td>GELD</td><td>Stel je plannen niet uit</td><td>PARA</td><td>Planlarınızı ertelemeyin</td><td>MONEY</td><td>Don’t postpone plans</td></tr>
+<tr><td>P</td><td>TAART</td><td>Goed nieuws</td><td>PASTA</td><td>Güzel haber</td><td>CAKE</td><td>Good news</td></tr>
+<tr><td>P</td><td>PELIKAAN</td><td>Veel geluk</td><td>PELİKAN</td><td>Bol şans</td><td>PELICAN</td><td>Lots of luck</td></tr>
+<tr><td>P</td><td>PINGUÏN</td><td>Met geduld krijg je voorspoed</td><td>PENGUEN</td><td>Sabrederseniz kısmetli olursunuz</td><td>PENGUIN</td><td>Patience brings fortune</td></tr>
+<tr><td>P</td><td>RAAM</td><td>Gezondheid</td><td>PENCERE</td><td>Sağlık</td><td>WINDOW</td><td>Health</td></tr>
+<tr><td>P</td><td>PASSER</td><td>Geheim project eindigt succesvol</td><td>PERGEL</td><td>Gizli iş başarıyla bitecek</td><td>COMPASS</td><td>Hidden work succeeds</td></tr>
+<tr><td>P</td><td>BATTERIJ</td><td>Geluk</td><td>PİL</td><td>Mutluluk</td><td>BATTERY</td><td>Happiness</td></tr>
+<tr><td>P</td><td>PIJP</td><td>Twijfel</td><td>PİPO</td><td>Şüphe</td><td>PIPE</td><td>Doubt</td></tr>
+<tr><td>P</td><td>POLITIE</td><td>Groot verdriet</td><td>POLİS</td><td>Çok büyük acı</td><td>POLICE</td><td>Great sorrow</td></tr>
+<tr><td>P</td><td>POSTBODE</td><td>Je vertrekt met vreugde</td><td>POSTACI</td><td>Keyifle yola çıkacaksınız</td><td>POSTMAN</td><td>Joyful departure</td></tr>
+<tr><td>P</td><td>PRINS</td><td>Aantrekkelijke partner</td><td>PRENS</td><td>Yakışıklı kısmet</td><td>PRINCE</td><td>Handsome match</td></tr>
+<tr><td>P</td><td>PRINSES</td><td>Binnen korte tijd ontmoet je ideale partner</td><td>PRENSES</td><td>Üç vakte kadar ideal eş adayıyla tanışacaksınız</td><td>PRINCESS</td><td>Meet ideal partner soon</td></tr>
+<tr><td>Letter</td><td>Symbool NL</td><td>Betekenis NL</td><td>Symbool TR</td><td>Betekenis TR</td><td>Symbool Engels</td><td>Betekenis Engels</td></tr>
+<tr><td>R</td><td>RAKI FLES</td><td>Plots maar groot geluk</td><td>RAKI ŞİŞESİ</td><td>Ani ama büyük mutluluk</td><td>RAKI BOTTLE</td><td>Sudden but great joy</td></tr>
+<tr><td>R</td><td>R LETTER</td><td>Persoon met R in naam kan je schaden</td><td>R HARFİ</td><td>İsmi R ile başlayan zarar verebilir</td><td>LETTER R</td><td>Person with “R” may harm</td></tr>
+<tr><td>Letter</td><td>Symbool NL</td><td>Betekenis NL</td><td>Symbool TR</td><td>Betekenis TR</td><td>Symbool Engels</td><td>Betekenis Engels</td></tr>
+<tr><td>S</td><td>KLOK</td><td>Je wordt rustiger</td><td>SAAT</td><td>Daha sakin olacaksınız</td><td>CLOCK</td><td>You’ll be calmer</td></tr>
+<tr><td>S</td><td>ZEEP</td><td>Je zorgen blijven bestaan</td><td>SABUN</td><td>Dertler devam edecek</td><td>SOAP</td><td>Troubles continue</td></tr>
+<tr><td>S</td><td>HAAR</td><td>Veel winst</td><td>SAÇ</td><td>Bol kazanç</td><td>HAIR</td><td>Much gain</td></tr>
+<tr><td>S</td><td>BAARD</td><td>Je broer bereikt succes</td><td>SAKAL</td><td>Kardeşiniz başarıya kavuşacak</td><td>BEARD</td><td>Brother succeeds</td></tr>
+<tr><td>S</td><td>SLUG</td><td>Met geduld korte termijn winst</td><td>SALYANGOZ</td><td>Sabırlı olursanız kazanç</td><td>SNAIL</td><td>Gain with patience</td></tr>
+<tr><td>S</td><td>LUIT</td><td>Doktersbezoek maar geen slecht nieuws</td><td>SAZ</td><td>Doktora gidecek, kötü haber almayacak</td><td>LUTE</td><td>Doctor visit, no bad news</td></tr>
+<tr><td>S</td><td>DERWISH</td><td>Voorspoed</td><td>SEMAZEN</td><td>Kısmet</td><td>WHIRLING DERVISH</td><td>Fortune</td></tr>
+<tr><td>S</td><td>RIVIER VAN LIEFDE</td><td>Grote overvloed</td><td>SEVGİ NEHRİ</td><td>Aşırı bereket</td><td>RIVER OF LOVE</td><td>Abundance</td></tr>
+<tr><td>S</td><td>SIGARET</td><td>Moeilijkheden verdwijnen</td><td>SİGARA</td><td>Güçlükler bitecek</td><td>CIGARETTE</td><td>Troubles end</td></tr>
+<tr><td>S</td><td>WAPEN</td><td>Je herkent slechte mensen om je heen</td><td>SİLAH</td><td>Kötü insanları tanıyacaksınız</td><td>GUN</td><td>Recognize evil people</td></tr>
+<tr><td>S</td><td>VLIEG</td><td>Je krijgt een mooie uitnodiging</td><td>SİNEK</td><td>Güzel bir davet alacaksınız</td><td>FLY</td><td>Nice invitation</td></tr>
+<tr><td>S</td><td>EEKHOORN</td><td>Met sparen opent je geluk</td><td>SİNCAP</td><td>Tasarruf ederseniz bahtınız açılacak</td><td>SQUIRREL</td><td>Save = fortune opens</td></tr>
+<tr><td>S</td><td>WORM</td><td>Pas op voor valse vrienden</td><td>SOLUCAN</td><td>Sahte dostlara dikkat</td><td>WORM</td><td>Beware false friends</td></tr>
+<tr><td>S</td><td>VRAAGTEKEN</td><td>Je geliefde houdt iets geheim</td><td>SORU İŞARETİ</td><td>Sevgiliniz sır saklıyor</td><td>QUESTION MARK</td><td>Lover hides a secret</td></tr>
+<tr><td>S</td><td>BEZEM</td><td>Uitgestelde reis gaat door</td><td>SÜPÜRGE</td><td>Ertelenen gezi olacak</td><td>BROOM</td><td>Delayed trip will happen</td></tr>
+<tr><td>Letter</td><td>Symbool NL</td><td>Betekenis NL</td><td>Symbool TR</td><td>Betekenis TR</td><td>Symbool Engels</td><td>Betekenis Engels</td></tr>
+<tr><td>Ş</td><td>PARAPLU</td><td>Met kleine uitgave komt iets moois</td><td>ŞEMSİYE</td><td>Az harcamayla güzel gelişme</td><td>UMBRELLA</td><td>Small cost brings good result</td></tr>
+<tr><td>Ş</td><td>DUIVEL</td><td>Pas op voor oude vrienden, ze plannen kwaad</td><td>ŞEYTAN</td><td>Eski dostlara dikkat, kötülük planlıyorlar</td><td>DEVIL</td><td>Old friends plan evil</td></tr>
+<tr><td>Ş</td><td>FLES</td><td>Vertel je geheimen niet overal</td><td>ŞİŞE</td><td>Sırlarınızı herkese anlatmayın</td><td>BOTTLE</td><td>Don’t share secrets</td></tr>
+<tr><td>Letter</td><td>Symbool NL</td><td>Betekenis NL</td><td>Symbool TR</td><td>Betekenis TR</td><td>Symbool Engels</td><td>Betekenis Engels</td></tr>
+<tr><td>T</td><td>BORD</td><td>Je krijgt eigendom</td><td>TABAK</td><td>Mülk edineceksiniz</td><td>PLATE</td><td>Property</td></tr>
+<tr><td>T</td><td>TABLET</td><td>Groot nieuws</td><td>TABLET</td><td>Büyük haber</td><td>TABLET</td><td>Big news</td></tr>
+<tr><td>T</td><td>DOODSKIST</td><td>Gezondheidsproblemen van je vader eindigen</td><td>TABUT</td><td>Babanızın sağlık problemleri bitecek</td><td>COFFIN</td><td>Father’s health improves</td></tr>
+<tr><td>T</td><td>TROON</td><td>Lange reis</td><td>TAHT</td><td>Uzun seyahat</td><td>THRONE</td><td>Long journey</td></tr>
+<tr><td>T</td><td>KAM</td><td>Je krijgt een nieuwe baan</td><td>TARAK</td><td>Yeni işe gireceksiniz</td><td>COMB</td><td>New job</td></tr>
+<tr><td>T</td><td>KONIJN</td><td>Eerst veel rust, daarna groot verval</td><td>TAVŞAN</td><td>Önce huzur, sonra çöküş</td><td>RABBIT</td><td>Peace then collapse</td></tr>
+<tr><td>T</td><td>PAUW</td><td>Geluk</td><td>TAVUSKUŞU</td><td>Talih</td><td>PEACOCK</td><td>Fortune</td></tr>
+<tr><td>T</td><td>TELEFOON</td><td>Goed nieuws</td><td>TELEFON</td><td>Sevindirici haber</td><td>TELEPHONE</td><td>Joyful news</td></tr>
+<tr><td>T</td><td>PAN</td><td>Je kwetst je geliefde onnodig</td><td>TENCERE</td><td>Sevgilinizi anlamsız kıracaksınız</td><td>POT</td><td>Hurt partner pointlessly</td></tr>
+<tr><td>T</td><td>ROZENKRANS</td><td>Iets gebeurt voor het eerst in je leven</td><td>TESBİH</td><td>Hayatınızda bir ilk gerçekleşecek</td><td>PRAYER BEADS</td><td>First-time event</td></tr>
+<tr><td>T</td><td>ZAAG</td><td>Je valse vriendschappen eindigen</td><td>TESTERE</td><td>Sahte dostluklar bitecek</td><td>SAW</td><td>False friendships end</td></tr>
+<tr><td>T</td><td>KAN</td><td>Je liegt tegen een vriend, hij ontdekt het</td><td>TESTİ</td><td>Arkadaşınıza yalan söylüyorsunuz, öğrenecek</td><td>JUG</td><td>Lie discovered</td></tr>
+<tr><td>T</td><td>VOS</td><td>Blijf weg van roddel</td><td>TİLKİ</td><td>Dedikodudan uzak durun</td><td>FOX</td><td>Avoid gossip</td></tr>
+<tr><td>T</td><td>RUPS</td><td>Reis helpt je zorgen vergeten</td><td>TIRTIL</td><td>Derdinizi unutmak için seyahate çıkın</td><td>CATERPILLAR</td><td>Trip helps forget troubles</td></tr>
+<tr><td>Letter</td><td>Symbool NL</td><td>Betekenis NL</td><td>Symbool TR</td><td>Betekenis TR</td><td>Symbool Engels</td><td>Betekenis Engels</td></tr>
+<tr><td>U</td><td>VLIEGTUIG</td><td>Korte reis</td><td>UÇAK</td><td>Kısa seyahat</td><td>AIRPLANE</td><td>Short trip</td></tr>
+<tr><td>U</td><td>VLIEGER</td><td>Je vindt geluk ondanks moeilijkheden</td><td>UÇURTMA</td><td>Zorluklar içinde mutlu olacaksınız</td><td>KITE</td><td>Happiness despite troubles</td></tr>
+<tr><td>U</td><td>SCHEERMES</td><td>Een oudere beschermt je</td><td>USTURA</td><td>Bir büyüğünüz sizi koruyacak</td><td>RAZOR</td><td>Elder protects you</td></tr>
+<tr><td>U</td><td>LIEVEHEERSBEESTJE</td><td>Veel geluk en voorspoed</td><td>UĞUR BÖCEĞİ</td><td>Bol şans, kısmet</td><td>LADYBUG</td><td>Luck and fortune</td></tr>
+<tr><td>Letter</td><td>Symbool NL</td><td>Betekenis NL</td><td>Symbool TR</td><td>Betekenis TR</td><td>Symbool Engels</td><td>Betekenis Engels</td></tr>
+<tr><td>Ü</td><td>STRIJKIJZER</td><td>Goed nieuws uit het verleden</td><td>ÜTÜ</td><td>Eskilerden iyi haber</td><td>IRON</td><td>Good news from past</td></tr>
+<tr><td>Ü</td><td>DRIEHOEK</td><td>Let op in zakelijke relaties</td><td>ÜÇGEN</td><td>İş ilişkilerine dikkat</td><td>TRIANGLE</td><td>Beware in business</td></tr>
+<tr><td>Ü</td><td>UITROEPTEKEN</td><td>Ruzie met geliefde, maar tijdelijk</td><td>ÜNLEM</td><td>Sevgilinizle aranız bozulacak ama geçecek</td><td>EXCLAMATION MARK</td><td>Temporary fight with lover</td></tr>
+<tr><td>Ü</td><td>Ü LETTER</td><td>Een verdrietige periode komt</td><td>Ü HARFİ</td><td>Üzüntülü dönem geliyor</td><td>LETTER Ü</td><td>Sad period ahead</td></tr>
+<tr><td>Letter</td><td>Symbool NL</td><td>Betekenis NL</td><td>Symbool TR</td><td>Betekenis TR</td><td>Symbool Engels</td><td>Betekenis Engels</td></tr>
+<tr><td>V</td><td>LICHAAM</td><td>Mannenlichaam = groot geluk, vrouwenlichaam = eerst tegenslag, dan groot geluk</td><td>VÜCUT</td><td>Erkek vücudu = büyük şans, kadın vücudu = önce bahtsızlık sonra şans</td><td>BODY</td><td>Male = great fortune, Female = bad luck then fortune</td></tr>
+<tr><td>Letter</td><td>Symbool NL</td><td>Betekenis NL</td><td>Symbool TR</td><td>Betekenis TR</td><td>Symbool Engels</td><td>Betekenis Engels</td></tr>
+<tr><td>Y</td><td>VULKAAN</td><td>Nieuws van ex-geliefde</td><td>YANARDAĞ</td><td>Eski sevgiliden haber</td><td>VOLCANO</td><td>News from ex</td></tr>
+<tr><td>Y</td><td>BLAD</td><td>Kans op ziekte, wees voorzichtig</td><td>YAPRAK</td><td>Hasta olabilirsiniz, dikkat edin</td><td>LEAF</td><td>Risk of illness</td></tr>
+<tr><td>Y</td><td>HALVE MAAN</td><td>Voer je geplande werk uit</td><td>YARIMAY</td><td>Planladığınız işi yapın</td><td>CRESCENT</td><td>Do planned work</td></tr>
+<tr><td>Y</td><td>BED</td><td>Stop met twijfelen</td><td>YATAK</td><td>Kararsızlığı bırakın</td><td>BED</td><td>Leave indecision</td></tr>
+<tr><td>Y</td><td>VLEERMUIS</td><td>Slecht nieuws verstoort je slaap</td><td>YARASA</td><td>Uykunuzu kaçıracak kötü haber</td><td>BAT</td><td>Bad news ruins sleep</td></tr>
+<tr><td>Y</td><td>ZEIL</td><td>Korte reis</td><td>YELKEN</td><td>Kısa yolculuk</td><td>SAIL</td><td>Short journey</td></tr>
+<tr><td>Y</td><td>KRAB</td><td>Je krijgt een goede vriend</td><td>YENGEÇ</td><td>Çok iyi bir dost edineceksiniz</td><td>CRAB</td><td>Good friend</td></tr>
+<tr><td>Y</td><td>STER</td><td>Groot probleem dichtbij, wees voorzichtig</td><td>YILDIZ</td><td>Büyük dert yanı başınızda</td><td>STAR</td><td>Big trouble nearby</td></tr>
+<tr><td>Y</td><td>SLANG</td><td>Goed nieuws verdrijft je zorgen</td><td>YILAN</td><td>Haberinle tasalarınız bitecek</td><td>SNAKE</td><td>News removes worries</td></tr>
+<tr><td>Y</td><td>EI</td><td>Betekenis hangt af van uitlegger</td><td>YUMURTA</td><td>Yoruma göre değişir</td><td>EGG</td><td>Depends on interpreter</td></tr>
+<tr><td>Y</td><td>DOLFIJN</td><td>Valse vrienden die glimlachen</td><td>YUNUS</td><td>Yüzüne gülen sahte arkadaşlar</td><td>DOLPHIN</td><td>Fake smiling friends</td></tr>
+<tr><td>Y</td><td>WEG</td><td>Je onrust verdwijnt</td><td>YOL</td><td>Huzursuzluğunuz geçecek</td><td>ROAD</td><td>Restlessness ends</td></tr>
+<tr><td>Letter</td><td>Symbool NL</td><td>Betekenis NL</td><td>Symbool TR</td><td>Betekenis TR</td><td>Symbool Engels</td><td>Betekenis Engels</td></tr>
+<tr><td>Z</td><td>DOBBELSTEEN</td><td>Je komt in een ongelukkige periode</td><td>ZAR</td><td>Şanssız döneme gireceksiniz</td><td>DICE</td><td>Unlucky period</td></tr>
+<tr><td>Z</td><td>ENVELOP</td><td>Ruzie tussen moeder en geliefde</td><td>ZARF</td><td>Annenizle sevgilinizin arası açılacak</td><td>ENVELOPE</td><td>Conflict mother &amp; partner</td></tr>
+<tr><td>Z</td><td>OLIJF</td><td>Zeer goed nieuws</td><td>ZEYTİN</td><td>Çok hayırlı haber</td><td>OLIVE</td><td>Very good news</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+<script>
+(function() {
+  const table = document.getElementById('dictTable');
+  const tbody = table.querySelector('tbody');
+  const rows = Array.from(tbody.querySelectorAll('tr'));
+  const search = document.getElementById('search');
+  const letter = document.getElementById('letter');
+  const clearBtn = document.getElementById('clearBtn');
+  const visibleCount = document.getElementById('visibleCount');
+  const sortInfo = document.getElementById('sortInfo');
+
+  let sortCol = null;
+  let sortAsc = true;
+
+  function normalize(str) {
+    return (str || '').toString()
+      .normalize('NFD').replace(/[̀-ͯ]/g, '')
+      .toLowerCase();
+  }
+
+  function applyFilter() {
+    const q = normalize(search.value);
+    const l = letter.value;
+
+    let visible = 0;
+    rows.forEach(tr => {
+      const cells = Array.from(tr.cells).map(td => td.textContent);
+      const matchesLetter = !l || (cells[0] && cells[0].trim() === l);
+      const hay = normalize(cells.join(' '));
+      const matchesQuery = !q || hay.indexOf(q) !== -1;
+      const show = matchesLetter && matchesQuery;
+      tr.style.display = show ? '' : 'none';
+      if (show) visible++;
+    });
+    visibleCount.textContent = visible;
+  }
+
+  function sortBy(col) {
+    const dir = (sortCol === col) ? !sortAsc : true;
+    sortCol = col; sortAsc = dir;
+    const factor = dir ? 1 : -1;
+
+    const visibleRows = rows.filter(r => r.style.display !== 'none');
+    visibleRows.sort((a, b) => {
+      const A = a.cells[col] ? a.cells[col].textContent : '';
+      const B = b.cells[col] ? b.cells[col].textContent : '';
+      return A.localeCompare(B, 'tr', { sensitivity: 'base' }) * factor;
+    });
+    // Re-append in order (only visible ones, hidden keep after)
+    const hiddenRows = rows.filter(r => r.style.display === 'none');
+    visibleRows.concat(hiddenRows).forEach(r => tbody.appendChild(r));
+    sortInfo.textContent = 'Sorteer: ' + table.tHead.rows[0].cells[col].textContent + ' (' + (dir ? 'A→Z' : 'Z→A') + ')';
+  }
+
+  table.tHead.addEventListener('click', (e) => {
+    const th = e.target.closest('th');
+    if (!th) return;
+    sortBy(parseInt(th.dataset.col, 10));
+  });
+
+  search.addEventListener('input', applyFilter);
+  letter.addEventListener('change', applyFilter);
+  clearBtn.addEventListener('click', () => {
+    search.value = '';
+    letter.value = '';
+    sortCol = null; sortAsc = true; sortInfo.textContent = 'Sorteer: geen';
+    rows.forEach(r => tbody.appendChild(r));
+    rows.forEach(r => r.style.display = '');
+    visibleCount.textContent = rows.length;
+  });
+})();
+</script>
+</body>
+</html>

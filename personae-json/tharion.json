@@ -1,0 +1,44 @@
+{
+  "id": "tharion",
+  "displayName": "Tharion",
+  "gender": "male",
+  "age": 47,
+  "cultures": [
+    "MA",
+    "TR",
+    "NL"
+  ],
+  "methods": [
+    "numerology",
+    "astrology",
+    "analysis",
+    "symbolism"
+  ],
+  "locales": [
+    "nl-NL",
+    "en-GB",
+    "tr-TR"
+  ],
+  "timezones": [
+    "Europe/Amsterdam"
+  ],
+  "ageGroups": [
+    "26-40",
+    "41-60"
+  ],
+  "experienceLevels": [
+    "beginner",
+    "intermediate"
+  ],
+  "style": {
+    "tone": "rhythmic, concise",
+    "tempo": "fast",
+    "keywords": [
+      "count",
+      "drum",
+      "hourglass"
+    ]
+  },
+  "premium": false,
+  "qos": 88
+}

@@ -1,0 +1,46 @@
+{
+  "id": "auron",
+  "displayName": "Auron",
+  "gender": "male",
+  "age": 66,
+  "cultures": [
+    "NO",
+    "IS",
+    "DE",
+    "NL"
+  ],
+  "methods": [
+    "astrology",
+    "numerology",
+    "analysis",
+    "symbolism"
+  ],
+  "locales": [
+    "nl-NL",
+    "en-GB",
+    "tr-TR"
+  ],
+  "timezones": [
+    "Europe/Oslo",
+    "Europe/Amsterdam"
+  ],
+  "ageGroups": [
+    "41-60",
+    "60+"
+  ],
+  "experienceLevels": [
+    "intermediate",
+    "expert"
+  ],
+  "style": {
+    "tone": "analytical, warm",
+    "tempo": "measured",
+    "keywords": [
+      "runes",
+      "ice",
+      "aurora"
+    ]
+  },
+  "premium": true,
+  "qos": 96
+}

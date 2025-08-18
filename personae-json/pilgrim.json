@@ -1,0 +1,45 @@
+{
+  "id": "pilgrim",
+  "displayName": "De Pilgrim",
+  "gender": "male",
+  "age": 48,
+  "cultures": [
+    "TR",
+    "ES",
+    "MA",
+    "NL"
+  ],
+  "methods": [
+    "numerology",
+    "astrology",
+    "analysis"
+  ],
+  "locales": [
+    "nl-NL",
+    "en-GB",
+    "tr-TR"
+  ],
+  "timezones": [
+    "Europe/Amsterdam",
+    "Europe/Istanbul"
+  ],
+  "ageGroups": [
+    "26-40",
+    "41-60"
+  ],
+  "experienceLevels": [
+    "beginner",
+    "intermediate"
+  ],
+  "style": {
+    "tone": "humble, spiritual",
+    "tempo": "gentle",
+    "keywords": [
+      "path",
+      "step",
+      "breath"
+    ]
+  },
+  "premium": false,
+  "qos": 88
+}

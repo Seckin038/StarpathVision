@@ -1,0 +1,42 @@
+{
+  "id": "vaelor",
+  "displayName": "Vaelor",
+  "gender": "male",
+  "age": 36,
+  "cultures": [
+    "NL",
+    "US"
+  ],
+  "methods": [
+    "astrology",
+    "numerology",
+    "analysis"
+  ],
+  "locales": [
+    "nl-NL",
+    "en-GB",
+    "tr-TR"
+  ],
+  "timezones": [
+    "Europe/Amsterdam"
+  ],
+  "ageGroups": [
+    "18-25",
+    "26-40"
+  ],
+  "experienceLevels": [
+    "beginner",
+    "intermediate"
+  ],
+  "style": {
+    "tone": "brisk, practical",
+    "tempo": "fast",
+    "keywords": [
+      "orbit",
+      "KPI",
+      "sprint"
+    ]
+  },
+  "premium": false,
+  "qos": 86
+}

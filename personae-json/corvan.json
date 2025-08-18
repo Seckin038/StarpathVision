@@ -1,0 +1,43 @@
+{
+  "id": "corvan",
+  "displayName": "Corvan",
+  "gender": "male",
+  "age": 42,
+  "cultures": [
+    "NL",
+    "GB"
+  ],
+  "methods": [
+    "analysis",
+    "symbolism",
+    "numerology",
+    "astrology"
+  ],
+  "locales": [
+    "nl-NL",
+    "en-GB",
+    "tr-TR"
+  ],
+  "timezones": [
+    "Europe/Amsterdam",
+    "Europe/London"
+  ],
+  "ageGroups": [
+    "26-40",
+    "41-60"
+  ],
+  "experienceLevels": [
+    "intermediate"
+  ],
+  "style": {
+    "tone": "direct, fair",
+    "tempo": "medium",
+    "keywords": [
+      "crossroads",
+      "mirror",
+      "scales"
+    ]
+  },
+  "premium": false,
+  "qos": 88
+}

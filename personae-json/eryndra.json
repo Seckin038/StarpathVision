@@ -1,0 +1,42 @@
+{
+  "id": "eryndra",
+  "displayName": "Eryndra",
+  "gender": "female",
+  "age": 38,
+  "cultures": [
+    "NL",
+    "US"
+  ],
+  "methods": [
+    "tarot",
+    "numerology",
+    "dream"
+  ],
+  "locales": [
+    "nl-NL",
+    "en-GB",
+    "tr-TR"
+  ],
+  "timezones": [
+    "Europe/Amsterdam"
+  ],
+  "ageGroups": [
+    "18-25",
+    "26-40"
+  ],
+  "experienceLevels": [
+    "beginner",
+    "intermediate"
+  ],
+  "style": {
+    "tone": "modern, playful",
+    "tempo": "fast",
+    "keywords": [
+      "neon",
+      "playlist",
+      "leap"
+    ]
+  },
+  "premium": false,
+  "qos": 87
+}

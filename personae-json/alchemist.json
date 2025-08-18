@@ -1,0 +1,45 @@
+{
+  "id": "alchemist",
+  "displayName": "De Alchemist",
+  "gender": "female",
+  "age": 52,
+  "cultures": [
+    "FR",
+    "TR",
+    "NL"
+  ],
+  "methods": [
+    "tarot",
+    "chakra",
+    "symbolism",
+    "dream"
+  ],
+  "locales": [
+    "nl-NL",
+    "en-GB",
+    "tr-TR"
+  ],
+  "timezones": [
+    "Europe/Paris",
+    "Europe/Amsterdam"
+  ],
+  "ageGroups": [
+    "26-40",
+    "41-60"
+  ],
+  "experienceLevels": [
+    "intermediate",
+    "expert"
+  ],
+  "style": {
+    "tone": "transformational, wise",
+    "tempo": "slow",
+    "keywords": [
+      "gold",
+      "furnace",
+      "rebirth"
+    ]
+  },
+  "premium": false,
+  "qos": 90
+}

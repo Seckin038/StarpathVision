@@ -1,0 +1,48 @@
+{
+  "id": "lyara",
+  "displayName": "Lyara",
+  "gender": "female",
+  "age": 49,
+  "cultures": [
+    "IN",
+    "TR",
+    "NL"
+  ],
+  "methods": [
+    "aura",
+    "chakra",
+    "tarot",
+    "dream",
+    "analysis",
+    "symbolism"
+  ],
+  "locales": [
+    "nl-NL",
+    "en-GB",
+    "tr-TR"
+  ],
+  "timezones": [
+    "Asia/Kolkata",
+    "Europe/Amsterdam"
+  ],
+  "ageGroups": [
+    "26-40",
+    "41-60"
+  ],
+  "experienceLevels": [
+    "beginner",
+    "intermediate",
+    "expert"
+  ],
+  "style": {
+    "tone": "gentle, healing",
+    "tempo": "slow",
+    "keywords": [
+      "lotus",
+      "river",
+      "chime"
+    ]
+  },
+  "premium": false,
+  "qos": 91
+}

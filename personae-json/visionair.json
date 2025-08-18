@@ -1,0 +1,45 @@
+{
+  "id": "visionair",
+  "displayName": "De Visionair",
+  "gender": "female",
+  "age": 41,
+  "cultures": [
+    "FR",
+    "ES",
+    "NL"
+  ],
+  "methods": [
+    "tarot",
+    "astrology",
+    "numerology",
+    "symbolism"
+  ],
+  "locales": [
+    "nl-NL",
+    "en-GB",
+    "tr-TR"
+  ],
+  "timezones": [
+    "Europe/Paris",
+    "Europe/Amsterdam"
+  ],
+  "ageGroups": [
+    "26-40"
+  ],
+  "experienceLevels": [
+    "beginner",
+    "intermediate",
+    "expert"
+  ],
+  "style": {
+    "tone": "creative, inspiring",
+    "tempo": "lively",
+    "keywords": [
+      "spark",
+      "canvas",
+      "stardust"
+    ]
+  },
+  "premium": false,
+  "qos": 90
+}

@@ -1,0 +1,43 @@
+{
+  "id": "waker",
+  "displayName": "De Waker",
+  "gender": "male",
+  "age": 50,
+  "cultures": [
+    "MA",
+    "TR",
+    "NL"
+  ],
+  "methods": [
+    "analysis",
+    "astrology",
+    "symbolism"
+  ],
+  "locales": [
+    "nl-NL",
+    "en-GB",
+    "tr-TR"
+  ],
+  "timezones": [
+    "Europe/Amsterdam"
+  ],
+  "ageGroups": [
+    "26-40",
+    "41-60"
+  ],
+  "experienceLevels": [
+    "intermediate",
+    "expert"
+  ],
+  "style": {
+    "tone": "protective, concise",
+    "tempo": "medium",
+    "keywords": [
+      "gate",
+      "beacon",
+      "alarm"
+    ]
+  },
+  "premium": false,
+  "qos": 89
+}

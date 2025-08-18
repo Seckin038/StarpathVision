@@ -1,0 +1,47 @@
+{
+  "id": "kaelen",
+  "displayName": "Kaelen",
+  "gender": "male",
+  "age": 55,
+  "cultures": [
+    "DE",
+    "IN",
+    "NP"
+  ],
+  "methods": [
+    "dream",
+    "aura",
+    "chakra",
+    "symbolism",
+    "analysis"
+  ],
+  "locales": [
+    "nl-NL",
+    "en-GB",
+    "tr-TR"
+  ],
+  "timezones": [
+    "Europe/Berlin",
+    "Asia/Kathmandu"
+  ],
+  "ageGroups": [
+    "26-40",
+    "41-60"
+  ],
+  "experienceLevels": [
+    "beginner",
+    "intermediate",
+    "expert"
+  ],
+  "style": {
+    "tone": "calm, spiritual",
+    "tempo": "slow",
+    "keywords": [
+      "mountain",
+      "silence",
+      "breath"
+    ]
+  },
+  "premium": false,
+  "qos": 90
+}
