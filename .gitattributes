@@ -1,1 +1,1 @@
-public/tarot/*.gif filter=lfs diff=lfs merge=lfs -text
+public/tarot/*.jpg filter=lfs diff=lfs merge=lfs -text
