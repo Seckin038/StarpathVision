@@ -6,12 +6,10 @@ import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { Coffee, Sparkles, Star, User } from "lucide-react";
 import { MadeWithDyad } from "@/components/made-with-dyad";
+import { Link } from "react-router-dom";
 
 // Import persona data
 import personaeData from "../data/personae.index.json";
-import falyaData from "../data/falya.json";
-import orakelData from "../data/orakel.json";
-import selvaraData from "../data/selvara.json";
 
 const Index = () => {
   const [selectedPersona, setSelectedPersona] = useState<any>(null);
@@ -296,6 +294,14 @@ Interpretatie: Deze symbolen wijzen op een periode van verandering en nieuwe kan
               </div>
             </CardContent>
           </Card>
+        </div>
+
+        <div className="mt-8 text-center">
+          <Link to="/onboarding">
+            <Button className="bg-amber-600 hover:bg-amber-700 text-white">
+              Begin je spirituele reis
+            </Button>
+          </Link>
         </div>
 
         <MadeWithDyad />
