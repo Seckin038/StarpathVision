@@ -13,6 +13,7 @@ import { useTranslation } from "react-i18next";
 import { supabase } from "@/integrations/supabase/client";
 import { showLoading, dismissToast, showError, showSuccess } from "@/utils/toast";
 import selvaraPersona from "../data/selvara.json";
+import MysticalBackground from "@/components/MysticalBackground";
 
 const NumerologyReading = () => {
   const { i18n } = useTranslation();
@@ -53,8 +54,9 @@ const NumerologyReading = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-stone-950 via-black to-stone-950 text-stone-200 p-4 font-serif">
-      <div className="max-w-4xl mx-auto">
+    <div className="relative min-h-screen bg-stone-950 text-stone-200 p-4 font-serif">
+      <MysticalBackground mode="particles" intensity="low" />
+      <div className="relative z-10 max-w-4xl mx-auto">
         <div className="flex items-center justify-between mb-6">
           <Link to="/dashboard">
             <Button variant="outline" className="flex items-center gap-2 border-amber-800 text-amber-300 hover:bg-amber-900/50 hover:text-amber-200">
