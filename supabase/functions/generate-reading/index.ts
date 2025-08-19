@@ -1,5 +1,7 @@
 // @ts-ignore: Deno is a global in the Supabase Edge Function environment
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
+// @ts-ignore: Deno is a global in the Supabase Edge Function environment
+import { requireEnv } from "../../../src/utils/env.ts";
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -13,8 +15,7 @@ serve(async (req) => {
   }
 
   try {
-    // @ts-ignore: Deno is a global in the Supabase Edge Function environment
-    const GEMINI_API_KEY = Deno.env.get("GEMINI_API_KEY");
+    const GEMINI_API_KEY = requireEnv("GEMINI_API_KEY");
     if (!GEMINI_API_KEY) {
       console.error("GEMINI_API_KEY is not set in Supabase secrets.");
       throw new Error("De AI-configuratie aan de server-kant ontbreekt. Controleer de API-sleutel.");
