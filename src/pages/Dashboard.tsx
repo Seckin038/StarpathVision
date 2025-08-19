@@ -11,7 +11,8 @@ import {
   Heart, 
   Eye,
   Zap,
-  Settings
+  Settings,
+  LogIn
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
@@ -27,9 +28,9 @@ const Dashboard = () => {
 
   const quickActions = [
     { 
-      title: "Kaart van de Dag", 
+      title: "Keltisch Kruis", 
       icon: <Sparkles className="h-5 w-5 text-purple-400" />,
-      path: "/readings/tarot/daily",
+      path: "/readings/tarot/celtic-cross",
     },
     { 
       title: "Koffielezing", 
@@ -37,9 +38,9 @@ const Dashboard = () => {
       path: "/readings/coffee",
     },
     { 
-      title: "Numerologie", 
+      title: "Sterlegging", 
       icon: <Star className="h-5 w-5 text-blue-400" />,
-      path: "/readings/numerology",
+      path: "/readings/tarot/star-spread",
     },
     { 
       title: "Droomduiding", 
@@ -96,9 +97,11 @@ const Dashboard = () => {
                 <p className="mt-4 text-stone-300">
                   Vandaag staat in het teken van balans. Vertrouw op je intuïtie bij belangrijke beslissingen.
                 </p>
-                <Button variant="outline" className="w-full mt-6 border-amber-800 text-amber-300 hover:bg-amber-900/50 hover:text-amber-200">
-                  Lees meer
-                </Button>
+                <Link to="/readings/tarot/three-card">
+                  <Button variant="outline" className="w-full mt-6 border-amber-800 text-amber-300 hover:bg-amber-900/50 hover:text-amber-200">
+                    Doe een 3-kaart legging
+                  </Button>
+                </Link>
               </CardContent>
             </Card>
 
@@ -115,9 +118,11 @@ const Dashboard = () => {
                   <div className="flex items-center justify-between"><span className="text-stone-400">Bestemmingsgetal</span><Badge variant="outline" className="text-stone-300 border-stone-700">3</Badge></div>
                   <div className="flex items-center justify-between"><span className="text-stone-400">Zielsverlangen</span><Badge variant="outline" className="text-stone-300 border-stone-700">5</Badge></div>
                 </div>
-                <Button variant="outline" className="w-full mt-6 border-amber-800 text-amber-300 hover:bg-amber-900/50 hover:text-amber-200">
-                  Bekijk volledige numerologie
-                </Button>
+                <Link to="/readings/numerology">
+                  <Button variant="outline" className="w-full mt-6 border-amber-800 text-amber-300 hover:bg-amber-900/50 hover:text-amber-200">
+                    Bekijk volledige numerologie
+                  </Button>
+                </Link>
               </CardContent>
             </Card>
           </div>

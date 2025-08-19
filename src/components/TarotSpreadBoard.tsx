@@ -92,9 +92,9 @@ export default function TarotSpreadBoard({
             key={drawnCard.positionId}
             className="absolute"
             style={style}
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ type: 'spring', damping: 15, stiffness: 100 }}
+            initial={{ opacity: 0, scale: 0.8, y: 50 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ type: 'spring', damping: 15, stiffness: 100, delay: 0.1 * draw.findIndex(d => d.positionId === drawnCard.positionId) }}
           >
             <div className="relative group">
               <Card
@@ -172,13 +172,8 @@ function Card({ drawnCard, isFlipped, onClick, cardSize }: CardProps) {
 function calculateCardPositions(spread: Spread, draw: DrawnCard[]) {
   const { layout, positions } = spread;
   const cardSize = layout.cardSize || { w: 120, h: 200 };
-  const origin = {
-    x: typeof layout.origin?.x === 'string' ? 0 : layout.origin?.x || 0,
-    y: typeof layout.origin?.y === 'string' ? 0 : layout.origin?.y || 0,
-  };
 
   const positionMap = new Map(positions.map(p => [p.id, p]));
-  const drawnMap = new Map(draw.map(d => [d.positionId, d]));
 
   let styles: { [key: string]: React.CSSProperties } = {};
 
@@ -186,8 +181,8 @@ function calculateCardPositions(spread: Spread, draw: DrawnCard[]) {
     case 'absolute':
       layout.coords?.forEach(coord => {
         styles[coord.id] = {
-          left: `calc(${layout.origin?.x || '50%'} + ${coord.x - cardSize.w / 2}px)`,
-          top: `calc(${layout.origin?.y || '50%'} + ${coord.y - cardSize.h / 2}px)`,
+          left: `calc(${layout.origin?.x || '50%'} - ${cardSize.w / 2}px + ${coord.x}px)`,
+          top: `calc(${layout.origin?.y || '50%'} - ${cardSize.h / 2}px + ${coord.y}px)`,
           transform: `rotate(${coord.rotation || 0}deg)`,
         };
       });
@@ -204,46 +199,7 @@ function calculateCardPositions(spread: Spread, draw: DrawnCard[]) {
       });
       break;
 
-    case 'circle':
-    case 'arc':
-      const angleStep = (layout.type === 'circle' ? 360 : 180) / (draw.length > 1 ? (layout.type === 'circle' ? draw.length : draw.length -1) : 1);
-      const startAngle = layout.type === 'arc' ? -90 : 0;
-      draw.forEach((d, i) => {
-        const angle = (startAngle + i * angleStep) * (Math.PI / 180);
-        const x = (layout.radius || 250) * Math.cos(angle);
-        const y = (layout.radius || 250) * Math.sin(angle);
-        styles[d.positionId] = {
-          left: `calc(${layout.origin?.x || '50%'} + ${x - cardSize.w / 2}px)`,
-          top: `calc(${layout.origin?.y || '50%'} + ${y - cardSize.h / 2}px)`,
-        };
-      });
-      break;
-      
-    case 'stair':
-        const totalStairWidth = draw.length * (layout.step || 95);
-        draw.forEach((d, i) => {
-            styles[d.positionId] = {
-                left: `calc(${layout.origin?.x || '50%'} - ${totalStairWidth/2}px + ${i * (layout.step || 95)}px)`,
-                top: `calc(${layout.origin?.y || '50%'} + ${i * (layout.step || 95) - (draw.length * (layout.step || 95))/2}px)`,
-            };
-        });
-        break;
-
-    case 'columns':
-        const cols = layout.columns || 2;
-        const rows = Math.ceil(draw.length / cols);
-        const colWidth = cardSize.w + (layout.gap || 30);
-        const rowHeight = cardSize.h + 60; // card height + label space
-        const totalColWidth = cols * colWidth - (layout.gap || 30);
-        draw.forEach((d, i) => {
-            const col = i % cols;
-            const row = Math.floor(i / cols);
-            styles[d.positionId] = {
-                left: `calc(50% - ${totalColWidth/2}px + ${col * colWidth}px)`,
-                top: `calc(50% - ${(rows * rowHeight)/2}px + ${row * rowHeight}px)`,
-            };
-        });
-        break;
+    // Andere layout types (circle, arc, etc.) kunnen hier worden toegevoegd
   }
 
   return draw
