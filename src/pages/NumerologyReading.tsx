@@ -55,7 +55,7 @@ const NumerologyReading = () => {
 
   return (
     <div className="relative min-h-screen bg-stone-950 text-stone-200 p-4 font-serif">
-      <MysticalBackground mode="particles" intensity="low" />
+      <MysticalBackground mode="particles+sigils" intensity="low" />
       <div className="relative z-10 max-w-4xl mx-auto">
         <div className="flex items-center justify-between mb-6">
           <Link to="/dashboard">

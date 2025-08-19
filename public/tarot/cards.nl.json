@@ -1,0 +1,48 @@
+[
+  {
+    "id": "wands-7",
+    "name": "Staven Zeven",
+    "suit": "wands",
+    "number": 7,
+    "image": "/tarot/wands-7.jpg",
+    "meanings": {
+      "general": "De Zeven van Staven wijst op een uitdaging waarvoor je standvastig mag blijven. Verdedig je plek en vertrouw op je innerlijke kracht.",
+      "love": "Grenzen stellen in relaties; zelfrespect leidt tot betere balans.",
+      "work": "Competitie; sta je mannetje/vrouwtje met vastberadenheid.",
+      "spiritual": "Blijf trouw aan je pad; innerlijke overtuiging geeft richting."
+    },
+    "element": "vuur",
+    "uprightKeywords": [
+      "standvastigheid",
+      "moed",
+      "verdedigen"
+    ],
+    "reversedKeywords": [
+      "twijfel",
+      "overweldiging"
+    ]
+  },
+  {
+    "id": "major-11",
+    "name": "Gerechtigheid",
+    "suit": "major",
+    "number": 11,
+    "image": "/tarot/justice.jpg",
+    "meanings": {
+      "general": "Balans, waarheid en eerlijkheid. Tijd om alles recht te zetten.",
+      "love": "Eerlijk communiceren; gezonde afspraken versterken de band.",
+      "work": "Contracten en beslissingen met integriteit.",
+      "spiritual": "Waarheidsvinding; innerlijke rechtvaardigheid."
+    },
+    "element": "lucht",
+    "uprightKeywords": [
+      "recht",
+      "evenwicht",
+      "waarheid"
+    ],
+    "reversedKeywords": [
+      "onrecht",
+      "oneerlijkheid"
+    ]
+  }
+]
