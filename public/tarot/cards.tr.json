@@ -1,1 +1,52 @@
-$$attachment_content_1$$
+[
+  {
+    "id": "tr_maj_0",
+    "name": "Joker",
+    "image": "https://dkw5wcabk1b56.cloudfront.net/RiderWaite/TR/MAJ00.jpg"
+  },
+  {
+    "id": "tr_maj_1",
+    "name": "Büyücü",
+    "image": "https://dkw5wcabk1b56.cloudfront.net/RiderWaite/TR/MAJ01.jpg"
+  },
+  {
+    "id": "tr_maj_2",
+    "name": "Azize",
+    "image": "https://dkw5wcabk1b56.cloudfront.net/RiderWaite/TR/MAJ02.jpg"
+  },
+  {
+    "id": "tr_maj_3",
+    "name": "İmparatoriçe",
+    "image": "https://dkw5wcabk1b56.cloudfront.net/RiderWaite/TR/MAJ03.jpg"
+  },
+  {
+    "id": "tr_maj_4",
+    "name": "İmparator",
+    "image": "https://dkw5wcabk1b56.cloudfront.net/RiderWaite/TR/MAJ04.jpg"
+  },
+  {
+    "id": "tr_wands_1",
+    "name": "Değnek Ası",
+    "image": "https://dkw5wcabk1b56.cloudfront.net/RiderWaite/TR/W01.jpg"
+  },
+  {
+    "id": "tr_cups_1",
+    "name": "Kupa Ası",
+    "image": "https://dkw5wcabk1b56.cloudfront.net/RiderWaite/TR/C01.jpg"
+  },
+  {
+    "id": "tr_swords_1",
+    "name": "Kılıç Ası",
+    "image": "https://dkw5wcabk1b56.cloudfront.net/RiderWaite/TR/S01.jpg"
+  },
+  {
+    "id": "tr_pentacles_1",
+    "name": "Tılsım Ası",
+    "image": "https://dkw5wcabk1b56.cloudfront.net/RiderWaite/TR/P01.jpg"
+  },
+  {
+    "id": "tr_maj_10",
+    "name": "Kader Çarkı",
+    "image": "https://dkw5wcabk1b56.cloudfront.net/RiderWaite/TR/MAJ10.jpg"
+  }
+]

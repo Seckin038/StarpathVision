@@ -1,1 +1,52 @@
-$$attachment_content_0$$
+[
+  {
+    "id": "nl_maj_0",
+    "name": "De Dwaas",
+    "image": "https://dkw5wcabk1b56.cloudfront.net/RiderWaite/NL/MAJ00.jpg"
+  },
+  {
+    "id": "nl_maj_1",
+    "name": "De Magiër",
+    "image": "https://dkw5wcabk1b56.cloudfront.net/RiderWaite/NL/MAJ01.jpg"
+  },
+  {
+    "id": "nl_maj_2",
+    "name": "De Hogepriesteres",
+    "image": "https://dkw5wcabk1b56.cloudfront.net/RiderWaite/NL/MAJ02.jpg"
+  },
+  {
+    "id": "nl_maj_3",
+    "name": "De Keizerin",
+    "image": "https://dkw5wcabk1b56.cloudfront.net/RiderWaite/NL/MAJ03.jpg"
+  },
+  {
+    "id": "nl_maj_4",
+    "name": "De Keizer",
+    "image": "https://dkw5wcabk1b56.cloudfront.net/RiderWaite/NL/MAJ04.jpg"
+  },
+  {
+    "id": "nl_wands_1",
+    "name": "Aas van Staven",
+    "image": "https://dkw5wcabk1b56.cloudfront.net/RiderWaite/NL/W01.jpg"
+  },
+  {
+    "id": "nl_cups_1",
+    "name": "Aas van Bekers",
+    "image": "https://dkw5wcabk1b56.cloudfront.net/RiderWaite/NL/C01.jpg"
+  },
+  {
+    "id": "nl_swords_1",
+    "name": "Aas van Zwaarden",
+    "image": "https://dkw5wcabk1b56.cloudfront.net/RiderWaite/NL/S01.jpg"
+  },
+  {
+    "id": "nl_pentacles_1",
+    "name": "Aas van Pentakels",
+    "image": "https://dkw5wcabk1b56.cloudfront.net/RiderWaite/NL/P01.jpg"
+  },
+  {
+    "id": "nl_maj_10",
+    "name": "Het Rad van Fortuin",
+    "image": "https://dkw5wcabk1b56.cloudfront.net/RiderWaite/NL/MAJ10.jpg"
+  }
+]

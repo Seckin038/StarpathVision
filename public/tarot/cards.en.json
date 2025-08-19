@@ -1,1 +1,52 @@
-$$attachment_content_2$$
+[
+  {
+    "id": "en_maj_0",
+    "name": "The Fool",
+    "image": "https://dkw5wcabk1b56.cloudfront.net/RiderWaite/EN/MAJ00.jpg"
+  },
+  {
+    "id": "en_maj_1",
+    "name": "The Magician",
+    "image": "https://dkw5wcabk1b56.cloudfront.net/RiderWaite/EN/MAJ01.jpg"
+  },
+  {
+    "id": "en_maj_2",
+    "name": "The High Priestess",
+    "image": "https://dkw5wcabk1b56.cloudfront.net/RiderWaite/EN/MAJ02.jpg"
+  },
+  {
+    "id": "en_maj_3",
+    "name": "The Empress",
+    "image": "https://dkw5wcabk1b56.cloudfront.net/RiderWaite/EN/MAJ03.jpg"
+  },
+  {
+    "id": "en_maj_4",
+    "name": "The Emperor",
+    "image": "https://dkw5wcabk1b56.cloudfront.net/RiderWaite/EN/MAJ04.jpg"
+  },
+  {
+    "id": "en_wands_1",
+    "name": "Ace of Wands",
+    "image": "https://dkw5wcabk1b56.cloudfront.net/RiderWaite/EN/W01.jpg"
+  },
+  {
+    "id": "en_cups_1",
+    "name": "Ace of Cups",
+    "image": "https://dkw5wcabk1b56.cloudfront.net/RiderWaite/EN/C01.jpg"
+  },
+  {
+    "id": "en_swords_1",
+    "name": "Ace of Swords",
+    "image": "https://dkw5wcabk1b56.cloudfront.net/RiderWaite/EN/S01.jpg"
+  },
+  {
+    "id": "en_pentacles_1",
+    "name": "Ace of Pentacles",
+    "image": "https://dkw5wcabk1b56.cloudfront.net/RiderWaite/EN/P01.jpg"
+  },
+  {
+    "id": "en_maj_10",
+    "name": "Wheel of Fortune",
+    "image": "https://dkw5wcabk1b56.cloudfront.net/RiderWaite/EN/MAJ10.jpg"
+  }
+]
