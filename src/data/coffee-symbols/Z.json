@@ -1,1 +1,34 @@
-$$attachment_content_1$$
+{
+  "version": "1.0.0",
+  "letter": "Z",
+  "count": 3,
+  "symbols": [
+    {
+      "letter": "Z",
+      "symbol_nl": "ZAK",
+      "meaning_nl": "Een geheim wordt onthuld",
+      "symbol_tr": "ÇUVAL",
+      "meaning_tr": "Bir sır ortaya çıkacak",
+      "symbol_en": "SACK",
+      "meaning_en": "A secret will be revealed"
+    },
+    {
+      "letter": "Z",
+      "symbol_nl": "ZANDLOPER",
+      "meaning_nl": "Tijd dringt",
+      "symbol_tr": "KUM SAATİ",
+      "meaning_tr": "Zaman daralıyor",
+      "symbol_en": "HOURGLASS",
+      "meaning_en": "Time is running out"
+    },
+    {
+      "letter": "Z",
+      "symbol_nl": "ZEBRA",
+      "meaning_nl": "Avontuur in het buitenland",
+      "symbol_tr": "ZEBRA",
+      "meaning_tr": "Yurtdışında macera",
+      "symbol_en": "ZEBRA",
+      "meaning_en": "Adventure abroad"
+    }
+  ]
+}
