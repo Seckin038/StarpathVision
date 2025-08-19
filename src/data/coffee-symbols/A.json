@@ -1,1 +1,6 @@
-$$attachment_content_2$$
+{
+  "symbols": [
+    { "letter": "A", "symbol_nl": "Aambeeld", "meaning_nl": "Hard werken", "symbol_en": "Anvil", "meaning_en": "Hard work", "symbol_tr": "Örs", "meaning_tr": "Sıkı çalışma" },
+    { "letter": "A", "symbol_nl": "Appel", "meaning_nl": "Kennis", "symbol_en": "Apple", "meaning_en": "Knowledge", "symbol_tr": "Elma", "meaning_tr": "Bilgi" }
+  ]
+}

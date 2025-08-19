@@ -1,1 +1,6 @@
-$$attachment_content_3$$
+{
+  "symbols": [
+    { "letter": "B", "symbol_nl": "Boom", "meaning_nl": "Groei", "symbol_en": "Tree", "meaning_en": "Growth", "symbol_tr": "Ağaç", "meaning_tr": "Büyüme" },
+    { "letter": "B", "symbol_nl": "Boot", "meaning_nl": "Reis", "symbol_en": "Boat", "meaning_en": "Journey", "symbol_tr": "Tekne", "meaning_tr": "Yolculuk" }
+  ]
+}

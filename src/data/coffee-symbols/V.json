@@ -1,16 +1,5 @@
 {
-    "version": "1.0.0",
-    "letter": "V",
-    "count": 1,
-    "symbols": [
-        {
-            "letter": "V",
-            "symbol_nl": "VAAS",
-            "meaning_nl": "Verdriet",
-            "symbol_tr": "VAZO",
-            "meaning_tr": "Üzüntü",
-            "symbol_en": "VASE",
-            "meaning_en": "Sorrow"
-        }
-    ]
+  "symbols": [
+    { "letter": "V", "symbol_nl": "Vogel", "meaning_nl": "Vrijheid", "symbol_en": "Bird", "meaning_en": "Freedom", "symbol_tr": "Kuş", "meaning_tr": "Özgürlük" }
+  ]
 }

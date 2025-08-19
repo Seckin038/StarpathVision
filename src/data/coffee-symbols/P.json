@@ -1,1 +1,5 @@
-$$attachment_content_21$$
+{
+  "symbols": [
+    { "letter": "P", "symbol_nl": "Pijl", "meaning_nl": "Richting", "symbol_en": "Arrow", "meaning_en": "Direction", "symbol_tr": "Ok", "meaning_tr": "Yön" }
+  ]
+}

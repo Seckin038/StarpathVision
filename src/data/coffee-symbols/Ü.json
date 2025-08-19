@@ -1,34 +1,5 @@
 {
-    "version": "1.0.0",
-    "letter": "Ü",
-    "count": 3,
-    "symbols": [
-        {
-            "letter": "Ü",
-            "symbol_nl": "DRUIF",
-            "meaning_nl": "Overvloed",
-            "symbol_tr": "ÜZÜM",
-            "meaning_tr": "Bereket",
-            "symbol_en": "GRAPE",
-            "meaning_en": "Abundance"
-        },
-        {
-            "letter": "Ü",
-            "symbol_nl": "DRIEHOEK",
-            "meaning_nl": "Succes",
-            "symbol_tr": "ÜÇGEN",
-            "meaning_tr": "Başarı",
-            "symbol_en": "TRIANGLE",
-            "meaning_en": "Success"
-        },
-        {
-            "letter": "Ü",
-            "symbol_nl": "STRIJKIJZER",
-            "meaning_nl": "Problemen gladstrijken",
-            "symbol_tr": "ÜTÜ",
-            "meaning_tr": "Sorunları gidermek",
-            "symbol_en": "IRON",
-            "meaning_en": "Smoothing over problems"
-        }
-    ]
+  "symbols": [
+    { "letter": "Ü", "symbol_nl": "Üzüm", "meaning_nl": "Druif", "symbol_en": "Grape", "meaning_en": "Grape", "symbol_tr": "Üzüm", "meaning_tr": "Üzüm" }
+  ]
 }

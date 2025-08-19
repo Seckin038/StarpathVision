@@ -1,1 +1,5 @@
-$$attachment_content_10$$
+{
+  "symbols": [
+    { "letter": "H", "symbol_nl": "Hart", "meaning_nl": "Liefde", "symbol_en": "Heart", "meaning_en": "Love", "symbol_tr": "Kalp", "meaning_tr": "Aşk" }
+  ]
+}
