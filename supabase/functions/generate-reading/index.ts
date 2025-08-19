@@ -3,7 +3,7 @@ import { z } from "https://deno.land/x/zod@v3.23.8/mod.ts";
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.45.0'
 
 const corsHeaders = {
-  "Access-Control-Allow-Origin": "https://dmsrsgecdvoswxopylfm.supabase.co", // Beperkt tot jouw domein
+  "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
   "Access-Control-Allow-Methods": "POST, OPTIONS",
   "Content-Type": "application/json"
@@ -74,7 +74,7 @@ serve(async (req) => {
     const body = BodySchema.parse(rawBody);
     const GEMINI_API_KEY = env("GEMINI_API_KEY");
     const model = "gemini-1.5-flash-latest";
-    const GEMINI_API_URL = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${GEMINI_API_KEY}`;
+    const GEMINI_API_URL = `https://generativelaunguage.googleapis.com/v1beta/models/${model}:generateContent?key=${GEMINI_API_KEY}`;
 
     const prompt = buildPrompt(body);
 

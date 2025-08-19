@@ -16,6 +16,7 @@ import { supabase } from "@/lib/supabaseClient";
 import { showLoading, dismissToast, showError, showSuccess } from "@/utils/toast";
 import falyaPersona from "../data/falya.json";
 import MysticalBackground from "@/components/MysticalBackground";
+import symbolIndex from '../data/coffee-symbols/index.json';
 
 const CoffeeReading = () => {
   const { i18n } = useTranslation();
@@ -26,16 +27,17 @@ const CoffeeReading = () => {
 
   useEffect(() => {
     const loadSymbols = async () => {
-      const { data, error } = await supabase
-        .from('coffee_symbols')
-        .select('*')
-        .order('symbol_name_nl', { ascending: true });
+      const allSymbols: any[] = [];
+      const promises = symbolIndex.letters.map(letterInfo => 
+        import(`../data/coffee-symbols/${letterInfo.letter}.json`)
+      );
+      try {
+        const modules = await Promise.all(promises);
+        modules.forEach(module => {
+          allSymbols.push(...module.default.symbols);
+        });
 
-      if (error) {
-        showError("Kon koffiesymbolen niet laden.");
-        console.error(error);
-      } else {
-        const grouped = (data || []).reduce((acc, symbol) => {
+        const grouped = allSymbols.reduce((acc, symbol) => {
           const letter = (symbol.symbol_name_nl || 'A').charAt(0).toUpperCase();
           if (!acc[letter]) {
             acc[letter] = [];
@@ -44,14 +46,18 @@ const CoffeeReading = () => {
           return acc;
         }, {} as Record<string, any[]>);
         setGroupedSymbols(grouped);
+      } catch (error) {
+        showError("Kon koffiesymbolen niet laden.");
+        console.error(error);
       }
     };
     loadSymbols();
   }, []);
 
   const handleSymbolSelect = (symbol: any) => {
-    if (selectedSymbols.some(s => s.id === symbol.id)) {
-      setSelectedSymbols(selectedSymbols.filter(s => s.id !== symbol.id));
+    const symbolIdentifier = symbol.symbol_name_nl;
+    if (selectedSymbols.some(s => s.symbol_name_nl === symbolIdentifier)) {
+      setSelectedSymbols(selectedSymbols.filter(s => s.symbol_name_nl !== symbolIdentifier));
     } else {
       setSelectedSymbols([...selectedSymbols, symbol]);
     }
@@ -126,7 +132,7 @@ const CoffeeReading = () => {
                 {selectedSymbols.length > 0 ? (
                   selectedSymbols.map((symbol) => (
                     <Badge 
-                      key={symbol.id}
+                      key={symbol.symbol_name_nl}
                       className="bg-amber-800 hover:bg-amber-700 text-stone-100 cursor-pointer"
                       onClick={() => handleSymbolSelect(symbol)}
                     >
@@ -150,10 +156,10 @@ const CoffeeReading = () => {
                     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
                       {groupedSymbols[letter].map((symbol) => (
                         <Button
-                          key={symbol.id}
-                          variant={selectedSymbols.some(s => s.id === symbol.id) ? "default" : "outline"}
+                          key={symbol.symbol_name_nl}
+                          variant={selectedSymbols.some(s => s.symbol_name_nl === symbol.symbol_name_nl) ? "default" : "outline"}
                           className={`h-auto py-3 flex flex-col items-center justify-center text-center transition-all ${
-                            selectedSymbols.some(s => s.id === symbol.id) 
+                            selectedSymbols.some(s => s.symbol_name_nl === symbol.symbol_name_nl) 
                               ? "bg-amber-800 hover:bg-amber-700 text-stone-100 border-amber-700" 
                               : "bg-stone-900/50 hover:bg-stone-800 border-stone-700 text-stone-300"
                           }`}
