@@ -10,7 +10,7 @@ const corsHeaders = {
 };
 
 const BodySchema = z.object({
-  readingType: z.enum(["Tarot", "Koffiedik", "Numerologie"]),
+  readingType: z.enum(["Tarot", "Koffiedik", "Numerologie", "Droomduiding"]),
   language: z.string().default("nl"),
   persona: z.any(),
   cards: z.array(z.any()).optional(),

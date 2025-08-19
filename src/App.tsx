@@ -10,6 +10,7 @@ import TarotReading from "./pages/TarotReading";
 import CoffeeReading from "./pages/CoffeeReading";
 import CoffeeReadingWithUpload from "./pages/CoffeeReadingWithUpload";
 import NumerologyReading from "./pages/NumerologyReading";
+import DreamReading from "./pages/DreamReading";
 import Archive from "./pages/Archive";
 import NotFound from "./pages/NotFound";
 
@@ -29,6 +30,7 @@ const App = () => (
           <Route path="/readings/coffee" element={<CoffeeReading />} />
           <Route path="/readings/coffee/upload" element={<CoffeeReadingWithUpload />} />
           <Route path="/readings/numerology" element={<NumerologyReading />} />
+          <Route path="/readings/dream" element={<DreamReading />} />
           <Route path="/archive" element={<Archive />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
