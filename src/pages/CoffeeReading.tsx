@@ -157,12 +157,12 @@ const CoffeeReading = () => {
                   {Object.keys(groupedSymbols).sort().map(letter => (
                     <div key={letter}>
                       <h4 className="font-bold text-amber-300 mb-2 text-lg">{letter}</h4>
-                      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+                      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 items-stretch">
                         {groupedSymbols[letter].map((symbol) => (
                           <Button
                             key={symbol.symbol_name_nl}
                             variant={selectedSymbols.some(s => s.symbol_name_nl === symbol.symbol_name_nl) ? "default" : "outline"}
-                            className={`h-auto py-3 flex flex-col items-center justify-center text-center transition-all ${
+                            className={`h-full py-3 flex flex-col items-center justify-start text-center transition-all whitespace-normal ${
                               selectedSymbols.some(s => s.symbol_name_nl === symbol.symbol_name_nl) 
                                 ? "bg-amber-800 hover:bg-amber-700 text-stone-100 border-amber-700" 
                                 : "bg-stone-900/50 hover:bg-stone-800 border-stone-700 text-stone-300"
