@@ -110,23 +110,23 @@ Interpretatie: Deze kaarten wijzen op een periode van verandering en nieuwe inzi
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-amber-50 to-amber-100 p-4">
+    <div className="min-h-screen bg-gradient-to-b from-purple-50 to-amber-50 p-4">
       <div className="max-w-4xl mx-auto">
         <div className="flex items-center justify-between mb-6">
           <Link to="/dashboard">
-            <Button variant="outline" className="flex items-center gap-2 border-amber-300 text-amber-700 hover:bg-amber-50">
+            <Button variant="outline" className="flex items-center gap-2 border-purple-300 text-purple-700 hover:bg-purple-50">
               <ChevronLeft className="h-4 w-4" />
               Terug naar dashboard
             </Button>
           </Link>
-          <h1 className="text-2xl font-bold text-amber-900">{spreadName}</h1>
+          <h1 className="text-2xl font-bold text-purple-900">{spreadName}</h1>
           <div className="w-32"></div> {/* Spacer for alignment */}
         </div>
 
-        <Card className="mb-6 bg-white/80 backdrop-blur-sm border-amber-200">
+        <Card className="mb-6 bg-white/80 backdrop-blur-sm border-purple-200">
           <CardHeader>
             <div className="flex justify-between items-center">
-              <CardTitle className="text-amber-900 flex items-center gap-2">
+              <CardTitle className="text-purple-900 flex items-center gap-2">
                 <BookOpen className="h-5 w-5" />
                 {spreadName}
               </CardTitle>
@@ -134,14 +134,14 @@ Interpretatie: Deze kaarten wijzen op een periode van verandering en nieuwe inzi
                 <Button 
                   variant="outline" 
                   size="sm"
-                  className="border-amber-300 text-amber-700 hover:bg-amber-50"
+                  className="border-purple-300 text-purple-700 hover:bg-purple-50"
                 >
                   <Share2 className="h-4 w-4" />
                 </Button>
                 <Button 
                   variant="outline" 
                   size="sm"
-                  className="border-amber-300 text-amber-700 hover:bg-amber-50"
+                  className="border-purple-300 text-purple-700 hover:bg-purple-50"
                 >
                   <Download className="h-4 w-4" />
                 </Button>
@@ -153,7 +153,7 @@ Interpretatie: Deze kaarten wijzen op een periode van verandering en nieuwe inzi
               <>
                 <div className="mb-6">
                   <div className="flex justify-between items-center mb-4">
-                    <h3 className="font-semibold text-amber-900">
+                    <h3 className="font-semibold text-purple-900">
                       {selectedCards[currentCardIndex].position}
                     </h3>
                     <div className="flex gap-2">
@@ -162,11 +162,11 @@ Interpretatie: Deze kaarten wijzen op een periode van verandering en nieuwe inzi
                         size="sm" 
                         onClick={prevCard}
                         disabled={currentCardIndex === 0}
-                        className="border-amber-300 text-amber-700 hover:bg-amber-50"
+                        className="border-purple-300 text-purple-700 hover:bg-purple-50"
                       >
                         <ChevronLeft className="h-4 w-4" />
                       </Button>
-                      <span className="text-amber-700 text-sm">
+                      <span className="text-purple-700 text-sm">
                         {currentCardIndex + 1} / {selectedCards.length}
                       </span>
                       <Button 
@@ -174,7 +174,7 @@ Interpretatie: Deze kaarten wijzen op een periode van verandering en nieuwe inzi
                         size="sm" 
                         onClick={nextCard}
                         disabled={currentCardIndex === selectedCards.length - 1}
-                        className="border-amber-300 text-amber-700 hover:bg-amber-50"
+                        className="border-purple-300 text-purple-700 hover:bg-purple-50"
                       >
                         <ChevronRight className="h-4 w-4" />
                       </Button>
@@ -184,32 +184,32 @@ Interpretatie: Deze kaarten wijzen op een periode van verandering en nieuwe inzi
                   <div className="flex justify-center">
                     {selectedCards[currentCardIndex].card ? (
                       <div className="relative">
-                        <div className="bg-amber-100 border-2 border-amber-300 rounded-lg w-48 h-72 flex flex-col items-center justify-center p-4 shadow-lg">
-                          <BookOpen className="h-12 w-12 text-amber-600 mb-3" />
-                          <h3 className="font-bold text-center text-amber-900">
+                        <div className="bg-purple-100 border-2 border-purple-300 rounded-lg w-48 h-72 flex flex-col items-center justify-center p-4 shadow-lg">
+                          <BookOpen className="h-12 w-12 text-purple-600 mb-3" />
+                          <h3 className="font-bold text-center text-purple-900">
                             {selectedCards[currentCardIndex].card.name}
                           </h3>
-                          <p className="text-sm text-center text-amber-700 mt-2">
+                          <p className="text-sm text-center text-purple-700 mt-2">
                             {selectedCards[currentCardIndex].card.meaning}
                           </p>
                         </div>
                       </div>
                     ) : (
                       <div 
-                        className={`bg-amber-200 border-2 border-dashed border-amber-400 rounded-lg w-48 h-72 flex items-center justify-center cursor-pointer transition-all ${
-                          isFlipping ? "animate-pulse" : "hover:bg-amber-300"
+                        className={`bg-purple-200 border-2 border-dashed border-purple-400 rounded-lg w-48 h-72 flex items-center justify-center cursor-pointer transition-all ${
+                          isFlipping ? "animate-pulse" : "hover:bg-purple-300"
                         }`}
                         onClick={drawCards}
                       >
                         {isFlipping ? (
                           <div className="text-center">
-                            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-amber-700 mx-auto mb-2"></div>
-                            <p className="text-amber-700">Kaarten aan het schudden...</p>
+                            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-purple-700 mx-auto mb-2"></div>
+                            <p className="text-purple-700">Kaarten aan het schudden...</p>
                           </div>
                         ) : (
                           <div className="text-center">
-                            <BookOpen className="h-12 w-12 text-amber-600 mx-auto mb-2" />
-                            <p className="text-amber-700">Klik om kaart te trekken</p>
+                            <BookOpen className="h-12 w-12 text-purple-600 mx-auto mb-2" />
+                            <p className="text-purple-700">Klik om kaart te trekken</p>
                           </div>
                         )}
                       </div>
@@ -225,18 +225,18 @@ Interpretatie: Deze kaarten wijzen op een periode van verandering en nieuwe inzi
                       key={index} 
                       className={`w-16 h-24 rounded border-2 cursor-pointer ${
                         index === currentCardIndex 
-                          ? "border-amber-500 bg-amber-100" 
-                          : "border-amber-200 bg-amber-50"
+                          ? "border-purple-500 bg-purple-100" 
+                          : "border-purple-200 bg-purple-50"
                       }`}
                       onClick={() => setCurrentCardIndex(index)}
                     >
                       {cardSlot.card ? (
                         <div className="w-full h-full flex items-center justify-center">
-                          <BookOpen className="h-6 w-6 text-amber-600" />
+                          <BookOpen className="h-6 w-6 text-purple-600" />
                         </div>
                       ) : (
-                        <div className="w-full h-full flex items-center justify-center bg-amber-100">
-                          <div className="bg-amber-200 border border-amber-300 rounded w-8 h-10"></div>
+                        <div className="w-full h-full flex items-center justify-center bg-purple-100">
+                          <div className="bg-purple-200 border border-purple-300 rounded w-8 h-10"></div>
                         </div>
                       )}
                     </div>
@@ -247,7 +247,7 @@ Interpretatie: Deze kaarten wijzen op een periode van verandering en nieuwe inzi
                   <Button 
                     onClick={drawCards}
                     disabled={isFlipping}
-                    className="bg-amber-600 hover:bg-amber-700 text-white flex items-center gap-2"
+                    className="bg-purple-600 hover:bg-purple-700 text-white flex items-center gap-2"
                   >
                     <RotateCcw className="h-4 w-4" />
                     {selectedCards[0].card ? "Opnieuw trekken" : "Kaarten trekken"}
@@ -265,17 +265,17 @@ Interpretatie: Deze kaarten wijzen op een periode van verandering en nieuwe inzi
                 </div>
 
                 {readingResult && (
-                  <Card className="mt-6 bg-amber-50 border-amber-200">
+                  <Card className="mt-6 bg-purple-50 border-purple-200">
                     <CardContent className="pt-6">
                       <div className="flex items-start gap-3">
-                        <Sparkles className="h-5 w-5 text-amber-600 mt-1 flex-shrink-0" />
+                        <Sparkles className="h-5 w-5 text-purple-600 mt-1 flex-shrink-0" />
                         <div>
-                          <h3 className="font-semibold text-amber-900 mb-2">Je lezing:</h3>
-                          <p className="text-amber-800 whitespace-pre-line">{readingResult}</p>
+                          <h3 className="font-semibold text-purple-900 mb-2">Je lezing:</h3>
+                          <p className="text-purple-800 whitespace-pre-line">{readingResult}</p>
                         </div>
                       </div>
                       <div className="flex justify-end mt-4">
-                        <Button variant="outline" className="border-amber-300 text-amber-700 hover:bg-amber-50">
+                        <Button variant="outline" className="border-purple-300 text-purple-700 hover:bg-purple-50">
                           <Share2 className="h-4 w-4 mr-2" />
                           Delen
                         </Button>

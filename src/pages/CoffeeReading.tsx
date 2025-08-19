@@ -206,7 +206,16 @@ Interpretatie: Deze symbolen wijzen op een periode van verandering en nieuwe kan
               </div>
             </ScrollArea>
 
-            <div className="mt-6 flex justify-center">
+            <div className="mt-6 flex justify-center gap-3">
+              <Link to="/readings/coffee/upload">
+                <Button 
+                  variant="outline"
+                  className="border-amber-300 text-amber-700 hover:bg-amber-100 flex items-center gap-2"
+                >
+                  <Upload className="h-4 w-4" />
+                  Foto uploaden
+                </Button>
+              </Link>
               <Button 
                 onClick={generateReading}
                 disabled={selectedSymbols.length === 0}
