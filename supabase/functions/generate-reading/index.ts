@@ -45,7 +45,7 @@ function buildPrompt(body: z.infer<typeof BodySchema>): string {
   }
 
   if (body.symbols && body.symbols.length > 0) {
-    const symbolDetails = body.symbols.map((s: any) => `${s['Symbool NL']}: ${s['Betekenis NL']}`).join(', ');
+    const symbolDetails = body.symbols.map((s: any) => `${s.symbol_name_nl || s.symbol_name}: ${s.description_nl || s.description}`).join(', ');
     content += ` The chosen symbols are: ${symbolDetails}.`;
   }
 
