@@ -18,6 +18,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { showLoading, dismissToast, showError, showSuccess } from "@/utils/toast";
 import falyaPersona from "../data/falya.json";
 import MysticalBackground from "@/components/MysticalBackground";
+import symbolIndex from '../data/coffee-symbols/index.json';
 
 const CoffeeReadingWithUpload = () => {
   const { i18n } = useTranslation();
@@ -32,18 +33,18 @@ const CoffeeReadingWithUpload = () => {
 
   useEffect(() => {
     const loadSymbols = async () => {
-      try {
-        const lang = i18n.language || 'nl';
-        const module = await import(`../data/coffee-symbols/${lang}.json`);
-        setSymbols(module.default.symbols);
-      } catch (e) {
-        console.error("Could not load coffee symbols for language:", i18n.language, e);
-        const module = await import(`../data/coffee-symbols/nl.json`);
-        setSymbols(module.default.symbols);
-      }
+      const allSymbols: any[] = [];
+      const promises = symbolIndex.letters.map(letterInfo => 
+        import(`../data/coffee-symbols/${letterInfo.letter}.json`)
+      );
+      const modules = await Promise.all(promises);
+      modules.forEach(module => {
+        allSymbols.push(...module.default.symbols);
+      });
+      setSymbols(allSymbols);
     };
     loadSymbols();
-  }, [i18n.language]);
+  }, []);
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -73,8 +74,9 @@ const CoffeeReadingWithUpload = () => {
   };
 
   const handleSymbolSelect = (symbol: any) => {
-    if (selectedSymbols.some(s => s.id === symbol.id)) {
-      setSelectedSymbols(selectedSymbols.filter(s => s.id !== symbol.id));
+    const symbolIdentifier = symbol.symbol_nl;
+    if (selectedSymbols.some(s => s.symbol_nl === symbolIdentifier)) {
+      setSelectedSymbols(selectedSymbols.filter(s => s.symbol_nl !== symbolIdentifier));
     } else {
       setSelectedSymbols([...selectedSymbols, symbol]);
     }
@@ -92,7 +94,7 @@ const CoffeeReadingWithUpload = () => {
           readingType: "Koffiedik",
           language: i18n.language,
           persona: falyaPersona,
-          symbols: selectedSymbols.map(s => ({ [s.name]: s.meanings[0] })),
+          symbols: selectedSymbols,
         }
       });
 
@@ -120,6 +122,10 @@ const CoffeeReadingWithUpload = () => {
       fileInputRef.current.value = "";
     }
   };
+  
+  const getSymbolName = (symbol: any) => {
+    return symbol[`symbol_${i18n.language}`] || symbol.symbol_nl;
+  }
 
   return (
     <div className="relative min-h-screen bg-stone-950 text-stone-200 p-4 font-serif">
@@ -218,16 +224,16 @@ const CoffeeReadingWithUpload = () => {
                     <div className="flex flex-wrap gap-2">
                       {detectedSymbols.map((symbol) => (
                         <Badge 
-                          key={symbol.id} 
-                          variant={selectedSymbols.some(s => s.id === symbol.id) ? "default" : "outline"}
+                          key={symbol.symbol_nl} 
+                          variant={selectedSymbols.some(s => s.symbol_nl === symbol.symbol_nl) ? "default" : "outline"}
                           className={`cursor-pointer transition-all ${
-                            selectedSymbols.some(s => s.id === symbol.id)
+                            selectedSymbols.some(s => s.symbol_nl === symbol.symbol_nl)
                             ? "bg-amber-800 text-stone-100 border-amber-700"
                             : "border-stone-700 text-stone-300 hover:bg-stone-800"
                           }`}
                           onClick={() => handleSymbolSelect(symbol)}
                         >
-                          {symbol.name}
+                          {getSymbolName(symbol)}
                         </Badge>
                       ))}
                     </div>

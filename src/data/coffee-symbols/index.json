@@ -1,0 +1,145 @@
+{
+  "version": "1.0.0",
+  "letters": [
+    {
+      "letter": "A",
+      "file": "coffee.symbols.A.json",
+      "count": 26
+    },
+    {
+      "letter": "B",
+      "file": "coffee.symbols.B.json",
+      "count": 26
+    },
+    {
+      "letter": "C",
+      "file": "coffee.symbols.C.json",
+      "count": 7
+    },
+    {
+      "letter": "Ç",
+      "file": "coffee.symbols.Ç.json",
+      "count": 11
+    },
+    {
+      "letter": "D",
+      "file": "coffee.symbols.D.json",
+      "count": 23
+    },
+    {
+      "letter": "E",
+      "file": "coffee.symbols.E.json",
+      "count": 8
+    },
+    {
+      "letter": "F",
+      "file": "coffee.symbols.F.json",
+      "count": 5
+    },
+    {
+      "letter": "G",
+      "file": "coffee.symbols.G.json",
+      "count": 9
+    },
+    {
+      "letter": "H",
+      "file": "coffee.symbols.H.json",
+      "count": 7
+    },
+    {
+      "letter": "I",
+      "file": "coffee.symbols.I.json",
+      "count": 1
+    },
+    {
+      "letter": "İ",
+      "file": "coffee.symbols.İ.json",
+      "count": 10
+    },
+    {
+      "letter": "J",
+      "file": "coffee.symbols.J.json",
+      "count": 2
+    },
+    {
+      "letter": "K",
+      "file": "coffee.symbols.K.json",
+      "count": 24
+    },
+    {
+      "letter": "L",
+      "file": "coffee.symbols.L.json",
+      "count": 1
+    },
+    {
+      "letter": "M",
+      "file": "coffee.symbols.M.json",
+      "count": 16
+    },
+    {
+      "letter": "N",
+      "file": "coffee.symbols.N.json",
+      "count": 3
+    },
+    {
+      "letter": "O",
+      "file": "coffee.symbols.O.json",
+      "count": 4
+    },
+    {
+      "letter": "Ö",
+      "file": "coffee.symbols.Ö.json",
+      "count": 3
+    },
+    {
+      "letter": "P",
+      "file": "coffee.symbols.P.json",
+      "count": 18
+    },
+    {
+      "letter": "R",
+      "file": "coffee.symbols.R.json",
+      "count": 2
+    },
+    {
+      "letter": "S",
+      "file": "coffee.symbols.S.json",
+      "count": 15
+    },
+    {
+      "letter": "Ş",
+      "file": "coffee.symbols.Ş.json",
+      "count": 3
+    },
+    {
+      "letter": "T",
+      "file": "coffee.symbols.T.json",
+      "count": 14
+    },
+    {
+      "letter": "U",
+      "file": "coffee.symbols.U.json",
+      "count": 4
+    },
+    {
+      "letter": "Ü",
+      "file": "coffee.symbols.Ü.json",
+      "count": 4
+    },
+    {
+      "letter": "V",
+      "file": "coffee.symbols.V.json",
+      "count": 1
+    },
+    {
+      "letter": "Y",
+      "file": "coffee.symbols.Y.json",
+      "count": 12
+    },
+    {
+      "letter": "Z",
+      "file": "coffee.symbols.Z.json",
+      "count": 3
+    }
+  ]
+}

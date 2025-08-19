@@ -7,10 +7,8 @@ import { Separator } from "@/components/ui/separator";
 import { 
   Coffee, 
   Sparkles, 
-  Upload, 
-  Camera,
-  ChevronLeft,
-  AlertCircle
+  Upload,
+  ChevronLeft
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -18,6 +16,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { showLoading, dismissToast, showError, showSuccess } from "@/utils/toast";
 import falyaPersona from "../data/falya.json";
 import MysticalBackground from "@/components/MysticalBackground";
+import symbolIndex from '../data/coffee-symbols/index.json';
 
 const CoffeeReading = () => {
   const { i18n } = useTranslation();
@@ -28,23 +27,22 @@ const CoffeeReading = () => {
 
   useEffect(() => {
     const loadSymbols = async () => {
-      try {
-        const lang = i18n.language || 'nl';
-        const module = await import(`../data/coffee-symbols/${lang}.json`);
-        setSymbols(module.default.symbols);
-      } catch (e) {
-        console.error("Could not load coffee symbols for language:", i18n.language, e);
-        // Fallback to Dutch
-        const module = await import(`../data/coffee-symbols/nl.json`);
-        setSymbols(module.default.symbols);
-      }
+      const allSymbols: any[] = [];
+      const promises = symbolIndex.letters.map(letterInfo => 
+        import(`../data/coffee-symbols/${letterInfo.letter}.json`)
+      );
+      const modules = await Promise.all(promises);
+      modules.forEach(module => {
+        allSymbols.push(...module.default.symbols);
+      });
+      setSymbols(allSymbols);
     };
     loadSymbols();
-  }, [i18n.language]);
+  }, []);
 
   const handleSymbolSelect = (symbol: any) => {
-    if (selectedSymbols.some(s => s.id === symbol.id)) {
-      setSelectedSymbols(selectedSymbols.filter(s => s.id !== symbol.id));
+    if (selectedSymbols.some(s => s.symbol_nl === symbol.symbol_nl)) {
+      setSelectedSymbols(selectedSymbols.filter(s => s.symbol_nl !== symbol.symbol_nl));
     } else {
       setSelectedSymbols([...selectedSymbols, symbol]);
     }
@@ -62,7 +60,7 @@ const CoffeeReading = () => {
           readingType: "Koffiedik",
           language: i18n.language,
           persona: falyaPersona,
-          symbols: selectedSymbols.map(s => ({ [s.name]: s.meanings[0] })),
+          symbols: selectedSymbols,
         }
       });
 
@@ -80,6 +78,14 @@ const CoffeeReading = () => {
       setIsGenerating(false);
     }
   };
+
+  const getSymbolName = (symbol: any) => {
+    return symbol[`symbol_${i18n.language}`] || symbol.symbol_nl;
+  }
+
+  const getSymbolMeaning = (symbol: any) => {
+    return symbol[`meaning_${i18n.language}`] || symbol.meaning_nl;
+  }
 
   return (
     <div className="relative min-h-screen bg-stone-950 text-stone-200 p-4 font-serif">
@@ -110,11 +116,11 @@ const CoffeeReading = () => {
                 {selectedSymbols.length > 0 ? (
                   selectedSymbols.map((symbol) => (
                     <Badge 
-                      key={symbol.id} 
+                      key={getSymbolName(symbol)}
                       className="bg-amber-800 hover:bg-amber-700 text-stone-100 cursor-pointer"
                       onClick={() => handleSymbolSelect(symbol)}
                     >
-                      {symbol.name}
+                      {getSymbolName(symbol)}
                     </Badge>
                   ))
                 ) : (
@@ -127,22 +133,32 @@ const CoffeeReading = () => {
 
             <h3 className="font-semibold text-amber-200 mb-3">Koffiesymbolen:</h3>
             <ScrollArea className="h-96 rounded-md border border-stone-800 p-4 bg-stone-950/50">
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
-                {symbols.map((symbol) => (
-                  <Button
-                    key={symbol.id}
-                    variant={selectedSymbols.some(s => s.id === symbol.id) ? "default" : "outline"}
-                    className={`h-auto py-3 flex flex-col items-center justify-center text-center transition-all ${
-                      selectedSymbols.some(s => s.id === symbol.id) 
-                        ? "bg-amber-800 hover:bg-amber-700 text-stone-100 border-amber-700" 
-                        : "bg-stone-900/50 hover:bg-stone-800 border-stone-700 text-stone-300"
-                    }`}
-                    onClick={() => handleSymbolSelect(symbol)}
-                  >
-                    <span className="font-medium text-sm">{symbol.name}</span>
-                    <span className="text-xs mt-1 text-stone-400">{symbol.meanings[0]}</span>
-                  </Button>
-                ))}
+              <div className="space-y-4">
+                {symbolIndex.letters.map(letterInfo => {
+                  const letterSymbols = symbols.filter(s => s.letter.toUpperCase() === letterInfo.letter.toUpperCase());
+                  return letterSymbols.length > 0 ? (
+                    <div key={letterInfo.letter}>
+                      <h4 className="font-bold text-amber-300 mb-2 text-lg">{letterInfo.letter.toUpperCase()}</h4>
+                      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+                        {letterSymbols.map((symbol, index) => (
+                          <Button
+                            key={`${letterInfo.letter}-${index}`}
+                            variant={selectedSymbols.some(s => s.symbol_nl === symbol.symbol_nl) ? "default" : "outline"}
+                            className={`h-auto py-3 flex flex-col items-center justify-center text-center transition-all ${
+                              selectedSymbols.some(s => s.symbol_nl === symbol.symbol_nl) 
+                                ? "bg-amber-800 hover:bg-amber-700 text-stone-100 border-amber-700" 
+                                : "bg-stone-900/50 hover:bg-stone-800 border-stone-700 text-stone-300"
+                            }`}
+                            onClick={() => handleSymbolSelect(symbol)}
+                          >
+                            <span className="font-medium text-sm">{getSymbolName(symbol)}</span>
+                            <span className="text-xs mt-1 text-stone-400">{getSymbolMeaning(symbol)}</span>
+                          </Button>
+                        ))}
+                      </div>
+                    </div>
+                  ) : null;
+                })}
               </div>
             </ScrollArea>
 
