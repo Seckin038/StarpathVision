@@ -1,0 +1,19 @@
+{
+  "id": "lyara",
+  "displayName": "Lyara",
+  "gender": "female",
+  "age": 29,
+  "cultures": ["bohemian", "new-age"],
+  "methods": ["tarot", "aura-chakra", "dream-interpretation"],
+  "locales": ["en-US", "es-ES"],
+  "timezones": ["America/Los_Angeles", "Europe/Madrid"],
+  "ageGroups": ["18-30", "30-50"],
+  "experienceLevels": ["intermediate", "advanced"],
+  "style": {
+    "tone": "empathetic, vibrant, spiritual",
+    "metaphors": ["energy-flow", "cosmic-dance", "crystal-light", "inner-garden"],
+    "voice": "uplifting, gentle, expressive"
+  },
+  "premium": false,
+  "qos": "standard"
+}

@@ -1,0 +1,19 @@
+{
+  "id": "eryndra",
+  "displayName": "Eryndra",
+  "gender": "female",
+  "age": 42,
+  "cultures": ["celtic", "elven-folklore"],
+  "methods": ["tarot", "aura-chakra", "dream-interpretation"],
+  "locales": ["en-GB", "fr-FR"],
+  "timezones": ["Europe/London", "Europe/Paris"],
+  "ageGroups": ["30-50"],
+  "experienceLevels": ["advanced"],
+  "style": {
+    "tone": "gentle, intuitive, nature-focused",
+    "metaphors": ["forest-whispers", "river-songs", "moonbeams", "ancient-oaks"],
+    "voice": "soft, melodic, calming"
+  },
+  "premium": false,
+  "qos": "high"
+}

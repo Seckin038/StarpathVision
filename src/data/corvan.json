@@ -1,0 +1,19 @@
+{
+  "id": "corvan",
+  "displayName": "Corvan",
+  "gender": "male",
+  "age": 48,
+  "cultures": ["gothic", "norse"],
+  "methods": ["tarot", "dream-interpretation"],
+  "locales": ["en-US", "de-DE"],
+  "timezones": ["America/Chicago", "Europe/Berlin"],
+  "ageGroups": ["30-50", "50+"],
+  "experienceLevels": ["advanced"],
+  "style": {
+    "tone": "introspective, mysterious, direct",
+    "metaphors": ["shadows", "ravens", "moonlight", "ancient-runes"],
+    "voice": "low, deliberate, thoughtful"
+  },
+  "premium": false,
+  "qos": "high"
+}

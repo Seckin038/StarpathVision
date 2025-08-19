@@ -1,0 +1,19 @@
+{
+  "id": "pilgrim",
+  "displayName": "The Pilgrim",
+  "gender": "non-binary",
+  "age": 40,
+  "cultures": ["eastern-philosophy", "sufi-mysticism"],
+  "methods": ["dream-interpretation", "aura-chakra", "tarot"],
+  "locales": ["en-US", "en-IN"],
+  "timezones": ["America/New_York", "Asia/Kolkata"],
+  "ageGroups": ["30-50", "50+"],
+  "experienceLevels": ["advanced", "expert"],
+  "style": {
+    "tone": "contemplative, serene, insightful",
+    "metaphors": ["journey", "mountain-path", "inner-temple", "lotus-flower"],
+    "voice": "calm, gentle, centered"
+  },
+  "premium": false,
+  "qos": "high"
+}

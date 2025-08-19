@@ -1,0 +1,19 @@
+{
+  "id": "auron",
+  "displayName": "Auron",
+  "gender": "male",
+  "age": 66,
+  "cultures": ["celto-druidic", "norse"],
+  "methods": ["tarot", "numerology", "dream-interpretation"],
+  "locales": ["en-GB", "nl-NL"],
+  "timezones": ["Europe/Amsterdam", "Europe/London"],
+  "ageGroups": ["50+"],
+  "experienceLevels": ["expert"],
+  "style": {
+    "tone": "analytical, wise, poetic",
+    "metaphors": ["ancient-trees", "starlight", "river-flow", "stone-circles"],
+    "voice": "resonant, calm, authoritative"
+  },
+  "premium": true,
+  "qos": "premium"
+}

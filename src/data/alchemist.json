@@ -1,0 +1,19 @@
+{
+  "id": "alchemist",
+  "displayName": "The Alchemist",
+  "gender": "male",
+  "age": 55,
+  "cultures": ["ancient-greek", "renaissance-europe"],
+  "methods": ["numerology", "aura-chakra", "tarot"],
+  "locales": ["en-US", "en-GB"],
+  "timezones": ["Europe/London", "America/New_York"],
+  "ageGroups": ["30-50", "50+"],
+  "experienceLevels": ["advanced", "expert"],
+  "style": {
+    "tone": "analytical, transformative, profound",
+    "metaphors": ["transmutation", "elements", "magnum-opus", "prima-materia"],
+    "voice": "calm, deep, measured"
+  },
+  "premium": false,
+  "qos": "high"
+}
