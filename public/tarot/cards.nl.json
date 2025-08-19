@@ -1,48 +1,1250 @@
 [
   {
-    "id": "wands-7",
-    "name": "Staven Zeven",
-    "suit": "wands",
-    "number": 7,
-    "image": "/tarot/wands-7.jpg",
+    "id": "major-0",
+    "name": "De Dwaas",
+    "suit": "major",
+    "number": 0,
+    "image": "/tarot/major-0.jpg",
     "meanings": {
-      "general": "De Zeven van Staven wijst op een uitdaging waarvoor je standvastig mag blijven. Verdedig je plek en vertrouw op je innerlijke kracht.",
-      "love": "Grenzen stellen in relaties; zelfrespect leidt tot betere balans.",
-      "work": "Competitie; sta je mannetje/vrouwtje met vastberadenheid.",
-      "spiritual": "Blijf trouw aan je pad; innerlijke overtuiging geeft richting."
+      "general": "Een nieuw begin, onschuld, spontaniteit en een sprong in het diepe. Vertrouw op het onbekende en omarm de reis die voor je ligt.",
+      "love": "Een nieuwe, speelse fase in de liefde. Wees open en avontuurlijk.",
+      "work": "Een nieuwe baan, project of carrièrepad. Leer door te doen.",
+      "spiritual": "Het begin van een spirituele reis. Het pad ontvouwt zich terwijl je loopt."
     },
-    "element": "vuur",
-    "uprightKeywords": [
-      "standvastigheid",
-      "moed",
-      "verdedigen"
-    ],
-    "reversedKeywords": [
-      "twijfel",
-      "overweldiging"
-    ]
+    "element": "Lucht",
+    "uprightKeywords": ["nieuw begin", "onschuld", "spontaniteit", "vrije geest"],
+    "reversedKeywords": ["roekeloosheid", "risico's nemen", "onoplettendheid"]
+  },
+  {
+    "id": "major-1",
+    "name": "De Magiër",
+    "suit": "major",
+    "number": 1,
+    "image": "/tarot/major-1.jpg",
+    "meanings": {
+      "general": "Manifestatie, wilskracht, en het gebruiken van je talenten. Je hebt alle tools in handen om je doelen te bereiken.",
+      "love": "Creëer de relatie die je wilt door duidelijke intenties.",
+      "work": "Gebruik je vaardigheden en kennis om succes te manifesteren.",
+      "spiritual": "Jouw wil vormt je realiteit. 'Zo boven, zo beneden.'"
+    },
+    "element": "Lucht",
+    "uprightKeywords": ["manifestatie", "wilskracht", "creatie", "vaardigheid"],
+    "reversedKeywords": ["manipulatie", "ongebruikt potentieel", "misleiding"]
+  },
+  {
+    "id": "major-2",
+    "name": "De Hogepriesteres",
+    "suit": "major",
+    "number": 2,
+    "image": "/tarot/major-2.jpg",
+    "meanings": {
+      "general": "Intuïtie, onderbewustzijn en verborgen kennis. Kijk voorbij het zichtbare en vertrouw op je innerlijke stem.",
+      "love": "Onuitgesproken gevoelens en een diepe, intuïtieve connectie.",
+      "work": "Niet alles is wat het lijkt. Doe onderzoek en vertrouw op je instinct.",
+      "spiritual": "Verbinding met het goddelijke vrouwelijke en je innerlijke wijsheid."
+    },
+    "element": "Water",
+    "uprightKeywords": ["intuïtie", "onderbewustzijn", "mysterie", "wijsheid"],
+    "reversedKeywords": ["geheimen", "oppervlakkigheid", "verwarring"]
+  },
+  {
+    "id": "major-3",
+    "name": "De Keizerin",
+    "suit": "major",
+    "number": 3,
+    "image": "/tarot/major-3.jpg",
+    "meanings": {
+      "general": "Vruchtbaarheid, creativiteit, overvloed en zorgzaamheid. Een tijd van groei en het koesteren van jezelf en anderen.",
+      "love": "Een periode van warmte, groei en diepe genegenheid in relaties.",
+      "work": "Creatieve projecten bloeien op. Een vruchtbare periode voor nieuwe ideeën.",
+      "spiritual": "Verbinding met Moeder Aarde en de cycli van de natuur."
+    },
+    "element": "Aarde",
+    "uprightKeywords": ["vruchtbaarheid", "creativiteit", "overvloed", "natuur"],
+    "reversedKeywords": ["stagnatie", "afhankelijkheid", "creatieve blokkade"]
+  },
+  {
+    "id": "major-4",
+    "name": "De Keizer",
+    "suit": "major",
+    "number": 4,
+    "image": "/tarot/major-4.jpg",
+    "meanings": {
+      "general": "Structuur, autoriteit, stabiliteit en leiderschap. Tijd om orde te scheppen en de leiding te nemen.",
+      "love": "Stabiliteit en duidelijke afspraken in een relatie.",
+      "work": "Neem de leiding, organiseer en creëer een solide basis voor succes.",
+      "spiritual": "Discipline en structuur als een pad naar spirituele groei."
+    },
+    "element": "Vuur",
+    "uprightKeywords": ["autoriteit", "structuur", "stabiliteit", "leiderschap"],
+    "reversedKeywords": ["controle", "rigiditeit", "machtsmisbruik"]
+  },
+  {
+    "id": "major-5",
+    "name": "De Hogepriester",
+    "suit": "major",
+    "number": 5,
+    "image": "/tarot/major-5.jpg",
+    "meanings": {
+      "general": "Traditie, instituties, mentorschap en spirituele leiding. Zoek wijsheid bij een leraar of traditie.",
+      "love": "Een relatie gebaseerd op gedeelde waarden en tradities.",
+      "work": "Werken binnen een gevestigde structuur, of het zoeken van een mentor.",
+      "spiritual": "Volg een gevestigd spiritueel pad of zoek een gids."
+    },
+    "element": "Aarde",
+    "uprightKeywords": ["traditie", "mentorschap", "geloof", "instituties"],
+    "reversedKeywords": ["rebellie", "dogma", "non-conformisme"]
+  },
+  {
+    "id": "major-6",
+    "name": "De Geliefden",
+    "suit": "major",
+    "number": 6,
+    "image": "/tarot/major-6.jpg",
+    "meanings": {
+      "general": "Liefde, harmonie, relaties en belangrijke keuzes. Een keuze vanuit het hart die leidt tot eenheid.",
+      "love": "Een diepe verbinding, partnerschap en harmonie.",
+      "work": "Een partnerschap of samenwerking die in lijn is met je waarden.",
+      "spiritual": "Het verenigen van dualiteiten binnen jezelf."
+    },
+    "element": "Lucht",
+    "uprightKeywords": ["liefde", "harmonie", "keuzes", "partnerschap"],
+    "reversedKeywords": ["disharmonie", "conflict", "verkeerde keuze"]
+  },
+  {
+    "id": "major-7",
+    "name": "De Zegewagen",
+    "suit": "major",
+    "number": 7,
+    "image": "/tarot/major-7.jpg",
+    "meanings": {
+      "general": "Wilskracht, vastberadenheid, controle en overwinning. Door focus en discipline kun je je doelen bereiken.",
+      "love": "Neem de controle over de richting van je liefdesleven.",
+      "work": "Succes door ambitie, focus en vastberadenheid.",
+      "spiritual": "Het beheersen van je innerlijke tegenstellingen om vooruit te komen."
+    },
+    "element": "Water",
+    "uprightKeywords": ["wilskracht", "overwinning", "vastberadenheid", "controle"],
+    "reversedKeywords": ["gebrek aan richting", "agressie", "controleverlies"]
+  },
+  {
+    "id": "major-8",
+    "name": "Kracht",
+    "suit": "major",
+    "number": 8,
+    "image": "/tarot/major-8.jpg",
+    "meanings": {
+      "general": "Innerlijke kracht, moed, compassie en geduld. Ware kracht komt niet uit dominantie, maar uit zachtmoedigheid.",
+      "love": "Geduld en compassie in een relatie.",
+      "work": "Je hebt de innerlijke kracht om uitdagingen met geduld te overwinnen.",
+      "spiritual": "Het temmen van je innerlijke 'beest' met liefde en compassie."
+    },
+    "element": "Vuur",
+    "uprightKeywords": ["kracht", "moed", "compassie", "geduld"],
+    "reversedKeywords": ["zwakte", "twijfel aan jezelf", "onzekerheid"]
+  },
+  {
+    "id": "major-9",
+    "name": "De Kluizenaar",
+    "suit": "major",
+    "number": 9,
+    "image": "/tarot/major-9.jpg",
+    "meanings": {
+      "general": "Introspectie, innerlijke wijsheid en afzondering. Tijd om je terug te trekken en je eigen innerlijke licht te vinden.",
+      "love": "Een periode van zelfreflectie in de liefde.",
+      "work": "Neem de tijd voor diepgaand onderzoek en reflectie.",
+      "spiritual": "Zoek de waarheid binnenin jezelf, niet buiten je."
+    },
+    "element": "Aarde",
+    "uprightKeywords": ["introspectie", "wijsheid", "afzondering", "begeleiding"],
+    "reversedKeywords": ["isolatie", "eenzaamheid", "terugtrekking"]
+  },
+  {
+    "id": "major-10",
+    "name": "Het Rad van Fortuin",
+    "suit": "major",
+    "number": 10,
+    "image": "/tarot/major-10.jpg",
+    "meanings": {
+      "general": "Verandering, cycli, lot en een keerpunt. Het leven is constant in beweging; wat omhoog gaat, moet omlaag.",
+      "love": "Een belangrijke verandering in je liefdesleven.",
+      "work": "Een onverwachte wending in je carrière.",
+      "spiritual": "Het begrijpen van de cyclische aard van het leven."
+    },
+    "element": "Vuur",
+    "uprightKeywords": ["verandering", "cycli", "lot", "keerpunt"],
+    "reversedKeywords": ["pech", "weerstand tegen verandering", "stagnatie"]
   },
   {
     "id": "major-11",
     "name": "Gerechtigheid",
     "suit": "major",
     "number": 11,
-    "image": "/tarot/justice.jpg",
+    "image": "/tarot/major-11.jpg",
     "meanings": {
-      "general": "Balans, waarheid en eerlijkheid. Tijd om alles recht te zetten.",
-      "love": "Eerlijk communiceren; gezonde afspraken versterken de band.",
-      "work": "Contracten en beslissingen met integriteit.",
-      "spiritual": "Waarheidsvinding; innerlijke rechtvaardigheid."
+      "general": "Balans, waarheid, eerlijkheid en de wet van oorzaak en gevolg. Je oogst wat je zaait.",
+      "love": "Eerlijkheid en balans in een relatie.",
+      "work": "Een eerlijke beslissing of contract. Handel met integriteit.",
+      "spiritual": "Het vinden van je eigen innerlijke waarheid en balans."
     },
-    "element": "lucht",
-    "uprightKeywords": [
-      "recht",
-      "evenwicht",
-      "waarheid"
-    ],
-    "reversedKeywords": [
-      "onrecht",
-      "oneerlijkheid"
-    ]
+    "element": "Lucht",
+    "uprightKeywords": ["rechtvaardigheid", "waarheid", "balans", "oorzaak en gevolg"],
+    "reversedKeywords": ["onrechtvaardigheid", "oneerlijkheid", "onbalans"]
+  },
+  {
+    "id": "major-12",
+    "name": "De Gehangene",
+    "suit": "major",
+    "number": 12,
+    "image": "/tarot/major-12.jpg",
+    "meanings": {
+      "general": "Loslaten, overgave, en een nieuw perspectief. Soms moet je stilhangen om de wereld anders te zien.",
+      "love": "Een pauze in de liefde om dingen vanuit een ander perspectief te zien.",
+      "work": "Een periode van wachten en reflectie. Forceer niets.",
+      "spiritual": "Overgave aan een hoger doel of perspectief."
+    },
+    "element": "Water",
+    "uprightKeywords": ["loslaten", "overgave", "nieuw perspectief", "pauze"],
+    "reversedKeywords": ["vastzitten", "weerstand", "opoffering"]
+  },
+  {
+    "id": "major-13",
+    "name": "De Dood",
+    "suit": "major",
+    "number": 13,
+    "image": "/tarot/major-13.jpg",
+    "meanings": {
+      "general": "Einde, transformatie, en loslaten. Een hoofdstuk wordt afgesloten om ruimte te maken voor iets nieuws.",
+      "love": "Het einde van een relatie of een diepgaande transformatie.",
+      "work": "Het einde van een baan of project, wat leidt tot nieuwe kansen.",
+      "spiritual": "Een diepe spirituele transformatie."
+    },
+    "element": "Water",
+    "uprightKeywords": ["einde", "transformatie", "loslaten", "verandering"],
+    "reversedKeywords": ["weerstand tegen verandering", "stagnatie", "angst"]
+  },
+  {
+    "id": "major-14",
+    "name": "Gematigdheid",
+    "suit": "major",
+    "number": 14,
+    "image": "/tarot/major-14.jpg",
+    "meanings": {
+      "general": "Balans, geduld, en het vinden van de middenweg. Harmonie ontstaat door het mengen van tegenstellingen.",
+      "love": "Balans en harmonie in een relatie.",
+      "work": "Samenwerking en het vinden van een evenwichtige aanpak.",
+      "spiritual": "Het integreren van je spirituele en materiële leven."
+    },
+    "element": "Vuur",
+    "uprightKeywords": ["balans", "geduld", "harmonie", "gematigdheid"],
+    "reversedKeywords": ["onbalans", "extremen", "ongeduld"]
+  },
+  {
+    "id": "major-15",
+    "name": "De Duivel",
+    "suit": "major",
+    "number": 15,
+    "image": "/tarot/major-15.jpg",
+    "meanings": {
+      "general": "Binding, verslaving, materialisme en beperkende overtuigingen. Word je bewust van wat je gevangen houdt.",
+      "love": "Een ongezonde of afhankelijke relatie.",
+      "work": "Gevangen zitten in een baan die je niet vervult.",
+      "spiritual": "Gehechtheid aan het materiële ten koste van het spirituele."
+    },
+    "element": "Aarde",
+    "uprightKeywords": ["binding", "verslaving", "materialisme", "beperking"],
+    "reversedKeywords": ["bevrijding", "loslaten", "onafhankelijkheid"]
+  },
+  {
+    "id": "major-16",
+    "name": "De Toren",
+    "suit": "major",
+    "number": 16,
+    "image": "/tarot/major-16.jpg",
+    "meanings": {
+      "general": "Plotselinge verandering, openbaring en chaos. Een plotselinge gebeurtenis die valse structuren vernietigt.",
+      "love": "Een plotselinge breuk of openbaring in een relatie.",
+      "work": "Een onverwachte verandering in je carrière, zoals ontslag.",
+      "spiritual": "Een plotseling inzicht dat je wereldbeeld op zijn kop zet."
+    },
+    "element": "Vuur",
+    "uprightKeywords": ["plotselinge verandering", "chaos", "openbaring", "vernietiging"],
+    "reversedKeywords": ["vermijden van verandering", "angst voor het onbekende"]
+  },
+  {
+    "id": "major-17",
+    "name": "De Ster",
+    "suit": "major",
+    "number": 17,
+    "image": "/tarot/major-17.jpg",
+    "meanings": {
+      "general": "Hoop, inspiratie, genezing en spiritualiteit. Na de storm komt er weer licht en hoop.",
+      "love": "Een periode van hoop en genezing in de liefde.",
+      "work": "Inspiratie en een hernieuwd gevoel van doel in je werk.",
+      "spiritual": "Een diepe verbinding met het universum en je spirituele pad."
+    },
+    "element": "Lucht",
+    "uprightKeywords": ["hoop", "inspiratie", "genezing", "spiritualiteit"],
+    "reversedKeywords": ["wanhoop", "gebrek aan geloof", "ontkoppeling"]
+  },
+  {
+    "id": "major-18",
+    "name": "De Maan",
+    "suit": "major",
+    "number": 18,
+    "image": "/tarot/major-18.jpg",
+    "meanings": {
+      "general": "Illusie, angst, onzekerheid en het onderbewustzijn. Dingen zijn niet wat ze lijken; vertrouw op je intuïtie.",
+      "love": "Onzekerheid en verborgen angsten in een relatie.",
+      "work": "Verwarring en gebrek aan duidelijkheid op het werk.",
+      "spiritual": "Het verkennen van de diepten van je onderbewustzijn."
+    },
+    "element": "Water",
+    "uprightKeywords": ["illusie", "angst", "onzekerheid", "intuïtie"],
+    "reversedKeywords": ["helderheid", "waarheid", "angst overwinnen"]
+  },
+  {
+    "id": "major-19",
+    "name": "De Zon",
+    "suit": "major",
+    "number": 19,
+    "image": "/tarot/major-19.jpg",
+    "meanings": {
+      "general": "Vreugde, succes, positiviteit en helderheid. Een tijd van geluk, optimisme en het zien van de waarheid.",
+      "love": "Geluk, warmte en vreugde in de liefde.",
+      "work": "Succes, erkenning en helderheid in je carrière.",
+      "spiritual": "Verlichting en een diep gevoel van vreugde."
+    },
+    "element": "Vuur",
+    "uprightKeywords": ["vreugde", "succes", "positiviteit", "helderheid"],
+    "reversedKeywords": ["verdriet", "negativiteit", "gebrek aan succes"]
+  },
+  {
+    "id": "major-20",
+    "name": "Het Oordeel",
+    "suit": "major",
+    "number": 20,
+    "image": "/tarot/major-20.jpg",
+    "meanings": {
+      "general": "Oordeel, wedergeboorte, en een innerlijke roeping. Een tijd van reflectie en het maken van een belangrijke beslissing.",
+      "love": "Een beslissend moment in een relatie.",
+      "work": "Een carrière-evaluatie die leidt tot een nieuwe richting.",
+      "spiritual": "Het beantwoorden van je spirituele roeping."
+    },
+    "element": "Vuur",
+    "uprightKeywords": ["oordeel", "wedergeboorte", "roeping", "vergeving"],
+    "reversedKeywords": ["zelfkritiek", "twijfel", "uitstel"]
+  },
+  {
+    "id": "major-21",
+    "name": "De Wereld",
+    "suit": "major",
+    "number": 21,
+    "image": "/tarot/major-21.jpg",
+    "meanings": {
+      "general": "Voltooiing, integratie, en vervulling. Het succesvol afronden van een cyclus en het vieren van je prestaties.",
+      "love": "Een gevoel van voltooiing en harmonie in de liefde.",
+      "work": "Het succesvol afronden van een project of het bereiken van een carrièredoel.",
+      "spiritual": "Een gevoel van eenheid en verbondenheid met het universum."
+    },
+    "element": "Aarde",
+    "uprightKeywords": ["voltooiing", "integratie", "vervulling", "succes"],
+    "reversedKeywords": ["onvoltooid", "gebrek aan afsluiting", "stagnatie"]
+  },
+  {
+    "id": "wands-1",
+    "name": "Aas van Staven",
+    "suit": "wands",
+    "number": 1,
+    "image": "/tarot/wands-1.jpg",
+    "meanings": {
+      "general": "Nieuwe inspiratie, creativiteit en potentieel. Een vonk van een nieuw idee of passie.",
+      "love": "Een nieuwe vonk of begin in de liefde.",
+      "work": "Een nieuw project of een golf van creatieve energie.",
+      "spiritual": "Een nieuw spiritueel pad of inzicht."
+    },
+    "element": "Vuur",
+    "uprightKeywords": ["inspiratie", "creativiteit", "potentieel", "begin"],
+    "reversedKeywords": ["gebrek aan inspiratie", "uitstel", "verspilde energie"]
+  },
+  {
+    "id": "wands-2",
+    "name": "Staven Twee",
+    "suit": "wands",
+    "number": 2,
+    "image": "/tarot/wands-2.jpg",
+    "meanings": {
+      "general": "Planning, beslissingen en het verkennen van mogelijkheden. Je staat op een punt van keuze en planning voor de toekomst.",
+      "love": "Het plannen van een toekomst samen.",
+      "work": "Het overwegen van je carrièremogelijkheden en het maken van plannen.",
+      "spiritual": "Het verkennen van verschillende spirituele paden."
+    },
+    "element": "Vuur",
+    "uprightKeywords": ["planning", "beslissingen", "toekomst", "mogelijkheden"],
+    "reversedKeywords": ["angst voor het onbekende", "besluiteloosheid", "gebrek aan planning"]
+  },
+  {
+    "id": "wands-3",
+    "name": "Staven Drie",
+    "suit": "wands",
+    "number": 3,
+    "image": "/tarot/wands-3.jpg",
+    "meanings": {
+      "general": "Uitbreiding, vooruitgang en het wachten op resultaten. Je plannen zijn in beweging; heb geduld.",
+      "love": "Groei en uitbreiding in een relatie.",
+      "work": "Vooruitgang in je carrière en het zien van de eerste resultaten.",
+      "spiritual": "Spirituele groei en het uitbreiden van je horizon."
+    },
+    "element": "Vuur",
+    "uprightKeywords": ["uitbreiding", "vooruitgang", "geduld", "visie"],
+    "reversedKeywords": ["vertraging", "obstakels", "gebrek aan vooruitgang"]
+  },
+  {
+    "id": "wands-4",
+    "name": "Staven Vier",
+    "suit": "wands",
+    "number": 4,
+    "image": "/tarot/wands-4.jpg",
+    "meanings": {
+      "general": "Viering, harmonie, en een stabiele basis. Een tijd van vreugde, stabiliteit en het vieren van successen.",
+      "love": "Een stabiele en harmonieuze relatie, mogelijk een huwelijk of samenwonen.",
+      "work": "Het vieren van een mijlpaal of succes op het werk.",
+      "spiritual": "Een gevoel van vrede en harmonie op je spirituele pad."
+    },
+    "element": "Vuur",
+    "uprightKeywords": ["viering", "harmonie", "stabiliteit", "thuis"],
+    "reversedKeywords": ["onstabiliteit", "disharmonie", "uitgestelde viering"]
+  },
+  {
+    "id": "wands-5",
+    "name": "Staven Vijf",
+    "suit": "wands",
+    "number": 5,
+    "image": "/tarot/wands-5.jpg",
+    "meanings": {
+      "general": "Conflict, competitie en meningsverschillen. Een periode van strijd en het uitdagen van anderen.",
+      "love": "Conflicten en meningsverschillen in een relatie.",
+      "work": "Competitie en conflicten op de werkvloer.",
+      "spiritual": "Een innerlijk conflict of een strijd met je overtuigingen."
+    },
+    "element": "Vuur",
+    "uprightKeywords": ["conflict", "competitie", "strijd", "meningsverschil"],
+    "reversedKeywords": ["harmonie", "oplossing", "vermijden van conflict"]
+  },
+  {
+    "id": "wands-6",
+    "name": "Staven Zes",
+    "suit": "wands",
+    "number": 6,
+    "image": "/tarot/wands-6.jpg",
+    "meanings": {
+      "general": "Succes, erkenning en overwinning. Je inspanningen worden beloond en erkend door anderen.",
+      "love": "Een succesvolle en erkende relatie.",
+      "work": "Publieke erkenning en succes in je carrière.",
+      "spiritual": "Een spirituele overwinning of doorbraak."
+    },
+    "element": "Vuur",
+    "uprightKeywords": ["succes", "erkenning", "overwinning", "trots"],
+    "reversedKeywords": ["mislukking", "gebrek aan erkenning", "arrogantie"]
+  },
+  {
+    "id": "wands-7",
+    "name": "Staven Zeven",
+    "suit": "wands",
+    "number": 7,
+    "image": "/tarot/wands-7.jpg",
+    "meanings": {
+      "general": "Verdediging, standvastigheid en moed. Verdedig je positie en blijf trouw aan je overtuigingen.",
+      "love": "Het verdedigen van je relatie of je grenzen.",
+      "work": "Opkomen voor jezelf en je ideeën op het werk.",
+      "spiritual": "Het verdedigen van je spirituele overtuigingen."
+    },
+    "element": "Vuur",
+    "uprightKeywords": ["verdediging", "standvastigheid", "moed", "uitdaging"],
+    "reversedKeywords": ["opgeven", "overweldigd", "zwakte"]
+  },
+  {
+    "id": "wands-8",
+    "name": "Staven Acht",
+    "suit": "wands",
+    "number": 8,
+    "image": "/tarot/wands-8.jpg",
+    "meanings": {
+      "general": "Snelheid, actie en vooruitgang. Dingen komen in een stroomversnelling; tijd voor snelle actie.",
+      "love": "Snelle ontwikkelingen in de liefde.",
+      "work": "Snelle vooruitgang en het afronden van projecten.",
+      "spiritual": "Een snelle spirituele groei of openbaring."
+    },
+    "element": "Vuur",
+    "uprightKeywords": ["snelheid", "actie", "vooruitgang", "communicatie"],
+    "reversedKeywords": ["vertraging", "obstakels", "uitstel"]
+  },
+  {
+    "id": "wands-9",
+    "name": "Staven Negen",
+    "suit": "wands",
+    "number": 9,
+    "image": "/tarot/wands-9.jpg",
+    "meanings": {
+      "general": "Vastberadenheid, veerkracht en het bewaken van je grenzen. Je bent er bijna, geef niet op.",
+      "love": "Het bewaken van je hart en je grenzen in de liefde.",
+      "work": "Doorzettingsvermogen en het overwinnen van de laatste obstakels.",
+      "spiritual": "Spirituele veerkracht en het beschermen van je energie."
+    },
+    "element": "Vuur",
+    "uprightKeywords": ["vastberadenheid", "veerkracht", "grenzen", "doorzettingsvermogen"],
+    "reversedKeywords": ["uitputting", "opgeven", "paranoia"]
+  },
+  {
+    "id": "wands-10",
+    "name": "Staven Tien",
+    "suit": "wands",
+    "number": 10,
+    "image": "/tarot/wands-10.jpg",
+    "meanings": {
+      "general": "Last, verantwoordelijkheid en overbelasting. Je draagt een zware last; het is tijd om te delegeren of los te laten.",
+      "love": "Een relatie die als een last voelt.",
+      "work": "Te veel verantwoordelijkheid en stress op het werk.",
+      "spiritual": "Een spirituele last of een gevoel van overweldiging."
+    },
+    "element": "Vuur",
+    "uprightKeywords": ["last", "verantwoordelijkheid", "overbelasting", "stress"],
+    "reversedKeywords": ["loslaten", "delegeren", "bevrijding"]
+  },
+  {
+    "id": "wands-page",
+    "name": "Schildknaap van Staven",
+    "suit": "wands",
+    "number": 11,
+    "image": "/tarot/wands-page.jpg",
+    "meanings": {
+      "general": "Enthousiasme, verkenning en nieuwe ideeën. Een boodschap van inspiratie en creativiteit.",
+      "love": "Een nieuwe, speelse en avontuurlijke fase in de liefde.",
+      "work": "Het verkennen van nieuwe creatieve ideeën of projecten.",
+      "spiritual": "Het verkennen van een nieuw spiritueel pad."
+    },
+    "element": "Vuur",
+    "uprightKeywords": ["enthousiasme", "verkenning", "creativiteit", "boodschap"],
+    "reversedKeywords": ["gebrek aan richting", "uitstel", "onvolwassenheid"]
+  },
+  {
+    "id": "wands-knight",
+    "name": "Ridder van Staven",
+    "suit": "wands",
+    "number": 12,
+    "image": "/tarot/wands-knight.jpg",
+    "meanings": {
+      "general": "Actie, avontuur en passie. Tijd om moedig en vol energie je doelen na te jagen.",
+      "love": "Een gepassioneerde en avontuurlijke romance.",
+      "work": "Een periode van snelle actie en het nastreven van je ambities.",
+      "spiritual": "Een avontuurlijke en gepassioneerde spirituele zoektocht."
+    },
+    "element": "Vuur",
+    "uprightKeywords": ["actie", "avontuur", "passie", "energie"],
+    "reversedKeywords": ["roekeloosheid", "ongeduld", "impulsiviteit"]
+  },
+  {
+    "id": "wands-queen",
+    "name": "Koningin van Staven",
+    "suit": "wands",
+    "number": 13,
+    "image": "/tarot/wands-queen.jpg",
+    "meanings": {
+      "general": "Zelfvertrouwen, charisma en onafhankelijkheid. Een zelfverzekerde en inspirerende persoon.",
+      "love": "Een charismatische en onafhankelijke partner.",
+      "work": "Leiderschap met zelfvertrouwen en charisma.",
+      "spiritual": "Een sterke en onafhankelijke spirituele leider."
+    },
+    "element": "Vuur",
+    "uprightKeywords": ["zelfvertrouwen", "charisma", "onafhankelijkheid", "passie"],
+    "reversedKeywords": ["arrogantie", "jaloezie", "dominantie"]
+  },
+  {
+    "id": "wands-king",
+    "name": "Koning van Staven",
+    "suit": "wands",
+    "number": 14,
+    "image": "/tarot/wands-king.jpg",
+    "meanings": {
+      "general": "Leiderschap, visie en inspiratie. Een natuurlijke leider met een duidelijke visie.",
+      "love": "Een inspirerende en visionaire partner.",
+      "work": "Leiderschap met visie en het inspireren van anderen.",
+      "spiritual": "Een spirituele leider die anderen inspireert."
+    },
+    "element": "Vuur",
+    "uprightKeywords": ["leiderschap", "visie", "inspiratie", "moed"],
+    "reversedKeywords": ["autoritair", "dominant", "ongeduldig"]
+  },
+  {
+    "id": "cups-1",
+    "name": "Aas van Bekers",
+    "suit": "cups",
+    "number": 1,
+    "image": "/tarot/cups-1.jpg",
+    "meanings": {
+      "general": "Nieuwe liefde, emoties en creativiteit. Een overvloed aan liefde en emotionele vervulling.",
+      "love": "Het begin van een nieuwe liefdevolle relatie.",
+      "work": "Een nieuw creatief project dat je emotioneel vervult.",
+      "spiritual": "Een diepe spirituele en emotionele opening."
+    },
+    "element": "Water",
+    "uprightKeywords": ["liefde", "emoties", "creativiteit", "relaties"],
+    "reversedKeywords": ["geblokkeerde emoties", "leegte", "liefdesverdriet"]
+  },
+  {
+    "id": "cups-2",
+    "name": "Bekers Twee",
+    "suit": "cups",
+    "number": 2,
+    "image": "/tarot/cups-2.jpg",
+    "meanings": {
+      "general": "Partnerschap, verbinding en wederzijdse aantrekkingskracht. Een harmonieuze verbinding tussen twee mensen.",
+      "love": "Een diepe en liefdevolle verbinding met een partner.",
+      "work": "Een succesvolle en harmonieuze samenwerking.",
+      "spiritual": "Een verbinding met een spirituele partner of gids."
+    },
+    "element": "Water",
+    "uprightKeywords": ["partnerschap", "verbinding", "liefde", "harmonie"],
+    "reversedKeywords": ["disharmonie", "conflict", "verbroken verbinding"]
+  },
+  {
+    "id": "cups-3",
+    "name": "Bekers Drie",
+    "suit": "cups",
+    "number": 3,
+    "image": "/tarot/cups-3.jpg",
+    "meanings": {
+      "general": "Vriendschap, viering en gemeenschap. Een tijd van vreugde en het vieren met vrienden.",
+      "love": "Een viering van liefde, zoals een verloving of bruiloft.",
+      "work": "Een positieve en ondersteunende werkomgeving.",
+      "spiritual": "Het vieren van je spirituele gemeenschap."
+    },
+    "element": "Water",
+    "uprightKeywords": ["vriendschap", "viering", "gemeenschap", "vreugde"],
+    "reversedKeywords": ["roddel", "isolatie", "overdaad"]
+  },
+  {
+    "id": "cups-4",
+    "name": "Bekers Vier",
+    "suit": "cups",
+    "number": 4,
+    "image": "/tarot/cups-4.jpg",
+    "meanings": {
+      "general": "Apathie, ontevredenheid en gemiste kansen. Je bent ontevreden en ziet de kansen die voor je liggen niet.",
+      "love": "Verveling of ontevredenheid in een relatie.",
+      "work": "Ontevredenheid en gebrek aan motivatie op het werk.",
+      "spiritual": "Een gevoel van spirituele leegte of ontevredenheid."
+    },
+    "element": "Water",
+    "uprightKeywords": ["apathie", "ontevredenheid", "meditatie", "reflectie"],
+    "reversedKeywords": ["nieuwe kansen", "motivatie", "enthousiasme"]
+  },
+  {
+    "id": "cups-5",
+    "name": "Bekers Vijf",
+    "suit": "cups",
+    "number": 5,
+    "image": "/tarot/cups-5.jpg",
+    "meanings": {
+      "general": "Verdriet, verlies en spijt. Je focust op wat je verloren hebt, in plaats van wat je nog hebt.",
+      "love": "Liefdesverdriet en het rouwen om een verlies.",
+      "work": "Een teleurstelling of verlies op het werk.",
+      "spiritual": "Een periode van spiritueel verdriet of verlies."
+    },
+    "element": "Water",
+    "uprightKeywords": ["verdriet", "verlies", "spijt", "rouw"],
+    "reversedKeywords": ["acceptatie", "vergeving", "verder gaan"]
+  },
+  {
+    "id": "cups-6",
+    "name": "Bekers Zes",
+    "suit": "cups",
+    "number": 6,
+    "image": "/tarot/cups-6.jpg",
+    "meanings": {
+      "general": "Nostalgie, jeugdherinneringen en onschuld. Een terugblik op het verleden met een gevoel van warmte.",
+      "love": "Een oude liefde die terugkeert of het herleven van oude herinneringen.",
+      "work": "Terugkeren naar een oude baan of project.",
+      "spiritual": "Het herontdekken van je kinderlijke onschuld en verwondering."
+    },
+    "element": "Water",
+    "uprightKeywords": ["nostalgie", "jeugd", "onschuld", "herinneringen"],
+    "reversedKeywords": ["vasthouden aan het verleden", "heimwee", "onrealistisch"]
+  },
+  {
+    "id": "cups-7",
+    "name": "Bekers Zeven",
+    "suit": "cups",
+    "number": 7,
+    "image": "/tarot/cups-7.jpg",
+    "meanings": {
+      "general": "Keuzes, illusies en dagdromen. Je hebt veel opties, maar niet alles is wat het lijkt.",
+      "love": "Meerdere aanbidders of keuzes in de liefde.",
+      "work": "Veel carrièremogelijkheden, maar wees realistisch.",
+      "spiritual": "Verleidingen en illusies op je spirituele pad."
+    },
+    "element": "Water",
+    "uprightKeywords": ["keuzes", "illusies", "dagdromen", "fantasie"],
+    "reversedKeywords": ["helderheid", "beslissing", "realiteit"]
+  },
+  {
+    "id": "cups-8",
+    "name": "Bekers Acht",
+    "suit": "cups",
+    "number": 8,
+    "image": "/tarot/cups-8.jpg",
+    "meanings": {
+      "general": "Loslaten, verder gaan en op zoek naar iets diepers. Je laat iets achter wat je niet langer dient.",
+      "love": "Het verlaten van een onbevredigende relatie.",
+      "work": "Het verlaten van een baan die je geen voldoening geeft.",
+      "spiritual": "Een zoektocht naar een diepere spirituele betekenis."
+    },
+    "element": "Water",
+    "uprightKeywords": ["loslaten", "verder gaan", "zoektocht", "onthechting"],
+    "reversedKeywords": ["terugkeren", "vasthouden", "angst voor verandering"]
+  },
+  {
+    "id": "cups-9",
+    "name": "Bekers Negen",
+    "suit": "cups",
+    "number": 9,
+    "image": "/tarot/cups-9.jpg",
+    "meanings": {
+      "general": "Wensvervulling, tevredenheid en geluk. Je wensen komen uit; geniet van het moment.",
+      "love": "Een gelukkige en vervullende relatie.",
+      "work": "Tevredenheid en succes in je carrière.",
+      "spiritual": "Een gevoel van spirituele vervulling en dankbaarheid."
+    },
+    "element": "Water",
+    "uprightKeywords": ["wensvervulling", "tevredenheid", "geluk", "overvloed"],
+    "reversedKeywords": ["onvervulde wensen", "ontevredenheid", "materialisme"]
+  },
+  {
+    "id": "cups-10",
+    "name": "Bekers Tien",
+    "suit": "cups",
+    "number": 10,
+    "image": "/tarot/cups-10.jpg",
+    "meanings": {
+      "general": "Familiegeluk, harmonie en emotionele vervulling. Het ultieme geluk en harmonie in je leven.",
+      "love": "Een gelukkig en harmonieus gezinsleven.",
+      "work": "Een gevoel van voldoening en harmonie op het werk.",
+      "spiritual": "Een diep gevoel van spirituele verbondenheid en vrede."
+    },
+    "element": "Water",
+    "uprightKeywords": ["familiegeluk", "harmonie", "vervulling", "vreugde"],
+    "reversedKeywords": ["familieconflict", "disharmonie", "gebroken dromen"]
+  },
+  {
+    "id": "cups-page",
+    "name": "Schildknaap van Bekers",
+    "suit": "cups",
+    "number": 11,
+    "image": "/tarot/cups-page.jpg",
+    "meanings": {
+      "general": "Creativiteit, intuïtie en een boodschap van het hart. Een uitnodiging om je creatieve en intuïtieve kant te omarmen.",
+      "love": "Een romantische boodschap of een nieuwe, gevoelige liefde.",
+      "work": "Een creatief idee of een intuïtief inzicht op het werk.",
+      "spiritual": "Het openen van je hart en het volgen van je intuïtie."
+    },
+    "element": "Water",
+    "uprightKeywords": ["creativiteit", "intuïtie", "boodschap", "gevoeligheid"],
+    "reversedKeywords": ["emotionele onvolwassenheid", "geblokkeerde creativiteit"]
+  },
+  {
+    "id": "cups-knight",
+    "name": "Ridder van Bekers",
+    "suit": "cups",
+    "number": 12,
+    "image": "/tarot/cups-knight.jpg",
+    "meanings": {
+      "general": "Romantiek, charme en een aanbod. Een charmante en romantische persoon die een aanbod doet.",
+      "love": "Een romantisch aanzoek of een charmante minnaar.",
+      "work": "Een creatief aanbod of een project waar je gepassioneerd over bent.",
+      "spiritual": "Het volgen van je hart en je dromen."
+    },
+    "element": "Water",
+    "uprightKeywords": ["romantiek", "charme", "aanbod", "gevoeligheid"],
+    "reversedKeywords": ["onrealistisch", "stemmingswisselingen", "bedrog"]
+  },
+  {
+    "id": "cups-queen",
+    "name": "Koningin van Bekers",
+    "suit": "cups",
+    "number": 13,
+    "image": "/tarot/cups-queen.jpg",
+    "meanings": {
+      "general": "Compassie, intuïtie en emotionele volwassenheid. Een zorgzame en intuïtieve persoon.",
+      "love": "Een liefdevolle en zorgzame partner.",
+      "work": "Een empathische en intuïtieve benadering op het werk.",
+      "spiritual": "Een diepe verbinding met je emoties en intuïtie."
+    },
+    "element": "Water",
+    "uprightKeywords": ["compassie", "intuïtie", "zorgzaamheid", "emoties"],
+    "reversedKeywords": ["emotionele instabiliteit", "afhankelijkheid", "manipulatie"]
+  },
+  {
+    "id": "cups-king",
+    "name": "Koning van Bekers",
+    "suit": "cups",
+    "number": 14,
+    "image": "/tarot/cups-king.jpg",
+    "meanings": {
+      "general": "Emotionele balans, compassie en diplomatie. Een meester van zijn emoties, die met wijsheid en compassie handelt.",
+      "love": "Een emotioneel volwassen en stabiele partner.",
+      "work": "Diplomatie en emotionele intelligentie op de werkvloer.",
+      "spiritual": "Emotionele meesterschap en spirituele wijsheid."
+    },
+    "element": "Water",
+    "uprightKeywords": ["emotionele balans", "compassie", "diplomatie", "wijsheid"],
+    "reversedKeywords": ["emotionele manipulatie", "stemmingswisselingen", "onbetrouwbaarheid"]
+  },
+  {
+    "id": "swords-1",
+    "name": "Aas van Zwaarden",
+    "suit": "swords",
+    "number": 1,
+    "image": "/tarot/swords-1.jpg",
+    "meanings": {
+      "general": "Heldere gedachten, waarheid en een doorbraak. Een nieuw inzicht dat door de verwarring heen snijdt.",
+      "love": "Een helder en eerlijk gesprek in een relatie.",
+      "work": "Een briljant idee of een doorbraak in een project.",
+      "spiritual": "Een moment van plotselinge spirituele helderheid."
+    },
+    "element": "Lucht",
+    "uprightKeywords": ["helderheid", "waarheid", "doorbraak", "inzicht"],
+    "reversedKeywords": ["verwarring", "misverstand", "leugens"]
+  },
+  {
+    "id": "swords-2",
+    "name": "Zwaarden Twee",
+    "suit": "swords",
+    "number": 2,
+    "image": "/tarot/swords-2.jpg",
+    "meanings": {
+      "general": "Besluiteloosheid, patstelling en het vermijden van de waarheid. Je weigert een beslissing te nemen of de waarheid onder ogen te zien.",
+      "love": "Een patstelling of het vermijden van een moeilijk gesprek in een relatie.",
+      "work": "Besluiteloosheid en het uitstellen van een belangrijke beslissing.",
+      "spiritual": "Het blokkeren van je intuïtie en innerlijke waarheid."
+    },
+    "element": "Lucht",
+    "uprightKeywords": ["besluiteloosheid", "patstelling", "wapenstilstand", "keuze"],
+    "reversedKeywords": ["beslissing", "waarheid", "verwarring"]
+  },
+  {
+    "id": "swords-3",
+    "name": "Zwaarden Drie",
+    "suit": "swords",
+    "number": 3,
+    "image": "/tarot/swords-3.jpg",
+    "meanings": {
+      "general": "Hartzeer, verdriet en pijnlijke waarheid. Een pijnlijke maar noodzakelijke waarheid komt aan het licht.",
+      "love": "Liefdesverdriet, verraad of een pijnlijke breuk.",
+      "work": "Een pijnlijke teleurstelling of conflict op het werk.",
+      "spiritual": "Een pijnlijke spirituele les of openbaring."
+    },
+    "element": "Lucht",
+    "uprightKeywords": ["hartzeer", "verdriet", "pijn", "verlies"],
+    "reversedKeywords": ["genezing", "vergeving", "loslaten"]
+  },
+  {
+    "id": "swords-4",
+    "name": "Zwaarden Vier",
+    "suit": "swords",
+    "number": 4,
+    "image": "/tarot/swords-4.jpg",
+    "meanings": {
+      "general": "Rust, herstel en contemplatie. Een periode van rust en herstel na een moeilijke tijd.",
+      "love": "Een pauze in een relatie om te herstellen en te reflecteren.",
+      "work": "Een periode van rust, zoals een vakantie of sabbatical.",
+      "spiritual": "Meditatie en spiritueel herstel."
+    },
+    "element": "Lucht",
+    "uprightKeywords": ["rust", "herstel", "contemplatie", "pauze"],
+    "reversedKeywords": ["uitputting", "burn-out", "stress"]
+  },
+  {
+    "id": "swords-5",
+    "name": "Zwaarden Vijf",
+    "suit": "swords",
+    "number": 5,
+    "image": "/tarot/swords-5.jpg",
+    "meanings": {
+      "general": "Conflict, nederlaag en een holle overwinning. Een conflict waarbij iedereen verliest.",
+      "love": "Een pijnlijk conflict of een strijd in een relatie.",
+      "work": "Een conflict op het werk waarbij je wint ten koste van anderen.",
+      "spiritual": "Een strijd met je ego of een conflict met je overtuigingen."
+    },
+    "element": "Lucht",
+    "uprightKeywords": ["conflict", "nederlaag", "verraad", "ambitie"],
+    "reversedKeywords": ["verzoening", "compromis", "vergeving"]
+  },
+  {
+    "id": "swords-6",
+    "name": "Zwaarden Zes",
+    "suit": "swords",
+    "number": 6,
+    "image": "/tarot/swords-6.jpg",
+    "meanings": {
+      "general": "Overgang, loslaten en verder gaan. Je laat een moeilijke situatie achter je en gaat op weg naar een betere toekomst.",
+      "love": "Het verlaten van een pijnlijke relatie en het beginnen van een nieuw hoofdstuk.",
+      "work": "Het verlaten van een stressvolle baan voor iets beters.",
+      "spiritual": "Een spirituele reis of overgang naar een nieuw bewustzijnsniveau."
+    },
+    "element": "Lucht",
+    "uprightKeywords": ["overgang", "loslaten", "reis", "herstel"],
+    "reversedKeywords": ["vastzitten", "terugkeer", "onopgeloste problemen"]
+  },
+  {
+    "id": "swords-7",
+    "name": "Zwaarden Zeven",
+    "suit": "swords",
+    "number": 7,
+    "image": "/tarot/swords-7.jpg",
+    "meanings": {
+      "general": "Bedrog, strategie en stiekem gedrag. Iemand is niet helemaal eerlijk, of je moet strategisch te werk gaan.",
+      "love": "Oneerlijkheid of bedrog in een relatie.",
+      "work": "Stiekem gedrag of het stelen van ideeën op het werk.",
+      "spiritual": "Zelfbedrog of het vermijden van de waarheid."
+    },
+    "element": "Lucht",
+    "uprightKeywords": ["bedrog", "strategie", "diefstal", "list"],
+    "reversedKeywords": ["eerlijkheid", "openheid", "bekentenis"]
+  },
+  {
+    "id": "swords-8",
+    "name": "Zwaarden Acht",
+    "suit": "swords",
+    "number": 8,
+    "image": "/tarot/swords-8.jpg",
+    "meanings": {
+      "general": "Gevangen voelen, beperkende overtuigingen en zelfopgelegde beperkingen. Je voelt je gevangen, maar de deur is niet op slot.",
+      "love": "Je gevangen voelen in een relatie.",
+      "work": "Je gevangen voelen in een baan of carrière.",
+      "spiritual": "Beperkende overtuigingen die je spirituele groei belemmeren."
+    },
+    "element": "Lucht",
+    "uprightKeywords": ["beperking", "gevangenschap", "zelfsabotage", "machteloosheid"],
+    "reversedKeywords": ["bevrijding", "vrijheid", "empowerment"]
+  },
+  {
+    "id": "swords-9",
+    "name": "Zwaarden Negen",
+    "suit": "swords",
+    "number": 9,
+    "image": "/tarot/swords-9.jpg",
+    "meanings": {
+      "general": "Angst, zorgen en slapeloze nachten. Je wordt gekweld door angst en negatieve gedachten.",
+      "love": "Angst en zorgen over een relatie.",
+      "work": "Stress en angst op het werk.",
+      "spiritual": "Een donkere nacht van de ziel of een spirituele crisis."
+    },
+    "element": "Lucht",
+    "uprightKeywords": ["angst", "zorgen", "nachtmerries", "stress"],
+    "reversedKeywords": ["loslaten van angst", "hoop", "genezing"]
+  },
+  {
+    "id": "swords-10",
+    "name": "Zwaarden Tien",
+    "suit": "swords",
+    "number": 10,
+    "image": "/tarot/swords-10.jpg",
+    "meanings": {
+      "general": "Einde, verraad en een pijnlijk dieptepunt. Een pijnlijk einde, maar het kan alleen maar beter worden.",
+      "love": "Een pijnlijke breuk of verraad in de liefde.",
+      "work": "Een pijnlijk einde van een baan of project.",
+      "spiritual": "Het loslaten van oude overtuigingen die je niet langer dienen."
+    },
+    "element": "Lucht",
+    "uprightKeywords": ["einde", "verraad", "dieptepunt", "verlies"],
+    "reversedKeywords": ["herstel", "wedergeboorte", "loslaten"]
+  },
+  {
+    "id": "swords-page",
+    "name": "Schildknaap van Zwaarden",
+    "suit": "swords",
+    "number": 11,
+    "image": "/tarot/swords-page.jpg",
+    "meanings": {
+      "general": "Nieuwsgierigheid, communicatie en nieuwe ideeën. Een boodschap die helderheid en waarheid brengt.",
+      "love": "Een open en eerlijk gesprek in een relatie.",
+      "work": "Een nieuw idee of een scherpe analyse op het werk.",
+      "spiritual": "Het stellen van kritische vragen en het zoeken naar de waarheid."
+    },
+    "element": "Lucht",
+    "uprightKeywords": ["nieuwsgierigheid", "communicatie", "ideeën", "waarheid"],
+    "reversedKeywords": ["roddel", "misverstand", "gebrek aan helderheid"]
+  },
+  {
+    "id": "swords-knight",
+    "name": "Ridder van Zwaarden",
+    "suit": "swords",
+    "number": 12,
+    "image": "/tarot/swords-knight.jpg",
+    "meanings": {
+      "general": "Ambitie, snelheid en directe actie. Een snelle en vastberaden persoon die recht op zijn doel afgaat.",
+      "love": "Een snelle en directe benadering in de liefde.",
+      "work": "Ambitieus en vastberaden je doelen nastreven.",
+      "spiritual": "Een snelle en directe zoektocht naar de waarheid."
+    },
+    "element": "Lucht",
+    "uprightKeywords": ["ambitie", "snelheid", "actie", "vastberadenheid"],
+    "reversedKeywords": ["roekeloosheid", "agressie", "conflict"]
+  },
+  {
+    "id": "swords-queen",
+    "name": "Koningin van Zwaarden",
+    "suit": "swords",
+    "number": 13,
+    "image": "/tarot/swords-queen.jpg",
+    "meanings": {
+      "general": "Intelligentie, onafhankelijkheid en heldere grenzen. Een scherpe en onafhankelijke denker.",
+      "love": "Een onafhankelijke partner die waarde hecht aan eerlijkheid.",
+      "work": "Heldere communicatie en objectieve beslissingen op het werk.",
+      "spiritual": "Het gebruik van je intellect om spirituele waarheid te vinden."
+    },
+    "element": "Lucht",
+    "uprightKeywords": ["intelligentie", "onafhankelijkheid", "helderheid", "grenzen"],
+    "reversedKeywords": ["kilheid", "kritiek", "bitterheid"]
+  },
+  {
+    "id": "swords-king",
+    "name": "Koning van Zwaarden",
+    "suit": "swords",
+    "number": 14,
+    "image": "/tarot/swords-king.jpg",
+    "meanings": {
+      "general": "Autoriteit, intellect en waarheid. Een leider die handelt met logica, waarheid en rechtvaardigheid.",
+      "love": "Een partner die waarde hecht aan intellectuele verbinding en eerlijkheid.",
+      "work": "Leiderschap gebaseerd op logica, objectiviteit en duidelijke communicatie.",
+      "spiritual": "Het bereiken van spirituele helderheid door intellectuele discipline."
+    },
+    "element": "Lucht",
+    "uprightKeywords": ["autoriteit", "intellect", "waarheid", "rechtvaardigheid"],
+    "reversedKeywords": ["autoritair", "dominant", "misbruik van macht"]
+  },
+  {
+    "id": "pentacles-1",
+    "name": "Aas van Pentakels",
+    "suit": "pentacles",
+    "number": 1,
+    "image": "/tarot/pentacles-1.jpg",
+    "meanings": {
+      "general": "Nieuwe kansen, welvaart en manifestatie. Een kans voor materiële groei en stabiliteit.",
+      "love": "Een stabiele en betrouwbare start in de liefde.",
+      "work": "Een nieuwe baan, promotie of zakelijke kans.",
+      "spiritual": "Het manifesteren van je spirituele doelen in de fysieke wereld."
+    },
+    "element": "Aarde",
+    "uprightKeywords": ["kansen", "welvaart", "manifestatie", "stabiliteit"],
+    "reversedKeywords": ["gemiste kansen", "financiële problemen", "hebzucht"]
+  },
+  {
+    "id": "pentacles-2",
+    "name": "Pentakels Twee",
+    "suit": "pentacles",
+    "number": 2,
+    "image": "/tarot/pentacles-2.jpg",
+    "meanings": {
+      "general": "Balans, aanpassingsvermogen en het jongleren met prioriteiten. Je probeert meerdere dingen tegelijk in balans te houden.",
+      "love": "Het balanceren van je liefdesleven met andere verantwoordelijkheden.",
+      "work": "Het jongleren met meerdere projecten of taken op het werk.",
+      "spiritual": "Het vinden van balans tussen je spirituele en materiële leven."
+    },
+    "element": "Aarde",
+    "uprightKeywords": ["balans", "aanpassingsvermogen", "jongleren", "prioriteiten"],
+    "reversedKeywords": ["onbalans", "desorganisatie", "stress"]
+  },
+  {
+    "id": "pentacles-3",
+    "name": "Pentakels Drie",
+    "suit": "pentacles",
+    "number": 3,
+    "image": "/tarot/pentacles-3.jpg",
+    "meanings": {
+      "general": "Samenwerking, vakmanschap en teamwork. Succes door samenwerking en het combineren van vaardigheden.",
+      "love": "Samenwerken aan een relatie en het opbouwen van een gezamenlijke toekomst.",
+      "work": "Succesvol teamwork en het leveren van kwalitatief hoogstaand werk.",
+      "spiritual": "Samenwerken met anderen op je spirituele pad."
+    },
+    "element": "Aarde",
+    "uprightKeywords": ["samenwerking", "vakmanschap", "teamwork", "planning"],
+    "reversedKeywords": ["gebrek aan teamwork", "slecht werk", "conflict"]
+  },
+  {
+    "id": "pentacles-4",
+    "name": "Pentakels Vier",
+    "suit": "pentacles",
+    "number": 4,
+    "image": "/tarot/pentacles-4.jpg",
+    "meanings": {
+      "general": "Bezit, controle en stabiliteit. Je houdt vast aan wat je hebt, uit angst voor verlies.",
+      "love": "Bezitdenkendheid of het vasthouden aan een relatie uit angst.",
+      "work": "Vasthouden aan een baan uit zekerheid, niet uit passie.",
+      "spiritual": "Gehechtheid aan het materiële ten koste van spirituele groei."
+    },
+    "element": "Aarde",
+    "uprightKeywords": ["bezit", "controle", "stabiliteit", "zekerheid"],
+    "reversedKeywords": ["loslaten", "vrijgevigheid", "hebzucht"]
+  },
+  {
+    "id": "pentacles-5",
+    "name": "Pentakels Vijf",
+    "suit": "pentacles",
+    "number": 5,
+    "image": "/tarot/pentacles-5.jpg",
+    "meanings": {
+      "general": "Armoede, verlies en buitengesloten voelen. Een periode van financiële of emotionele tegenslag.",
+      "love": "Je buitengesloten of onbemind voelen in een relatie.",
+      "work": "Financiële problemen of het verlies van een baan.",
+      "spiritual": "Een gevoel van spirituele armoede of verlatenheid."
+    },
+    "element": "Aarde",
+    "uprightKeywords": ["armoede", "verlies", "tegenslag", "isolatie"],
+    "reversedKeywords": ["herstel", "hulp", "hoop"]
+  },
+  {
+    "id": "pentacles-6",
+    "name": "Pentakels Zes",
+    "suit": "pentacles",
+    "number": 6,
+    "image": "/tarot/pentacles-6.jpg",
+    "meanings": {
+      "general": "Vrijgevigheid, liefdadigheid en het ontvangen van hulp. Een tijd van geven en ontvangen in balans.",
+      "love": "Een relatie gebaseerd op wederzijdse steun en vrijgevigheid.",
+      "work": "Het ontvangen van een bonus of het helpen van een collega.",
+      "spiritual": "Het delen van je spirituele gaven met anderen."
+    },
+    "element": "Aarde",
+    "uprightKeywords": ["vrijgevigheid", "liefdadigheid", "hulp", "balans"],
+    "reversedKeywords": ["schuld", "hebzucht", "onbalans"]
+  },
+  {
+    "id": "pentacles-7",
+    "name": "Pentakels Zeven",
+    "suit": "pentacles",
+    "number": 7,
+    "image": "/tarot/pentacles-7.jpg",
+    "meanings": {
+      "general": "Geduld, investering en het wachten op de oogst. Je hebt hard gewerkt; nu is het tijd om geduldig te wachten op de resultaten.",
+      "love": "Geduld en investering in een relatie.",
+      "work": "Het evalueren van je investeringen en het wachten op de resultaten.",
+      "spiritual": "Geduld op je spirituele pad; groei kost tijd."
+    },
+    "element": "Aarde",
+    "uprightKeywords": ["geduld", "investering", "oogst", "evaluatie"],
+    "reversedKeywords": ["ongeduld", "verspilde moeite", "uitstel"]
+  },
+  {
+    "id": "pentacles-8",
+    "name": "Pentakels Acht",
+    "suit": "pentacles",
+    "number": 8,
+    "image": "/tarot/pentacles-8.jpg",
+    "meanings": {
+      "general": "Vakmanschap, toewijding en het perfectioneren van je vaardigheden. Hard werken en toewijding leiden tot meesterschap.",
+      "love": "Werken aan een relatie en het verbeteren van de verbinding.",
+      "work": "Toewijding aan je werk en het ontwikkelen van je vaardigheden.",
+      "spiritual": "Toewijding aan je spirituele oefening."
+    },
+    "element": "Aarde",
+    "uprightKeywords": ["vakmanschap", "toewijding", "vaardigheid", "hard werken"],
+    "reversedKeywords": ["perfectionisme", "slecht werk", "gebrek aan focus"]
+  },
+  {
+    "id": "pentacles-9",
+    "name": "Pentakels Negen",
+    "suit": "pentacles",
+    "number": 9,
+    "image": "/tarot/pentacles-9.jpg",
+    "meanings": {
+      "general": "Onafhankelijkheid, welvaart en zelfredzaamheid. Genieten van de vruchten van je harde werk.",
+      "love": "Een onafhankelijke en zelfverzekerde benadering van de liefde.",
+      "work": "Financiële onafhankelijkheid en succes.",
+      "spiritual": "Een gevoel van spirituele overvloed en zelfredzaamheid."
+    },
+    "element": "Aarde",
+    "uprightKeywords": ["onafhankelijkheid", "welvaart", "zelfredzaamheid", "luxe"],
+    "reversedKeywords": ["afhankelijkheid", "financiële problemen", "oppervlakkigheid"]
+  },
+  {
+    "id": "pentacles-10",
+    "name": "Pentakels Tien",
+    "suit": "pentacles",
+    "number": 10,
+    "image": "/tarot/pentacles-10.jpg",
+    "meanings": {
+      "general": "Rijkdom, familie en nalatenschap. Langdurige welvaart en een stabiele basis voor de toekomst.",
+      "love": "Een stabiele en welvarende familie.",
+      "work": "Een succesvol familiebedrijf of een langdurige carrière.",
+      "spiritual": "Het doorgeven van spirituele wijsheid aan de volgende generatie."
+    },
+    "element": "Aarde",
+    "uprightKeywords": ["rijkdom", "familie", "nalatenschap", "stabiliteit"],
+    "reversedKeywords": ["familieconflict", "financiële problemen", "instabiliteit"]
+  },
+  {
+    "id": "pentacles-page",
+    "name": "Schildknaap van Pentakels",
+    "suit": "pentacles",
+    "number": 11,
+    "image": "/tarot/pentacles-page.jpg",
+    "meanings": {
+      "general": "Nieuwe kansen, leergierigheid en praktische zaken. Een boodschap over een nieuwe kans voor groei.",
+      "love": "Een nieuwe, stabiele en betrouwbare relatie.",
+      "work": "Een nieuwe baan, studie of een kans om een nieuwe vaardigheid te leren.",
+      "spiritual": "Het leren van nieuwe spirituele praktijken op een praktische manier."
+    },
+    "element": "Aarde",
+    "uprightKeywords": ["kansen", "leergierigheid", "praktisch", "boodschap"],
+    "reversedKeywords": ["gemiste kansen", "luiheid", "gebrek aan focus"]
+  },
+  {
+    "id": "pentacles-knight",
+    "name": "Ridder van Pentakels",
+    "suit": "pentacles",
+    "number": 12,
+    "image": "/tarot/pentacles-knight.jpg",
+    "meanings": {
+      "general": "Betrouwbaarheid, hard werken en routine. Een betrouwbare en hardwerkende persoon die gestaag vooruitgaat.",
+      "love": "Een betrouwbare en toegewijde partner.",
+      "work": "Hard werken en toewijding aan je taken.",
+      "spiritual": "Een gedisciplineerde en consistente spirituele praktijk."
+    },
+    "element": "Aarde",
+    "uprightKeywords": ["betrouwbaarheid", "hard werken", "routine", "geduld"],
+    "reversedKeywords": ["luiheid", "stagnatie", "verveling"]
+  },
+  {
+    "id": "pentacles-queen",
+    "name": "Koningin van Pentakels",
+    "suit": "pentacles",
+    "number": 13,
+    "image": "/tarot/pentacles-queen.jpg",
+    "meanings": {
+      "general": "Zorgzaamheid, praktisch en overvloed. Een zorgzame en praktische persoon die een stabiele omgeving creëert.",
+      "love": "Een zorgzame en praktische partner.",
+      "work": "Een praktische en zorgzame benadering van je werk.",
+      "spiritual": "Het creëren van een stabiele en voedende spirituele basis."
+    },
+    "element": "Aarde",
+    "uprightKeywords": ["zorgzaamheid", "praktisch", "overvloed", "stabiliteit"],
+    "reversedKeywords": ["materialisme", "verwaarlozing", "onzekerheid"]
+  },
+  {
+    "id": "pentacles-king",
+    "name": "Koning van Pentakels",
+    "suit": "pentacles",
+    "number": 14,
+    "image": "/tarot/pentacles-king.jpg",
+    "meanings": {
+      "general": "Welvaart, succes en meesterschap. Een succesvolle en welvarende leider die zijn rijkdom deelt.",
+      "love": "Een stabiele en gulle partner.",
+      "work": "Financieel succes en meesterschap in je vakgebied.",
+      "spiritual": "Het bereiken van spirituele en materiële overvloed."
+    },
+    "element": "Aarde",
+    "uprightKeywords": ["welvaart", "succes", "meesterschap", "vrijgevigheid"],
+    "reversedKeywords": ["hebzucht", "materialisme", "gierigheid"]
   }
 ]
