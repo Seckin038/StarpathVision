@@ -10,7 +10,6 @@ import {
   Heart, 
   Eye,
   Zap,
-  Globe,
   LogIn
 } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -21,7 +20,7 @@ import Card3D from "@/components/Card3D";
 import { Button } from "@/components/ui/button";
 
 const Index = () => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   const readingMethods = [
     { 
@@ -50,12 +49,6 @@ const Index = () => {
     }
   ];
 
-  const languageOptions = [
-    { code: "nl", name: "Nederlands" },
-    { code: "en", name: "English" },
-    { code: "tr", name: "Türkçe" }
-  ];
-
   return (
     <div className="relative min-h-screen bg-stone-950 text-stone-200 p-4 font-serif">
       <MysticalBackground mode="particles+sigils" intensity="low" />
@@ -66,18 +59,6 @@ const Index = () => {
             <p className="text-stone-400">{t('subtitle')}</p>
           </div>
           <div className="flex items-center gap-4">
-            <div className="flex items-center gap-2">
-              <Globe className="h-5 w-5 text-stone-400" />
-              <select 
-                value={i18n.language}
-                onChange={(e) => i18n.changeLanguage(e.target.value)}
-                className="bg-stone-900/50 border border-stone-700 rounded-md px-2 py-1 text-stone-300 focus:ring-amber-500"
-              >
-                {languageOptions.map((lang) => (
-                  <option key={lang.code} value={lang.code} className="bg-stone-800">{lang.name}</option>
-                ))}
-              </select>
-            </div>
             <Link to="/login">
               <Button variant="outline" className="border-amber-800 text-amber-300 hover:bg-amber-900/50 hover:text-amber-200">
                 <LogIn className="h-4 w-4 mr-2" />
