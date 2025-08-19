@@ -1,0 +1,152 @@
+{
+  "version": "1.0.0",
+  "spreads": [
+    {
+      "id": "relationship-detailed",
+      "name": "Gedetailleerde Relatie Legging",
+      "description": "Een diepgaande kijk op de dynamiek tussen twee mensen.",
+      "cardCount": 7,
+      "layout": {
+        "type": "row",
+        "gap": 20
+      },
+      "positions": [
+        {
+          "id": "you",
+          "label": "Jij in de relatie"
+        },
+        {
+          "id": "partner",
+          "label": "Je partner in de relatie"
+        },
+        {
+          "id": "foundation",
+          "label": "De basis van de relatie"
+        },
+        {
+          "id": "strengths",
+          "label": "Krachten"
+        },
+        {
+          "id": "challenges",
+          "label": "Uitdagingen"
+        },
+        {
+          "id": "guidance",
+          "label": "Advies voor de toekomst"
+        },
+        {
+          "id": "outcome",
+          "label": "Mogelijke uitkomst"
+        }
+      ]
+    },
+    {
+      "id": "year-ahead",
+      "name": "Jaarlegging",
+      "description": "Een kaart voor elke maand van het komende jaar.",
+      "cardCount": 12,
+      "layout": {
+        "type": "circle",
+        "origin": {
+          "x": "50%",
+          "y": "50%"
+        },
+        "radius": 250
+      },
+      "positions": [
+        {
+          "id": "jan",
+          "label": "Januari"
+        },
+        {
+          "id": "feb",
+          "label": "Februari"
+        },
+        {
+          "id": "mar",
+          "label": "Maart"
+        },
+        {
+          "id": "apr",
+          "label": "April"
+        },
+        {
+          "id": "may",
+          "label": "Mei"
+        },
+        {
+          "id": "jun",
+          "label": "Juni"
+        },
+        {
+          "id": "jul",
+          "label": "Juli"
+        },
+        {
+          "id": "aug",
+          "label": "Augustus"
+        },
+        {
+          "id": "sep",
+          "label": "September"
+        },
+        {
+          "id": "oct",
+          "label": "Oktober"
+        },
+        {
+          "id": "nov",
+          "label": "November"
+        },
+        {
+          "id": "dec",
+          "label": "December"
+        }
+      ]
+    },
+    {
+      "id": "career-path",
+      "name": "Carrièrepad Legging",
+      "description": "Inzicht in je professionele pad en volgende stappen.",
+      "cardCount": 7,
+      "layout": {
+        "type": "stair",
+        "step": {
+          "x": 40,
+          "y": 30
+        }
+      },
+      "positions": [
+        {
+          "id": "current-situation",
+          "label": "Huidige situatie"
+        },
+        {
+          "id": "ambitions",
+          "label": "Je ambities"
+        },
+        {
+          "id": "obstacles",
+          "label": "Obstakels"
+        },
+        {
+          "id": "skills-to-develop",
+          "label": "Te ontwikkelen vaardigheden"
+        },
+        {
+          "id": "next-step",
+          "label": "De volgende stap"
+        },
+        {
+          "id": "long-term-potential",
+          "label": "Lange termijn potentieel"
+        },
+        {
+          "id": "final-advice",
+          "label": "Eindadvies"
+        }
+      ]
+    }
+  ]
+}
