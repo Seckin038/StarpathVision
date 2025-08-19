@@ -3,39 +3,54 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Separator } from "@/components/ui/separator";
 import { 
   Star, 
   Sparkles, 
   ChevronLeft
 } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import { supabase } from "@/integrations/supabase/client";
+import { showLoading, dismissToast, showError, showSuccess } from "@/utils/toast";
+import selvaraPersona from "../data/selvara.json";
 
 const NumerologyReading = () => {
+  const { i18n } = useTranslation();
   const [birthDate, setBirthDate] = useState("");
   const [fullName, setFullName] = useState("");
-  const [readingResult, setReadingResult] = useState<any>(null);
+  const [readingResult, setReadingResult] = useState<string | null>(null);
   const [isCalculating, setIsCalculating] = useState(false);
 
-  const calculateNumerology = () => {
-    if (!birthDate || !fullName) return;
+  const calculateNumerology = async () => {
+    if (!birthDate || !fullName || isCalculating) return;
+    
     setIsCalculating(true);
-    setTimeout(() => {
-      const lifePath = Math.floor(Math.random() * 9) + 1;
-      const destiny = Math.floor(Math.random() * 9) + 1;
-      const soulUrge = Math.floor(Math.random() * 9) + 1;
-      setReadingResult({
-        lifePath: { number: lifePath, meaning: getLifePathMeaning(lifePath) },
-        destiny: { number: destiny, meaning: getDestinyMeaning(destiny) },
-        soulUrge: { number: soulUrge, meaning: getSoulUrgeMeaning(soulUrge) }
-      });
-      setIsCalculating(false);
-    }, 2000);
-  };
+    const toastId = showLoading("Je numerologische profiel wordt berekend...");
 
-  const getLifePathMeaning = (n: number) => ({1:"De leider",2:"De mediator",3:"De communicatieve",4:"De bouwer",5:"De vrijheidszoeker",6:"De verzorger",7:"De denker",8:"De manager",9:"De humanist"}[n]||"");
-  const getDestinyMeaning = (n: number) => ({1:"Leiderschap",2:"Verbinding",3:"Creativiteit",4:"Structuur",5:"Avontuur",6:"Verzorging",7:"Spiritualiteit",8:"Materieel succes",9:"Humanisme"}[n]||"");
-  const getSoulUrgeMeaning = (n: number) => ({1:"Onafhankelijkheid",2:"Harmonie",3:"Expressie",4:"Stabiliteit",5:"Vrijheid",6:"Liefde",7:"Wijsheid",8:"Macht",9:"Altruïsme"}[n]||"");
+    try {
+      const { data, error } = await supabase.functions.invoke('generate-reading', {
+        body: {
+          readingType: "Numerologie",
+          language: i18n.language,
+          persona: selvaraPersona,
+          numerologyData: { birthDate, fullName },
+        }
+      });
+
+      if (error) throw new Error(error.message);
+
+      setReadingResult(data.reading);
+      dismissToast(toastId);
+      showSuccess("Je profiel is klaar!");
+
+    } catch (err: any) {
+      dismissToast(toastId);
+      showError(`Er ging iets mis: ${err.message}`);
+      console.error(err);
+    } finally {
+      setIsCalculating(false);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-stone-950 via-black to-stone-950 text-stone-200 p-4 font-serif">
@@ -80,26 +95,17 @@ const NumerologyReading = () => {
               </div>
             ) : (
               <div className="space-y-6">
-                <div className="text-center">
-                  <h2 className="text-xl font-bold text-amber-200 mb-2">Jouw Numerologische Profiel</h2>
-                  <p className="text-stone-400">Gebaseerd op je geboortedatum en naam</p>
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  {[{title: "Levenspad", data: readingResult.lifePath}, {title: "Bestemming", data: readingResult.destiny}, {title: "Ziel Verlangen", data: readingResult.soulUrge}].map(item => (
-                    <Card key={item.title} className="bg-stone-900 border-stone-800">
-                      <CardContent className="p-4 text-center">
-                        <div className="bg-stone-800 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3"><span className="text-amber-300 font-bold text-xl">{item.data.number}</span></div>
-                        <h3 className="font-semibold text-amber-200">{item.title}</h3>
-                        <p className="text-sm text-stone-400 mt-2">{item.data.meaning}</p>
-                      </CardContent>
-                    </Card>
-                  ))}
-                </div>
-                <Separator className="my-4 bg-stone-800" />
-                <div className="bg-stone-900 p-4 rounded-lg border border-stone-800">
-                  <h3 className="font-semibold text-amber-200 mb-2 flex items-center gap-2"><Sparkles className="h-4 w-4" />Persoonlijke Inzichten</h3>
-                  <p className="text-stone-300">Je Levenspad {readingResult.lifePath.number} wijst op een reis van zelfontdekking. Je Bestemming {readingResult.destiny.number} suggereert dat je talenten zich manifesteren in creatieve domeinen. Je Ziel Verlangen {readingResult.soulUrge.number} toont een diepe behoefte aan harmonie.</p>
-                </div>
+                <Card className="bg-stone-900 border-stone-800">
+                  <CardContent className="pt-6">
+                    <div className="flex items-start gap-3">
+                      <Sparkles className="h-5 w-5 text-amber-400 mt-1 flex-shrink-0" />
+                      <div>
+                        <h3 className="font-semibold text-amber-200 mb-2">Jouw Numerologische Lezing:</h3>
+                        <p className="text-stone-300 whitespace-pre-line">{readingResult}</p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
                 <div className="flex justify-center">
                   <Button onClick={() => setReadingResult(null)} variant="outline" className="border-stone-700 text-stone-300 hover:bg-stone-800">Nieuwe berekening</Button>
                 </div>

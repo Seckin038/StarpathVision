@@ -13,12 +13,18 @@ import {
   AlertCircle
 } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import { supabase } from "@/integrations/supabase/client";
+import { showLoading, dismissToast, showError, showSuccess } from "@/utils/toast";
 import symbolIndex from '../data/coffee-symbols/index.json';
+import falyaPersona from "../data/falya.json";
 
 const CoffeeReading = () => {
+  const { i18n } = useTranslation();
   const [symbols, setSymbols] = useState<any[]>([]);
   const [selectedSymbols, setSelectedSymbols] = useState<any[]>([]);
   const [readingResult, setReadingResult] = useState<string | null>(null);
+  const [isGenerating, setIsGenerating] = useState(false);
   const [showUpload, setShowUpload] = useState(false);
   const [uploadedImage, setUploadedImage] = useState<string | null>(null);
 
@@ -45,14 +51,35 @@ const CoffeeReading = () => {
     }
   };
 
-  const generateReading = () => {
-    if (selectedSymbols.length === 0) return;
-    
-    const interpretations = selectedSymbols.map(symbol => 
-      `${symbol["Symbool NL"]}: ${symbol["Betekenis NL"]}`
-    );
-    
-    setReadingResult(`Je koffielezing:\n\n${interpretations.join("\n\n")}\n\nInterpretatie: Deze symbolen wijzen op een periode van verandering en nieuwe kansen. Wees open voor onverwachte ontmoetingen en vertrouw op je intuïtie.`);
+  const generateReading = async () => {
+    if (selectedSymbols.length === 0 || isGenerating) return;
+
+    setIsGenerating(true);
+    const toastId = showLoading("Je lezing wordt voorbereid...");
+
+    try {
+      const { data, error } = await supabase.functions.invoke('generate-reading', {
+        body: {
+          readingType: "Koffiedik",
+          language: i18n.language,
+          persona: falyaPersona,
+          symbols: selectedSymbols,
+        }
+      });
+
+      if (error) throw new Error(error.message);
+
+      setReadingResult(data.reading);
+      dismissToast(toastId);
+      showSuccess("Je lezing is klaar!");
+
+    } catch (err: any) {
+      dismissToast(toastId);
+      showError(`Er ging iets mis: ${err.message}`);
+      console.error(err);
+    } finally {
+      setIsGenerating(false);
+    }
   };
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -220,10 +247,10 @@ const CoffeeReading = () => {
               </Link>
               <Button 
                 onClick={generateReading}
-                disabled={selectedSymbols.length === 0}
+                disabled={selectedSymbols.length === 0 || isGenerating}
                 className="bg-amber-800 hover:bg-amber-700 text-stone-100 flex items-center gap-2 px-6 py-3"
               >
-                <Coffee className="h-5 w-5" />
+                {isGenerating ? <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div> : <Coffee className="h-5 w-5" />}
                 Lezing genereren
               </Button>
             </div>
