@@ -1,6 +1,5 @@
 import { useTranslation } from "react-i18next";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { 
   BookOpen, 
@@ -15,6 +14,9 @@ import {
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { MadeWithDyad } from "@/components/made-with-dyad";
+import MysticalBackground from "@/components/MysticalBackground";
+import FancyButton from "@/components/FancyButton";
+import Card3D from "@/components/Card3D";
 
 const Index = () => {
   const { t, i18n } = useTranslation();
@@ -53,8 +55,9 @@ const Index = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-stone-950 via-black to-stone-950 text-stone-200 p-4 font-serif">
-      <div className="max-w-4xl mx-auto">
+    <div className="relative min-h-screen bg-stone-950 text-stone-200 p-4 font-serif">
+      <MysticalBackground mode="particles+sigils" intensity="low" />
+      <div className="relative z-10 max-w-4xl mx-auto">
         <header className="flex justify-between items-center mb-12">
           <div>
             <h1 className="text-4xl font-bold text-amber-200 tracking-wider">{t('title')}</h1>
@@ -102,9 +105,9 @@ const Index = () => {
                   </Badge>
                 </div>
                 <Link to="/onboarding">
-                  <Button className="w-full bg-amber-800 hover:bg-amber-700 text-stone-100 font-bold tracking-wider">
+                  <FancyButton className="w-full font-bold tracking-wider">
                     {t('start_journey')}
-                  </Button>
+                  </FancyButton>
                 </Link>
               </CardContent>
             </Card>
@@ -130,9 +133,9 @@ const Index = () => {
                   Vandaag staat in het teken van balans. Vertrouw op je intuïtie bij belangrijke beslissingen.
                 </p>
                 <Link to="/readings/tarot/daily">
-                  <Button variant="outline" className="w-full mt-6 border-amber-800 text-amber-300 hover:bg-amber-900/50 hover:text-amber-200">
+                  <FancyButton className="w-full mt-6">
                     Ontvang je lezing
-                  </Button>
+                  </FancyButton>
                 </Link>
               </CardContent>
             </Card>
@@ -143,15 +146,17 @@ const Index = () => {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
               {readingMethods.map((method, index) => (
                 <Link to={method.path} key={index}>
-                  <Card className="bg-stone-900/50 backdrop-blur-sm border-stone-800 hover:border-amber-700 transition-all cursor-pointer group">
-                    <CardContent className="p-6 flex flex-col items-center text-center">
-                      <div className="p-4 rounded-full mb-4 bg-stone-800/50 border border-stone-700 group-hover:border-amber-700 transition-all">
-                        {method.icon}
-                      </div>
-                      <h3 className="font-bold text-stone-200 text-lg">{method.title}</h3>
-                      <p className="text-xs text-stone-400 mt-1">{method.description}</p>
-                    </CardContent>
-                  </Card>
+                  <Card3D className="h-full">
+                    <Card className="bg-stone-900/50 backdrop-blur-sm border-stone-800 hover:border-amber-700 transition-all cursor-pointer group h-full">
+                      <CardContent className="p-6 flex flex-col items-center text-center">
+                        <div className="p-4 rounded-full mb-4 bg-stone-800/50 border border-stone-700 group-hover:border-amber-700 transition-all">
+                          {method.icon}
+                        </div>
+                        <h3 className="font-bold text-stone-200 text-lg">{method.title}</h3>
+                        <p className="text-xs text-stone-400 mt-1">{method.description}</p>
+                      </CardContent>
+                    </Card>
+                  </Card3D>
                 </Link>
               ))}
             </div>

@@ -18,6 +18,7 @@ import { showLoading, dismissToast, showError, showSuccess } from "@/utils/toast
 import tarotDeckData from "../data/tarot-cards.json";
 import falyaPersona from "../data/falya.json";
 import MysticalBackground from "@/components/MysticalBackground";
+import FancyButton from "@/components/FancyButton";
 
 const allCards = [
   ...tarotDeckData.majorArcana,
@@ -124,7 +125,7 @@ const TarotReading = () => {
 
   return (
     <div className="relative min-h-screen bg-stone-950 text-stone-200 p-4 font-serif">
-      <MysticalBackground mode="particles" intensity="low" />
+      <MysticalBackground mode="particles+sigils" intensity="low" />
       <div className="relative z-10 max-w-4xl mx-auto">
         <div className="flex items-center justify-between mb-6">
           <Link to="/dashboard">
@@ -189,10 +190,12 @@ const TarotReading = () => {
                   </Button>
                   
                   {selectedCards.every(c => c.card) && (
-                    <Button onClick={generateReading} disabled={isGenerating} className="bg-amber-800 hover:bg-amber-700 text-stone-100 flex items-center gap-2">
-                      {isGenerating ? <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div> : <Sparkles className="h-4 w-4" />}
-                      Lezing genereren
-                    </Button>
+                    <FancyButton onClick={generateReading} disabled={isGenerating}>
+                      <div className="flex items-center gap-2">
+                        {isGenerating ? <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-black"></div> : <Sparkles className="h-4 w-4" />}
+                        Lezing genereren
+                      </div>
+                    </FancyButton>
                   )}
                 </div>
 
