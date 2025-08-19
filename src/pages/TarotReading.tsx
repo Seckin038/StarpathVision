@@ -16,7 +16,7 @@ import { useTranslation } from "react-i18next";
 import { supabase } from "@/integrations/supabase/client";
 import { showLoading, dismissToast, showError, showSuccess } from "@/utils/toast";
 import tarotDeckData from "../data/tarot-cards.json";
-import personae from "../data/personae.index.json";
+import falyaPersona from "../data/falya.json";
 
 const allCards = [
   ...tarotDeckData.majorArcana,
@@ -87,7 +87,7 @@ const TarotReading = () => {
     const toastId = showLoading("Je lezing wordt voorbereid...");
 
     try {
-      const persona = personae.find(p => p.id === "falya"); // Default persona for now
+      const persona = falyaPersona; // Default persona for now
 
       const { data, error } = await supabase.functions.invoke('generate-reading', {
         body: {
