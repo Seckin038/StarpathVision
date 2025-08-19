@@ -16,16 +16,21 @@ import {
   Globe
 } from "lucide-react";
 import { Link } from "react-router-dom";
-import { supabase } from "@/integrations/supabase/client";
+import { supabase } from "@/lib/supabaseClient";
 import { showError } from "@/utils/toast";
 import MysticalBackground from "@/components/MysticalBackground";
 
 interface Reading {
   id: string;
   created_at: string;
-  reading_type: string;
-  reading_result: string;
-  user_question?: string;
+  method: string;
+  output: {
+    summary?: string;
+    ai_summary?: string;
+  };
+  input: {
+    text?: string;
+  };
   language: string;
 }
 
@@ -58,13 +63,15 @@ const Archive = () => {
   useEffect(() => {
     let result = readings;
     if (searchTerm) {
-      result = result.filter(r => 
-        r.reading_result.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        (r.user_question && r.user_question.toLowerCase().includes(searchTerm.toLowerCase()))
-      );
+      result = result.filter(r => {
+        const output = r.output?.summary || r.output?.ai_summary || '';
+        const input = r.input?.text || '';
+        return output.toLowerCase().includes(searchTerm.toLowerCase()) ||
+               input.toLowerCase().includes(searchTerm.toLowerCase());
+      });
     }
     if (filterMethod !== "all") {
-      result = result.filter(r => r.reading_type === filterMethod);
+      result = result.filter(r => r.method === filterMethod);
     }
     setFilteredReadings(result);
   }, [searchTerm, filterMethod, readings]);
@@ -116,9 +123,10 @@ const Archive = () => {
                 </div>
                 <select value={filterMethod} onChange={(e) => setFilterMethod(e.target.value)} className="border border-stone-700 rounded-md px-3 py-2 bg-stone-900 text-stone-300 focus:ring-amber-500 focus:border-amber-500">
                   <option value="all">Alle methodes</option>
-                  <option value="Tarot">Tarot</option>
-                  <option value="Numerologie">Numerologie</option>
-                  <option value="Koffiedik">Koffiedik</option>
+                  <option value="tarot">Tarot</option>
+                  <option value="numerology">Numerologie</option>
+                  <option value="coffee">Koffiedik</option>
+                  <option value="dreams">Dromen</option>
                 </select>
               </div>
             </div>
@@ -145,8 +153,8 @@ const Archive = () => {
                         <div className="flex justify-between items-start">
                           <div className="flex-1">
                             <div className="flex items-center gap-2 mb-2 flex-wrap">
-                              <h3 className="font-semibold text-stone-200">{reading.user_question || `Lezing van ${formatDate(reading.created_at)}`}</h3>
-                              <Badge variant="outline" className="text-stone-300 border-stone-700">{reading.reading_type}</Badge>
+                              <h3 className="font-semibold text-stone-200">{reading.input.text || `Lezing van ${formatDate(reading.created_at)}`}</h3>
+                              <Badge variant="outline" className="text-stone-300 border-stone-700">{reading.method}</Badge>
                               <Badge variant="outline" className="text-stone-300 border-stone-700 flex items-center gap-1">
                                 <Globe className="h-3 w-3" />
                                 {reading.language.toUpperCase()}
@@ -155,7 +163,7 @@ const Archive = () => {
                             <div className="flex items-center gap-4 text-sm text-stone-400 mb-3">
                               <div className="flex items-center gap-1"><Calendar className="h-4 w-4" /><span>{formatDate(reading.created_at)}</span></div>
                             </div>
-                            <p className="text-stone-300 text-sm line-clamp-2">{reading.reading_result}</p>
+                            <p className="text-stone-300 text-sm line-clamp-2">{reading.output?.summary || reading.output?.ai_summary}</p>
                           </div>
                           <div className="flex flex-col gap-2 ml-4">
                             <Button variant="outline" size="sm" className="border-stone-700 text-stone-300 hover:bg-stone-800"><Download className="h-4 w-4" /></Button>

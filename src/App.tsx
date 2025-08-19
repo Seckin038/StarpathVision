@@ -3,6 +3,9 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { AuthProvider } from "./contexts/AuthContext";
+import RequireAuth from "./components/RequireAuth";
+
 import Index from "./pages/Index";
 import Onboarding from "./pages/Onboarding";
 import Dashboard from "./pages/Dashboard";
@@ -13,6 +16,10 @@ import NumerologyReading from "./pages/NumerologyReading";
 import DreamReading from "./pages/DreamReading";
 import Archive from "./pages/Archive";
 import NotFound from "./pages/NotFound";
+import LoginPage from "./pages/Login";
+import RegisterPage from "./pages/Register";
+import ForgotPasswordPage from "./pages/ForgotPassword";
+import ProfilePage from "./pages/Profile";
 
 const queryClient = new QueryClient();
 
@@ -22,19 +29,30 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/onboarding" element={<Onboarding />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/readings/tarot/:spread" element={<TarotReading />} />
-          <Route path="/readings/coffee" element={<CoffeeReading />} />
-          <Route path="/readings/coffee/upload" element={<CoffeeReadingWithUpload />} />
-          <Route path="/readings/numerology" element={<NumerologyReading />} />
-          <Route path="/readings/dream" element={<DreamReading />} />
-          <Route path="/archive" element={<Archive />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        <AuthProvider>
+          <Routes>
+            {/* Public Routes */}
+            <Route path="/" element={<Index />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/register" element={<RegisterPage />} />
+            <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+            <Route path="/onboarding" element={<Onboarding />} />
+
+            {/* Protected Routes */}
+            <Route path="/dashboard" element={<RequireAuth><Dashboard /></RequireAuth>} />
+            <Route path="/archive" element={<RequireAuth><Archive /></RequireAuth>} />
+            <Route path="/profile" element={<RequireAuth><ProfilePage /></RequireAuth>} />
+            
+            <Route path="/readings/tarot/:spread" element={<TarotReading />} />
+            <Route path="/readings/coffee" element={<CoffeeReading />} />
+            <Route path="/readings/coffee/upload" element={<CoffeeReadingWithUpload />} />
+            <Route path="/readings/numerology" element={<NumerologyReading />} />
+            <Route path="/readings/dream" element={<DreamReading />} />
+            
+            {/* Catch-all */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </AuthProvider>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>

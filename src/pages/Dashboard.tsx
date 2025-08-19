@@ -10,13 +10,17 @@ import {
   User, 
   Heart, 
   Eye,
-  Zap
+  Zap,
+  Settings
 } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useAuth } from "@/contexts/AuthContext";
 
 const Dashboard = () => {
+  const { user, signOut } = useAuth();
+
   const userPreferences = {
-    name: "Zoeker",
+    name: user?.email?.split('@')[0] || "Zoeker",
     interests: ["Tarot", "Koffiedik", "Numerologie"],
     preferredPersona: "Falya"
   };
@@ -59,10 +63,14 @@ const Dashboard = () => {
             <p className="text-stone-400">Wat wil je vandaag ontdekken?</p>
           </div>
           <div className="flex items-center gap-2">
-            <Badge variant="outline" className="text-amber-300 border-amber-700">
-              <Zap className="h-3 w-3 mr-1" />
-              Premium
-            </Badge>
+            <Link to="/profile">
+              <Button variant="outline" size="icon" className="border-stone-700 text-stone-300 hover:bg-stone-800">
+                <Settings className="h-4 w-4" />
+              </Button>
+            </Link>
+            <Button onClick={signOut} variant="outline" className="border-amber-800 text-amber-300 hover:bg-amber-900/50 hover:text-amber-200">
+              Uitloggen
+            </Button>
           </div>
         </header>
 
