@@ -1,1 +1,16 @@
-$$attachment_content_28$$
+{
+    "version": "1.0.0",
+    "letter": "V",
+    "count": 1,
+    "symbols": [
+        {
+            "letter": "V",
+            "symbol_nl": "VAAS",
+            "meaning_nl": "Verdriet",
+            "symbol_tr": "VAZO",
+            "meaning_tr": "Üzüntü",
+            "symbol_en": "VASE",
+            "meaning_en": "Sorrow"
+        }
+    ]
+}
