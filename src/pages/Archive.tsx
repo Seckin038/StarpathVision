@@ -8,44 +8,81 @@ import {
   Coffee, 
   Sparkles, 
   Calendar, 
-  User, 
   Search,
   Download,
   Trash2,
-  ChevronLeft
+  ChevronLeft,
+  Loader2
 } from "lucide-react";
 import { Link } from "react-router-dom";
+import { supabase } from "@/integrations/supabase/client";
+import { showError } from "@/utils/toast";
+
+interface Reading {
+  id: string;
+  created_at: string;
+  reading_type: string;
+  reading_result: string;
+  user_question?: string;
+}
 
 const Archive = () => {
-  const [readings, setReadings] = useState<any[]>([]);
-  const [filteredReadings, setFilteredReadings] = useState<any[]>([]);
+  const [readings, setReadings] = useState<Reading[]>([]);
+  const [filteredReadings, setFilteredReadings] = useState<Reading[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [filterMethod, setFilterMethod] = useState("all");
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const mockReadings = [
-      { id: 1, date: "2023-06-15", method: "Tarot", persona: "Falya", title: "Dagkaart - De Waag", symbols: ["De Waag"], reading: "Je staat op het punt een belangrijke beslissing te nemen." },
-      { id: 2, date: "2023-06-10", method: "Numerologie", persona: "Selvara", title: "Levenspad 7", symbols: ["7"], reading: "Je Levenspad 7 wijst op een spirituele reis." },
-      { id: 3, date: "2023-06-05", method: "Koffiedik", persona: "Falya", title: "Koffielezing", symbols: ["EILAND", "BOOM"], reading: "Je staat op het punt een onverwachte kans te krijgen." },
-    ];
-    setReadings(mockReadings);
+    const fetchReadings = async () => {
+      setLoading(true);
+      const { data, error } = await supabase
+        .from("readings")
+        .select("*")
+        .order("created_at", { ascending: false });
+
+      if (error) {
+        showError("Kon lezingen niet ophalen.");
+        console.error(error);
+      } else {
+        setReadings(data as Reading[]);
+      }
+      setLoading(false);
+    };
+    fetchReadings();
   }, []);
 
   useEffect(() => {
     let result = readings;
     if (searchTerm) {
-      result = result.filter(r => r.title.toLowerCase().includes(searchTerm.toLowerCase()) || r.persona.toLowerCase().includes(searchTerm.toLowerCase()));
+      result = result.filter(r => 
+        r.reading_result.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        (r.user_question && r.user_question.toLowerCase().includes(searchTerm.toLowerCase()))
+      );
     }
     if (filterMethod !== "all") {
-      result = result.filter(r => r.method === filterMethod);
+      result = result.filter(r => r.reading_type === filterMethod);
     }
     setFilteredReadings(result);
   }, [searchTerm, filterMethod, readings]);
 
-  const deleteReading = (id: number) => {
+  const deleteReading = async (id: string) => {
     if (window.confirm("Weet je zeker dat je deze lezing wilt verwijderen?")) {
-      setReadings(readings.filter(r => r.id !== id));
+      const { error } = await supabase.from("readings").delete().eq("id", id);
+      if (error) {
+        showError("Kon lezing niet verwijderen.");
+      } else {
+        setReadings(readings.filter(r => r.id !== id));
+      }
     }
+  };
+
+  const formatDate = (dateString: string) => {
+    return new Date(dateString).toLocaleDateString('nl-NL', {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric'
+    });
   };
 
   return (
@@ -64,7 +101,7 @@ const Archive = () => {
           </div>
         </div>
 
-        <Card className="mb-6 bg-stone-900/50 backdrop-blur-sm border-stone-800">
+        <Card className="bg-stone-900/50 backdrop-blur-sm border-stone-800">
           <CardHeader>
             <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
               <CardTitle className="text-amber-300 flex items-center gap-2 text-xl"><Sparkles className="h-5 w-5" />Lezing Geschiedenis</CardTitle>
@@ -83,7 +120,12 @@ const Archive = () => {
             </div>
           </CardHeader>
           <CardContent>
-            {filteredReadings.length === 0 ? (
+            {loading ? (
+              <div className="text-center py-12 flex justify-center items-center gap-2">
+                <Loader2 className="h-8 w-8 text-amber-600 animate-spin" />
+                <p className="text-stone-400">Lezingen worden geladen...</p>
+              </div>
+            ) : filteredReadings.length === 0 ? (
               <div className="text-center py-12">
                 <Coffee className="h-12 w-12 text-amber-600 mx-auto mb-4" />
                 <h3 className="font-semibold text-amber-200 mb-2">Geen lezingen gevonden</h3>
@@ -99,14 +141,13 @@ const Archive = () => {
                         <div className="flex justify-between items-start">
                           <div className="flex-1">
                             <div className="flex items-center gap-2 mb-2">
-                              <h3 className="font-semibold text-stone-200">{reading.title}</h3>
-                              <Badge variant="outline" className="text-stone-300 border-stone-700">{reading.method}</Badge>
+                              <h3 className="font-semibold text-stone-200">{reading.user_question || `Lezing van ${formatDate(reading.created_at)}`}</h3>
+                              <Badge variant="outline" className="text-stone-300 border-stone-700">{reading.reading_type}</Badge>
                             </div>
                             <div className="flex items-center gap-4 text-sm text-stone-400 mb-3">
-                              <div className="flex items-center gap-1"><Calendar className="h-4 w-4" /><span>{reading.date}</span></div>
-                              <div className="flex items-center gap-1"><User className="h-4 w-4" /><span>{reading.persona}</span></div>
+                              <div className="flex items-center gap-1"><Calendar className="h-4 w-4" /><span>{formatDate(reading.created_at)}</span></div>
                             </div>
-                            <p className="text-stone-300 text-sm line-clamp-2">{reading.reading}</p>
+                            <p className="text-stone-300 text-sm line-clamp-2">{reading.reading_result}</p>
                           </div>
                           <div className="flex flex-col gap-2 ml-4">
                             <Button variant="outline" size="sm" className="border-stone-700 text-stone-300 hover:bg-stone-800"><Download className="h-4 w-4" /></Button>
