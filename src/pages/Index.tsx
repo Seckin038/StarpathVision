@@ -22,31 +22,27 @@ const Index = () => {
   const readingMethods = [
     { 
       title: "Tarot", 
-      icon: <BookOpen className="h-6 w-6" />,
+      icon: <BookOpen className="h-6 w-6 text-purple-400" />,
       description: "Kaartlezing voor inzicht in je toekomst",
       path: "/readings/tarot/daily",
-      color: "bg-purple-900/50 text-purple-300"
     },
     { 
       title: "Koffiedik", 
-      icon: <Coffee className="h-6 w-6" />,
+      icon: <Coffee className="h-6 w-6 text-amber-400" />,
       description: "Traditionele lezing uit koffiesymbolen",
       path: "/readings/coffee",
-      color: "bg-amber-900/50 text-amber-300"
     },
     { 
       title: "Numerologie", 
-      icon: <Star className="h-6 w-6" />,
+      icon: <Star className="h-6 w-6 text-blue-400" />,
       description: "Inzicht via je geboortedatum en naam",
       path: "/readings/numerology",
-      color: "bg-blue-900/50 text-blue-300"
     },
     { 
       title: "Droomduiding", 
-      icon: <Eye className="h-6 w-6" />,
+      icon: <Eye className="h-6 w-6 text-indigo-400" />,
       description: "Betekenis van je dromen ontdekken",
       path: "/readings/dream",
-      color: "bg-indigo-900/50 text-indigo-300"
     }
   ];
 
@@ -57,135 +53,115 @@ const Index = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 via-purple-950 to-gray-900 text-white p-4">
+    <div className="min-h-screen bg-gradient-to-b from-stone-950 via-black to-stone-950 text-stone-200 p-4 font-serif">
       <div className="max-w-4xl mx-auto">
-        <div className="flex justify-between items-center mb-8">
+        <header className="flex justify-between items-center mb-12">
           <div>
-            <h1 className="text-3xl font-bold text-purple-300">Starpath Vision</h1>
-            <p className="text-purple-400">Ontdek je toekomst door de kunst van waarzeggen</p>
+            <h1 className="text-4xl font-bold text-amber-200 tracking-wider">Starpath Vision</h1>
+            <p className="text-stone-400">De sluiers van de toekomst, onthuld.</p>
           </div>
           <div className="flex items-center gap-2">
-            <Globe className="h-5 w-5 text-purple-400" />
+            <Globe className="h-5 w-5 text-stone-400" />
             <select 
               value={language}
               onChange={(e) => setLanguage(e.target.value)}
-              className="bg-purple-900/50 border border-purple-700 rounded-md px-2 py-1 text-purple-300"
+              className="bg-stone-900/50 border border-stone-700 rounded-md px-2 py-1 text-stone-300 focus:ring-amber-500"
             >
               {languageOptions.map((lang) => (
-                <option key={lang.code} value={lang.code} className="bg-gray-800">{lang.name}</option>
+                <option key={lang.code} value={lang.code} className="bg-stone-800">{lang.name}</option>
               ))}
             </select>
           </div>
-        </div>
+        </header>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-          <Card className="bg-black/30 backdrop-blur-sm border-purple-800">
-            <CardHeader>
-              <CardTitle className="text-purple-300 flex items-center gap-2">
-                <Sparkles className="h-5 w-5" />
-                Welkom bij Starpath Vision
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-purple-400 mb-4">
-                Ontdek de geheimen van het universum door traditionele waarzegkunsten. 
-                Onze ervaren lezers helpen je bij het vinden van antwoorden op je vragen.
-              </p>
-              <div className="flex items-center gap-2 mb-4">
-                <Badge variant="secondary" className="bg-purple-900/50 text-purple-300 border-purple-700">
-                  <Zap className="h-3 w-3 mr-1" />
-                  Authentic
-                </Badge>
-                <Badge variant="secondary" className="bg-purple-900/50 text-purple-300 border-purple-700">
-                  <Heart className="h-3 w-3 mr-1" />
-                  Spiritueel
-                </Badge>
-                <Badge variant="secondary" className="bg-purple-900/50 text-purple-300 border-purple-700">
-                  <User className="h-3 w-3 mr-1" />
-                  Persoonlijk
-                </Badge>
-              </div>
-              <Link to="/onboarding">
-                <Button className="w-full bg-purple-600 hover:bg-purple-700 text-white">
-                  Begin je reis
-                </Button>
-              </Link>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-black/30 backdrop-blur-sm border-purple-800">
-            <CardHeader>
-              <CardTitle className="text-purple-300 flex items-center gap-2">
-                <BookOpen className="h-5 w-5" />
-                Tarot van de Dag
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-xl font-bold text-purple-200">De Waag</p>
-                  <p className="text-purple-400">Evenwicht en beslissing</p>
+        <main>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+            <Card className="bg-stone-900/50 backdrop-blur-sm border-stone-800">
+              <CardHeader>
+                <CardTitle className="text-amber-300 flex items-center gap-2 text-xl">
+                  <Sparkles className="h-5 w-5" />
+                  Welkom, Zoeker
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-stone-300 mb-6">
+                  Treed binnen in een wereld waar oeroude wijsheid en mystieke kunsten samenkomen. 
+                  Onze Wijzen staan klaar om de symbolen te duiden en antwoorden te onthullen die in de sterren geschreven staan.
+                </p>
+                <div className="flex items-center gap-2 mb-6">
+                  <Badge variant="outline" className="text-stone-300 border-stone-700">
+                    <Zap className="h-3 w-3 mr-1" />
+                    Authentiek
+                  </Badge>
+                  <Badge variant="outline" className="text-stone-300 border-stone-700">
+                    <Heart className="h-3 w-3 mr-1" />
+                    Spiritueel
+                  </Badge>
+                  <Badge variant="outline" className="text-stone-300 border-stone-700">
+                    <User className="h-3 w-3 mr-1" />
+                    Persoonlijk
+                  </Badge>
                 </div>
-                <div className="bg-purple-900/50 p-3 rounded-full">
-                  <BookOpen className="h-8 w-8 text-purple-400" />
-                </div>
-              </div>
-              <p className="mt-4 text-purple-400">
-                Vandaag staat in het teken van balans. Vertrouw op je intuïtie bij belangrijke beslissingen.
-              </p>
-              <Link to="/readings/tarot/daily">
-                <Button className="w-full mt-4 bg-purple-600 hover:bg-purple-700 text-white">
-                  Lees meer
-                </Button>
-              </Link>
-            </CardContent>
-          </Card>
-        </div>
+                <Link to="/onboarding">
+                  <Button className="w-full bg-amber-800 hover:bg-amber-700 text-stone-100 font-bold tracking-wider">
+                    Begin Je Reis
+                  </Button>
+                </Link>
+              </CardContent>
+            </Card>
 
-        <div className="mb-8">
-          <h2 className="text-2xl font-bold text-purple-300 mb-4">Waarzegmethodes</h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {readingMethods.map((method, index) => (
-              <Link to={method.path} key={index}>
-                <Card className="bg-black/30 backdrop-blur-sm border-purple-800 hover:border-purple-600 transition-all cursor-pointer">
-                  <CardContent className="p-4 flex flex-col items-center text-center">
-                    <div className={`p-3 rounded-full mb-3 ${method.color}`}>
-                      {method.icon}
-                    </div>
-                    <h3 className="font-medium text-purple-300 text-sm">{method.title}</h3>
-                    <p className="text-xs text-purple-500 mt-1">{method.description}</p>
-                  </CardContent>
-                </Card>
-              </Link>
-            ))}
+            <Card className="bg-stone-900/50 backdrop-blur-sm border-stone-800">
+              <CardHeader>
+                <CardTitle className="text-amber-300 flex items-center gap-2 text-xl">
+                  <BookOpen className="h-5 w-5" />
+                  Tarot van de Dag
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-2xl font-bold text-stone-100">De Waag</p>
+                    <p className="text-stone-400">Evenwicht en beslissing</p>
+                  </div>
+                  <div className="bg-stone-800/50 p-3 rounded-full border border-stone-700">
+                    <BookOpen className="h-8 w-8 text-purple-400" />
+                  </div>
+                </div>
+                <p className="mt-4 text-stone-300">
+                  Vandaag staat in het teken van balans. Vertrouw op je intuïtie bij belangrijke beslissingen.
+                </p>
+                <Link to="/readings/tarot/daily">
+                  <Button variant="outline" className="w-full mt-6 border-amber-800 text-amber-300 hover:bg-amber-900/50 hover:text-amber-200">
+                    Ontvang je lezing
+                  </Button>
+                </Link>
+              </CardContent>
+            </Card>
           </div>
-        </div>
 
-        <div className="text-center mb-8">
-          <Card className="bg-black/30 backdrop-blur-sm border-purple-800 max-w-2xl mx-auto">
-            <CardContent className="pt-6">
-              <h3 className="font-semibold text-purple-300 mb-2">Veelgestelde Vragen</h3>
-              <div className="space-y-3 text-left">
-                <div>
-                  <p className="font-medium text-purple-300">Hoe werkt een tarotlezing?</p>
-                  <p className="text-sm text-purple-400">
-                    Onze lezers gebruiken traditionele tarotkaarten om inzicht te geven in je situatie. 
-                    Elke kaart heeft een unieke betekenis die in relatie wordt gebracht tot jouw vraag.
-                  </p>
-                </div>
-                <div>
-                  <p className="font-medium text-purple-300">Wat is koffiediklezen?</p>
-                  <p className="text-sm text-purple-400">
-                    Na het drinken van je koffie blijven er symbolen achter in de kop. 
-                    Onze ervaren lezers interpreteren deze symbolen om inzicht te geven in jouw toekomst.
-                  </p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
+          <div className="mb-12">
+            <h2 className="text-3xl font-bold text-amber-200 mb-6 text-center tracking-wider">Kies Je Pad</h2>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+              {readingMethods.map((method, index) => (
+                <Link to={method.path} key={index}>
+                  <Card className="bg-stone-900/50 backdrop-blur-sm border-stone-800 hover:border-amber-700 transition-all cursor-pointer group">
+                    <CardContent className="p-6 flex flex-col items-center text-center">
+                      <div className="p-4 rounded-full mb-4 bg-stone-800/50 border border-stone-700 group-hover:border-amber-700 transition-all">
+                        {method.icon}
+                      </div>
+                      <h3 className="font-bold text-stone-200 text-lg">{method.title}</h3>
+                      <p className="text-xs text-stone-400 mt-1">{method.description}</p>
+                    </CardContent>
+                  </Card>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </main>
 
-        <MadeWithDyad />
+        <footer className="text-center mt-12">
+          <MadeWithDyad />
+        </footer>
       </div>
     </div>
   );
