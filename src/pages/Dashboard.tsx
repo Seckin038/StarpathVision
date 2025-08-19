@@ -38,9 +38,9 @@ const Dashboard = () => {
       path: "/readings/coffee",
     },
     { 
-      title: "Sterlegging", 
-      icon: <Star className="h-5 w-5 text-blue-400" />,
-      path: "/readings/tarot/spread/star-spread",
+      title: "Tarot Leggingen", 
+      icon: <BookOpen className="h-5 w-5 text-blue-400" />,
+      path: "/readings/tarot",
     },
     { 
       title: "Droomduiding", 
