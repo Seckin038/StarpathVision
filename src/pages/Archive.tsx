@@ -12,7 +12,8 @@ import {
   Download,
   Trash2,
   ChevronLeft,
-  Loader2
+  Loader2,
+  Globe
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
@@ -24,6 +25,7 @@ interface Reading {
   reading_type: string;
   reading_result: string;
   user_question?: string;
+  language: string;
 }
 
 const Archive = () => {
@@ -140,9 +142,13 @@ const Archive = () => {
                       <CardContent className="p-4">
                         <div className="flex justify-between items-start">
                           <div className="flex-1">
-                            <div className="flex items-center gap-2 mb-2">
+                            <div className="flex items-center gap-2 mb-2 flex-wrap">
                               <h3 className="font-semibold text-stone-200">{reading.user_question || `Lezing van ${formatDate(reading.created_at)}`}</h3>
                               <Badge variant="outline" className="text-stone-300 border-stone-700">{reading.reading_type}</Badge>
+                              <Badge variant="outline" className="text-stone-300 border-stone-700 flex items-center gap-1">
+                                <Globe className="h-3 w-3" />
+                                {reading.language.toUpperCase()}
+                              </Badge>
                             </div>
                             <div className="flex items-center gap-4 text-sm text-stone-400 mb-3">
                               <div className="flex items-center gap-1"><Calendar className="h-4 w-4" /><span>{formatDate(reading.created_at)}</span></div>

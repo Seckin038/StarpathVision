@@ -3,7 +3,7 @@ import { z } from "https://deno.land/x/zod@v3.23.8/mod.ts";
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.45.0'
 
 const corsHeaders = {
-  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Origin": "https://dmsrsgecdvoswxopylfm.supabase.co", // Beperkt tot jouw domein
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
   "Access-Control-Allow-Methods": "POST, OPTIONS",
   "Content-Type": "application/json"
@@ -12,7 +12,7 @@ const corsHeaders = {
 const BodySchema = z.object({
   readingType: z.enum(["Tarot", "Koffiedik", "Numerologie"]),
   language: z.string().default("nl"),
-  persona: z.any().optional(),
+  persona: z.any(),
   cards: z.array(z.any()).optional(),
   symbols: z.array(z.any()).optional(),
   numerologyData: z.any().optional(),
@@ -24,6 +24,42 @@ function env(key: string) {
   if (!v) throw new Error(`Missing env var: ${key}`);
   return v;
 }
+
+// Helper voor taal-specifieke prompts
+function buildPrompt(body: z.infer<typeof BodySchema>): string {
+  let content = `Je bent ${body.persona.name}, een ${body.persona.description}. `;
+  content += `Je achtergrond is: ${body.persona.background}. `;
+  content += `Je specialisaties zijn: ${body.persona.specializations.join(', ')}. `;
+  
+  const instructions = {
+    nl: `Genereer een waarzegging in het Nederlands. De gebruiker heeft een ${body.readingType} lezing gedaan. Geef een diepgaande, inzichtelijke en poëtische interpretatie. Spreek direct tot de gebruiker ('je', 'jouw'). De toon moet mysterieus en wijs zijn. Geef alleen de waarzegging terug, zonder extra opmaak of inleidende zinnen.`,
+    en: `Generate a fortune telling in English. The user has done a ${body.readingType} reading. Provide a deep, insightful, and poetic interpretation. Speak directly to the user ('you', 'your'). The tone should be mysterious and wise. Return only the divination, without extra formatting or introductory phrases.`,
+    tr: `Türkçe bir kehanet oluşturun. Kullanıcı bir ${body.readingType} okuması yaptı. Derin, anlayışlı ve şiirsel bir yorum sağlayın. Doğrudan kullanıcıya ('sen', 'senin') hitap edin. Ton gizemli ve bilge olmalı. Sadece kehaneti, ek biçimlendirme veya giriş cümleleri olmadan döndürün.`,
+  };
+
+  content += instructions[body.language as keyof typeof instructions] || instructions.nl;
+
+  if (body.cards && body.cards.length > 0) {
+    const cardDetails = body.cards.map((c: any) => `${c.position}: ${c.card.name} (Meaning: ${c.card.meaning_up})`).join(', ');
+    content += ` The drawn cards are: ${cardDetails}.`;
+  }
+
+  if (body.symbols && body.symbols.length > 0) {
+    const symbolDetails = body.symbols.map((s: any) => `${s['Symbool NL']}: ${s['Betekenis NL']}`).join(', ');
+    content += ` The chosen symbols are: ${symbolDetails}.`;
+  }
+
+  if (body.readingType === "Numerologie" && body.numerologyData) {
+    content += ` The user provided: Date of Birth: ${body.numerologyData.birthDate}, Full Name: ${body.numerologyData.fullName}. Calculate the core numbers (Life Path, Destiny, Soul Urge) and provide a personal, in-depth numerological reading.`;
+  }
+
+  if (body.userQuestion) {
+    content += ` The user's question is: "${body.userQuestion}".`;
+  }
+
+  return content;
+}
+
 
 serve(async (req) => {
   if (req.method === "OPTIONS") {
@@ -37,39 +73,15 @@ serve(async (req) => {
     const rawBody = await req.json().catch(() => ({}));
     const body = BodySchema.parse(rawBody);
     const GEMINI_API_KEY = env("GEMINI_API_KEY");
-    const GEMINI_API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${GEMINI_API_KEY}`;
+    const model = "gemini-1.5-flash-latest";
+    const GEMINI_API_URL = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${GEMINI_API_KEY}`;
 
-    let content = `Je bent ${body.persona.name}, een ${body.persona.description}. `;
-    content += `Je achtergrond is: ${body.persona.background}. `;
-    content += `Je specialisaties zijn: ${body.persona.specializations.join(', ')}. `;
-    content += `Genereer een waarzegging in de taal: ${body.language}. `;
-    content += `De gebruiker heeft een ${body.readingType} lezing gedaan. `;
-
-    if (body.cards && body.cards.length > 0) {
-      const cardDetails = body.cards.map((c: any) => `${c.position}: ${c.card.name} (Betekenis: ${c.card.meaning_up})`).join(', ');
-      content += `De getrokken kaarten zijn: ${cardDetails}. `;
-    }
-
-    if (body.symbols && body.symbols.length > 0) {
-      const symbolDetails = body.symbols.map((s: any) => `${s['Symbool NL']}: ${s['Betekenis NL']}`).join(', ');
-      content += `De gekozen symbolen zijn: ${symbolDetails}. `;
-    }
-
-    if (body.readingType === "Numerologie" && body.numerologyData) {
-      content += `De gebruiker heeft de volgende gegevens ingevoerd: Geboortedatum: ${body.numerologyData.birthDate}, Volledige naam: ${body.numerologyData.fullName}. `;
-      content += `Bereken de kerngetallen (Levenspad, Bestemming, Zielsverlangen) en geef een persoonlijke, diepgaande numerologische lezing gebaseerd op deze getallen.`;
-    }
-
-    if (body.userQuestion) {
-      content += `De vraag van de gebruiker is: "${body.userQuestion}". `;
-    }
-
-    content += "Geef een diepgaande, inzichtelijke en poëtische interpretatie gebaseerd op deze informatie. Spreek direct tot de gebruiker ('je', 'jouw'). De toon moet mysterieus en wijs zijn. Geef alleen de waarzegging terug, zonder extra opmaak of inleidende zinnen zoals 'Hier is je lezing:'.";
+    const prompt = buildPrompt(body);
 
     const geminiResponse = await fetch(GEMINI_API_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ contents: [{ parts: [{ text: content }] }] }),
+      body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] }),
     });
 
     if (!geminiResponse.ok) {
@@ -79,6 +91,7 @@ serve(async (req) => {
 
     const geminiData = await geminiResponse.json();
     const readingText = geminiData.candidates[0].content.parts[0].text;
+    const duration_ms = Date.now() - t0;
 
     const { data: { user } } = await supabaseAdmin.auth.getUser(req.headers.get('Authorization')?.replace('Bearer ', ''));
     
@@ -91,10 +104,13 @@ serve(async (req) => {
         symbols_selected: body.symbols,
         user_question: body.userQuestion,
         reading_result: readingText,
+        duration_ms,
+        model,
+        rid,
       });
     }
 
-    console.log(`[${rid}] OK in ${Date.now() - t0}ms`);
+    console.log(`[${rid}] OK in ${duration_ms}ms`);
     return new Response(JSON.stringify({ reading: readingText, rid }), { headers: corsHeaders, status: 200 });
 
   } catch (error) {

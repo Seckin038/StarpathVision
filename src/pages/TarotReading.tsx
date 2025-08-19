@@ -17,6 +17,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { showLoading, dismissToast, showError, showSuccess } from "@/utils/toast";
 import tarotDeckData from "../data/tarot-cards.json";
 import falyaPersona from "../data/falya.json";
+import MysticalBackground from "@/components/MysticalBackground";
 
 const allCards = [
   ...tarotDeckData.majorArcana,
@@ -122,8 +123,9 @@ const TarotReading = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-stone-950 via-black to-stone-950 text-stone-200 p-4 font-serif">
-      <div className="max-w-4xl mx-auto">
+    <div className="relative min-h-screen bg-stone-950 text-stone-200 p-4 font-serif">
+      <MysticalBackground mode="particles" intensity="low" />
+      <div className="relative z-10 max-w-4xl mx-auto">
         <div className="flex items-center justify-between mb-6">
           <Link to="/dashboard">
             <Button variant="outline" className="flex items-center gap-2 border-amber-800 text-amber-300 hover:bg-amber-900/50 hover:text-amber-200">
