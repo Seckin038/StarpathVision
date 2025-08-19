@@ -10,7 +10,8 @@ import MainLayout from "./components/MainLayout";
 import Index from "./pages/Index";
 import Onboarding from "./pages/Onboarding";
 import Dashboard from "./pages/Dashboard";
-import TarotReading from "./pages/TarotReading";
+import TarotSpreadReading from "./pages/TarotSpreadReading";
+import TarotPickThree from "./pages/TarotPickThree";
 import CoffeeReading from "./pages/CoffeeReading";
 import CoffeeReadingWithUpload from "./pages/CoffeeReadingWithUpload";
 import NumerologyReading from "./pages/NumerologyReading";
@@ -45,7 +46,8 @@ const App = () => (
               <Route path="/archive" element={<RequireAuth><Archive /></RequireAuth>} />
               <Route path="/profile" element={<RequireAuth><ProfilePage /></RequireAuth>} />
               
-              <Route path="/readings/tarot/:spread" element={<TarotReading />} />
+              <Route path="/readings/tarot/spread/:spread" element={<TarotSpreadReading />} />
+              <Route path="/readings/tarot/pick-three" element={<RequireAuth><TarotPickThree /></RequireAuth>} />
               <Route path="/readings/coffee" element={<CoffeeReading />} />
               <Route path="/readings/coffee/upload" element={<CoffeeReadingWithUpload />} />
               <Route path="/readings/numerology" element={<NumerologyReading />} />

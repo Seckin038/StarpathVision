@@ -28,9 +28,9 @@ const Dashboard = () => {
 
   const quickActions = [
     { 
-      title: "Keltisch Kruis", 
+      title: "3-Kaart Legging", 
       icon: <Sparkles className="h-5 w-5 text-purple-400" />,
-      path: "/readings/tarot/celtic-cross",
+      path: "/readings/tarot/pick-three",
     },
     { 
       title: "Koffielezing", 
@@ -40,7 +40,7 @@ const Dashboard = () => {
     { 
       title: "Sterlegging", 
       icon: <Star className="h-5 w-5 text-blue-400" />,
-      path: "/readings/tarot/star-spread",
+      path: "/readings/tarot/spread/star-spread",
     },
     { 
       title: "Droomduiding", 
@@ -97,7 +97,7 @@ const Dashboard = () => {
                 <p className="mt-4 text-stone-300">
                   Vandaag staat in het teken van balans. Vertrouw op je intuïtie bij belangrijke beslissingen.
                 </p>
-                <Link to="/readings/tarot/three-card">
+                <Link to="/readings/tarot/pick-three">
                   <Button variant="outline" className="w-full mt-6 border-amber-800 text-amber-300 hover:bg-amber-900/50 hover:text-amber-200">
                     Doe een 3-kaart legging
                   </Button>
