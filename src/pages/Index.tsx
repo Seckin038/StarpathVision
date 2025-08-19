@@ -1,5 +1,3 @@
-// Update this page (the content is just a fallback if you fail to update the page)
-
 import { MadeWithDyad } from "@/components/made-with-dyad";
 import { usePersonae } from "@/hooks/use-personae";
 
@@ -19,11 +17,15 @@ const Index = () => {
             <p className="text-red-500">Failed to load personae: {error}</p>
           )}
           {!loading && !error && (
-            <ul className="list-disc list-inside text-left">
-              {personae.map((p) => (
-                <li key={p.id}>{p.name}</li>
-              ))}
-            </ul>
+            personae?.length ? (
+              <ul className="list-disc list-inside text-left">
+                {personae.map((p) => (
+                  <li key={p.id}>{p.name}</li>
+                ))}
+              </ul>
+            ) : (
+              <p>No personae found.</p>
+            )
           )}
         </div>
       </div>
