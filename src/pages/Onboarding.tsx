@@ -110,7 +110,13 @@ const Onboarding = () => {
                   <SelectTrigger className="w-full mt-2 bg-stone-900 border-stone-700"><SelectValue placeholder="Selecteer je cultuur" /></SelectTrigger>
                   <SelectContent className="bg-stone-900 border-stone-700 text-stone-200">
                     <SelectItem value="nl">Nederland</SelectItem>
+                    <SelectItem value="be">België</SelectItem>
                     <SelectItem value="tr">Turkije</SelectItem>
+                    <SelectItem value="de">Duitsland</SelectItem>
+                    <SelectItem value="gb">Verenigd Koninkrijk</SelectItem>
+                    <SelectItem value="fr">Frankrijk</SelectItem>
+                    <SelectItem value="ma">Marokko</SelectItem>
+                    <SelectItem value="other">Anders / Internationaal</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
