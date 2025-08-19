@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -17,39 +17,39 @@ import { Link } from "react-router-dom";
 import { MadeWithDyad } from "@/components/made-with-dyad";
 
 const Index = () => {
-  const [language, setLanguage] = useState("nl-NL");
+  const { t, i18n } = useTranslation();
 
   const readingMethods = [
     { 
-      title: "Tarot", 
+      title: t('tarot'), 
       icon: <BookOpen className="h-6 w-6 text-purple-400" />,
-      description: "Kaartlezing voor inzicht in je toekomst",
+      description: t('tarot_desc'),
       path: "/readings/tarot/daily",
     },
     { 
-      title: "Koffiedik", 
+      title: t('coffee'), 
       icon: <Coffee className="h-6 w-6 text-amber-400" />,
-      description: "Traditionele lezing uit koffiesymbolen",
+      description: t('coffee_desc'),
       path: "/readings/coffee",
     },
     { 
-      title: "Numerologie", 
+      title: t('numerology'), 
       icon: <Star className="h-6 w-6 text-blue-400" />,
-      description: "Inzicht via je geboortedatum en naam",
+      description: t('numerology_desc'),
       path: "/readings/numerology",
     },
     { 
-      title: "Droomduiding", 
+      title: t('dream'), 
       icon: <Eye className="h-6 w-6 text-indigo-400" />,
-      description: "Betekenis van je dromen ontdekken",
+      description: t('dream_desc'),
       path: "/readings/dream",
     }
   ];
 
   const languageOptions = [
-    { code: "nl-NL", name: "Nederlands" },
-    { code: "en-GB", name: "English" },
-    { code: "tr-TR", name: "Türkçe" }
+    { code: "nl", name: "Nederlands" },
+    { code: "en", name: "English" },
+    { code: "tr", name: "Türkçe" }
   ];
 
   return (
@@ -57,14 +57,14 @@ const Index = () => {
       <div className="max-w-4xl mx-auto">
         <header className="flex justify-between items-center mb-12">
           <div>
-            <h1 className="text-4xl font-bold text-amber-200 tracking-wider">Starpath Vision</h1>
-            <p className="text-stone-400">De sluiers van de toekomst, onthuld.</p>
+            <h1 className="text-4xl font-bold text-amber-200 tracking-wider">{t('title')}</h1>
+            <p className="text-stone-400">{t('subtitle')}</p>
           </div>
           <div className="flex items-center gap-2">
             <Globe className="h-5 w-5 text-stone-400" />
             <select 
-              value={language}
-              onChange={(e) => setLanguage(e.target.value)}
+              value={i18n.language}
+              onChange={(e) => i18n.changeLanguage(e.target.value)}
               className="bg-stone-900/50 border border-stone-700 rounded-md px-2 py-1 text-stone-300 focus:ring-amber-500"
             >
               {languageOptions.map((lang) => (
@@ -80,13 +80,12 @@ const Index = () => {
               <CardHeader>
                 <CardTitle className="text-amber-300 flex items-center gap-2 text-xl">
                   <Sparkles className="h-5 w-5" />
-                  Welkom, Zoeker
+                  {t('welcome_title')}
                 </CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-stone-300 mb-6">
-                  Treed binnen in een wereld waar oeroude wijsheid en mystieke kunsten samenkomen. 
-                  Onze Wijzen staan klaar om de symbolen te duiden en antwoorden te onthullen die in de sterren geschreven staan.
+                  {t('welcome_text')}
                 </p>
                 <div className="flex items-center gap-2 mb-6">
                   <Badge variant="outline" className="text-stone-300 border-stone-700">
@@ -104,7 +103,7 @@ const Index = () => {
                 </div>
                 <Link to="/onboarding">
                   <Button className="w-full bg-amber-800 hover:bg-amber-700 text-stone-100 font-bold tracking-wider">
-                    Begin Je Reis
+                    {t('start_journey')}
                   </Button>
                 </Link>
               </CardContent>
@@ -140,7 +139,7 @@ const Index = () => {
           </div>
 
           <div className="mb-12">
-            <h2 className="text-3xl font-bold text-amber-200 mb-6 text-center tracking-wider">Kies Je Pad</h2>
+            <h2 className="text-3xl font-bold text-amber-200 mb-6 text-center tracking-wider">{t('choose_path')}</h2>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
               {readingMethods.map((method, index) => (
                 <Link to={method.path} key={index}>

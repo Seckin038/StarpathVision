@@ -12,7 +12,11 @@ import {
   ChevronRight
 } from "lucide-react";
 import { Link, useParams } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import { supabase } from "@/integrations/supabase/client";
+import { showLoading, dismissToast, showError, showSuccess } from "@/utils/toast";
 import tarotDeckData from "../data/tarot-cards.json";
+import personae from "../data/personae.index.json";
 
 const allCards = [
   ...tarotDeckData.majorArcana,
@@ -24,9 +28,11 @@ const allCards = [
 
 const TarotReading = () => {
   const { spread } = useParams();
+  const { i18n } = useTranslation();
   const [selectedCards, setSelectedCards] = useState<any[]>([]);
   const [readingResult, setReadingResult] = useState<string | null>(null);
   const [isFlipping, setIsFlipping] = useState(false);
+  const [isGenerating, setIsGenerating] = useState(false);
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
 
   const spreadType = spread || "daily";
@@ -35,6 +41,10 @@ const TarotReading = () => {
                     spreadType === "celtic" ? "Keltische Kruis" : "Jaarkaart";
 
   useEffect(() => {
+    resetReading();
+  }, [spreadType]);
+
+  const resetReading = () => {
     const cardCount = spreadType === "daily" ? 1 : 
                      spreadType === "three" ? 3 : 
                      spreadType === "celtic" ? 10 : 1;
@@ -52,10 +62,11 @@ const TarotReading = () => {
     setSelectedCards(initialCards);
     setReadingResult(null);
     setCurrentCardIndex(0);
-  }, [spreadType]);
+  };
 
   const drawCards = () => {
     setIsFlipping(true);
+    setReadingResult(null);
     
     setTimeout(() => {
       const shuffledDeck = [...allCards].sort(() => 0.5 - Math.random());
@@ -69,26 +80,45 @@ const TarotReading = () => {
     }, 1500);
   };
 
-  const generateReading = () => {
-    if (selectedCards.some(card => !card.card)) return;
-    
-    const interpretations = selectedCards.map(cardSlot => 
-      `${cardSlot.position}: ${cardSlot.card.name}`
-    );
-    
-    setReadingResult(`Je ${spreadName} lezing:\n\n${interpretations.join("\n\n")}\n\nInterpretatie: Deze kaarten wijzen op een periode van verandering en nieuwe inzichten. Vertrouw op je intuïtie.`);
+  const generateReading = async () => {
+    if (selectedCards.some(c => !c.card) || isGenerating) return;
+
+    setIsGenerating(true);
+    const toastId = showLoading("Je lezing wordt voorbereid...");
+
+    try {
+      const persona = personae.find(p => p.id === "falya"); // Default persona for now
+
+      const { data, error } = await supabase.functions.invoke('generate-reading', {
+        body: {
+          readingType: "Tarot",
+          language: i18n.language,
+          persona: persona,
+          cards: selectedCards,
+        }
+      });
+
+      if (error) throw new Error(error.message);
+
+      setReadingResult(data.reading);
+      dismissToast(toastId);
+      showSuccess("Je lezing is klaar!");
+
+    } catch (err: any) {
+      dismissToast(toastId);
+      showError("Er ging iets mis bij het genereren van de lezing.");
+      console.error(err);
+    } finally {
+      setIsGenerating(false);
+    }
   };
 
   const nextCard = () => {
-    if (currentCardIndex < selectedCards.length - 1) {
-      setCurrentCardIndex(currentCardIndex + 1);
-    }
+    if (currentCardIndex < selectedCards.length - 1) setCurrentCardIndex(currentCardIndex + 1);
   };
 
   const prevCard = () => {
-    if (currentCardIndex > 0) {
-      setCurrentCardIndex(currentCardIndex - 1);
-    }
+    if (currentCardIndex > 0) setCurrentCardIndex(currentCardIndex - 1);
   };
 
   return (
@@ -97,8 +127,7 @@ const TarotReading = () => {
         <div className="flex items-center justify-between mb-6">
           <Link to="/dashboard">
             <Button variant="outline" className="flex items-center gap-2 border-amber-800 text-amber-300 hover:bg-amber-900/50 hover:text-amber-200">
-              <ChevronLeft className="h-4 w-4" />
-              Terug
+              <ChevronLeft className="h-4 w-4" /> Terug
             </Button>
           </Link>
           <h1 className="text-2xl font-bold text-amber-200 tracking-wider">{spreadName}</h1>
@@ -109,8 +138,7 @@ const TarotReading = () => {
           <CardHeader>
             <div className="flex justify-between items-center">
               <CardTitle className="text-amber-300 flex items-center gap-2 text-xl">
-                <BookOpen className="h-5 w-5" />
-                {spreadName}
+                <BookOpen className="h-5 w-5" /> {spreadName}
               </CardTitle>
               <div className="flex gap-2">
                 <Button variant="outline" size="sm" className="border-stone-700 text-stone-300 hover:bg-stone-800"><Share2 className="h-4 w-4" /></Button>
@@ -123,9 +151,7 @@ const TarotReading = () => {
               <>
                 <div className="mb-6">
                   <div className="flex justify-between items-center mb-4">
-                    <h3 className="font-semibold text-amber-200">
-                      {selectedCards[currentCardIndex].position}
-                    </h3>
+                    <h3 className="font-semibold text-amber-200">{selectedCards[currentCardIndex].position}</h3>
                     {selectedCards.length > 1 && (
                       <div className="flex gap-2 items-center">
                         <Button variant="outline" size="sm" onClick={prevCard} disabled={currentCardIndex === 0} className="border-stone-700 text-stone-300 hover:bg-stone-800 disabled:opacity-50"><ChevronLeft className="h-4 w-4" /></Button>
@@ -139,27 +165,14 @@ const TarotReading = () => {
                     {selectedCards[currentCardIndex].card ? (
                       <Card className="bg-stone-950/50 border-2 border-stone-700 rounded-lg w-56 h-96 flex flex-col items-center justify-center p-4 shadow-lg shadow-amber-900/10">
                         <img src={selectedCards[currentCardIndex].card.image} alt={selectedCards[currentCardIndex].card.name} className="w-32 h-32 mb-4 opacity-50" />
-                        <h3 className="font-bold text-center text-amber-200 text-xl tracking-wider">
-                          {selectedCards[currentCardIndex].card.name}
-                        </h3>
+                        <h3 className="font-bold text-center text-amber-200 text-xl tracking-wider">{selectedCards[currentCardIndex].card.name}</h3>
                       </Card>
                     ) : (
-                      <div 
-                        className={`bg-stone-900/50 border-2 border-dashed border-stone-600 rounded-lg w-56 h-96 flex items-center justify-center cursor-pointer transition-all ${
-                          isFlipping ? "animate-pulse" : "hover:bg-stone-800/50"
-                        }`}
-                        onClick={drawCards}
-                      >
+                      <div className={`bg-stone-900/50 border-2 border-dashed border-stone-600 rounded-lg w-56 h-96 flex items-center justify-center cursor-pointer transition-all ${isFlipping ? "animate-pulse" : "hover:bg-stone-800/50"}`} onClick={drawCards}>
                         {isFlipping ? (
-                          <div className="text-center">
-                            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-amber-400 mx-auto mb-2"></div>
-                            <p className="text-stone-400">Kaarten aan het schudden...</p>
-                          </div>
+                          <div className="text-center"><div className="animate-spin rounded-full h-8 w-8 border-b-2 border-amber-400 mx-auto mb-2"></div><p className="text-stone-400">Kaarten schudden...</p></div>
                         ) : (
-                          <div className="text-center">
-                            <BookOpen className="h-12 w-12 text-amber-400 mx-auto mb-2" />
-                            <p className="text-stone-300">Klik om kaart te trekken</p>
-                          </div>
+                          <div className="text-center"><BookOpen className="h-12 w-12 text-amber-400 mx-auto mb-2" /><p className="text-stone-300">Klik om kaart te trekken</p></div>
                         )}
                       </div>
                     )}
@@ -169,14 +182,13 @@ const TarotReading = () => {
                 <Separator className="my-6 bg-stone-800" />
 
                 <div className="flex justify-center gap-3">
-                  <Button onClick={drawCards} disabled={isFlipping} className="bg-amber-800 hover:bg-amber-700 text-stone-100 flex items-center gap-2">
-                    <RotateCcw className="h-4 w-4" />
-                    {selectedCards[0].card ? "Opnieuw trekken" : "Kaarten trekken"}
+                  <Button onClick={resetReading} variant="outline" className="border-stone-700 text-stone-300 hover:bg-stone-800 flex items-center gap-2">
+                    <RotateCcw className="h-4 w-4" /> Opnieuw
                   </Button>
                   
-                  {selectedCards.every(card => card.card) && !readingResult && (
-                    <Button onClick={generateReading} className="bg-amber-800 hover:bg-amber-700 text-stone-100 flex items-center gap-2">
-                      <Sparkles className="h-4 w-4" />
+                  {selectedCards.every(c => c.card) && (
+                    <Button onClick={generateReading} disabled={isGenerating} className="bg-amber-800 hover:bg-amber-700 text-stone-100 flex items-center gap-2">
+                      {isGenerating ? <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div> : <Sparkles className="h-4 w-4" />}
                       Lezing genereren
                     </Button>
                   )}
