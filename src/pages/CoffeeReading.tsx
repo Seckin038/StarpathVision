@@ -16,7 +16,6 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { supabase } from "@/integrations/supabase/client";
 import { showLoading, dismissToast, showError, showSuccess } from "@/utils/toast";
-import symbolIndex from '../data/coffee-symbols/index.json';
 import falyaPersona from "../data/falya.json";
 import MysticalBackground from "@/components/MysticalBackground";
 
@@ -26,27 +25,26 @@ const CoffeeReading = () => {
   const [selectedSymbols, setSelectedSymbols] = useState<any[]>([]);
   const [readingResult, setReadingResult] = useState<string | null>(null);
   const [isGenerating, setIsGenerating] = useState(false);
-  const [showUpload, setShowUpload] = useState(false);
-  const [uploadedImage, setUploadedImage] = useState<string | null>(null);
 
   useEffect(() => {
     const loadSymbols = async () => {
-      const allSymbols: any[] = [];
-      const promises = symbolIndex.map(letter => 
-        import(`../data/coffee-symbols/${letter}.json`)
-      );
-      const modules = await Promise.all(promises);
-      modules.forEach(module => {
-        allSymbols.push(...module.default);
-      });
-      setSymbols(allSymbols);
+      try {
+        const lang = i18n.language || 'nl';
+        const module = await import(`../data/coffee-symbols/${lang}.json`);
+        setSymbols(module.default.symbols);
+      } catch (e) {
+        console.error("Could not load coffee symbols for language:", i18n.language, e);
+        // Fallback to Dutch
+        const module = await import(`../data/coffee-symbols/nl.json`);
+        setSymbols(module.default.symbols);
+      }
     };
     loadSymbols();
-  }, []);
+  }, [i18n.language]);
 
   const handleSymbolSelect = (symbol: any) => {
-    if (selectedSymbols.some(s => s["Symbool NL"] === symbol["Symbool NL"])) {
-      setSelectedSymbols(selectedSymbols.filter(s => s["Symbool NL"] !== symbol["Symbool NL"]));
+    if (selectedSymbols.some(s => s.id === symbol.id)) {
+      setSelectedSymbols(selectedSymbols.filter(s => s.id !== symbol.id));
     } else {
       setSelectedSymbols([...selectedSymbols, symbol]);
     }
@@ -64,7 +62,7 @@ const CoffeeReading = () => {
           readingType: "Koffiedik",
           language: i18n.language,
           persona: falyaPersona,
-          symbols: selectedSymbols,
+          symbols: selectedSymbols.map(s => ({ [s.name]: s.meanings[0] })),
         }
       });
 
@@ -80,20 +78,6 @@ const CoffeeReading = () => {
       console.error(err);
     } finally {
       setIsGenerating(false);
-    }
-  };
-
-  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        if (event.target?.result) {
-          setUploadedImage(event.target.result as string);
-          setShowUpload(false);
-        }
-      };
-      reader.readAsDataURL(file);
     }
   };
 
@@ -120,82 +104,17 @@ const CoffeeReading = () => {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            {uploadedImage ? (
-              <div className="mb-6">
-                <div className="relative">
-                  <img 
-                    src={uploadedImage} 
-                    alt="Uploaded coffee cup" 
-                    className="w-full h-64 object-cover rounded-lg border border-stone-700"
-                  />
-                  <Button 
-                    onClick={() => setUploadedImage(null)}
-                    variant="outline"
-                    size="sm"
-                    className="absolute top-2 right-2 bg-stone-900/80 border-stone-700 text-stone-300 hover:bg-stone-800"
-                  >
-                    Verwijderen
-                  </Button>
-                </div>
-                <p className="text-sm text-stone-400 mt-2 text-center">
-                  Analyseer de symbolen in je koffiekop of kies handmatig uit de lijst hieronder.
-                </p>
-              </div>
-            ) : (
-              <div className="mb-6">
-                <div 
-                  className="border-2 border-dashed border-stone-700 rounded-lg p-8 text-center cursor-pointer hover:bg-stone-900 transition-colors"
-                  onClick={() => setShowUpload(true)}
-                >
-                  <Camera className="h-12 w-12 text-amber-400 mx-auto mb-3" />
-                  <h3 className="font-medium text-stone-200">Upload een foto van je koffiekop</h3>
-                  <p className="text-stone-400 text-sm mt-1">
-                    Of kies handmatig symbolen uit de lijst hieronder
-                  </p>
-                </div>
-                
-                {showUpload && (
-                  <div className="mt-4 p-4 bg-stone-900 rounded-lg border border-stone-800">
-                    <div className="flex items-center gap-2 mb-3">
-                      <AlertCircle className="h-4 w-4 text-amber-400" />
-                      <span className="text-sm font-medium text-stone-200">Tips voor een goede foto</span>
-                    </div>
-                    <ul className="text-sm text-stone-400 space-y-1 list-disc list-inside">
-                      <li>Zorg voor voldoende licht</li>
-                      <li>Fotografeer de binnenkant van de kop</li>
-                      <li>Zorg dat de symbolen duidelijk zichtbaar zijn</li>
-                    </ul>
-                    <label className="block mt-3">
-                      <Button 
-                        variant="outline" 
-                        className="w-full border-stone-700 text-stone-300 hover:bg-stone-800"
-                      >
-                        <Upload className="h-4 w-4 mr-2" />
-                        Kies foto
-                      </Button>
-                      <input 
-                        type="file" 
-                        accept="image/*" 
-                        className="hidden" 
-                        onChange={handleImageUpload}
-                      />
-                    </label>
-                  </div>
-                )}
-              </div>
-            )}
-
             <div className="mb-6">
               <h3 className="font-semibold text-amber-200 mb-2">Geselecteerde symbolen:</h3>
               <div className="flex flex-wrap gap-2">
                 {selectedSymbols.length > 0 ? (
-                  selectedSymbols.map((symbol, index) => (
+                  selectedSymbols.map((symbol) => (
                     <Badge 
-                      key={index} 
+                      key={symbol.id} 
                       className="bg-amber-800 hover:bg-amber-700 text-stone-100 cursor-pointer"
                       onClick={() => handleSymbolSelect(symbol)}
                     >
-                      {symbol["Symbool NL"]}
+                      {symbol.name}
                     </Badge>
                   ))
                 ) : (
@@ -208,32 +127,22 @@ const CoffeeReading = () => {
 
             <h3 className="font-semibold text-amber-200 mb-3">Koffiesymbolen:</h3>
             <ScrollArea className="h-96 rounded-md border border-stone-800 p-4 bg-stone-950/50">
-              <div className="space-y-4">
-                {symbolIndex.map(letter => {
-                  const letterSymbols = symbols.filter(s => s["Letter"].toUpperCase() === letter.toUpperCase());
-                  return letterSymbols.length > 0 ? (
-                    <div key={letter}>
-                      <h4 className="font-bold text-amber-300 mb-2 text-lg">{letter.toUpperCase()}</h4>
-                      <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                        {letterSymbols.map((symbol, index) => (
-                          <Button
-                            key={index}
-                            variant={selectedSymbols.some(s => s["Symbool NL"] === symbol["Symbool NL"]) ? "default" : "outline"}
-                            className={`h-auto py-3 flex flex-col items-center justify-center text-left transition-all ${
-                              selectedSymbols.some(s => s["Symbool NL"] === symbol["Symbool NL"]) 
-                                ? "bg-amber-800 hover:bg-amber-700 text-stone-100 border-amber-700" 
-                                : "bg-stone-900/50 hover:bg-stone-800 border-stone-700 text-stone-300"
-                            }`}
-                            onClick={() => handleSymbolSelect(symbol)}
-                          >
-                            <span className="font-medium text-sm">{symbol["Symbool NL"]}</span>
-                            <span className="text-xs mt-1 text-center text-stone-400">{symbol["Betekenis NL"]}</span>
-                          </Button>
-                        ))}
-                      </div>
-                    </div>
-                  ) : null;
-                })}
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+                {symbols.map((symbol) => (
+                  <Button
+                    key={symbol.id}
+                    variant={selectedSymbols.some(s => s.id === symbol.id) ? "default" : "outline"}
+                    className={`h-auto py-3 flex flex-col items-center justify-center text-center transition-all ${
+                      selectedSymbols.some(s => s.id === symbol.id) 
+                        ? "bg-amber-800 hover:bg-amber-700 text-stone-100 border-amber-700" 
+                        : "bg-stone-900/50 hover:bg-stone-800 border-stone-700 text-stone-300"
+                    }`}
+                    onClick={() => handleSymbolSelect(symbol)}
+                  >
+                    <span className="font-medium text-sm">{symbol.name}</span>
+                    <span className="text-xs mt-1 text-stone-400">{symbol.meanings[0]}</span>
+                  </Button>
+                ))}
               </div>
             </ScrollArea>
 

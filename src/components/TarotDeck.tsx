@@ -25,10 +25,9 @@ type TarotCard = {
 type Props = {
   locale?: "nl" | "tr" | "en";
   maxVisible?: number;
-  radius?: number;
 };
 
-export default function TarotDeck({ locale = "nl", maxVisible = 30 }: Props) {
+export default function TarotDeck({ locale = "nl", maxVisible = 40 }: Props) {
   const [cards, setCards] = useState<TarotCard[]>([]);
   const [deck, setDeck] = useState<TarotCard[]>([]);
   const [revealed, setRevealed] = useState<TarotCard | null>(null);
@@ -80,8 +79,8 @@ export default function TarotDeck({ locale = "nl", maxVisible = 30 }: Props) {
   const fan = useMemo(() => {
     const subset = deck.slice(0, maxVisible);
     const count = subset.length;
-    const startAngle = -20;
-    const endAngle = 20;
+    const startAngle = -45;
+    const endAngle = 45;
     return subset.map((c, i) => {
       const t = count === 1 ? 0.5 : i / (count - 1);
       const angle = lerp(startAngle, endAngle, t);
@@ -91,13 +90,13 @@ export default function TarotDeck({ locale = "nl", maxVisible = 30 }: Props) {
 
   return (
     <div className="w-full">
-      <div className="flex items-center gap-2 mb-4">
+      <div className="flex items-center justify-center gap-2 mb-4">
         <Button onClick={handleReset} variant="outline" className="border-stone-700 text-stone-300 hover:bg-stone-800">↺ Reset</Button>
         <Button onClick={handleShuffle} variant="outline" className="border-stone-700 text-stone-300 hover:bg-stone-800">⤮ Schudden</Button>
-        <Button onClick={drawTop} className="bg-amber-700 hover:bg-amber-600 text-white">★ Trek een kaart</Button>
+        <Button onClick={drawTop} className="bg-amber-700 hover:bg-amber-600 text-white text-lg px-6 py-4">★ Trek een kaart</Button>
       </div>
 
-      <div className="relative h-[200px] sm:h-[230px] md:h-[260px]">
+      <div className="relative h-[300px] sm:h-[350px] md:h-[400px]">
         <div className="absolute inset-0 flex items-start justify-center pt-3">
           <div className="relative" style={{ perspective: 1200 }}>
             <AnimatePresence initial={false}>
@@ -109,7 +108,7 @@ export default function TarotDeck({ locale = "nl", maxVisible = 30 }: Props) {
                     "w-[80px] h-[120px] sm:w-[90px] sm:h-[136px] md:w-[100px] md:h-[152px]",
                     "rounded-lg shadow-lg overflow-hidden border border-yellow-800/40"
                   )}
-                  style={{ transformOrigin: `50% 200%`, left: `calc(50% - 50px)` }}
+                  style={{ transformOrigin: `50% 400%`, left: `calc(50% - 50px)` }}
                   initial={{ rotate: angle, y: 20, opacity: 0, x: 0 }}
                   animate={{
                     rotate: isShuffling ? angle + Math.random() * 20 - 10 : angle,

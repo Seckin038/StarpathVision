@@ -16,7 +16,6 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { supabase } from "@/integrations/supabase/client";
 import { showLoading, dismissToast, showError, showSuccess } from "@/utils/toast";
-import symbolIndex from '../data/coffee-symbols/index.json';
 import falyaPersona from "../data/falya.json";
 import MysticalBackground from "@/components/MysticalBackground";
 
@@ -33,18 +32,18 @@ const CoffeeReadingWithUpload = () => {
 
   useEffect(() => {
     const loadSymbols = async () => {
-      const allSymbols: any[] = [];
-      const promises = symbolIndex.map(letter => 
-        import(`../data/coffee-symbols/${letter}.json`)
-      );
-      const modules = await Promise.all(promises);
-      modules.forEach(module => {
-        allSymbols.push(...module.default);
-      });
-      setSymbols(allSymbols);
+      try {
+        const lang = i18n.language || 'nl';
+        const module = await import(`../data/coffee-symbols/${lang}.json`);
+        setSymbols(module.default.symbols);
+      } catch (e) {
+        console.error("Could not load coffee symbols for language:", i18n.language, e);
+        const module = await import(`../data/coffee-symbols/nl.json`);
+        setSymbols(module.default.symbols);
+      }
     };
     loadSymbols();
-  }, []);
+  }, [i18n.language]);
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -74,8 +73,8 @@ const CoffeeReadingWithUpload = () => {
   };
 
   const handleSymbolSelect = (symbol: any) => {
-    if (selectedSymbols.some(s => s["Symbool NL"] === symbol["Symbool NL"])) {
-      setSelectedSymbols(selectedSymbols.filter(s => s["Symbool NL"] !== symbol["Symbool NL"]));
+    if (selectedSymbols.some(s => s.id === symbol.id)) {
+      setSelectedSymbols(selectedSymbols.filter(s => s.id !== symbol.id));
     } else {
       setSelectedSymbols([...selectedSymbols, symbol]);
     }
@@ -93,7 +92,7 @@ const CoffeeReadingWithUpload = () => {
           readingType: "Koffiedik",
           language: i18n.language,
           persona: falyaPersona,
-          symbols: selectedSymbols,
+          symbols: selectedSymbols.map(s => ({ [s.name]: s.meanings[0] })),
         }
       });
 
@@ -217,18 +216,18 @@ const CoffeeReadingWithUpload = () => {
                     <h3 className="font-semibold text-amber-200 mb-2">Gedetecteerde symbolen:</h3>
                     <p className="text-sm text-stone-400 mb-3">Klik op de symbolen die je wilt gebruiken voor je lezing.</p>
                     <div className="flex flex-wrap gap-2">
-                      {detectedSymbols.map((symbol, index) => (
+                      {detectedSymbols.map((symbol) => (
                         <Badge 
-                          key={index} 
-                          variant={selectedSymbols.some(s => s["Symbool NL"] === symbol["Symbool NL"]) ? "default" : "outline"}
+                          key={symbol.id} 
+                          variant={selectedSymbols.some(s => s.id === symbol.id) ? "default" : "outline"}
                           className={`cursor-pointer transition-all ${
-                            selectedSymbols.some(s => s["Symbool NL"] === symbol["Symbool NL"])
+                            selectedSymbols.some(s => s.id === symbol.id)
                             ? "bg-amber-800 text-stone-100 border-amber-700"
                             : "border-stone-700 text-stone-300 hover:bg-stone-800"
                           }`}
                           onClick={() => handleSymbolSelect(symbol)}
                         >
-                          {symbol["Symbool NL"]}
+                          {symbol.name}
                         </Badge>
                       ))}
                     </div>
