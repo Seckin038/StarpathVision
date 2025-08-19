@@ -1,0 +1,1723 @@
+{
+  "version": "1.0.0",
+  "count": 130,
+  "symbols": [
+    {
+      "id": "falling-1",
+      "name": "Falling",
+      "themes": [
+        "creativity",
+        "shame"
+      ],
+      "explanation": "In dreams, falling often signals creativity, yet may also touch shame. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Ask which emotion felt strongest and where it shows up in daily life.",
+      "keywords": [
+        "falling"
+      ]
+    },
+    {
+      "id": "flying-2",
+      "name": "Flying",
+      "themes": [
+        "connection",
+        "confusion"
+      ],
+      "explanation": "In dreams, flying often signals connection, yet may also touch confusion. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Check if the symbol warns or encourages you.",
+      "keywords": [
+        "flying"
+      ]
+    },
+    {
+      "id": "teeth-falling-3",
+      "name": "Teeth Falling",
+      "themes": [
+        "clarity",
+        "confusion"
+      ],
+      "explanation": "In dreams, teeth falling often signals clarity, yet may also touch confusion. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Write a few keywords upon waking and revisit later for reflection.",
+      "keywords": [
+        "teeth",
+        "falling"
+      ]
+    },
+    {
+      "id": "being-chased-4",
+      "name": "Being Chased",
+      "themes": [
+        "healing",
+        "shame"
+      ],
+      "explanation": "In dreams, being chased often signals healing, yet may also touch shame. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Create a small ritual (breath, tea, short walk) to integrate the message.",
+      "keywords": [
+        "being",
+        "chased"
+      ]
+    },
+    {
+      "id": "being-late-5",
+      "name": "Being Late",
+      "themes": [
+        "trust",
+        "shame"
+      ],
+      "explanation": "In dreams, being late often signals trust, yet may also touch shame. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Write a few keywords upon waking and revisit later for reflection.",
+      "keywords": [
+        "being",
+        "late"
+      ]
+    },
+    {
+      "id": "water-6",
+      "name": "Water",
+      "themes": [
+        "healing",
+        "uncertainty"
+      ],
+      "explanation": "In dreams, water often signals healing, yet may also touch uncertainty. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Check if the symbol warns or encourages you.",
+      "keywords": [
+        "water"
+      ]
+    },
+    {
+      "id": "storm-7",
+      "name": "Storm",
+      "themes": [
+        "creativity",
+        "confusion"
+      ],
+      "explanation": "In dreams, storm often signals creativity, yet may also touch confusion. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Check if the symbol warns or encourages you.",
+      "keywords": [
+        "storm"
+      ]
+    },
+    {
+      "id": "snake-8",
+      "name": "Snake",
+      "themes": [
+        "trust",
+        "lack of boundaries"
+      ],
+      "explanation": "In dreams, snake often signals trust, yet may also touch lack of boundaries. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Ask which emotion felt strongest and where it shows up in daily life.",
+      "keywords": [
+        "snake"
+      ]
+    },
+    {
+      "id": "spider-9",
+      "name": "Spider",
+      "themes": [
+        "acceptance",
+        "uncertainty"
+      ],
+      "explanation": "In dreams, spider often signals acceptance, yet may also touch uncertainty. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Set a gentle boundary: what do you allow in, what do you release?",
+      "keywords": [
+        "spider"
+      ]
+    },
+    {
+      "id": "cat-10",
+      "name": "Cat",
+      "themes": [
+        "connection",
+        "fear"
+      ],
+      "explanation": "In dreams, cat often signals connection, yet may also touch fear. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Check if the symbol warns or encourages you.",
+      "keywords": [
+        "cat"
+      ]
+    },
+    {
+      "id": "dog-11",
+      "name": "Dog",
+      "themes": [
+        "insight",
+        "lack of boundaries"
+      ],
+      "explanation": "In dreams, dog often signals insight, yet may also touch lack of boundaries. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Set a gentle boundary: what do you allow in, what do you release?",
+      "keywords": [
+        "dog"
+      ]
+    },
+    {
+      "id": "baby-12",
+      "name": "Baby",
+      "themes": [
+        "creativity",
+        "procrastination"
+      ],
+      "explanation": "In dreams, baby often signals creativity, yet may also touch procrastination. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Ask which emotion felt strongest and where it shows up in daily life.",
+      "keywords": [
+        "baby"
+      ]
+    },
+    {
+      "id": "pregnancy-13",
+      "name": "Pregnancy",
+      "themes": [
+        "creativity",
+        "uncertainty"
+      ],
+      "explanation": "In dreams, pregnancy often signals creativity, yet may also touch uncertainty. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Use creativity (drawing, music) to let the image speak.",
+      "keywords": [
+        "pregnancy"
+      ]
+    },
+    {
+      "id": "death-14",
+      "name": "Death",
+      "themes": [
+        "healing",
+        "shame"
+      ],
+      "explanation": "In dreams, death often signals healing, yet may also touch shame. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Speak with someone you trust and name the core without overanalysis.",
+      "keywords": [
+        "death"
+      ]
+    },
+    {
+      "id": "wedding-15",
+      "name": "Wedding",
+      "themes": [
+        "acceptance",
+        "confusion"
+      ],
+      "explanation": "In dreams, wedding often signals acceptance, yet may also touch confusion. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Check if the symbol warns or encourages you.",
+      "keywords": [
+        "wedding"
+      ]
+    },
+    {
+      "id": "naked-in-public-16",
+      "name": "Naked In Public",
+      "themes": [
+        "connection",
+        "lack of boundaries"
+      ],
+      "explanation": "In dreams, naked in public often signals connection, yet may also touch lack of boundaries. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Create a small ritual (breath, tea, short walk) to integrate the message.",
+      "keywords": [
+        "naked",
+        "public"
+      ]
+    },
+    {
+      "id": "school-17",
+      "name": "School",
+      "themes": [
+        "renewal",
+        "procrastination"
+      ],
+      "explanation": "In dreams, school often signals renewal, yet may also touch procrastination. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Check if the symbol warns or encourages you.",
+      "keywords": [
+        "school"
+      ]
+    },
+    {
+      "id": "exam-18",
+      "name": "Exam",
+      "themes": [
+        "freedom",
+        "uncertainty"
+      ],
+      "explanation": "In dreams, exam often signals freedom, yet may also touch uncertainty. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Speak with someone you trust and name the core without overanalysis.",
+      "keywords": [
+        "exam"
+      ]
+    },
+    {
+      "id": "elevator-19",
+      "name": "Elevator",
+      "themes": [
+        "acceptance",
+        "lack of boundaries"
+      ],
+      "explanation": "In dreams, elevator often signals acceptance, yet may also touch lack of boundaries. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Write a few keywords upon waking and revisit later for reflection.",
+      "keywords": [
+        "elevator"
+      ]
+    },
+    {
+      "id": "train-20",
+      "name": "Train",
+      "themes": [
+        "connection",
+        "shame"
+      ],
+      "explanation": "In dreams, train often signals connection, yet may also touch shame. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Set a gentle boundary: what do you allow in, what do you release?",
+      "keywords": [
+        "train"
+      ]
+    },
+    {
+      "id": "car-21",
+      "name": "Car",
+      "themes": [
+        "acceptance",
+        "uncertainty"
+      ],
+      "explanation": "In dreams, car often signals acceptance, yet may also touch uncertainty. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Use creativity (drawing, music) to let the image speak.",
+      "keywords": [
+        "car"
+      ]
+    },
+    {
+      "id": "darkness-22",
+      "name": "Darkness",
+      "themes": [
+        "courage",
+        "overload"
+      ],
+      "explanation": "In dreams, darkness often signals courage, yet may also touch overload. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Slow the day: fewer screens, more body, a simple routine.",
+      "keywords": [
+        "darkness"
+      ]
+    },
+    {
+      "id": "fire-23",
+      "name": "Fire",
+      "themes": [
+        "renewal",
+        "lack of boundaries"
+      ],
+      "explanation": "In dreams, fire often signals renewal, yet may also touch lack of boundaries. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Slow the day: fewer screens, more body, a simple routine.",
+      "keywords": [
+        "fire"
+      ]
+    },
+    {
+      "id": "rain-24",
+      "name": "Rain",
+      "themes": [
+        "freedom",
+        "loss of control"
+      ],
+      "explanation": "In dreams, rain often signals freedom, yet may also touch loss of control. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Speak with someone you trust and name the core without overanalysis.",
+      "keywords": [
+        "rain"
+      ]
+    },
+    {
+      "id": "sea-25",
+      "name": "Sea",
+      "themes": [
+        "clarity",
+        "uncertainty"
+      ],
+      "explanation": "In dreams, sea often signals clarity, yet may also touch uncertainty. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Use creativity (drawing, music) to let the image speak.",
+      "keywords": [
+        "sea"
+      ]
+    },
+    {
+      "id": "river-26",
+      "name": "River",
+      "themes": [
+        "healing",
+        "guilt"
+      ],
+      "explanation": "In dreams, river often signals healing, yet may also touch guilt. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Speak with someone you trust and name the core without overanalysis.",
+      "keywords": [
+        "river"
+      ]
+    },
+    {
+      "id": "bridge-27",
+      "name": "Bridge",
+      "themes": [
+        "renewal",
+        "guilt"
+      ],
+      "explanation": "In dreams, bridge often signals renewal, yet may also touch guilt. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Create a small ritual (breath, tea, short walk) to integrate the message.",
+      "keywords": [
+        "bridge"
+      ]
+    },
+    {
+      "id": "mountain-28",
+      "name": "Mountain",
+      "themes": [
+        "insight",
+        "fear"
+      ],
+      "explanation": "In dreams, mountain often signals insight, yet may also touch fear. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Set a gentle boundary: what do you allow in, what do you release?",
+      "keywords": [
+        "mountain"
+      ]
+    },
+    {
+      "id": "forest-29",
+      "name": "Forest",
+      "themes": [
+        "courage",
+        "uncertainty"
+      ],
+      "explanation": "In dreams, forest often signals courage, yet may also touch uncertainty. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Ask which emotion felt strongest and where it shows up in daily life.",
+      "keywords": [
+        "forest"
+      ]
+    },
+    {
+      "id": "labyrinth-30",
+      "name": "Labyrinth",
+      "themes": [
+        "courage",
+        "procrastination"
+      ],
+      "explanation": "In dreams, labyrinth often signals courage, yet may also touch procrastination. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Set a gentle boundary: what do you allow in, what do you release?",
+      "keywords": [
+        "labyrinth"
+      ]
+    },
+    {
+      "id": "mirror-31",
+      "name": "Mirror",
+      "themes": [
+        "acceptance",
+        "overload"
+      ],
+      "explanation": "In dreams, mirror often signals acceptance, yet may also touch overload. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Check if the symbol warns or encourages you.",
+      "keywords": [
+        "mirror"
+      ]
+    },
+    {
+      "id": "phone-32",
+      "name": "Phone",
+      "themes": [
+        "renewal",
+        "loss"
+      ],
+      "explanation": "In dreams, phone often signals renewal, yet may also touch loss. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Write a few keywords upon waking and revisit later for reflection.",
+      "keywords": [
+        "phone"
+      ]
+    },
+    {
+      "id": "groceries-33",
+      "name": "Groceries",
+      "themes": [
+        "healing",
+        "procrastination"
+      ],
+      "explanation": "In dreams, groceries often signals healing, yet may also touch procrastination. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Set a gentle boundary: what do you allow in, what do you release?",
+      "keywords": [
+        "groceries"
+      ]
+    },
+    {
+      "id": "keys-34",
+      "name": "Keys",
+      "themes": [
+        "freedom",
+        "lack of boundaries"
+      ],
+      "explanation": "In dreams, keys often signals freedom, yet may also touch lack of boundaries. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Slow the day: fewer screens, more body, a simple routine.",
+      "keywords": [
+        "keys"
+      ]
+    },
+    {
+      "id": "house-35",
+      "name": "House",
+      "themes": [
+        "insight",
+        "lack of boundaries"
+      ],
+      "explanation": "In dreams, house often signals insight, yet may also touch lack of boundaries. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Set a gentle boundary: what do you allow in, what do you release?",
+      "keywords": [
+        "house"
+      ]
+    },
+    {
+      "id": "attic-36",
+      "name": "Attic",
+      "themes": [
+        "healing",
+        "overload"
+      ],
+      "explanation": "In dreams, attic often signals healing, yet may also touch overload. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Create a small ritual (breath, tea, short walk) to integrate the message.",
+      "keywords": [
+        "attic"
+      ]
+    },
+    {
+      "id": "basement-37",
+      "name": "Basement",
+      "themes": [
+        "courage",
+        "lack of boundaries"
+      ],
+      "explanation": "In dreams, basement often signals courage, yet may also touch lack of boundaries. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Use creativity (drawing, music) to let the image speak.",
+      "keywords": [
+        "basement"
+      ]
+    },
+    {
+      "id": "kitchen-38",
+      "name": "Kitchen",
+      "themes": [
+        "courage",
+        "uncertainty"
+      ],
+      "explanation": "In dreams, kitchen often signals courage, yet may also touch uncertainty. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Check if the symbol warns or encourages you.",
+      "keywords": [
+        "kitchen"
+      ]
+    },
+    {
+      "id": "bathroom-39",
+      "name": "Bathroom",
+      "themes": [
+        "clarity",
+        "overload"
+      ],
+      "explanation": "In dreams, bathroom often signals clarity, yet may also touch overload. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Create a small ritual (breath, tea, short walk) to integrate the message.",
+      "keywords": [
+        "bathroom"
+      ]
+    },
+    {
+      "id": "office-40",
+      "name": "Office",
+      "themes": [
+        "courage",
+        "overload"
+      ],
+      "explanation": "In dreams, office often signals courage, yet may also touch overload. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Speak with someone you trust and name the core without overanalysis.",
+      "keywords": [
+        "office"
+      ]
+    },
+    {
+      "id": "church-41",
+      "name": "Church",
+      "themes": [
+        "renewal",
+        "shame"
+      ],
+      "explanation": "In dreams, church often signals renewal, yet may also touch shame. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Slow the day: fewer screens, more body, a simple routine.",
+      "keywords": [
+        "church"
+      ]
+    },
+    {
+      "id": "mosque-42",
+      "name": "Mosque",
+      "themes": [
+        "renewal",
+        "shame"
+      ],
+      "explanation": "In dreams, mosque often signals renewal, yet may also touch shame. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Slow the day: fewer screens, more body, a simple routine.",
+      "keywords": [
+        "mosque"
+      ]
+    },
+    {
+      "id": "market-43",
+      "name": "Market",
+      "themes": [
+        "healing",
+        "shame"
+      ],
+      "explanation": "In dreams, market often signals healing, yet may also touch shame. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Set a gentle boundary: what do you allow in, what do you release?",
+      "keywords": [
+        "market"
+      ]
+    },
+    {
+      "id": "hospital-44",
+      "name": "Hospital",
+      "themes": [
+        "connection",
+        "confusion"
+      ],
+      "explanation": "In dreams, hospital often signals connection, yet may also touch confusion. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Use creativity (drawing, music) to let the image speak.",
+      "keywords": [
+        "hospital"
+      ]
+    },
+    {
+      "id": "doctor-45",
+      "name": "Doctor",
+      "themes": [
+        "clarity",
+        "loss of control"
+      ],
+      "explanation": "In dreams, doctor often signals clarity, yet may also touch loss of control. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Create a small ritual (breath, tea, short walk) to integrate the message.",
+      "keywords": [
+        "doctor"
+      ]
+    },
+    {
+      "id": "police-46",
+      "name": "Police",
+      "themes": [
+        "freedom",
+        "guilt"
+      ],
+      "explanation": "In dreams, police often signals freedom, yet may also touch guilt. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Check if the symbol warns or encourages you.",
+      "keywords": [
+        "police"
+      ]
+    },
+    {
+      "id": "flight-47",
+      "name": "Flight",
+      "themes": [
+        "freedom",
+        "guilt"
+      ],
+      "explanation": "In dreams, flight often signals freedom, yet may also touch guilt. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Ask which emotion felt strongest and where it shows up in daily life.",
+      "keywords": [
+        "flight"
+      ]
+    },
+    {
+      "id": "stranger-48",
+      "name": "Stranger",
+      "themes": [
+        "acceptance",
+        "procrastination"
+      ],
+      "explanation": "In dreams, stranger often signals acceptance, yet may also touch procrastination. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Use creativity (drawing, music) to let the image speak.",
+      "keywords": [
+        "stranger"
+      ]
+    },
+    {
+      "id": "family-49",
+      "name": "Family",
+      "themes": [
+        "clarity",
+        "overload"
+      ],
+      "explanation": "In dreams, family often signals clarity, yet may also touch overload. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Check if the symbol warns or encourages you.",
+      "keywords": [
+        "family"
+      ]
+    },
+    {
+      "id": "friend-50",
+      "name": "Friend",
+      "themes": [
+        "insight",
+        "guilt"
+      ],
+      "explanation": "In dreams, friend often signals insight, yet may also touch guilt. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Check if the symbol warns or encourages you.",
+      "keywords": [
+        "friend"
+      ]
+    },
+    {
+      "id": "celebrities-51",
+      "name": "Celebrities",
+      "themes": [
+        "acceptance",
+        "uncertainty"
+      ],
+      "explanation": "In dreams, celebrities often signals acceptance, yet may also touch uncertainty. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Write a few keywords upon waking and revisit later for reflection.",
+      "keywords": [
+        "celebrities"
+      ]
+    },
+    {
+      "id": "money-52",
+      "name": "Money",
+      "themes": [
+        "trust",
+        "procrastination"
+      ],
+      "explanation": "In dreams, money often signals trust, yet may also touch procrastination. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Slow the day: fewer screens, more body, a simple routine.",
+      "keywords": [
+        "money"
+      ]
+    },
+    {
+      "id": "wallet-53",
+      "name": "Wallet",
+      "themes": [
+        "insight",
+        "confusion"
+      ],
+      "explanation": "In dreams, wallet often signals insight, yet may also touch confusion. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Speak with someone you trust and name the core without overanalysis.",
+      "keywords": [
+        "wallet"
+      ]
+    },
+    {
+      "id": "passport-54",
+      "name": "Passport",
+      "themes": [
+        "acceptance",
+        "procrastination"
+      ],
+      "explanation": "In dreams, passport often signals acceptance, yet may also touch procrastination. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Set a gentle boundary: what do you allow in, what do you release?",
+      "keywords": [
+        "passport"
+      ]
+    },
+    {
+      "id": "pitfall-55",
+      "name": "Pitfall",
+      "themes": [
+        "courage",
+        "guilt"
+      ],
+      "explanation": "In dreams, pitfall often signals courage, yet may also touch guilt. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Speak with someone you trust and name the core without overanalysis.",
+      "keywords": [
+        "pitfall"
+      ]
+    },
+    {
+      "id": "tornado-56",
+      "name": "Tornado",
+      "themes": [
+        "acceptance",
+        "overload"
+      ],
+      "explanation": "In dreams, tornado often signals acceptance, yet may also touch overload. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Write a few keywords upon waking and revisit later for reflection.",
+      "keywords": [
+        "tornado"
+      ]
+    },
+    {
+      "id": "volcano-57",
+      "name": "Volcano",
+      "themes": [
+        "acceptance",
+        "confusion"
+      ],
+      "explanation": "In dreams, volcano often signals acceptance, yet may also touch confusion. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Check if the symbol warns or encourages you.",
+      "keywords": [
+        "volcano"
+      ]
+    },
+    {
+      "id": "ice-58",
+      "name": "Ice",
+      "themes": [
+        "freedom",
+        "overload"
+      ],
+      "explanation": "In dreams, ice often signals freedom, yet may also touch overload. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Create a small ritual (breath, tea, short walk) to integrate the message.",
+      "keywords": [
+        "ice"
+      ]
+    },
+    {
+      "id": "snow-59",
+      "name": "Snow",
+      "themes": [
+        "trust",
+        "lack of boundaries"
+      ],
+      "explanation": "In dreams, snow often signals trust, yet may also touch lack of boundaries. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Write a few keywords upon waking and revisit later for reflection.",
+      "keywords": [
+        "snow"
+      ]
+    },
+    {
+      "id": "flowers-60",
+      "name": "Flowers",
+      "themes": [
+        "acceptance",
+        "uncertainty"
+      ],
+      "explanation": "In dreams, flowers often signals acceptance, yet may also touch uncertainty. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Write a few keywords upon waking and revisit later for reflection.",
+      "keywords": [
+        "flowers"
+      ]
+    },
+    {
+      "id": "tree-61",
+      "name": "Tree",
+      "themes": [
+        "healing",
+        "procrastination"
+      ],
+      "explanation": "In dreams, tree often signals healing, yet may also touch procrastination. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Create a small ritual (breath, tea, short walk) to integrate the message.",
+      "keywords": [
+        "tree"
+      ]
+    },
+    {
+      "id": "fruits-62",
+      "name": "Fruits",
+      "themes": [
+        "courage",
+        "loss"
+      ],
+      "explanation": "In dreams, fruits often signals courage, yet may also touch loss. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Write a few keywords upon waking and revisit later for reflection.",
+      "keywords": [
+        "fruits"
+      ]
+    },
+    {
+      "id": "mud-63",
+      "name": "Mud",
+      "themes": [
+        "connection",
+        "procrastination"
+      ],
+      "explanation": "In dreams, mud often signals connection, yet may also touch procrastination. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Use creativity (drawing, music) to let the image speak.",
+      "keywords": [
+        "mud"
+      ]
+    },
+    {
+      "id": "shoes-64",
+      "name": "Shoes",
+      "themes": [
+        "renewal",
+        "overload"
+      ],
+      "explanation": "In dreams, shoes often signals renewal, yet may also touch overload. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Use creativity (drawing, music) to let the image speak.",
+      "keywords": [
+        "shoes"
+      ]
+    },
+    {
+      "id": "clothes-65",
+      "name": "Clothes",
+      "themes": [
+        "creativity",
+        "procrastination"
+      ],
+      "explanation": "In dreams, clothes often signals creativity, yet may also touch procrastination. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Speak with someone you trust and name the core without overanalysis.",
+      "keywords": [
+        "clothes"
+      ]
+    },
+    {
+      "id": "mask-66",
+      "name": "Mask",
+      "themes": [
+        "acceptance",
+        "shame"
+      ],
+      "explanation": "In dreams, mask often signals acceptance, yet may also touch shame. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Ask which emotion felt strongest and where it shows up in daily life.",
+      "keywords": [
+        "mask"
+      ]
+    },
+    {
+      "id": "bird-67",
+      "name": "Bird",
+      "themes": [
+        "courage",
+        "fear"
+      ],
+      "explanation": "In dreams, bird often signals courage, yet may also touch fear. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Write a few keywords upon waking and revisit later for reflection.",
+      "keywords": [
+        "bird"
+      ]
+    },
+    {
+      "id": "fish-68",
+      "name": "Fish",
+      "themes": [
+        "creativity",
+        "guilt"
+      ],
+      "explanation": "In dreams, fish often signals creativity, yet may also touch guilt. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Ask which emotion felt strongest and where it shows up in daily life.",
+      "keywords": [
+        "fish"
+      ]
+    },
+    {
+      "id": "horse-69",
+      "name": "Horse",
+      "themes": [
+        "insight",
+        "fear"
+      ],
+      "explanation": "In dreams, horse often signals insight, yet may also touch fear. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Set a gentle boundary: what do you allow in, what do you release?",
+      "keywords": [
+        "horse"
+      ]
+    },
+    {
+      "id": "cow-70",
+      "name": "Cow",
+      "themes": [
+        "renewal",
+        "fear"
+      ],
+      "explanation": "In dreams, cow often signals renewal, yet may also touch fear. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Create a small ritual (breath, tea, short walk) to integrate the message.",
+      "keywords": [
+        "cow"
+      ]
+    },
+    {
+      "id": "ball-71",
+      "name": "Ball",
+      "themes": [
+        "renewal",
+        "loss"
+      ],
+      "explanation": "In dreams, ball often signals renewal, yet may also touch loss. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Slow the day: fewer screens, more body, a simple routine.",
+      "keywords": [
+        "ball"
+      ]
+    },
+    {
+      "id": "playing-cards-72",
+      "name": "Playing Cards",
+      "themes": [
+        "healing",
+        "uncertainty"
+      ],
+      "explanation": "In dreams, playing cards often signals healing, yet may also touch uncertainty. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Set a gentle boundary: what do you allow in, what do you release?",
+      "keywords": [
+        "playing",
+        "cards"
+      ]
+    },
+    {
+      "id": "book-73",
+      "name": "Book",
+      "themes": [
+        "courage",
+        "shame"
+      ],
+      "explanation": "In dreams, book often signals courage, yet may also touch shame. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Use creativity (drawing, music) to let the image speak.",
+      "keywords": [
+        "book"
+      ]
+    },
+    {
+      "id": "pen-74",
+      "name": "Pen",
+      "themes": [
+        "freedom",
+        "uncertainty"
+      ],
+      "explanation": "In dreams, pen often signals freedom, yet may also touch uncertainty. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Ask which emotion felt strongest and where it shows up in daily life.",
+      "keywords": [
+        "pen"
+      ]
+    },
+    {
+      "id": "clock-75",
+      "name": "Clock",
+      "themes": [
+        "freedom",
+        "shame"
+      ],
+      "explanation": "In dreams, clock often signals freedom, yet may also touch shame. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Ask which emotion felt strongest and where it shows up in daily life.",
+      "keywords": [
+        "clock"
+      ]
+    },
+    {
+      "id": "map-76",
+      "name": "Map",
+      "themes": [
+        "trust",
+        "fear"
+      ],
+      "explanation": "In dreams, map often signals trust, yet may also touch fear. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Speak with someone you trust and name the core without overanalysis.",
+      "keywords": [
+        "map"
+      ]
+    },
+    {
+      "id": "maze-77",
+      "name": "Maze",
+      "themes": [
+        "trust",
+        "procrastination"
+      ],
+      "explanation": "In dreams, maze often signals trust, yet may also touch procrastination. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Check if the symbol warns or encourages you.",
+      "keywords": [
+        "maze"
+      ]
+    },
+    {
+      "id": "fence-78",
+      "name": "Fence",
+      "themes": [
+        "renewal",
+        "loss of control"
+      ],
+      "explanation": "In dreams, fence often signals renewal, yet may also touch loss of control. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Set a gentle boundary: what do you allow in, what do you release?",
+      "keywords": [
+        "fence"
+      ]
+    },
+    {
+      "id": "wall-79",
+      "name": "Wall",
+      "themes": [
+        "healing",
+        "shame"
+      ],
+      "explanation": "In dreams, wall often signals healing, yet may also touch shame. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Ask which emotion felt strongest and where it shows up in daily life.",
+      "keywords": [
+        "wall"
+      ]
+    },
+    {
+      "id": "door-80",
+      "name": "Door",
+      "themes": [
+        "trust",
+        "fear"
+      ],
+      "explanation": "In dreams, door often signals trust, yet may also touch fear. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Use creativity (drawing, music) to let the image speak.",
+      "keywords": [
+        "door"
+      ]
+    },
+    {
+      "id": "window-81",
+      "name": "Window",
+      "themes": [
+        "clarity",
+        "procrastination"
+      ],
+      "explanation": "In dreams, window often signals clarity, yet may also touch procrastination. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Use creativity (drawing, music) to let the image speak.",
+      "keywords": [
+        "window"
+      ]
+    },
+    {
+      "id": "balcony-82",
+      "name": "Balcony",
+      "themes": [
+        "healing",
+        "lack of boundaries"
+      ],
+      "explanation": "In dreams, balcony often signals healing, yet may also touch lack of boundaries. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Use creativity (drawing, music) to let the image speak.",
+      "keywords": [
+        "balcony"
+      ]
+    },
+    {
+      "id": "roof-83",
+      "name": "Roof",
+      "themes": [
+        "insight",
+        "procrastination"
+      ],
+      "explanation": "In dreams, roof often signals insight, yet may also touch procrastination. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Slow the day: fewer screens, more body, a simple routine.",
+      "keywords": [
+        "roof"
+      ]
+    },
+    {
+      "id": "stairs-84",
+      "name": "Stairs",
+      "themes": [
+        "healing",
+        "procrastination"
+      ],
+      "explanation": "In dreams, stairs often signals healing, yet may also touch procrastination. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Use creativity (drawing, music) to let the image speak.",
+      "keywords": [
+        "stairs"
+      ]
+    },
+    {
+      "id": "fall-85",
+      "name": "Fall",
+      "themes": [
+        "courage",
+        "loss"
+      ],
+      "explanation": "In dreams, fall often signals courage, yet may also touch loss. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Check if the symbol warns or encourages you.",
+      "keywords": [
+        "fall"
+      ]
+    },
+    {
+      "id": "hover-86",
+      "name": "Hover",
+      "themes": [
+        "freedom",
+        "lack of boundaries"
+      ],
+      "explanation": "In dreams, hover often signals freedom, yet may also touch lack of boundaries. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Speak with someone you trust and name the core without overanalysis.",
+      "keywords": [
+        "hover"
+      ]
+    },
+    {
+      "id": "sing-87",
+      "name": "Sing",
+      "themes": [
+        "trust",
+        "lack of boundaries"
+      ],
+      "explanation": "In dreams, sing often signals trust, yet may also touch lack of boundaries. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Slow the day: fewer screens, more body, a simple routine.",
+      "keywords": [
+        "sing"
+      ]
+    },
+    {
+      "id": "shout-88",
+      "name": "Shout",
+      "themes": [
+        "courage",
+        "procrastination"
+      ],
+      "explanation": "In dreams, shout often signals courage, yet may also touch procrastination. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Speak with someone you trust and name the core without overanalysis.",
+      "keywords": [
+        "shout"
+      ]
+    },
+    {
+      "id": "whisper-89",
+      "name": "Whisper",
+      "themes": [
+        "creativity",
+        "guilt"
+      ],
+      "explanation": "In dreams, whisper often signals creativity, yet may also touch guilt. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Ask which emotion felt strongest and where it shows up in daily life.",
+      "keywords": [
+        "whisper"
+      ]
+    },
+    {
+      "id": "swim-90",
+      "name": "Swim",
+      "themes": [
+        "connection",
+        "overload"
+      ],
+      "explanation": "In dreams, swim often signals connection, yet may also touch overload. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Set a gentle boundary: what do you allow in, what do you release?",
+      "keywords": [
+        "swim"
+      ]
+    },
+    {
+      "id": "drown-91",
+      "name": "Drown",
+      "themes": [
+        "courage",
+        "uncertainty"
+      ],
+      "explanation": "In dreams, drown often signals courage, yet may also touch uncertainty. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Check if the symbol warns or encourages you.",
+      "keywords": [
+        "drown"
+      ]
+    },
+    {
+      "id": "rescue-92",
+      "name": "Rescue",
+      "themes": [
+        "creativity",
+        "fear"
+      ],
+      "explanation": "In dreams, rescue often signals creativity, yet may also touch fear. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Slow the day: fewer screens, more body, a simple routine.",
+      "keywords": [
+        "rescue"
+      ]
+    },
+    {
+      "id": "search-93",
+      "name": "Search",
+      "themes": [
+        "creativity",
+        "loss"
+      ],
+      "explanation": "In dreams, search often signals creativity, yet may also touch loss. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Slow the day: fewer screens, more body, a simple routine.",
+      "keywords": [
+        "search"
+      ]
+    },
+    {
+      "id": "find-94",
+      "name": "Find",
+      "themes": [
+        "renewal",
+        "confusion"
+      ],
+      "explanation": "In dreams, find often signals renewal, yet may also touch confusion. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Speak with someone you trust and name the core without overanalysis.",
+      "keywords": [
+        "find"
+      ]
+    },
+    {
+      "id": "forget-95",
+      "name": "Forget",
+      "themes": [
+        "creativity",
+        "shame"
+      ],
+      "explanation": "In dreams, forget often signals creativity, yet may also touch shame. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Speak with someone you trust and name the core without overanalysis.",
+      "keywords": [
+        "forget"
+      ]
+    },
+    {
+      "id": "get-lost-96",
+      "name": "Get Lost",
+      "themes": [
+        "clarity",
+        "fear"
+      ],
+      "explanation": "In dreams, get lost often signals clarity, yet may also touch fear. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Set a gentle boundary: what do you allow in, what do you release?",
+      "keywords": [
+        "get",
+        "lost"
+      ]
+    },
+    {
+      "id": "hug-97",
+      "name": "Hug",
+      "themes": [
+        "healing",
+        "guilt"
+      ],
+      "explanation": "In dreams, hug often signals healing, yet may also touch guilt. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Check if the symbol warns or encourages you.",
+      "keywords": [
+        "hug"
+      ]
+    },
+    {
+      "id": "kiss-98",
+      "name": "Kiss",
+      "themes": [
+        "courage",
+        "lack of boundaries"
+      ],
+      "explanation": "In dreams, kiss often signals courage, yet may also touch lack of boundaries. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Set a gentle boundary: what do you allow in, what do you release?",
+      "keywords": [
+        "kiss"
+      ]
+    },
+    {
+      "id": "quarrel-99",
+      "name": "Quarrel",
+      "themes": [
+        "courage",
+        "overload"
+      ],
+      "explanation": "In dreams, quarrel often signals courage, yet may also touch overload. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Slow the day: fewer screens, more body, a simple routine.",
+      "keywords": [
+        "quarrel"
+      ]
+    },
+    {
+      "id": "peace-100",
+      "name": "Peace",
+      "themes": [
+        "insight",
+        "loss of control"
+      ],
+      "explanation": "In dreams, peace often signals insight, yet may also touch loss of control. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Speak with someone you trust and name the core without overanalysis.",
+      "keywords": [
+        "peace"
+      ]
+    },
+    {
+      "id": "gift-101",
+      "name": "Gift",
+      "themes": [
+        "renewal",
+        "procrastination"
+      ],
+      "explanation": "In dreams, gift often signals renewal, yet may also touch procrastination. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Set a gentle boundary: what do you allow in, what do you release?",
+      "keywords": [
+        "gift"
+      ]
+    },
+    {
+      "id": "party-102",
+      "name": "Party",
+      "themes": [
+        "connection",
+        "uncertainty"
+      ],
+      "explanation": "In dreams, party often signals connection, yet may also touch uncertainty. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Use creativity (drawing, music) to let the image speak.",
+      "keywords": [
+        "party"
+      ]
+    },
+    {
+      "id": "birthday-103",
+      "name": "Birthday",
+      "themes": [
+        "courage",
+        "lack of boundaries"
+      ],
+      "explanation": "In dreams, birthday often signals courage, yet may also touch lack of boundaries. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Use creativity (drawing, music) to let the image speak.",
+      "keywords": [
+        "birthday"
+      ]
+    },
+    {
+      "id": "betrayal-104",
+      "name": "Betrayal",
+      "themes": [
+        "acceptance",
+        "lack of boundaries"
+      ],
+      "explanation": "In dreams, betrayal often signals acceptance, yet may also touch lack of boundaries. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Use creativity (drawing, music) to let the image speak.",
+      "keywords": [
+        "betrayal"
+      ]
+    },
+    {
+      "id": "theft-105",
+      "name": "Theft",
+      "themes": [
+        "creativity",
+        "overload"
+      ],
+      "explanation": "In dreams, theft often signals creativity, yet may also touch overload. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Speak with someone you trust and name the core without overanalysis.",
+      "keywords": [
+        "theft"
+      ]
+    },
+    {
+      "id": "prison-106",
+      "name": "Prison",
+      "themes": [
+        "connection",
+        "shame"
+      ],
+      "explanation": "In dreams, prison often signals connection, yet may also touch shame. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Set a gentle boundary: what do you allow in, what do you release?",
+      "keywords": [
+        "prison"
+      ]
+    },
+    {
+      "id": "freedom-107",
+      "name": "Freedom",
+      "themes": [
+        "healing",
+        "guilt"
+      ],
+      "explanation": "In dreams, freedom often signals healing, yet may also touch guilt. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Use creativity (drawing, music) to let the image speak.",
+      "keywords": [
+        "freedom"
+      ]
+    },
+    {
+      "id": "travel-108",
+      "name": "Travel",
+      "themes": [
+        "healing",
+        "lack of boundaries"
+      ],
+      "explanation": "In dreams, travel often signals healing, yet may also touch lack of boundaries. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Create a small ritual (breath, tea, short walk) to integrate the message.",
+      "keywords": [
+        "travel"
+      ]
+    },
+    {
+      "id": "luggage-109",
+      "name": "Luggage",
+      "themes": [
+        "renewal",
+        "guilt"
+      ],
+      "explanation": "In dreams, luggage often signals renewal, yet may also touch guilt. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Slow the day: fewer screens, more body, a simple routine.",
+      "keywords": [
+        "luggage"
+      ]
+    },
+    {
+      "id": "hidden-camera-110",
+      "name": "Hidden Camera",
+      "themes": [
+        "connection",
+        "uncertainty"
+      ],
+      "explanation": "In dreams, hidden camera often signals connection, yet may also touch uncertainty. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Speak with someone you trust and name the core without overanalysis.",
+      "keywords": [
+        "hidden",
+        "camera"
+      ]
+    },
+    {
+      "id": "strange-language-111",
+      "name": "Strange Language",
+      "themes": [
+        "healing",
+        "guilt"
+      ],
+      "explanation": "In dreams, strange language often signals healing, yet may also touch guilt. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Speak with someone you trust and name the core without overanalysis.",
+      "keywords": [
+        "strange",
+        "language"
+      ]
+    },
+    {
+      "id": "old-house-112",
+      "name": "Old House",
+      "themes": [
+        "renewal",
+        "confusion"
+      ],
+      "explanation": "In dreams, old house often signals renewal, yet may also touch confusion. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Create a small ritual (breath, tea, short walk) to integrate the message.",
+      "keywords": [
+        "old",
+        "house"
+      ]
+    },
+    {
+      "id": "old-friend-113",
+      "name": "Old Friend",
+      "themes": [
+        "connection",
+        "fear"
+      ],
+      "explanation": "In dreams, old friend often signals connection, yet may also touch fear. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Create a small ritual (breath, tea, short walk) to integrate the message.",
+      "keywords": [
+        "old",
+        "friend"
+      ]
+    },
+    {
+      "id": "unexplained-light-114",
+      "name": "Unexplained Light",
+      "themes": [
+        "connection",
+        "fear"
+      ],
+      "explanation": "In dreams, unexplained light often signals connection, yet may also touch fear. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Write a few keywords upon waking and revisit later for reflection.",
+      "keywords": [
+        "unexplained",
+        "light"
+      ]
+    },
+    {
+      "id": "hidden-camera-115",
+      "name": "Hidden Camera",
+      "themes": [
+        "clarity",
+        "shame"
+      ],
+      "explanation": "In dreams, hidden camera often signals clarity, yet may also touch shame. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Create a small ritual (breath, tea, short walk) to integrate the message.",
+      "keywords": [
+        "hidden",
+        "camera"
+      ]
+    },
+    {
+      "id": "strange-language-116",
+      "name": "Strange Language",
+      "themes": [
+        "courage",
+        "loss of control"
+      ],
+      "explanation": "In dreams, strange language often signals courage, yet may also touch loss of control. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Write a few keywords upon waking and revisit later for reflection.",
+      "keywords": [
+        "strange",
+        "language"
+      ]
+    },
+    {
+      "id": "old-house-117",
+      "name": "Old House",
+      "themes": [
+        "trust",
+        "shame"
+      ],
+      "explanation": "In dreams, old house often signals trust, yet may also touch shame. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Slow the day: fewer screens, more body, a simple routine.",
+      "keywords": [
+        "old",
+        "house"
+      ]
+    },
+    {
+      "id": "old-friend-118",
+      "name": "Old Friend",
+      "themes": [
+        "courage",
+        "overload"
+      ],
+      "explanation": "In dreams, old friend often signals courage, yet may also touch overload. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Use creativity (drawing, music) to let the image speak.",
+      "keywords": [
+        "old",
+        "friend"
+      ]
+    },
+    {
+      "id": "unexplained-light-119",
+      "name": "Unexplained Light",
+      "themes": [
+        "freedom",
+        "fear"
+      ],
+      "explanation": "In dreams, unexplained light often signals freedom, yet may also touch fear. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Speak with someone you trust and name the core without overanalysis.",
+      "keywords": [
+        "unexplained",
+        "light"
+      ]
+    },
+    {
+      "id": "hidden-camera-120",
+      "name": "Hidden Camera",
+      "themes": [
+        "courage",
+        "loss of control"
+      ],
+      "explanation": "In dreams, hidden camera often signals courage, yet may also touch loss of control. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Ask which emotion felt strongest and where it shows up in daily life.",
+      "keywords": [
+        "hidden",
+        "camera"
+      ]
+    },
+    {
+      "id": "strange-language-121",
+      "name": "Strange Language",
+      "themes": [
+        "acceptance",
+        "overload"
+      ],
+      "explanation": "In dreams, strange language often signals acceptance, yet may also touch overload. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Ask which emotion felt strongest and where it shows up in daily life.",
+      "keywords": [
+        "strange",
+        "language"
+      ]
+    },
+    {
+      "id": "old-house-122",
+      "name": "Old House",
+      "themes": [
+        "trust",
+        "fear"
+      ],
+      "explanation": "In dreams, old house often signals trust, yet may also touch fear. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Create a small ritual (breath, tea, short walk) to integrate the message.",
+      "keywords": [
+        "old",
+        "house"
+      ]
+    },
+    {
+      "id": "old-friend-123",
+      "name": "Old Friend",
+      "themes": [
+        "freedom",
+        "uncertainty"
+      ],
+      "explanation": "In dreams, old friend often signals freedom, yet may also touch uncertainty. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Speak with someone you trust and name the core without overanalysis.",
+      "keywords": [
+        "old",
+        "friend"
+      ]
+    },
+    {
+      "id": "unexplained-light-124",
+      "name": "Unexplained Light",
+      "themes": [
+        "healing",
+        "guilt"
+      ],
+      "explanation": "In dreams, unexplained light often signals healing, yet may also touch guilt. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Ask which emotion felt strongest and where it shows up in daily life.",
+      "keywords": [
+        "unexplained",
+        "light"
+      ]
+    },
+    {
+      "id": "hidden-camera-125",
+      "name": "Hidden Camera",
+      "themes": [
+        "clarity",
+        "procrastination"
+      ],
+      "explanation": "In dreams, hidden camera often signals clarity, yet may also touch procrastination. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Set a gentle boundary: what do you allow in, what do you release?",
+      "keywords": [
+        "hidden",
+        "camera"
+      ]
+    },
+    {
+      "id": "strange-language-126",
+      "name": "Strange Language",
+      "themes": [
+        "clarity",
+        "procrastination"
+      ],
+      "explanation": "In dreams, strange language often signals clarity, yet may also touch procrastination. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Slow the day: fewer screens, more body, a simple routine.",
+      "keywords": [
+        "strange",
+        "language"
+      ]
+    },
+    {
+      "id": "old-house-127",
+      "name": "Old House",
+      "themes": [
+        "courage",
+        "shame"
+      ],
+      "explanation": "In dreams, old house often signals courage, yet may also touch shame. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Check if the symbol warns or encourages you.",
+      "keywords": [
+        "old",
+        "house"
+      ]
+    },
+    {
+      "id": "old-friend-128",
+      "name": "Old Friend",
+      "themes": [
+        "connection",
+        "uncertainty"
+      ],
+      "explanation": "In dreams, old friend often signals connection, yet may also touch uncertainty. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Write a few keywords upon waking and revisit later for reflection.",
+      "keywords": [
+        "old",
+        "friend"
+      ]
+    },
+    {
+      "id": "unexplained-light-129",
+      "name": "Unexplained Light",
+      "themes": [
+        "trust",
+        "loss of control"
+      ],
+      "explanation": "In dreams, unexplained light often signals trust, yet may also touch loss of control. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Set a gentle boundary: what do you allow in, what do you release?",
+      "keywords": [
+        "unexplained",
+        "light"
+      ]
+    },
+    {
+      "id": "hidden-camera-130",
+      "name": "Hidden Camera",
+      "themes": [
+        "renewal",
+        "shame"
+      ],
+      "explanation": "In dreams, hidden camera often signals renewal, yet may also touch shame. Watch the context: who/what is present, and how do you feel?",
+      "advice": "Ask which emotion felt strongest and where it shows up in daily life.",
+      "keywords": [
+        "hidden",
+        "camera"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,118 @@
+{
+  "version": "1.0.0",
+  "count": 258,
+  "letters": [
+    {
+      "letter": "A",
+      "count": 26
+    },
+    {
+      "letter": "B",
+      "count": 26
+    },
+    {
+      "letter": "C",
+      "count": 7
+    },
+    {
+      "letter": "D",
+      "count": 23
+    },
+    {
+      "letter": "E",
+      "count": 8
+    },
+    {
+      "letter": "F",
+      "count": 5
+    },
+    {
+      "letter": "G",
+      "count": 9
+    },
+    {
+      "letter": "H",
+      "count": 7
+    },
+    {
+      "letter": "I",
+      "count": 1
+    },
+    {
+      "letter": "J",
+      "count": 2
+    },
+    {
+      "letter": "K",
+      "count": 23
+    },
+    {
+      "letter": "L",
+      "count": 1
+    },
+    {
+      "letter": "M",
+      "count": 16
+    },
+    {
+      "letter": "N",
+      "count": 2
+    },
+    {
+      "letter": "O",
+      "count": 3
+    },
+    {
+      "letter": "P",
+      "count": 18
+    },
+    {
+      "letter": "R",
+      "count": 2
+    },
+    {
+      "letter": "S",
+      "count": 15
+    },
+    {
+      "letter": "T",
+      "count": 14
+    },
+    {
+      "letter": "U",
+      "count": 4
+    },
+    {
+      "letter": "V",
+      "count": 1
+    },
+    {
+      "letter": "Y",
+      "count": 11
+    },
+    {
+      "letter": "Z",
+      "count": 3
+    },
+    {
+      "letter": "Ç",
+      "count": 11
+    },
+    {
+      "letter": "Ö",
+      "count": 3
+    },
+    {
+      "letter": "Ü",
+      "count": 4
+    },
+    {
+      "letter": "İ",
+      "count": 10
+    },
+    {
+      "letter": "Ş",
+      "count": 3
+    }
+  ]
+}

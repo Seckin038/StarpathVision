@@ -1,0 +1,1553 @@
+{
+  "version": "1.0.0",
+  "symbols": [
+    {
+      "id": "island",
+      "letter": "A",
+      "name": "ADA",
+      "meaning": "Ummadık bir fırsat"
+    },
+    {
+      "id": "tree",
+      "letter": "A",
+      "name": "AĞAÇ",
+      "meaning": "Uzun ömür"
+    },
+    {
+      "id": "net",
+      "letter": "A",
+      "name": "AĞ",
+      "meaning": "Kapınızda bekleyen tehlike"
+    },
+    {
+      "id": "cook",
+      "letter": "A",
+      "name": "AHÇI",
+      "meaning": "Kısa sürede mutluluk"
+    },
+    {
+      "id": "octopus",
+      "letter": "A",
+      "name": "AHTAPOT",
+      "meaning": "Dikkatli olun"
+    },
+    {
+      "id": "family",
+      "letter": "A",
+      "name": "AİLE",
+      "meaning": "Sevindirici haber"
+    },
+    {
+      "id": "scorpion",
+      "letter": "A",
+      "name": "AKREP",
+      "meaning": "Çevrende kötü niyetliler var"
+    },
+    {
+      "id": "vulture",
+      "letter": "A",
+      "name": "AKBABA",
+      "meaning": "Borçlanmamalısınız"
+    },
+    {
+      "id": "lung",
+      "letter": "A",
+      "name": "AKCİĞER",
+      "meaning": "Bereket"
+    },
+    {
+      "id": "flame",
+      "letter": "A",
+      "name": "ALEV",
+      "meaning": "Büyük bir aşk bekliyor"
+    },
+    {
+      "id": "god-allah",
+      "letter": "A",
+      "name": "ALLAH",
+      "meaning": "Büyük bir hayra alamet"
+    },
+    {
+      "id": "wedding-ring",
+      "letter": "A",
+      "name": "ALYANS",
+      "meaning": "Sevgilinizle problem yaşayacak ama barışacaksınız"
+    },
+    {
+      "id": "bulb",
+      "letter": "A",
+      "name": "AMPUL",
+      "meaning": "Çok büyük problemler yaşayacaksınız"
+    },
+    {
+      "id": "key",
+      "letter": "A",
+      "name": "ANAHTAR",
+      "meaning": "Uzun süredir beklediğiniz şeyler gerçekleşecek"
+    },
+    {
+      "id": "car",
+      "letter": "A",
+      "name": "ARABA",
+      "meaning": "Sizi seven insanlardan yardım göreceksiniz"
+    },
+    {
+      "id": "bee",
+      "letter": "A",
+      "name": "ARI",
+      "meaning": "Dertleriniz ortadan kalkacak"
+    },
+    {
+      "id": "lion",
+      "letter": "A",
+      "name": "ARSLAN/ASLAN",
+      "meaning": "Ailenizden bir büyük elinizden tutacak"
+    },
+    {
+      "id": "soldier",
+      "letter": "A",
+      "name": "ASKER",
+      "meaning": "Sıkıntılı zamanlar yaşayacak ama aşacaksınız"
+    },
+    {
+      "id": "horse",
+      "letter": "A",
+      "name": "AT",
+      "meaning": "Zenginlik"
+    },
+    {
+      "id": "horseshoe",
+      "letter": "A",
+      "name": "AT NALI",
+      "meaning": "Çok hayırlı olay olacak"
+    },
+    {
+      "id": "fire",
+      "letter": "A",
+      "name": "ATEŞ",
+      "meaning": "Sevdiğiniz birisinden kısa ayrılık"
+    },
+    {
+      "id": "palm",
+      "letter": "A",
+      "name": "AVUÇ",
+      "meaning": "Kötü alışkanlıklarınızı bırakacaksınız"
+    },
+    {
+      "id": "moon",
+      "letter": "A",
+      "name": "AY",
+      "meaning": "Kariyeriniz yükselecek"
+    },
+    {
+      "id": "foot",
+      "letter": "A",
+      "name": "AYAK",
+      "meaning": "Sevdiğiniz birine yardım edeceksiniz"
+    },
+    {
+      "id": "shoe",
+      "letter": "A",
+      "name": "AYAKKABI",
+      "meaning": "Ummadığınız birinden yardım"
+    },
+    {
+      "id": "bear",
+      "letter": "A",
+      "name": "AYI",
+      "meaning": "Büyük bir korku yaşayacaksınız"
+    },
+    {
+      "id": "chimney",
+      "letter": "B",
+      "name": "BACA",
+      "meaning": "Sevindirici haber"
+    },
+    {
+      "id": "leg",
+      "letter": "B",
+      "name": "BACAK",
+      "meaning": "Para kaybedeceksiniz"
+    },
+    {
+      "id": "almond",
+      "letter": "B",
+      "name": "BADEM",
+      "meaning": "Talihiniz dönecek"
+    },
+    {
+      "id": "navy-sailor",
+      "letter": "B",
+      "name": "BAHRİYELİ",
+      "meaning": "Büyük ama geçici mutluluk"
+    },
+    {
+      "id": "fish",
+      "letter": "B",
+      "name": "BALIK",
+      "meaning": "Bolluk"
+    },
+    {
+      "id": "balloon",
+      "letter": "B",
+      "name": "BALON",
+      "meaning": "Tartışmalar yaşayacaksınız"
+    },
+    {
+      "id": "axe",
+      "letter": "B",
+      "name": "BALTA",
+      "meaning": "Belalarınız bitecek"
+    },
+    {
+      "id": "glass",
+      "letter": "B",
+      "name": "BARDAK",
+      "meaning": "Sevginizi açıklayacaksınız"
+    },
+    {
+      "id": "step",
+      "letter": "B",
+      "name": "BASAMAK",
+      "meaning": "Hayalleriniz adım adım gerçekleşiyor"
+    },
+    {
+      "id": "cane",
+      "letter": "B",
+      "name": "BASTON",
+      "meaning": "Kazanç"
+    },
+    {
+      "id": "head",
+      "letter": "B",
+      "name": "BAŞ",
+      "meaning": "Para ya da çocuk sahibi olacaksınız"
+    },
+    {
+      "id": "wheat-ear",
+      "letter": "B",
+      "name": "BAŞAK",
+      "meaning": "Huzur"
+    },
+    {
+      "id": "sunset",
+      "letter": "B",
+      "name": "BATAN GÜNEŞ",
+      "meaning": "Kısa sürede güzel haber"
+    },
+    {
+      "id": "suitcase",
+      "letter": "B",
+      "name": "BAVUL",
+      "meaning": "Ciddi karar"
+    },
+    {
+      "id": "owl",
+      "letter": "B",
+      "name": "BAYKUŞ",
+      "meaning": "Arkadaşlarınıza dikkat, içlerinde sinsiler var"
+    },
+    {
+      "id": "flag",
+      "letter": "B",
+      "name": "BAYRAK",
+      "meaning": "Huzur"
+    },
+    {
+      "id": "baby",
+      "letter": "B",
+      "name": "BEBEK",
+      "meaning": "Bir karar arifesindesiniz"
+    },
+    {
+      "id": "cradle",
+      "letter": "B",
+      "name": "BEŞİK",
+      "meaning": "Evlilik, evliyseniz çocuk"
+    },
+    {
+      "id": "knife",
+      "letter": "B",
+      "name": "BIÇAK",
+      "meaning": "Kısmetiniz açılacak"
+    },
+    {
+      "id": "computer",
+      "letter": "B",
+      "name": "BİLGİSAYAR",
+      "meaning": "Büyük kısmet"
+    },
+    {
+      "id": "building",
+      "letter": "B",
+      "name": "BİNA",
+      "meaning": "Çevrenizdekilerin saygısı artacak"
+    },
+    {
+      "id": "bull",
+      "letter": "B",
+      "name": "BOĞA",
+      "meaning": "Kazanç"
+    },
+    {
+      "id": "horn",
+      "letter": "B",
+      "name": "BOYNUZ",
+      "meaning": "Dedikoduya dikkat edin"
+    },
+    {
+      "id": "wheat",
+      "letter": "B",
+      "name": "BUĞDAY",
+      "meaning": "Para gelecek"
+    },
+    {
+      "id": "cloud",
+      "letter": "B",
+      "name": "BULUT",
+      "meaning": "Huzursuzluk"
+    },
+    {
+      "id": "nose",
+      "letter": "B",
+      "name": "BURUN",
+      "meaning": "Akıl danışacak bir dost gelecek"
+    },
+    {
+      "id": "mosque",
+      "letter": "C",
+      "name": "CAMİİ",
+      "meaning": "Ailenizden yardım gelecek"
+    },
+    {
+      "id": "monster",
+      "letter": "C",
+      "name": "CANAVAR",
+      "meaning": "Dost görünen düşmanlar pişman olacak"
+    },
+    {
+      "id": "funeral",
+      "letter": "C",
+      "name": "CENAZE",
+      "meaning": "Yolculuk"
+    },
+    {
+      "id": "mobile-phone",
+      "letter": "C",
+      "name": "CEP TELEFONU",
+      "meaning": "Erkekseniz hayırlı haber, kadınsanız dedikodu"
+    },
+    {
+      "id": "ruler",
+      "letter": "C",
+      "name": "CETVEL",
+      "meaning": "Hayırlı gelişme"
+    },
+    {
+      "id": "tweezers",
+      "letter": "C",
+      "name": "CIMBIZ",
+      "meaning": "Zor günler gelecek ama kısa sürede geçecek"
+    },
+    {
+      "id": "dwarf",
+      "letter": "C",
+      "name": "CÜCE",
+      "meaning": "Büyük tehlike yanı başınızda"
+    },
+    {
+      "id": "bell",
+      "letter": "Ç",
+      "name": "ÇAN",
+      "meaning": "Üzücü bir haber"
+    },
+    {
+      "id": "bag",
+      "letter": "Ç",
+      "name": "ÇANTA",
+      "meaning": "Az miktar kazanç"
+    },
+    {
+      "id": "hoe",
+      "letter": "Ç",
+      "name": "ÇAPA",
+      "meaning": "Büyük başarı"
+    },
+    {
+      "id": "cross",
+      "letter": "Ç",
+      "name": "ÇARPI",
+      "meaning": "Hayalleriniz, beklentileriniz değişecek"
+    },
+    {
+      "id": "teapot",
+      "letter": "Ç",
+      "name": "ÇAYDANLIK",
+      "meaning": "Yeni arkadaşlar"
+    },
+    {
+      "id": "hammer",
+      "letter": "Ç",
+      "name": "ÇEKİÇ",
+      "meaning": "Sorunlar bitecek"
+    },
+    {
+      "id": "flower",
+      "letter": "Ç",
+      "name": "ÇİÇEK",
+      "meaning": "Seyahat"
+    },
+    {
+      "id": "line",
+      "letter": "Ç",
+      "name": "ÇİZGİ",
+      "meaning": "Önemsiz bir hastalık kapınızda"
+    },
+    {
+      "id": "boot",
+      "letter": "Ç",
+      "name": "ÇİZME",
+      "meaning": "Kısa yolculuk"
+    },
+    {
+      "id": "child",
+      "letter": "Ç",
+      "name": "ÇOCUK",
+      "meaning": "Bekarsanız evlilik, evliyseniz kazanç"
+    },
+    {
+      "id": "sock",
+      "letter": "Ç",
+      "name": "ÇORAP",
+      "meaning": "Büyük bir beladan kurtulacaksınız ama sabırlı olun"
+    },
+    {
+      "id": "mountain",
+      "letter": "D",
+      "name": "DAĞ",
+      "meaning": "Beklentileriniz gerçek olacak"
+    },
+    {
+      "id": "diver",
+      "letter": "D",
+      "name": "DALGIÇ",
+      "meaning": "Dostlarınızdan kazık yiyeceksiniz"
+    },
+    {
+      "id": "dance",
+      "letter": "D",
+      "name": "DANS",
+      "meaning": "Büyük bir para ile çok rahatlayacaksınız"
+    },
+    {
+      "id": "drum",
+      "letter": "D",
+      "name": "DAVUL",
+      "meaning": "Arsız komşu edineceksiniz"
+    },
+    {
+      "id": "notebook",
+      "letter": "D",
+      "name": "DEFTER",
+      "meaning": "İşyerinde güzellikler"
+    },
+    {
+      "id": "railway",
+      "letter": "D",
+      "name": "DEMİRYOLU",
+      "meaning": "Babanızla aranız açılacak"
+    },
+    {
+      "id": "submarine",
+      "letter": "D",
+      "name": "DENİZALTI",
+      "meaning": "Periskopu görünüyorsa huzur, yoksa iç bunaltıcı haber"
+    },
+    {
+      "id": "mermaid",
+      "letter": "D",
+      "name": "DENİZKIZI",
+      "meaning": "Büyük bir başarı ihtimali"
+    },
+    {
+      "id": "sea",
+      "letter": "D",
+      "name": "DENİZ",
+      "meaning": "Huzurla huzursuzluk iç içe"
+    },
+    {
+      "id": "seahorse",
+      "letter": "D",
+      "name": "DENİZATI",
+      "meaning": "Umulmadık servet"
+    },
+    {
+      "id": "derya-sea",
+      "letter": "D",
+      "name": "DERYA",
+      "meaning": "Ablanızdan bir yardım"
+    },
+    {
+      "id": "camel",
+      "letter": "D",
+      "name": "DEVE",
+      "meaning": "Zorlu bir yolculuk ama sonu güzel"
+    },
+    {
+      "id": "ostrich",
+      "letter": "D",
+      "name": "DEVEKUŞU",
+      "meaning": "Büyük para"
+    },
+    {
+      "id": "tooth",
+      "letter": "D",
+      "name": "DİŞ",
+      "meaning": "Sağlık problemi yaşayabilirsiniz"
+    },
+    {
+      "id": "dinosaur",
+      "letter": "D",
+      "name": "DİNAZOR",
+      "meaning": "Planlamadık seyahat"
+    },
+    {
+      "id": "doctor",
+      "letter": "D",
+      "name": "DOKTOR",
+      "meaning": "Hayatınıza bir kurtarıcı girecek"
+    },
+    {
+      "id": "full-moon",
+      "letter": "D",
+      "name": "DOLUNAY",
+      "meaning": "Yeni bir aşk kapıda"
+    },
+    {
+      "id": "pig",
+      "letter": "D",
+      "name": "DOMUZ",
+      "meaning": "Patronunuz size dert çıkaracak"
+    },
+    {
+      "id": "lip",
+      "letter": "D",
+      "name": "DUDAK",
+      "meaning": "Eşya kaybedeceksiniz"
+    },
+    {
+      "id": "button",
+      "letter": "D",
+      "name": "DÜĞME",
+      "meaning": "İlişkiniz tıkanacak ama tez sürede çözülecek"
+    },
+    {
+      "id": "helm-rudder",
+      "letter": "D",
+      "name": "DÜMEN",
+      "meaning": "Çok zorlu günler geliyor"
+    },
+    {
+      "id": "binoculars",
+      "letter": "D",
+      "name": "DÜRBÜN",
+      "meaning": "Uykusuzluk çekeceksiniz, 6 ay kadar"
+    },
+    {
+      "id": "whistle",
+      "letter": "D",
+      "name": "DÜDÜK",
+      "meaning": "Neşeli bir adamdan güzel bir haber gelecek"
+    },
+    {
+      "id": "dragon",
+      "letter": "E",
+      "name": "EJDERHA",
+      "meaning": "Yazın ferahlama, kışın duygusal sıkıntı"
+    },
+    {
+      "id": "bread",
+      "letter": "E",
+      "name": "EKMEK",
+      "meaning": "Kısa sürede büyük ödemeler yapacaksınız"
+    },
+    {
+      "id": "hand",
+      "letter": "E",
+      "name": "EL",
+      "meaning": "Niyete göre anlam döker"
+    },
+    {
+      "id": "clothes",
+      "letter": "E",
+      "name": "ELBİSE",
+      "meaning": "Bereket"
+    },
+    {
+      "id": "glove",
+      "letter": "E",
+      "name": "ELDİVEN",
+      "meaning": "Büyük tehlikeden kıl payı kurtulma"
+    },
+    {
+      "id": "apple",
+      "letter": "E",
+      "name": "ELMA",
+      "meaning": "Beklemediğiniz bir para"
+    },
+    {
+      "id": "donkey",
+      "letter": "E",
+      "name": "EŞEK",
+      "meaning": "Yakın arkadaşınız inatçılık yapacak"
+    },
+    {
+      "id": "house",
+      "letter": "E",
+      "name": "EV",
+      "meaning": "İyileşeceksiniz"
+    },
+    {
+      "id": "mouse",
+      "letter": "F",
+      "name": "FARE",
+      "meaning": "Kazancınıza ortak olanlar var"
+    },
+    {
+      "id": "lantern",
+      "letter": "F",
+      "name": "FENER",
+      "meaning": "Büyük mutluluk"
+    },
+    {
+      "id": "hazelnut",
+      "letter": "F",
+      "name": "FINDIK",
+      "meaning": "Huzursuzluğunuz sona eriyor"
+    },
+    {
+      "id": "elephant",
+      "letter": "F",
+      "name": "FİL",
+      "meaning": "Sükûnet"
+    },
+    {
+      "id": "cup",
+      "letter": "F",
+      "name": "FİNCAN",
+      "meaning": "Bu fal gerçek çıkmayacak"
+    },
+    {
+      "id": "newspaper",
+      "letter": "G",
+      "name": "GAZETE",
+      "meaning": "Dedikodudan uzak durmalısınız, yoksa para kaybedeceksiniz"
+    },
+    {
+      "id": "bride",
+      "letter": "G",
+      "name": "GELİN",
+      "meaning": "Beklenmedik ve büyük mutluluk"
+    },
+    {
+      "id": "ship",
+      "letter": "G",
+      "name": "GEMİ",
+      "meaning": "Dertleriniz bir anda buharlaşacak"
+    },
+    {
+      "id": "rose",
+      "letter": "G",
+      "name": "GÜL",
+      "meaning": "Beklediğiniz ama ummadığınız kişiyi göreceksiniz"
+    },
+    {
+      "id": "sun",
+      "letter": "G",
+      "name": "GÜNEŞ",
+      "meaning": "Dertleriniz bitecek"
+    },
+    {
+      "id": "dove",
+      "letter": "G",
+      "name": "GÜVERCİN",
+      "meaning": "Aşkınızı itiraf edeceksiniz"
+    },
+    {
+      "id": "eye",
+      "letter": "G",
+      "name": "GÖZ",
+      "meaning": "Kirpik varsa dertler biter, yoksa yeni sorunlar"
+    },
+    {
+      "id": "glasses",
+      "letter": "G",
+      "name": "GÖZLÜK",
+      "meaning": "Yardım alacaksınız"
+    },
+    {
+      "id": "deer",
+      "letter": "G",
+      "name": "GEYİK",
+      "meaning": "Bol kısmet"
+    },
+    {
+      "id": "ring",
+      "letter": "H",
+      "name": "HALKA",
+      "meaning": "Büyük bir dert gelmek üzere"
+    },
+    {
+      "id": "letters",
+      "letter": "H",
+      "name": "HARFLER",
+      "meaning": "Erkekse para, kadınsa kısmet"
+    },
+    {
+      "id": "dagger",
+      "letter": "H",
+      "name": "HANÇER",
+      "meaning": "Ummadığınız para, ama çarçur olacak"
+    },
+    {
+      "id": "carrot",
+      "letter": "H",
+      "name": "HAVUÇ",
+      "meaning": "Nedensiz mutluluk"
+    },
+    {
+      "id": "animal",
+      "letter": "H",
+      "name": "HAYVAN",
+      "meaning": "Çok zor bir işi başaracaksınız"
+    },
+    {
+      "id": "nurse",
+      "letter": "H",
+      "name": "HEMŞİRE",
+      "meaning": "Ailenizden biri sağlık sorunu yaşayabilir"
+    },
+    {
+      "id": "crescent",
+      "letter": "H",
+      "name": "HİLAL",
+      "meaning": "Güzel haber"
+    },
+    {
+      "id": "river",
+      "letter": "I",
+      "name": "IRMAK",
+      "meaning": "Sürprizler yaşayacaksınız"
+    },
+    {
+      "id": "needle",
+      "letter": "İ",
+      "name": "İĞNE",
+      "meaning": "Güzel haberler gelecek"
+    },
+    {
+      "id": "elder",
+      "letter": "İ",
+      "name": "İHTİYAR",
+      "meaning": "Gelecek yıl güzel gelişmeler"
+    },
+    {
+      "id": "imam",
+      "letter": "İ",
+      "name": "İMAM",
+      "meaning": "Kötü haber kapınızda"
+    },
+    {
+      "id": "emperor",
+      "letter": "İ",
+      "name": "İMPARATOR",
+      "meaning": "Şans oyununda para"
+    },
+    {
+      "id": "pearl",
+      "letter": "İ",
+      "name": "İNCİ",
+      "meaning": "İçiniz huzurla dolacak"
+    },
+    {
+      "id": "fig",
+      "letter": "İ",
+      "name": "İNCİR",
+      "meaning": "Kısa yolculukla büyük kazanç"
+    },
+    {
+      "id": "human",
+      "letter": "İ",
+      "name": "İNSAN",
+      "meaning": "Tek kişi = huzur, iki+ = problem"
+    },
+    {
+      "id": "rope",
+      "letter": "İ",
+      "name": "İP",
+      "meaning": "Yolculuk"
+    },
+    {
+      "id": "playing-card",
+      "letter": "İ",
+      "name": "İSKAMBİL",
+      "meaning": "Büyük dertler kolay çabalarla bitecek"
+    },
+    {
+      "id": "letter-i",
+      "letter": "İ",
+      "name": "İ HARFİ",
+      "meaning": "Şans"
+    },
+    {
+      "id": "razor-blade",
+      "letter": "J",
+      "name": "JİLET",
+      "meaning": "Dertler bitecek"
+    },
+    {
+      "id": "token",
+      "letter": "J",
+      "name": "JETON",
+      "meaning": "Ani para gelecek, mutluluk getirecek"
+    },
+    {
+      "id": "kaaba",
+      "letter": "K",
+      "name": "KABE",
+      "meaning": "Çok büyük şans"
+    },
+    {
+      "id": "grave",
+      "letter": "K",
+      "name": "KABİR",
+      "meaning": "Bir süre akrabalarla görüşmeyin, bela gelir"
+    },
+    {
+      "id": "goblet",
+      "letter": "K",
+      "name": "KADEH",
+      "meaning": "Sırlarınız açığa çıkacak"
+    },
+    {
+      "id": "woman",
+      "letter": "K",
+      "name": "KADIN",
+      "meaning": "Bereket. Evli kadında yaşlı sembol = erkeği elden gitmek üzere"
+    },
+    {
+      "id": "coffee",
+      "letter": "K",
+      "name": "KAHVE",
+      "meaning": "Fal kahvenin içinden çıkacak"
+    },
+    {
+      "id": "castle",
+      "letter": "K",
+      "name": "KALE",
+      "meaning": "Dostlarınıza güvenin"
+    },
+    {
+      "id": "shield",
+      "letter": "K",
+      "name": "KALKAN",
+      "meaning": "Aklınızdakileri uygulayın"
+    },
+    {
+      "id": "heart",
+      "letter": "K",
+      "name": "KALP",
+      "meaning": "Sorunlarınız bitecek"
+    },
+    {
+      "id": "wing",
+      "letter": "K",
+      "name": "KANAT",
+      "meaning": "Uzun yolculuk"
+    },
+    {
+      "id": "kangaroo",
+      "letter": "K",
+      "name": "KANGURU",
+      "meaning": "Beklemediğiniz bir terfi"
+    },
+    {
+      "id": "door",
+      "letter": "K",
+      "name": "KAPI",
+      "meaning": "Sevmediğiniz biri iyi haber getirecek"
+    },
+    {
+      "id": "turtle",
+      "letter": "K",
+      "name": "KAPLUMBAĞA",
+      "meaning": "Yeni aşk"
+    },
+    {
+      "id": "square",
+      "letter": "K",
+      "name": "KARE",
+      "meaning": "Umduğunuz paraya kavuşacaksınız"
+    },
+    {
+      "id": "crow",
+      "letter": "K",
+      "name": "KARGA",
+      "meaning": "Çok güzel haber gelecek"
+    },
+    {
+      "id": "ant",
+      "letter": "K",
+      "name": "KARINCA",
+      "meaning": "Bol kazanç ama çok çalışarak"
+    },
+    {
+      "id": "bowl",
+      "letter": "K",
+      "name": "KASE",
+      "meaning": "İşinizde güzel gelişmeler"
+    },
+    {
+      "id": "spoon",
+      "letter": "K",
+      "name": "KAŞIK",
+      "meaning": "Fırsat gelecek ama kaçıracaksınız"
+    },
+    {
+      "id": "pickaxe",
+      "letter": "K",
+      "name": "KAZMA",
+      "meaning": "Çok para geçecek elinize, hayır yapmazsanız sorunlar"
+    },
+    {
+      "id": "cat",
+      "letter": "K",
+      "name": "KEDİ",
+      "meaning": "Fal bakanın anlamına göre değişir"
+    },
+    {
+      "id": "butterfly",
+      "letter": "K",
+      "name": "KELEBEK",
+      "meaning": "Çok çile, ama mutlak mutluluk"
+    },
+    {
+      "id": "violin",
+      "letter": "K",
+      "name": "KEMAN",
+      "meaning": "Bencilce hatalar işleyeceksiniz"
+    },
+    {
+      "id": "sword",
+      "letter": "K",
+      "name": "KILIÇ",
+      "meaning": "Sevgiliniz hediye alacak"
+    },
+    {
+      "id": "s",
+      "letter": "K",
+      "name": "KIRLANGIÇ",
+      "meaning": "Küçük iyilikten büyük kazanç"
+    },
+    {
+      "id": "lamp",
+      "letter": "L",
+      "name": "LAMBA",
+      "meaning": "İş gezisi"
+    },
+    {
+      "id": "medal",
+      "letter": "M",
+      "name": "MADALYA",
+      "meaning": "Kaybettiğiniz parayı bulacaksınız"
+    },
+    {
+      "id": "cave",
+      "letter": "M",
+      "name": "MAĞARA",
+      "meaning": "Zorlu seyahat"
+    },
+    {
+      "id": "scissors",
+      "letter": "M",
+      "name": "MAKAS",
+      "meaning": "Kendinizi her şeyi yapacak kadar iyi hissedeceksiniz"
+    },
+    {
+      "id": "buffalo",
+      "letter": "M",
+      "name": "MANDA",
+      "meaning": "Batıdan tatlı bir haber"
+    },
+    {
+      "id": "grill",
+      "letter": "M",
+      "name": "MANGAL",
+      "meaning": "Çok beklediğiniz haber yakında geliyor"
+    },
+    {
+      "id": "seagull",
+      "letter": "M",
+      "name": "MARTI",
+      "meaning": "Çok kötü haberler gelecek"
+    },
+    {
+      "id": "table",
+      "letter": "M",
+      "name": "MASA",
+      "meaning": "Yakınınız sınavda büyük başarı alacak"
+    },
+    {
+      "id": "letter",
+      "letter": "M",
+      "name": "MEKTUP",
+      "meaning": "Dertlerinizi birine anlatacaksınız"
+    },
+    {
+      "id": "mevlana",
+      "letter": "M",
+      "name": "MEVLANA",
+      "meaning": "Çevrenizde mutlu dostlar olacak"
+    },
+    {
+      "id": "angel",
+      "letter": "M",
+      "name": "MELEK",
+      "meaning": "Anne tarafından biri destek verecek"
+    },
+    {
+      "id": "fruit",
+      "letter": "M",
+      "name": "MEYVE",
+      "meaning": "Çok bekleyecek ama başaracaksınız"
+    },
+    {
+      "id": "tombstone",
+      "letter": "M",
+      "name": "MEZAR TAŞI",
+      "meaning": "Uzun ömür"
+    },
+    {
+      "id": "spear",
+      "letter": "M",
+      "name": "MIZRAK",
+      "meaning": "İlişkide mutlu dönemeç"
+    },
+    {
+      "id": "mussel",
+      "letter": "M",
+      "name": "MİDYE",
+      "meaning": "Ciddi sağlık sorunları"
+    },
+    {
+      "id": "minaret",
+      "letter": "M",
+      "name": "MİNARE",
+      "meaning": "Ramazan’da büyük dert"
+    },
+    {
+      "id": "candle",
+      "letter": "M",
+      "name": "MUM",
+      "meaning": "Cinsel açıdan keyif"
+    },
+    {
+      "id": "prayer",
+      "letter": "N",
+      "name": "NAMAZ",
+      "meaning": "Beklemediğiniz hayır"
+    },
+    {
+      "id": "pomegranate",
+      "letter": "N",
+      "name": "NAR",
+      "meaning": "Küçük ama sonunda büyük dert"
+    },
+    {
+      "id": "arrow",
+      "letter": "O",
+      "name": "OK",
+      "meaning": "Sabırsızlığınız geçecek"
+    },
+    {
+      "id": "sickle",
+      "letter": "O",
+      "name": "ORAK",
+      "meaning": "Küs arkadaşlarla barışacaksınız"
+    },
+    {
+      "id": "capricorn",
+      "letter": "O",
+      "name": "OĞLAK",
+      "meaning": "Zor dönemin ardından rahat"
+    },
+    {
+      "id": "student",
+      "letter": "Ö",
+      "name": "ÖĞRENCİ",
+      "meaning": "Hayatınızda yeni dönem"
+    },
+    {
+      "id": "spider",
+      "letter": "Ö",
+      "name": "ÖRÜMCEK",
+      "meaning": "Kişilik sorunları yaşayacaksınız"
+    },
+    {
+      "id": "duck",
+      "letter": "Ö",
+      "name": "ÖRDEK",
+      "meaning": "Baba tarafından yardım"
+    },
+    {
+      "id": "coat",
+      "letter": "P",
+      "name": "PALTO",
+      "meaning": "Çok beklediğiniz haber gelmeyecek"
+    },
+    {
+      "id": "trousers",
+      "letter": "P",
+      "name": "PANTOLON",
+      "meaning": "Sarı birinden güzel haber"
+    },
+    {
+      "id": "bow-tie",
+      "letter": "P",
+      "name": "PAPYON",
+      "meaning": "Yakın dostlar kazık atabilir"
+    },
+    {
+      "id": "cotton",
+      "letter": "P",
+      "name": "PAMUK",
+      "meaning": "Boğulma tehlikesi"
+    },
+    {
+      "id": "parrot",
+      "letter": "P",
+      "name": "PAPAĞAN",
+      "meaning": "Dostlarınız artacak"
+    },
+    {
+      "id": "daisy",
+      "letter": "P",
+      "name": "PAPATYA",
+      "meaning": "Ziyaret"
+    },
+    {
+      "id": "money",
+      "letter": "P",
+      "name": "PARA",
+      "meaning": "Planlarınızı ertelemeyin"
+    },
+    {
+      "id": "cake",
+      "letter": "P",
+      "name": "PASTA",
+      "meaning": "Güzel haber"
+    },
+    {
+      "id": "pelican",
+      "letter": "P",
+      "name": "PELİKAN",
+      "meaning": "Bol şans"
+    },
+    {
+      "id": "penguin",
+      "letter": "P",
+      "name": "PENGUEN",
+      "meaning": "Sabrederseniz kısmetli olursunuz"
+    },
+    {
+      "id": "window",
+      "letter": "P",
+      "name": "PENCERE",
+      "meaning": "Sağlık"
+    },
+    {
+      "id": "compass",
+      "letter": "P",
+      "name": "PERGEL",
+      "meaning": "Gizli iş başarıyla bitecek"
+    },
+    {
+      "id": "battery",
+      "letter": "P",
+      "name": "PİL",
+      "meaning": "Mutluluk"
+    },
+    {
+      "id": "pipe",
+      "letter": "P",
+      "name": "PİPO",
+      "meaning": "Şüphe"
+    },
+    {
+      "id": "police",
+      "letter": "P",
+      "name": "POLİS",
+      "meaning": "Çok büyük acı"
+    },
+    {
+      "id": "postman",
+      "letter": "P",
+      "name": "POSTACI",
+      "meaning": "Keyifle yola çıkacaksınız"
+    },
+    {
+      "id": "prince",
+      "letter": "P",
+      "name": "PRENS",
+      "meaning": "Yakışıklı kısmet"
+    },
+    {
+      "id": "princess",
+      "letter": "P",
+      "name": "PRENSES",
+      "meaning": "Üç vakte kadar ideal eş adayıyla tanışacaksınız"
+    },
+    {
+      "id": "raki-bottle",
+      "letter": "R",
+      "name": "RAKI ŞİŞESİ",
+      "meaning": "Ani ama büyük mutluluk"
+    },
+    {
+      "id": "letter-r",
+      "letter": "R",
+      "name": "R HARFİ",
+      "meaning": "İsmi R ile başlayan zarar verebilir"
+    },
+    {
+      "id": "clock",
+      "letter": "S",
+      "name": "SAAT",
+      "meaning": "Daha sakin olacaksınız"
+    },
+    {
+      "id": "soap",
+      "letter": "S",
+      "name": "SABUN",
+      "meaning": "Dertler devam edecek"
+    },
+    {
+      "id": "hair",
+      "letter": "S",
+      "name": "SAÇ",
+      "meaning": "Bol kazanç"
+    },
+    {
+      "id": "beard",
+      "letter": "S",
+      "name": "SAKAL",
+      "meaning": "Kardeşiniz başarıya kavuşacak"
+    },
+    {
+      "id": "snail",
+      "letter": "S",
+      "name": "SALYANGOZ",
+      "meaning": "Sabırlı olursanız kazanç"
+    },
+    {
+      "id": "lute",
+      "letter": "S",
+      "name": "SAZ",
+      "meaning": "Doktora gidecek, kötü haber almayacak"
+    },
+    {
+      "id": "whirling-dervish",
+      "letter": "S",
+      "name": "SEMAZEN",
+      "meaning": "Kısmet"
+    },
+    {
+      "id": "river-of-love",
+      "letter": "S",
+      "name": "SEVGİ NEHRİ",
+      "meaning": "Aşırı bereket"
+    },
+    {
+      "id": "cigarette",
+      "letter": "S",
+      "name": "SİGARA",
+      "meaning": "Güçlükler bitecek"
+    },
+    {
+      "id": "gun",
+      "letter": "S",
+      "name": "SİLAH",
+      "meaning": "Kötü insanları tanıyacaksınız"
+    },
+    {
+      "id": "fly",
+      "letter": "S",
+      "name": "SİNEK",
+      "meaning": "Güzel bir davet alacaksınız"
+    },
+    {
+      "id": "squirrel",
+      "letter": "S",
+      "name": "SİNCAP",
+      "meaning": "Tasarruf ederseniz bahtınız açılacak"
+    },
+    {
+      "id": "worm",
+      "letter": "S",
+      "name": "SOLUCAN",
+      "meaning": "Sahte dostlara dikkat"
+    },
+    {
+      "id": "question-mark",
+      "letter": "S",
+      "name": "SORU İŞARETİ",
+      "meaning": "Sevgiliniz sır saklıyor"
+    },
+    {
+      "id": "broom",
+      "letter": "S",
+      "name": "SÜPÜRGE",
+      "meaning": "Ertelenen gezi olacak"
+    },
+    {
+      "id": "umbrella",
+      "letter": "Ş",
+      "name": "ŞEMSİYE",
+      "meaning": "Az harcamayla güzel gelişme"
+    },
+    {
+      "id": "devil",
+      "letter": "Ş",
+      "name": "ŞEYTAN",
+      "meaning": "Eski dostlara dikkat, kötülük planlıyorlar"
+    },
+    {
+      "id": "bottle",
+      "letter": "Ş",
+      "name": "ŞİŞE",
+      "meaning": "Sırlarınızı herkese anlatmayın"
+    },
+    {
+      "id": "plate",
+      "letter": "T",
+      "name": "TABAK",
+      "meaning": "Mülk edineceksiniz"
+    },
+    {
+      "id": "tablet",
+      "letter": "T",
+      "name": "TABLET",
+      "meaning": "Büyük haber"
+    },
+    {
+      "id": "coffin",
+      "letter": "T",
+      "name": "TABUT",
+      "meaning": "Babanızın sağlık problemleri bitecek"
+    },
+    {
+      "id": "throne",
+      "letter": "T",
+      "name": "TAHT",
+      "meaning": "Uzun seyahat"
+    },
+    {
+      "id": "comb",
+      "letter": "T",
+      "name": "TARAK",
+      "meaning": "Yeni işe gireceksiniz"
+    },
+    {
+      "id": "rabbit",
+      "letter": "T",
+      "name": "TAVŞAN",
+      "meaning": "Önce huzur, sonra çöküş"
+    },
+    {
+      "id": "peacock",
+      "letter": "T",
+      "name": "TAVUSKUŞU",
+      "meaning": "Talih"
+    },
+    {
+      "id": "telephone",
+      "letter": "T",
+      "name": "TELEFON",
+      "meaning": "Sevindirici haber"
+    },
+    {
+      "id": "pot",
+      "letter": "T",
+      "name": "TENCERE",
+      "meaning": "Sevgilinizi anlamsız kıracaksınız"
+    },
+    {
+      "id": "prayer-beads",
+      "letter": "T",
+      "name": "TESBİH",
+      "meaning": "Hayatınızda bir ilk gerçekleşecek"
+    },
+    {
+      "id": "saw",
+      "letter": "T",
+      "name": "TESTERE",
+      "meaning": "Sahte dostluklar bitecek"
+    },
+    {
+      "id": "jug",
+      "letter": "T",
+      "name": "TESTİ",
+      "meaning": "Arkadaşınıza yalan söylüyorsunuz, öğrenecek"
+    },
+    {
+      "id": "fox",
+      "letter": "T",
+      "name": "TİLKİ",
+      "meaning": "Dedikodudan uzak durun"
+    },
+    {
+      "id": "caterpillar",
+      "letter": "T",
+      "name": "TIRTIL",
+      "meaning": "Derdinizi unutmak için seyahate çıkın"
+    },
+    {
+      "id": "airplane",
+      "letter": "U",
+      "name": "UÇAK",
+      "meaning": "Kısa seyahat"
+    },
+    {
+      "id": "kite",
+      "letter": "U",
+      "name": "UÇURTMA",
+      "meaning": "Zorluklar içinde mutlu olacaksınız"
+    },
+    {
+      "id": "razor",
+      "letter": "U",
+      "name": "USTURA",
+      "meaning": "Bir büyüğünüz sizi koruyacak"
+    },
+    {
+      "id": "ladybug",
+      "letter": "U",
+      "name": "UĞUR BÖCEĞİ",
+      "meaning": "Bol şans, kısmet"
+    },
+    {
+      "id": "iron",
+      "letter": "Ü",
+      "name": "ÜTÜ",
+      "meaning": "Eskilerden iyi haber"
+    },
+    {
+      "id": "triangle",
+      "letter": "Ü",
+      "name": "ÜÇGEN",
+      "meaning": "İş ilişkilerine dikkat"
+    },
+    {
+      "id": "exclamation-mark",
+      "letter": "Ü",
+      "name": "ÜNLEM",
+      "meaning": "Sevgilinizle aranız bozulacak ama geçecek"
+    },
+    {
+      "id": "letter-u",
+      "letter": "Ü",
+      "name": "Ü HARFİ",
+      "meaning": "Üzüntülü dönem geliyor"
+    },
+    {
+      "id": "body",
+      "letter": "V",
+      "name": "VÜCUT",
+      "meaning": "Erkek vücudu = büyük şans, kadın vücudu = önce bahtsızlık sonra şans"
+    },
+    {
+      "id": "volcano",
+      "letter": "Y",
+      "name": "YANARDAĞ",
+      "meaning": "Eski sevgiliden haber"
+    },
+    {
+      "id": "leaf",
+      "letter": "Y",
+      "name": "YAPRAK",
+      "meaning": "Hasta olabilirsiniz, dikkat edin"
+    },
+    {
+      "id": "bed",
+      "letter": "Y",
+      "name": "YATAK",
+      "meaning": "Kararsızlığı bırakın"
+    },
+    {
+      "id": "bat",
+      "letter": "Y",
+      "name": "YARASA",
+      "meaning": "Uykunuzu kaçıracak kötü haber"
+    },
+    {
+      "id": "sail",
+      "letter": "Y",
+      "name": "YELKEN",
+      "meaning": "Kısa yolculuk"
+    },
+    {
+      "id": "crab",
+      "letter": "Y",
+      "name": "YENGEÇ",
+      "meaning": "Çok iyi bir dost edineceksiniz"
+    },
+    {
+      "id": "star",
+      "letter": "Y",
+      "name": "YILDIZ",
+      "meaning": "Büyük dert yanı başınızda"
+    },
+    {
+      "id": "snake",
+      "letter": "Y",
+      "name": "YILAN",
+      "meaning": "Haberinle tasalarınız bitecek"
+    },
+    {
+      "id": "egg",
+      "letter": "Y",
+      "name": "YUMURTA",
+      "meaning": "Yoruma göre değişir"
+    },
+    {
+      "id": "dolphin",
+      "letter": "Y",
+      "name": "YUNUS",
+      "meaning": "Yüzüne gülen sahte arkadaşlar"
+    },
+    {
+      "id": "road",
+      "letter": "Y",
+      "name": "YOL",
+      "meaning": "Huzursuzluğunuz geçecek"
+    },
+    {
+      "id": "dice",
+      "letter": "Z",
+      "name": "ZAR",
+      "meaning": "Şanssız döneme gireceksiniz"
+    },
+    {
+      "id": "envelope",
+      "letter": "Z",
+      "name": "ZARF",
+      "meaning": "Annenizle sevgilinizin arası açılacak"
+    },
+    {
+      "id": "olive",
+      "letter": "Z",
+      "name": "ZEYTİN",
+      "meaning": "Çok hayırlı haber"
+    }
+  ]
+}

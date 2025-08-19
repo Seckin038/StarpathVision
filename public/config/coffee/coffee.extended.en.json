@@ -1,0 +1,1553 @@
+{
+  "version": "1.0.0",
+  "symbols": [
+    {
+      "id": "island",
+      "letter": "A",
+      "name": "ISLAND",
+      "meaning": "Unexpected opportunity"
+    },
+    {
+      "id": "tree",
+      "letter": "A",
+      "name": "TREE",
+      "meaning": "Long life"
+    },
+    {
+      "id": "net",
+      "letter": "A",
+      "name": "NET",
+      "meaning": "Danger ahead"
+    },
+    {
+      "id": "cook",
+      "letter": "A",
+      "name": "COOK",
+      "meaning": "Happiness soon"
+    },
+    {
+      "id": "octopus",
+      "letter": "A",
+      "name": "OCTOPUS",
+      "meaning": "Be careful"
+    },
+    {
+      "id": "family",
+      "letter": "A",
+      "name": "FAMILY",
+      "meaning": "Joyful news"
+    },
+    {
+      "id": "scorpion",
+      "letter": "A",
+      "name": "SCORPION",
+      "meaning": "Malicious people around"
+    },
+    {
+      "id": "vulture",
+      "letter": "A",
+      "name": "VULTURE",
+      "meaning": "Avoid debts"
+    },
+    {
+      "id": "lung",
+      "letter": "A",
+      "name": "LUNG",
+      "meaning": "Abundance"
+    },
+    {
+      "id": "flame",
+      "letter": "A",
+      "name": "FLAME",
+      "meaning": "A great love awaits"
+    },
+    {
+      "id": "god-allah",
+      "letter": "A",
+      "name": "GOD (Allah)",
+      "meaning": "Great blessing sign"
+    },
+    {
+      "id": "wedding-ring",
+      "letter": "A",
+      "name": "WEDDING RING",
+      "meaning": "Issues with partner but reconciliation"
+    },
+    {
+      "id": "bulb",
+      "letter": "A",
+      "name": "BULB",
+      "meaning": "Major problems ahead"
+    },
+    {
+      "id": "key",
+      "letter": "A",
+      "name": "KEY",
+      "meaning": "Long-awaited things will happen"
+    },
+    {
+      "id": "car",
+      "letter": "A",
+      "name": "CAR",
+      "meaning": "Help from loved ones"
+    },
+    {
+      "id": "bee",
+      "letter": "A",
+      "name": "BEE",
+      "meaning": "Troubles vanish"
+    },
+    {
+      "id": "lion",
+      "letter": "A",
+      "name": "LION",
+      "meaning": "Support from elder in family"
+    },
+    {
+      "id": "soldier",
+      "letter": "A",
+      "name": "SOLDIER",
+      "meaning": "Tough times but you overcome"
+    },
+    {
+      "id": "horse",
+      "letter": "A",
+      "name": "HORSE",
+      "meaning": "Wealth"
+    },
+    {
+      "id": "horseshoe",
+      "letter": "A",
+      "name": "HORSESHOE",
+      "meaning": "Very lucky event"
+    },
+    {
+      "id": "fire",
+      "letter": "A",
+      "name": "FIRE",
+      "meaning": "Temporary separation"
+    },
+    {
+      "id": "palm",
+      "letter": "A",
+      "name": "PALM",
+      "meaning": "Quitting bad habits"
+    },
+    {
+      "id": "moon",
+      "letter": "A",
+      "name": "MOON",
+      "meaning": "Career growth"
+    },
+    {
+      "id": "foot",
+      "letter": "A",
+      "name": "FOOT",
+      "meaning": "Helping a loved one"
+    },
+    {
+      "id": "shoe",
+      "letter": "A",
+      "name": "SHOE",
+      "meaning": "Unexpected help"
+    },
+    {
+      "id": "bear",
+      "letter": "A",
+      "name": "BEAR",
+      "meaning": "A great fear awaits"
+    },
+    {
+      "id": "chimney",
+      "letter": "B",
+      "name": "CHIMNEY",
+      "meaning": "Joyful news"
+    },
+    {
+      "id": "leg",
+      "letter": "B",
+      "name": "LEG",
+      "meaning": "Loss of money"
+    },
+    {
+      "id": "almond",
+      "letter": "B",
+      "name": "ALMOND",
+      "meaning": "Fortune turns"
+    },
+    {
+      "id": "navy-sailor",
+      "letter": "B",
+      "name": "NAVY SAILOR",
+      "meaning": "Great but temporary joy"
+    },
+    {
+      "id": "fish",
+      "letter": "B",
+      "name": "FISH",
+      "meaning": "Abundance"
+    },
+    {
+      "id": "balloon",
+      "letter": "B",
+      "name": "BALLOON",
+      "meaning": "Arguments"
+    },
+    {
+      "id": "axe",
+      "letter": "B",
+      "name": "AXE",
+      "meaning": "Troubles end"
+    },
+    {
+      "id": "glass",
+      "letter": "B",
+      "name": "GLASS",
+      "meaning": "Declaration of love"
+    },
+    {
+      "id": "step",
+      "letter": "B",
+      "name": "STEP",
+      "meaning": "Dreams fulfilled step by step"
+    },
+    {
+      "id": "cane",
+      "letter": "B",
+      "name": "CANE",
+      "meaning": "Gain"
+    },
+    {
+      "id": "head",
+      "letter": "B",
+      "name": "HEAD",
+      "meaning": "Money or children"
+    },
+    {
+      "id": "wheat-ear",
+      "letter": "B",
+      "name": "WHEAT EAR",
+      "meaning": "Peace"
+    },
+    {
+      "id": "sunset",
+      "letter": "B",
+      "name": "SUNSET",
+      "meaning": "Soon good news"
+    },
+    {
+      "id": "suitcase",
+      "letter": "B",
+      "name": "SUITCASE",
+      "meaning": "Serious decision"
+    },
+    {
+      "id": "owl",
+      "letter": "B",
+      "name": "OWL",
+      "meaning": "Beware of sly friends"
+    },
+    {
+      "id": "flag",
+      "letter": "B",
+      "name": "FLAG",
+      "meaning": "Peace"
+    },
+    {
+      "id": "baby",
+      "letter": "B",
+      "name": "BABY",
+      "meaning": "Important decision ahead"
+    },
+    {
+      "id": "cradle",
+      "letter": "B",
+      "name": "CRADLE",
+      "meaning": "Marriage or child"
+    },
+    {
+      "id": "knife",
+      "letter": "B",
+      "name": "KNIFE",
+      "meaning": "Fortune opens"
+    },
+    {
+      "id": "computer",
+      "letter": "B",
+      "name": "COMPUTER",
+      "meaning": "Great luck"
+    },
+    {
+      "id": "building",
+      "letter": "B",
+      "name": "BUILDING",
+      "meaning": "More respect"
+    },
+    {
+      "id": "bull",
+      "letter": "B",
+      "name": "BULL",
+      "meaning": "Gain"
+    },
+    {
+      "id": "horn",
+      "letter": "B",
+      "name": "HORN",
+      "meaning": "Beware of gossip"
+    },
+    {
+      "id": "wheat",
+      "letter": "B",
+      "name": "WHEAT",
+      "meaning": "Money incoming"
+    },
+    {
+      "id": "cloud",
+      "letter": "B",
+      "name": "CLOUD",
+      "meaning": "Unrest"
+    },
+    {
+      "id": "nose",
+      "letter": "B",
+      "name": "NOSE",
+      "meaning": "A friend seeks advice"
+    },
+    {
+      "id": "mosque",
+      "letter": "C",
+      "name": "MOSQUE",
+      "meaning": "Help from family"
+    },
+    {
+      "id": "monster",
+      "letter": "C",
+      "name": "MONSTER",
+      "meaning": "False friends regret"
+    },
+    {
+      "id": "funeral",
+      "letter": "C",
+      "name": "FUNERAL",
+      "meaning": "Journey"
+    },
+    {
+      "id": "mobile-phone",
+      "letter": "C",
+      "name": "MOBILE PHONE",
+      "meaning": "Good news (male) / Gossip (female)"
+    },
+    {
+      "id": "ruler",
+      "letter": "C",
+      "name": "RULER",
+      "meaning": "Positive development"
+    },
+    {
+      "id": "tweezers",
+      "letter": "C",
+      "name": "TWEEZERS",
+      "meaning": "Hard days, short-lived"
+    },
+    {
+      "id": "dwarf",
+      "letter": "C",
+      "name": "DWARF",
+      "meaning": "Big danger close"
+    },
+    {
+      "id": "bell",
+      "letter": "Ç",
+      "name": "BELL",
+      "meaning": "Sad news"
+    },
+    {
+      "id": "bag",
+      "letter": "Ç",
+      "name": "BAG",
+      "meaning": "Small profit"
+    },
+    {
+      "id": "hoe",
+      "letter": "Ç",
+      "name": "HOE",
+      "meaning": "Great success"
+    },
+    {
+      "id": "cross",
+      "letter": "Ç",
+      "name": "CROSS",
+      "meaning": "Expectations change"
+    },
+    {
+      "id": "teapot",
+      "letter": "Ç",
+      "name": "TEAPOT",
+      "meaning": "New friends"
+    },
+    {
+      "id": "hammer",
+      "letter": "Ç",
+      "name": "HAMMER",
+      "meaning": "Troubles end"
+    },
+    {
+      "id": "flower",
+      "letter": "Ç",
+      "name": "FLOWER",
+      "meaning": "Travel"
+    },
+    {
+      "id": "line",
+      "letter": "Ç",
+      "name": "LINE",
+      "meaning": "Minor illness"
+    },
+    {
+      "id": "boot",
+      "letter": "Ç",
+      "name": "BOOT",
+      "meaning": "Short trip"
+    },
+    {
+      "id": "child",
+      "letter": "Ç",
+      "name": "CHILD",
+      "meaning": "Marriage / Profit"
+    },
+    {
+      "id": "sock",
+      "letter": "Ç",
+      "name": "SOCK",
+      "meaning": "Escape from danger with patience"
+    },
+    {
+      "id": "mountain",
+      "letter": "D",
+      "name": "MOUNTAIN",
+      "meaning": "Expectations will come true"
+    },
+    {
+      "id": "diver",
+      "letter": "D",
+      "name": "DIVER",
+      "meaning": "Betrayal from a friend"
+    },
+    {
+      "id": "dance",
+      "letter": "D",
+      "name": "DANCE",
+      "meaning": "Relief with big money"
+    },
+    {
+      "id": "drum",
+      "letter": "D",
+      "name": "DRUM",
+      "meaning": "An insolent neighbor"
+    },
+    {
+      "id": "notebook",
+      "letter": "D",
+      "name": "NOTEBOOK",
+      "meaning": "Positive changes at work"
+    },
+    {
+      "id": "railway",
+      "letter": "D",
+      "name": "RAILWAY",
+      "meaning": "Conflict with father"
+    },
+    {
+      "id": "submarine",
+      "letter": "D",
+      "name": "SUBMARINE",
+      "meaning": "Periscope = peace, not = bad news"
+    },
+    {
+      "id": "mermaid",
+      "letter": "D",
+      "name": "MERMAID",
+      "meaning": "Chance of success"
+    },
+    {
+      "id": "sea",
+      "letter": "D",
+      "name": "SEA",
+      "meaning": "Peace and unrest together"
+    },
+    {
+      "id": "seahorse",
+      "letter": "D",
+      "name": "SEAHORSE",
+      "meaning": "Unexpected wealth"
+    },
+    {
+      "id": "derya-sea",
+      "letter": "D",
+      "name": "DERYA (SEA)",
+      "meaning": "Help from sister"
+    },
+    {
+      "id": "camel",
+      "letter": "D",
+      "name": "CAMEL",
+      "meaning": "Hard but fruitful journey"
+    },
+    {
+      "id": "ostrich",
+      "letter": "D",
+      "name": "OSTRICH",
+      "meaning": "Big money"
+    },
+    {
+      "id": "tooth",
+      "letter": "D",
+      "name": "TOOTH",
+      "meaning": "Health problem possible"
+    },
+    {
+      "id": "dinosaur",
+      "letter": "D",
+      "name": "DINOSAUR",
+      "meaning": "Unplanned trip"
+    },
+    {
+      "id": "doctor",
+      "letter": "D",
+      "name": "DOCTOR",
+      "meaning": "A savior appears"
+    },
+    {
+      "id": "full-moon",
+      "letter": "D",
+      "name": "FULL MOON",
+      "meaning": "New love approaching"
+    },
+    {
+      "id": "pig",
+      "letter": "D",
+      "name": "PIG",
+      "meaning": "Boss causes trouble"
+    },
+    {
+      "id": "lip",
+      "letter": "D",
+      "name": "LIP",
+      "meaning": "Loss of belongings"
+    },
+    {
+      "id": "button",
+      "letter": "D",
+      "name": "BUTTON",
+      "meaning": "Relationship block, quickly solved"
+    },
+    {
+      "id": "helm-rudder",
+      "letter": "D",
+      "name": "HELM (RUDDER)",
+      "meaning": "Hard days ahead"
+    },
+    {
+      "id": "binoculars",
+      "letter": "D",
+      "name": "BINOCULARS",
+      "meaning": "Insomnia ~6 months"
+    },
+    {
+      "id": "whistle",
+      "letter": "D",
+      "name": "WHISTLE",
+      "meaning": "Good news from cheerful man"
+    },
+    {
+      "id": "dragon",
+      "letter": "E",
+      "name": "DRAGON",
+      "meaning": "Relief in summer, troubles in winter"
+    },
+    {
+      "id": "bread",
+      "letter": "E",
+      "name": "BREAD",
+      "meaning": "Big payments soon"
+    },
+    {
+      "id": "hand",
+      "letter": "E",
+      "name": "HAND",
+      "meaning": "Depends on intention"
+    },
+    {
+      "id": "clothes",
+      "letter": "E",
+      "name": "CLOTHES",
+      "meaning": "Abundance"
+    },
+    {
+      "id": "glove",
+      "letter": "E",
+      "name": "GLOVE",
+      "meaning": "Narrow escape"
+    },
+    {
+      "id": "apple",
+      "letter": "E",
+      "name": "APPLE",
+      "meaning": "Unexpected money"
+    },
+    {
+      "id": "donkey",
+      "letter": "E",
+      "name": "DONKEY",
+      "meaning": "Friend becomes stubborn"
+    },
+    {
+      "id": "house",
+      "letter": "E",
+      "name": "HOUSE",
+      "meaning": "Recovery"
+    },
+    {
+      "id": "mouse",
+      "letter": "F",
+      "name": "MOUSE",
+      "meaning": "Someone shares in your profit"
+    },
+    {
+      "id": "lantern",
+      "letter": "F",
+      "name": "LANTERN",
+      "meaning": "Great joy"
+    },
+    {
+      "id": "hazelnut",
+      "letter": "F",
+      "name": "HAZELNUT",
+      "meaning": "End of unrest"
+    },
+    {
+      "id": "elephant",
+      "letter": "F",
+      "name": "ELEPHANT",
+      "meaning": "Calmness"
+    },
+    {
+      "id": "cup",
+      "letter": "F",
+      "name": "CUP",
+      "meaning": "Reading won’t come true"
+    },
+    {
+      "id": "newspaper",
+      "letter": "G",
+      "name": "NEWSPAPER",
+      "meaning": "Avoid gossip or lose money"
+    },
+    {
+      "id": "bride",
+      "letter": "G",
+      "name": "BRIDE",
+      "meaning": "Unexpected joy"
+    },
+    {
+      "id": "ship",
+      "letter": "G",
+      "name": "SHIP",
+      "meaning": "Troubles vanish suddenly"
+    },
+    {
+      "id": "rose",
+      "letter": "G",
+      "name": "ROSE",
+      "meaning": "Meeting unexpected person"
+    },
+    {
+      "id": "sun",
+      "letter": "G",
+      "name": "SUN",
+      "meaning": "Troubles end"
+    },
+    {
+      "id": "dove",
+      "letter": "G",
+      "name": "DOVE",
+      "meaning": "You confess love"
+    },
+    {
+      "id": "eye",
+      "letter": "G",
+      "name": "EYE",
+      "meaning": "Eyelashes = end of troubles"
+    },
+    {
+      "id": "glasses",
+      "letter": "G",
+      "name": "GLASSES",
+      "meaning": "Help will come"
+    },
+    {
+      "id": "deer",
+      "letter": "G",
+      "name": "DEER",
+      "meaning": "Plenty of luck"
+    },
+    {
+      "id": "ring",
+      "letter": "H",
+      "name": "RING",
+      "meaning": "Big trouble near"
+    },
+    {
+      "id": "letters",
+      "letter": "H",
+      "name": "LETTERS",
+      "meaning": "Money (male) / Fortune (female)"
+    },
+    {
+      "id": "dagger",
+      "letter": "H",
+      "name": "DAGGER",
+      "meaning": "Unexpected money, wasted"
+    },
+    {
+      "id": "carrot",
+      "letter": "H",
+      "name": "CARROT",
+      "meaning": "Reasonless happiness"
+    },
+    {
+      "id": "animal",
+      "letter": "H",
+      "name": "ANIMAL",
+      "meaning": "Achievement of hard task"
+    },
+    {
+      "id": "nurse",
+      "letter": "H",
+      "name": "NURSE",
+      "meaning": "Health issue in family"
+    },
+    {
+      "id": "crescent",
+      "letter": "H",
+      "name": "CRESCENT",
+      "meaning": "Good news"
+    },
+    {
+      "id": "river",
+      "letter": "I",
+      "name": "RIVER",
+      "meaning": "Surprises ahead"
+    },
+    {
+      "id": "needle",
+      "letter": "İ",
+      "name": "NEEDLE",
+      "meaning": "Good news"
+    },
+    {
+      "id": "elder",
+      "letter": "İ",
+      "name": "ELDER",
+      "meaning": "Good progress next year"
+    },
+    {
+      "id": "imam",
+      "letter": "İ",
+      "name": "IMAM",
+      "meaning": "Bad news"
+    },
+    {
+      "id": "emperor",
+      "letter": "İ",
+      "name": "EMPEROR",
+      "meaning": "Money through gambling"
+    },
+    {
+      "id": "pearl",
+      "letter": "İ",
+      "name": "PEARL",
+      "meaning": "Inner peace"
+    },
+    {
+      "id": "fig",
+      "letter": "İ",
+      "name": "FIG",
+      "meaning": "Profit via short trip"
+    },
+    {
+      "id": "human",
+      "letter": "İ",
+      "name": "HUMAN",
+      "meaning": "One = peace, many = problems"
+    },
+    {
+      "id": "rope",
+      "letter": "İ",
+      "name": "ROPE",
+      "meaning": "Journey"
+    },
+    {
+      "id": "playing-card",
+      "letter": "İ",
+      "name": "PLAYING CARD",
+      "meaning": "Troubles end with ease"
+    },
+    {
+      "id": "letter-i",
+      "letter": "İ",
+      "name": "LETTER İ",
+      "meaning": "Luck"
+    },
+    {
+      "id": "razor-blade",
+      "letter": "J",
+      "name": "RAZOR BLADE",
+      "meaning": "Troubles will end"
+    },
+    {
+      "id": "token",
+      "letter": "J",
+      "name": "TOKEN",
+      "meaning": "Sudden money, big joy"
+    },
+    {
+      "id": "kaaba",
+      "letter": "K",
+      "name": "KAABA",
+      "meaning": "Great fortune"
+    },
+    {
+      "id": "grave",
+      "letter": "K",
+      "name": "GRAVE",
+      "meaning": "Stay away from family for a while"
+    },
+    {
+      "id": "goblet",
+      "letter": "K",
+      "name": "GOBLET",
+      "meaning": "Secrets revealed"
+    },
+    {
+      "id": "woman",
+      "letter": "K",
+      "name": "WOMAN",
+      "meaning": "Abundance; for married woman = risk of losing husband"
+    },
+    {
+      "id": "coffee",
+      "letter": "K",
+      "name": "COFFEE",
+      "meaning": "Reading will be true"
+    },
+    {
+      "id": "castle",
+      "letter": "K",
+      "name": "CASTLE",
+      "meaning": "Trust your friends"
+    },
+    {
+      "id": "shield",
+      "letter": "K",
+      "name": "SHIELD",
+      "meaning": "Apply your ideas"
+    },
+    {
+      "id": "heart",
+      "letter": "K",
+      "name": "HEART",
+      "meaning": "Problems will end"
+    },
+    {
+      "id": "wing",
+      "letter": "K",
+      "name": "WING",
+      "meaning": "Long journey"
+    },
+    {
+      "id": "kangaroo",
+      "letter": "K",
+      "name": "KANGAROO",
+      "meaning": "Unexpected promotion"
+    },
+    {
+      "id": "door",
+      "letter": "K",
+      "name": "DOOR",
+      "meaning": "Good news from disliked person"
+    },
+    {
+      "id": "turtle",
+      "letter": "K",
+      "name": "TURTLE",
+      "meaning": "New love"
+    },
+    {
+      "id": "square",
+      "letter": "K",
+      "name": "SQUARE",
+      "meaning": "Expected money arrives"
+    },
+    {
+      "id": "crow",
+      "letter": "K",
+      "name": "CROW",
+      "meaning": "Very good news"
+    },
+    {
+      "id": "ant",
+      "letter": "K",
+      "name": "ANT",
+      "meaning": "Gain through hard work"
+    },
+    {
+      "id": "bowl",
+      "letter": "K",
+      "name": "BOWL",
+      "meaning": "Good progress at work"
+    },
+    {
+      "id": "spoon",
+      "letter": "K",
+      "name": "SPOON",
+      "meaning": "Opportunity missed"
+    },
+    {
+      "id": "pickaxe",
+      "letter": "K",
+      "name": "PICKAXE",
+      "meaning": "Big money but risk if wasted"
+    },
+    {
+      "id": "cat",
+      "letter": "K",
+      "name": "CAT",
+      "meaning": "Depends on interpretation"
+    },
+    {
+      "id": "butterfly",
+      "letter": "K",
+      "name": "BUTTERFLY",
+      "meaning": "Suffering then happiness"
+    },
+    {
+      "id": "violin",
+      "letter": "K",
+      "name": "VIOLIN",
+      "meaning": "Selfish mistakes"
+    },
+    {
+      "id": "sword",
+      "letter": "K",
+      "name": "SWORD",
+      "meaning": "Gift from lover"
+    },
+    {
+      "id": "s",
+      "letter": "K",
+      "name": "S",
+      "meaning": "nan"
+    },
+    {
+      "id": "lamp",
+      "letter": "L",
+      "name": "LAMP",
+      "meaning": "Business trip"
+    },
+    {
+      "id": "medal",
+      "letter": "M",
+      "name": "MEDAL",
+      "meaning": "Lost money will be found"
+    },
+    {
+      "id": "cave",
+      "letter": "M",
+      "name": "CAVE",
+      "meaning": "Hard journey"
+    },
+    {
+      "id": "scissors",
+      "letter": "M",
+      "name": "SCISSORS",
+      "meaning": "Feeling capable"
+    },
+    {
+      "id": "buffalo",
+      "letter": "M",
+      "name": "BUFFALO",
+      "meaning": "Sweet news from west"
+    },
+    {
+      "id": "grill",
+      "letter": "M",
+      "name": "GRILL",
+      "meaning": "Awaited news arrives"
+    },
+    {
+      "id": "seagull",
+      "letter": "M",
+      "name": "SEAGULL",
+      "meaning": "Many sad news"
+    },
+    {
+      "id": "table",
+      "letter": "M",
+      "name": "TABLE",
+      "meaning": "Success in exams"
+    },
+    {
+      "id": "letter",
+      "letter": "M",
+      "name": "LETTER",
+      "meaning": "Confide troubles"
+    },
+    {
+      "id": "mevlana",
+      "letter": "M",
+      "name": "MEVLANA",
+      "meaning": "Happy friends nearby"
+    },
+    {
+      "id": "angel",
+      "letter": "M",
+      "name": "ANGEL",
+      "meaning": "Support from maternal side"
+    },
+    {
+      "id": "fruit",
+      "letter": "M",
+      "name": "FRUIT",
+      "meaning": "Success after waiting"
+    },
+    {
+      "id": "tombstone",
+      "letter": "M",
+      "name": "TOMBSTONE",
+      "meaning": "Long life"
+    },
+    {
+      "id": "spear",
+      "letter": "M",
+      "name": "SPEAR",
+      "meaning": "Happy turn in relationship"
+    },
+    {
+      "id": "mussel",
+      "letter": "M",
+      "name": "MUSSEL",
+      "meaning": "Serious health issues"
+    },
+    {
+      "id": "minaret",
+      "letter": "M",
+      "name": "MINARET",
+      "meaning": "Trouble during Ramadan"
+    },
+    {
+      "id": "candle",
+      "letter": "M",
+      "name": "CANDLE",
+      "meaning": "Sexual pleasure"
+    },
+    {
+      "id": "prayer",
+      "letter": "N",
+      "name": "PRAYER",
+      "meaning": "Unexpected blessing"
+    },
+    {
+      "id": "pomegranate",
+      "letter": "N",
+      "name": "POMEGRANATE",
+      "meaning": "Small issue grows big"
+    },
+    {
+      "id": "arrow",
+      "letter": "O",
+      "name": "ARROW",
+      "meaning": "Impatience fades"
+    },
+    {
+      "id": "sickle",
+      "letter": "O",
+      "name": "SICKLE",
+      "meaning": "Reconcile with friends"
+    },
+    {
+      "id": "capricorn",
+      "letter": "O",
+      "name": "CAPRICORN",
+      "meaning": "Relief after hardship"
+    },
+    {
+      "id": "student",
+      "letter": "Ö",
+      "name": "STUDENT",
+      "meaning": "New phase"
+    },
+    {
+      "id": "spider",
+      "letter": "Ö",
+      "name": "SPIDER",
+      "meaning": "Personality issues"
+    },
+    {
+      "id": "duck",
+      "letter": "Ö",
+      "name": "DUCK",
+      "meaning": "Help from father’s side"
+    },
+    {
+      "id": "coat",
+      "letter": "P",
+      "name": "COAT",
+      "meaning": "Awaited news won’t come"
+    },
+    {
+      "id": "trousers",
+      "letter": "P",
+      "name": "TROUSERS",
+      "meaning": "Good news from blond person"
+    },
+    {
+      "id": "bow-tie",
+      "letter": "P",
+      "name": "BOW TIE",
+      "meaning": "Betrayal from close friend"
+    },
+    {
+      "id": "cotton",
+      "letter": "P",
+      "name": "COTTON",
+      "meaning": "Risk of suffocation"
+    },
+    {
+      "id": "parrot",
+      "letter": "P",
+      "name": "PARROT",
+      "meaning": "More friends"
+    },
+    {
+      "id": "daisy",
+      "letter": "P",
+      "name": "DAISY",
+      "meaning": "Visit"
+    },
+    {
+      "id": "money",
+      "letter": "P",
+      "name": "MONEY",
+      "meaning": "Don’t postpone plans"
+    },
+    {
+      "id": "cake",
+      "letter": "P",
+      "name": "CAKE",
+      "meaning": "Good news"
+    },
+    {
+      "id": "pelican",
+      "letter": "P",
+      "name": "PELICAN",
+      "meaning": "Lots of luck"
+    },
+    {
+      "id": "penguin",
+      "letter": "P",
+      "name": "PENGUIN",
+      "meaning": "Patience brings fortune"
+    },
+    {
+      "id": "window",
+      "letter": "P",
+      "name": "WINDOW",
+      "meaning": "Health"
+    },
+    {
+      "id": "compass",
+      "letter": "P",
+      "name": "COMPASS",
+      "meaning": "Hidden work succeeds"
+    },
+    {
+      "id": "battery",
+      "letter": "P",
+      "name": "BATTERY",
+      "meaning": "Happiness"
+    },
+    {
+      "id": "pipe",
+      "letter": "P",
+      "name": "PIPE",
+      "meaning": "Doubt"
+    },
+    {
+      "id": "police",
+      "letter": "P",
+      "name": "POLICE",
+      "meaning": "Great sorrow"
+    },
+    {
+      "id": "postman",
+      "letter": "P",
+      "name": "POSTMAN",
+      "meaning": "Joyful departure"
+    },
+    {
+      "id": "prince",
+      "letter": "P",
+      "name": "PRINCE",
+      "meaning": "Handsome match"
+    },
+    {
+      "id": "princess",
+      "letter": "P",
+      "name": "PRINCESS",
+      "meaning": "Meet ideal partner soon"
+    },
+    {
+      "id": "raki-bottle",
+      "letter": "R",
+      "name": "RAKI BOTTLE",
+      "meaning": "Sudden but great joy"
+    },
+    {
+      "id": "letter-r",
+      "letter": "R",
+      "name": "LETTER R",
+      "meaning": "Person with “R” may harm"
+    },
+    {
+      "id": "clock",
+      "letter": "S",
+      "name": "CLOCK",
+      "meaning": "You’ll be calmer"
+    },
+    {
+      "id": "soap",
+      "letter": "S",
+      "name": "SOAP",
+      "meaning": "Troubles continue"
+    },
+    {
+      "id": "hair",
+      "letter": "S",
+      "name": "HAIR",
+      "meaning": "Much gain"
+    },
+    {
+      "id": "beard",
+      "letter": "S",
+      "name": "BEARD",
+      "meaning": "Brother succeeds"
+    },
+    {
+      "id": "snail",
+      "letter": "S",
+      "name": "SNAIL",
+      "meaning": "Gain with patience"
+    },
+    {
+      "id": "lute",
+      "letter": "S",
+      "name": "LUTE",
+      "meaning": "Doctor visit, no bad news"
+    },
+    {
+      "id": "whirling-dervish",
+      "letter": "S",
+      "name": "WHIRLING DERVISH",
+      "meaning": "Fortune"
+    },
+    {
+      "id": "river-of-love",
+      "letter": "S",
+      "name": "RIVER OF LOVE",
+      "meaning": "Abundance"
+    },
+    {
+      "id": "cigarette",
+      "letter": "S",
+      "name": "CIGARETTE",
+      "meaning": "Troubles end"
+    },
+    {
+      "id": "gun",
+      "letter": "S",
+      "name": "GUN",
+      "meaning": "Recognize evil people"
+    },
+    {
+      "id": "fly",
+      "letter": "S",
+      "name": "FLY",
+      "meaning": "Nice invitation"
+    },
+    {
+      "id": "squirrel",
+      "letter": "S",
+      "name": "SQUIRREL",
+      "meaning": "Save = fortune opens"
+    },
+    {
+      "id": "worm",
+      "letter": "S",
+      "name": "WORM",
+      "meaning": "Beware false friends"
+    },
+    {
+      "id": "question-mark",
+      "letter": "S",
+      "name": "QUESTION MARK",
+      "meaning": "Lover hides a secret"
+    },
+    {
+      "id": "broom",
+      "letter": "S",
+      "name": "BROOM",
+      "meaning": "Delayed trip will happen"
+    },
+    {
+      "id": "umbrella",
+      "letter": "Ş",
+      "name": "UMBRELLA",
+      "meaning": "Small cost brings good result"
+    },
+    {
+      "id": "devil",
+      "letter": "Ş",
+      "name": "DEVIL",
+      "meaning": "Old friends plan evil"
+    },
+    {
+      "id": "bottle",
+      "letter": "Ş",
+      "name": "BOTTLE",
+      "meaning": "Don’t share secrets"
+    },
+    {
+      "id": "plate",
+      "letter": "T",
+      "name": "PLATE",
+      "meaning": "Property"
+    },
+    {
+      "id": "tablet",
+      "letter": "T",
+      "name": "TABLET",
+      "meaning": "Big news"
+    },
+    {
+      "id": "coffin",
+      "letter": "T",
+      "name": "COFFIN",
+      "meaning": "Father’s health improves"
+    },
+    {
+      "id": "throne",
+      "letter": "T",
+      "name": "THRONE",
+      "meaning": "Long journey"
+    },
+    {
+      "id": "comb",
+      "letter": "T",
+      "name": "COMB",
+      "meaning": "New job"
+    },
+    {
+      "id": "rabbit",
+      "letter": "T",
+      "name": "RABBIT",
+      "meaning": "Peace then collapse"
+    },
+    {
+      "id": "peacock",
+      "letter": "T",
+      "name": "PEACOCK",
+      "meaning": "Fortune"
+    },
+    {
+      "id": "telephone",
+      "letter": "T",
+      "name": "TELEPHONE",
+      "meaning": "Joyful news"
+    },
+    {
+      "id": "pot",
+      "letter": "T",
+      "name": "POT",
+      "meaning": "Hurt partner pointlessly"
+    },
+    {
+      "id": "prayer-beads",
+      "letter": "T",
+      "name": "PRAYER BEADS",
+      "meaning": "First-time event"
+    },
+    {
+      "id": "saw",
+      "letter": "T",
+      "name": "SAW",
+      "meaning": "False friendships end"
+    },
+    {
+      "id": "jug",
+      "letter": "T",
+      "name": "JUG",
+      "meaning": "Lie discovered"
+    },
+    {
+      "id": "fox",
+      "letter": "T",
+      "name": "FOX",
+      "meaning": "Avoid gossip"
+    },
+    {
+      "id": "caterpillar",
+      "letter": "T",
+      "name": "CATERPILLAR",
+      "meaning": "Trip helps forget troubles"
+    },
+    {
+      "id": "airplane",
+      "letter": "U",
+      "name": "AIRPLANE",
+      "meaning": "Short trip"
+    },
+    {
+      "id": "kite",
+      "letter": "U",
+      "name": "KITE",
+      "meaning": "Happiness despite troubles"
+    },
+    {
+      "id": "razor",
+      "letter": "U",
+      "name": "RAZOR",
+      "meaning": "Elder protects you"
+    },
+    {
+      "id": "ladybug",
+      "letter": "U",
+      "name": "LADYBUG",
+      "meaning": "Luck and fortune"
+    },
+    {
+      "id": "iron",
+      "letter": "Ü",
+      "name": "IRON",
+      "meaning": "Good news from past"
+    },
+    {
+      "id": "triangle",
+      "letter": "Ü",
+      "name": "TRIANGLE",
+      "meaning": "Beware in business"
+    },
+    {
+      "id": "exclamation-mark",
+      "letter": "Ü",
+      "name": "EXCLAMATION MARK",
+      "meaning": "Temporary fight with lover"
+    },
+    {
+      "id": "letter-u",
+      "letter": "Ü",
+      "name": "LETTER Ü",
+      "meaning": "Sad period ahead"
+    },
+    {
+      "id": "body",
+      "letter": "V",
+      "name": "BODY",
+      "meaning": "Male = great fortune, Female = bad luck then fortune"
+    },
+    {
+      "id": "volcano",
+      "letter": "Y",
+      "name": "VOLCANO",
+      "meaning": "News from ex"
+    },
+    {
+      "id": "leaf",
+      "letter": "Y",
+      "name": "LEAF",
+      "meaning": "Risk of illness"
+    },
+    {
+      "id": "bed",
+      "letter": "Y",
+      "name": "BED",
+      "meaning": "Leave indecision"
+    },
+    {
+      "id": "bat",
+      "letter": "Y",
+      "name": "BAT",
+      "meaning": "Bad news ruins sleep"
+    },
+    {
+      "id": "sail",
+      "letter": "Y",
+      "name": "SAIL",
+      "meaning": "Short journey"
+    },
+    {
+      "id": "crab",
+      "letter": "Y",
+      "name": "CRAB",
+      "meaning": "Good friend"
+    },
+    {
+      "id": "star",
+      "letter": "Y",
+      "name": "STAR",
+      "meaning": "Big trouble nearby"
+    },
+    {
+      "id": "snake",
+      "letter": "Y",
+      "name": "SNAKE",
+      "meaning": "News removes worries"
+    },
+    {
+      "id": "egg",
+      "letter": "Y",
+      "name": "EGG",
+      "meaning": "Depends on interpreter"
+    },
+    {
+      "id": "dolphin",
+      "letter": "Y",
+      "name": "DOLPHIN",
+      "meaning": "Fake smiling friends"
+    },
+    {
+      "id": "road",
+      "letter": "Y",
+      "name": "ROAD",
+      "meaning": "Restlessness ends"
+    },
+    {
+      "id": "dice",
+      "letter": "Z",
+      "name": "DICE",
+      "meaning": "Unlucky period"
+    },
+    {
+      "id": "envelope",
+      "letter": "Z",
+      "name": "ENVELOPE",
+      "meaning": "Conflict mother & partner"
+    },
+    {
+      "id": "olive",
+      "letter": "Z",
+      "name": "OLIVE",
+      "meaning": "Very good news"
+    }
+  ]
+}

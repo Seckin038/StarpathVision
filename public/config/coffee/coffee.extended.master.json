@@ -1,0 +1,3617 @@
+{
+  "version": "1.0.0",
+  "symbols": [
+    {
+      "id": "island",
+      "letter": "A",
+      "name": {
+        "nl": "EILAND",
+        "en": "ISLAND",
+        "tr": "ADA"
+      },
+      "meaning": {
+        "nl": "Onverwachte kans",
+        "en": "Unexpected opportunity",
+        "tr": "Ummadık bir fırsat"
+      }
+    },
+    {
+      "id": "tree",
+      "letter": "A",
+      "name": {
+        "nl": "BOOM",
+        "en": "TREE",
+        "tr": "AĞAÇ"
+      },
+      "meaning": {
+        "nl": "Lang leven",
+        "en": "Long life",
+        "tr": "Uzun ömür"
+      }
+    },
+    {
+      "id": "net",
+      "letter": "A",
+      "name": {
+        "nl": "NET",
+        "en": "NET",
+        "tr": "AĞ"
+      },
+      "meaning": {
+        "nl": "Gevaar dat op de loer ligt",
+        "en": "Danger ahead",
+        "tr": "Kapınızda bekleyen tehlike"
+      }
+    },
+    {
+      "id": "cook",
+      "letter": "A",
+      "name": {
+        "nl": "KOK",
+        "en": "COOK",
+        "tr": "AHÇI"
+      },
+      "meaning": {
+        "nl": "Binnen korte tijd geluk",
+        "en": "Happiness soon",
+        "tr": "Kısa sürede mutluluk"
+      }
+    },
+    {
+      "id": "octopus",
+      "letter": "A",
+      "name": {
+        "nl": "OCTOPUS",
+        "en": "OCTOPUS",
+        "tr": "AHTAPOT"
+      },
+      "meaning": {
+        "nl": "Wees voorzichtig",
+        "en": "Be careful",
+        "tr": "Dikkatli olun"
+      }
+    },
+    {
+      "id": "family",
+      "letter": "A",
+      "name": {
+        "nl": "GEZIN",
+        "en": "FAMILY",
+        "tr": "AİLE"
+      },
+      "meaning": {
+        "nl": "Blij nieuws",
+        "en": "Joyful news",
+        "tr": "Sevindirici haber"
+      }
+    },
+    {
+      "id": "scorpion",
+      "letter": "A",
+      "name": {
+        "nl": "SCHORPIOEN",
+        "en": "SCORPION",
+        "tr": "AKREP"
+      },
+      "meaning": {
+        "nl": "Kwaadwillige mensen in je omgeving",
+        "en": "Malicious people around",
+        "tr": "Çevrende kötü niyetliler var"
+      }
+    },
+    {
+      "id": "vulture",
+      "letter": "A",
+      "name": {
+        "nl": "GIERVOGEL",
+        "en": "VULTURE",
+        "tr": "AKBABA"
+      },
+      "meaning": {
+        "nl": "Je moet niet in de schulden raken",
+        "en": "Avoid debts",
+        "tr": "Borçlanmamalısınız"
+      }
+    },
+    {
+      "id": "lung",
+      "letter": "A",
+      "name": {
+        "nl": "LONG",
+        "en": "LUNG",
+        "tr": "AKCİĞER"
+      },
+      "meaning": {
+        "nl": "Overvloed",
+        "en": "Abundance",
+        "tr": "Bereket"
+      }
+    },
+    {
+      "id": "flame",
+      "letter": "A",
+      "name": {
+        "nl": "VLAM",
+        "en": "FLAME",
+        "tr": "ALEV"
+      },
+      "meaning": {
+        "nl": "Een grote liefde wacht op je",
+        "en": "A great love awaits",
+        "tr": "Büyük bir aşk bekliyor"
+      }
+    },
+    {
+      "id": "god-allah",
+      "letter": "A",
+      "name": {
+        "nl": "ALLAH",
+        "en": "GOD (Allah)",
+        "tr": "ALLAH"
+      },
+      "meaning": {
+        "nl": "Een groot goed voorteken",
+        "en": "Great blessing sign",
+        "tr": "Büyük bir hayra alamet"
+      }
+    },
+    {
+      "id": "wedding-ring",
+      "letter": "A",
+      "name": {
+        "nl": "TROUWRING",
+        "en": "WEDDING RING",
+        "tr": "ALYANS"
+      },
+      "meaning": {
+        "nl": "Je krijgt problemen met je partner, maar verzoening volgt",
+        "en": "Issues with partner but reconciliation",
+        "tr": "Sevgilinizle problem yaşayacak ama barışacaksınız"
+      }
+    },
+    {
+      "id": "bulb",
+      "letter": "A",
+      "name": {
+        "nl": "LAMP",
+        "en": "BULB",
+        "tr": "AMPUL"
+      },
+      "meaning": {
+        "nl": "Je zult grote problemen ervaren",
+        "en": "Major problems ahead",
+        "tr": "Çok büyük problemler yaşayacaksınız"
+      }
+    },
+    {
+      "id": "key",
+      "letter": "A",
+      "name": {
+        "nl": "SLEUTEL",
+        "en": "KEY",
+        "tr": "ANAHTAR"
+      },
+      "meaning": {
+        "nl": "Dingen waar je al lang op wacht, worden werkelijkheid",
+        "en": "Long-awaited things will happen",
+        "tr": "Uzun süredir beklediğiniz şeyler gerçekleşecek"
+      }
+    },
+    {
+      "id": "car",
+      "letter": "A",
+      "name": {
+        "nl": "AUTO",
+        "en": "CAR",
+        "tr": "ARABA"
+      },
+      "meaning": {
+        "nl": "Je krijgt hulp van mensen die van je houden",
+        "en": "Help from loved ones",
+        "tr": "Sizi seven insanlardan yardım göreceksiniz"
+      }
+    },
+    {
+      "id": "bee",
+      "letter": "A",
+      "name": {
+        "nl": "BIJ",
+        "en": "BEE",
+        "tr": "ARI"
+      },
+      "meaning": {
+        "nl": "Je zorgen verdwijnen",
+        "en": "Troubles vanish",
+        "tr": "Dertleriniz ortadan kalkacak"
+      }
+    },
+    {
+      "id": "lion",
+      "letter": "A",
+      "name": {
+        "nl": "LEEUW",
+        "en": "LION",
+        "tr": "ARSLAN/ASLAN"
+      },
+      "meaning": {
+        "nl": "Een ouder of familielid zal je bijstaan",
+        "en": "Support from elder in family",
+        "tr": "Ailenizden bir büyük elinizden tutacak"
+      }
+    },
+    {
+      "id": "soldier",
+      "letter": "A",
+      "name": {
+        "nl": "SOLDAT",
+        "en": "SOLDIER",
+        "tr": "ASKER"
+      },
+      "meaning": {
+        "nl": "Je maakt moeilijke tijden door, maar je overwint ze",
+        "en": "Tough times but you overcome",
+        "tr": "Sıkıntılı zamanlar yaşayacak ama aşacaksınız"
+      }
+    },
+    {
+      "id": "horse",
+      "letter": "A",
+      "name": {
+        "nl": "PAARD",
+        "en": "HORSE",
+        "tr": "AT"
+      },
+      "meaning": {
+        "nl": "Rijkdom",
+        "en": "Wealth",
+        "tr": "Zenginlik"
+      }
+    },
+    {
+      "id": "horseshoe",
+      "letter": "A",
+      "name": {
+        "nl": "HOEFIJZER",
+        "en": "HORSESHOE",
+        "tr": "AT NALI"
+      },
+      "meaning": {
+        "nl": "Een gunstige gebeurtenis",
+        "en": "Very lucky event",
+        "tr": "Çok hayırlı olay olacak"
+      }
+    },
+    {
+      "id": "fire",
+      "letter": "A",
+      "name": {
+        "nl": "VUUR",
+        "en": "FIRE",
+        "tr": "ATEŞ"
+      },
+      "meaning": {
+        "nl": "Tijdelijke scheiding van een geliefde",
+        "en": "Temporary separation",
+        "tr": "Sevdiğiniz birisinden kısa ayrılık"
+      }
+    },
+    {
+      "id": "palm",
+      "letter": "A",
+      "name": {
+        "nl": "HANDPALM",
+        "en": "PALM",
+        "tr": "AVUÇ"
+      },
+      "meaning": {
+        "nl": "Je laat slechte gewoonten los",
+        "en": "Quitting bad habits",
+        "tr": "Kötü alışkanlıklarınızı bırakacaksınız"
+      }
+    },
+    {
+      "id": "moon",
+      "letter": "A",
+      "name": {
+        "nl": "MAAN",
+        "en": "MOON",
+        "tr": "AY"
+      },
+      "meaning": {
+        "nl": "Carrière stijgt",
+        "en": "Career growth",
+        "tr": "Kariyeriniz yükselecek"
+      }
+    },
+    {
+      "id": "foot",
+      "letter": "A",
+      "name": {
+        "nl": "VOET",
+        "en": "FOOT",
+        "tr": "AYAK"
+      },
+      "meaning": {
+        "nl": "Je zult een geliefde helpen",
+        "en": "Helping a loved one",
+        "tr": "Sevdiğiniz birine yardım edeceksiniz"
+      }
+    },
+    {
+      "id": "shoe",
+      "letter": "A",
+      "name": {
+        "nl": "SCHOEN",
+        "en": "SHOE",
+        "tr": "AYAKKABI"
+      },
+      "meaning": {
+        "nl": "Hulp uit onverwachte hoek",
+        "en": "Unexpected help",
+        "tr": "Ummadığınız birinden yardım"
+      }
+    },
+    {
+      "id": "bear",
+      "letter": "A",
+      "name": {
+        "nl": "BEER",
+        "en": "BEAR",
+        "tr": "AYI"
+      },
+      "meaning": {
+        "nl": "Een grote angst wacht op je",
+        "en": "A great fear awaits",
+        "tr": "Büyük bir korku yaşayacaksınız"
+      }
+    },
+    {
+      "id": "chimney",
+      "letter": "B",
+      "name": {
+        "nl": "SCHOORSTEEN",
+        "en": "CHIMNEY",
+        "tr": "BACA"
+      },
+      "meaning": {
+        "nl": "Blij nieuws",
+        "en": "Joyful news",
+        "tr": "Sevindirici haber"
+      }
+    },
+    {
+      "id": "leg",
+      "letter": "B",
+      "name": {
+        "nl": "BEEN",
+        "en": "LEG",
+        "tr": "BACAK"
+      },
+      "meaning": {
+        "nl": "Geldverlies",
+        "en": "Loss of money",
+        "tr": "Para kaybedeceksiniz"
+      }
+    },
+    {
+      "id": "almond",
+      "letter": "B",
+      "name": {
+        "nl": "AMANDEL",
+        "en": "ALMOND",
+        "tr": "BADEM"
+      },
+      "meaning": {
+        "nl": "Je geluk keert terug",
+        "en": "Fortune turns",
+        "tr": "Talihiniz dönecek"
+      }
+    },
+    {
+      "id": "navy-sailor",
+      "letter": "B",
+      "name": {
+        "nl": "MARINE",
+        "en": "NAVY SAILOR",
+        "tr": "BAHRİYELİ"
+      },
+      "meaning": {
+        "nl": "Groot maar tijdelijk geluk",
+        "en": "Great but temporary joy",
+        "tr": "Büyük ama geçici mutluluk"
+      }
+    },
+    {
+      "id": "fish",
+      "letter": "B",
+      "name": {
+        "nl": "VIS",
+        "en": "FISH",
+        "tr": "BALIK"
+      },
+      "meaning": {
+        "nl": "Overvloed",
+        "en": "Abundance",
+        "tr": "Bolluk"
+      }
+    },
+    {
+      "id": "balloon",
+      "letter": "B",
+      "name": {
+        "nl": "BALLON",
+        "en": "BALLOON",
+        "tr": "BALON"
+      },
+      "meaning": {
+        "nl": "Ruzies",
+        "en": "Arguments",
+        "tr": "Tartışmalar yaşayacaksınız"
+      }
+    },
+    {
+      "id": "axe",
+      "letter": "B",
+      "name": {
+        "nl": "BIJL",
+        "en": "AXE",
+        "tr": "BALTA"
+      },
+      "meaning": {
+        "nl": "Je problemen verdwijnen",
+        "en": "Troubles end",
+        "tr": "Belalarınız bitecek"
+      }
+    },
+    {
+      "id": "glass",
+      "letter": "B",
+      "name": {
+        "nl": "GLAS",
+        "en": "GLASS",
+        "tr": "BARDAK"
+      },
+      "meaning": {
+        "nl": "Je verklaart je liefde",
+        "en": "Declaration of love",
+        "tr": "Sevginizi açıklayacaksınız"
+      }
+    },
+    {
+      "id": "step",
+      "letter": "B",
+      "name": {
+        "nl": "TRAP",
+        "en": "STEP",
+        "tr": "BASAMAK"
+      },
+      "meaning": {
+        "nl": "Je dromen komen stap voor stap uit",
+        "en": "Dreams fulfilled step by step",
+        "tr": "Hayalleriniz adım adım gerçekleşiyor"
+      }
+    },
+    {
+      "id": "cane",
+      "letter": "B",
+      "name": {
+        "nl": "STOK",
+        "en": "CANE",
+        "tr": "BASTON"
+      },
+      "meaning": {
+        "nl": "Winst",
+        "en": "Gain",
+        "tr": "Kazanç"
+      }
+    },
+    {
+      "id": "head",
+      "letter": "B",
+      "name": {
+        "nl": "HOOFD",
+        "en": "HEAD",
+        "tr": "BAŞ"
+      },
+      "meaning": {
+        "nl": "Geld of kinderen",
+        "en": "Money or children",
+        "tr": "Para ya da çocuk sahibi olacaksınız"
+      }
+    },
+    {
+      "id": "wheat-ear",
+      "letter": "B",
+      "name": {
+        "nl": "KOREN",
+        "en": "WHEAT EAR",
+        "tr": "BAŞAK"
+      },
+      "meaning": {
+        "nl": "Rust",
+        "en": "Peace",
+        "tr": "Huzur"
+      }
+    },
+    {
+      "id": "sunset",
+      "letter": "B",
+      "name": {
+        "nl": "ONDERGAANDE ZON",
+        "en": "SUNSET",
+        "tr": "BATAN GÜNEŞ"
+      },
+      "meaning": {
+        "nl": "Binnenkort goed nieuws",
+        "en": "Soon good news",
+        "tr": "Kısa sürede güzel haber"
+      }
+    },
+    {
+      "id": "suitcase",
+      "letter": "B",
+      "name": {
+        "nl": "KOFFER",
+        "en": "SUITCASE",
+        "tr": "BAVUL"
+      },
+      "meaning": {
+        "nl": "Serieuze beslissing",
+        "en": "Serious decision",
+        "tr": "Ciddi karar"
+      }
+    },
+    {
+      "id": "owl",
+      "letter": "B",
+      "name": {
+        "nl": "UIL",
+        "en": "OWL",
+        "tr": "BAYKUŞ"
+      },
+      "meaning": {
+        "nl": "Pas op voor sluwe vrienden",
+        "en": "Beware of sly friends",
+        "tr": "Arkadaşlarınıza dikkat, içlerinde sinsiler var"
+      }
+    },
+    {
+      "id": "flag",
+      "letter": "B",
+      "name": {
+        "nl": "VLAG",
+        "en": "FLAG",
+        "tr": "BAYRAK"
+      },
+      "meaning": {
+        "nl": "Vrede",
+        "en": "Peace",
+        "tr": "Huzur"
+      }
+    },
+    {
+      "id": "baby",
+      "letter": "B",
+      "name": {
+        "nl": "BABY",
+        "en": "BABY",
+        "tr": "BEBEK"
+      },
+      "meaning": {
+        "nl": "Je staat voor een belangrijke beslissing",
+        "en": "Important decision ahead",
+        "tr": "Bir karar arifesindesiniz"
+      }
+    },
+    {
+      "id": "cradle",
+      "letter": "B",
+      "name": {
+        "nl": "WIEG",
+        "en": "CRADLE",
+        "tr": "BEŞİK"
+      },
+      "meaning": {
+        "nl": "Huwelijk of kinderen",
+        "en": "Marriage or child",
+        "tr": "Evlilik, evliyseniz çocuk"
+      }
+    },
+    {
+      "id": "knife",
+      "letter": "B",
+      "name": {
+        "nl": "MES",
+        "en": "KNIFE",
+        "tr": "BIÇAK"
+      },
+      "meaning": {
+        "nl": "Je fortuin opent zich",
+        "en": "Fortune opens",
+        "tr": "Kısmetiniz açılacak"
+      }
+    },
+    {
+      "id": "computer",
+      "letter": "B",
+      "name": {
+        "nl": "COMPUTER",
+        "en": "COMPUTER",
+        "tr": "BİLGİSAYAR"
+      },
+      "meaning": {
+        "nl": "Groot geluk",
+        "en": "Great luck",
+        "tr": "Büyük kısmet"
+      }
+    },
+    {
+      "id": "building",
+      "letter": "B",
+      "name": {
+        "nl": "GEBOUW",
+        "en": "BUILDING",
+        "tr": "BİNA"
+      },
+      "meaning": {
+        "nl": "Respect van je omgeving",
+        "en": "More respect",
+        "tr": "Çevrenizdekilerin saygısı artacak"
+      }
+    },
+    {
+      "id": "bull",
+      "letter": "B",
+      "name": {
+        "nl": "STIER",
+        "en": "BULL",
+        "tr": "BOĞA"
+      },
+      "meaning": {
+        "nl": "Winst",
+        "en": "Gain",
+        "tr": "Kazanç"
+      }
+    },
+    {
+      "id": "horn",
+      "letter": "B",
+      "name": {
+        "nl": "HOORN",
+        "en": "HORN",
+        "tr": "BOYNUZ"
+      },
+      "meaning": {
+        "nl": "Pas op voor roddels",
+        "en": "Beware of gossip",
+        "tr": "Dedikoduya dikkat edin"
+      }
+    },
+    {
+      "id": "wheat",
+      "letter": "B",
+      "name": {
+        "nl": "TARWE",
+        "en": "WHEAT",
+        "tr": "BUĞDAY"
+      },
+      "meaning": {
+        "nl": "Geld komt binnen",
+        "en": "Money incoming",
+        "tr": "Para gelecek"
+      }
+    },
+    {
+      "id": "cloud",
+      "letter": "B",
+      "name": {
+        "nl": "WOLK",
+        "en": "CLOUD",
+        "tr": "BULUT"
+      },
+      "meaning": {
+        "nl": "Onrust",
+        "en": "Unrest",
+        "tr": "Huzursuzluk"
+      }
+    },
+    {
+      "id": "nose",
+      "letter": "B",
+      "name": {
+        "nl": "NEUS",
+        "en": "NOSE",
+        "tr": "BURUN"
+      },
+      "meaning": {
+        "nl": "Een vriend komt om raad vragen",
+        "en": "A friend seeks advice",
+        "tr": "Akıl danışacak bir dost gelecek"
+      }
+    },
+    {
+      "id": "mosque",
+      "letter": "C",
+      "name": {
+        "nl": "MOSKEE",
+        "en": "MOSQUE",
+        "tr": "CAMİİ"
+      },
+      "meaning": {
+        "nl": "Hulp uit je familie",
+        "en": "Help from family",
+        "tr": "Ailenizden yardım gelecek"
+      }
+    },
+    {
+      "id": "monster",
+      "letter": "C",
+      "name": {
+        "nl": "MONSTER",
+        "en": "MONSTER",
+        "tr": "CANAVAR"
+      },
+      "meaning": {
+        "nl": "Vijanden die zich voordoen als vrienden krijgen spijt",
+        "en": "False friends regret",
+        "tr": "Dost görünen düşmanlar pişman olacak"
+      }
+    },
+    {
+      "id": "funeral",
+      "letter": "C",
+      "name": {
+        "nl": "BEGRAFENIS",
+        "en": "FUNERAL",
+        "tr": "CENAZE"
+      },
+      "meaning": {
+        "nl": "Reis",
+        "en": "Journey",
+        "tr": "Yolculuk"
+      }
+    },
+    {
+      "id": "mobile-phone",
+      "letter": "C",
+      "name": {
+        "nl": "MOBIEL",
+        "en": "MOBILE PHONE",
+        "tr": "CEP TELEFONU"
+      },
+      "meaning": {
+        "nl": "Man = goed nieuws, vrouw = roddel",
+        "en": "Good news (male) / Gossip (female)",
+        "tr": "Erkekseniz hayırlı haber, kadınsanız dedikodu"
+      }
+    },
+    {
+      "id": "ruler",
+      "letter": "C",
+      "name": {
+        "nl": "LINIAAL",
+        "en": "RULER",
+        "tr": "CETVEL"
+      },
+      "meaning": {
+        "nl": "Gunstige ontwikkeling",
+        "en": "Positive development",
+        "tr": "Hayırlı gelişme"
+      }
+    },
+    {
+      "id": "tweezers",
+      "letter": "C",
+      "name": {
+        "nl": "PINSET",
+        "en": "TWEEZERS",
+        "tr": "CIMBIZ"
+      },
+      "meaning": {
+        "nl": "Moeilijke dagen, maar kort van duur",
+        "en": "Hard days, short-lived",
+        "tr": "Zor günler gelecek ama kısa sürede geçecek"
+      }
+    },
+    {
+      "id": "dwarf",
+      "letter": "C",
+      "name": {
+        "nl": "DWERG",
+        "en": "DWARF",
+        "tr": "CÜCE"
+      },
+      "meaning": {
+        "nl": "Groot gevaar dichtbij",
+        "en": "Big danger close",
+        "tr": "Büyük tehlike yanı başınızda"
+      }
+    },
+    {
+      "id": "bell",
+      "letter": "Ç",
+      "name": {
+        "nl": "BEL",
+        "en": "BELL",
+        "tr": "ÇAN"
+      },
+      "meaning": {
+        "nl": "Droevig nieuws",
+        "en": "Sad news",
+        "tr": "Üzücü bir haber"
+      }
+    },
+    {
+      "id": "bag",
+      "letter": "Ç",
+      "name": {
+        "nl": "TAS",
+        "en": "BAG",
+        "tr": "ÇANTA"
+      },
+      "meaning": {
+        "nl": "Kleine winst",
+        "en": "Small profit",
+        "tr": "Az miktar kazanç"
+      }
+    },
+    {
+      "id": "hoe",
+      "letter": "Ç",
+      "name": {
+        "nl": "SCHOFFEL",
+        "en": "HOE",
+        "tr": "ÇAPA"
+      },
+      "meaning": {
+        "nl": "Groot succes",
+        "en": "Great success",
+        "tr": "Büyük başarı"
+      }
+    },
+    {
+      "id": "cross",
+      "letter": "Ç",
+      "name": {
+        "nl": "KRUIS",
+        "en": "CROSS",
+        "tr": "ÇARPI"
+      },
+      "meaning": {
+        "nl": "Je dromen en verwachtingen veranderen",
+        "en": "Expectations change",
+        "tr": "Hayalleriniz, beklentileriniz değişecek"
+      }
+    },
+    {
+      "id": "teapot",
+      "letter": "Ç",
+      "name": {
+        "nl": "THEEPOT",
+        "en": "TEAPOT",
+        "tr": "ÇAYDANLIK"
+      },
+      "meaning": {
+        "nl": "Nieuwe vrienden",
+        "en": "New friends",
+        "tr": "Yeni arkadaşlar"
+      }
+    },
+    {
+      "id": "hammer",
+      "letter": "Ç",
+      "name": {
+        "nl": "HAMER",
+        "en": "HAMMER",
+        "tr": "ÇEKİÇ"
+      },
+      "meaning": {
+        "nl": "Problemen verdwijnen",
+        "en": "Troubles end",
+        "tr": "Sorunlar bitecek"
+      }
+    },
+    {
+      "id": "flower",
+      "letter": "Ç",
+      "name": {
+        "nl": "BLOEM",
+        "en": "FLOWER",
+        "tr": "ÇİÇEK"
+      },
+      "meaning": {
+        "nl": "Reis",
+        "en": "Travel",
+        "tr": "Seyahat"
+      }
+    },
+    {
+      "id": "line",
+      "letter": "Ç",
+      "name": {
+        "nl": "LIJN",
+        "en": "LINE",
+        "tr": "ÇİZGİ"
+      },
+      "meaning": {
+        "nl": "Kleine ziekte",
+        "en": "Minor illness",
+        "tr": "Önemsiz bir hastalık kapınızda"
+      }
+    },
+    {
+      "id": "boot",
+      "letter": "Ç",
+      "name": {
+        "nl": "LAARS",
+        "en": "BOOT",
+        "tr": "ÇİZME"
+      },
+      "meaning": {
+        "nl": "Korte reis",
+        "en": "Short trip",
+        "tr": "Kısa yolculuk"
+      }
+    },
+    {
+      "id": "child",
+      "letter": "Ç",
+      "name": {
+        "nl": "KIND",
+        "en": "CHILD",
+        "tr": "ÇOCUK"
+      },
+      "meaning": {
+        "nl": "Vrijgezel = huwelijk, getrouwd = winst",
+        "en": "Marriage / Profit",
+        "tr": "Bekarsanız evlilik, evliyseniz kazanç"
+      }
+    },
+    {
+      "id": "sock",
+      "letter": "Ç",
+      "name": {
+        "nl": "SOK",
+        "en": "SOCK",
+        "tr": "ÇORAP"
+      },
+      "meaning": {
+        "nl": "Je ontsnapt aan een groot gevaar, maar wees geduldig",
+        "en": "Escape from danger with patience",
+        "tr": "Büyük bir beladan kurtulacaksınız ama sabırlı olun"
+      }
+    },
+    {
+      "id": "mountain",
+      "letter": "D",
+      "name": {
+        "nl": "BERG",
+        "en": "MOUNTAIN",
+        "tr": "DAĞ"
+      },
+      "meaning": {
+        "nl": "Je verwachtingen komen uit",
+        "en": "Expectations will come true",
+        "tr": "Beklentileriniz gerçek olacak"
+      }
+    },
+    {
+      "id": "diver",
+      "letter": "D",
+      "name": {
+        "nl": "DUIKER",
+        "en": "DIVER",
+        "tr": "DALGIÇ"
+      },
+      "meaning": {
+        "nl": "Je wordt verraden door een vriend",
+        "en": "Betrayal from a friend",
+        "tr": "Dostlarınızdan kazık yiyeceksiniz"
+      }
+    },
+    {
+      "id": "dance",
+      "letter": "D",
+      "name": {
+        "nl": "DANS",
+        "en": "DANCE",
+        "tr": "DANS"
+      },
+      "meaning": {
+        "nl": "Grote som geld brengt opluchting",
+        "en": "Relief with big money",
+        "tr": "Büyük bir para ile çok rahatlayacaksınız"
+      }
+    },
+    {
+      "id": "drum",
+      "letter": "D",
+      "name": {
+        "nl": "TROMMEL",
+        "en": "DRUM",
+        "tr": "DAVUL"
+      },
+      "meaning": {
+        "nl": "Je krijgt een brutale buur",
+        "en": "An insolent neighbor",
+        "tr": "Arsız komşu edineceksiniz"
+      }
+    },
+    {
+      "id": "notebook",
+      "letter": "D",
+      "name": {
+        "nl": "SCHRIFT",
+        "en": "NOTEBOOK",
+        "tr": "DEFTER"
+      },
+      "meaning": {
+        "nl": "Mooie ontwikkelingen op je werk",
+        "en": "Positive changes at work",
+        "tr": "İşyerinde güzellikler"
+      }
+    },
+    {
+      "id": "railway",
+      "letter": "D",
+      "name": {
+        "nl": "SPOORWEG",
+        "en": "RAILWAY",
+        "tr": "DEMİRYOLU"
+      },
+      "meaning": {
+        "nl": "Ruzie met je vader",
+        "en": "Conflict with father",
+        "tr": "Babanızla aranız açılacak"
+      }
+    },
+    {
+      "id": "submarine",
+      "letter": "D",
+      "name": {
+        "nl": "ONDERZEEËR",
+        "en": "SUBMARINE",
+        "tr": "DENİZALTI"
+      },
+      "meaning": {
+        "nl": "Periscoop zichtbaar = rust; niet zichtbaar = somber nieuws",
+        "en": "Periscope = peace, not = bad news",
+        "tr": "Periskopu görünüyorsa huzur, yoksa iç bunaltıcı haber"
+      }
+    },
+    {
+      "id": "mermaid",
+      "letter": "D",
+      "name": {
+        "nl": "MEERMIN",
+        "en": "MERMAID",
+        "tr": "DENİZKIZI"
+      },
+      "meaning": {
+        "nl": "Kans op groot succes",
+        "en": "Chance of success",
+        "tr": "Büyük bir başarı ihtimali"
+      }
+    },
+    {
+      "id": "sea",
+      "letter": "D",
+      "name": {
+        "nl": "ZEE",
+        "en": "SEA",
+        "tr": "DENİZ"
+      },
+      "meaning": {
+        "nl": "Rust en onrust samen",
+        "en": "Peace and unrest together",
+        "tr": "Huzurla huzursuzluk iç içe"
+      }
+    },
+    {
+      "id": "seahorse",
+      "letter": "D",
+      "name": {
+        "nl": "ZEEPAARDJE",
+        "en": "SEAHORSE",
+        "tr": "DENİZATI"
+      },
+      "meaning": {
+        "nl": "Onverwachte rijkdom",
+        "en": "Unexpected wealth",
+        "tr": "Umulmadık servet"
+      }
+    },
+    {
+      "id": "derya-sea",
+      "letter": "D",
+      "name": {
+        "nl": "DERYA",
+        "en": "DERYA (SEA)",
+        "tr": "DERYA"
+      },
+      "meaning": {
+        "nl": "Hulp van je zus",
+        "en": "Help from sister",
+        "tr": "Ablanızdan bir yardım"
+      }
+    },
+    {
+      "id": "camel",
+      "letter": "D",
+      "name": {
+        "nl": "KAMEEL",
+        "en": "CAMEL",
+        "tr": "DEVE"
+      },
+      "meaning": {
+        "nl": "Moeilijke maar positieve reis",
+        "en": "Hard but fruitful journey",
+        "tr": "Zorlu bir yolculuk ama sonu güzel"
+      }
+    },
+    {
+      "id": "ostrich",
+      "letter": "D",
+      "name": {
+        "nl": "STRUISVOGEL",
+        "en": "OSTRICH",
+        "tr": "DEVEKUŞU"
+      },
+      "meaning": {
+        "nl": "Groot geld",
+        "en": "Big money",
+        "tr": "Büyük para"
+      }
+    },
+    {
+      "id": "tooth",
+      "letter": "D",
+      "name": {
+        "nl": "TAND",
+        "en": "TOOTH",
+        "tr": "DİŞ"
+      },
+      "meaning": {
+        "nl": "Mogelijk gezondheidsprobleem",
+        "en": "Health problem possible",
+        "tr": "Sağlık problemi yaşayabilirsiniz"
+      }
+    },
+    {
+      "id": "dinosaur",
+      "letter": "D",
+      "name": {
+        "nl": "DINO",
+        "en": "DINOSAUR",
+        "tr": "DİNAZOR"
+      },
+      "meaning": {
+        "nl": "Onverwachte reis",
+        "en": "Unplanned trip",
+        "tr": "Planlamadık seyahat"
+      }
+    },
+    {
+      "id": "doctor",
+      "letter": "D",
+      "name": {
+        "nl": "DOKTER",
+        "en": "DOCTOR",
+        "tr": "DOKTOR"
+      },
+      "meaning": {
+        "nl": "Een redder komt in je leven",
+        "en": "A savior appears",
+        "tr": "Hayatınıza bir kurtarıcı girecek"
+      }
+    },
+    {
+      "id": "full-moon",
+      "letter": "D",
+      "name": {
+        "nl": "VOLLE MAAN",
+        "en": "FULL MOON",
+        "tr": "DOLUNAY"
+      },
+      "meaning": {
+        "nl": "Nieuwe liefde",
+        "en": "New love approaching",
+        "tr": "Yeni bir aşk kapıda"
+      }
+    },
+    {
+      "id": "pig",
+      "letter": "D",
+      "name": {
+        "nl": "VARKEN",
+        "en": "PIG",
+        "tr": "DOMUZ"
+      },
+      "meaning": {
+        "nl": "Je baas bezorgt je zorgen",
+        "en": "Boss causes trouble",
+        "tr": "Patronunuz size dert çıkaracak"
+      }
+    },
+    {
+      "id": "lip",
+      "letter": "D",
+      "name": {
+        "nl": "LIP",
+        "en": "LIP",
+        "tr": "DUDAK"
+      },
+      "meaning": {
+        "nl": "Je verliest een voorwerp",
+        "en": "Loss of belongings",
+        "tr": "Eşya kaybedeceksiniz"
+      }
+    },
+    {
+      "id": "button",
+      "letter": "D",
+      "name": {
+        "nl": "KNOP",
+        "en": "BUTTON",
+        "tr": "DÜĞME"
+      },
+      "meaning": {
+        "nl": "Relatieproblemen, maar snel opgelost",
+        "en": "Relationship block, quickly solved",
+        "tr": "İlişkiniz tıkanacak ama tez sürede çözülecek"
+      }
+    },
+    {
+      "id": "helm-rudder",
+      "letter": "D",
+      "name": {
+        "nl": "ROER",
+        "en": "HELM (RUDDER)",
+        "tr": "DÜMEN"
+      },
+      "meaning": {
+        "nl": "Moeilijke dagen op komst",
+        "en": "Hard days ahead",
+        "tr": "Çok zorlu günler geliyor"
+      }
+    },
+    {
+      "id": "binoculars",
+      "letter": "D",
+      "name": {
+        "nl": "VERREKIJKER",
+        "en": "BINOCULARS",
+        "tr": "DÜRBÜN"
+      },
+      "meaning": {
+        "nl": "Slapeloosheid, ongeveer 6 maanden",
+        "en": "Insomnia ~6 months",
+        "tr": "Uykusuzluk çekeceksiniz, 6 ay kadar"
+      }
+    },
+    {
+      "id": "whistle",
+      "letter": "D",
+      "name": {
+        "nl": "FLUIT",
+        "en": "WHISTLE",
+        "tr": "DÜDÜK"
+      },
+      "meaning": {
+        "nl": "Goed nieuws van een vrolijke man",
+        "en": "Good news from cheerful man",
+        "tr": "Neşeli bir adamdan güzel bir haber gelecek"
+      }
+    },
+    {
+      "id": "dragon",
+      "letter": "E",
+      "name": {
+        "nl": "DRAAK",
+        "en": "DRAGON",
+        "tr": "EJDERHA"
+      },
+      "meaning": {
+        "nl": "In de zomer: opluchting; in de winter: emotionele moeilijkheden",
+        "en": "Relief in summer, troubles in winter",
+        "tr": "Yazın ferahlama, kışın duygusal sıkıntı"
+      }
+    },
+    {
+      "id": "bread",
+      "letter": "E",
+      "name": {
+        "nl": "BROOD",
+        "en": "BREAD",
+        "tr": "EKMEK"
+      },
+      "meaning": {
+        "nl": "Grote betalingen op korte termijn",
+        "en": "Big payments soon",
+        "tr": "Kısa sürede büyük ödemeler yapacaksınız"
+      }
+    },
+    {
+      "id": "hand",
+      "letter": "E",
+      "name": {
+        "nl": "HAND",
+        "en": "HAND",
+        "tr": "EL"
+      },
+      "meaning": {
+        "nl": "Betekenis hangt af van de intentie van de lezer",
+        "en": "Depends on intention",
+        "tr": "Niyete göre anlam döker"
+      }
+    },
+    {
+      "id": "clothes",
+      "letter": "E",
+      "name": {
+        "nl": "KLEDING",
+        "en": "CLOTHES",
+        "tr": "ELBİSE"
+      },
+      "meaning": {
+        "nl": "Overvloed",
+        "en": "Abundance",
+        "tr": "Bereket"
+      }
+    },
+    {
+      "id": "glove",
+      "letter": "E",
+      "name": {
+        "nl": "HANDSCHOEN",
+        "en": "GLOVE",
+        "tr": "ELDİVEN"
+      },
+      "meaning": {
+        "nl": "Je ontsnapt op het nippertje aan groot gevaar",
+        "en": "Narrow escape",
+        "tr": "Büyük tehlikeden kıl payı kurtulma"
+      }
+    },
+    {
+      "id": "apple",
+      "letter": "E",
+      "name": {
+        "nl": "APPEL",
+        "en": "APPLE",
+        "tr": "ELMA"
+      },
+      "meaning": {
+        "nl": "Onverwacht geld",
+        "en": "Unexpected money",
+        "tr": "Beklemediğiniz bir para"
+      }
+    },
+    {
+      "id": "donkey",
+      "letter": "E",
+      "name": {
+        "nl": "EZEL",
+        "en": "DONKEY",
+        "tr": "EŞEK"
+      },
+      "meaning": {
+        "nl": "Een goede vriend wordt koppig, wees toegeeflijk",
+        "en": "Friend becomes stubborn",
+        "tr": "Yakın arkadaşınız inatçılık yapacak"
+      }
+    },
+    {
+      "id": "house",
+      "letter": "E",
+      "name": {
+        "nl": "HUIS",
+        "en": "HOUSE",
+        "tr": "EV"
+      },
+      "meaning": {
+        "nl": "Je herstelt",
+        "en": "Recovery",
+        "tr": "İyileşeceksiniz"
+      }
+    },
+    {
+      "id": "mouse",
+      "letter": "F",
+      "name": {
+        "nl": "MUIS",
+        "en": "MOUSE",
+        "tr": "FARE"
+      },
+      "meaning": {
+        "nl": "Iemand deelt mee in jouw winst",
+        "en": "Someone shares in your profit",
+        "tr": "Kazancınıza ortak olanlar var"
+      }
+    },
+    {
+      "id": "lantern",
+      "letter": "F",
+      "name": {
+        "nl": "LANTAARN",
+        "en": "LANTERN",
+        "tr": "FENER"
+      },
+      "meaning": {
+        "nl": "Groot geluk",
+        "en": "Great joy",
+        "tr": "Büyük mutluluk"
+      }
+    },
+    {
+      "id": "hazelnut",
+      "letter": "F",
+      "name": {
+        "nl": "HAZELNOOT",
+        "en": "HAZELNUT",
+        "tr": "FINDIK"
+      },
+      "meaning": {
+        "nl": "Einde van je onrust",
+        "en": "End of unrest",
+        "tr": "Huzursuzluğunuz sona eriyor"
+      }
+    },
+    {
+      "id": "elephant",
+      "letter": "F",
+      "name": {
+        "nl": "OLIFANT",
+        "en": "ELEPHANT",
+        "tr": "FİL"
+      },
+      "meaning": {
+        "nl": "Rust en kalmte",
+        "en": "Calmness",
+        "tr": "Sükûnet"
+      }
+    },
+    {
+      "id": "cup",
+      "letter": "F",
+      "name": {
+        "nl": "KOPJE",
+        "en": "CUP",
+        "tr": "FİNCAN"
+      },
+      "meaning": {
+        "nl": "De koffielezing komt niet uit",
+        "en": "Reading won’t come true",
+        "tr": "Bu fal gerçek çıkmayacak"
+      }
+    },
+    {
+      "id": "newspaper",
+      "letter": "G",
+      "name": {
+        "nl": "KRANT",
+        "en": "NEWSPAPER",
+        "tr": "GAZETE"
+      },
+      "meaning": {
+        "nl": "Vermijd roddels, anders verlies je geld",
+        "en": "Avoid gossip or lose money",
+        "tr": "Dedikodudan uzak durmalısınız, yoksa para kaybedeceksiniz"
+      }
+    },
+    {
+      "id": "bride",
+      "letter": "G",
+      "name": {
+        "nl": "BRUID",
+        "en": "BRIDE",
+        "tr": "GELİN"
+      },
+      "meaning": {
+        "nl": "Onverwacht groot geluk",
+        "en": "Unexpected joy",
+        "tr": "Beklenmedik ve büyük mutluluk"
+      }
+    },
+    {
+      "id": "ship",
+      "letter": "G",
+      "name": {
+        "nl": "SCHIP",
+        "en": "SHIP",
+        "tr": "GEMİ"
+      },
+      "meaning": {
+        "nl": "Je zorgen verdwijnen plotseling",
+        "en": "Troubles vanish suddenly",
+        "tr": "Dertleriniz bir anda buharlaşacak"
+      }
+    },
+    {
+      "id": "rose",
+      "letter": "G",
+      "name": {
+        "nl": "ROOS",
+        "en": "ROSE",
+        "tr": "GÜL"
+      },
+      "meaning": {
+        "nl": "Je ziet iemand die je niet meer verwachtte",
+        "en": "Meeting unexpected person",
+        "tr": "Beklediğiniz ama ummadığınız kişiyi göreceksiniz"
+      }
+    },
+    {
+      "id": "sun",
+      "letter": "G",
+      "name": {
+        "nl": "ZON",
+        "en": "SUN",
+        "tr": "GÜNEŞ"
+      },
+      "meaning": {
+        "nl": "Je zorgen verdwijnen",
+        "en": "Troubles end",
+        "tr": "Dertleriniz bitecek"
+      }
+    },
+    {
+      "id": "dove",
+      "letter": "G",
+      "name": {
+        "nl": "DUIF",
+        "en": "DOVE",
+        "tr": "GÜVERCİN"
+      },
+      "meaning": {
+        "nl": "Je verklaart je liefde",
+        "en": "You confess love",
+        "tr": "Aşkınızı itiraf edeceksiniz"
+      }
+    },
+    {
+      "id": "eye",
+      "letter": "G",
+      "name": {
+        "nl": "OOG",
+        "en": "EYE",
+        "tr": "GÖZ"
+      },
+      "meaning": {
+        "nl": "Met wimpers = zorgen weg; zonder = nieuwe problemen",
+        "en": "Eyelashes = end of troubles",
+        "tr": "Kirpik varsa dertler biter, yoksa yeni sorunlar"
+      }
+    },
+    {
+      "id": "glasses",
+      "letter": "G",
+      "name": {
+        "nl": "BRIL",
+        "en": "GLASSES",
+        "tr": "GÖZLÜK"
+      },
+      "meaning": {
+        "nl": "Je krijgt hulp",
+        "en": "Help will come",
+        "tr": "Yardım alacaksınız"
+      }
+    },
+    {
+      "id": "deer",
+      "letter": "G",
+      "name": {
+        "nl": "HERT",
+        "en": "DEER",
+        "tr": "GEYİK"
+      },
+      "meaning": {
+        "nl": "Veel fortuin",
+        "en": "Plenty of luck",
+        "tr": "Bol kısmet"
+      }
+    },
+    {
+      "id": "ring",
+      "letter": "H",
+      "name": {
+        "nl": "RING",
+        "en": "RING",
+        "tr": "HALKA"
+      },
+      "meaning": {
+        "nl": "Groot probleem op komst",
+        "en": "Big trouble near",
+        "tr": "Büyük bir dert gelmek üzere"
+      }
+    },
+    {
+      "id": "letters",
+      "letter": "H",
+      "name": {
+        "nl": "LETTERS",
+        "en": "LETTERS",
+        "tr": "HARFLER"
+      },
+      "meaning": {
+        "nl": "Man = geld, vrouw = fortuin",
+        "en": "Money (male) / Fortune (female)",
+        "tr": "Erkekse para, kadınsa kısmet"
+      }
+    },
+    {
+      "id": "dagger",
+      "letter": "H",
+      "name": {
+        "nl": "DOLK",
+        "en": "DAGGER",
+        "tr": "HANÇER"
+      },
+      "meaning": {
+        "nl": "Onverwacht geld, maar gaat verloren",
+        "en": "Unexpected money, wasted",
+        "tr": "Ummadığınız para, ama çarçur olacak"
+      }
+    },
+    {
+      "id": "carrot",
+      "letter": "H",
+      "name": {
+        "nl": "WORTEL",
+        "en": "CARROT",
+        "tr": "HAVUÇ"
+      },
+      "meaning": {
+        "nl": "Onverklaarbaar geluk",
+        "en": "Reasonless happiness",
+        "tr": "Nedensiz mutluluk"
+      }
+    },
+    {
+      "id": "animal",
+      "letter": "H",
+      "name": {
+        "nl": "DIER",
+        "en": "ANIMAL",
+        "tr": "HAYVAN"
+      },
+      "meaning": {
+        "nl": "Je overwint een zware taak",
+        "en": "Achievement of hard task",
+        "tr": "Çok zor bir işi başaracaksınız"
+      }
+    },
+    {
+      "id": "nurse",
+      "letter": "H",
+      "name": {
+        "nl": "VERPLEEGSTER",
+        "en": "NURSE",
+        "tr": "HEMŞİRE"
+      },
+      "meaning": {
+        "nl": "Familielid kan gezondheidsproblemen krijgen",
+        "en": "Health issue in family",
+        "tr": "Ailenizden biri sağlık sorunu yaşayabilir"
+      }
+    },
+    {
+      "id": "crescent",
+      "letter": "H",
+      "name": {
+        "nl": "HALVE MAAN",
+        "en": "CRESCENT",
+        "tr": "HİLAL"
+      },
+      "meaning": {
+        "nl": "Goed nieuws",
+        "en": "Good news",
+        "tr": "Güzel haber"
+      }
+    },
+    {
+      "id": "river",
+      "letter": "I",
+      "name": {
+        "nl": "RIVIER",
+        "en": "RIVER",
+        "tr": "IRMAK"
+      },
+      "meaning": {
+        "nl": "Je zult verrassingen meemaken",
+        "en": "Surprises ahead",
+        "tr": "Sürprizler yaşayacaksınız"
+      }
+    },
+    {
+      "id": "needle",
+      "letter": "İ",
+      "name": {
+        "nl": "NAALD",
+        "en": "NEEDLE",
+        "tr": "İĞNE"
+      },
+      "meaning": {
+        "nl": "Goed nieuws",
+        "en": "Good news",
+        "tr": "Güzel haberler gelecek"
+      }
+    },
+    {
+      "id": "elder",
+      "letter": "İ",
+      "name": {
+        "nl": "OUDERE",
+        "en": "ELDER",
+        "tr": "İHTİYAR"
+      },
+      "meaning": {
+        "nl": "Volgend jaar veel mooie ontwikkelingen",
+        "en": "Good progress next year",
+        "tr": "Gelecek yıl güzel gelişmeler"
+      }
+    },
+    {
+      "id": "imam",
+      "letter": "İ",
+      "name": {
+        "nl": "IMAM",
+        "en": "IMAM",
+        "tr": "İMAM"
+      },
+      "meaning": {
+        "nl": "Slecht nieuws",
+        "en": "Bad news",
+        "tr": "Kötü haber kapınızda"
+      }
+    },
+    {
+      "id": "emperor",
+      "letter": "İ",
+      "name": {
+        "nl": "KEIZER",
+        "en": "EMPEROR",
+        "tr": "İMPARATOR"
+      },
+      "meaning": {
+        "nl": "Geld via kansspel",
+        "en": "Money through gambling",
+        "tr": "Şans oyununda para"
+      }
+    },
+    {
+      "id": "pearl",
+      "letter": "İ",
+      "name": {
+        "nl": "PAREL",
+        "en": "PEARL",
+        "tr": "İNCİ"
+      },
+      "meaning": {
+        "nl": "Innerlijke rust",
+        "en": "Inner peace",
+        "tr": "İçiniz huzurla dolacak"
+      }
+    },
+    {
+      "id": "fig",
+      "letter": "İ",
+      "name": {
+        "nl": "VIJGEN",
+        "en": "FIG",
+        "tr": "İNCİR"
+      },
+      "meaning": {
+        "nl": "Grote winst door korte reis",
+        "en": "Profit via short trip",
+        "tr": "Kısa yolculukla büyük kazanç"
+      }
+    },
+    {
+      "id": "human",
+      "letter": "İ",
+      "name": {
+        "nl": "MENS",
+        "en": "HUMAN",
+        "tr": "İNSAN"
+      },
+      "meaning": {
+        "nl": "Eén = rust; meerdere = problemen",
+        "en": "One = peace, many = problems",
+        "tr": "Tek kişi = huzur, iki+ = problem"
+      }
+    },
+    {
+      "id": "rope",
+      "letter": "İ",
+      "name": {
+        "nl": "TOUW",
+        "en": "ROPE",
+        "tr": "İP"
+      },
+      "meaning": {
+        "nl": "Reis",
+        "en": "Journey",
+        "tr": "Yolculuk"
+      }
+    },
+    {
+      "id": "playing-card",
+      "letter": "İ",
+      "name": {
+        "nl": "SPEELKAART",
+        "en": "PLAYING CARD",
+        "tr": "İSKAMBİL"
+      },
+      "meaning": {
+        "nl": "Zorgen verdwijnen door kleine inspanning",
+        "en": "Troubles end with ease",
+        "tr": "Büyük dertler kolay çabalarla bitecek"
+      }
+    },
+    {
+      "id": "letter-i",
+      "letter": "İ",
+      "name": {
+        "nl": "LETTER İ",
+        "en": "LETTER İ",
+        "tr": "İ HARFİ"
+      },
+      "meaning": {
+        "nl": "Geluk",
+        "en": "Luck",
+        "tr": "Şans"
+      }
+    },
+    {
+      "id": "razor-blade",
+      "letter": "J",
+      "name": {
+        "nl": "SCHEERMESJE",
+        "en": "RAZOR BLADE",
+        "tr": "JİLET"
+      },
+      "meaning": {
+        "nl": "Je zorgen verdwijnen",
+        "en": "Troubles will end",
+        "tr": "Dertler bitecek"
+      }
+    },
+    {
+      "id": "token",
+      "letter": "J",
+      "name": {
+        "nl": "MUNTJE",
+        "en": "TOKEN",
+        "tr": "JETON"
+      },
+      "meaning": {
+        "nl": "Plotseling geld brengt groot geluk",
+        "en": "Sudden money, big joy",
+        "tr": "Ani para gelecek, mutluluk getirecek"
+      }
+    },
+    {
+      "id": "kaaba",
+      "letter": "K",
+      "name": {
+        "nl": "KABA",
+        "en": "KAABA",
+        "tr": "KABE"
+      },
+      "meaning": {
+        "nl": "Heel groot geluk",
+        "en": "Great fortune",
+        "tr": "Çok büyük şans"
+      }
+    },
+    {
+      "id": "grave",
+      "letter": "K",
+      "name": {
+        "nl": "GRAF",
+        "en": "GRAVE",
+        "tr": "KABİR"
+      },
+      "meaning": {
+        "nl": "Vermijd tijdelijk contact met familie, anders problemen",
+        "en": "Stay away from family for a while",
+        "tr": "Bir süre akrabalarla görüşmeyin, bela gelir"
+      }
+    },
+    {
+      "id": "goblet",
+      "letter": "K",
+      "name": {
+        "nl": "WIJNGALS",
+        "en": "GOBLET",
+        "tr": "KADEH"
+      },
+      "meaning": {
+        "nl": "Geheimen komen uit",
+        "en": "Secrets revealed",
+        "tr": "Sırlarınız açığa çıkacak"
+      }
+    },
+    {
+      "id": "woman",
+      "letter": "K",
+      "name": {
+        "nl": "VROUW",
+        "en": "WOMAN",
+        "tr": "KADIN"
+      },
+      "meaning": {
+        "nl": "Overvloed; bij getrouwde vrouw = gevaar voor echtgenoot",
+        "en": "Abundance; for married woman = risk of losing husband",
+        "tr": "Bereket. Evli kadında yaşlı sembol = erkeği elden gitmek üzere"
+      }
+    },
+    {
+      "id": "coffee",
+      "letter": "K",
+      "name": {
+        "nl": "KOFFIE",
+        "en": "COFFEE",
+        "tr": "KAHVE"
+      },
+      "meaning": {
+        "nl": "De lezing komt écht uit",
+        "en": "Reading will be true",
+        "tr": "Fal kahvenin içinden çıkacak"
+      }
+    },
+    {
+      "id": "castle",
+      "letter": "K",
+      "name": {
+        "nl": "BASTION",
+        "en": "CASTLE",
+        "tr": "KALE"
+      },
+      "meaning": {
+        "nl": "Vertrouw je vrienden",
+        "en": "Trust your friends",
+        "tr": "Dostlarınıza güvenin"
+      }
+    },
+    {
+      "id": "shield",
+      "letter": "K",
+      "name": {
+        "nl": "SCHILD",
+        "en": "SHIELD",
+        "tr": "KALKAN"
+      },
+      "meaning": {
+        "nl": "Voer je plannen uit",
+        "en": "Apply your ideas",
+        "tr": "Aklınızdakileri uygulayın"
+      }
+    },
+    {
+      "id": "heart",
+      "letter": "K",
+      "name": {
+        "nl": "HART",
+        "en": "HEART",
+        "tr": "KALP"
+      },
+      "meaning": {
+        "nl": "Problemen verdwijnen",
+        "en": "Problems will end",
+        "tr": "Sorunlarınız bitecek"
+      }
+    },
+    {
+      "id": "wing",
+      "letter": "K",
+      "name": {
+        "nl": "VLEUGEL",
+        "en": "WING",
+        "tr": "KANAT"
+      },
+      "meaning": {
+        "nl": "Lange reis",
+        "en": "Long journey",
+        "tr": "Uzun yolculuk"
+      }
+    },
+    {
+      "id": "kangaroo",
+      "letter": "K",
+      "name": {
+        "nl": "KANGOEROE",
+        "en": "KANGAROO",
+        "tr": "KANGURU"
+      },
+      "meaning": {
+        "nl": "Onverwachte promotie",
+        "en": "Unexpected promotion",
+        "tr": "Beklemediğiniz bir terfi"
+      }
+    },
+    {
+      "id": "door",
+      "letter": "K",
+      "name": {
+        "nl": "DEUR",
+        "en": "DOOR",
+        "tr": "KAPI"
+      },
+      "meaning": {
+        "nl": "Iemand die je niet mag, brengt goed nieuws",
+        "en": "Good news from disliked person",
+        "tr": "Sevmediğiniz biri iyi haber getirecek"
+      }
+    },
+    {
+      "id": "turtle",
+      "letter": "K",
+      "name": {
+        "nl": "SCHILDPAD",
+        "en": "TURTLE",
+        "tr": "KAPLUMBAĞA"
+      },
+      "meaning": {
+        "nl": "Nieuwe liefde",
+        "en": "New love",
+        "tr": "Yeni aşk"
+      }
+    },
+    {
+      "id": "square",
+      "letter": "K",
+      "name": {
+        "nl": "VIERKANT",
+        "en": "SQUARE",
+        "tr": "KARE"
+      },
+      "meaning": {
+        "nl": "Je krijgt het verwachte geld",
+        "en": "Expected money arrives",
+        "tr": "Umduğunuz paraya kavuşacaksınız"
+      }
+    },
+    {
+      "id": "crow",
+      "letter": "K",
+      "name": {
+        "nl": "KRAAI",
+        "en": "CROW",
+        "tr": "KARGA"
+      },
+      "meaning": {
+        "nl": "Heel goed nieuws",
+        "en": "Very good news",
+        "tr": "Çok güzel haber gelecek"
+      }
+    },
+    {
+      "id": "ant",
+      "letter": "K",
+      "name": {
+        "nl": "MIER",
+        "en": "ANT",
+        "tr": "KARINCA"
+      },
+      "meaning": {
+        "nl": "Veel winst, maar alleen met hard werken",
+        "en": "Gain through hard work",
+        "tr": "Bol kazanç ama çok çalışarak"
+      }
+    },
+    {
+      "id": "bowl",
+      "letter": "K",
+      "name": {
+        "nl": "KOM",
+        "en": "BOWL",
+        "tr": "KASE"
+      },
+      "meaning": {
+        "nl": "Goede ontwikkelingen in je werk",
+        "en": "Good progress at work",
+        "tr": "İşinizde güzel gelişmeler"
+      }
+    },
+    {
+      "id": "spoon",
+      "letter": "K",
+      "name": {
+        "nl": "LEPEL",
+        "en": "SPOON",
+        "tr": "KAŞIK"
+      },
+      "meaning": {
+        "nl": "Kans verschijnt, maar je mist hem",
+        "en": "Opportunity missed",
+        "tr": "Fırsat gelecek ama kaçıracaksınız"
+      }
+    },
+    {
+      "id": "pickaxe",
+      "letter": "K",
+      "name": {
+        "nl": "HOEFSMEEDHAMER",
+        "en": "PICKAXE",
+        "tr": "KAZMA"
+      },
+      "meaning": {
+        "nl": "Je krijgt veel geld, maar als je het niet goed gebruikt = problemen",
+        "en": "Big money but risk if wasted",
+        "tr": "Çok para geçecek elinize, hayır yapmazsanız sorunlar"
+      }
+    },
+    {
+      "id": "cat",
+      "letter": "K",
+      "name": {
+        "nl": "KAT",
+        "en": "CAT",
+        "tr": "KEDİ"
+      },
+      "meaning": {
+        "nl": "Afhankelijk van de interpretatie van de lezer",
+        "en": "Depends on interpretation",
+        "tr": "Fal bakanın anlamına göre değişir"
+      }
+    },
+    {
+      "id": "butterfly",
+      "letter": "K",
+      "name": {
+        "nl": "VLINDER",
+        "en": "BUTTERFLY",
+        "tr": "KELEBEK"
+      },
+      "meaning": {
+        "nl": "Veel lijden, maar eindigt in geluk",
+        "en": "Suffering then happiness",
+        "tr": "Çok çile, ama mutlak mutluluk"
+      }
+    },
+    {
+      "id": "violin",
+      "letter": "K",
+      "name": {
+        "nl": "VIOOL",
+        "en": "VIOLIN",
+        "tr": "KEMAN"
+      },
+      "meaning": {
+        "nl": "Je maakt egoïstische fouten",
+        "en": "Selfish mistakes",
+        "tr": "Bencilce hatalar işleyeceksiniz"
+      }
+    },
+    {
+      "id": "sword",
+      "letter": "K",
+      "name": {
+        "nl": "ZWAARD",
+        "en": "SWORD",
+        "tr": "KILIÇ"
+      },
+      "meaning": {
+        "nl": "Je geliefde geeft een cadeau",
+        "en": "Gift from lover",
+        "tr": "Sevgiliniz hediye alacak"
+      }
+    },
+    {
+      "id": "s",
+      "letter": "K",
+      "name": {
+        "nl": "ZWALUW",
+        "en": "S",
+        "tr": "KIRLANGIÇ"
+      },
+      "meaning": {
+        "nl": "Kleine gunst levert groot voordeel op",
+        "en": "nan",
+        "tr": "Küçük iyilikten büyük kazanç"
+      }
+    },
+    {
+      "id": "lamp",
+      "letter": "L",
+      "name": {
+        "nl": "LAMP",
+        "en": "LAMP",
+        "tr": "LAMBA"
+      },
+      "meaning": {
+        "nl": "Zakenreis",
+        "en": "Business trip",
+        "tr": "İş gezisi"
+      }
+    },
+    {
+      "id": "medal",
+      "letter": "M",
+      "name": {
+        "nl": "MEDAILLE",
+        "en": "MEDAL",
+        "tr": "MADALYA"
+      },
+      "meaning": {
+        "nl": "Je vindt verloren geld terug",
+        "en": "Lost money will be found",
+        "tr": "Kaybettiğiniz parayı bulacaksınız"
+      }
+    },
+    {
+      "id": "cave",
+      "letter": "M",
+      "name": {
+        "nl": "GROT",
+        "en": "CAVE",
+        "tr": "MAĞARA"
+      },
+      "meaning": {
+        "nl": "Zware reis",
+        "en": "Hard journey",
+        "tr": "Zorlu seyahat"
+      }
+    },
+    {
+      "id": "scissors",
+      "letter": "M",
+      "name": {
+        "nl": "SCHAAR",
+        "en": "SCISSORS",
+        "tr": "MAKAS"
+      },
+      "meaning": {
+        "nl": "Je voelt je capabel alles te doen",
+        "en": "Feeling capable",
+        "tr": "Kendinizi her şeyi yapacak kadar iyi hissedeceksiniz"
+      }
+    },
+    {
+      "id": "buffalo",
+      "letter": "M",
+      "name": {
+        "nl": "BUFFEL",
+        "en": "BUFFALO",
+        "tr": "MANDA"
+      },
+      "meaning": {
+        "nl": "Zoet nieuws uit het westen",
+        "en": "Sweet news from west",
+        "tr": "Batıdan tatlı bir haber"
+      }
+    },
+    {
+      "id": "grill",
+      "letter": "M",
+      "name": {
+        "nl": "BARBECUE",
+        "en": "GRILL",
+        "tr": "MANGAL"
+      },
+      "meaning": {
+        "nl": "Langverwacht nieuws komt snel",
+        "en": "Awaited news arrives",
+        "tr": "Çok beklediğiniz haber yakında geliyor"
+      }
+    },
+    {
+      "id": "seagull",
+      "letter": "M",
+      "name": {
+        "nl": "MEEUW",
+        "en": "SEAGULL",
+        "tr": "MARTI"
+      },
+      "meaning": {
+        "nl": "Veel verdrietige berichten",
+        "en": "Many sad news",
+        "tr": "Çok kötü haberler gelecek"
+      }
+    },
+    {
+      "id": "table",
+      "letter": "M",
+      "name": {
+        "nl": "TAFEL",
+        "en": "TABLE",
+        "tr": "MASA"
+      },
+      "meaning": {
+        "nl": "Naaste slaagt in examen",
+        "en": "Success in exams",
+        "tr": "Yakınınız sınavda büyük başarı alacak"
+      }
+    },
+    {
+      "id": "letter",
+      "letter": "M",
+      "name": {
+        "nl": "BRIEF",
+        "en": "LETTER",
+        "tr": "MEKTUP"
+      },
+      "meaning": {
+        "nl": "Je lucht je hart bij iemand",
+        "en": "Confide troubles",
+        "tr": "Dertlerinizi birine anlatacaksınız"
+      }
+    },
+    {
+      "id": "mevlana",
+      "letter": "M",
+      "name": {
+        "nl": "MEVLANA",
+        "en": "MEVLANA",
+        "tr": "MEVLANA"
+      },
+      "meaning": {
+        "nl": "Gelukkige vrienden om je heen",
+        "en": "Happy friends nearby",
+        "tr": "Çevrenizde mutlu dostlar olacak"
+      }
+    },
+    {
+      "id": "angel",
+      "letter": "M",
+      "name": {
+        "nl": "ENGEL",
+        "en": "ANGEL",
+        "tr": "MELEK"
+      },
+      "meaning": {
+        "nl": "Steun van familielid van moederskant",
+        "en": "Support from maternal side",
+        "tr": "Anne tarafından biri destek verecek"
+      }
+    },
+    {
+      "id": "fruit",
+      "letter": "M",
+      "name": {
+        "nl": "FRUIT",
+        "en": "FRUIT",
+        "tr": "MEYVE"
+      },
+      "meaning": {
+        "nl": "Je moet lang wachten maar slaagt",
+        "en": "Success after waiting",
+        "tr": "Çok bekleyecek ama başaracaksınız"
+      }
+    },
+    {
+      "id": "tombstone",
+      "letter": "M",
+      "name": {
+        "nl": "GRAFSTEEN",
+        "en": "TOMBSTONE",
+        "tr": "MEZAR TAŞI"
+      },
+      "meaning": {
+        "nl": "Lang leven",
+        "en": "Long life",
+        "tr": "Uzun ömür"
+      }
+    },
+    {
+      "id": "spear",
+      "letter": "M",
+      "name": {
+        "nl": "SPEER",
+        "en": "SPEAR",
+        "tr": "MIZRAK"
+      },
+      "meaning": {
+        "nl": "Je relatie krijgt een gelukkig keerpunt",
+        "en": "Happy turn in relationship",
+        "tr": "İlişkide mutlu dönemeç"
+      }
+    },
+    {
+      "id": "mussel",
+      "letter": "M",
+      "name": {
+        "nl": "MOSS",
+        "en": "MUSSEL",
+        "tr": "MİDYE"
+      },
+      "meaning": {
+        "nl": "Ernstige gezondheidsproblemen",
+        "en": "Serious health issues",
+        "tr": "Ciddi sağlık sorunları"
+      }
+    },
+    {
+      "id": "minaret",
+      "letter": "M",
+      "name": {
+        "nl": "MINARET",
+        "en": "MINARET",
+        "tr": "MİNARE"
+      },
+      "meaning": {
+        "nl": "Groot probleem in Ramadan",
+        "en": "Trouble during Ramadan",
+        "tr": "Ramazan’da büyük dert"
+      }
+    },
+    {
+      "id": "candle",
+      "letter": "M",
+      "name": {
+        "nl": "KAARS",
+        "en": "CANDLE",
+        "tr": "MUM"
+      },
+      "meaning": {
+        "nl": "Veel plezier in seksueel opzicht",
+        "en": "Sexual pleasure",
+        "tr": "Cinsel açıdan keyif"
+      }
+    },
+    {
+      "id": "prayer",
+      "letter": "N",
+      "name": {
+        "nl": "GEBED",
+        "en": "PRAYER",
+        "tr": "NAMAZ"
+      },
+      "meaning": {
+        "nl": "Onverwacht goed nieuws",
+        "en": "Unexpected blessing",
+        "tr": "Beklemediğiniz hayır"
+      }
+    },
+    {
+      "id": "pomegranate",
+      "letter": "N",
+      "name": {
+        "nl": "GRANAATAPPEL",
+        "en": "POMEGRANATE",
+        "tr": "NAR"
+      },
+      "meaning": {
+        "nl": "Klein probleem dat groot kan worden",
+        "en": "Small issue grows big",
+        "tr": "Küçük ama sonunda büyük dert"
+      }
+    },
+    {
+      "id": "arrow",
+      "letter": "O",
+      "name": {
+        "nl": "PIJL",
+        "en": "ARROW",
+        "tr": "OK"
+      },
+      "meaning": {
+        "nl": "Je wordt geduldiger",
+        "en": "Impatience fades",
+        "tr": "Sabırsızlığınız geçecek"
+      }
+    },
+    {
+      "id": "sickle",
+      "letter": "O",
+      "name": {
+        "nl": "SIKKEL",
+        "en": "SICKLE",
+        "tr": "ORAK"
+      },
+      "meaning": {
+        "nl": "Je maakt vrede met oude vrienden",
+        "en": "Reconcile with friends",
+        "tr": "Küs arkadaşlarla barışacaksınız"
+      }
+    },
+    {
+      "id": "capricorn",
+      "letter": "O",
+      "name": {
+        "nl": "STEENBOK",
+        "en": "CAPRICORN",
+        "tr": "OĞLAK"
+      },
+      "meaning": {
+        "nl": "Opluchting na moeilijke tijd",
+        "en": "Relief after hardship",
+        "tr": "Zor dönemin ardından rahat"
+      }
+    },
+    {
+      "id": "student",
+      "letter": "Ö",
+      "name": {
+        "nl": "STUDENT",
+        "en": "STUDENT",
+        "tr": "ÖĞRENCİ"
+      },
+      "meaning": {
+        "nl": "Nieuwe fase in je leven",
+        "en": "New phase",
+        "tr": "Hayatınızda yeni dönem"
+      }
+    },
+    {
+      "id": "spider",
+      "letter": "Ö",
+      "name": {
+        "nl": "SPIN",
+        "en": "SPIDER",
+        "tr": "ÖRÜMCEK"
+      },
+      "meaning": {
+        "nl": "Persoonlijkheidsproblemen",
+        "en": "Personality issues",
+        "tr": "Kişilik sorunları yaşayacaksınız"
+      }
+    },
+    {
+      "id": "duck",
+      "letter": "Ö",
+      "name": {
+        "nl": "EEND",
+        "en": "DUCK",
+        "tr": "ÖRDEK"
+      },
+      "meaning": {
+        "nl": "Hulp van vaderskant",
+        "en": "Help from father’s side",
+        "tr": "Baba tarafından yardım"
+      }
+    },
+    {
+      "id": "coat",
+      "letter": "P",
+      "name": {
+        "nl": "JAS",
+        "en": "COAT",
+        "tr": "PALTO"
+      },
+      "meaning": {
+        "nl": "Langverwacht nieuws komt maar niet",
+        "en": "Awaited news won’t come",
+        "tr": "Çok beklediğiniz haber gelmeyecek"
+      }
+    },
+    {
+      "id": "trousers",
+      "letter": "P",
+      "name": {
+        "nl": "BROEK",
+        "en": "TROUSERS",
+        "tr": "PANTOLON"
+      },
+      "meaning": {
+        "nl": "Goed nieuws van een blonde persoon",
+        "en": "Good news from blond person",
+        "tr": "Sarı birinden güzel haber"
+      }
+    },
+    {
+      "id": "bow-tie",
+      "letter": "P",
+      "name": {
+        "nl": "VLINDDAS",
+        "en": "BOW TIE",
+        "tr": "PAPYON"
+      },
+      "meaning": {
+        "nl": "Mogelijk verraad door naaste vrienden",
+        "en": "Betrayal from close friend",
+        "tr": "Yakın dostlar kazık atabilir"
+      }
+    },
+    {
+      "id": "cotton",
+      "letter": "P",
+      "name": {
+        "nl": "KATOEN",
+        "en": "COTTON",
+        "tr": "PAMUK"
+      },
+      "meaning": {
+        "nl": "Let op verstikkingsgevaar",
+        "en": "Risk of suffocation",
+        "tr": "Boğulma tehlikesi"
+      }
+    },
+    {
+      "id": "parrot",
+      "letter": "P",
+      "name": {
+        "nl": "PAPEGAAI",
+        "en": "PARROT",
+        "tr": "PAPAĞAN"
+      },
+      "meaning": {
+        "nl": "Je vriendenkring groeit",
+        "en": "More friends",
+        "tr": "Dostlarınız artacak"
+      }
+    },
+    {
+      "id": "daisy",
+      "letter": "P",
+      "name": {
+        "nl": "MARGRIET",
+        "en": "DAISY",
+        "tr": "PAPATYA"
+      },
+      "meaning": {
+        "nl": "Bezoek",
+        "en": "Visit",
+        "tr": "Ziyaret"
+      }
+    },
+    {
+      "id": "money",
+      "letter": "P",
+      "name": {
+        "nl": "GELD",
+        "en": "MONEY",
+        "tr": "PARA"
+      },
+      "meaning": {
+        "nl": "Stel je plannen niet uit",
+        "en": "Don’t postpone plans",
+        "tr": "Planlarınızı ertelemeyin"
+      }
+    },
+    {
+      "id": "cake",
+      "letter": "P",
+      "name": {
+        "nl": "TAART",
+        "en": "CAKE",
+        "tr": "PASTA"
+      },
+      "meaning": {
+        "nl": "Goed nieuws",
+        "en": "Good news",
+        "tr": "Güzel haber"
+      }
+    },
+    {
+      "id": "pelican",
+      "letter": "P",
+      "name": {
+        "nl": "PELIKAAN",
+        "en": "PELICAN",
+        "tr": "PELİKAN"
+      },
+      "meaning": {
+        "nl": "Veel geluk",
+        "en": "Lots of luck",
+        "tr": "Bol şans"
+      }
+    },
+    {
+      "id": "penguin",
+      "letter": "P",
+      "name": {
+        "nl": "PINGUÏN",
+        "en": "PENGUIN",
+        "tr": "PENGUEN"
+      },
+      "meaning": {
+        "nl": "Met geduld krijg je voorspoed",
+        "en": "Patience brings fortune",
+        "tr": "Sabrederseniz kısmetli olursunuz"
+      }
+    },
+    {
+      "id": "window",
+      "letter": "P",
+      "name": {
+        "nl": "RAAM",
+        "en": "WINDOW",
+        "tr": "PENCERE"
+      },
+      "meaning": {
+        "nl": "Gezondheid",
+        "en": "Health",
+        "tr": "Sağlık"
+      }
+    },
+    {
+      "id": "compass",
+      "letter": "P",
+      "name": {
+        "nl": "PASSER",
+        "en": "COMPASS",
+        "tr": "PERGEL"
+      },
+      "meaning": {
+        "nl": "Geheim project eindigt succesvol",
+        "en": "Hidden work succeeds",
+        "tr": "Gizli iş başarıyla bitecek"
+      }
+    },
+    {
+      "id": "battery",
+      "letter": "P",
+      "name": {
+        "nl": "BATTERIJ",
+        "en": "BATTERY",
+        "tr": "PİL"
+      },
+      "meaning": {
+        "nl": "Geluk",
+        "en": "Happiness",
+        "tr": "Mutluluk"
+      }
+    },
+    {
+      "id": "pipe",
+      "letter": "P",
+      "name": {
+        "nl": "PIJP",
+        "en": "PIPE",
+        "tr": "PİPO"
+      },
+      "meaning": {
+        "nl": "Twijfel",
+        "en": "Doubt",
+        "tr": "Şüphe"
+      }
+    },
+    {
+      "id": "police",
+      "letter": "P",
+      "name": {
+        "nl": "POLITIE",
+        "en": "POLICE",
+        "tr": "POLİS"
+      },
+      "meaning": {
+        "nl": "Groot verdriet",
+        "en": "Great sorrow",
+        "tr": "Çok büyük acı"
+      }
+    },
+    {
+      "id": "postman",
+      "letter": "P",
+      "name": {
+        "nl": "POSTBODE",
+        "en": "POSTMAN",
+        "tr": "POSTACI"
+      },
+      "meaning": {
+        "nl": "Je vertrekt met vreugde",
+        "en": "Joyful departure",
+        "tr": "Keyifle yola çıkacaksınız"
+      }
+    },
+    {
+      "id": "prince",
+      "letter": "P",
+      "name": {
+        "nl": "PRINS",
+        "en": "PRINCE",
+        "tr": "PRENS"
+      },
+      "meaning": {
+        "nl": "Aantrekkelijke partner",
+        "en": "Handsome match",
+        "tr": "Yakışıklı kısmet"
+      }
+    },
+    {
+      "id": "princess",
+      "letter": "P",
+      "name": {
+        "nl": "PRINSES",
+        "en": "PRINCESS",
+        "tr": "PRENSES"
+      },
+      "meaning": {
+        "nl": "Binnen korte tijd ontmoet je ideale partner",
+        "en": "Meet ideal partner soon",
+        "tr": "Üç vakte kadar ideal eş adayıyla tanışacaksınız"
+      }
+    },
+    {
+      "id": "raki-bottle",
+      "letter": "R",
+      "name": {
+        "nl": "RAKI FLES",
+        "en": "RAKI BOTTLE",
+        "tr": "RAKI ŞİŞESİ"
+      },
+      "meaning": {
+        "nl": "Plots maar groot geluk",
+        "en": "Sudden but great joy",
+        "tr": "Ani ama büyük mutluluk"
+      }
+    },
+    {
+      "id": "letter-r",
+      "letter": "R",
+      "name": {
+        "nl": "R LETTER",
+        "en": "LETTER R",
+        "tr": "R HARFİ"
+      },
+      "meaning": {
+        "nl": "Persoon met R in naam kan je schaden",
+        "en": "Person with “R” may harm",
+        "tr": "İsmi R ile başlayan zarar verebilir"
+      }
+    },
+    {
+      "id": "clock",
+      "letter": "S",
+      "name": {
+        "nl": "KLOK",
+        "en": "CLOCK",
+        "tr": "SAAT"
+      },
+      "meaning": {
+        "nl": "Je wordt rustiger",
+        "en": "You’ll be calmer",
+        "tr": "Daha sakin olacaksınız"
+      }
+    },
+    {
+      "id": "soap",
+      "letter": "S",
+      "name": {
+        "nl": "ZEEP",
+        "en": "SOAP",
+        "tr": "SABUN"
+      },
+      "meaning": {
+        "nl": "Je zorgen blijven bestaan",
+        "en": "Troubles continue",
+        "tr": "Dertler devam edecek"
+      }
+    },
+    {
+      "id": "hair",
+      "letter": "S",
+      "name": {
+        "nl": "HAAR",
+        "en": "HAIR",
+        "tr": "SAÇ"
+      },
+      "meaning": {
+        "nl": "Veel winst",
+        "en": "Much gain",
+        "tr": "Bol kazanç"
+      }
+    },
+    {
+      "id": "beard",
+      "letter": "S",
+      "name": {
+        "nl": "BAARD",
+        "en": "BEARD",
+        "tr": "SAKAL"
+      },
+      "meaning": {
+        "nl": "Je broer bereikt succes",
+        "en": "Brother succeeds",
+        "tr": "Kardeşiniz başarıya kavuşacak"
+      }
+    },
+    {
+      "id": "snail",
+      "letter": "S",
+      "name": {
+        "nl": "SLUG",
+        "en": "SNAIL",
+        "tr": "SALYANGOZ"
+      },
+      "meaning": {
+        "nl": "Met geduld korte termijn winst",
+        "en": "Gain with patience",
+        "tr": "Sabırlı olursanız kazanç"
+      }
+    },
+    {
+      "id": "lute",
+      "letter": "S",
+      "name": {
+        "nl": "LUIT",
+        "en": "LUTE",
+        "tr": "SAZ"
+      },
+      "meaning": {
+        "nl": "Doktersbezoek maar geen slecht nieuws",
+        "en": "Doctor visit, no bad news",
+        "tr": "Doktora gidecek, kötü haber almayacak"
+      }
+    },
+    {
+      "id": "whirling-dervish",
+      "letter": "S",
+      "name": {
+        "nl": "DERWISH",
+        "en": "WHIRLING DERVISH",
+        "tr": "SEMAZEN"
+      },
+      "meaning": {
+        "nl": "Voorspoed",
+        "en": "Fortune",
+        "tr": "Kısmet"
+      }
+    },
+    {
+      "id": "river-of-love",
+      "letter": "S",
+      "name": {
+        "nl": "RIVIER VAN LIEFDE",
+        "en": "RIVER OF LOVE",
+        "tr": "SEVGİ NEHRİ"
+      },
+      "meaning": {
+        "nl": "Grote overvloed",
+        "en": "Abundance",
+        "tr": "Aşırı bereket"
+      }
+    },
+    {
+      "id": "cigarette",
+      "letter": "S",
+      "name": {
+        "nl": "SIGARET",
+        "en": "CIGARETTE",
+        "tr": "SİGARA"
+      },
+      "meaning": {
+        "nl": "Moeilijkheden verdwijnen",
+        "en": "Troubles end",
+        "tr": "Güçlükler bitecek"
+      }
+    },
+    {
+      "id": "gun",
+      "letter": "S",
+      "name": {
+        "nl": "WAPEN",
+        "en": "GUN",
+        "tr": "SİLAH"
+      },
+      "meaning": {
+        "nl": "Je herkent slechte mensen om je heen",
+        "en": "Recognize evil people",
+        "tr": "Kötü insanları tanıyacaksınız"
+      }
+    },
+    {
+      "id": "fly",
+      "letter": "S",
+      "name": {
+        "nl": "VLIEG",
+        "en": "FLY",
+        "tr": "SİNEK"
+      },
+      "meaning": {
+        "nl": "Je krijgt een mooie uitnodiging",
+        "en": "Nice invitation",
+        "tr": "Güzel bir davet alacaksınız"
+      }
+    },
+    {
+      "id": "squirrel",
+      "letter": "S",
+      "name": {
+        "nl": "EEKHOORN",
+        "en": "SQUIRREL",
+        "tr": "SİNCAP"
+      },
+      "meaning": {
+        "nl": "Met sparen opent je geluk",
+        "en": "Save = fortune opens",
+        "tr": "Tasarruf ederseniz bahtınız açılacak"
+      }
+    },
+    {
+      "id": "worm",
+      "letter": "S",
+      "name": {
+        "nl": "WORM",
+        "en": "WORM",
+        "tr": "SOLUCAN"
+      },
+      "meaning": {
+        "nl": "Pas op voor valse vrienden",
+        "en": "Beware false friends",
+        "tr": "Sahte dostlara dikkat"
+      }
+    },
+    {
+      "id": "question-mark",
+      "letter": "S",
+      "name": {
+        "nl": "VRAAGTEKEN",
+        "en": "QUESTION MARK",
+        "tr": "SORU İŞARETİ"
+      },
+      "meaning": {
+        "nl": "Je geliefde houdt iets geheim",
+        "en": "Lover hides a secret",
+        "tr": "Sevgiliniz sır saklıyor"
+      }
+    },
+    {
+      "id": "broom",
+      "letter": "S",
+      "name": {
+        "nl": "BEZEM",
+        "en": "BROOM",
+        "tr": "SÜPÜRGE"
+      },
+      "meaning": {
+        "nl": "Uitgestelde reis gaat door",
+        "en": "Delayed trip will happen",
+        "tr": "Ertelenen gezi olacak"
+      }
+    },
+    {
+      "id": "umbrella",
+      "letter": "Ş",
+      "name": {
+        "nl": "PARAPLU",
+        "en": "UMBRELLA",
+        "tr": "ŞEMSİYE"
+      },
+      "meaning": {
+        "nl": "Met kleine uitgave komt iets moois",
+        "en": "Small cost brings good result",
+        "tr": "Az harcamayla güzel gelişme"
+      }
+    },
+    {
+      "id": "devil",
+      "letter": "Ş",
+      "name": {
+        "nl": "DUIVEL",
+        "en": "DEVIL",
+        "tr": "ŞEYTAN"
+      },
+      "meaning": {
+        "nl": "Pas op voor oude vrienden, ze plannen kwaad",
+        "en": "Old friends plan evil",
+        "tr": "Eski dostlara dikkat, kötülük planlıyorlar"
+      }
+    },
+    {
+      "id": "bottle",
+      "letter": "Ş",
+      "name": {
+        "nl": "FLES",
+        "en": "BOTTLE",
+        "tr": "ŞİŞE"
+      },
+      "meaning": {
+        "nl": "Vertel je geheimen niet overal",
+        "en": "Don’t share secrets",
+        "tr": "Sırlarınızı herkese anlatmayın"
+      }
+    },
+    {
+      "id": "plate",
+      "letter": "T",
+      "name": {
+        "nl": "BORD",
+        "en": "PLATE",
+        "tr": "TABAK"
+      },
+      "meaning": {
+        "nl": "Je krijgt eigendom",
+        "en": "Property",
+        "tr": "Mülk edineceksiniz"
+      }
+    },
+    {
+      "id": "tablet",
+      "letter": "T",
+      "name": {
+        "nl": "TABLET",
+        "en": "TABLET",
+        "tr": "TABLET"
+      },
+      "meaning": {
+        "nl": "Groot nieuws",
+        "en": "Big news",
+        "tr": "Büyük haber"
+      }
+    },
+    {
+      "id": "coffin",
+      "letter": "T",
+      "name": {
+        "nl": "DOODSKIST",
+        "en": "COFFIN",
+        "tr": "TABUT"
+      },
+      "meaning": {
+        "nl": "Gezondheidsproblemen van je vader eindigen",
+        "en": "Father’s health improves",
+        "tr": "Babanızın sağlık problemleri bitecek"
+      }
+    },
+    {
+      "id": "throne",
+      "letter": "T",
+      "name": {
+        "nl": "TROON",
+        "en": "THRONE",
+        "tr": "TAHT"
+      },
+      "meaning": {
+        "nl": "Lange reis",
+        "en": "Long journey",
+        "tr": "Uzun seyahat"
+      }
+    },
+    {
+      "id": "comb",
+      "letter": "T",
+      "name": {
+        "nl": "KAM",
+        "en": "COMB",
+        "tr": "TARAK"
+      },
+      "meaning": {
+        "nl": "Je krijgt een nieuwe baan",
+        "en": "New job",
+        "tr": "Yeni işe gireceksiniz"
+      }
+    },
+    {
+      "id": "rabbit",
+      "letter": "T",
+      "name": {
+        "nl": "KONIJN",
+        "en": "RABBIT",
+        "tr": "TAVŞAN"
+      },
+      "meaning": {
+        "nl": "Eerst veel rust, daarna groot verval",
+        "en": "Peace then collapse",
+        "tr": "Önce huzur, sonra çöküş"
+      }
+    },
+    {
+      "id": "peacock",
+      "letter": "T",
+      "name": {
+        "nl": "PAUW",
+        "en": "PEACOCK",
+        "tr": "TAVUSKUŞU"
+      },
+      "meaning": {
+        "nl": "Geluk",
+        "en": "Fortune",
+        "tr": "Talih"
+      }
+    },
+    {
+      "id": "telephone",
+      "letter": "T",
+      "name": {
+        "nl": "TELEFOON",
+        "en": "TELEPHONE",
+        "tr": "TELEFON"
+      },
+      "meaning": {
+        "nl": "Goed nieuws",
+        "en": "Joyful news",
+        "tr": "Sevindirici haber"
+      }
+    },
+    {
+      "id": "pot",
+      "letter": "T",
+      "name": {
+        "nl": "PAN",
+        "en": "POT",
+        "tr": "TENCERE"
+      },
+      "meaning": {
+        "nl": "Je kwetst je geliefde onnodig",
+        "en": "Hurt partner pointlessly",
+        "tr": "Sevgilinizi anlamsız kıracaksınız"
+      }
+    },
+    {
+      "id": "prayer-beads",
+      "letter": "T",
+      "name": {
+        "nl": "ROZENKRANS",
+        "en": "PRAYER BEADS",
+        "tr": "TESBİH"
+      },
+      "meaning": {
+        "nl": "Iets gebeurt voor het eerst in je leven",
+        "en": "First-time event",
+        "tr": "Hayatınızda bir ilk gerçekleşecek"
+      }
+    },
+    {
+      "id": "saw",
+      "letter": "T",
+      "name": {
+        "nl": "ZAAG",
+        "en": "SAW",
+        "tr": "TESTERE"
+      },
+      "meaning": {
+        "nl": "Je valse vriendschappen eindigen",
+        "en": "False friendships end",
+        "tr": "Sahte dostluklar bitecek"
+      }
+    },
+    {
+      "id": "jug",
+      "letter": "T",
+      "name": {
+        "nl": "KAN",
+        "en": "JUG",
+        "tr": "TESTİ"
+      },
+      "meaning": {
+        "nl": "Je liegt tegen een vriend, hij ontdekt het",
+        "en": "Lie discovered",
+        "tr": "Arkadaşınıza yalan söylüyorsunuz, öğrenecek"
+      }
+    },
+    {
+      "id": "fox",
+      "letter": "T",
+      "name": {
+        "nl": "VOS",
+        "en": "FOX",
+        "tr": "TİLKİ"
+      },
+      "meaning": {
+        "nl": "Blijf weg van roddel",
+        "en": "Avoid gossip",
+        "tr": "Dedikodudan uzak durun"
+      }
+    },
+    {
+      "id": "caterpillar",
+      "letter": "T",
+      "name": {
+        "nl": "RUPS",
+        "en": "CATERPILLAR",
+        "tr": "TIRTIL"
+      },
+      "meaning": {
+        "nl": "Reis helpt je zorgen vergeten",
+        "en": "Trip helps forget troubles",
+        "tr": "Derdinizi unutmak için seyahate çıkın"
+      }
+    },
+    {
+      "id": "airplane",
+      "letter": "U",
+      "name": {
+        "nl": "VLIEGTUIG",
+        "en": "AIRPLANE",
+        "tr": "UÇAK"
+      },
+      "meaning": {
+        "nl": "Korte reis",
+        "en": "Short trip",
+        "tr": "Kısa seyahat"
+      }
+    },
+    {
+      "id": "kite",
+      "letter": "U",
+      "name": {
+        "nl": "VLIEGER",
+        "en": "KITE",
+        "tr": "UÇURTMA"
+      },
+      "meaning": {
+        "nl": "Je vindt geluk ondanks moeilijkheden",
+        "en": "Happiness despite troubles",
+        "tr": "Zorluklar içinde mutlu olacaksınız"
+      }
+    },
+    {
+      "id": "razor",
+      "letter": "U",
+      "name": {
+        "nl": "SCHEERMES",
+        "en": "RAZOR",
+        "tr": "USTURA"
+      },
+      "meaning": {
+        "nl": "Een oudere beschermt je",
+        "en": "Elder protects you",
+        "tr": "Bir büyüğünüz sizi koruyacak"
+      }
+    },
+    {
+      "id": "ladybug",
+      "letter": "U",
+      "name": {
+        "nl": "LIEVEHEERSBEESTJE",
+        "en": "LADYBUG",
+        "tr": "UĞUR BÖCEĞİ"
+      },
+      "meaning": {
+        "nl": "Veel geluk en voorspoed",
+        "en": "Luck and fortune",
+        "tr": "Bol şans, kısmet"
+      }
+    },
+    {
+      "id": "iron",
+      "letter": "Ü",
+      "name": {
+        "nl": "STRIJKIJZER",
+        "en": "IRON",
+        "tr": "ÜTÜ"
+      },
+      "meaning": {
+        "nl": "Goed nieuws uit het verleden",
+        "en": "Good news from past",
+        "tr": "Eskilerden iyi haber"
+      }
+    },
+    {
+      "id": "triangle",
+      "letter": "Ü",
+      "name": {
+        "nl": "DRIEHOEK",
+        "en": "TRIANGLE",
+        "tr": "ÜÇGEN"
+      },
+      "meaning": {
+        "nl": "Let op in zakelijke relaties",
+        "en": "Beware in business",
+        "tr": "İş ilişkilerine dikkat"
+      }
+    },
+    {
+      "id": "exclamation-mark",
+      "letter": "Ü",
+      "name": {
+        "nl": "UITROEPTEKEN",
+        "en": "EXCLAMATION MARK",
+        "tr": "ÜNLEM"
+      },
+      "meaning": {
+        "nl": "Ruzie met geliefde, maar tijdelijk",
+        "en": "Temporary fight with lover",
+        "tr": "Sevgilinizle aranız bozulacak ama geçecek"
+      }
+    },
+    {
+      "id": "letter-u",
+      "letter": "Ü",
+      "name": {
+        "nl": "Ü LETTER",
+        "en": "LETTER Ü",
+        "tr": "Ü HARFİ"
+      },
+      "meaning": {
+        "nl": "Een verdrietige periode komt",
+        "en": "Sad period ahead",
+        "tr": "Üzüntülü dönem geliyor"
+      }
+    },
+    {
+      "id": "body",
+      "letter": "V",
+      "name": {
+        "nl": "LICHAAM",
+        "en": "BODY",
+        "tr": "VÜCUT"
+      },
+      "meaning": {
+        "nl": "Mannenlichaam = groot geluk, vrouwenlichaam = eerst tegenslag, dan groot geluk",
+        "en": "Male = great fortune, Female = bad luck then fortune",
+        "tr": "Erkek vücudu = büyük şans, kadın vücudu = önce bahtsızlık sonra şans"
+      }
+    },
+    {
+      "id": "volcano",
+      "letter": "Y",
+      "name": {
+        "nl": "VULKAAN",
+        "en": "VOLCANO",
+        "tr": "YANARDAĞ"
+      },
+      "meaning": {
+        "nl": "Nieuws van ex-geliefde",
+        "en": "News from ex",
+        "tr": "Eski sevgiliden haber"
+      }
+    },
+    {
+      "id": "leaf",
+      "letter": "Y",
+      "name": {
+        "nl": "BLAD",
+        "en": "LEAF",
+        "tr": "YAPRAK"
+      },
+      "meaning": {
+        "nl": "Kans op ziekte, wees voorzichtig",
+        "en": "Risk of illness",
+        "tr": "Hasta olabilirsiniz, dikkat edin"
+      }
+    },
+    {
+      "id": "bed",
+      "letter": "Y",
+      "name": {
+        "nl": "BED",
+        "en": "BED",
+        "tr": "YATAK"
+      },
+      "meaning": {
+        "nl": "Stop met twijfelen",
+        "en": "Leave indecision",
+        "tr": "Kararsızlığı bırakın"
+      }
+    },
+    {
+      "id": "bat",
+      "letter": "Y",
+      "name": {
+        "nl": "VLEERMUIS",
+        "en": "BAT",
+        "tr": "YARASA"
+      },
+      "meaning": {
+        "nl": "Slecht nieuws verstoort je slaap",
+        "en": "Bad news ruins sleep",
+        "tr": "Uykunuzu kaçıracak kötü haber"
+      }
+    },
+    {
+      "id": "sail",
+      "letter": "Y",
+      "name": {
+        "nl": "ZEIL",
+        "en": "SAIL",
+        "tr": "YELKEN"
+      },
+      "meaning": {
+        "nl": "Korte reis",
+        "en": "Short journey",
+        "tr": "Kısa yolculuk"
+      }
+    },
+    {
+      "id": "crab",
+      "letter": "Y",
+      "name": {
+        "nl": "KRAB",
+        "en": "CRAB",
+        "tr": "YENGEÇ"
+      },
+      "meaning": {
+        "nl": "Je krijgt een goede vriend",
+        "en": "Good friend",
+        "tr": "Çok iyi bir dost edineceksiniz"
+      }
+    },
+    {
+      "id": "star",
+      "letter": "Y",
+      "name": {
+        "nl": "STER",
+        "en": "STAR",
+        "tr": "YILDIZ"
+      },
+      "meaning": {
+        "nl": "Groot probleem dichtbij, wees voorzichtig",
+        "en": "Big trouble nearby",
+        "tr": "Büyük dert yanı başınızda"
+      }
+    },
+    {
+      "id": "snake",
+      "letter": "Y",
+      "name": {
+        "nl": "SLANG",
+        "en": "SNAKE",
+        "tr": "YILAN"
+      },
+      "meaning": {
+        "nl": "Goed nieuws verdrijft je zorgen",
+        "en": "News removes worries",
+        "tr": "Haberinle tasalarınız bitecek"
+      }
+    },
+    {
+      "id": "egg",
+      "letter": "Y",
+      "name": {
+        "nl": "EI",
+        "en": "EGG",
+        "tr": "YUMURTA"
+      },
+      "meaning": {
+        "nl": "Betekenis hangt af van uitlegger",
+        "en": "Depends on interpreter",
+        "tr": "Yoruma göre değişir"
+      }
+    },
+    {
+      "id": "dolphin",
+      "letter": "Y",
+      "name": {
+        "nl": "DOLFIJN",
+        "en": "DOLPHIN",
+        "tr": "YUNUS"
+      },
+      "meaning": {
+        "nl": "Valse vrienden die glimlachen",
+        "en": "Fake smiling friends",
+        "tr": "Yüzüne gülen sahte arkadaşlar"
+      }
+    },
+    {
+      "id": "road",
+      "letter": "Y",
+      "name": {
+        "nl": "WEG",
+        "en": "ROAD",
+        "tr": "YOL"
+      },
+      "meaning": {
+        "nl": "Je onrust verdwijnt",
+        "en": "Restlessness ends",
+        "tr": "Huzursuzluğunuz geçecek"
+      }
+    },
+    {
+      "id": "dice",
+      "letter": "Z",
+      "name": {
+        "nl": "DOBBELSTEEN",
+        "en": "DICE",
+        "tr": "ZAR"
+      },
+      "meaning": {
+        "nl": "Je komt in een ongelukkige periode",
+        "en": "Unlucky period",
+        "tr": "Şanssız döneme gireceksiniz"
+      }
+    },
+    {
+      "id": "envelope",
+      "letter": "Z",
+      "name": {
+        "nl": "ENVELOP",
+        "en": "ENVELOPE",
+        "tr": "ZARF"
+      },
+      "meaning": {
+        "nl": "Ruzie tussen moeder en geliefde",
+        "en": "Conflict mother & partner",
+        "tr": "Annenizle sevgilinizin arası açılacak"
+      }
+    },
+    {
+      "id": "olive",
+      "letter": "Z",
+      "name": {
+        "nl": "OLIJF",
+        "en": "OLIVE",
+        "tr": "ZEYTİN"
+      },
+      "meaning": {
+        "nl": "Zeer goed nieuws",
+        "en": "Very good news",
+        "tr": "Çok hayırlı haber"
+      }
+    }
+  ]
+}

@@ -1,0 +1,1553 @@
+{
+  "version": "1.0.0",
+  "symbols": [
+    {
+      "id": "island",
+      "letter": "A",
+      "name": "EILAND",
+      "meaning": "Onverwachte kans"
+    },
+    {
+      "id": "tree",
+      "letter": "A",
+      "name": "BOOM",
+      "meaning": "Lang leven"
+    },
+    {
+      "id": "net",
+      "letter": "A",
+      "name": "NET",
+      "meaning": "Gevaar dat op de loer ligt"
+    },
+    {
+      "id": "cook",
+      "letter": "A",
+      "name": "KOK",
+      "meaning": "Binnen korte tijd geluk"
+    },
+    {
+      "id": "octopus",
+      "letter": "A",
+      "name": "OCTOPUS",
+      "meaning": "Wees voorzichtig"
+    },
+    {
+      "id": "family",
+      "letter": "A",
+      "name": "GEZIN",
+      "meaning": "Blij nieuws"
+    },
+    {
+      "id": "scorpion",
+      "letter": "A",
+      "name": "SCHORPIOEN",
+      "meaning": "Kwaadwillige mensen in je omgeving"
+    },
+    {
+      "id": "vulture",
+      "letter": "A",
+      "name": "GIERVOGEL",
+      "meaning": "Je moet niet in de schulden raken"
+    },
+    {
+      "id": "lung",
+      "letter": "A",
+      "name": "LONG",
+      "meaning": "Overvloed"
+    },
+    {
+      "id": "flame",
+      "letter": "A",
+      "name": "VLAM",
+      "meaning": "Een grote liefde wacht op je"
+    },
+    {
+      "id": "god-allah",
+      "letter": "A",
+      "name": "ALLAH",
+      "meaning": "Een groot goed voorteken"
+    },
+    {
+      "id": "wedding-ring",
+      "letter": "A",
+      "name": "TROUWRING",
+      "meaning": "Je krijgt problemen met je partner, maar verzoening volgt"
+    },
+    {
+      "id": "bulb",
+      "letter": "A",
+      "name": "LAMP",
+      "meaning": "Je zult grote problemen ervaren"
+    },
+    {
+      "id": "key",
+      "letter": "A",
+      "name": "SLEUTEL",
+      "meaning": "Dingen waar je al lang op wacht, worden werkelijkheid"
+    },
+    {
+      "id": "car",
+      "letter": "A",
+      "name": "AUTO",
+      "meaning": "Je krijgt hulp van mensen die van je houden"
+    },
+    {
+      "id": "bee",
+      "letter": "A",
+      "name": "BIJ",
+      "meaning": "Je zorgen verdwijnen"
+    },
+    {
+      "id": "lion",
+      "letter": "A",
+      "name": "LEEUW",
+      "meaning": "Een ouder of familielid zal je bijstaan"
+    },
+    {
+      "id": "soldier",
+      "letter": "A",
+      "name": "SOLDAT",
+      "meaning": "Je maakt moeilijke tijden door, maar je overwint ze"
+    },
+    {
+      "id": "horse",
+      "letter": "A",
+      "name": "PAARD",
+      "meaning": "Rijkdom"
+    },
+    {
+      "id": "horseshoe",
+      "letter": "A",
+      "name": "HOEFIJZER",
+      "meaning": "Een gunstige gebeurtenis"
+    },
+    {
+      "id": "fire",
+      "letter": "A",
+      "name": "VUUR",
+      "meaning": "Tijdelijke scheiding van een geliefde"
+    },
+    {
+      "id": "palm",
+      "letter": "A",
+      "name": "HANDPALM",
+      "meaning": "Je laat slechte gewoonten los"
+    },
+    {
+      "id": "moon",
+      "letter": "A",
+      "name": "MAAN",
+      "meaning": "Carrière stijgt"
+    },
+    {
+      "id": "foot",
+      "letter": "A",
+      "name": "VOET",
+      "meaning": "Je zult een geliefde helpen"
+    },
+    {
+      "id": "shoe",
+      "letter": "A",
+      "name": "SCHOEN",
+      "meaning": "Hulp uit onverwachte hoek"
+    },
+    {
+      "id": "bear",
+      "letter": "A",
+      "name": "BEER",
+      "meaning": "Een grote angst wacht op je"
+    },
+    {
+      "id": "chimney",
+      "letter": "B",
+      "name": "SCHOORSTEEN",
+      "meaning": "Blij nieuws"
+    },
+    {
+      "id": "leg",
+      "letter": "B",
+      "name": "BEEN",
+      "meaning": "Geldverlies"
+    },
+    {
+      "id": "almond",
+      "letter": "B",
+      "name": "AMANDEL",
+      "meaning": "Je geluk keert terug"
+    },
+    {
+      "id": "navy-sailor",
+      "letter": "B",
+      "name": "MARINE",
+      "meaning": "Groot maar tijdelijk geluk"
+    },
+    {
+      "id": "fish",
+      "letter": "B",
+      "name": "VIS",
+      "meaning": "Overvloed"
+    },
+    {
+      "id": "balloon",
+      "letter": "B",
+      "name": "BALLON",
+      "meaning": "Ruzies"
+    },
+    {
+      "id": "axe",
+      "letter": "B",
+      "name": "BIJL",
+      "meaning": "Je problemen verdwijnen"
+    },
+    {
+      "id": "glass",
+      "letter": "B",
+      "name": "GLAS",
+      "meaning": "Je verklaart je liefde"
+    },
+    {
+      "id": "step",
+      "letter": "B",
+      "name": "TRAP",
+      "meaning": "Je dromen komen stap voor stap uit"
+    },
+    {
+      "id": "cane",
+      "letter": "B",
+      "name": "STOK",
+      "meaning": "Winst"
+    },
+    {
+      "id": "head",
+      "letter": "B",
+      "name": "HOOFD",
+      "meaning": "Geld of kinderen"
+    },
+    {
+      "id": "wheat-ear",
+      "letter": "B",
+      "name": "KOREN",
+      "meaning": "Rust"
+    },
+    {
+      "id": "sunset",
+      "letter": "B",
+      "name": "ONDERGAANDE ZON",
+      "meaning": "Binnenkort goed nieuws"
+    },
+    {
+      "id": "suitcase",
+      "letter": "B",
+      "name": "KOFFER",
+      "meaning": "Serieuze beslissing"
+    },
+    {
+      "id": "owl",
+      "letter": "B",
+      "name": "UIL",
+      "meaning": "Pas op voor sluwe vrienden"
+    },
+    {
+      "id": "flag",
+      "letter": "B",
+      "name": "VLAG",
+      "meaning": "Vrede"
+    },
+    {
+      "id": "baby",
+      "letter": "B",
+      "name": "BABY",
+      "meaning": "Je staat voor een belangrijke beslissing"
+    },
+    {
+      "id": "cradle",
+      "letter": "B",
+      "name": "WIEG",
+      "meaning": "Huwelijk of kinderen"
+    },
+    {
+      "id": "knife",
+      "letter": "B",
+      "name": "MES",
+      "meaning": "Je fortuin opent zich"
+    },
+    {
+      "id": "computer",
+      "letter": "B",
+      "name": "COMPUTER",
+      "meaning": "Groot geluk"
+    },
+    {
+      "id": "building",
+      "letter": "B",
+      "name": "GEBOUW",
+      "meaning": "Respect van je omgeving"
+    },
+    {
+      "id": "bull",
+      "letter": "B",
+      "name": "STIER",
+      "meaning": "Winst"
+    },
+    {
+      "id": "horn",
+      "letter": "B",
+      "name": "HOORN",
+      "meaning": "Pas op voor roddels"
+    },
+    {
+      "id": "wheat",
+      "letter": "B",
+      "name": "TARWE",
+      "meaning": "Geld komt binnen"
+    },
+    {
+      "id": "cloud",
+      "letter": "B",
+      "name": "WOLK",
+      "meaning": "Onrust"
+    },
+    {
+      "id": "nose",
+      "letter": "B",
+      "name": "NEUS",
+      "meaning": "Een vriend komt om raad vragen"
+    },
+    {
+      "id": "mosque",
+      "letter": "C",
+      "name": "MOSKEE",
+      "meaning": "Hulp uit je familie"
+    },
+    {
+      "id": "monster",
+      "letter": "C",
+      "name": "MONSTER",
+      "meaning": "Vijanden die zich voordoen als vrienden krijgen spijt"
+    },
+    {
+      "id": "funeral",
+      "letter": "C",
+      "name": "BEGRAFENIS",
+      "meaning": "Reis"
+    },
+    {
+      "id": "mobile-phone",
+      "letter": "C",
+      "name": "MOBIEL",
+      "meaning": "Man = goed nieuws, vrouw = roddel"
+    },
+    {
+      "id": "ruler",
+      "letter": "C",
+      "name": "LINIAAL",
+      "meaning": "Gunstige ontwikkeling"
+    },
+    {
+      "id": "tweezers",
+      "letter": "C",
+      "name": "PINSET",
+      "meaning": "Moeilijke dagen, maar kort van duur"
+    },
+    {
+      "id": "dwarf",
+      "letter": "C",
+      "name": "DWERG",
+      "meaning": "Groot gevaar dichtbij"
+    },
+    {
+      "id": "bell",
+      "letter": "Ç",
+      "name": "BEL",
+      "meaning": "Droevig nieuws"
+    },
+    {
+      "id": "bag",
+      "letter": "Ç",
+      "name": "TAS",
+      "meaning": "Kleine winst"
+    },
+    {
+      "id": "hoe",
+      "letter": "Ç",
+      "name": "SCHOFFEL",
+      "meaning": "Groot succes"
+    },
+    {
+      "id": "cross",
+      "letter": "Ç",
+      "name": "KRUIS",
+      "meaning": "Je dromen en verwachtingen veranderen"
+    },
+    {
+      "id": "teapot",
+      "letter": "Ç",
+      "name": "THEEPOT",
+      "meaning": "Nieuwe vrienden"
+    },
+    {
+      "id": "hammer",
+      "letter": "Ç",
+      "name": "HAMER",
+      "meaning": "Problemen verdwijnen"
+    },
+    {
+      "id": "flower",
+      "letter": "Ç",
+      "name": "BLOEM",
+      "meaning": "Reis"
+    },
+    {
+      "id": "line",
+      "letter": "Ç",
+      "name": "LIJN",
+      "meaning": "Kleine ziekte"
+    },
+    {
+      "id": "boot",
+      "letter": "Ç",
+      "name": "LAARS",
+      "meaning": "Korte reis"
+    },
+    {
+      "id": "child",
+      "letter": "Ç",
+      "name": "KIND",
+      "meaning": "Vrijgezel = huwelijk, getrouwd = winst"
+    },
+    {
+      "id": "sock",
+      "letter": "Ç",
+      "name": "SOK",
+      "meaning": "Je ontsnapt aan een groot gevaar, maar wees geduldig"
+    },
+    {
+      "id": "mountain",
+      "letter": "D",
+      "name": "BERG",
+      "meaning": "Je verwachtingen komen uit"
+    },
+    {
+      "id": "diver",
+      "letter": "D",
+      "name": "DUIKER",
+      "meaning": "Je wordt verraden door een vriend"
+    },
+    {
+      "id": "dance",
+      "letter": "D",
+      "name": "DANS",
+      "meaning": "Grote som geld brengt opluchting"
+    },
+    {
+      "id": "drum",
+      "letter": "D",
+      "name": "TROMMEL",
+      "meaning": "Je krijgt een brutale buur"
+    },
+    {
+      "id": "notebook",
+      "letter": "D",
+      "name": "SCHRIFT",
+      "meaning": "Mooie ontwikkelingen op je werk"
+    },
+    {
+      "id": "railway",
+      "letter": "D",
+      "name": "SPOORWEG",
+      "meaning": "Ruzie met je vader"
+    },
+    {
+      "id": "submarine",
+      "letter": "D",
+      "name": "ONDERZEEËR",
+      "meaning": "Periscoop zichtbaar = rust; niet zichtbaar = somber nieuws"
+    },
+    {
+      "id": "mermaid",
+      "letter": "D",
+      "name": "MEERMIN",
+      "meaning": "Kans op groot succes"
+    },
+    {
+      "id": "sea",
+      "letter": "D",
+      "name": "ZEE",
+      "meaning": "Rust en onrust samen"
+    },
+    {
+      "id": "seahorse",
+      "letter": "D",
+      "name": "ZEEPAARDJE",
+      "meaning": "Onverwachte rijkdom"
+    },
+    {
+      "id": "derya-sea",
+      "letter": "D",
+      "name": "DERYA",
+      "meaning": "Hulp van je zus"
+    },
+    {
+      "id": "camel",
+      "letter": "D",
+      "name": "KAMEEL",
+      "meaning": "Moeilijke maar positieve reis"
+    },
+    {
+      "id": "ostrich",
+      "letter": "D",
+      "name": "STRUISVOGEL",
+      "meaning": "Groot geld"
+    },
+    {
+      "id": "tooth",
+      "letter": "D",
+      "name": "TAND",
+      "meaning": "Mogelijk gezondheidsprobleem"
+    },
+    {
+      "id": "dinosaur",
+      "letter": "D",
+      "name": "DINO",
+      "meaning": "Onverwachte reis"
+    },
+    {
+      "id": "doctor",
+      "letter": "D",
+      "name": "DOKTER",
+      "meaning": "Een redder komt in je leven"
+    },
+    {
+      "id": "full-moon",
+      "letter": "D",
+      "name": "VOLLE MAAN",
+      "meaning": "Nieuwe liefde"
+    },
+    {
+      "id": "pig",
+      "letter": "D",
+      "name": "VARKEN",
+      "meaning": "Je baas bezorgt je zorgen"
+    },
+    {
+      "id": "lip",
+      "letter": "D",
+      "name": "LIP",
+      "meaning": "Je verliest een voorwerp"
+    },
+    {
+      "id": "button",
+      "letter": "D",
+      "name": "KNOP",
+      "meaning": "Relatieproblemen, maar snel opgelost"
+    },
+    {
+      "id": "helm-rudder",
+      "letter": "D",
+      "name": "ROER",
+      "meaning": "Moeilijke dagen op komst"
+    },
+    {
+      "id": "binoculars",
+      "letter": "D",
+      "name": "VERREKIJKER",
+      "meaning": "Slapeloosheid, ongeveer 6 maanden"
+    },
+    {
+      "id": "whistle",
+      "letter": "D",
+      "name": "FLUIT",
+      "meaning": "Goed nieuws van een vrolijke man"
+    },
+    {
+      "id": "dragon",
+      "letter": "E",
+      "name": "DRAAK",
+      "meaning": "In de zomer: opluchting; in de winter: emotionele moeilijkheden"
+    },
+    {
+      "id": "bread",
+      "letter": "E",
+      "name": "BROOD",
+      "meaning": "Grote betalingen op korte termijn"
+    },
+    {
+      "id": "hand",
+      "letter": "E",
+      "name": "HAND",
+      "meaning": "Betekenis hangt af van de intentie van de lezer"
+    },
+    {
+      "id": "clothes",
+      "letter": "E",
+      "name": "KLEDING",
+      "meaning": "Overvloed"
+    },
+    {
+      "id": "glove",
+      "letter": "E",
+      "name": "HANDSCHOEN",
+      "meaning": "Je ontsnapt op het nippertje aan groot gevaar"
+    },
+    {
+      "id": "apple",
+      "letter": "E",
+      "name": "APPEL",
+      "meaning": "Onverwacht geld"
+    },
+    {
+      "id": "donkey",
+      "letter": "E",
+      "name": "EZEL",
+      "meaning": "Een goede vriend wordt koppig, wees toegeeflijk"
+    },
+    {
+      "id": "house",
+      "letter": "E",
+      "name": "HUIS",
+      "meaning": "Je herstelt"
+    },
+    {
+      "id": "mouse",
+      "letter": "F",
+      "name": "MUIS",
+      "meaning": "Iemand deelt mee in jouw winst"
+    },
+    {
+      "id": "lantern",
+      "letter": "F",
+      "name": "LANTAARN",
+      "meaning": "Groot geluk"
+    },
+    {
+      "id": "hazelnut",
+      "letter": "F",
+      "name": "HAZELNOOT",
+      "meaning": "Einde van je onrust"
+    },
+    {
+      "id": "elephant",
+      "letter": "F",
+      "name": "OLIFANT",
+      "meaning": "Rust en kalmte"
+    },
+    {
+      "id": "cup",
+      "letter": "F",
+      "name": "KOPJE",
+      "meaning": "De koffielezing komt niet uit"
+    },
+    {
+      "id": "newspaper",
+      "letter": "G",
+      "name": "KRANT",
+      "meaning": "Vermijd roddels, anders verlies je geld"
+    },
+    {
+      "id": "bride",
+      "letter": "G",
+      "name": "BRUID",
+      "meaning": "Onverwacht groot geluk"
+    },
+    {
+      "id": "ship",
+      "letter": "G",
+      "name": "SCHIP",
+      "meaning": "Je zorgen verdwijnen plotseling"
+    },
+    {
+      "id": "rose",
+      "letter": "G",
+      "name": "ROOS",
+      "meaning": "Je ziet iemand die je niet meer verwachtte"
+    },
+    {
+      "id": "sun",
+      "letter": "G",
+      "name": "ZON",
+      "meaning": "Je zorgen verdwijnen"
+    },
+    {
+      "id": "dove",
+      "letter": "G",
+      "name": "DUIF",
+      "meaning": "Je verklaart je liefde"
+    },
+    {
+      "id": "eye",
+      "letter": "G",
+      "name": "OOG",
+      "meaning": "Met wimpers = zorgen weg; zonder = nieuwe problemen"
+    },
+    {
+      "id": "glasses",
+      "letter": "G",
+      "name": "BRIL",
+      "meaning": "Je krijgt hulp"
+    },
+    {
+      "id": "deer",
+      "letter": "G",
+      "name": "HERT",
+      "meaning": "Veel fortuin"
+    },
+    {
+      "id": "ring",
+      "letter": "H",
+      "name": "RING",
+      "meaning": "Groot probleem op komst"
+    },
+    {
+      "id": "letters",
+      "letter": "H",
+      "name": "LETTERS",
+      "meaning": "Man = geld, vrouw = fortuin"
+    },
+    {
+      "id": "dagger",
+      "letter": "H",
+      "name": "DOLK",
+      "meaning": "Onverwacht geld, maar gaat verloren"
+    },
+    {
+      "id": "carrot",
+      "letter": "H",
+      "name": "WORTEL",
+      "meaning": "Onverklaarbaar geluk"
+    },
+    {
+      "id": "animal",
+      "letter": "H",
+      "name": "DIER",
+      "meaning": "Je overwint een zware taak"
+    },
+    {
+      "id": "nurse",
+      "letter": "H",
+      "name": "VERPLEEGSTER",
+      "meaning": "Familielid kan gezondheidsproblemen krijgen"
+    },
+    {
+      "id": "crescent",
+      "letter": "H",
+      "name": "HALVE MAAN",
+      "meaning": "Goed nieuws"
+    },
+    {
+      "id": "river",
+      "letter": "I",
+      "name": "RIVIER",
+      "meaning": "Je zult verrassingen meemaken"
+    },
+    {
+      "id": "needle",
+      "letter": "İ",
+      "name": "NAALD",
+      "meaning": "Goed nieuws"
+    },
+    {
+      "id": "elder",
+      "letter": "İ",
+      "name": "OUDERE",
+      "meaning": "Volgend jaar veel mooie ontwikkelingen"
+    },
+    {
+      "id": "imam",
+      "letter": "İ",
+      "name": "IMAM",
+      "meaning": "Slecht nieuws"
+    },
+    {
+      "id": "emperor",
+      "letter": "İ",
+      "name": "KEIZER",
+      "meaning": "Geld via kansspel"
+    },
+    {
+      "id": "pearl",
+      "letter": "İ",
+      "name": "PAREL",
+      "meaning": "Innerlijke rust"
+    },
+    {
+      "id": "fig",
+      "letter": "İ",
+      "name": "VIJGEN",
+      "meaning": "Grote winst door korte reis"
+    },
+    {
+      "id": "human",
+      "letter": "İ",
+      "name": "MENS",
+      "meaning": "Eén = rust; meerdere = problemen"
+    },
+    {
+      "id": "rope",
+      "letter": "İ",
+      "name": "TOUW",
+      "meaning": "Reis"
+    },
+    {
+      "id": "playing-card",
+      "letter": "İ",
+      "name": "SPEELKAART",
+      "meaning": "Zorgen verdwijnen door kleine inspanning"
+    },
+    {
+      "id": "letter-i",
+      "letter": "İ",
+      "name": "LETTER İ",
+      "meaning": "Geluk"
+    },
+    {
+      "id": "razor-blade",
+      "letter": "J",
+      "name": "SCHEERMESJE",
+      "meaning": "Je zorgen verdwijnen"
+    },
+    {
+      "id": "token",
+      "letter": "J",
+      "name": "MUNTJE",
+      "meaning": "Plotseling geld brengt groot geluk"
+    },
+    {
+      "id": "kaaba",
+      "letter": "K",
+      "name": "KABA",
+      "meaning": "Heel groot geluk"
+    },
+    {
+      "id": "grave",
+      "letter": "K",
+      "name": "GRAF",
+      "meaning": "Vermijd tijdelijk contact met familie, anders problemen"
+    },
+    {
+      "id": "goblet",
+      "letter": "K",
+      "name": "WIJNGALS",
+      "meaning": "Geheimen komen uit"
+    },
+    {
+      "id": "woman",
+      "letter": "K",
+      "name": "VROUW",
+      "meaning": "Overvloed; bij getrouwde vrouw = gevaar voor echtgenoot"
+    },
+    {
+      "id": "coffee",
+      "letter": "K",
+      "name": "KOFFIE",
+      "meaning": "De lezing komt écht uit"
+    },
+    {
+      "id": "castle",
+      "letter": "K",
+      "name": "BASTION",
+      "meaning": "Vertrouw je vrienden"
+    },
+    {
+      "id": "shield",
+      "letter": "K",
+      "name": "SCHILD",
+      "meaning": "Voer je plannen uit"
+    },
+    {
+      "id": "heart",
+      "letter": "K",
+      "name": "HART",
+      "meaning": "Problemen verdwijnen"
+    },
+    {
+      "id": "wing",
+      "letter": "K",
+      "name": "VLEUGEL",
+      "meaning": "Lange reis"
+    },
+    {
+      "id": "kangaroo",
+      "letter": "K",
+      "name": "KANGOEROE",
+      "meaning": "Onverwachte promotie"
+    },
+    {
+      "id": "door",
+      "letter": "K",
+      "name": "DEUR",
+      "meaning": "Iemand die je niet mag, brengt goed nieuws"
+    },
+    {
+      "id": "turtle",
+      "letter": "K",
+      "name": "SCHILDPAD",
+      "meaning": "Nieuwe liefde"
+    },
+    {
+      "id": "square",
+      "letter": "K",
+      "name": "VIERKANT",
+      "meaning": "Je krijgt het verwachte geld"
+    },
+    {
+      "id": "crow",
+      "letter": "K",
+      "name": "KRAAI",
+      "meaning": "Heel goed nieuws"
+    },
+    {
+      "id": "ant",
+      "letter": "K",
+      "name": "MIER",
+      "meaning": "Veel winst, maar alleen met hard werken"
+    },
+    {
+      "id": "bowl",
+      "letter": "K",
+      "name": "KOM",
+      "meaning": "Goede ontwikkelingen in je werk"
+    },
+    {
+      "id": "spoon",
+      "letter": "K",
+      "name": "LEPEL",
+      "meaning": "Kans verschijnt, maar je mist hem"
+    },
+    {
+      "id": "pickaxe",
+      "letter": "K",
+      "name": "HOEFSMEEDHAMER",
+      "meaning": "Je krijgt veel geld, maar als je het niet goed gebruikt = problemen"
+    },
+    {
+      "id": "cat",
+      "letter": "K",
+      "name": "KAT",
+      "meaning": "Afhankelijk van de interpretatie van de lezer"
+    },
+    {
+      "id": "butterfly",
+      "letter": "K",
+      "name": "VLINDER",
+      "meaning": "Veel lijden, maar eindigt in geluk"
+    },
+    {
+      "id": "violin",
+      "letter": "K",
+      "name": "VIOOL",
+      "meaning": "Je maakt egoïstische fouten"
+    },
+    {
+      "id": "sword",
+      "letter": "K",
+      "name": "ZWAARD",
+      "meaning": "Je geliefde geeft een cadeau"
+    },
+    {
+      "id": "s",
+      "letter": "K",
+      "name": "ZWALUW",
+      "meaning": "Kleine gunst levert groot voordeel op"
+    },
+    {
+      "id": "lamp",
+      "letter": "L",
+      "name": "LAMP",
+      "meaning": "Zakenreis"
+    },
+    {
+      "id": "medal",
+      "letter": "M",
+      "name": "MEDAILLE",
+      "meaning": "Je vindt verloren geld terug"
+    },
+    {
+      "id": "cave",
+      "letter": "M",
+      "name": "GROT",
+      "meaning": "Zware reis"
+    },
+    {
+      "id": "scissors",
+      "letter": "M",
+      "name": "SCHAAR",
+      "meaning": "Je voelt je capabel alles te doen"
+    },
+    {
+      "id": "buffalo",
+      "letter": "M",
+      "name": "BUFFEL",
+      "meaning": "Zoet nieuws uit het westen"
+    },
+    {
+      "id": "grill",
+      "letter": "M",
+      "name": "BARBECUE",
+      "meaning": "Langverwacht nieuws komt snel"
+    },
+    {
+      "id": "seagull",
+      "letter": "M",
+      "name": "MEEUW",
+      "meaning": "Veel verdrietige berichten"
+    },
+    {
+      "id": "table",
+      "letter": "M",
+      "name": "TAFEL",
+      "meaning": "Naaste slaagt in examen"
+    },
+    {
+      "id": "letter",
+      "letter": "M",
+      "name": "BRIEF",
+      "meaning": "Je lucht je hart bij iemand"
+    },
+    {
+      "id": "mevlana",
+      "letter": "M",
+      "name": "MEVLANA",
+      "meaning": "Gelukkige vrienden om je heen"
+    },
+    {
+      "id": "angel",
+      "letter": "M",
+      "name": "ENGEL",
+      "meaning": "Steun van familielid van moederskant"
+    },
+    {
+      "id": "fruit",
+      "letter": "M",
+      "name": "FRUIT",
+      "meaning": "Je moet lang wachten maar slaagt"
+    },
+    {
+      "id": "tombstone",
+      "letter": "M",
+      "name": "GRAFSTEEN",
+      "meaning": "Lang leven"
+    },
+    {
+      "id": "spear",
+      "letter": "M",
+      "name": "SPEER",
+      "meaning": "Je relatie krijgt een gelukkig keerpunt"
+    },
+    {
+      "id": "mussel",
+      "letter": "M",
+      "name": "MOSS",
+      "meaning": "Ernstige gezondheidsproblemen"
+    },
+    {
+      "id": "minaret",
+      "letter": "M",
+      "name": "MINARET",
+      "meaning": "Groot probleem in Ramadan"
+    },
+    {
+      "id": "candle",
+      "letter": "M",
+      "name": "KAARS",
+      "meaning": "Veel plezier in seksueel opzicht"
+    },
+    {
+      "id": "prayer",
+      "letter": "N",
+      "name": "GEBED",
+      "meaning": "Onverwacht goed nieuws"
+    },
+    {
+      "id": "pomegranate",
+      "letter": "N",
+      "name": "GRANAATAPPEL",
+      "meaning": "Klein probleem dat groot kan worden"
+    },
+    {
+      "id": "arrow",
+      "letter": "O",
+      "name": "PIJL",
+      "meaning": "Je wordt geduldiger"
+    },
+    {
+      "id": "sickle",
+      "letter": "O",
+      "name": "SIKKEL",
+      "meaning": "Je maakt vrede met oude vrienden"
+    },
+    {
+      "id": "capricorn",
+      "letter": "O",
+      "name": "STEENBOK",
+      "meaning": "Opluchting na moeilijke tijd"
+    },
+    {
+      "id": "student",
+      "letter": "Ö",
+      "name": "STUDENT",
+      "meaning": "Nieuwe fase in je leven"
+    },
+    {
+      "id": "spider",
+      "letter": "Ö",
+      "name": "SPIN",
+      "meaning": "Persoonlijkheidsproblemen"
+    },
+    {
+      "id": "duck",
+      "letter": "Ö",
+      "name": "EEND",
+      "meaning": "Hulp van vaderskant"
+    },
+    {
+      "id": "coat",
+      "letter": "P",
+      "name": "JAS",
+      "meaning": "Langverwacht nieuws komt maar niet"
+    },
+    {
+      "id": "trousers",
+      "letter": "P",
+      "name": "BROEK",
+      "meaning": "Goed nieuws van een blonde persoon"
+    },
+    {
+      "id": "bow-tie",
+      "letter": "P",
+      "name": "VLINDDAS",
+      "meaning": "Mogelijk verraad door naaste vrienden"
+    },
+    {
+      "id": "cotton",
+      "letter": "P",
+      "name": "KATOEN",
+      "meaning": "Let op verstikkingsgevaar"
+    },
+    {
+      "id": "parrot",
+      "letter": "P",
+      "name": "PAPEGAAI",
+      "meaning": "Je vriendenkring groeit"
+    },
+    {
+      "id": "daisy",
+      "letter": "P",
+      "name": "MARGRIET",
+      "meaning": "Bezoek"
+    },
+    {
+      "id": "money",
+      "letter": "P",
+      "name": "GELD",
+      "meaning": "Stel je plannen niet uit"
+    },
+    {
+      "id": "cake",
+      "letter": "P",
+      "name": "TAART",
+      "meaning": "Goed nieuws"
+    },
+    {
+      "id": "pelican",
+      "letter": "P",
+      "name": "PELIKAAN",
+      "meaning": "Veel geluk"
+    },
+    {
+      "id": "penguin",
+      "letter": "P",
+      "name": "PINGUÏN",
+      "meaning": "Met geduld krijg je voorspoed"
+    },
+    {
+      "id": "window",
+      "letter": "P",
+      "name": "RAAM",
+      "meaning": "Gezondheid"
+    },
+    {
+      "id": "compass",
+      "letter": "P",
+      "name": "PASSER",
+      "meaning": "Geheim project eindigt succesvol"
+    },
+    {
+      "id": "battery",
+      "letter": "P",
+      "name": "BATTERIJ",
+      "meaning": "Geluk"
+    },
+    {
+      "id": "pipe",
+      "letter": "P",
+      "name": "PIJP",
+      "meaning": "Twijfel"
+    },
+    {
+      "id": "police",
+      "letter": "P",
+      "name": "POLITIE",
+      "meaning": "Groot verdriet"
+    },
+    {
+      "id": "postman",
+      "letter": "P",
+      "name": "POSTBODE",
+      "meaning": "Je vertrekt met vreugde"
+    },
+    {
+      "id": "prince",
+      "letter": "P",
+      "name": "PRINS",
+      "meaning": "Aantrekkelijke partner"
+    },
+    {
+      "id": "princess",
+      "letter": "P",
+      "name": "PRINSES",
+      "meaning": "Binnen korte tijd ontmoet je ideale partner"
+    },
+    {
+      "id": "raki-bottle",
+      "letter": "R",
+      "name": "RAKI FLES",
+      "meaning": "Plots maar groot geluk"
+    },
+    {
+      "id": "letter-r",
+      "letter": "R",
+      "name": "R LETTER",
+      "meaning": "Persoon met R in naam kan je schaden"
+    },
+    {
+      "id": "clock",
+      "letter": "S",
+      "name": "KLOK",
+      "meaning": "Je wordt rustiger"
+    },
+    {
+      "id": "soap",
+      "letter": "S",
+      "name": "ZEEP",
+      "meaning": "Je zorgen blijven bestaan"
+    },
+    {
+      "id": "hair",
+      "letter": "S",
+      "name": "HAAR",
+      "meaning": "Veel winst"
+    },
+    {
+      "id": "beard",
+      "letter": "S",
+      "name": "BAARD",
+      "meaning": "Je broer bereikt succes"
+    },
+    {
+      "id": "snail",
+      "letter": "S",
+      "name": "SLUG",
+      "meaning": "Met geduld korte termijn winst"
+    },
+    {
+      "id": "lute",
+      "letter": "S",
+      "name": "LUIT",
+      "meaning": "Doktersbezoek maar geen slecht nieuws"
+    },
+    {
+      "id": "whirling-dervish",
+      "letter": "S",
+      "name": "DERWISH",
+      "meaning": "Voorspoed"
+    },
+    {
+      "id": "river-of-love",
+      "letter": "S",
+      "name": "RIVIER VAN LIEFDE",
+      "meaning": "Grote overvloed"
+    },
+    {
+      "id": "cigarette",
+      "letter": "S",
+      "name": "SIGARET",
+      "meaning": "Moeilijkheden verdwijnen"
+    },
+    {
+      "id": "gun",
+      "letter": "S",
+      "name": "WAPEN",
+      "meaning": "Je herkent slechte mensen om je heen"
+    },
+    {
+      "id": "fly",
+      "letter": "S",
+      "name": "VLIEG",
+      "meaning": "Je krijgt een mooie uitnodiging"
+    },
+    {
+      "id": "squirrel",
+      "letter": "S",
+      "name": "EEKHOORN",
+      "meaning": "Met sparen opent je geluk"
+    },
+    {
+      "id": "worm",
+      "letter": "S",
+      "name": "WORM",
+      "meaning": "Pas op voor valse vrienden"
+    },
+    {
+      "id": "question-mark",
+      "letter": "S",
+      "name": "VRAAGTEKEN",
+      "meaning": "Je geliefde houdt iets geheim"
+    },
+    {
+      "id": "broom",
+      "letter": "S",
+      "name": "BEZEM",
+      "meaning": "Uitgestelde reis gaat door"
+    },
+    {
+      "id": "umbrella",
+      "letter": "Ş",
+      "name": "PARAPLU",
+      "meaning": "Met kleine uitgave komt iets moois"
+    },
+    {
+      "id": "devil",
+      "letter": "Ş",
+      "name": "DUIVEL",
+      "meaning": "Pas op voor oude vrienden, ze plannen kwaad"
+    },
+    {
+      "id": "bottle",
+      "letter": "Ş",
+      "name": "FLES",
+      "meaning": "Vertel je geheimen niet overal"
+    },
+    {
+      "id": "plate",
+      "letter": "T",
+      "name": "BORD",
+      "meaning": "Je krijgt eigendom"
+    },
+    {
+      "id": "tablet",
+      "letter": "T",
+      "name": "TABLET",
+      "meaning": "Groot nieuws"
+    },
+    {
+      "id": "coffin",
+      "letter": "T",
+      "name": "DOODSKIST",
+      "meaning": "Gezondheidsproblemen van je vader eindigen"
+    },
+    {
+      "id": "throne",
+      "letter": "T",
+      "name": "TROON",
+      "meaning": "Lange reis"
+    },
+    {
+      "id": "comb",
+      "letter": "T",
+      "name": "KAM",
+      "meaning": "Je krijgt een nieuwe baan"
+    },
+    {
+      "id": "rabbit",
+      "letter": "T",
+      "name": "KONIJN",
+      "meaning": "Eerst veel rust, daarna groot verval"
+    },
+    {
+      "id": "peacock",
+      "letter": "T",
+      "name": "PAUW",
+      "meaning": "Geluk"
+    },
+    {
+      "id": "telephone",
+      "letter": "T",
+      "name": "TELEFOON",
+      "meaning": "Goed nieuws"
+    },
+    {
+      "id": "pot",
+      "letter": "T",
+      "name": "PAN",
+      "meaning": "Je kwetst je geliefde onnodig"
+    },
+    {
+      "id": "prayer-beads",
+      "letter": "T",
+      "name": "ROZENKRANS",
+      "meaning": "Iets gebeurt voor het eerst in je leven"
+    },
+    {
+      "id": "saw",
+      "letter": "T",
+      "name": "ZAAG",
+      "meaning": "Je valse vriendschappen eindigen"
+    },
+    {
+      "id": "jug",
+      "letter": "T",
+      "name": "KAN",
+      "meaning": "Je liegt tegen een vriend, hij ontdekt het"
+    },
+    {
+      "id": "fox",
+      "letter": "T",
+      "name": "VOS",
+      "meaning": "Blijf weg van roddel"
+    },
+    {
+      "id": "caterpillar",
+      "letter": "T",
+      "name": "RUPS",
+      "meaning": "Reis helpt je zorgen vergeten"
+    },
+    {
+      "id": "airplane",
+      "letter": "U",
+      "name": "VLIEGTUIG",
+      "meaning": "Korte reis"
+    },
+    {
+      "id": "kite",
+      "letter": "U",
+      "name": "VLIEGER",
+      "meaning": "Je vindt geluk ondanks moeilijkheden"
+    },
+    {
+      "id": "razor",
+      "letter": "U",
+      "name": "SCHEERMES",
+      "meaning": "Een oudere beschermt je"
+    },
+    {
+      "id": "ladybug",
+      "letter": "U",
+      "name": "LIEVEHEERSBEESTJE",
+      "meaning": "Veel geluk en voorspoed"
+    },
+    {
+      "id": "iron",
+      "letter": "Ü",
+      "name": "STRIJKIJZER",
+      "meaning": "Goed nieuws uit het verleden"
+    },
+    {
+      "id": "triangle",
+      "letter": "Ü",
+      "name": "DRIEHOEK",
+      "meaning": "Let op in zakelijke relaties"
+    },
+    {
+      "id": "exclamation-mark",
+      "letter": "Ü",
+      "name": "UITROEPTEKEN",
+      "meaning": "Ruzie met geliefde, maar tijdelijk"
+    },
+    {
+      "id": "letter-u",
+      "letter": "Ü",
+      "name": "Ü LETTER",
+      "meaning": "Een verdrietige periode komt"
+    },
+    {
+      "id": "body",
+      "letter": "V",
+      "name": "LICHAAM",
+      "meaning": "Mannenlichaam = groot geluk, vrouwenlichaam = eerst tegenslag, dan groot geluk"
+    },
+    {
+      "id": "volcano",
+      "letter": "Y",
+      "name": "VULKAAN",
+      "meaning": "Nieuws van ex-geliefde"
+    },
+    {
+      "id": "leaf",
+      "letter": "Y",
+      "name": "BLAD",
+      "meaning": "Kans op ziekte, wees voorzichtig"
+    },
+    {
+      "id": "bed",
+      "letter": "Y",
+      "name": "BED",
+      "meaning": "Stop met twijfelen"
+    },
+    {
+      "id": "bat",
+      "letter": "Y",
+      "name": "VLEERMUIS",
+      "meaning": "Slecht nieuws verstoort je slaap"
+    },
+    {
+      "id": "sail",
+      "letter": "Y",
+      "name": "ZEIL",
+      "meaning": "Korte reis"
+    },
+    {
+      "id": "crab",
+      "letter": "Y",
+      "name": "KRAB",
+      "meaning": "Je krijgt een goede vriend"
+    },
+    {
+      "id": "star",
+      "letter": "Y",
+      "name": "STER",
+      "meaning": "Groot probleem dichtbij, wees voorzichtig"
+    },
+    {
+      "id": "snake",
+      "letter": "Y",
+      "name": "SLANG",
+      "meaning": "Goed nieuws verdrijft je zorgen"
+    },
+    {
+      "id": "egg",
+      "letter": "Y",
+      "name": "EI",
+      "meaning": "Betekenis hangt af van uitlegger"
+    },
+    {
+      "id": "dolphin",
+      "letter": "Y",
+      "name": "DOLFIJN",
+      "meaning": "Valse vrienden die glimlachen"
+    },
+    {
+      "id": "road",
+      "letter": "Y",
+      "name": "WEG",
+      "meaning": "Je onrust verdwijnt"
+    },
+    {
+      "id": "dice",
+      "letter": "Z",
+      "name": "DOBBELSTEEN",
+      "meaning": "Je komt in een ongelukkige periode"
+    },
+    {
+      "id": "envelope",
+      "letter": "Z",
+      "name": "ENVELOP",
+      "meaning": "Ruzie tussen moeder en geliefde"
+    },
+    {
+      "id": "olive",
+      "letter": "Z",
+      "name": "OLIJF",
+      "meaning": "Zeer goed nieuws"
+    }
+  ]
+}

@@ -1,0 +1,1714 @@
+{
+  "version": "1.0.0",
+  "count": 130,
+  "symbols": [
+    {
+      "id": "dusmek-1",
+      "name": "Düşmek",
+      "themes": [
+        "özgürlük",
+        "suçluluk"
+      ],
+      "explanation": "Bir rüyada düşmek genellikle özgürlük teması taşır; fakat bazen suçluluk ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Küçük bir ritüel oluştur (nefes, çay, kısa yürüyüş) ve mesajı bütünleştir.",
+      "keywords": [
+        "düşmek"
+      ]
+    },
+    {
+      "id": "ucmak-2",
+      "name": "Uçmak",
+      "themes": [
+        "berraklık",
+        "kontrol kaybı"
+      ],
+      "explanation": "Bir rüyada uçmak genellikle berraklık teması taşır; fakat bazen kontrol kaybı ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Küçük bir ritüel oluştur (nefes, çay, kısa yürüyüş) ve mesajı bütünleştir.",
+      "keywords": [
+        "uçmak"
+      ]
+    },
+    {
+      "id": "dis-dokulmesi-3",
+      "name": "Diş Dökülmesi",
+      "themes": [
+        "içgörü",
+        "erteleme"
+      ],
+      "explanation": "Bir rüyada diş dökülmesi genellikle içgörü teması taşır; fakat bazen erteleme ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Günü yavaşlat: daha az ekran, daha çok beden, basit rutin.",
+      "keywords": [
+        "diş",
+        "dökülmesi"
+      ]
+    },
+    {
+      "id": "kovalanmak-4",
+      "name": "Kovalanmak",
+      "themes": [
+        "güven",
+        "yük fazlası"
+      ],
+      "explanation": "Bir rüyada kovalanmak genellikle güven teması taşır; fakat bazen yük fazlası ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Güvendiğin biriyle konuş ve özü fazla analiz etmeden adlandır.",
+      "keywords": [
+        "kovalanmak"
+      ]
+    },
+    {
+      "id": "gec-kalmak-5",
+      "name": "Geç Kalmak",
+      "themes": [
+        "içgörü",
+        "suçluluk"
+      ],
+      "explanation": "Bir rüyada geç kalmak genellikle içgörü teması taşır; fakat bazen suçluluk ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Güvendiğin biriyle konuş ve özü fazla analiz etmeden adlandır.",
+      "keywords": [
+        "geç",
+        "kalmak"
+      ]
+    },
+    {
+      "id": "su-6",
+      "name": "Su",
+      "themes": [
+        "bağ",
+        "yük fazlası"
+      ],
+      "explanation": "Bir rüyada su genellikle bağ teması taşır; fakat bazen yük fazlası ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "En baskın duygunun ne olduğunu ve günlük hayatta nerede ortaya çıktığını sor.",
+      "keywords": []
+    },
+    {
+      "id": "frtna-7",
+      "name": "Fırtına",
+      "themes": [
+        "yenilenme",
+        "utanç"
+      ],
+      "explanation": "Bir rüyada fırtına genellikle yenilenme teması taşır; fakat bazen utanç ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Nazik bir sınır koy: neyi içeri alıyor, neyi bırakıyorsun?",
+      "keywords": [
+        "fırtına"
+      ]
+    },
+    {
+      "id": "ylan-8",
+      "name": "Yılan",
+      "themes": [
+        "kabul",
+        "kontrol kaybı"
+      ],
+      "explanation": "Bir rüyada yılan genellikle kabul teması taşır; fakat bazen kontrol kaybı ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Nazik bir sınır koy: neyi içeri alıyor, neyi bırakıyorsun?",
+      "keywords": [
+        "yılan"
+      ]
+    },
+    {
+      "id": "orumcek-9",
+      "name": "Örümcek",
+      "themes": [
+        "özgürlük",
+        "utanç"
+      ],
+      "explanation": "Bir rüyada örümcek genellikle özgürlük teması taşır; fakat bazen utanç ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Küçük bir ritüel oluştur (nefes, çay, kısa yürüyüş) ve mesajı bütünleştir.",
+      "keywords": [
+        "örümcek"
+      ]
+    },
+    {
+      "id": "kedi-10",
+      "name": "Kedi",
+      "themes": [
+        "şifa",
+        "korku"
+      ],
+      "explanation": "Bir rüyada kedi genellikle şifa teması taşır; fakat bazen korku ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Küçük bir ritüel oluştur (nefes, çay, kısa yürüyüş) ve mesajı bütünleştir.",
+      "keywords": [
+        "kedi"
+      ]
+    },
+    {
+      "id": "kopek-11",
+      "name": "Köpek",
+      "themes": [
+        "bağ",
+        "belirsizlik"
+      ],
+      "explanation": "Bir rüyada köpek genellikle bağ teması taşır; fakat bazen belirsizlik ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Güvendiğin biriyle konuş ve özü fazla analiz etmeden adlandır.",
+      "keywords": [
+        "köpek"
+      ]
+    },
+    {
+      "id": "bebek-12",
+      "name": "Bebek",
+      "themes": [
+        "cesaret",
+        "kontrol kaybı"
+      ],
+      "explanation": "Bir rüyada bebek genellikle cesaret teması taşır; fakat bazen kontrol kaybı ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Günü yavaşlat: daha az ekran, daha çok beden, basit rutin.",
+      "keywords": [
+        "bebek"
+      ]
+    },
+    {
+      "id": "hamilelik-13",
+      "name": "Hamilelik",
+      "themes": [
+        "bağ",
+        "erteleme"
+      ],
+      "explanation": "Bir rüyada hamilelik genellikle bağ teması taşır; fakat bazen erteleme ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Güvendiğin biriyle konuş ve özü fazla analiz etmeden adlandır.",
+      "keywords": [
+        "hamilelik"
+      ]
+    },
+    {
+      "id": "olum-14",
+      "name": "Ölüm",
+      "themes": [
+        "berraklık",
+        "sınır eksikliği"
+      ],
+      "explanation": "Bir rüyada ölüm genellikle berraklık teması taşır; fakat bazen sınır eksikliği ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Günü yavaşlat: daha az ekran, daha çok beden, basit rutin.",
+      "keywords": [
+        "ölüm"
+      ]
+    },
+    {
+      "id": "dugun-15",
+      "name": "Düğün",
+      "themes": [
+        "cesaret",
+        "kontrol kaybı"
+      ],
+      "explanation": "Bir rüyada düğün genellikle cesaret teması taşır; fakat bazen kontrol kaybı ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Uyanır uyanmaz birkaç anahtar kelime yaz ve sonra dönüp düşün.",
+      "keywords": [
+        "düğün"
+      ]
+    },
+    {
+      "id": "kamusal-alanda-cplaklk-16",
+      "name": "Kamusal Alanda Çıplaklık",
+      "themes": [
+        "kabul",
+        "kafa karışıklığı"
+      ],
+      "explanation": "Bir rüyada kamusal alanda çıplaklık genellikle kabul teması taşır; fakat bazen kafa karışıklığı ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Güvendiğin biriyle konuş ve özü fazla analiz etmeden adlandır.",
+      "keywords": [
+        "kamusal",
+        "alanda",
+        "çıplaklık"
+      ]
+    },
+    {
+      "id": "okul-17",
+      "name": "Okul",
+      "themes": [
+        "içgörü",
+        "kontrol kaybı"
+      ],
+      "explanation": "Bir rüyada okul genellikle içgörü teması taşır; fakat bazen kontrol kaybı ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Nazik bir sınır koy: neyi içeri alıyor, neyi bırakıyorsun?",
+      "keywords": [
+        "okul"
+      ]
+    },
+    {
+      "id": "snav-18",
+      "name": "Sınav",
+      "themes": [
+        "güven",
+        "belirsizlik"
+      ],
+      "explanation": "Bir rüyada sınav genellikle güven teması taşır; fakat bazen belirsizlik ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Uyanır uyanmaz birkaç anahtar kelime yaz ve sonra dönüp düşün.",
+      "keywords": [
+        "sınav"
+      ]
+    },
+    {
+      "id": "asansor-19",
+      "name": "Asansör",
+      "themes": [
+        "bağ",
+        "belirsizlik"
+      ],
+      "explanation": "Bir rüyada asansör genellikle bağ teması taşır; fakat bazen belirsizlik ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Uyanır uyanmaz birkaç anahtar kelime yaz ve sonra dönüp düşün.",
+      "keywords": [
+        "asansör"
+      ]
+    },
+    {
+      "id": "tren-20",
+      "name": "Tren",
+      "themes": [
+        "özgürlük",
+        "yük fazlası"
+      ],
+      "explanation": "Bir rüyada tren genellikle özgürlük teması taşır; fakat bazen yük fazlası ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Günü yavaşlat: daha az ekran, daha çok beden, basit rutin.",
+      "keywords": [
+        "tren"
+      ]
+    },
+    {
+      "id": "araba-21",
+      "name": "Araba",
+      "themes": [
+        "bağ",
+        "kayıp"
+      ],
+      "explanation": "Bir rüyada araba genellikle bağ teması taşır; fakat bazen kayıp ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Sembol bir uyarı mı yoksa cesaretlendirme mi, kontrol et.",
+      "keywords": [
+        "araba"
+      ]
+    },
+    {
+      "id": "karanlk-22",
+      "name": "Karanlık",
+      "themes": [
+        "cesaret",
+        "kontrol kaybı"
+      ],
+      "explanation": "Bir rüyada karanlık genellikle cesaret teması taşır; fakat bazen kontrol kaybı ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Günü yavaşlat: daha az ekran, daha çok beden, basit rutin.",
+      "keywords": [
+        "karanlık"
+      ]
+    },
+    {
+      "id": "yangn-23",
+      "name": "Yangın",
+      "themes": [
+        "yaratıcılık",
+        "erteleme"
+      ],
+      "explanation": "Bir rüyada yangın genellikle yaratıcılık teması taşır; fakat bazen erteleme ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Yaratıcılığı kullan (çizim, müzik); görüntü konuşsun.",
+      "keywords": [
+        "yangın"
+      ]
+    },
+    {
+      "id": "yagmur-24",
+      "name": "Yağmur",
+      "themes": [
+        "yaratıcılık",
+        "kontrol kaybı"
+      ],
+      "explanation": "Bir rüyada yağmur genellikle yaratıcılık teması taşır; fakat bazen kontrol kaybı ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Küçük bir ritüel oluştur (nefes, çay, kısa yürüyüş) ve mesajı bütünleştir.",
+      "keywords": [
+        "yağmur"
+      ]
+    },
+    {
+      "id": "deniz-25",
+      "name": "Deniz",
+      "themes": [
+        "yaratıcılık",
+        "erteleme"
+      ],
+      "explanation": "Bir rüyada deniz genellikle yaratıcılık teması taşır; fakat bazen erteleme ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Günü yavaşlat: daha az ekran, daha çok beden, basit rutin.",
+      "keywords": [
+        "deniz"
+      ]
+    },
+    {
+      "id": "nehir-26",
+      "name": "Nehir",
+      "themes": [
+        "bağ",
+        "erteleme"
+      ],
+      "explanation": "Bir rüyada nehir genellikle bağ teması taşır; fakat bazen erteleme ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Uyanır uyanmaz birkaç anahtar kelime yaz ve sonra dönüp düşün.",
+      "keywords": [
+        "nehir"
+      ]
+    },
+    {
+      "id": "kopru-27",
+      "name": "Köprü",
+      "themes": [
+        "cesaret",
+        "kontrol kaybı"
+      ],
+      "explanation": "Bir rüyada köprü genellikle cesaret teması taşır; fakat bazen kontrol kaybı ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Yaratıcılığı kullan (çizim, müzik); görüntü konuşsun.",
+      "keywords": [
+        "köprü"
+      ]
+    },
+    {
+      "id": "dag-28",
+      "name": "Dağ",
+      "themes": [
+        "bağ",
+        "kafa karışıklığı"
+      ],
+      "explanation": "Bir rüyada dağ genellikle bağ teması taşır; fakat bazen kafa karışıklığı ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "En baskın duygunun ne olduğunu ve günlük hayatta nerede ortaya çıktığını sor.",
+      "keywords": [
+        "dağ"
+      ]
+    },
+    {
+      "id": "orman-29",
+      "name": "Orman",
+      "themes": [
+        "kabul",
+        "sınır eksikliği"
+      ],
+      "explanation": "Bir rüyada orman genellikle kabul teması taşır; fakat bazen sınır eksikliği ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Uyanır uyanmaz birkaç anahtar kelime yaz ve sonra dönüp düşün.",
+      "keywords": [
+        "orman"
+      ]
+    },
+    {
+      "id": "labirent-30",
+      "name": "Labirent",
+      "themes": [
+        "berraklık",
+        "yük fazlası"
+      ],
+      "explanation": "Bir rüyada labirent genellikle berraklık teması taşır; fakat bazen yük fazlası ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Sembol bir uyarı mı yoksa cesaretlendirme mi, kontrol et.",
+      "keywords": [
+        "labirent"
+      ]
+    },
+    {
+      "id": "ayna-31",
+      "name": "Ayna",
+      "themes": [
+        "içgörü",
+        "suçluluk"
+      ],
+      "explanation": "Bir rüyada ayna genellikle içgörü teması taşır; fakat bazen suçluluk ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Yaratıcılığı kullan (çizim, müzik); görüntü konuşsun.",
+      "keywords": [
+        "ayna"
+      ]
+    },
+    {
+      "id": "telefon-32",
+      "name": "Telefon",
+      "themes": [
+        "güven",
+        "yük fazlası"
+      ],
+      "explanation": "Bir rüyada telefon genellikle güven teması taşır; fakat bazen yük fazlası ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Günü yavaşlat: daha az ekran, daha çok beden, basit rutin.",
+      "keywords": [
+        "telefon"
+      ]
+    },
+    {
+      "id": "alsveris-33",
+      "name": "Alışveriş",
+      "themes": [
+        "içgörü",
+        "suçluluk"
+      ],
+      "explanation": "Bir rüyada alışveriş genellikle içgörü teması taşır; fakat bazen suçluluk ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Güvendiğin biriyle konuş ve özü fazla analiz etmeden adlandır.",
+      "keywords": [
+        "alışveriş"
+      ]
+    },
+    {
+      "id": "anahtarlar-34",
+      "name": "Anahtarlar",
+      "themes": [
+        "berraklık",
+        "kayıp"
+      ],
+      "explanation": "Bir rüyada anahtarlar genellikle berraklık teması taşır; fakat bazen kayıp ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Güvendiğin biriyle konuş ve özü fazla analiz etmeden adlandır.",
+      "keywords": [
+        "anahtarlar"
+      ]
+    },
+    {
+      "id": "ev-35",
+      "name": "Ev",
+      "themes": [
+        "cesaret",
+        "yük fazlası"
+      ],
+      "explanation": "Bir rüyada ev genellikle cesaret teması taşır; fakat bazen yük fazlası ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "En baskın duygunun ne olduğunu ve günlük hayatta nerede ortaya çıktığını sor.",
+      "keywords": []
+    },
+    {
+      "id": "tavanaras-36",
+      "name": "Tavanarası",
+      "themes": [
+        "içgörü",
+        "belirsizlik"
+      ],
+      "explanation": "Bir rüyada tavanarası genellikle içgörü teması taşır; fakat bazen belirsizlik ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Nazik bir sınır koy: neyi içeri alıyor, neyi bırakıyorsun?",
+      "keywords": [
+        "tavanarası"
+      ]
+    },
+    {
+      "id": "bodrum-37",
+      "name": "Bodrum",
+      "themes": [
+        "özgürlük",
+        "utanç"
+      ],
+      "explanation": "Bir rüyada bodrum genellikle özgürlük teması taşır; fakat bazen utanç ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Uyanır uyanmaz birkaç anahtar kelime yaz ve sonra dönüp düşün.",
+      "keywords": [
+        "bodrum"
+      ]
+    },
+    {
+      "id": "mutfak-38",
+      "name": "Mutfak",
+      "themes": [
+        "berraklık",
+        "erteleme"
+      ],
+      "explanation": "Bir rüyada mutfak genellikle berraklık teması taşır; fakat bazen erteleme ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "En baskın duygunun ne olduğunu ve günlük hayatta nerede ortaya çıktığını sor.",
+      "keywords": [
+        "mutfak"
+      ]
+    },
+    {
+      "id": "banyo-39",
+      "name": "Banyo",
+      "themes": [
+        "yenilenme",
+        "kontrol kaybı"
+      ],
+      "explanation": "Bir rüyada banyo genellikle yenilenme teması taşır; fakat bazen kontrol kaybı ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Günü yavaşlat: daha az ekran, daha çok beden, basit rutin.",
+      "keywords": [
+        "banyo"
+      ]
+    },
+    {
+      "id": "ofis-40",
+      "name": "Ofis",
+      "themes": [
+        "şifa",
+        "kayıp"
+      ],
+      "explanation": "Bir rüyada ofis genellikle şifa teması taşır; fakat bazen kayıp ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Günü yavaşlat: daha az ekran, daha çok beden, basit rutin.",
+      "keywords": [
+        "ofis"
+      ]
+    },
+    {
+      "id": "kilise-41",
+      "name": "Kilise",
+      "themes": [
+        "bağ",
+        "sınır eksikliği"
+      ],
+      "explanation": "Bir rüyada kilise genellikle bağ teması taşır; fakat bazen sınır eksikliği ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Güvendiğin biriyle konuş ve özü fazla analiz etmeden adlandır.",
+      "keywords": [
+        "kilise"
+      ]
+    },
+    {
+      "id": "cami-42",
+      "name": "Cami",
+      "themes": [
+        "kabul",
+        "yük fazlası"
+      ],
+      "explanation": "Bir rüyada cami genellikle kabul teması taşır; fakat bazen yük fazlası ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Günü yavaşlat: daha az ekran, daha çok beden, basit rutin.",
+      "keywords": [
+        "cami"
+      ]
+    },
+    {
+      "id": "pazar-43",
+      "name": "Pazar",
+      "themes": [
+        "yenilenme",
+        "yük fazlası"
+      ],
+      "explanation": "Bir rüyada pazar genellikle yenilenme teması taşır; fakat bazen yük fazlası ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Küçük bir ritüel oluştur (nefes, çay, kısa yürüyüş) ve mesajı bütünleştir.",
+      "keywords": [
+        "pazar"
+      ]
+    },
+    {
+      "id": "hastane-44",
+      "name": "Hastane",
+      "themes": [
+        "kabul",
+        "suçluluk"
+      ],
+      "explanation": "Bir rüyada hastane genellikle kabul teması taşır; fakat bazen suçluluk ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Küçük bir ritüel oluştur (nefes, çay, kısa yürüyüş) ve mesajı bütünleştir.",
+      "keywords": [
+        "hastane"
+      ]
+    },
+    {
+      "id": "doktor-45",
+      "name": "Doktor",
+      "themes": [
+        "şifa",
+        "utanç"
+      ],
+      "explanation": "Bir rüyada doktor genellikle şifa teması taşır; fakat bazen utanç ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Sembol bir uyarı mı yoksa cesaretlendirme mi, kontrol et.",
+      "keywords": [
+        "doktor"
+      ]
+    },
+    {
+      "id": "polis-46",
+      "name": "Polis",
+      "themes": [
+        "yaratıcılık",
+        "sınır eksikliği"
+      ],
+      "explanation": "Bir rüyada polis genellikle yaratıcılık teması taşır; fakat bazen sınır eksikliği ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Güvendiğin biriyle konuş ve özü fazla analiz etmeden adlandır.",
+      "keywords": [
+        "polis"
+      ]
+    },
+    {
+      "id": "ucus-47",
+      "name": "Uçuş",
+      "themes": [
+        "içgörü",
+        "utanç"
+      ],
+      "explanation": "Bir rüyada uçuş genellikle içgörü teması taşır; fakat bazen utanç ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Güvendiğin biriyle konuş ve özü fazla analiz etmeden adlandır.",
+      "keywords": [
+        "uçuş"
+      ]
+    },
+    {
+      "id": "yabanc-48",
+      "name": "Yabancı",
+      "themes": [
+        "güven",
+        "belirsizlik"
+      ],
+      "explanation": "Bir rüyada yabancı genellikle güven teması taşır; fakat bazen belirsizlik ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Günü yavaşlat: daha az ekran, daha çok beden, basit rutin.",
+      "keywords": [
+        "yabancı"
+      ]
+    },
+    {
+      "id": "aile-49",
+      "name": "Aile",
+      "themes": [
+        "özgürlük",
+        "yük fazlası"
+      ],
+      "explanation": "Bir rüyada aile genellikle özgürlük teması taşır; fakat bazen yük fazlası ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Günü yavaşlat: daha az ekran, daha çok beden, basit rutin.",
+      "keywords": [
+        "aile"
+      ]
+    },
+    {
+      "id": "arkadas-50",
+      "name": "Arkadaş",
+      "themes": [
+        "yaratıcılık",
+        "kafa karışıklığı"
+      ],
+      "explanation": "Bir rüyada arkadaş genellikle yaratıcılık teması taşır; fakat bazen kafa karışıklığı ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Sembol bir uyarı mı yoksa cesaretlendirme mi, kontrol et.",
+      "keywords": [
+        "arkadaş"
+      ]
+    },
+    {
+      "id": "unluler-51",
+      "name": "Ünlüler",
+      "themes": [
+        "cesaret",
+        "kafa karışıklığı"
+      ],
+      "explanation": "Bir rüyada ünlüler genellikle cesaret teması taşır; fakat bazen kafa karışıklığı ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Nazik bir sınır koy: neyi içeri alıyor, neyi bırakıyorsun?",
+      "keywords": [
+        "ünlüler"
+      ]
+    },
+    {
+      "id": "para-52",
+      "name": "Para",
+      "themes": [
+        "yenilenme",
+        "belirsizlik"
+      ],
+      "explanation": "Bir rüyada para genellikle yenilenme teması taşır; fakat bazen belirsizlik ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Sembol bir uyarı mı yoksa cesaretlendirme mi, kontrol et.",
+      "keywords": [
+        "para"
+      ]
+    },
+    {
+      "id": "cuzdan-53",
+      "name": "Cüzdan",
+      "themes": [
+        "yenilenme",
+        "erteleme"
+      ],
+      "explanation": "Bir rüyada cüzdan genellikle yenilenme teması taşır; fakat bazen erteleme ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Uyanır uyanmaz birkaç anahtar kelime yaz ve sonra dönüp düşün.",
+      "keywords": [
+        "cüzdan"
+      ]
+    },
+    {
+      "id": "pasaport-54",
+      "name": "Pasaport",
+      "themes": [
+        "yaratıcılık",
+        "yük fazlası"
+      ],
+      "explanation": "Bir rüyada pasaport genellikle yaratıcılık teması taşır; fakat bazen yük fazlası ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Sembol bir uyarı mı yoksa cesaretlendirme mi, kontrol et.",
+      "keywords": [
+        "pasaport"
+      ]
+    },
+    {
+      "id": "tuzak-55",
+      "name": "Tuzak",
+      "themes": [
+        "kabul",
+        "kayıp"
+      ],
+      "explanation": "Bir rüyada tuzak genellikle kabul teması taşır; fakat bazen kayıp ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Günü yavaşlat: daha az ekran, daha çok beden, basit rutin.",
+      "keywords": [
+        "tuzak"
+      ]
+    },
+    {
+      "id": "hortum-56",
+      "name": "Hortum",
+      "themes": [
+        "içgörü",
+        "kayıp"
+      ],
+      "explanation": "Bir rüyada hortum genellikle içgörü teması taşır; fakat bazen kayıp ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Yaratıcılığı kullan (çizim, müzik); görüntü konuşsun.",
+      "keywords": [
+        "hortum"
+      ]
+    },
+    {
+      "id": "volkan-57",
+      "name": "Volkan",
+      "themes": [
+        "şifa",
+        "yük fazlası"
+      ],
+      "explanation": "Bir rüyada volkan genellikle şifa teması taşır; fakat bazen yük fazlası ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "En baskın duygunun ne olduğunu ve günlük hayatta nerede ortaya çıktığını sor.",
+      "keywords": [
+        "volkan"
+      ]
+    },
+    {
+      "id": "buz-58",
+      "name": "Buz",
+      "themes": [
+        "berraklık",
+        "yük fazlası"
+      ],
+      "explanation": "Bir rüyada buz genellikle berraklık teması taşır; fakat bazen yük fazlası ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Uyanır uyanmaz birkaç anahtar kelime yaz ve sonra dönüp düşün.",
+      "keywords": [
+        "buz"
+      ]
+    },
+    {
+      "id": "kar-59",
+      "name": "Kar",
+      "themes": [
+        "özgürlük",
+        "erteleme"
+      ],
+      "explanation": "Bir rüyada kar genellikle özgürlük teması taşır; fakat bazen erteleme ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Küçük bir ritüel oluştur (nefes, çay, kısa yürüyüş) ve mesajı bütünleştir.",
+      "keywords": [
+        "kar"
+      ]
+    },
+    {
+      "id": "cicekler-60",
+      "name": "Çiçekler",
+      "themes": [
+        "şifa",
+        "yük fazlası"
+      ],
+      "explanation": "Bir rüyada çiçekler genellikle şifa teması taşır; fakat bazen yük fazlası ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Güvendiğin biriyle konuş ve özü fazla analiz etmeden adlandır.",
+      "keywords": [
+        "çiçekler"
+      ]
+    },
+    {
+      "id": "agac-61",
+      "name": "Ağaç",
+      "themes": [
+        "yaratıcılık",
+        "belirsizlik"
+      ],
+      "explanation": "Bir rüyada ağaç genellikle yaratıcılık teması taşır; fakat bazen belirsizlik ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Sembol bir uyarı mı yoksa cesaretlendirme mi, kontrol et.",
+      "keywords": [
+        "ağaç"
+      ]
+    },
+    {
+      "id": "meyve-62",
+      "name": "Meyve",
+      "themes": [
+        "şifa",
+        "kafa karışıklığı"
+      ],
+      "explanation": "Bir rüyada meyve genellikle şifa teması taşır; fakat bazen kafa karışıklığı ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Sembol bir uyarı mı yoksa cesaretlendirme mi, kontrol et.",
+      "keywords": [
+        "meyve"
+      ]
+    },
+    {
+      "id": "camur-63",
+      "name": "Çamur",
+      "themes": [
+        "yaratıcılık",
+        "yük fazlası"
+      ],
+      "explanation": "Bir rüyada çamur genellikle yaratıcılık teması taşır; fakat bazen yük fazlası ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Uyanır uyanmaz birkaç anahtar kelime yaz ve sonra dönüp düşün.",
+      "keywords": [
+        "çamur"
+      ]
+    },
+    {
+      "id": "ayakkab-64",
+      "name": "Ayakkabı",
+      "themes": [
+        "güven",
+        "kontrol kaybı"
+      ],
+      "explanation": "Bir rüyada ayakkabı genellikle güven teması taşır; fakat bazen kontrol kaybı ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Nazik bir sınır koy: neyi içeri alıyor, neyi bırakıyorsun?",
+      "keywords": [
+        "ayakkabı"
+      ]
+    },
+    {
+      "id": "kyafet-65",
+      "name": "Kıyafet",
+      "themes": [
+        "bağ",
+        "suçluluk"
+      ],
+      "explanation": "Bir rüyada kıyafet genellikle bağ teması taşır; fakat bazen suçluluk ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "En baskın duygunun ne olduğunu ve günlük hayatta nerede ortaya çıktığını sor.",
+      "keywords": [
+        "kıyafet"
+      ]
+    },
+    {
+      "id": "maske-66",
+      "name": "Maske",
+      "themes": [
+        "kabul",
+        "kontrol kaybı"
+      ],
+      "explanation": "Bir rüyada maske genellikle kabul teması taşır; fakat bazen kontrol kaybı ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "En baskın duygunun ne olduğunu ve günlük hayatta nerede ortaya çıktığını sor.",
+      "keywords": [
+        "maske"
+      ]
+    },
+    {
+      "id": "kus-67",
+      "name": "Kuş",
+      "themes": [
+        "cesaret",
+        "kayıp"
+      ],
+      "explanation": "Bir rüyada kuş genellikle cesaret teması taşır; fakat bazen kayıp ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Güvendiğin biriyle konuş ve özü fazla analiz etmeden adlandır.",
+      "keywords": [
+        "kuş"
+      ]
+    },
+    {
+      "id": "balk-68",
+      "name": "Balık",
+      "themes": [
+        "içgörü",
+        "korku"
+      ],
+      "explanation": "Bir rüyada balık genellikle içgörü teması taşır; fakat bazen korku ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Yaratıcılığı kullan (çizim, müzik); görüntü konuşsun.",
+      "keywords": [
+        "balık"
+      ]
+    },
+    {
+      "id": "at-69",
+      "name": "At",
+      "themes": [
+        "içgörü",
+        "utanç"
+      ],
+      "explanation": "Bir rüyada at genellikle içgörü teması taşır; fakat bazen utanç ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Yaratıcılığı kullan (çizim, müzik); görüntü konuşsun.",
+      "keywords": []
+    },
+    {
+      "id": "inek-70",
+      "name": "Inek",
+      "themes": [
+        "yaratıcılık",
+        "erteleme"
+      ],
+      "explanation": "Bir rüyada inek genellikle yaratıcılık teması taşır; fakat bazen erteleme ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Küçük bir ritüel oluştur (nefes, çay, kısa yürüyüş) ve mesajı bütünleştir.",
+      "keywords": [
+        "inek"
+      ]
+    },
+    {
+      "id": "top-71",
+      "name": "Top",
+      "themes": [
+        "yenilenme",
+        "sınır eksikliği"
+      ],
+      "explanation": "Bir rüyada top genellikle yenilenme teması taşır; fakat bazen sınır eksikliği ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Sembol bir uyarı mı yoksa cesaretlendirme mi, kontrol et.",
+      "keywords": [
+        "top"
+      ]
+    },
+    {
+      "id": "iskambil-72",
+      "name": "Iskambil",
+      "themes": [
+        "güven",
+        "kayıp"
+      ],
+      "explanation": "Bir rüyada iskambil genellikle güven teması taşır; fakat bazen kayıp ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Küçük bir ritüel oluştur (nefes, çay, kısa yürüyüş) ve mesajı bütünleştir.",
+      "keywords": [
+        "iskambil"
+      ]
+    },
+    {
+      "id": "kitap-73",
+      "name": "Kitap",
+      "themes": [
+        "özgürlük",
+        "kontrol kaybı"
+      ],
+      "explanation": "Bir rüyada kitap genellikle özgürlük teması taşır; fakat bazen kontrol kaybı ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Sembol bir uyarı mı yoksa cesaretlendirme mi, kontrol et.",
+      "keywords": [
+        "kitap"
+      ]
+    },
+    {
+      "id": "kalem-74",
+      "name": "Kalem",
+      "themes": [
+        "güven",
+        "suçluluk"
+      ],
+      "explanation": "Bir rüyada kalem genellikle güven teması taşır; fakat bazen suçluluk ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Günü yavaşlat: daha az ekran, daha çok beden, basit rutin.",
+      "keywords": [
+        "kalem"
+      ]
+    },
+    {
+      "id": "saat-75",
+      "name": "Saat",
+      "themes": [
+        "güven",
+        "kayıp"
+      ],
+      "explanation": "Bir rüyada saat genellikle güven teması taşır; fakat bazen kayıp ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Nazik bir sınır koy: neyi içeri alıyor, neyi bırakıyorsun?",
+      "keywords": [
+        "saat"
+      ]
+    },
+    {
+      "id": "harita-76",
+      "name": "Harita",
+      "themes": [
+        "cesaret",
+        "utanç"
+      ],
+      "explanation": "Bir rüyada harita genellikle cesaret teması taşır; fakat bazen utanç ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Günü yavaşlat: daha az ekran, daha çok beden, basit rutin.",
+      "keywords": [
+        "harita"
+      ]
+    },
+    {
+      "id": "cit-77",
+      "name": "Çit",
+      "themes": [
+        "bağ",
+        "korku"
+      ],
+      "explanation": "Bir rüyada çit genellikle bağ teması taşır; fakat bazen korku ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Günü yavaşlat: daha az ekran, daha çok beden, basit rutin.",
+      "keywords": [
+        "çit"
+      ]
+    },
+    {
+      "id": "duvar-78",
+      "name": "Duvar",
+      "themes": [
+        "bağ",
+        "sınır eksikliği"
+      ],
+      "explanation": "Bir rüyada duvar genellikle bağ teması taşır; fakat bazen sınır eksikliği ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Küçük bir ritüel oluştur (nefes, çay, kısa yürüyüş) ve mesajı bütünleştir.",
+      "keywords": [
+        "duvar"
+      ]
+    },
+    {
+      "id": "kap-79",
+      "name": "Kapı",
+      "themes": [
+        "şifa",
+        "yük fazlası"
+      ],
+      "explanation": "Bir rüyada kapı genellikle şifa teması taşır; fakat bazen yük fazlası ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Yaratıcılığı kullan (çizim, müzik); görüntü konuşsun.",
+      "keywords": [
+        "kapı"
+      ]
+    },
+    {
+      "id": "pencere-80",
+      "name": "Pencere",
+      "themes": [
+        "güven",
+        "utanç"
+      ],
+      "explanation": "Bir rüyada pencere genellikle güven teması taşır; fakat bazen utanç ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Sembol bir uyarı mı yoksa cesaretlendirme mi, kontrol et.",
+      "keywords": [
+        "pencere"
+      ]
+    },
+    {
+      "id": "balkon-81",
+      "name": "Balkon",
+      "themes": [
+        "bağ",
+        "yük fazlası"
+      ],
+      "explanation": "Bir rüyada balkon genellikle bağ teması taşır; fakat bazen yük fazlası ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Güvendiğin biriyle konuş ve özü fazla analiz etmeden adlandır.",
+      "keywords": [
+        "balkon"
+      ]
+    },
+    {
+      "id": "cat-82",
+      "name": "Çatı",
+      "themes": [
+        "yenilenme",
+        "erteleme"
+      ],
+      "explanation": "Bir rüyada çatı genellikle yenilenme teması taşır; fakat bazen erteleme ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Günü yavaşlat: daha az ekran, daha çok beden, basit rutin.",
+      "keywords": [
+        "çatı"
+      ]
+    },
+    {
+      "id": "merdiven-83",
+      "name": "Merdiven",
+      "themes": [
+        "şifa",
+        "suçluluk"
+      ],
+      "explanation": "Bir rüyada merdiven genellikle şifa teması taşır; fakat bazen suçluluk ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Sembol bir uyarı mı yoksa cesaretlendirme mi, kontrol et.",
+      "keywords": [
+        "merdiven"
+      ]
+    },
+    {
+      "id": "dusus-84",
+      "name": "Düşüş",
+      "themes": [
+        "güven",
+        "kafa karışıklığı"
+      ],
+      "explanation": "Bir rüyada düşüş genellikle güven teması taşır; fakat bazen kafa karışıklığı ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Güvendiğin biriyle konuş ve özü fazla analiz etmeden adlandır.",
+      "keywords": [
+        "düşüş"
+      ]
+    },
+    {
+      "id": "suzulme-85",
+      "name": "Süzülme",
+      "themes": [
+        "bağ",
+        "korku"
+      ],
+      "explanation": "Bir rüyada süzülme genellikle bağ teması taşır; fakat bazen korku ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Sembol bir uyarı mı yoksa cesaretlendirme mi, kontrol et.",
+      "keywords": [
+        "süzülme"
+      ]
+    },
+    {
+      "id": "sark-soylemek-86",
+      "name": "Şarkı Söylemek",
+      "themes": [
+        "bağ",
+        "korku"
+      ],
+      "explanation": "Bir rüyada şarkı söylemek genellikle bağ teması taşır; fakat bazen korku ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Uyanır uyanmaz birkaç anahtar kelime yaz ve sonra dönüp düşün.",
+      "keywords": [
+        "şarkı",
+        "söylemek"
+      ]
+    },
+    {
+      "id": "bagrmak-87",
+      "name": "Bağırmak",
+      "themes": [
+        "güven",
+        "yük fazlası"
+      ],
+      "explanation": "Bir rüyada bağırmak genellikle güven teması taşır; fakat bazen yük fazlası ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Güvendiğin biriyle konuş ve özü fazla analiz etmeden adlandır.",
+      "keywords": [
+        "bağırmak"
+      ]
+    },
+    {
+      "id": "fsldamak-88",
+      "name": "Fısıldamak",
+      "themes": [
+        "yenilenme",
+        "belirsizlik"
+      ],
+      "explanation": "Bir rüyada fısıldamak genellikle yenilenme teması taşır; fakat bazen belirsizlik ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Yaratıcılığı kullan (çizim, müzik); görüntü konuşsun.",
+      "keywords": [
+        "fısıldamak"
+      ]
+    },
+    {
+      "id": "yuzmek-89",
+      "name": "Yüzmek",
+      "themes": [
+        "yenilenme",
+        "suçluluk"
+      ],
+      "explanation": "Bir rüyada yüzmek genellikle yenilenme teması taşır; fakat bazen suçluluk ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Güvendiğin biriyle konuş ve özü fazla analiz etmeden adlandır.",
+      "keywords": [
+        "yüzmek"
+      ]
+    },
+    {
+      "id": "bogulmak-90",
+      "name": "Boğulmak",
+      "themes": [
+        "özgürlük",
+        "kontrol kaybı"
+      ],
+      "explanation": "Bir rüyada boğulmak genellikle özgürlük teması taşır; fakat bazen kontrol kaybı ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Uyanır uyanmaz birkaç anahtar kelime yaz ve sonra dönüp düşün.",
+      "keywords": [
+        "boğulmak"
+      ]
+    },
+    {
+      "id": "kurtarmak-91",
+      "name": "Kurtarmak",
+      "themes": [
+        "bağ",
+        "yük fazlası"
+      ],
+      "explanation": "Bir rüyada kurtarmak genellikle bağ teması taşır; fakat bazen yük fazlası ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Uyanır uyanmaz birkaç anahtar kelime yaz ve sonra dönüp düşün.",
+      "keywords": [
+        "kurtarmak"
+      ]
+    },
+    {
+      "id": "aramak-92",
+      "name": "Aramak",
+      "themes": [
+        "güven",
+        "kafa karışıklığı"
+      ],
+      "explanation": "Bir rüyada aramak genellikle güven teması taşır; fakat bazen kafa karışıklığı ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Küçük bir ritüel oluştur (nefes, çay, kısa yürüyüş) ve mesajı bütünleştir.",
+      "keywords": [
+        "aramak"
+      ]
+    },
+    {
+      "id": "bulmak-93",
+      "name": "Bulmak",
+      "themes": [
+        "şifa",
+        "utanç"
+      ],
+      "explanation": "Bir rüyada bulmak genellikle şifa teması taşır; fakat bazen utanç ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Yaratıcılığı kullan (çizim, müzik); görüntü konuşsun.",
+      "keywords": [
+        "bulmak"
+      ]
+    },
+    {
+      "id": "unutmak-94",
+      "name": "Unutmak",
+      "themes": [
+        "kabul",
+        "kayıp"
+      ],
+      "explanation": "Bir rüyada unutmak genellikle kabul teması taşır; fakat bazen kayıp ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Nazik bir sınır koy: neyi içeri alıyor, neyi bırakıyorsun?",
+      "keywords": [
+        "unutmak"
+      ]
+    },
+    {
+      "id": "kaybolmak-95",
+      "name": "Kaybolmak",
+      "themes": [
+        "özgürlük",
+        "sınır eksikliği"
+      ],
+      "explanation": "Bir rüyada kaybolmak genellikle özgürlük teması taşır; fakat bazen sınır eksikliği ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Yaratıcılığı kullan (çizim, müzik); görüntü konuşsun.",
+      "keywords": [
+        "kaybolmak"
+      ]
+    },
+    {
+      "id": "sarlma-96",
+      "name": "Sarılma",
+      "themes": [
+        "berraklık",
+        "sınır eksikliği"
+      ],
+      "explanation": "Bir rüyada sarılma genellikle berraklık teması taşır; fakat bazen sınır eksikliği ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Güvendiğin biriyle konuş ve özü fazla analiz etmeden adlandır.",
+      "keywords": [
+        "sarılma"
+      ]
+    },
+    {
+      "id": "opucuk-97",
+      "name": "Öpücük",
+      "themes": [
+        "özgürlük",
+        "utanç"
+      ],
+      "explanation": "Bir rüyada öpücük genellikle özgürlük teması taşır; fakat bazen utanç ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Günü yavaşlat: daha az ekran, daha çok beden, basit rutin.",
+      "keywords": [
+        "öpücük"
+      ]
+    },
+    {
+      "id": "tartsma-98",
+      "name": "Tartışma",
+      "themes": [
+        "bağ",
+        "kafa karışıklığı"
+      ],
+      "explanation": "Bir rüyada tartışma genellikle bağ teması taşır; fakat bazen kafa karışıklığı ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "En baskın duygunun ne olduğunu ve günlük hayatta nerede ortaya çıktığını sor.",
+      "keywords": [
+        "tartışma"
+      ]
+    },
+    {
+      "id": "bars-99",
+      "name": "Barış",
+      "themes": [
+        "cesaret",
+        "kontrol kaybı"
+      ],
+      "explanation": "Bir rüyada barış genellikle cesaret teması taşır; fakat bazen kontrol kaybı ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Küçük bir ritüel oluştur (nefes, çay, kısa yürüyüş) ve mesajı bütünleştir.",
+      "keywords": [
+        "barış"
+      ]
+    },
+    {
+      "id": "hediye-100",
+      "name": "Hediye",
+      "themes": [
+        "yenilenme",
+        "erteleme"
+      ],
+      "explanation": "Bir rüyada hediye genellikle yenilenme teması taşır; fakat bazen erteleme ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Yaratıcılığı kullan (çizim, müzik); görüntü konuşsun.",
+      "keywords": [
+        "hediye"
+      ]
+    },
+    {
+      "id": "parti-101",
+      "name": "Parti",
+      "themes": [
+        "şifa",
+        "erteleme"
+      ],
+      "explanation": "Bir rüyada parti genellikle şifa teması taşır; fakat bazen erteleme ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Uyanır uyanmaz birkaç anahtar kelime yaz ve sonra dönüp düşün.",
+      "keywords": [
+        "parti"
+      ]
+    },
+    {
+      "id": "dogum-gunu-102",
+      "name": "Doğum Günü",
+      "themes": [
+        "bağ",
+        "sınır eksikliği"
+      ],
+      "explanation": "Bir rüyada doğum günü genellikle bağ teması taşır; fakat bazen sınır eksikliği ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "En baskın duygunun ne olduğunu ve günlük hayatta nerede ortaya çıktığını sor.",
+      "keywords": [
+        "doğum",
+        "günü"
+      ]
+    },
+    {
+      "id": "ihanet-103",
+      "name": "Ihanet",
+      "themes": [
+        "cesaret",
+        "kafa karışıklığı"
+      ],
+      "explanation": "Bir rüyada ihanet genellikle cesaret teması taşır; fakat bazen kafa karışıklığı ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Güvendiğin biriyle konuş ve özü fazla analiz etmeden adlandır.",
+      "keywords": [
+        "ihanet"
+      ]
+    },
+    {
+      "id": "hrszlk-104",
+      "name": "Hırsızlık",
+      "themes": [
+        "güven",
+        "erteleme"
+      ],
+      "explanation": "Bir rüyada hırsızlık genellikle güven teması taşır; fakat bazen erteleme ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Yaratıcılığı kullan (çizim, müzik); görüntü konuşsun.",
+      "keywords": [
+        "hırsızlık"
+      ]
+    },
+    {
+      "id": "hapishane-105",
+      "name": "Hapishane",
+      "themes": [
+        "şifa",
+        "suçluluk"
+      ],
+      "explanation": "Bir rüyada hapishane genellikle şifa teması taşır; fakat bazen suçluluk ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Günü yavaşlat: daha az ekran, daha çok beden, basit rutin.",
+      "keywords": [
+        "hapishane"
+      ]
+    },
+    {
+      "id": "ozgurluk-106",
+      "name": "Özgürlük",
+      "themes": [
+        "içgörü",
+        "belirsizlik"
+      ],
+      "explanation": "Bir rüyada özgürlük genellikle içgörü teması taşır; fakat bazen belirsizlik ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Yaratıcılığı kullan (çizim, müzik); görüntü konuşsun.",
+      "keywords": [
+        "özgürlük"
+      ]
+    },
+    {
+      "id": "seyahat-107",
+      "name": "Seyahat",
+      "themes": [
+        "güven",
+        "suçluluk"
+      ],
+      "explanation": "Bir rüyada seyahat genellikle güven teması taşır; fakat bazen suçluluk ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "En baskın duygunun ne olduğunu ve günlük hayatta nerede ortaya çıktığını sor.",
+      "keywords": [
+        "seyahat"
+      ]
+    },
+    {
+      "id": "bagaj-108",
+      "name": "Bagaj",
+      "themes": [
+        "cesaret",
+        "utanç"
+      ],
+      "explanation": "Bir rüyada bagaj genellikle cesaret teması taşır; fakat bazen utanç ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Sembol bir uyarı mı yoksa cesaretlendirme mi, kontrol et.",
+      "keywords": [
+        "bagaj"
+      ]
+    },
+    {
+      "id": "gizli-kamera-109",
+      "name": "Gizli Kamera",
+      "themes": [
+        "şifa",
+        "kayıp"
+      ],
+      "explanation": "Bir rüyada gizli kamera genellikle şifa teması taşır; fakat bazen kayıp ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Uyanır uyanmaz birkaç anahtar kelime yaz ve sonra dönüp düşün.",
+      "keywords": [
+        "gizli",
+        "kamera"
+      ]
+    },
+    {
+      "id": "yabanc-dil-110",
+      "name": "Yabancı Dil",
+      "themes": [
+        "içgörü",
+        "utanç"
+      ],
+      "explanation": "Bir rüyada yabancı dil genellikle içgörü teması taşır; fakat bazen utanç ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Günü yavaşlat: daha az ekran, daha çok beden, basit rutin.",
+      "keywords": [
+        "yabancı",
+        "dil"
+      ]
+    },
+    {
+      "id": "eski-ev-111",
+      "name": "Eski Ev",
+      "themes": [
+        "şifa",
+        "kontrol kaybı"
+      ],
+      "explanation": "Bir rüyada eski ev genellikle şifa teması taşır; fakat bazen kontrol kaybı ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Nazik bir sınır koy: neyi içeri alıyor, neyi bırakıyorsun?",
+      "keywords": [
+        "eski"
+      ]
+    },
+    {
+      "id": "eski-arkadas-112",
+      "name": "Eski Arkadaş",
+      "themes": [
+        "berraklık",
+        "kayıp"
+      ],
+      "explanation": "Bir rüyada eski arkadaş genellikle berraklık teması taşır; fakat bazen kayıp ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Sembol bir uyarı mı yoksa cesaretlendirme mi, kontrol et.",
+      "keywords": [
+        "eski",
+        "arkadaş"
+      ]
+    },
+    {
+      "id": "anlaslmayan-isk-113",
+      "name": "Anlaşılmayan Işık",
+      "themes": [
+        "cesaret",
+        "kafa karışıklığı"
+      ],
+      "explanation": "Bir rüyada anlaşılmayan işık genellikle cesaret teması taşır; fakat bazen kafa karışıklığı ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Sembol bir uyarı mı yoksa cesaretlendirme mi, kontrol et.",
+      "keywords": [
+        "anlaşılmayan",
+        "işık"
+      ]
+    },
+    {
+      "id": "gizli-kamera-114",
+      "name": "Gizli Kamera",
+      "themes": [
+        "güven",
+        "kayıp"
+      ],
+      "explanation": "Bir rüyada gizli kamera genellikle güven teması taşır; fakat bazen kayıp ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Sembol bir uyarı mı yoksa cesaretlendirme mi, kontrol et.",
+      "keywords": [
+        "gizli",
+        "kamera"
+      ]
+    },
+    {
+      "id": "yabanc-dil-115",
+      "name": "Yabancı Dil",
+      "themes": [
+        "şifa",
+        "yük fazlası"
+      ],
+      "explanation": "Bir rüyada yabancı dil genellikle şifa teması taşır; fakat bazen yük fazlası ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Sembol bir uyarı mı yoksa cesaretlendirme mi, kontrol et.",
+      "keywords": [
+        "yabancı",
+        "dil"
+      ]
+    },
+    {
+      "id": "eski-ev-116",
+      "name": "Eski Ev",
+      "themes": [
+        "bağ",
+        "korku"
+      ],
+      "explanation": "Bir rüyada eski ev genellikle bağ teması taşır; fakat bazen korku ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Yaratıcılığı kullan (çizim, müzik); görüntü konuşsun.",
+      "keywords": [
+        "eski"
+      ]
+    },
+    {
+      "id": "eski-arkadas-117",
+      "name": "Eski Arkadaş",
+      "themes": [
+        "yenilenme",
+        "yük fazlası"
+      ],
+      "explanation": "Bir rüyada eski arkadaş genellikle yenilenme teması taşır; fakat bazen yük fazlası ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Günü yavaşlat: daha az ekran, daha çok beden, basit rutin.",
+      "keywords": [
+        "eski",
+        "arkadaş"
+      ]
+    },
+    {
+      "id": "anlaslmayan-isk-118",
+      "name": "Anlaşılmayan Işık",
+      "themes": [
+        "yenilenme",
+        "kafa karışıklığı"
+      ],
+      "explanation": "Bir rüyada anlaşılmayan işık genellikle yenilenme teması taşır; fakat bazen kafa karışıklığı ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "En baskın duygunun ne olduğunu ve günlük hayatta nerede ortaya çıktığını sor.",
+      "keywords": [
+        "anlaşılmayan",
+        "işık"
+      ]
+    },
+    {
+      "id": "gizli-kamera-119",
+      "name": "Gizli Kamera",
+      "themes": [
+        "yaratıcılık",
+        "sınır eksikliği"
+      ],
+      "explanation": "Bir rüyada gizli kamera genellikle yaratıcılık teması taşır; fakat bazen sınır eksikliği ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Yaratıcılığı kullan (çizim, müzik); görüntü konuşsun.",
+      "keywords": [
+        "gizli",
+        "kamera"
+      ]
+    },
+    {
+      "id": "yabanc-dil-120",
+      "name": "Yabancı Dil",
+      "themes": [
+        "içgörü",
+        "erteleme"
+      ],
+      "explanation": "Bir rüyada yabancı dil genellikle içgörü teması taşır; fakat bazen erteleme ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Güvendiğin biriyle konuş ve özü fazla analiz etmeden adlandır.",
+      "keywords": [
+        "yabancı",
+        "dil"
+      ]
+    },
+    {
+      "id": "eski-ev-121",
+      "name": "Eski Ev",
+      "themes": [
+        "yenilenme",
+        "kontrol kaybı"
+      ],
+      "explanation": "Bir rüyada eski ev genellikle yenilenme teması taşır; fakat bazen kontrol kaybı ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Günü yavaşlat: daha az ekran, daha çok beden, basit rutin.",
+      "keywords": [
+        "eski"
+      ]
+    },
+    {
+      "id": "eski-arkadas-122",
+      "name": "Eski Arkadaş",
+      "themes": [
+        "şifa",
+        "suçluluk"
+      ],
+      "explanation": "Bir rüyada eski arkadaş genellikle şifa teması taşır; fakat bazen suçluluk ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Uyanır uyanmaz birkaç anahtar kelime yaz ve sonra dönüp düşün.",
+      "keywords": [
+        "eski",
+        "arkadaş"
+      ]
+    },
+    {
+      "id": "anlaslmayan-isk-123",
+      "name": "Anlaşılmayan Işık",
+      "themes": [
+        "içgörü",
+        "kafa karışıklığı"
+      ],
+      "explanation": "Bir rüyada anlaşılmayan işık genellikle içgörü teması taşır; fakat bazen kafa karışıklığı ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Nazik bir sınır koy: neyi içeri alıyor, neyi bırakıyorsun?",
+      "keywords": [
+        "anlaşılmayan",
+        "işık"
+      ]
+    },
+    {
+      "id": "gizli-kamera-124",
+      "name": "Gizli Kamera",
+      "themes": [
+        "özgürlük",
+        "belirsizlik"
+      ],
+      "explanation": "Bir rüyada gizli kamera genellikle özgürlük teması taşır; fakat bazen belirsizlik ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Nazik bir sınır koy: neyi içeri alıyor, neyi bırakıyorsun?",
+      "keywords": [
+        "gizli",
+        "kamera"
+      ]
+    },
+    {
+      "id": "yabanc-dil-125",
+      "name": "Yabancı Dil",
+      "themes": [
+        "şifa",
+        "sınır eksikliği"
+      ],
+      "explanation": "Bir rüyada yabancı dil genellikle şifa teması taşır; fakat bazen sınır eksikliği ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Nazik bir sınır koy: neyi içeri alıyor, neyi bırakıyorsun?",
+      "keywords": [
+        "yabancı",
+        "dil"
+      ]
+    },
+    {
+      "id": "eski-ev-126",
+      "name": "Eski Ev",
+      "themes": [
+        "güven",
+        "suçluluk"
+      ],
+      "explanation": "Bir rüyada eski ev genellikle güven teması taşır; fakat bazen suçluluk ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Nazik bir sınır koy: neyi içeri alıyor, neyi bırakıyorsun?",
+      "keywords": [
+        "eski"
+      ]
+    },
+    {
+      "id": "eski-arkadas-127",
+      "name": "Eski Arkadaş",
+      "themes": [
+        "yaratıcılık",
+        "kayıp"
+      ],
+      "explanation": "Bir rüyada eski arkadaş genellikle yaratıcılık teması taşır; fakat bazen kayıp ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Uyanır uyanmaz birkaç anahtar kelime yaz ve sonra dönüp düşün.",
+      "keywords": [
+        "eski",
+        "arkadaş"
+      ]
+    },
+    {
+      "id": "anlaslmayan-isk-128",
+      "name": "Anlaşılmayan Işık",
+      "themes": [
+        "bağ",
+        "kayıp"
+      ],
+      "explanation": "Bir rüyada anlaşılmayan işık genellikle bağ teması taşır; fakat bazen kayıp ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Küçük bir ritüel oluştur (nefes, çay, kısa yürüyüş) ve mesajı bütünleştir.",
+      "keywords": [
+        "anlaşılmayan",
+        "işık"
+      ]
+    },
+    {
+      "id": "gizli-kamera-129",
+      "name": "Gizli Kamera",
+      "themes": [
+        "berraklık",
+        "utanç"
+      ],
+      "explanation": "Bir rüyada gizli kamera genellikle berraklık teması taşır; fakat bazen utanç ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Küçük bir ritüel oluştur (nefes, çay, kısa yürüyüş) ve mesajı bütünleştir.",
+      "keywords": [
+        "gizli",
+        "kamera"
+      ]
+    },
+    {
+      "id": "yabanc-dil-130",
+      "name": "Yabancı Dil",
+      "themes": [
+        "şifa",
+        "korku"
+      ],
+      "explanation": "Bir rüyada yabancı dil genellikle şifa teması taşır; fakat bazen korku ile de yüzleştirir. Bağlama dikkat et: kim, ne, nerede ve duygu?",
+      "advice": "Küçük bir ritüel oluştur (nefes, çay, kısa yürüyüş) ve mesajı bütünleştir.",
+      "keywords": [
+        "yabancı",
+        "dil"
+      ]
+    }
+  ]
+}

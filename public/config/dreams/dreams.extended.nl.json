@@ -1,0 +1,1720 @@
+{
+  "version": "1.0.0",
+  "count": 130,
+  "symbols": [
+    {
+      "id": "vallen-1",
+      "name": "Vallen",
+      "themes": [
+        "herstel",
+        "angst"
+      ],
+      "explanation": "Vallen in een droom wijst vaak op herstel maar kan ook angst aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Praat met iemand die je vertrouwt en benoem de kern zonder te analyseren.",
+      "keywords": [
+        "vallen"
+      ]
+    },
+    {
+      "id": "vliegen-2",
+      "name": "Vliegen",
+      "themes": [
+        "vernieuwing",
+        "schuld"
+      ],
+      "explanation": "Vliegen in een droom wijst vaak op vernieuwing maar kan ook schuld aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Zoek een klein ritueel (ademhaling, thee, korte wandeling) om de boodschap te integreren.",
+      "keywords": [
+        "vliegen"
+      ]
+    },
+    {
+      "id": "tanden-uitvallen-3",
+      "name": "Tanden Uitvallen",
+      "themes": [
+        "herstel",
+        "grensloosheid"
+      ],
+      "explanation": "Tanden Uitvallen in een droom wijst vaak op herstel maar kan ook grensloosheid aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Vraag je af welke emotie het sterkst aanwezig was en waar die in je dagleven op slaat.",
+      "keywords": [
+        "tanden",
+        "uitvallen"
+      ]
+    },
+    {
+      "id": "achtervolgd-worden-4",
+      "name": "Achtervolgd Worden",
+      "themes": [
+        "vertrouwen",
+        "uitstel"
+      ],
+      "explanation": "Achtervolgd Worden in een droom wijst vaak op vertrouwen maar kan ook uitstel aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Schrijf direct na het ontwaken een paar trefwoorden op en keer later terug voor reflectie.",
+      "keywords": [
+        "achtervolgd",
+        "worden"
+      ]
+    },
+    {
+      "id": "te-laat-komen-5",
+      "name": "Te Laat Komen",
+      "themes": [
+        "inzicht",
+        "verlies van controle"
+      ],
+      "explanation": "Te Laat Komen in een droom wijst vaak op inzicht maar kan ook verlies van controle aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Zet een zachte grens: wat laat je binnen, wat laat je los?",
+      "keywords": [
+        "laat",
+        "komen"
+      ]
+    },
+    {
+      "id": "water-6",
+      "name": "Water",
+      "themes": [
+        "vernieuwing",
+        "grensloosheid"
+      ],
+      "explanation": "Water in een droom wijst vaak op vernieuwing maar kan ook grensloosheid aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Schrijf direct na het ontwaken een paar trefwoorden op en keer later terug voor reflectie.",
+      "keywords": [
+        "water"
+      ]
+    },
+    {
+      "id": "storm-7",
+      "name": "Storm",
+      "themes": [
+        "helderheid",
+        "schuld"
+      ],
+      "explanation": "Storm in een droom wijst vaak op helderheid maar kan ook schuld aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Kijk of het symbool je ergens voor wil waarschuwen of juist bemoedigen.",
+      "keywords": [
+        "storm"
+      ]
+    },
+    {
+      "id": "slang-8",
+      "name": "Slang",
+      "themes": [
+        "vernieuwing",
+        "overbelasting"
+      ],
+      "explanation": "Slang in een droom wijst vaak op vernieuwing maar kan ook overbelasting aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Praat met iemand die je vertrouwt en benoem de kern zonder te analyseren.",
+      "keywords": [
+        "slang"
+      ]
+    },
+    {
+      "id": "spin-9",
+      "name": "Spin",
+      "themes": [
+        "inzicht",
+        "verlies"
+      ],
+      "explanation": "Spin in een droom wijst vaak op inzicht maar kan ook verlies aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Kijk of het symbool je ergens voor wil waarschuwen of juist bemoedigen.",
+      "keywords": [
+        "spin"
+      ]
+    },
+    {
+      "id": "kat-10",
+      "name": "Kat",
+      "themes": [
+        "creativiteit",
+        "schaamte"
+      ],
+      "explanation": "Kat in een droom wijst vaak op creativiteit maar kan ook schaamte aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Zoek een klein ritueel (ademhaling, thee, korte wandeling) om de boodschap te integreren.",
+      "keywords": [
+        "kat"
+      ]
+    },
+    {
+      "id": "hond-11",
+      "name": "Hond",
+      "themes": [
+        "vernieuwing",
+        "verwarring"
+      ],
+      "explanation": "Hond in een droom wijst vaak op vernieuwing maar kan ook verwarring aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Vraag je af welke emotie het sterkst aanwezig was en waar die in je dagleven op slaat.",
+      "keywords": [
+        "hond"
+      ]
+    },
+    {
+      "id": "baby-12",
+      "name": "Baby",
+      "themes": [
+        "herstel",
+        "uitstel"
+      ],
+      "explanation": "Baby in een droom wijst vaak op herstel maar kan ook uitstel aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Vraag je af welke emotie het sterkst aanwezig was en waar die in je dagleven op slaat.",
+      "keywords": [
+        "baby"
+      ]
+    },
+    {
+      "id": "zwangerschap-13",
+      "name": "Zwangerschap",
+      "themes": [
+        "creativiteit",
+        "verwarring"
+      ],
+      "explanation": "Zwangerschap in een droom wijst vaak op creativiteit maar kan ook verwarring aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Praat met iemand die je vertrouwt en benoem de kern zonder te analyseren.",
+      "keywords": [
+        "zwangerschap"
+      ]
+    },
+    {
+      "id": "overlijden-14",
+      "name": "Overlijden",
+      "themes": [
+        "inzicht",
+        "overbelasting"
+      ],
+      "explanation": "Overlijden in een droom wijst vaak op inzicht maar kan ook overbelasting aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Vraag je af welke emotie het sterkst aanwezig was en waar die in je dagleven op slaat.",
+      "keywords": [
+        "overlijden"
+      ]
+    },
+    {
+      "id": "bruiloft-15",
+      "name": "Bruiloft",
+      "themes": [
+        "acceptatie",
+        "verlies van controle"
+      ],
+      "explanation": "Bruiloft in een droom wijst vaak op acceptatie maar kan ook verlies van controle aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Praat met iemand die je vertrouwt en benoem de kern zonder te analyseren.",
+      "keywords": [
+        "bruiloft"
+      ]
+    },
+    {
+      "id": "naakt-in-het-openbaar-16",
+      "name": "Naakt In Het Openbaar",
+      "themes": [
+        "vertrouwen",
+        "verwarring"
+      ],
+      "explanation": "Naakt In Het Openbaar in een droom wijst vaak op vertrouwen maar kan ook verwarring aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Zet een zachte grens: wat laat je binnen, wat laat je los?",
+      "keywords": [
+        "naakt",
+        "het",
+        "openbaar"
+      ]
+    },
+    {
+      "id": "school-17",
+      "name": "School",
+      "themes": [
+        "herstel",
+        "angst"
+      ],
+      "explanation": "School in een droom wijst vaak op herstel maar kan ook angst aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Zet een zachte grens: wat laat je binnen, wat laat je los?",
+      "keywords": [
+        "school"
+      ]
+    },
+    {
+      "id": "examen-18",
+      "name": "Examen",
+      "themes": [
+        "verbinding",
+        "verlies van controle"
+      ],
+      "explanation": "Examen in een droom wijst vaak op verbinding maar kan ook verlies van controle aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Zet een zachte grens: wat laat je binnen, wat laat je los?",
+      "keywords": [
+        "examen"
+      ]
+    },
+    {
+      "id": "lift-19",
+      "name": "Lift",
+      "themes": [
+        "herstel",
+        "uitstel"
+      ],
+      "explanation": "Lift in een droom wijst vaak op herstel maar kan ook uitstel aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Praat met iemand die je vertrouwt en benoem de kern zonder te analyseren.",
+      "keywords": [
+        "lift"
+      ]
+    },
+    {
+      "id": "trein-20",
+      "name": "Trein",
+      "themes": [
+        "moed",
+        "verwarring"
+      ],
+      "explanation": "Trein in een droom wijst vaak op moed maar kan ook verwarring aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Zoek een klein ritueel (ademhaling, thee, korte wandeling) om de boodschap te integreren.",
+      "keywords": [
+        "trein"
+      ]
+    },
+    {
+      "id": "auto-21",
+      "name": "Auto",
+      "themes": [
+        "creativiteit",
+        "verwarring"
+      ],
+      "explanation": "Auto in een droom wijst vaak op creativiteit maar kan ook verwarring aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Zet een zachte grens: wat laat je binnen, wat laat je los?",
+      "keywords": [
+        "auto"
+      ]
+    },
+    {
+      "id": "duisternis-22",
+      "name": "Duisternis",
+      "themes": [
+        "verbinding",
+        "verlies van controle"
+      ],
+      "explanation": "Duisternis in een droom wijst vaak op verbinding maar kan ook verlies van controle aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Zoek een klein ritueel (ademhaling, thee, korte wandeling) om de boodschap te integreren.",
+      "keywords": [
+        "duisternis"
+      ]
+    },
+    {
+      "id": "brand-23",
+      "name": "Brand",
+      "themes": [
+        "helderheid",
+        "schuld"
+      ],
+      "explanation": "Brand in een droom wijst vaak op helderheid maar kan ook schuld aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Zoek een klein ritueel (ademhaling, thee, korte wandeling) om de boodschap te integreren.",
+      "keywords": [
+        "brand"
+      ]
+    },
+    {
+      "id": "regen-24",
+      "name": "Regen",
+      "themes": [
+        "moed",
+        "uitstel"
+      ],
+      "explanation": "Regen in een droom wijst vaak op moed maar kan ook uitstel aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Praat met iemand die je vertrouwt en benoem de kern zonder te analyseren.",
+      "keywords": [
+        "regen"
+      ]
+    },
+    {
+      "id": "zee-25",
+      "name": "Zee",
+      "themes": [
+        "helderheid",
+        "schuld"
+      ],
+      "explanation": "Zee in een droom wijst vaak op helderheid maar kan ook schuld aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Gebruik creativiteit (tekenen, muziek) om het beeld te laten spreken.",
+      "keywords": [
+        "zee"
+      ]
+    },
+    {
+      "id": "rivier-26",
+      "name": "Rivier",
+      "themes": [
+        "inzicht",
+        "schuld"
+      ],
+      "explanation": "Rivier in een droom wijst vaak op inzicht maar kan ook schuld aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Schrijf direct na het ontwaken een paar trefwoorden op en keer later terug voor reflectie.",
+      "keywords": [
+        "rivier"
+      ]
+    },
+    {
+      "id": "brug-27",
+      "name": "Brug",
+      "themes": [
+        "creativiteit",
+        "uitstel"
+      ],
+      "explanation": "Brug in een droom wijst vaak op creativiteit maar kan ook uitstel aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Praat met iemand die je vertrouwt en benoem de kern zonder te analyseren.",
+      "keywords": [
+        "brug"
+      ]
+    },
+    {
+      "id": "berg-28",
+      "name": "Berg",
+      "themes": [
+        "herstel",
+        "schuld"
+      ],
+      "explanation": "Berg in een droom wijst vaak op herstel maar kan ook schuld aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Gebruik creativiteit (tekenen, muziek) om het beeld te laten spreken.",
+      "keywords": [
+        "berg"
+      ]
+    },
+    {
+      "id": "bos-29",
+      "name": "Bos",
+      "themes": [
+        "vernieuwing",
+        "overbelasting"
+      ],
+      "explanation": "Bos in een droom wijst vaak op vernieuwing maar kan ook overbelasting aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Kijk of het symbool je ergens voor wil waarschuwen of juist bemoedigen.",
+      "keywords": [
+        "bos"
+      ]
+    },
+    {
+      "id": "labyrint-30",
+      "name": "Labyrint",
+      "themes": [
+        "moed",
+        "verlies"
+      ],
+      "explanation": "Labyrint in een droom wijst vaak op moed maar kan ook verlies aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Praat met iemand die je vertrouwt en benoem de kern zonder te analyseren.",
+      "keywords": [
+        "labyrint"
+      ]
+    },
+    {
+      "id": "spiegel-31",
+      "name": "Spiegel",
+      "themes": [
+        "vrijheid",
+        "schuld"
+      ],
+      "explanation": "Spiegel in een droom wijst vaak op vrijheid maar kan ook schuld aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Praat met iemand die je vertrouwt en benoem de kern zonder te analyseren.",
+      "keywords": [
+        "spiegel"
+      ]
+    },
+    {
+      "id": "telefoon-32",
+      "name": "Telefoon",
+      "themes": [
+        "vertrouwen",
+        "uitstel"
+      ],
+      "explanation": "Telefoon in een droom wijst vaak op vertrouwen maar kan ook uitstel aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Kijk of het symbool je ergens voor wil waarschuwen of juist bemoedigen.",
+      "keywords": [
+        "telefoon"
+      ]
+    },
+    {
+      "id": "boodschappen-33",
+      "name": "Boodschappen",
+      "themes": [
+        "creativiteit",
+        "schuld"
+      ],
+      "explanation": "Boodschappen in een droom wijst vaak op creativiteit maar kan ook schuld aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Zoek een klein ritueel (ademhaling, thee, korte wandeling) om de boodschap te integreren.",
+      "keywords": [
+        "boodschappen"
+      ]
+    },
+    {
+      "id": "sleutels-34",
+      "name": "Sleutels",
+      "themes": [
+        "helderheid",
+        "overbelasting"
+      ],
+      "explanation": "Sleutels in een droom wijst vaak op helderheid maar kan ook overbelasting aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Vraag je af welke emotie het sterkst aanwezig was en waar die in je dagleven op slaat.",
+      "keywords": [
+        "sleutels"
+      ]
+    },
+    {
+      "id": "huis-35",
+      "name": "Huis",
+      "themes": [
+        "inzicht",
+        "verlies van controle"
+      ],
+      "explanation": "Huis in een droom wijst vaak op inzicht maar kan ook verlies van controle aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Zoek een klein ritueel (ademhaling, thee, korte wandeling) om de boodschap te integreren.",
+      "keywords": [
+        "huis"
+      ]
+    },
+    {
+      "id": "zolder-36",
+      "name": "Zolder",
+      "themes": [
+        "vrijheid",
+        "uitstel"
+      ],
+      "explanation": "Zolder in een droom wijst vaak op vrijheid maar kan ook uitstel aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Vraag je af welke emotie het sterkst aanwezig was en waar die in je dagleven op slaat.",
+      "keywords": [
+        "zolder"
+      ]
+    },
+    {
+      "id": "kelder-37",
+      "name": "Kelder",
+      "themes": [
+        "acceptatie",
+        "uitstel"
+      ],
+      "explanation": "Kelder in een droom wijst vaak op acceptatie maar kan ook uitstel aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Vertraag de dag: minder scherm, meer lichaam, duidelijke routine.",
+      "keywords": [
+        "kelder"
+      ]
+    },
+    {
+      "id": "keuken-38",
+      "name": "Keuken",
+      "themes": [
+        "helderheid",
+        "schaamte"
+      ],
+      "explanation": "Keuken in een droom wijst vaak op helderheid maar kan ook schaamte aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Schrijf direct na het ontwaken een paar trefwoorden op en keer later terug voor reflectie.",
+      "keywords": [
+        "keuken"
+      ]
+    },
+    {
+      "id": "badkamer-39",
+      "name": "Badkamer",
+      "themes": [
+        "herstel",
+        "grensloosheid"
+      ],
+      "explanation": "Badkamer in een droom wijst vaak op herstel maar kan ook grensloosheid aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Praat met iemand die je vertrouwt en benoem de kern zonder te analyseren.",
+      "keywords": [
+        "badkamer"
+      ]
+    },
+    {
+      "id": "kantoor-40",
+      "name": "Kantoor",
+      "themes": [
+        "creativiteit",
+        "verlies van controle"
+      ],
+      "explanation": "Kantoor in een droom wijst vaak op creativiteit maar kan ook verlies van controle aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Praat met iemand die je vertrouwt en benoem de kern zonder te analyseren.",
+      "keywords": [
+        "kantoor"
+      ]
+    },
+    {
+      "id": "kerk-41",
+      "name": "Kerk",
+      "themes": [
+        "acceptatie",
+        "verlies"
+      ],
+      "explanation": "Kerk in een droom wijst vaak op acceptatie maar kan ook verlies aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Vertraag de dag: minder scherm, meer lichaam, duidelijke routine.",
+      "keywords": [
+        "kerk"
+      ]
+    },
+    {
+      "id": "moskee-42",
+      "name": "Moskee",
+      "themes": [
+        "inzicht",
+        "schaamte"
+      ],
+      "explanation": "Moskee in een droom wijst vaak op inzicht maar kan ook schaamte aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Zoek een klein ritueel (ademhaling, thee, korte wandeling) om de boodschap te integreren.",
+      "keywords": [
+        "moskee"
+      ]
+    },
+    {
+      "id": "markt-43",
+      "name": "Markt",
+      "themes": [
+        "helderheid",
+        "verlies van controle"
+      ],
+      "explanation": "Markt in een droom wijst vaak op helderheid maar kan ook verlies van controle aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Praat met iemand die je vertrouwt en benoem de kern zonder te analyseren.",
+      "keywords": [
+        "markt"
+      ]
+    },
+    {
+      "id": "ziekenhuis-44",
+      "name": "Ziekenhuis",
+      "themes": [
+        "helderheid",
+        "onzekerheid"
+      ],
+      "explanation": "Ziekenhuis in een droom wijst vaak op helderheid maar kan ook onzekerheid aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Zet een zachte grens: wat laat je binnen, wat laat je los?",
+      "keywords": [
+        "ziekenhuis"
+      ]
+    },
+    {
+      "id": "dokter-45",
+      "name": "Dokter",
+      "themes": [
+        "vrijheid",
+        "verwarring"
+      ],
+      "explanation": "Dokter in een droom wijst vaak op vrijheid maar kan ook verwarring aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Zoek een klein ritueel (ademhaling, thee, korte wandeling) om de boodschap te integreren.",
+      "keywords": [
+        "dokter"
+      ]
+    },
+    {
+      "id": "politie-46",
+      "name": "Politie",
+      "themes": [
+        "helderheid",
+        "grensloosheid"
+      ],
+      "explanation": "Politie in een droom wijst vaak op helderheid maar kan ook grensloosheid aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Schrijf direct na het ontwaken een paar trefwoorden op en keer later terug voor reflectie.",
+      "keywords": [
+        "politie"
+      ]
+    },
+    {
+      "id": "vlucht-47",
+      "name": "Vlucht",
+      "themes": [
+        "vertrouwen",
+        "verwarring"
+      ],
+      "explanation": "Vlucht in een droom wijst vaak op vertrouwen maar kan ook verwarring aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Vertraag de dag: minder scherm, meer lichaam, duidelijke routine.",
+      "keywords": [
+        "vlucht"
+      ]
+    },
+    {
+      "id": "vreemdeling-48",
+      "name": "Vreemdeling",
+      "themes": [
+        "inzicht",
+        "verlies van controle"
+      ],
+      "explanation": "Vreemdeling in een droom wijst vaak op inzicht maar kan ook verlies van controle aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Gebruik creativiteit (tekenen, muziek) om het beeld te laten spreken.",
+      "keywords": [
+        "vreemdeling"
+      ]
+    },
+    {
+      "id": "familie-49",
+      "name": "Familie",
+      "themes": [
+        "verbinding",
+        "schuld"
+      ],
+      "explanation": "Familie in een droom wijst vaak op verbinding maar kan ook schuld aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Schrijf direct na het ontwaken een paar trefwoorden op en keer later terug voor reflectie.",
+      "keywords": [
+        "familie"
+      ]
+    },
+    {
+      "id": "vriend-50",
+      "name": "Vriend",
+      "themes": [
+        "vernieuwing",
+        "onzekerheid"
+      ],
+      "explanation": "Vriend in een droom wijst vaak op vernieuwing maar kan ook onzekerheid aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Vraag je af welke emotie het sterkst aanwezig was en waar die in je dagleven op slaat.",
+      "keywords": [
+        "vriend"
+      ]
+    },
+    {
+      "id": "celebrities-51",
+      "name": "Celebrities",
+      "themes": [
+        "herstel",
+        "overbelasting"
+      ],
+      "explanation": "Celebrities in een droom wijst vaak op herstel maar kan ook overbelasting aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Vraag je af welke emotie het sterkst aanwezig was en waar die in je dagleven op slaat.",
+      "keywords": [
+        "celebrities"
+      ]
+    },
+    {
+      "id": "geld-52",
+      "name": "Geld",
+      "themes": [
+        "helderheid",
+        "verlies"
+      ],
+      "explanation": "Geld in een droom wijst vaak op helderheid maar kan ook verlies aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Zoek een klein ritueel (ademhaling, thee, korte wandeling) om de boodschap te integreren.",
+      "keywords": [
+        "geld"
+      ]
+    },
+    {
+      "id": "portemonnee-53",
+      "name": "Portemonnee",
+      "themes": [
+        "moed",
+        "grensloosheid"
+      ],
+      "explanation": "Portemonnee in een droom wijst vaak op moed maar kan ook grensloosheid aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Zoek een klein ritueel (ademhaling, thee, korte wandeling) om de boodschap te integreren.",
+      "keywords": [
+        "portemonnee"
+      ]
+    },
+    {
+      "id": "paspoort-54",
+      "name": "Paspoort",
+      "themes": [
+        "verbinding",
+        "grensloosheid"
+      ],
+      "explanation": "Paspoort in een droom wijst vaak op verbinding maar kan ook grensloosheid aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Kijk of het symbool je ergens voor wil waarschuwen of juist bemoedigen.",
+      "keywords": [
+        "paspoort"
+      ]
+    },
+    {
+      "id": "valkuil-55",
+      "name": "Valkuil",
+      "themes": [
+        "vernieuwing",
+        "grensloosheid"
+      ],
+      "explanation": "Valkuil in een droom wijst vaak op vernieuwing maar kan ook grensloosheid aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Zet een zachte grens: wat laat je binnen, wat laat je los?",
+      "keywords": [
+        "valkuil"
+      ]
+    },
+    {
+      "id": "tornado-56",
+      "name": "Tornado",
+      "themes": [
+        "verbinding",
+        "uitstel"
+      ],
+      "explanation": "Tornado in een droom wijst vaak op verbinding maar kan ook uitstel aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Gebruik creativiteit (tekenen, muziek) om het beeld te laten spreken.",
+      "keywords": [
+        "tornado"
+      ]
+    },
+    {
+      "id": "vulkaan-57",
+      "name": "Vulkaan",
+      "themes": [
+        "moed",
+        "grensloosheid"
+      ],
+      "explanation": "Vulkaan in een droom wijst vaak op moed maar kan ook grensloosheid aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Vertraag de dag: minder scherm, meer lichaam, duidelijke routine.",
+      "keywords": [
+        "vulkaan"
+      ]
+    },
+    {
+      "id": "ijs-58",
+      "name": "Ijs",
+      "themes": [
+        "herstel",
+        "schuld"
+      ],
+      "explanation": "Ijs in een droom wijst vaak op herstel maar kan ook schuld aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Zet een zachte grens: wat laat je binnen, wat laat je los?",
+      "keywords": [
+        "ijs"
+      ]
+    },
+    {
+      "id": "sneeuw-59",
+      "name": "Sneeuw",
+      "themes": [
+        "herstel",
+        "verwarring"
+      ],
+      "explanation": "Sneeuw in een droom wijst vaak op herstel maar kan ook verwarring aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Schrijf direct na het ontwaken een paar trefwoorden op en keer later terug voor reflectie.",
+      "keywords": [
+        "sneeuw"
+      ]
+    },
+    {
+      "id": "bloemen-60",
+      "name": "Bloemen",
+      "themes": [
+        "vertrouwen",
+        "grensloosheid"
+      ],
+      "explanation": "Bloemen in een droom wijst vaak op vertrouwen maar kan ook grensloosheid aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Zet een zachte grens: wat laat je binnen, wat laat je los?",
+      "keywords": [
+        "bloemen"
+      ]
+    },
+    {
+      "id": "boom-61",
+      "name": "Boom",
+      "themes": [
+        "vertrouwen",
+        "schuld"
+      ],
+      "explanation": "Boom in een droom wijst vaak op vertrouwen maar kan ook schuld aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Schrijf direct na het ontwaken een paar trefwoorden op en keer later terug voor reflectie.",
+      "keywords": [
+        "boom"
+      ]
+    },
+    {
+      "id": "vruchten-62",
+      "name": "Vruchten",
+      "themes": [
+        "herstel",
+        "angst"
+      ],
+      "explanation": "Vruchten in een droom wijst vaak op herstel maar kan ook angst aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Zet een zachte grens: wat laat je binnen, wat laat je los?",
+      "keywords": [
+        "vruchten"
+      ]
+    },
+    {
+      "id": "slijk-63",
+      "name": "Slijk",
+      "themes": [
+        "herstel",
+        "angst"
+      ],
+      "explanation": "Slijk in een droom wijst vaak op herstel maar kan ook angst aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Gebruik creativiteit (tekenen, muziek) om het beeld te laten spreken.",
+      "keywords": [
+        "slijk"
+      ]
+    },
+    {
+      "id": "modder-64",
+      "name": "Modder",
+      "themes": [
+        "herstel",
+        "grensloosheid"
+      ],
+      "explanation": "Modder in een droom wijst vaak op herstel maar kan ook grensloosheid aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Zet een zachte grens: wat laat je binnen, wat laat je los?",
+      "keywords": [
+        "modder"
+      ]
+    },
+    {
+      "id": "schoenen-65",
+      "name": "Schoenen",
+      "themes": [
+        "verbinding",
+        "overbelasting"
+      ],
+      "explanation": "Schoenen in een droom wijst vaak op verbinding maar kan ook overbelasting aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Zet een zachte grens: wat laat je binnen, wat laat je los?",
+      "keywords": [
+        "schoenen"
+      ]
+    },
+    {
+      "id": "kleren-66",
+      "name": "Kleren",
+      "themes": [
+        "helderheid",
+        "verlies"
+      ],
+      "explanation": "Kleren in een droom wijst vaak op helderheid maar kan ook verlies aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Vertraag de dag: minder scherm, meer lichaam, duidelijke routine.",
+      "keywords": [
+        "kleren"
+      ]
+    },
+    {
+      "id": "masker-67",
+      "name": "Masker",
+      "themes": [
+        "vernieuwing",
+        "overbelasting"
+      ],
+      "explanation": "Masker in een droom wijst vaak op vernieuwing maar kan ook overbelasting aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Kijk of het symbool je ergens voor wil waarschuwen of juist bemoedigen.",
+      "keywords": [
+        "masker"
+      ]
+    },
+    {
+      "id": "vogel-68",
+      "name": "Vogel",
+      "themes": [
+        "vernieuwing",
+        "verlies van controle"
+      ],
+      "explanation": "Vogel in een droom wijst vaak op vernieuwing maar kan ook verlies van controle aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Vraag je af welke emotie het sterkst aanwezig was en waar die in je dagleven op slaat.",
+      "keywords": [
+        "vogel"
+      ]
+    },
+    {
+      "id": "vis-69",
+      "name": "Vis",
+      "themes": [
+        "acceptatie",
+        "verwarring"
+      ],
+      "explanation": "Vis in een droom wijst vaak op acceptatie maar kan ook verwarring aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Kijk of het symbool je ergens voor wil waarschuwen of juist bemoedigen.",
+      "keywords": [
+        "vis"
+      ]
+    },
+    {
+      "id": "paard-70",
+      "name": "Paard",
+      "themes": [
+        "acceptatie",
+        "overbelasting"
+      ],
+      "explanation": "Paard in een droom wijst vaak op acceptatie maar kan ook overbelasting aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Schrijf direct na het ontwaken een paar trefwoorden op en keer later terug voor reflectie.",
+      "keywords": [
+        "paard"
+      ]
+    },
+    {
+      "id": "koe-71",
+      "name": "Koe",
+      "themes": [
+        "herstel",
+        "angst"
+      ],
+      "explanation": "Koe in een droom wijst vaak op herstel maar kan ook angst aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Kijk of het symbool je ergens voor wil waarschuwen of juist bemoedigen.",
+      "keywords": [
+        "koe"
+      ]
+    },
+    {
+      "id": "bal-72",
+      "name": "Bal",
+      "themes": [
+        "creativiteit",
+        "verlies van controle"
+      ],
+      "explanation": "Bal in een droom wijst vaak op creativiteit maar kan ook verlies van controle aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Zet een zachte grens: wat laat je binnen, wat laat je los?",
+      "keywords": [
+        "bal"
+      ]
+    },
+    {
+      "id": "speelkaarten-73",
+      "name": "Speelkaarten",
+      "themes": [
+        "vernieuwing",
+        "schuld"
+      ],
+      "explanation": "Speelkaarten in een droom wijst vaak op vernieuwing maar kan ook schuld aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Vertraag de dag: minder scherm, meer lichaam, duidelijke routine.",
+      "keywords": [
+        "speelkaarten"
+      ]
+    },
+    {
+      "id": "boek-74",
+      "name": "Boek",
+      "themes": [
+        "vrijheid",
+        "uitstel"
+      ],
+      "explanation": "Boek in een droom wijst vaak op vrijheid maar kan ook uitstel aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Zoek een klein ritueel (ademhaling, thee, korte wandeling) om de boodschap te integreren.",
+      "keywords": [
+        "boek"
+      ]
+    },
+    {
+      "id": "pen-75",
+      "name": "Pen",
+      "themes": [
+        "verbinding",
+        "overbelasting"
+      ],
+      "explanation": "Pen in een droom wijst vaak op verbinding maar kan ook overbelasting aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Zet een zachte grens: wat laat je binnen, wat laat je los?",
+      "keywords": [
+        "pen"
+      ]
+    },
+    {
+      "id": "klok-76",
+      "name": "Klok",
+      "themes": [
+        "herstel",
+        "overbelasting"
+      ],
+      "explanation": "Klok in een droom wijst vaak op herstel maar kan ook overbelasting aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Vraag je af welke emotie het sterkst aanwezig was en waar die in je dagleven op slaat.",
+      "keywords": [
+        "klok"
+      ]
+    },
+    {
+      "id": "kaart-77",
+      "name": "Kaart",
+      "themes": [
+        "inzicht",
+        "grensloosheid"
+      ],
+      "explanation": "Kaart in een droom wijst vaak op inzicht maar kan ook grensloosheid aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Schrijf direct na het ontwaken een paar trefwoorden op en keer later terug voor reflectie.",
+      "keywords": [
+        "kaart"
+      ]
+    },
+    {
+      "id": "kaartspel-78",
+      "name": "Kaartspel",
+      "themes": [
+        "herstel",
+        "schuld"
+      ],
+      "explanation": "Kaartspel in een droom wijst vaak op herstel maar kan ook schuld aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Zoek een klein ritueel (ademhaling, thee, korte wandeling) om de boodschap te integreren.",
+      "keywords": [
+        "kaartspel"
+      ]
+    },
+    {
+      "id": "doolhof-79",
+      "name": "Doolhof",
+      "themes": [
+        "acceptatie",
+        "overbelasting"
+      ],
+      "explanation": "Doolhof in een droom wijst vaak op acceptatie maar kan ook overbelasting aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Vertraag de dag: minder scherm, meer lichaam, duidelijke routine.",
+      "keywords": [
+        "doolhof"
+      ]
+    },
+    {
+      "id": "hek-80",
+      "name": "Hek",
+      "themes": [
+        "vernieuwing",
+        "uitstel"
+      ],
+      "explanation": "Hek in een droom wijst vaak op vernieuwing maar kan ook uitstel aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Schrijf direct na het ontwaken een paar trefwoorden op en keer later terug voor reflectie.",
+      "keywords": [
+        "hek"
+      ]
+    },
+    {
+      "id": "muur-81",
+      "name": "Muur",
+      "themes": [
+        "vrijheid",
+        "uitstel"
+      ],
+      "explanation": "Muur in een droom wijst vaak op vrijheid maar kan ook uitstel aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Schrijf direct na het ontwaken een paar trefwoorden op en keer later terug voor reflectie.",
+      "keywords": [
+        "muur"
+      ]
+    },
+    {
+      "id": "deur-82",
+      "name": "Deur",
+      "themes": [
+        "acceptatie",
+        "schaamte"
+      ],
+      "explanation": "Deur in een droom wijst vaak op acceptatie maar kan ook schaamte aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Vertraag de dag: minder scherm, meer lichaam, duidelijke routine.",
+      "keywords": [
+        "deur"
+      ]
+    },
+    {
+      "id": "raam-83",
+      "name": "Raam",
+      "themes": [
+        "verbinding",
+        "uitstel"
+      ],
+      "explanation": "Raam in een droom wijst vaak op verbinding maar kan ook uitstel aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Vertraag de dag: minder scherm, meer lichaam, duidelijke routine.",
+      "keywords": [
+        "raam"
+      ]
+    },
+    {
+      "id": "balkon-84",
+      "name": "Balkon",
+      "themes": [
+        "vrijheid",
+        "schuld"
+      ],
+      "explanation": "Balkon in een droom wijst vaak op vrijheid maar kan ook schuld aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Praat met iemand die je vertrouwt en benoem de kern zonder te analyseren.",
+      "keywords": [
+        "balkon"
+      ]
+    },
+    {
+      "id": "dak-85",
+      "name": "Dak",
+      "themes": [
+        "vernieuwing",
+        "angst"
+      ],
+      "explanation": "Dak in een droom wijst vaak op vernieuwing maar kan ook angst aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Schrijf direct na het ontwaken een paar trefwoorden op en keer later terug voor reflectie.",
+      "keywords": [
+        "dak"
+      ]
+    },
+    {
+      "id": "trap-86",
+      "name": "Trap",
+      "themes": [
+        "creativiteit",
+        "angst"
+      ],
+      "explanation": "Trap in een droom wijst vaak op creativiteit maar kan ook angst aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Schrijf direct na het ontwaken een paar trefwoorden op en keer later terug voor reflectie.",
+      "keywords": [
+        "trap"
+      ]
+    },
+    {
+      "id": "val-87",
+      "name": "Val",
+      "themes": [
+        "vertrouwen",
+        "overbelasting"
+      ],
+      "explanation": "Val in een droom wijst vaak op vertrouwen maar kan ook overbelasting aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Zoek een klein ritueel (ademhaling, thee, korte wandeling) om de boodschap te integreren.",
+      "keywords": [
+        "val"
+      ]
+    },
+    {
+      "id": "zweven-88",
+      "name": "Zweven",
+      "themes": [
+        "inzicht",
+        "grensloosheid"
+      ],
+      "explanation": "Zweven in een droom wijst vaak op inzicht maar kan ook grensloosheid aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Vraag je af welke emotie het sterkst aanwezig was en waar die in je dagleven op slaat.",
+      "keywords": [
+        "zweven"
+      ]
+    },
+    {
+      "id": "zingen-89",
+      "name": "Zingen",
+      "themes": [
+        "vrijheid",
+        "verlies van controle"
+      ],
+      "explanation": "Zingen in een droom wijst vaak op vrijheid maar kan ook verlies van controle aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Vraag je af welke emotie het sterkst aanwezig was en waar die in je dagleven op slaat.",
+      "keywords": [
+        "zingen"
+      ]
+    },
+    {
+      "id": "schreeuwen-90",
+      "name": "Schreeuwen",
+      "themes": [
+        "vernieuwing",
+        "uitstel"
+      ],
+      "explanation": "Schreeuwen in een droom wijst vaak op vernieuwing maar kan ook uitstel aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Vraag je af welke emotie het sterkst aanwezig was en waar die in je dagleven op slaat.",
+      "keywords": [
+        "schreeuwen"
+      ]
+    },
+    {
+      "id": "fluisteren-91",
+      "name": "Fluisteren",
+      "themes": [
+        "vertrouwen",
+        "schuld"
+      ],
+      "explanation": "Fluisteren in een droom wijst vaak op vertrouwen maar kan ook schuld aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Schrijf direct na het ontwaken een paar trefwoorden op en keer later terug voor reflectie.",
+      "keywords": [
+        "fluisteren"
+      ]
+    },
+    {
+      "id": "zwemmen-92",
+      "name": "Zwemmen",
+      "themes": [
+        "vertrouwen",
+        "verlies van controle"
+      ],
+      "explanation": "Zwemmen in een droom wijst vaak op vertrouwen maar kan ook verlies van controle aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Kijk of het symbool je ergens voor wil waarschuwen of juist bemoedigen.",
+      "keywords": [
+        "zwemmen"
+      ]
+    },
+    {
+      "id": "verdrinken-93",
+      "name": "Verdrinken",
+      "themes": [
+        "vertrouwen",
+        "onzekerheid"
+      ],
+      "explanation": "Verdrinken in een droom wijst vaak op vertrouwen maar kan ook onzekerheid aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Gebruik creativiteit (tekenen, muziek) om het beeld te laten spreken.",
+      "keywords": [
+        "verdrinken"
+      ]
+    },
+    {
+      "id": "redden-94",
+      "name": "Redden",
+      "themes": [
+        "verbinding",
+        "schuld"
+      ],
+      "explanation": "Redden in een droom wijst vaak op verbinding maar kan ook schuld aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Gebruik creativiteit (tekenen, muziek) om het beeld te laten spreken.",
+      "keywords": [
+        "redden"
+      ]
+    },
+    {
+      "id": "zoeken-95",
+      "name": "Zoeken",
+      "themes": [
+        "vernieuwing",
+        "schaamte"
+      ],
+      "explanation": "Zoeken in een droom wijst vaak op vernieuwing maar kan ook schaamte aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Kijk of het symbool je ergens voor wil waarschuwen of juist bemoedigen.",
+      "keywords": [
+        "zoeken"
+      ]
+    },
+    {
+      "id": "vinden-96",
+      "name": "Vinden",
+      "themes": [
+        "vrijheid",
+        "schaamte"
+      ],
+      "explanation": "Vinden in een droom wijst vaak op vrijheid maar kan ook schaamte aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Vertraag de dag: minder scherm, meer lichaam, duidelijke routine.",
+      "keywords": [
+        "vinden"
+      ]
+    },
+    {
+      "id": "vergeten-97",
+      "name": "Vergeten",
+      "themes": [
+        "creativiteit",
+        "verlies van controle"
+      ],
+      "explanation": "Vergeten in een droom wijst vaak op creativiteit maar kan ook verlies van controle aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Schrijf direct na het ontwaken een paar trefwoorden op en keer later terug voor reflectie.",
+      "keywords": [
+        "vergeten"
+      ]
+    },
+    {
+      "id": "verdwalen-98",
+      "name": "Verdwalen",
+      "themes": [
+        "moed",
+        "onzekerheid"
+      ],
+      "explanation": "Verdwalen in een droom wijst vaak op moed maar kan ook onzekerheid aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Vraag je af welke emotie het sterkst aanwezig was en waar die in je dagleven op slaat.",
+      "keywords": [
+        "verdwalen"
+      ]
+    },
+    {
+      "id": "omhelzing-99",
+      "name": "Omhelzing",
+      "themes": [
+        "herstel",
+        "grensloosheid"
+      ],
+      "explanation": "Omhelzing in een droom wijst vaak op herstel maar kan ook grensloosheid aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Zet een zachte grens: wat laat je binnen, wat laat je los?",
+      "keywords": [
+        "omhelzing"
+      ]
+    },
+    {
+      "id": "kus-100",
+      "name": "Kus",
+      "themes": [
+        "helderheid",
+        "schaamte"
+      ],
+      "explanation": "Kus in een droom wijst vaak op helderheid maar kan ook schaamte aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Zoek een klein ritueel (ademhaling, thee, korte wandeling) om de boodschap te integreren.",
+      "keywords": [
+        "kus"
+      ]
+    },
+    {
+      "id": "ruzie-101",
+      "name": "Ruzie",
+      "themes": [
+        "creativiteit",
+        "verlies van controle"
+      ],
+      "explanation": "Ruzie in een droom wijst vaak op creativiteit maar kan ook verlies van controle aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Zet een zachte grens: wat laat je binnen, wat laat je los?",
+      "keywords": [
+        "ruzie"
+      ]
+    },
+    {
+      "id": "vrede-102",
+      "name": "Vrede",
+      "themes": [
+        "creativiteit",
+        "schaamte"
+      ],
+      "explanation": "Vrede in een droom wijst vaak op creativiteit maar kan ook schaamte aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Zoek een klein ritueel (ademhaling, thee, korte wandeling) om de boodschap te integreren.",
+      "keywords": [
+        "vrede"
+      ]
+    },
+    {
+      "id": "cadeau-103",
+      "name": "Cadeau",
+      "themes": [
+        "moed",
+        "grensloosheid"
+      ],
+      "explanation": "Cadeau in een droom wijst vaak op moed maar kan ook grensloosheid aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Praat met iemand die je vertrouwt en benoem de kern zonder te analyseren.",
+      "keywords": [
+        "cadeau"
+      ]
+    },
+    {
+      "id": "feest-104",
+      "name": "Feest",
+      "themes": [
+        "vertrouwen",
+        "grensloosheid"
+      ],
+      "explanation": "Feest in een droom wijst vaak op vertrouwen maar kan ook grensloosheid aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Schrijf direct na het ontwaken een paar trefwoorden op en keer later terug voor reflectie.",
+      "keywords": [
+        "feest"
+      ]
+    },
+    {
+      "id": "verjaardag-105",
+      "name": "Verjaardag",
+      "themes": [
+        "helderheid",
+        "schaamte"
+      ],
+      "explanation": "Verjaardag in een droom wijst vaak op helderheid maar kan ook schaamte aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Vraag je af welke emotie het sterkst aanwezig was en waar die in je dagleven op slaat.",
+      "keywords": [
+        "verjaardag"
+      ]
+    },
+    {
+      "id": "verraad-106",
+      "name": "Verraad",
+      "themes": [
+        "vrijheid",
+        "schaamte"
+      ],
+      "explanation": "Verraad in een droom wijst vaak op vrijheid maar kan ook schaamte aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Vraag je af welke emotie het sterkst aanwezig was en waar die in je dagleven op slaat.",
+      "keywords": [
+        "verraad"
+      ]
+    },
+    {
+      "id": "diefstal-107",
+      "name": "Diefstal",
+      "themes": [
+        "herstel",
+        "grensloosheid"
+      ],
+      "explanation": "Diefstal in een droom wijst vaak op herstel maar kan ook grensloosheid aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Zoek een klein ritueel (ademhaling, thee, korte wandeling) om de boodschap te integreren.",
+      "keywords": [
+        "diefstal"
+      ]
+    },
+    {
+      "id": "gevangenis-108",
+      "name": "Gevangenis",
+      "themes": [
+        "verbinding",
+        "schaamte"
+      ],
+      "explanation": "Gevangenis in een droom wijst vaak op verbinding maar kan ook schaamte aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Zet een zachte grens: wat laat je binnen, wat laat je los?",
+      "keywords": [
+        "gevangenis"
+      ]
+    },
+    {
+      "id": "vrijheid-109",
+      "name": "Vrijheid",
+      "themes": [
+        "creativiteit",
+        "schuld"
+      ],
+      "explanation": "Vrijheid in een droom wijst vaak op creativiteit maar kan ook schuld aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Praat met iemand die je vertrouwt en benoem de kern zonder te analyseren.",
+      "keywords": [
+        "vrijheid"
+      ]
+    },
+    {
+      "id": "reizen-110",
+      "name": "Reizen",
+      "themes": [
+        "helderheid",
+        "overbelasting"
+      ],
+      "explanation": "Reizen in een droom wijst vaak op helderheid maar kan ook overbelasting aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Praat met iemand die je vertrouwt en benoem de kern zonder te analyseren.",
+      "keywords": [
+        "reizen"
+      ]
+    },
+    {
+      "id": "bagage-111",
+      "name": "Bagage",
+      "themes": [
+        "inzicht",
+        "verlies van controle"
+      ],
+      "explanation": "Bagage in een droom wijst vaak op inzicht maar kan ook verlies van controle aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Kijk of het symbool je ergens voor wil waarschuwen of juist bemoedigen.",
+      "keywords": [
+        "bagage"
+      ]
+    },
+    {
+      "id": "onverklaarbaar-licht-112",
+      "name": "Onverklaarbaar Licht",
+      "themes": [
+        "verbinding",
+        "angst"
+      ],
+      "explanation": "Onverklaarbaar Licht in een droom wijst vaak op verbinding maar kan ook angst aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Schrijf direct na het ontwaken een paar trefwoorden op en keer later terug voor reflectie.",
+      "keywords": [
+        "onverklaarbaar",
+        "licht"
+      ]
+    },
+    {
+      "id": "oude-vriend-113",
+      "name": "Oude Vriend",
+      "themes": [
+        "creativiteit",
+        "verlies"
+      ],
+      "explanation": "Oude Vriend in een droom wijst vaak op creativiteit maar kan ook verlies aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Praat met iemand die je vertrouwt en benoem de kern zonder te analyseren.",
+      "keywords": [
+        "oude",
+        "vriend"
+      ]
+    },
+    {
+      "id": "oude-huis-114",
+      "name": "Oude Huis",
+      "themes": [
+        "vrijheid",
+        "overbelasting"
+      ],
+      "explanation": "Oude Huis in een droom wijst vaak op vrijheid maar kan ook overbelasting aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Kijk of het symbool je ergens voor wil waarschuwen of juist bemoedigen.",
+      "keywords": [
+        "oude",
+        "huis"
+      ]
+    },
+    {
+      "id": "vreemde-taal-115",
+      "name": "Vreemde Taal",
+      "themes": [
+        "helderheid",
+        "angst"
+      ],
+      "explanation": "Vreemde Taal in een droom wijst vaak op helderheid maar kan ook angst aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Vraag je af welke emotie het sterkst aanwezig was en waar die in je dagleven op slaat.",
+      "keywords": [
+        "vreemde",
+        "taal"
+      ]
+    },
+    {
+      "id": "geheime-kameratoezicht-116",
+      "name": "Geheime Kameratoezicht",
+      "themes": [
+        "herstel",
+        "verlies"
+      ],
+      "explanation": "Geheime Kameratoezicht in een droom wijst vaak op herstel maar kan ook verlies aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Schrijf direct na het ontwaken een paar trefwoorden op en keer later terug voor reflectie.",
+      "keywords": [
+        "geheime",
+        "kameratoezicht"
+      ]
+    },
+    {
+      "id": "onverklaarbaar-licht-117",
+      "name": "Onverklaarbaar Licht",
+      "themes": [
+        "creativiteit",
+        "onzekerheid"
+      ],
+      "explanation": "Onverklaarbaar Licht in een droom wijst vaak op creativiteit maar kan ook onzekerheid aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Zoek een klein ritueel (ademhaling, thee, korte wandeling) om de boodschap te integreren.",
+      "keywords": [
+        "onverklaarbaar",
+        "licht"
+      ]
+    },
+    {
+      "id": "oude-vriend-118",
+      "name": "Oude Vriend",
+      "themes": [
+        "acceptatie",
+        "verlies"
+      ],
+      "explanation": "Oude Vriend in een droom wijst vaak op acceptatie maar kan ook verlies aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Schrijf direct na het ontwaken een paar trefwoorden op en keer later terug voor reflectie.",
+      "keywords": [
+        "oude",
+        "vriend"
+      ]
+    },
+    {
+      "id": "oude-huis-119",
+      "name": "Oude Huis",
+      "themes": [
+        "verbinding",
+        "verwarring"
+      ],
+      "explanation": "Oude Huis in een droom wijst vaak op verbinding maar kan ook verwarring aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Schrijf direct na het ontwaken een paar trefwoorden op en keer later terug voor reflectie.",
+      "keywords": [
+        "oude",
+        "huis"
+      ]
+    },
+    {
+      "id": "vreemde-taal-120",
+      "name": "Vreemde Taal",
+      "themes": [
+        "creativiteit",
+        "schuld"
+      ],
+      "explanation": "Vreemde Taal in een droom wijst vaak op creativiteit maar kan ook schuld aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Zet een zachte grens: wat laat je binnen, wat laat je los?",
+      "keywords": [
+        "vreemde",
+        "taal"
+      ]
+    },
+    {
+      "id": "geheime-kameratoezicht-121",
+      "name": "Geheime Kameratoezicht",
+      "themes": [
+        "herstel",
+        "verwarring"
+      ],
+      "explanation": "Geheime Kameratoezicht in een droom wijst vaak op herstel maar kan ook verwarring aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Kijk of het symbool je ergens voor wil waarschuwen of juist bemoedigen.",
+      "keywords": [
+        "geheime",
+        "kameratoezicht"
+      ]
+    },
+    {
+      "id": "onverklaarbaar-licht-122",
+      "name": "Onverklaarbaar Licht",
+      "themes": [
+        "vertrouwen",
+        "verlies"
+      ],
+      "explanation": "Onverklaarbaar Licht in een droom wijst vaak op vertrouwen maar kan ook verlies aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Zet een zachte grens: wat laat je binnen, wat laat je los?",
+      "keywords": [
+        "onverklaarbaar",
+        "licht"
+      ]
+    },
+    {
+      "id": "oude-vriend-123",
+      "name": "Oude Vriend",
+      "themes": [
+        "vrijheid",
+        "verlies"
+      ],
+      "explanation": "Oude Vriend in een droom wijst vaak op vrijheid maar kan ook verlies aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Kijk of het symbool je ergens voor wil waarschuwen of juist bemoedigen.",
+      "keywords": [
+        "oude",
+        "vriend"
+      ]
+    },
+    {
+      "id": "oude-huis-124",
+      "name": "Oude Huis",
+      "themes": [
+        "inzicht",
+        "verlies"
+      ],
+      "explanation": "Oude Huis in een droom wijst vaak op inzicht maar kan ook verlies aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Gebruik creativiteit (tekenen, muziek) om het beeld te laten spreken.",
+      "keywords": [
+        "oude",
+        "huis"
+      ]
+    },
+    {
+      "id": "vreemde-taal-125",
+      "name": "Vreemde Taal",
+      "themes": [
+        "acceptatie",
+        "schuld"
+      ],
+      "explanation": "Vreemde Taal in een droom wijst vaak op acceptatie maar kan ook schuld aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Praat met iemand die je vertrouwt en benoem de kern zonder te analyseren.",
+      "keywords": [
+        "vreemde",
+        "taal"
+      ]
+    },
+    {
+      "id": "geheime-kameratoezicht-126",
+      "name": "Geheime Kameratoezicht",
+      "themes": [
+        "vrijheid",
+        "verlies van controle"
+      ],
+      "explanation": "Geheime Kameratoezicht in een droom wijst vaak op vrijheid maar kan ook verlies van controle aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Kijk of het symbool je ergens voor wil waarschuwen of juist bemoedigen.",
+      "keywords": [
+        "geheime",
+        "kameratoezicht"
+      ]
+    },
+    {
+      "id": "onverklaarbaar-licht-127",
+      "name": "Onverklaarbaar Licht",
+      "themes": [
+        "inzicht",
+        "overbelasting"
+      ],
+      "explanation": "Onverklaarbaar Licht in een droom wijst vaak op inzicht maar kan ook overbelasting aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Zet een zachte grens: wat laat je binnen, wat laat je los?",
+      "keywords": [
+        "onverklaarbaar",
+        "licht"
+      ]
+    },
+    {
+      "id": "oude-vriend-128",
+      "name": "Oude Vriend",
+      "themes": [
+        "vernieuwing",
+        "overbelasting"
+      ],
+      "explanation": "Oude Vriend in een droom wijst vaak op vernieuwing maar kan ook overbelasting aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Gebruik creativiteit (tekenen, muziek) om het beeld te laten spreken.",
+      "keywords": [
+        "oude",
+        "vriend"
+      ]
+    },
+    {
+      "id": "oude-huis-129",
+      "name": "Oude Huis",
+      "themes": [
+        "verbinding",
+        "schuld"
+      ],
+      "explanation": "Oude Huis in een droom wijst vaak op verbinding maar kan ook schuld aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Zet een zachte grens: wat laat je binnen, wat laat je los?",
+      "keywords": [
+        "oude",
+        "huis"
+      ]
+    },
+    {
+      "id": "vreemde-taal-130",
+      "name": "Vreemde Taal",
+      "themes": [
+        "inzicht",
+        "schuld"
+      ],
+      "explanation": "Vreemde Taal in een droom wijst vaak op inzicht maar kan ook schuld aanraken. Let op de context: wie of wat is erbij, en hoe voel je je?",
+      "advice": "Kijk of het symbool je ergens voor wil waarschuwen of juist bemoedigen.",
+      "keywords": [
+        "vreemde",
+        "taal"
+      ]
+    }
+  ]
+}
