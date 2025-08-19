@@ -22,7 +22,6 @@ const Onboarding = () => {
     if (step < 4) {
       setStep(step + 1);
     } else {
-      // Save preferences and navigate to dashboard
       localStorage.setItem("userPreferences", JSON.stringify(formData));
       navigate("/dashboard");
     }
@@ -37,13 +36,12 @@ const Onboarding = () => {
   };
 
   const handleInterestToggle = (interest: string) => {
-    setFormData(prev => {
-      const interests = prev.interests.includes(interest)
+    setFormData(prev => ({
+      ...prev,
+      interests: prev.interests.includes(interest)
         ? prev.interests.filter(i => i !== interest)
-        : [...prev.interests, interest];
-      
-      return { ...prev, interests };
-    });
+        : [...prev.interests, interest],
+    }));
   };
 
   const renderStep = () => {
@@ -52,30 +50,23 @@ const Onboarding = () => {
         return (
           <div className="space-y-6">
             <div className="text-center">
-              <User className="h-12 w-12 text-amber-600 mx-auto mb-4" />
-              <h2 className="text-2xl font-bold text-amber-900">Vertel ons iets over jezelf</h2>
-              <p className="text-amber-700 mt-2">Dit helpt ons de juiste lezer voor je te vinden</p>
+              <User className="h-12 w-12 text-amber-400 mx-auto mb-4" />
+              <h2 className="text-2xl font-bold text-amber-200">Vertel ons iets over jezelf</h2>
+              <p className="text-stone-400 mt-2">Dit helpt ons de juiste lezer voor je te vinden</p>
             </div>
-            
             <div className="space-y-4">
-              <Label className="text-amber-900">Wat is je geslacht?</Label>
+              <Label className="text-stone-300">Wat is je geslacht?</Label>
               <RadioGroup 
                 value={formData.gender} 
                 onValueChange={(value) => setFormData({...formData, gender: value})}
-                className="grid grid-cols-2 gap-4"
+                className="grid grid-cols-3 gap-4"
               >
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="female" id="female" />
-                  <Label htmlFor="female">Vrouw</Label>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="male" id="male" />
-                  <Label htmlFor="male">Man</Label>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="other" id="other" />
-                  <Label htmlFor="other">Anders</Label>
-                </div>
+                {["Vrouw", "Man", "Anders"].map(g => (
+                  <div key={g} className="flex items-center space-x-2">
+                    <RadioGroupItem value={g.toLowerCase()} id={g.toLowerCase()} />
+                    <Label htmlFor={g.toLowerCase()}>{g}</Label>
+                  </div>
+                ))}
               </RadioGroup>
             </div>
           </div>
@@ -85,35 +76,22 @@ const Onboarding = () => {
         return (
           <div className="space-y-6">
             <div className="text-center">
-              <Calendar className="h-12 w-12 text-amber-600 mx-auto mb-4" />
-              <h2 className="text-2xl font-bold text-amber-900">Leeftijd</h2>
-              <p className="text-amber-700 mt-2">Welke leeftijdsgroep voelt het beste bij je?</p>
+              <Calendar className="h-12 w-12 text-amber-400 mx-auto mb-4" />
+              <h2 className="text-2xl font-bold text-amber-200">Leeftijd</h2>
+              <p className="text-stone-400 mt-2">Welke leeftijdsgroep voelt het beste bij je?</p>
             </div>
-            
-            <div className="space-y-4">
-              <RadioGroup 
-                value={formData.ageGroup} 
-                onValueChange={(value) => setFormData({...formData, ageGroup: value})}
-                className="space-y-3"
-              >
-                <div className="flex items-center space-x-3">
-                  <RadioGroupItem value="18-25" id="18-25" />
-                  <Label htmlFor="18-25">18-25 jaar</Label>
+            <RadioGroup 
+              value={formData.ageGroup} 
+              onValueChange={(value) => setFormData({...formData, ageGroup: value})}
+              className="space-y-3"
+            >
+              {["18-25", "26-40", "41-60", "60+"].map(age => (
+                <div key={age} className="flex items-center space-x-3">
+                  <RadioGroupItem value={age} id={age} />
+                  <Label htmlFor={age}>{age} jaar</Label>
                 </div>
-                <div className="flex items-center space-x-3">
-                  <RadioGroupItem value="26-40" id="26-40" />
-                  <Label htmlFor="26-40">26-40 jaar</Label>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <RadioGroupItem value="41-60" id="41-60" />
-                  <Label htmlFor="41-60">41-60 jaar</Label>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <RadioGroupItem value="60+" id="60+" />
-                  <Label htmlFor="60+">60+ jaar</Label>
-                </div>
-              </RadioGroup>
-            </div>
+              ))}
+            </RadioGroup>
           </div>
         );
       
@@ -121,46 +99,26 @@ const Onboarding = () => {
         return (
           <div className="space-y-6">
             <div className="text-center">
-              <Globe className="h-12 w-12 text-amber-600 mx-auto mb-4" />
-              <h2 className="text-2xl font-bold text-amber-900">Cultuur & Taal</h2>
-              <p className="text-amber-700 mt-2">Waar voel je je cultureel verbonden?</p>
+              <Globe className="h-12 w-12 text-amber-400 mx-auto mb-4" />
+              <h2 className="text-2xl font-bold text-amber-200">Cultuur & Taal</h2>
+              <p className="text-stone-400 mt-2">Waar voel je je cultureel verbonden?</p>
             </div>
-            
             <div className="space-y-4">
               <div>
-                <Label className="text-amber-900">Cultuur</Label>
-                <Select 
-                  value={formData.culture} 
-                  onValueChange={(value) => setFormData({...formData, culture: value})}
-                >
-                  <SelectTrigger className="w-full mt-2">
-                    <SelectValue placeholder="Selecteer je cultuur" />
-                  </SelectTrigger>
-                  <SelectContent>
+                <Label className="text-stone-300">Cultuur</Label>
+                <Select value={formData.culture} onValueChange={(value) => setFormData({...formData, culture: value})}>
+                  <SelectTrigger className="w-full mt-2 bg-stone-900 border-stone-700"><SelectValue placeholder="Selecteer je cultuur" /></SelectTrigger>
+                  <SelectContent className="bg-stone-900 border-stone-700 text-stone-200">
                     <SelectItem value="nl">Nederland</SelectItem>
                     <SelectItem value="tr">Turkije</SelectItem>
-                    <SelectItem value="en">Verenigd Koninkrijk</SelectItem>
-                    <SelectItem value="es">Spanje</SelectItem>
-                    <SelectItem value="de">Duitsland</SelectItem>
-                    <SelectItem value="fr">Frankrijk</SelectItem>
-                    <SelectItem value="it">Italië</SelectItem>
-                    <SelectItem value="gr">Griekenland</SelectItem>
-                    <SelectItem value="no">Noorwegen</SelectItem>
-                    <SelectItem value="ma">Marokko</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
-              
               <div>
-                <Label className="text-amber-900">Voorkeurstaal</Label>
-                <Select 
-                  value={formData.language} 
-                  onValueChange={(value) => setFormData({...formData, language: value})}
-                >
-                  <SelectTrigger className="w-full mt-2">
-                    <SelectValue placeholder="Selecteer je taal" />
-                  </SelectTrigger>
-                  <SelectContent>
+                <Label className="text-stone-300">Voorkeurstaal</Label>
+                <Select value={formData.language} onValueChange={(value) => setFormData({...formData, language: value})}>
+                  <SelectTrigger className="w-full mt-2 bg-stone-900 border-stone-700"><SelectValue placeholder="Selecteer je taal" /></SelectTrigger>
+                  <SelectContent className="bg-stone-900 border-stone-700 text-stone-200">
                     <SelectItem value="nl-NL">Nederlands</SelectItem>
                     <SelectItem value="en-GB">English</SelectItem>
                     <SelectItem value="tr-TR">Türkçe</SelectItem>
@@ -175,27 +133,19 @@ const Onboarding = () => {
         return (
           <div className="space-y-6">
             <div className="text-center">
-              <Heart className="h-12 w-12 text-amber-600 mx-auto mb-4" />
-              <h2 className="text-2xl font-bold text-amber-900">Jouw Interesses</h2>
-              <p className="text-amber-700 mt-2">Waar ben je nieuwsgierig naar?</p>
+              <Heart className="h-12 w-12 text-amber-400 mx-auto mb-4" />
+              <h2 className="text-2xl font-bold text-amber-200">Jouw Interesses</h2>
+              <p className="text-stone-400 mt-2">Waar ben je nieuwsgierig naar?</p>
             </div>
-            
             <div className="grid grid-cols-2 gap-3">
-              {[
-                "Tarot", 
-                "Koffiedik", 
-                "Numerologie", 
-                "Droomduiding", 
-                "Aura/Chakra", 
-                "Astrologie"
-              ].map((interest) => (
+              {["Tarot", "Koffiedik", "Numerologie", "Droomduiding", "Aura/Chakra", "Astrologie"].map((interest) => (
                 <button
                   key={interest}
                   onClick={() => handleInterestToggle(interest)}
                   className={`p-4 rounded-lg border-2 transition-all ${
                     formData.interests.includes(interest)
-                      ? "border-amber-500 bg-amber-50 text-amber-900"
-                      : "border-amber-200 hover:border-amber-300"
+                      ? "border-amber-700 bg-stone-800 text-amber-200"
+                      : "border-stone-700 hover:border-stone-600 bg-stone-900/50"
                   }`}
                 >
                   {interest}
@@ -205,24 +155,21 @@ const Onboarding = () => {
           </div>
         );
       
-      default:
-        return null;
+      default: return null;
     }
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-amber-50 to-amber-100 p-4 flex items-center justify-center">
+    <div className="min-h-screen bg-gradient-to-b from-stone-950 via-black to-stone-950 text-stone-200 p-4 flex items-center justify-center font-serif">
       <div className="w-full max-w-md">
-        <Card className="bg-white/80 backdrop-blur-sm border-amber-200">
+        <Card className="bg-stone-900/50 backdrop-blur-sm border-stone-800">
           <CardHeader>
-            <CardTitle className="text-center">
+            <CardTitle>
               <div className="flex justify-between items-center mb-4">
-                <span className="text-sm text-amber-700">Stap {step} van 4</span>
-                <span className="text-sm text-amber-700">
-                  {Math.round((step / 4) * 100)}%
-                </span>
+                <span className="text-sm text-stone-400">Stap {step} van 4</span>
+                <span className="text-sm text-stone-400">{Math.round((step / 4) * 100)}%</span>
               </div>
-              <div className="w-full bg-amber-200 rounded-full h-2">
+              <div className="w-full bg-stone-800 rounded-full h-2">
                 <div 
                   className="bg-amber-600 h-2 rounded-full transition-all duration-300" 
                   style={{ width: `${(step / 4) * 100}%` }}
@@ -232,18 +179,11 @@ const Onboarding = () => {
           </CardHeader>
           <CardContent className="pt-6">
             {renderStep()}
-            
             <div className="flex justify-between mt-8">
-              <Button 
-                variant="outline" 
-                onClick={handleBack}
-                className="border-amber-300 text-amber-700 hover:bg-amber-50"
-              >
-                Terug
-              </Button>
+              <Button variant="outline" onClick={handleBack} className="border-stone-700 text-stone-300 hover:bg-stone-800">Terug</Button>
               <Button 
                 onClick={handleNext}
-                className="bg-amber-600 hover:bg-amber-700 text-white"
+                className="bg-amber-800 hover:bg-amber-700 text-stone-100"
                 disabled={
                   (step === 1 && !formData.gender) ||
                   (step === 2 && !formData.ageGroup) ||
