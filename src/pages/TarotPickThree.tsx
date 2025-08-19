@@ -134,8 +134,8 @@ export default function TarotPickThreePage() {
                 exit={{ opacity: 0 }}
                 className="w-full"
               >
-                <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 lg:grid-cols-10 gap-4">
-                  {deck.slice(0, 40).map((card, i) => (
+                <div className="grid grid-cols-6 md:grid-cols-10 lg:grid-cols-[repeat(13,minmax(0,1fr))] gap-2">
+                  {deck.map((card, i) => (
                     <motion.div
                       key={card.id}
                       initial={{ opacity: 0, y: 20 }}
