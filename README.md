@@ -1,4 +1,12 @@
-# Welcome to your Dyad app
+# StarpathVision
+
+## Running lint
+
+Run ESLint to check for code issues:
+
+```bash
+pnpm lint
+```
 
 ## Running tests
 
@@ -9,3 +17,4 @@ pnpm test
 ```
 
 This runs all tests using [Vitest](https://vitest.dev/).
+
