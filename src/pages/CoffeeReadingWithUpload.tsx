@@ -18,7 +18,6 @@ import { supabase } from "@/lib/supabaseClient";
 import { showLoading, dismissToast, showError, showSuccess } from "@/utils/toast";
 import falyaPersona from "../data/falya.json";
 import MysticalBackground from "@/components/MysticalBackground";
-import symbolIndex from '../data/coffee-symbols/index.json';
 
 const CoffeeReadingWithUpload = () => {
   const { i18n } = useTranslation();
@@ -32,18 +31,18 @@ const CoffeeReadingWithUpload = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    const loadSymbols = async () => {
-      const allSymbols: any[] = [];
-      const promises = symbolIndex.letters.map(letterInfo => 
-        import(`../data/coffee-symbols/${letterInfo.letter}.json`)
-      );
-      const modules = await Promise.all(promises);
-      modules.forEach(module => {
-        allSymbols.push(...module.default.symbols);
-      });
-      setSymbols(allSymbols);
+    const fetchSymbols = async () => {
+      const { data, error } = await supabase
+        .from('coffee_symbols')
+        .select('*');
+
+      if (error) {
+        showError("Kon koffiesymbolen niet laden.");
+      } else {
+        setSymbols(data);
+      }
     };
-    loadSymbols();
+    fetchSymbols();
   }, []);
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
