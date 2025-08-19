@@ -1,1 +1,115 @@
-$$attachment_content_29$$
+{
+    "version": "1.0.0",
+    "letter": "Y",
+    "count": 12,
+    "symbols": [
+        {
+            "letter": "Y",
+            "symbol_nl": "YATAGAN",
+            "meaning_nl": "Gevaar",
+            "symbol_tr": "YATAĞAN",
+            "meaning_tr": "Tehlike",
+            "symbol_en": "YATAGAN",
+            "meaning_en": "Danger"
+        },
+        {
+            "letter": "Y",
+            "symbol_nl": "BED",
+            "meaning_nl": "Ziekte",
+            "symbol_tr": "YATAK",
+            "meaning_tr": "Hastalık",
+            "symbol_en": "BED",
+            "meaning_en": "Sickness"
+        },
+        {
+            "letter": "Y",
+            "symbol_nl": "DOLFIJN",
+            "meaning_nl": "Goed nieuws",
+            "symbol_tr": "YUNUS BALIĞI",
+            "meaning_tr": "İyi haber",
+            "symbol_en": "DOLPHIN",
+            "meaning_en": "Good news"
+        },
+        {
+            "letter": "Y",
+            "symbol_nl": "HELLING",
+            "meaning_nl": "Moeilijkheden",
+            "symbol_tr": "YOKUŞ",
+            "meaning_tr": "Zorluk",
+            "symbol_en": "SLOPE",
+            "meaning_en": "Difficulties"
+        },
+        {
+            "letter": "Y",
+            "symbol_nl": "RING",
+            "meaning_nl": "Huwelijk",
+            "symbol_tr": "YÜZÜK",
+            "meaning_tr": "Evlilik",
+            "symbol_en": "RING",
+            "meaning_en": "Marriage"
+        },
+        {
+            "letter": "Y",
+            "symbol_nl": "HART",
+            "meaning_nl": "Liefde",
+            "symbol_tr": "YÜREK",
+            "meaning_tr": "Aşk",
+            "symbol_en": "HEART",
+            "meaning_en": "Love"
+        },
+        {
+            "letter": "Y",
+            "symbol_nl": "SLANG",
+            "meaning_nl": "Vijand",
+            "symbol_tr": "YILAN",
+            "meaning_tr": "Düşman",
+            "symbol_en": "SNAKE",
+            "meaning_en": "Enemy"
+        },
+        {
+            "letter": "Y",
+            "symbol_nl": "STER",
+            "meaning_nl": "Succes",
+            "symbol_tr": "YILDIZ",
+            "meaning_tr": "Başarı",
+            "symbol_en": "STAR",
+            "meaning_en": "Success"
+        },
+        {
+            "letter": "Y",
+            "symbol_nl": "WEG",
+            "meaning_nl": "Reis",
+            "symbol_tr": "YOL",
+            "meaning_tr": "Yolculuk",
+            "symbol_en": "ROAD",
+            "meaning_en": "Journey"
+        },
+        {
+            "letter": "Y",
+            "symbol_nl": "BLAD",
+            "meaning_nl": "Nieuws",
+            "symbol_tr": "YAPRAK",
+            "meaning_tr": "Haber",
+            "symbol_en": "LEAF",
+            "meaning_en": "News"
+        },
+        {
+            "letter": "Y",
+            "symbol_nl": "KREEFT",
+            "meaning_nl": "Verdriet",
+            "symbol_tr": "YENGEÇ",
+            "meaning_tr": "Üzüntü",
+            "symbol_en": "CRAB",
+            "meaning_en": "Sorrow"
+        },
+        {
+            "letter": "Y",
+            "symbol_nl": "EI",
+            "meaning_nl": "Rijkdom",
+            "symbol_tr": "YUMURTA",
+            "meaning_tr": "Zenginlik",
+            "symbol_en": "EGG",
+            "meaning_en": "Wealth"
+        }
+    ]
+}
