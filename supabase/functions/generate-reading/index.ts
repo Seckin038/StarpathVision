@@ -1,25 +1,27 @@
-// @ts-ignore: Deno is a global in the Supabase Edge Function environment
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
-// @ts-ignore: Deno is a global in the Supabase Edge Function environment
-import { requireEnv } from "../../../src/utils/env.ts";
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
 };
 
-// @ts-ignore: Deno is a global in the Supabase Edge Function environment
 serve(async (req) => {
   if (req.method === 'OPTIONS') {
     return new Response(null, { headers: corsHeaders });
   }
 
   try {
-    const GEMINI_API_KEY = requireEnv("GEMINI_API_KEY");
+    // Oplossing direct in de functie, zoals je voorstelde in de "bonus" sectie.
+    // Dit werkt omdat het geen externe bestanden hoeft te importeren.
+    const GEMINI_API_KEY =
+      (typeof Deno !== "undefined" && Deno.env?.get?.("GEMINI_API_KEY")) ||
+      (typeof process !== "undefined" && process.env?.GEMINI_API_KEY);
+
     if (!GEMINI_API_KEY) {
       console.error("GEMINI_API_KEY is not set in Supabase secrets.");
       throw new Error("De AI-configuratie aan de server-kant ontbreekt. Controleer de API-sleutel.");
     }
+    
     const GEMINI_API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${GEMINI_API_KEY}`;
 
     const body = await req.json();
@@ -89,10 +91,8 @@ serve(async (req) => {
     });
 
   } catch (error) {
-    // @ts-ignore: Deno is a global in the Supabase Edge Function environment
     console.error("Edge function error:", error.message);
-    // @ts-ignore: Deno is a global in the Supabase Edge Function environment
-    return new Response(JSON.stringify({ error: error.message }), {
+    return new Response(JSON.stringify({ error: a.message }), {
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       status: 500,
     });
