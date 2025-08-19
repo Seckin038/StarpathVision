@@ -1,5 +1,14 @@
 # StarpathVision
 
+## Local development
+
+Install dependencies and start the development server:
+
+```bash
+pnpm install
+pnpm dev
+```
+
 ## Running lint
 
 Run ESLint to check for code issues:
@@ -10,11 +19,9 @@ pnpm lint
 
 ## Running tests
 
-To run the test suite locally, install dependencies and execute:
+Execute the test suite with [Vitest](https://vitest.dev/):
 
 ```bash
 pnpm test
 ```
-
-This runs all tests using [Vitest](https://vitest.dev/).
 
