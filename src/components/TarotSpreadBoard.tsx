@@ -1,57 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
-
-// --- TYPE DEFINITIES ---
-type Locale = 'nl' | 'en' | 'tr';
-
-type LocalizedString = {
-  [key in Locale]: string;
-};
-
-type TarotCard = {
-  id: string;
-  name: string;
-  image: string;
-};
-
-type DrawnCard = {
-  positionId: string;
-  card: TarotCard;
-  isReversed: boolean;
-};
-
-type SpreadPosition = {
-  id: string;
-  label: LocalizedString;
-};
-
-type LayoutCoord = {
-  id: string;
-  x: number;
-  y: number;
-  rotation?: number;
-};
-
-type SpreadLayout = {
-  type: 'absolute' | 'row' | 'circle' | 'arc' | 'stair' | 'columns';
-  gap?: number;
-  origin?: { x: number | string; y: number | string };
-  radius?: number;
-  cardSize?: { w: number; h: number };
-  coords?: LayoutCoord[];
-  step?: number;
-  columns?: number;
-};
-
-type Spread = {
-  id: string;
-  name: LocalizedString;
-  description: LocalizedString;
-  drawCount: number;
-  positions: SpreadPosition[];
-  layout: SpreadLayout;
-};
+import { Spread, DrawnCard, Locale, SpreadPosition } from '@/types/tarot';
 
 // --- COMPONENT PROPS ---
 interface TarotSpreadBoardProps {
@@ -73,9 +23,7 @@ export default function TarotSpreadBoard({
   const handleCardClick = (positionId: string) => {
     setFlippedCards(prev => {
       const newSet = new Set(prev);
-      if (newSet.has(positionId)) {
-        // newSet.delete(positionId); // Uncomment to allow flipping back
-      } else {
+      if (!newSet.has(positionId)) {
         newSet.add(positionId);
       }
       return newSet;
@@ -85,33 +33,34 @@ export default function TarotSpreadBoard({
   const cardPositions = calculateCardPositions(spread, draw);
 
   return (
-    <div className={cn('relative w-full min-h-[600px] p-4', className)}>
-      <AnimatePresence>
-        {cardPositions.map(({ drawnCard, style, position }, index) => (
-          <motion.div
-            key={drawnCard.positionId}
-            className="absolute"
-            style={style}
-            initial={{ opacity: 0, scale: 0.8, y: 50 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            transition={{ type: 'spring', damping: 15, stiffness: 100, delay: 0.1 * index }}
-          >
-            <div className="relative group">
-              <Card
-                drawnCard={drawnCard}
-                isFlipped={flippedCards.has(drawnCard.positionId)}
-                onClick={() => handleCardClick(drawnCard.positionId)}
-                cardSize={spread.layout.cardSize}
-              />
-              <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 w-max text-center">
-                <p className="text-xs font-semibold text-amber-200 bg-black/50 px-2 py-1 rounded">
-                  {position.label[locale]}
-                </p>
+    <div className={cn('relative w-full min-h-[600px] p-4 flex items-center justify-center', className)}>
+      <div className="relative w-full h-full">
+        <AnimatePresence>
+          {cardPositions.map(({ drawnCard, style, position }, index) => (
+            <motion.div
+              key={drawnCard.positionId}
+              className="absolute"
+              style={style}
+              initial={{ opacity: 0, scale: 0.8, y: 50 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{ type: 'spring', damping: 15, stiffness: 100, delay: 0.1 * index }}
+            >
+              <div className="relative group">
+                <Card
+                  drawnCard={drawnCard}
+                  isFlipped={flippedCards.has(drawnCard.positionId)}
+                  onClick={() => handleCardClick(drawnCard.positionId)}
+                />
+                <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 w-max text-center">
+                  <p className="text-xs font-semibold text-amber-200 bg-black/50 px-2 py-1 rounded">
+                    {position[locale]}
+                  </p>
+                </div>
               </div>
-            </div>
-          </motion.div>
-        ))}
-      </AnimatePresence>
+            </motion.div>
+          ))}
+        </AnimatePresence>
+      </div>
     </div>
   );
 }
@@ -121,13 +70,12 @@ interface CardProps {
   drawnCard: DrawnCard;
   isFlipped: boolean;
   onClick: () => void;
-  cardSize?: { w: number; h: number };
 }
 
-function Card({ drawnCard, isFlipped, onClick, cardSize }: CardProps) {
+function Card({ drawnCard, isFlipped, onClick }: CardProps) {
   const { card, isReversed } = drawnCard;
-  const width = cardSize?.w || 120;
-  const height = cardSize?.h || 200;
+  const width = 120;
+  const height = 200;
 
   return (
     <div
@@ -171,40 +119,29 @@ function Card({ drawnCard, isFlipped, onClick, cardSize }: CardProps) {
 // --- LAYOUT CALCULATIE LOGICA ---
 function calculateCardPositions(spread: Spread, draw: DrawnCard[]) {
   const { layout, positions } = spread;
-  const cardSize = layout.cardSize || { w: 120, h: 200 };
+  const cardSize = { w: 120, h: 200 };
+  const gap = 40;
 
-  const positionMap = new Map(positions.map((p: SpreadPosition) => [p.id, p]));
+  const positionMap = new Map(positions.map((p) => [p.slot_key, p]));
+  const styles: { [key: string]: React.CSSProperties } = {};
 
-  let styles: { [key: string]: React.CSSProperties } = {};
+  const cardWidthWithGap = cardSize.w + gap;
 
-  switch (layout.type) {
-    case 'absolute':
-      layout.coords?.forEach((coord: LayoutCoord) => {
-        styles[coord.id] = {
-          left: `calc(${layout.origin?.x || '50%'} - ${cardSize.w / 2}px + ${coord.x}px)`,
-          top: `calc(${layout.origin?.y || '50%'} - ${cardSize.h / 2}px + ${coord.y}px)`,
-          transform: `rotate(${coord.rotation || 0}deg)`,
-        };
-      });
-      break;
-
-    case 'row':
-      const totalWidth = draw.length * cardSize.w + (draw.length - 1) * (layout.gap || 20);
-      draw.forEach((d, i) => {
-        styles[d.positionId] = {
-          left: `calc(50% - ${totalWidth / 2}px + ${i * (cardSize.w + (layout.gap || 20))}px)`,
-          top: '50%',
-          transform: 'translateY(-50%)',
-        };
-      });
-      break;
-  }
+  // For now, we'll treat most layouts as a simple horizontal line.
+  // This can be expanded later with more complex layout logic.
+  const totalWidth = draw.length * cardSize.w + (draw.length - 1) * gap;
+  draw.forEach((d, i) => {
+    styles[d.positionId] = {
+      left: `calc(50% - ${totalWidth / 2}px + ${i * cardWidthWithGap}px)`,
+      top: `calc(50% - ${cardSize.h / 2}px)`,
+    };
+  });
 
   return draw
-    .map(drawnCard => ({
+    .map((drawnCard) => ({
       drawnCard,
       style: styles[drawnCard.positionId],
       position: positionMap.get(drawnCard.positionId)!,
     }))
-    .filter(item => item.position && item.style);
+    .filter((item) => item.position && item.style);
 }

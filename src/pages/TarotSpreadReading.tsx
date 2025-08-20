@@ -122,7 +122,7 @@ export default function TarotReadingPage() {
             <div className="mt-8 flex justify-center">
               <Button
                 disabled={selectedIndices.length !== spread.cards_required}
-                className="rounded-xl bg-amber-700/90 px-5 py-3 text-black disabled:opacity-40"
+                className="rounded-xl bg-amber-800/90 px-5 py-3 text-black disabled:opacity-40"
                 onClick={handleConfirmSelection}
               >
                 ✨ Onthul mijn lezing ( {selectedIndices.length}/{spread.cards_required} )
@@ -132,8 +132,7 @@ export default function TarotReadingPage() {
         );
       case 'reading':
         if (!spread || draw.length === 0) return null;
-        // This component needs to be updated to handle the new spread format
-        return <p className="text-center">Lezing wordt weergegeven...</p>;
+        return <TarotSpreadBoard spread={spread} draw={draw} locale={locale} />;
     }
   };
 
