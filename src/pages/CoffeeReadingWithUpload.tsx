@@ -17,7 +17,6 @@ import { useTranslation } from "react-i18next";
 import { supabase } from "@/lib/supabaseClient";
 import { showLoading, dismissToast, showError, showSuccess } from "@/utils/toast";
 import falyaPersona from "../data/falya.json";
-import MysticalBackground from "@/components/MysticalBackground";
 
 const CoffeeReadingWithUpload = () => {
   const { i18n } = useTranslation();
@@ -127,152 +126,149 @@ const CoffeeReadingWithUpload = () => {
   }
 
   return (
-    <div className="relative min-h-screen bg-stone-950 text-stone-200 p-4 font-serif">
-      <MysticalBackground mode="particles" intensity="low" />
-      <div className="relative z-10 max-w-4xl mx-auto">
-        <div className="flex items-center justify-between mb-6">
-          <Link to="/dashboard">
-            <Button variant="outline" className="flex items-center gap-2 border-amber-800 text-amber-300 hover:bg-amber-900/50 hover:text-amber-200">
-              <ChevronLeft className="h-4 w-4" />
-              Terug
-            </Button>
-          </Link>
-          <h1 className="text-2xl font-bold text-amber-200 tracking-wider">Koffielezing met Foto</h1>
-          <div className="w-32"></div>
-        </div>
-
-        <Card className="mb-6 bg-stone-900/50 backdrop-blur-sm border-stone-800">
-          <CardHeader>
-            <CardTitle className="text-amber-300 flex items-center gap-2 text-xl">
-              <Camera className="h-5 w-5" />
-              Upload je koffiekop
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            {!uploadedImage ? (
-              <div>
-                <div 
-                  className="border-2 border-dashed border-stone-700 rounded-lg p-8 text-center cursor-pointer hover:bg-stone-900 transition-colors"
-                  onClick={() => fileInputRef.current?.click()}
-                >
-                  <Camera className="h-12 w-12 text-amber-400 mx-auto mb-3" />
-                  <h3 className="font-medium text-stone-200">Upload een foto van je koffiekop</h3>
-                  <p className="text-stone-400 text-sm mt-1">
-                    Of maak een foto met je camera
-                  </p>
-                  <Button 
-                    className="mt-4 bg-amber-800 hover:bg-amber-700 text-stone-100"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      fileInputRef.current?.click();
-                    }}
-                  >
-                    <Upload className="h-4 w-4 mr-2" />
-                    Kies foto
-                  </Button>
-                </div>
-                
-                <div className="mt-4 p-4 bg-stone-900 rounded-lg border border-stone-800">
-                  <div className="flex items-center gap-2 mb-3">
-                    <AlertCircle className="h-4 w-4 text-amber-400" />
-                    <span className="text-sm font-medium text-stone-200">Tips voor een goede foto</span>
-                  </div>
-                  <ul className="text-sm text-stone-400 space-y-1 list-disc list-inside">
-                    <li>Zorg voor voldoende licht</li>
-                    <li>Fotografeer de binnenkant van de kop</li>
-                    <li>Zorg dat de symbolen duidelijk zichtbaar zijn</li>
-                    <li>Gebruik geen flits</li>
-                  </ul>
-                </div>
-                
-                <input 
-                  type="file" 
-                  accept="image/*" 
-                  className="hidden" 
-                  onChange={handleImageUpload}
-                  ref={fileInputRef}
-                />
-              </div>
-            ) : (
-              <div className="mb-6">
-                <div className="relative">
-                  <img 
-                    src={uploadedImage} 
-                    alt="Uploaded coffee cup" 
-                    className="w-full h-64 object-contain rounded-lg border border-stone-700"
-                  />
-                  <Button 
-                    onClick={resetReading}
-                    variant="outline"
-                    size="sm"
-                    className="absolute top-2 right-2 bg-stone-900/80 border-stone-700 text-stone-300 hover:bg-stone-800"
-                  >
-                    <RotateCcw className="h-4 w-4" />
-                  </Button>
-                </div>
-                
-                {isAnalyzing ? (
-                  <div className="mt-4 text-center">
-                    <div className="inline-block animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-amber-500 mb-2"></div>
-                    <p className="text-stone-400">Beeld wordt geanalyseerd...</p>
-                  </div>
-                ) : detectedSymbols.length > 0 && (
-                  <div className="mt-4">
-                    <h3 className="font-semibold text-amber-200 mb-2">Gedetecteerde symbolen:</h3>
-                    <p className="text-sm text-stone-400 mb-3">Klik op de symbolen die je wilt gebruiken voor je lezing.</p>
-                    <div className="flex flex-wrap gap-2">
-                      {detectedSymbols.map((symbol) => (
-                        <Badge 
-                          key={symbol.symbol_nl} 
-                          variant={selectedSymbols.some(s => s.symbol_nl === symbol.symbol_nl) ? "default" : "outline"}
-                          className={`cursor-pointer transition-all ${
-                            selectedSymbols.some(s => s.symbol_nl === symbol.symbol_nl)
-                            ? "bg-amber-800 text-stone-100 border-amber-700"
-                            : "border-stone-700 text-stone-300 hover:bg-stone-800"
-                          }`}
-                          onClick={() => handleSymbolSelect(symbol)}
-                        >
-                          {getSymbolName(symbol)}
-                        </Badge>
-                      ))}
-                    </div>
-                  </div>
-                )}
-              </div>
-            )}
-
-            {selectedSymbols.length > 0 && (
-              <>
-                <Separator className="my-4 bg-stone-800" />
-                <div className="flex justify-center">
-                  <Button 
-                    onClick={generateReading}
-                    disabled={isGenerating}
-                    className="bg-amber-800 hover:bg-amber-700 text-stone-100 flex items-center gap-2 px-6 py-3"
-                  >
-                    {isGenerating ? <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div> : <Coffee className="h-5 w-5" />}
-                    Lezing genereren
-                  </Button>
-                </div>
-              </>
-            )}
-
-            {readingResult && (
-              <Card className="mt-6 bg-stone-900 border-stone-800">
-                <CardContent className="pt-6">
-                  <div className="flex items-start gap-3">
-                    <Sparkles className="h-5 w-5 text-amber-400 mt-1 flex-shrink-0" />
-                    <div>
-                      <h3 className="font-semibold text-amber-200 mb-2">Je lezing:</h3>
-                      <p className="text-stone-300 whitespace-pre-line">{readingResult}</p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            )}
-          </CardContent>
-        </Card>
+    <div className="relative z-10 max-w-4xl mx-auto">
+      <div className="flex items-center justify-between mb-6">
+        <Link to="/dashboard">
+          <Button variant="outline" className="flex items-center gap-2 border-amber-800 text-amber-300 hover:bg-amber-900/50 hover:text-amber-200">
+            <ChevronLeft className="h-4 w-4" />
+            Terug
+          </Button>
+        </Link>
+        <h1 className="text-2xl font-bold text-amber-200 tracking-wider">Koffielezing met Foto</h1>
+        <div className="w-32"></div>
       </div>
+
+      <Card className="mb-6 bg-stone-900/50 backdrop-blur-sm border-stone-800">
+        <CardHeader>
+          <CardTitle className="text-amber-300 flex items-center gap-2 text-xl">
+            <Camera className="h-5 w-5" />
+            Upload je koffiekop
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          {!uploadedImage ? (
+            <div>
+              <div 
+                className="border-2 border-dashed border-stone-700 rounded-lg p-8 text-center cursor-pointer hover:bg-stone-900 transition-colors"
+                onClick={() => fileInputRef.current?.click()}
+              >
+                <Camera className="h-12 w-12 text-amber-400 mx-auto mb-3" />
+                <h3 className="font-medium text-stone-200">Upload een foto van je koffiekop</h3>
+                <p className="text-stone-400 text-sm mt-1">
+                  Of maak een foto met je camera
+                </p>
+                <Button 
+                  className="mt-4 bg-amber-800 hover:bg-amber-700 text-stone-100"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    fileInputRef.current?.click();
+                  }}
+                >
+                  <Upload className="h-4 w-4 mr-2" />
+                  Kies foto
+                </Button>
+              </div>
+              
+              <div className="mt-4 p-4 bg-stone-900 rounded-lg border border-stone-800">
+                <div className="flex items-center gap-2 mb-3">
+                  <AlertCircle className="h-4 w-4 text-amber-400" />
+                  <span className="text-sm font-medium text-stone-200">Tips voor een goede foto</span>
+                </div>
+                <ul className="text-sm text-stone-400 space-y-1 list-disc list-inside">
+                  <li>Zorg voor voldoende licht</li>
+                  <li>Fotografeer de binnenkant van de kop</li>
+                  <li>Zorg dat de symbolen duidelijk zichtbaar zijn</li>
+                  <li>Gebruik geen flits</li>
+                </ul>
+              </div>
+              
+              <input 
+                type="file" 
+                accept="image/*" 
+                className="hidden" 
+                onChange={handleImageUpload}
+                ref={fileInputRef}
+              />
+            </div>
+          ) : (
+            <div className="mb-6">
+              <div className="relative">
+                <img 
+                  src={uploadedImage} 
+                  alt="Uploaded coffee cup" 
+                  className="w-full h-64 object-contain rounded-lg border border-stone-700"
+                />
+                <Button 
+                  onClick={resetReading}
+                  variant="outline"
+                  size="sm"
+                  className="absolute top-2 right-2 bg-stone-900/80 border-stone-700 text-stone-300 hover:bg-stone-800"
+                >
+                  <RotateCcw className="h-4 w-4" />
+                </Button>
+              </div>
+              
+              {isAnalyzing ? (
+                <div className="mt-4 text-center">
+                  <div className="inline-block animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-amber-500 mb-2"></div>
+                  <p className="text-stone-400">Beeld wordt geanalyseerd...</p>
+                </div>
+              ) : detectedSymbols.length > 0 && (
+                <div className="mt-4">
+                  <h3 className="font-semibold text-amber-200 mb-2">Gedetecteerde symbolen:</h3>
+                  <p className="text-sm text-stone-400 mb-3">Klik op de symbolen die je wilt gebruiken voor je lezing.</p>
+                  <div className="flex flex-wrap gap-2">
+                    {detectedSymbols.map((symbol) => (
+                      <Badge 
+                        key={symbol.symbol_nl} 
+                        variant={selectedSymbols.some(s => s.symbol_nl === symbol.symbol_nl) ? "default" : "outline"}
+                        className={`cursor-pointer transition-all ${
+                          selectedSymbols.some(s => s.symbol_nl === symbol.symbol_nl)
+                          ? "bg-amber-800 text-stone-100 border-amber-700"
+                          : "border-stone-700 text-stone-300 hover:bg-stone-800"
+                        }`}
+                        onClick={() => handleSymbolSelect(symbol)}
+                      >
+                        {getSymbolName(symbol)}
+                      </Badge>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+
+          {selectedSymbols.length > 0 && (
+            <>
+              <Separator className="my-4 bg-stone-800" />
+              <div className="flex justify-center">
+                <Button 
+                  onClick={generateReading}
+                  disabled={isGenerating}
+                  className="bg-amber-800 hover:bg-amber-700 text-stone-100 flex items-center gap-2 px-6 py-3"
+                >
+                  {isGenerating ? <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div> : <Coffee className="h-5 w-5" />}
+                  Lezing genereren
+                </Button>
+              </div>
+            </>
+          )}
+
+          {readingResult && (
+            <Card className="mt-6 bg-stone-900 border-stone-800">
+              <CardContent className="pt-6">
+                <div className="flex items-start gap-3">
+                  <Sparkles className="h-5 w-5 text-amber-400 mt-1 flex-shrink-0" />
+                  <div>
+                    <h3 className="font-semibold text-amber-200 mb-2">Je lezing:</h3>
+                    <p className="text-stone-300 whitespace-pre-line">{readingResult}</p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          )}
+        </CardContent>
+      </Card>
     </div>
   );
 };

@@ -16,7 +16,6 @@ import { useTranslation } from "react-i18next";
 import { supabase } from "@/lib/supabaseClient";
 import { showLoading, dismissToast, showError, showSuccess } from "@/utils/toast";
 import falyaPersona from "../data/falya.json";
-import MysticalBackground from "@/components/MysticalBackground";
 
 const CoffeeReading = () => {
   const { i18n } = useTranslation();
@@ -103,119 +102,116 @@ const CoffeeReading = () => {
   }
 
   return (
-    <div className="relative min-h-screen bg-stone-950 text-stone-200 p-4 font-serif">
-      <MysticalBackground mode="particles+sigils" intensity="low" />
-      <div className="relative z-10 max-w-4xl mx-auto">
-        <div className="flex items-center justify-between mb-6">
-          <Link to="/dashboard">
-            <Button variant="outline" className="flex items-center gap-2 border-amber-800 text-amber-300 hover:bg-amber-900/50 hover:text-amber-200">
-              <ChevronLeft className="h-4 w-4" />
-              Terug
-            </Button>
-          </Link>
-          <h1 className="text-2xl font-bold text-amber-200 tracking-wider">Koffielezing</h1>
-          <div className="w-32"></div>
-        </div>
+    <div className="relative z-10 max-w-4xl mx-auto">
+      <div className="flex items-center justify-between mb-6">
+        <Link to="/dashboard">
+          <Button variant="outline" className="flex items-center gap-2 border-amber-800 text-amber-300 hover:bg-amber-900/50 hover:text-amber-200">
+            <ChevronLeft className="h-4 w-4" />
+            Terug
+          </Button>
+        </Link>
+        <h1 className="text-2xl font-bold text-amber-200 tracking-wider">Koffielezing</h1>
+        <div className="w-32"></div>
+      </div>
 
-        <Card className="mb-6 bg-stone-900/50 backdrop-blur-sm border-stone-800">
-          <CardHeader>
-            <CardTitle className="text-amber-300 flex items-center gap-2 text-xl">
-              <Coffee className="h-5 w-5" />
-              Kies Symbolen uit je Koffiekop
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="mb-6">
-              <h3 className="font-semibold text-amber-200 mb-2">Geselecteerde symbolen:</h3>
-              <div className="flex flex-wrap gap-2">
-                {selectedSymbols.length > 0 ? (
-                  selectedSymbols.map((symbol) => (
-                    <Badge 
-                      key={symbol.symbol_name_nl}
-                      className="bg-amber-800 hover:bg-amber-700 text-stone-100 cursor-pointer"
-                      onClick={() => handleSymbolSelect(symbol)}
-                    >
-                      {getSymbolName(symbol)}
-                    </Badge>
-                  ))
-                ) : (
-                  <p className="text-stone-400 text-sm">Nog geen symbolen geselecteerd</p>
-                )}
-              </div>
-            </div>
-
-            <Separator className="my-4 bg-stone-800" />
-
-            <h3 className="font-semibold text-amber-200 mb-3">Koffiesymbolen:</h3>
-            <ScrollArea className="h-96 rounded-md border border-stone-800 p-4 bg-stone-950/50">
-              {isLoadingSymbols ? (
-                <div className="flex items-center justify-center h-full">
-                  <Loader2 className="h-8 w-8 animate-spin text-amber-500" />
-                </div>
+      <Card className="mb-6 bg-stone-900/50 backdrop-blur-sm border-stone-800">
+        <CardHeader>
+          <CardTitle className="text-amber-300 flex items-center gap-2 text-xl">
+            <Coffee className="h-5 w-5" />
+            Kies Symbolen uit je Koffiekop
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="mb-6">
+            <h3 className="font-semibold text-amber-200 mb-2">Geselecteerde symbolen:</h3>
+            <div className="flex flex-wrap gap-2">
+              {selectedSymbols.length > 0 ? (
+                selectedSymbols.map((symbol) => (
+                  <Badge 
+                    key={symbol.symbol_name_nl}
+                    className="bg-amber-800 hover:bg-amber-700 text-stone-100 cursor-pointer"
+                    onClick={() => handleSymbolSelect(symbol)}
+                  >
+                    {getSymbolName(symbol)}
+                  </Badge>
+                ))
               ) : (
-                <div className="space-y-4">
-                  {Object.keys(groupedSymbols).sort().map(letter => (
-                    <div key={letter}>
-                      <h4 className="font-bold text-amber-300 mb-2 text-lg">{letter}</h4>
-                      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 items-stretch">
-                        {groupedSymbols[letter].map((symbol) => (
-                          <Button
-                            key={symbol.symbol_name_nl}
-                            variant={selectedSymbols.some(s => s.symbol_name_nl === symbol.symbol_name_nl) ? "default" : "outline"}
-                            className={`h-full py-3 flex flex-col items-center justify-start text-center transition-all whitespace-normal ${
-                              selectedSymbols.some(s => s.symbol_name_nl === symbol.symbol_name_nl) 
-                                ? "bg-amber-800 hover:bg-amber-700 text-stone-100 border-amber-700" 
-                                : "bg-stone-900/50 hover:bg-stone-800 border-stone-700 text-stone-300"
-                            }`}
-                            onClick={() => handleSymbolSelect(symbol)}
-                          >
-                            <span className="font-medium text-sm">{getSymbolName(symbol)}</span>
-                            <span className="text-xs mt-1 text-stone-400">{getSymbolMeaning(symbol)}</span>
-                          </Button>
-                        ))}
-                      </div>
-                    </div>
-                  ))}
-                </div>
+                <p className="text-stone-400 text-sm">Nog geen symbolen geselecteerd</p>
               )}
-            </ScrollArea>
-
-            <div className="mt-6 flex justify-center gap-3">
-              <Link to="/readings/coffee/upload">
-                <Button 
-                  variant="outline"
-                  className="border-amber-800 text-amber-300 hover:bg-amber-900/50 hover:text-amber-200 flex items-center gap-2"
-                >
-                  <Upload className="h-4 w-4" />
-                  Foto uploaden
-                </Button>
-              </Link>
-              <Button 
-                onClick={generateReading}
-                disabled={selectedSymbols.length === 0 || isGenerating}
-                className="bg-amber-800 hover:bg-amber-700 text-stone-100 flex items-center gap-2 px-6 py-3"
-              >
-                {isGenerating ? <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div> : <Coffee className="h-5 w-5" />}
-                Lezing genereren
-              </Button>
             </div>
+          </div>
 
-            {readingResult && (
-              <Card className="mt-6 bg-stone-900 border-stone-800">
-                <CardContent className="pt-6">
-                  <div className="flex items-start gap-3">
-                    <Sparkles className="h-5 w-5 text-amber-400 mt-1 flex-shrink-0" />
-                    <div>
-                      <h3 className="font-semibold text-amber-200 mb-2">Je lezing:</h3>
-                      <p className="text-stone-300 whitespace-pre-line">{readingResult}</p>
+          <Separator className="my-4 bg-stone-800" />
+
+          <h3 className="font-semibold text-amber-200 mb-3">Koffiesymbolen:</h3>
+          <ScrollArea className="h-96 rounded-md border border-stone-800 p-4 bg-stone-950/50">
+            {isLoadingSymbols ? (
+              <div className="flex items-center justify-center h-full">
+                <Loader2 className="h-8 w-8 animate-spin text-amber-500" />
+              </div>
+            ) : (
+              <div className="space-y-4">
+                {Object.keys(groupedSymbols).sort().map(letter => (
+                  <div key={letter}>
+                    <h4 className="font-bold text-amber-300 mb-2 text-lg">{letter}</h4>
+                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 items-stretch">
+                      {groupedSymbols[letter].map((symbol) => (
+                        <Button
+                          key={symbol.symbol_name_nl}
+                          variant={selectedSymbols.some(s => s.symbol_name_nl === symbol.symbol_name_nl) ? "default" : "outline"}
+                          className={`h-full py-3 flex flex-col items-center justify-start text-center transition-all whitespace-normal ${
+                            selectedSymbols.some(s => s.symbol_name_nl === symbol.symbol_name_nl) 
+                              ? "bg-amber-800 hover:bg-amber-700 text-stone-100 border-amber-700" 
+                              : "bg-stone-900/50 hover:bg-stone-800 border-stone-700 text-stone-300"
+                          }`}
+                          onClick={() => handleSymbolSelect(symbol)}
+                        >
+                          <span className="font-medium text-sm">{getSymbolName(symbol)}</span>
+                          <span className="text-xs mt-1 text-stone-400">{getSymbolMeaning(symbol)}</span>
+                        </Button>
+                      ))}
                     </div>
                   </div>
-                </CardContent>
-              </Card>
+                ))}
+              </div>
             )}
-          </CardContent>
-        </Card>
-      </div>
+          </ScrollArea>
+
+          <div className="mt-6 flex justify-center gap-3">
+            <Link to="/readings/coffee/upload">
+              <Button 
+                variant="outline"
+                className="border-amber-800 text-amber-300 hover:bg-amber-900/50 hover:text-amber-200 flex items-center gap-2"
+              >
+                <Upload className="h-4 w-4" />
+                Foto uploaden
+              </Button>
+            </Link>
+            <Button 
+              onClick={generateReading}
+              disabled={selectedSymbols.length === 0 || isGenerating}
+              className="bg-amber-800 hover:bg-amber-700 text-stone-100 flex items-center gap-2 px-6 py-3"
+            >
+              {isGenerating ? <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div> : <Coffee className="h-5 w-5" />}
+              Lezing genereren
+            </Button>
+          </div>
+
+          {readingResult && (
+            <Card className="mt-6 bg-stone-900 border-stone-800">
+              <CardContent className="pt-6">
+                <div className="flex items-start gap-3">
+                  <Sparkles className="h-5 w-5 text-amber-400 mt-1 flex-shrink-0" />
+                  <div>
+                    <h3 className="font-semibold text-amber-200 mb-2">Je lezing:</h3>
+                    <p className="text-stone-300 whitespace-pre-line">{readingResult}</p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          )}
+        </CardContent>
+      </Card>
     </div>
   );
 };

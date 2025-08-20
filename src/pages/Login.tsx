@@ -5,7 +5,6 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import MysticalBackground from "@/components/MysticalBackground";
 
 export default function LoginPage() {
   const navigate = useNavigate();
@@ -28,8 +27,7 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="relative min-h-screen bg-stone-950 text-stone-200 p-4 flex items-center justify-center font-serif">
-      <MysticalBackground mode="gradient" />
+    <div className="flex items-center justify-center">
       <Card className="w-full max-w-sm bg-stone-900/50 backdrop-blur-sm border-stone-800 z-10">
         <CardHeader>
           <CardTitle className="text-2xl text-amber-200 text-center">Welkom Terug</CardTitle>

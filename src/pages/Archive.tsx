@@ -18,7 +18,6 @@ import {
 import { Link } from "react-router-dom";
 import { supabase } from "@/lib/supabaseClient";
 import { showError } from "@/utils/toast";
-import MysticalBackground from "@/components/MysticalBackground";
 
 interface Reading {
   id: string;
@@ -96,89 +95,86 @@ const Archive = () => {
   };
 
   return (
-    <div className="relative min-h-screen bg-stone-950 text-stone-200 p-4 font-serif">
-      <MysticalBackground mode="gradient" />
-      <div className="relative z-10 max-w-4xl mx-auto">
-        <div className="flex items-center justify-between mb-6">
-          <Link to="/dashboard">
-            <Button variant="outline" className="flex items-center gap-2 border-amber-800 text-amber-300 hover:bg-amber-900/50 hover:text-amber-200">
-              <ChevronLeft className="h-4 w-4" />
-              Terug
-            </Button>
-          </Link>
-          <h1 className="text-2xl font-bold text-amber-200 tracking-wider">Mijn Lezingen</h1>
-          <div className="w-32 flex justify-end">
-            <Button variant="outline" className="border-stone-700 text-stone-300 hover:bg-stone-800"><Download className="h-4 w-4" /></Button>
-          </div>
+    <div className="relative z-10 max-w-4xl mx-auto">
+      <div className="flex items-center justify-between mb-6">
+        <Link to="/dashboard">
+          <Button variant="outline" className="flex items-center gap-2 border-amber-800 text-amber-300 hover:bg-amber-900/50 hover:text-amber-200">
+            <ChevronLeft className="h-4 w-4" />
+            Terug
+          </Button>
+        </Link>
+        <h1 className="text-2xl font-bold text-amber-200 tracking-wider">Mijn Lezingen</h1>
+        <div className="w-32 flex justify-end">
+          <Button variant="outline" className="border-stone-700 text-stone-300 hover:bg-stone-800"><Download className="h-4 w-4" /></Button>
         </div>
-
-        <Card className="bg-stone-900/50 backdrop-blur-sm border-stone-800">
-          <CardHeader>
-            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-              <CardTitle className="text-amber-300 flex items-center gap-2 text-xl"><Sparkles className="h-5 w-5" />Lezing Geschiedenis</CardTitle>
-              <div className="flex gap-2">
-                <div className="relative">
-                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-stone-500" />
-                  <Input placeholder="Zoek lezingen..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} className="pl-10 bg-stone-900 border-stone-700 focus:ring-amber-500" />
-                </div>
-                <select value={filterMethod} onChange={(e) => setFilterMethod(e.target.value)} className="border border-stone-700 rounded-md px-3 py-2 bg-stone-900 text-stone-300 focus:ring-amber-500 focus:border-amber-500">
-                  <option value="all">Alle methodes</option>
-                  <option value="tarot">Tarot</option>
-                  <option value="numerology">Numerologie</option>
-                  <option value="coffee">Koffiedik</option>
-                  <option value="dreams">Dromen</option>
-                </select>
-              </div>
-            </div>
-          </CardHeader>
-          <CardContent>
-            {loading ? (
-              <div className="text-center py-12 flex justify-center items-center gap-2">
-                <Loader2 className="h-8 w-8 text-amber-600 animate-spin" />
-                <p className="text-stone-400">Lezingen worden geladen...</p>
-              </div>
-            ) : filteredReadings.length === 0 ? (
-              <div className="text-center py-12">
-                <Coffee className="h-12 w-12 text-amber-600 mx-auto mb-4" />
-                <h3 className="font-semibold text-amber-200 mb-2">Geen lezingen gevonden</h3>
-                <p className="text-stone-400 mb-4">Er zijn geen lezingen die voldoen aan je zoekcriteria.</p>
-                <Button onClick={() => { setSearchTerm(""); setFilterMethod("all"); }} className="bg-amber-800 hover:bg-amber-700 text-stone-100">Reset filters</Button>
-              </div>
-            ) : (
-              <ScrollArea className="h-[calc(100vh-300px)]">
-                <div className="space-y-4 pr-4">
-                  {filteredReadings.map((reading) => (
-                    <Card key={reading.id} className="bg-stone-900 border-stone-800">
-                      <CardContent className="p-4">
-                        <div className="flex justify-between items-start">
-                          <div className="flex-1">
-                            <div className="flex items-center gap-2 mb-2 flex-wrap">
-                              <h3 className="font-semibold text-stone-200">{reading.input.text || `Lezing van ${formatDate(reading.created_at)}`}</h3>
-                              <Badge variant="outline" className="text-stone-300 border-stone-700">{reading.method}</Badge>
-                              <Badge variant="outline" className="text-stone-300 border-stone-700 flex items-center gap-1">
-                                <Globe className="h-3 w-3" />
-                                {reading.language.toUpperCase()}
-                              </Badge>
-                            </div>
-                            <div className="flex items-center gap-4 text-sm text-stone-400 mb-3">
-                              <div className="flex items-center gap-1"><Calendar className="h-4 w-4" /><span>{formatDate(reading.created_at)}</span></div>
-                            </div>
-                            <p className="text-stone-300 text-sm line-clamp-2">{reading.output?.summary || reading.output?.ai_summary}</p>
-                          </div>
-                          <div className="flex flex-col gap-2 ml-4">
-                            <Button variant="outline" size="sm" className="border-stone-700 text-stone-300 hover:bg-stone-800"><Download className="h-4 w-4" /></Button>
-                            <Button variant="outline" size="sm" onClick={() => deleteReading(reading.id)} className="border-red-900/50 text-red-400 hover:bg-red-900/20"><Trash2 className="h-4 w-4" /></Button>
-                          </div>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  ))}
-                </div>
-              </ScrollArea>
-            )}
-          </CardContent>
-        </Card>
       </div>
+
+      <Card className="bg-stone-900/50 backdrop-blur-sm border-stone-800">
+        <CardHeader>
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+            <CardTitle className="text-amber-300 flex items-center gap-2 text-xl"><Sparkles className="h-5 w-5" />Lezing Geschiedenis</CardTitle>
+            <div className="flex gap-2">
+              <div className="relative">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-stone-500" />
+                <Input placeholder="Zoek lezingen..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} className="pl-10 bg-stone-900 border-stone-700 focus:ring-amber-500" />
+              </div>
+              <select value={filterMethod} onChange={(e) => setFilterMethod(e.target.value)} className="border border-stone-700 rounded-md px-3 py-2 bg-stone-900 text-stone-300 focus:ring-amber-500 focus:border-amber-500">
+                <option value="all">Alle methodes</option>
+                <option value="tarot">Tarot</option>
+                <option value="numerology">Numerologie</option>
+                <option value="coffee">Koffiedik</option>
+                <option value="dreams">Dromen</option>
+              </select>
+            </div>
+          </div>
+        </CardHeader>
+        <CardContent>
+          {loading ? (
+            <div className="text-center py-12 flex justify-center items-center gap-2">
+              <Loader2 className="h-8 w-8 text-amber-600 animate-spin" />
+              <p className="text-stone-400">Lezingen worden geladen...</p>
+            </div>
+          ) : filteredReadings.length === 0 ? (
+            <div className="text-center py-12">
+              <Coffee className="h-12 w-12 text-amber-600 mx-auto mb-4" />
+              <h3 className="font-semibold text-amber-200 mb-2">Geen lezingen gevonden</h3>
+              <p className="text-stone-400 mb-4">Er zijn geen lezingen die voldoen aan je zoekcriteria.</p>
+              <Button onClick={() => { setSearchTerm(""); setFilterMethod("all"); }} className="bg-amber-800 hover:bg-amber-700 text-stone-100">Reset filters</Button>
+            </div>
+          ) : (
+            <ScrollArea className="h-[calc(100vh-300px)]">
+              <div className="space-y-4 pr-4">
+                {filteredReadings.map((reading) => (
+                  <Card key={reading.id} className="bg-stone-900 border-stone-800">
+                    <CardContent className="p-4">
+                      <div className="flex justify-between items-start">
+                        <div className="flex-1">
+                          <div className="flex items-center gap-2 mb-2 flex-wrap">
+                            <h3 className="font-semibold text-stone-200">{reading.input.text || `Lezing van ${formatDate(reading.created_at)}`}</h3>
+                            <Badge variant="outline" className="text-stone-300 border-stone-700">{reading.method}</Badge>
+                            <Badge variant="outline" className="text-stone-300 border-stone-700 flex items-center gap-1">
+                              <Globe className="h-3 w-3" />
+                              {reading.language.toUpperCase()}
+                            </Badge>
+                          </div>
+                          <div className="flex items-center gap-4 text-sm text-stone-400 mb-3">
+                            <div className="flex items-center gap-1"><Calendar className="h-4 w-4" /><span>{formatDate(reading.created_at)}</span></div>
+                          </div>
+                          <p className="text-stone-300 text-sm line-clamp-2">{reading.output?.summary || reading.output?.ai_summary}</p>
+                        </div>
+                        <div className="flex flex-col gap-2 ml-4">
+                          <Button variant="outline" size="sm" className="border-stone-700 text-stone-300 hover:bg-stone-800"><Download className="h-4 w-4" /></Button>
+                          <Button variant="outline" size="sm" onClick={() => deleteReading(reading.id)} className="border-red-900/50 text-red-400 hover:bg-red-900/20"><Trash2 className="h-4 w-4" /></Button>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </ScrollArea>
+          )}
+        </CardContent>
+      </Card>
     </div>
   );
 };

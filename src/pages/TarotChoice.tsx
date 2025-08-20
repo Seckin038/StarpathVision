@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Loader2, AlertTriangle, ChevronLeft, BookOpen } from "lucide-react";
-import MysticalBackground from "@/components/MysticalBackground";
 import { useTranslation } from "react-i18next";
 import { Spread, Locale } from "@/types/tarot";
 
@@ -88,29 +87,26 @@ const TarotChoice = () => {
   };
 
   return (
-    <div className="relative min-h-screen bg-stone-950 text-stone-200 p-4 font-serif">
-      <MysticalBackground mode="particles" intensity="low" />
-      <div className="relative z-10 max-w-5xl mx-auto">
-        <header className="flex items-center justify-between mb-8">
-          <Link to="/dashboard">
-            <Button variant="outline" className="flex items-center gap-2 border-amber-800 text-amber-300 hover:bg-amber-900/50 hover:text-amber-200">
-              <ChevronLeft className="h-4 w-4" /> Terug
-            </Button>
-          </Link>
-          <div className="text-center">
-            <h1 className="text-3xl font-serif tracking-wide text-amber-200">
-              Kies een Tarot Legging
-            </h1>
-            <p className="text-stone-400">
-              Selecteer een legging die resoneert met je vraag.
-            </p>
-          </div>
-          <div className="w-32"></div>
-        </header>
-        <main>
-          {renderContent()}
-        </main>
-      </div>
+    <div className="relative z-10 max-w-5xl mx-auto">
+      <header className="flex items-center justify-between mb-8">
+        <Link to="/dashboard">
+          <Button variant="outline" className="flex items-center gap-2 border-amber-800 text-amber-300 hover:bg-amber-900/50 hover:text-amber-200">
+            <ChevronLeft className="h-4 w-4" /> Terug
+          </Button>
+        </Link>
+        <div className="text-center">
+          <h1 className="text-3xl font-serif tracking-wide text-amber-200">
+            Kies een Tarot Legging
+          </h1>
+          <p className="text-stone-400">
+            Selecteer een legging die resoneert met je vraag.
+          </p>
+        </div>
+        <div className="w-32"></div>
+      </header>
+      <main>
+        {renderContent()}
+      </main>
     </div>
   );
 };
