@@ -100,7 +100,7 @@ export default function TarotPickThreePage() {
   return (
     <div className="relative min-h-screen bg-stone-950 text-stone-200 p-4 font-serif">
       <MysticalBackground mode="particles+sigils" intensity="medium" />
-      <div className="relative z-10 max-w-6xl mx-auto">
+      <div className="relative z-10 max-w-full px-4 lg:max-w-7xl lg:px-8 mx-auto">
         <header className="flex items-center justify-between mb-6">
           <Link to="/dashboard">
             <Button variant="outline" className="flex items-center gap-2 border-amber-800 text-amber-300 hover:bg-amber-900/50 hover:text-amber-200">
@@ -134,7 +134,7 @@ export default function TarotPickThreePage() {
                 exit={{ opacity: 0 }}
                 className="w-full"
               >
-                <div className="grid grid-cols-6 md:grid-cols-10 lg:grid-cols-[repeat(13,minmax(0,1fr))] gap-2">
+                <div className="grid grid-cols-7 lg:grid-cols-[repeat(13,minmax(0,1fr))] gap-2">
                   {deck.map((card, i) => (
                     <motion.div
                       key={card.id}
