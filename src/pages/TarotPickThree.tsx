@@ -6,7 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { ChevronLeft, Loader2, Sparkles } from "lucide-react";
 import MysticalBackground from "@/components/MysticalBackground";
-import TarotCardPicker from "@/components/TarotCardPicker";
+import TarotGridPicker from "@/components/TarotGridPicker";
 import { useTranslation } from "react-i18next";
 import { supabase } from "@/lib/supabaseClient";
 import { showLoading, dismissToast, showError, showSuccess } from "@/utils/toast";
@@ -95,7 +95,7 @@ export default function TarotPickThreePage() {
         );
       case 'picking':
         return (
-          <TarotCardPicker
+          <TarotGridPicker
             deck={deck}
             selectionLimit={SELECTION_LIMIT}
             onSelectionComplete={handleSelectionComplete}

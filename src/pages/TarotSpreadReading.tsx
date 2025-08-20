@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { ChevronLeft, Loader2, AlertTriangle } from "lucide-react";
 import MysticalBackground from "@/components/MysticalBackground";
 import TarotSpreadBoard from "@/components/TarotSpreadBoard";
-import TarotCardPicker from "@/components/TarotCardPicker";
+import TarotGridPicker from "@/components/TarotGridPicker";
 import { useTranslation } from "react-i18next";
 
 // Type definitions
@@ -95,7 +95,7 @@ export default function TarotReadingPage() {
       case 'picking':
         if (!spread) return null;
         return (
-          <TarotCardPicker
+          <TarotGridPicker
             deck={deck}
             selectionLimit={spread.drawCount}
             onSelectionComplete={handleSelectionComplete}

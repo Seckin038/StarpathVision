@@ -11,7 +11,7 @@ interface Props {
   onSelectionComplete: (selectedCards: TarotCardData[]) => void;
 }
 
-export default function TarotCardPicker({ deck, selectionLimit, onSelectionComplete }: Props) {
+export default function TarotGridPicker({ deck, selectionLimit, onSelectionComplete }: Props) {
   const [selectedCards, setSelectedCards] = useState<TarotCardData[]>([]);
 
   const handleCardSelect = (card: TarotCardData) => {
