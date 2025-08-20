@@ -1,12 +1,14 @@
 import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ChevronLeft, Loader2, AlertTriangle } from "lucide-react";
+import { ChevronLeft, Loader2, AlertTriangle, Sparkles } from "lucide-react";
 import MysticalBackground from "@/components/MysticalBackground";
 import TarotSpreadBoard, { SpreadName } from "@/components/TarotSpreadBoard";
 import TarotGridDisplay from "@/components/TarotGridDisplay";
 import { useTranslation } from "react-i18next";
 import { Spread, DrawnCard, TarotCardData, Locale } from "@/types/tarot";
+import { useTarotInterpretation } from "@/hooks/useTarotInterpretation";
+import TarotInterpretationPanel from "@/components/TarotInterpretationPanel";
 
 type Phase = 'loading' | 'error' | 'picking' | 'reading';
 
@@ -38,6 +40,8 @@ export default function TarotReadingPage() {
   const [draw, setDraw] = useState<DrawnCard[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [selectedIndices, setSelectedIndices] = useState<number[]>([]);
+
+  const { data: interpretation, isLoading: isLoadingInterpretation, error: interpretationError, getInterpretation } = useTarotInterpretation();
 
   useEffect(() => {
     const initializeReading = async () => {
@@ -109,6 +113,24 @@ export default function TarotReadingPage() {
     setPhase('reading');
   };
 
+  const handleInterpret = () => {
+    if (!spread || draw.length === 0) return;
+
+    const payload = {
+      locale,
+      spread: { id: spread.id, name: spread.name[locale] },
+      spreadGuide: spread.ui_copy[locale]?.subtitle || '',
+      cards: draw.map((c, i) => ({
+        index: i + 1,
+        name: c.card.name,
+        upright: !c.isReversed,
+        position_key: spread.positions[i].slot_key,
+        position_title: spread.positions[i][locale],
+      })),
+    };
+    getInterpretation(payload);
+  };
+
   const renderContent = () => {
     switch (phase) {
       case 'loading':
@@ -158,13 +180,40 @@ export default function TarotReadingPage() {
         }));
 
         return (
-          <div className="h-[70vh]">
-            <TarotSpreadBoard
-              deck={deck}
-              selectedCards={selectedCardsForBoard}
-              spread={spreadName}
-              mode="spread"
-            />
+          <div className="flex flex-col items-center">
+            <div className="h-[60vh] w-full">
+              <TarotSpreadBoard
+                deck={deck}
+                selectedCards={selectedCardsForBoard}
+                spread={spreadName}
+                mode="spread"
+              />
+            </div>
+            
+            {!interpretation && !isLoadingInterpretation && (
+              <Button
+                onClick={handleInterpret}
+                className="mt-8 bg-amber-700 hover:bg-amber-600 text-stone-100 text-lg px-6 py-6 flex items-center gap-2"
+              >
+                <Sparkles className="h-5 w-5" />
+                Onthul Interpretatie
+              </Button>
+            )}
+
+            {isLoadingInterpretation && (
+              <div className="mt-8 flex items-center gap-3 text-amber-300">
+                <Loader2 className="h-6 w-6 animate-spin" />
+                <span>De kaarten worden geduid...</span>
+              </div>
+            )}
+
+            {interpretationError && (
+              <div className="mt-8 text-red-400 bg-red-900/20 border border-red-800 rounded-lg p-4">
+                <p><strong>Fout:</strong> {interpretationError}</p>
+              </div>
+            )}
+
+            {interpretation && <TarotInterpretationPanel data={interpretation} />}
           </div>
         );
     }
