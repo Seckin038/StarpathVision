@@ -53,8 +53,8 @@ export default function TarotGridDisplay({
               key={i}
               type="button"
               onClick={() => toggle(i)}
-              className={`relative aspect-[2/3] w-full rounded-lg border border-purple-900/40 bg-[url('/tarot/back.svg')] bg-cover bg-center shadow-sm hover:shadow-md transition-all duration-300 ${
-                isSelected ? "ring-2 ring-amber-400 scale-105 shadow-lg shadow-amber-500/20" : "ring-0 hover:border-amber-600/50"
+              className={`relative aspect-[2/3] w-full rounded-xl border border-purple-900/40 bg-[url('/tarot/back.svg')] bg-cover bg-center shadow-sm hover:shadow-md transition-all duration-300 ${
+                isSelected ? "ring-2 ring-amber-500 scale-105" : "ring-0 hover:border-amber-600/50"
               }`}
               aria-pressed={isSelected}
               aria-label={`Card ${i + 1}`}
@@ -65,7 +65,7 @@ export default function TarotGridDisplay({
               {renderCard ? (
                 renderCard(i, isSelected)
               ) : (
-                <span className="absolute bottom-1 right-2 text-xs font-bold text-black/50 select-none">
+                <span className="absolute bottom-1 right-1 text-xs text-amber-200/70 select-none">
                   {i + 1}
                 </span>
               )}
