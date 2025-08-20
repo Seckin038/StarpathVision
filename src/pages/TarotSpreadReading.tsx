@@ -11,6 +11,7 @@ import TarotInterpretationPanel from "@/components/TarotInterpretationPanel";
 import { usePersona } from "@/contexts/PersonaContext";
 import { PersonaPicker } from "@/components/PersonaPicker";
 import { PersonaBadge } from "@/components/PersonaBadge";
+import { Card, CardContent } from "@/components/ui/card"; // Added import
 
 type Phase = 'loading' | 'error' | 'picking' | 'reading';
 
@@ -106,7 +107,97 @@ export default function TarotReadingPage() {
   }, [phase, draw, spread, locale, personaId, getInterpretation]);
 
   const renderContent = () => {
-    // ... content rendering logic
+    if (phase === 'loading') {
+      return (
+        <div className="text-center py-12 flex justify-center items-center gap-2">
+          <Loader2 className="h-8 w-8 text-amber-600 animate-spin" />
+          <p className="text-stone-400">Legging wordt geladen...</p>
+        </div>
+      );
+    }
+
+    if (phase === 'error' && error) {
+      return (
+        <div className="text-center py-12 text-red-400 bg-red-900/20 border border-red-800 rounded-lg p-8">
+          <AlertTriangle className="h-12 w-12 mx-auto mb-4" />
+          <h2 className="text-xl font-bold mb-2">Er is iets misgegaan</h2>
+          <p>{error}</p>
+        </div>
+      );
+    }
+
+    if (phase === 'picking' && spread && deck.length > 0) {
+      return (
+        <div className="space-y-8">
+          <div className="text-center text-stone-300">
+            <p>Kies {spread.cards_required} kaarten uit de stapel.</p>
+            <p className="text-sm text-stone-400">Geselecteerd: {selectedIndices.length} / {spread.cards_required}</p>
+          </div>
+          <TarotGridDisplay
+            totalCards={deck.length}
+            maxSelect={spread.cards_required}
+            selected={selectedIndices}
+            onChange={handleSelectionChange}
+            renderCard={(idx, isSelected) => (
+              <img
+                src="/tarot/back.svg" // Use a generic card back image
+                alt="Tarot Card Back"
+                className={`w-full h-full object-cover rounded-xl transition-transform duration-200 
+                  bg-gradient-to-b from-purple-500/15 to-indigo-600/15 border border-white/10 shadow-[0_10px_20px_rgba(0,0,0,.25)]
+                  ${isSelected ? 'scale-105 ring-2 ring-amber-500' : ''}`}
+              />
+            )}
+          />
+          <div className="flex justify-center">
+            <Button
+              onClick={handleConfirmSelection}
+              disabled={selectedIndices.length !== spread.cards_required}
+              className="bg-amber-800 hover:bg-amber-700 text-stone-100 flex items-center gap-2 px-6 py-3"
+            >
+              <Sparkles className="h-4 w-4" />
+              Bevestig selectie
+            </Button>
+          </div>
+        </div>
+      );
+    }
+
+    if (phase === 'reading' && spread && draw.length > 0) {
+      return (
+        <div className="space-y-8">
+          <TarotSpreadBoard
+            deck={deck}
+            selectedCards={draw.map(d => ({ id: d.card.id, name: d.card.name, imageUrl: `/tarot/${d.card.image}` }))}
+            spread={mapSpreadIdToSpreadName(spread.id)}
+            mode="spread"
+          />
+          {(isLoadingInterpretation || interpretationError || !interpretation) ? (
+            <Card className="bg-stone-900/50 backdrop-blur-sm border-stone-800">
+              <CardContent className="pt-6 text-center">
+                {isLoadingInterpretation && (
+                  <div className="flex items-center justify-center gap-2">
+                    <Loader2 className="h-8 w-8 text-amber-600 animate-spin" />
+                    <p className="text-stone-400">Lezing wordt gegenereerd...</p>
+                  </div>
+                )}
+                {interpretationError && (
+                  <div className="text-red-400">
+                    <AlertTriangle className="h-8 w-8 mx-auto mb-2" />
+                    <p>Fout bij genereren van lezing: {interpretationError}</p>
+                  </div>
+                )}
+                {!isLoadingInterpretation && !interpretationError && !interpretation && (
+                  <p className="text-stone-400">Geen interpretatie beschikbaar.</p>
+                )}
+              </CardContent>
+            </Card>
+          ) : (
+            <TarotInterpretationPanel data={interpretation} />
+          )}
+        </div>
+      );
+    }
+    return null;
   };
 
   return (
@@ -144,7 +235,7 @@ export default function TarotReadingPage() {
         )}
 
         <main>
-          {/* ... renderContent() logic from previous version ... */}
+          {renderContent()}
         </main>
       </div>
     </div>
