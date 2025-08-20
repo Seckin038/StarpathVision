@@ -5,14 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Loader2, AlertTriangle, ChevronLeft, BookOpen } from "lucide-react";
 import MysticalBackground from "@/components/MysticalBackground";
 import { useTranslation } from "react-i18next";
-
-type Locale = 'nl' | 'en' | 'tr';
-type Spread = {
-  id: string;
-  name: { [key in Locale]: string };
-  description: { [key in Locale]: string };
-  drawCount: number;
-};
+import { Spread, Locale } from "@/types/tarot";
 
 const TarotChoice = () => {
   const { i18n } = useTranslation();
@@ -28,13 +21,13 @@ const TarotChoice = () => {
         setLoading(true);
         setError(null);
 
-        const [bundle, starpath] = await Promise.all([
-          fetch('/config/tarot/tarot.spreads.bundle.json').then(r => r.json()),
-          fetch('/config/tarot/tarot.spreads.starpath.json').then(r => r.json())
-        ]);
+        const response = await fetch('/config/tarot/spread-library.json');
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
         
-        const allSpreads = [...bundle.spreads, ...starpath.spreads];
-        setSpreads(allSpreads);
+        setSpreads(data.spreads);
 
       } catch (err: any) {
         console.error("Fout bij het laden van de tarot leggingen:", err);
@@ -79,9 +72,9 @@ const TarotChoice = () => {
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-stone-400 text-sm mb-4 h-20 overflow-hidden">{spread.description[locale]}</p>
+                <p className="text-stone-400 text-sm mb-4 h-20 overflow-hidden">{spread.ui_copy[locale].subtitle}</p>
                 <div className="flex justify-between items-center">
-                  <span className="text-xs text-stone-500">{spread.drawCount} kaarten</span>
+                  <span className="text-xs text-stone-500">{spread.cards_required} kaarten</span>
                   <Button variant="outline" size="sm" className="border-amber-800 text-amber-300 group-hover:bg-amber-900/50 group-hover:text-amber-200">
                     Start legging
                   </Button>

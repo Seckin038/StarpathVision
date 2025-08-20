@@ -1,0 +1,527 @@
+{
+  "_meta": {
+    "version": "1.0.0",
+    "author": "StarpathVision",
+    "for": "Dyad",
+    "notes": [
+      "Alle spreads hebben hetzelfde schema en zijn drietalig (NL/EN/TR).",
+      "Dyad: gebruik 'cards_required' om UI-tekst te tonen: 'Kies {cards_required} kaarten voor je legging.'",
+      "'layout.kind' is een hint voor rendering (line, cross, star, horseshoe, circle, grid, tree, rows).",
+      "'positions[i].slot_key' = stabiele sleutel; per taal de titel + optionele hint.",
+      "Als 'allow_reversals' true is, kan Dyad omgekeerde kaarten toelaten in interpretatie.",
+      "Voor Full Deck (78) gebruik de 6x13 grid (rows=6, cols=13)."
+    ],
+    "types": {
+      "Spread": {
+        "id": "string",
+        "module": "tarot",
+        "deck": "RWS|Thoth|Marseille|custom",
+        "name": {"nl": "string", "en": "string", "tr": "string"},
+        "cards_required": "number",
+        "allow_reversals": "boolean",
+        "layout": {
+          "kind": "line|cross|star|horseshoe|circle|grid|tree|rows|wheel|pentagram",
+          "params": {"rows?": "number", "cols?": "number", "radius?": "number"}
+        },
+        "positions": [
+          {"slot_key": "string", "nl": "string", "en": "string", "tr": "string"}
+        ],
+        "ui_copy": {"nl": {"title": "string", "subtitle": "string"}, "en": {"title": "string", "subtitle": "string"}, "tr": {"title": "string", "subtitle": "string"}},
+        "tags": ["string"]
+      }
+    }
+  },
+  "spreads": [
+    {
+      "id": "daily-1",
+      "module": "tarot",
+      "deck": "RWS",
+      "name": {"nl": "Dagkaart", "en": "Daily Draw", "tr": "Günlük Kart"},
+      "cards_required": 1,
+      "allow_reversals": true,
+      "layout": {"kind": "line", "params": {}},
+      "positions": [
+        {"slot_key": "daily", "nl": "Dagkaart", "en": "Daily", "tr": "Günlük"}
+      ],
+      "ui_copy": {
+        "nl": {"title": "Trek je dagkaart", "subtitle": "Kies 1 kaart voor je dagenergie."},
+        "en": {"title": "Draw your daily card", "subtitle": "Pick 1 card for today's energy."},
+        "tr": {"title": "Günlük kartını çek", "subtitle": "Bugünün enerjisi için 1 kart seç."}
+      },
+      "tags": ["small","1-card","daily"]
+    },
+    {
+      "id": "two-choice-2",
+      "module": "tarot",
+      "deck": "RWS",
+      "name": {"nl": "Keuze A/B", "en": "Two-Choice Spread", "tr": "İki Seçenek Açılımı"},
+      "cards_required": 2,
+      "allow_reversals": true,
+      "layout": {"kind": "line", "params": {}},
+      "positions": [
+        {"slot_key": "option_a", "nl": "Optie A", "en": "Option A", "tr": "Seçenek A"},
+        {"slot_key": "option_b", "nl": "Optie B", "en": "Option B", "tr": "Seçenek B"}
+      ],
+      "ui_copy": {
+        "nl": {"title": "Kruispunt-keuze", "subtitle": "Kies 2 kaarten: A en B."},
+        "en": {"title": "Crossroads choice", "subtitle": "Pick 2 cards: A and B."},
+        "tr": {"title": "Yol ayrımı", "subtitle": "2 kart seç: A ve B."}
+      },
+      "tags": ["decision","2-card"]
+    },
+    {
+      "id": "ppf-3",
+      "module": "tarot",
+      "deck": "RWS",
+      "name": {"nl": "Verleden-Heden-Toekomst", "en": "Past-Present-Future", "tr": "Geçmiş-Şimdi-Gelecek"},
+      "cards_required": 3,
+      "allow_reversals": true,
+      "layout": {"kind": "line", "params": {}},
+      "positions": [
+        {"slot_key": "past", "nl": "Verleden", "en": "Past", "tr": "Geçmiş"},
+        {"slot_key": "present", "nl": "Heden", "en": "Present", "tr": "Şimdi"},
+        {"slot_key": "future", "nl": "Toekomst", "en": "Future", "tr": "Gelecek"}
+      ],
+      "ui_copy": {
+        "nl": {"title": "Driekaartenlegging", "subtitle": "Kies 3 kaarten voor je tijdlijn."},
+        "en": {"title": "Three-Card Spread", "subtitle": "Pick 3 cards for your timeline."},
+        "tr": {"title": "Üç Kart Açılımı", "subtitle": "Zaman çizgin için 3 kart seç."}
+      },
+      "tags": ["3-card","timeline"]
+    },
+    {
+      "id": "mind-body-spirit-3",
+      "module": "tarot",
+      "deck": "RWS",
+      "name": {"nl": "Geest-Lichaam-Ziel", "en": "Mind-Body-Spirit", "tr": "Zihin-Beden-Ruh"},
+      "cards_required": 3,
+      "allow_reversals": true,
+      "layout": {"kind": "line", "params": {}},
+      "positions": [
+        {"slot_key": "mind", "nl": "Geest", "en": "Mind", "tr": "Zihin"},
+        {"slot_key": "body", "nl": "Lichaam", "en": "Body", "tr": "Beden"},
+        {"slot_key": "spirit", "nl": "Ziel", "en": "Spirit", "tr": "Ruh"}
+      ],
+      "ui_copy": {
+        "nl": {"title": "MBS", "subtitle": "Kies 3 kaarten voor balans."},
+        "en": {"title": "MBS", "subtitle": "Pick 3 cards for balance."},
+        "tr": {"title": "ZBR", "subtitle": "Denge için 3 kart seç."}
+      },
+      "tags": ["3-card","wellbeing"]
+    },
+    {
+      "id": "situation-action-outcome-3",
+      "module": "tarot",
+      "deck": "RWS",
+      "name": {"nl": "Situatie-Actie-Uitkomst", "en": "Situation-Action-Outcome", "tr": "Durum-Eylem-Sonuç"},
+      "cards_required": 3,
+      "allow_reversals": true,
+      "layout": {"kind": "line", "params": {}},
+      "positions": [
+        {"slot_key": "situation", "nl": "Situatie", "en": "Situation", "tr": "Durum"},
+        {"slot_key": "action", "nl": "Actie", "en": "Action", "tr": "Eylem"},
+        {"slot_key": "outcome", "nl": "Uitkomst", "en": "Outcome", "tr": "Sonuç"}
+      ],
+      "ui_copy": {
+        "nl": {"title": "SAU", "subtitle": "Kies 3 kaarten voor richting."},
+        "en": {"title": "SAO", "subtitle": "Pick 3 cards for direction."},
+        "tr": {"title": "DES", "subtitle": "Yön için 3 kart seç."}
+      },
+      "tags": ["3-card","decision"]
+    },
+    {
+      "id": "relationship-5",
+      "module": "tarot",
+      "deck": "RWS",
+      "name": {"nl": "Relatie (5)", "en": "Relationship (5)", "tr": "İlişki (5)"},
+      "cards_required": 5,
+      "allow_reversals": true,
+      "layout": {"kind": "rows", "params": {}},
+      "positions": [
+        {"slot_key": "you", "nl": "Jij", "en": "You", "tr": "Sen"},
+        {"slot_key": "partner", "nl": "Partner", "en": "Partner", "tr": "Partner"},
+        {"slot_key": "dynamic", "nl": "Dynamiek", "en": "Dynamic", "tr": "Dinamik"},
+        {"slot_key": "challenge", "nl": "Uitdaging", "en": "Challenge", "tr": "Zorluk"},
+        {"slot_key": "advice", "nl": "Advies", "en": "Advice", "tr": "Tavsiye"}
+      ],
+      "ui_copy": {
+        "nl": {"title": "Relatielegging", "subtitle": "Kies 5 kaarten voor jullie dynamiek."},
+        "en": {"title": "Relationship Spread", "subtitle": "Pick 5 cards for your dynamic."},
+        "tr": {"title": "İlişki Açılımı", "subtitle": "İlişkiniz için 5 kart seç."}
+      },
+      "tags": ["love","5-card"]
+    },
+    {
+      "id": "cross-of-truth-5",
+      "module": "tarot",
+      "deck": "RWS",
+      "name": {"nl": "Kruis van Waarheid", "en": "Cross of Truth", "tr": "Gerçeğin Haçı"},
+      "cards_required": 5,
+      "allow_reversals": true,
+      "layout": {"kind": "cross", "params": {}},
+      "positions": [
+        {"slot_key": "situation", "nl": "Situatie", "en": "Situation", "tr": "Durum"},
+        {"slot_key": "challenge", "nl": "Uitdaging", "en": "Challenge", "tr": "Zorluk"},
+        {"slot_key": "guidance", "nl": "Leiding", "en": "Guidance", "tr": "Rehberlik"},
+        {"slot_key": "focus", "nl": "Focus", "en": "Focus", "tr": "Odak"},
+        {"slot_key": "outcome", "nl": "Uitkomst", "en": "Outcome", "tr": "Sonuç"}
+      ],
+      "ui_copy": {
+        "nl": {"title": "Kruis van Waarheid", "subtitle": "Kies 5 kaarten voor helderheid."},
+        "en": {"title": "Cross of Truth", "subtitle": "Pick 5 cards for clarity."},
+        "tr": {"title": "Gerçeğin Haçı", "subtitle": "Berraklık için 5 kart seç."}
+      },
+      "tags": ["cross","clarity"]
+    },
+    {
+      "id": "pentagram-5",
+      "module": "tarot",
+      "deck": "RWS",
+      "name": {"nl": "Pentagram (Elementen)", "en": "Pentagram (Elements)", "tr": "Pentagram (Elementler)"},
+      "cards_required": 5,
+      "allow_reversals": true,
+      "layout": {"kind": "pentagram", "params": {}},
+      "positions": [
+        {"slot_key": "spirit", "nl": "Geest", "en": "Spirit", "tr": "Ruh"},
+        {"slot_key": "air", "nl": "Lucht", "en": "Air", "tr": "Hava"},
+        {"slot_key": "fire", "nl": "Vuur", "en": "Fire", "tr": "Ateş"},
+        {"slot_key": "water", "nl": "Water", "en": "Water", "tr": "Su"},
+        {"slot_key": "earth", "nl": "Aarde", "en": "Earth", "tr": "Toprak"}
+      ],
+      "ui_copy": {
+        "nl": {"title": "Pentagram", "subtitle": "Kies 5 kaarten – de elementen."},
+        "en": {"title": "Pentagram", "subtitle": "Pick 5 cards – the elements."},
+        "tr": {"title": "Pentagram", "subtitle": "5 kart seç – elementler."}
+      },
+      "tags": ["elements","5-card"]
+    },
+    {
+      "id": "star-6",
+      "module": "tarot",
+      "deck": "RWS",
+      "name": {"nl": "Sterlegging", "en": "Star Spread", "tr": "Yıldız Açılımı"},
+      "cards_required": 6,
+      "allow_reversals": true,
+      "layout": {"kind": "star", "params": {}},
+      "positions": [
+        {"slot_key": "present", "nl": "Huidige situatie", "en": "Present", "tr": "Şimdi"},
+        {"slot_key": "obstacle", "nl": "Uitdaging", "en": "Obstacle", "tr": "Engel"},
+        {"slot_key": "past", "nl": "Verleden", "en": "Past", "tr": "Geçmiş"},
+        {"slot_key": "future", "nl": "Toekomst", "en": "Future", "tr": "Gelecek"},
+        {"slot_key": "advice", "nl": "Advies", "en": "Advice", "tr": "Tavsiye"},
+        {"slot_key": "outcome", "nl": "Uitkomst", "en": "Outcome", "tr": "Sonuç"}
+      ],
+      "ui_copy": {
+        "nl": {"title": "Sterlegging", "subtitle": "Kies 6 kaarten in stervorm."},
+        "en": {"title": "Star Spread", "subtitle": "Pick 6 cards in a star pattern."},
+        "tr": {"title": "Yıldız Açılımı", "subtitle": "Yıldız düzeninde 6 kart seç."}
+      },
+      "tags": ["star","6-card"]
+    },
+    {
+      "id": "horseshoe-7",
+      "module": "tarot",
+      "deck": "RWS",
+      "name": {"nl": "Paardenschoen (7)", "en": "Horseshoe (7)", "tr": "Atnalı (7)"},
+      "cards_required": 7,
+      "allow_reversals": true,
+      "layout": {"kind": "horseshoe", "params": {}},
+      "positions": [
+        {"slot_key": "past", "nl": "Verleden", "en": "Past", "tr": "Geçmiş"},
+        {"slot_key": "present", "nl": "Heden", "en": "Present", "tr": "Şimdi"},
+        {"slot_key": "future", "nl": "Toekomst", "en": "Future", "tr": "Gelecek"},
+        {"slot_key": "advice", "nl": "Advies", "en": "Advice", "tr": "Tavsiye"},
+        {"slot_key": "external", "nl": "Externe invloeden", "en": "External", "tr": "Dış etkiler"},
+        {"slot_key": "hopes", "nl": "Hopen/Vrezen", "en": "Hopes/Fears", "tr": "Umutlar/Korkular"},
+        {"slot_key": "outcome", "nl": "Uitkomst", "en": "Outcome", "tr": "Sonuç"}
+      ],
+      "ui_copy": {
+        "nl": {"title": "Paardenschoen", "subtitle": "Kies 7 kaarten in boogvorm."},
+        "en": {"title": "Horseshoe", "subtitle": "Pick 7 cards in a curved pattern."},
+        "tr": {"title": "Atnalı", "subtitle": "Yay biçiminde 7 kart seç."}
+      },
+      "tags": ["7-card","insight"]
+    },
+    {
+      "id": "chakra-7",
+      "module": "tarot",
+      "deck": "RWS",
+      "name": {"nl": "Chakra (7)", "en": "Chakra (7)", "tr": "Çakra (7)"},
+      "cards_required": 7,
+      "allow_reversals": true,
+      "layout": {"kind": "line", "params": {}},
+      "positions": [
+        {"slot_key": "root", "nl": "Wortel", "en": "Root", "tr": "Kök"},
+        {"slot_key": "sacral", "nl": "Sacraal", "en": "Sacral", "tr": "Sakral"},
+        {"slot_key": "solar", "nl": "Zonnevlecht", "en": "Solar Plexus", "tr": "Güneş Sinirağı"},
+        {"slot_key": "heart", "nl": "Hart", "en": "Heart", "tr": "Kalp"},
+        {"slot_key": "throat", "nl": "Keel", "en": "Throat", "tr": "Boğaz"},
+        {"slot_key": "third_eye", "nl": "Derde oog", "en": "Third Eye", "tr": "Üçüncü Göz"},
+        {"slot_key": "crown", "nl": "Kruin", "en": "Crown", "tr": "Taç"}
+      ],
+      "ui_copy": {
+        "nl": {"title": "Chakra-lezing", "subtitle": "Kies 7 kaarten – 1 per chakra."},
+        "en": {"title": "Chakra Reading", "subtitle": "Pick 7 cards – one per chakra."},
+        "tr": {"title": "Çakra Okuması", "subtitle": "7 kart seç – her çakra için bir."}
+      },
+      "tags": ["energy","7-card"]
+    },
+    {
+      "id": "planetary-7",
+      "module": "tarot",
+      "deck": "RWS",
+      "name": {"nl": "Planetaire (7)", "en": "Planetary (7)", "tr": "Gezegensel (7)"},
+      "cards_required": 7,
+      "allow_reversals": true,
+      "layout": {"kind": "circle", "params": {}},
+      "positions": [
+        {"slot_key": "sun", "nl": "Zon", "en": "Sun", "tr": "Güneş"},
+        {"slot_key": "moon", "nl": "Maan", "en": "Moon", "tr": "Ay"},
+        {"slot_key": "mercury", "nl": "Mercurius", "en": "Mercury", "tr": "Merkür"},
+        {"slot_key": "venus", "nl": "Venus", "en": "Venus", "tr": "Venüs"},
+        {"slot_key": "mars", "nl": "Mars", "en": "Mars", "tr": "Mars"},
+        {"slot_key": "jupiter", "nl": "Jupiter", "en": "Jupiter", "tr": "Jüpiter"},
+        {"slot_key": "saturn", "nl": "Saturnus", "en": "Saturn", "tr": "Satürn"}
+      ],
+      "ui_copy": {
+        "nl": {"title": "Planetaire legging", "subtitle": "Kies 7 kaarten – klassieke planeten."},
+        "en": {"title": "Planetary spread", "subtitle": "Pick 7 cards – classical planets."},
+        "tr": {"title": "Gezegensel açılım", "subtitle": "7 kart seç – klasik gezegenler."}
+      },
+      "tags": ["astrology","7-card"]
+    },
+    {
+      "id": "celtic-cross-10",
+      "module": "tarot",
+      "deck": "RWS",
+      "name": {"nl": "Celtic Cross", "en": "Celtic Cross", "tr": "Kelt Haçı"},
+      "cards_required": 10,
+      "allow_reversals": true,
+      "layout": {"kind": "cross", "params": {}},
+      "positions": [
+        {"slot_key": "present", "nl": "Heden", "en": "Present", "tr": "Şimdi"},
+        {"slot_key": "challenge", "nl": "Uitdaging", "en": "Challenge", "tr": "Zorluk"},
+        {"slot_key": "past", "nl": "Verleden", "en": "Past", "tr": "Geçmiş"},
+        {"slot_key": "future", "nl": "Toekomst", "en": "Future", "tr": "Gelecek"},
+        {"slot_key": "above", "nl": "Boven (bewust)", "en": "Above (conscious)", "tr": "Üst (bilinç)"},
+        {"slot_key": "below", "nl": "Onder (onbewust)", "en": "Below (subconscious)", "tr": "Alt (bilinçdışı)"},
+        {"slot_key": "advice", "nl": "Advies", "en": "Advice", "tr": "Tavsiye"},
+        {"slot_key": "external", "nl": "Extern", "en": "External", "tr": "Dış"},
+        {"slot_key": "hopes", "nl": "Hopen/Vrezen", "en": "Hopes/Fears", "tr": "Umutlar/Korkular"},
+        {"slot_key": "outcome", "nl": "Uitkomst", "en": "Outcome", "tr": "Sonuç"}
+      ],
+      "ui_copy": {
+        "nl": {"title": "Celtic Cross", "subtitle": "Kies 10 kaarten voor je legging."},
+        "en": {"title": "Celtic Cross", "subtitle": "Pick 10 cards for your reading."},
+        "tr": {"title": "Kelt Haçı", "subtitle": "Açılım için 10 kart seç."}
+      },
+      "tags": ["classic","10-card"]
+    },
+    {
+      "id": "career-10",
+      "module": "tarot",
+      "deck": "RWS",
+      "name": {"nl": "Carrière (10)", "en": "Career (10)", "tr": "Kariyer (10)"},
+      "cards_required": 10,
+      "allow_reversals": true,
+      "layout": {"kind": "rows", "params": {}},
+      "positions": [
+        {"slot_key": "you_now", "nl": "Jij nu", "en": "You now", "tr": "Şimdiki halin"},
+        {"slot_key": "skill", "nl": "Talent", "en": "Skill", "tr": "Yetenek"},
+        {"slot_key": "block", "nl": "Blokkade", "en": "Block", "tr": "Blokaj"},
+        {"slot_key": "support", "nl": "Steun", "en": "Support", "tr": "Destek"},
+        {"slot_key": "opportunity", "nl": "Kans", "en": "Opportunity", "tr": "Fırsat"},
+        {"slot_key": "visibility", "nl": "Zichtbaarheid", "en": "Visibility", "tr": "Görünürlük"},
+        {"slot_key": "learning", "nl": "Leren", "en": "Learning", "tr": "Öğrenme"},
+        {"slot_key": "network", "nl": "Netwerk", "en": "Network", "tr": "Ağ"},
+        {"slot_key": "next_step", "nl": "Volgende stap", "en": "Next step", "tr": "Sonraki adım"},
+        {"slot_key": "outcome", "nl": "Uitkomst", "en": "Outcome", "tr": "Sonuç"}
+      ],
+      "ui_copy": {
+        "nl": {"title": "Carrière-advies", "subtitle": "Kies 10 kaarten voor je pad."},
+        "en": {"title": "Career guidance", "subtitle": "Pick 10 cards for your path."},
+        "tr": {"title": "Kariyer rehberi", "subtitle": "Yolun için 10 kart seç."}
+      },
+      "tags": ["career","10-card"]
+    },
+    {
+      "id": "astrological-12",
+      "module": "tarot",
+      "deck": "RWS",
+      "name": {"nl": "Astrologische Huizen (12)", "en": "Astrological Houses (12)", "tr": "Astrolojik Evler (12)"},
+      "cards_required": 12,
+      "allow_reversals": true,
+      "layout": {"kind": "wheel", "params": {}},
+      "positions": [
+        {"slot_key": "house_1", "nl": "Huis 1 – Zelf", "en": "House 1 – Self", "tr": "1. Ev – Benlik"},
+        {"slot_key": "house_2", "nl": "Huis 2 – Waarden", "en": "House 2 – Values", "tr": "2. Ev – Değerler"},
+        {"slot_key": "house_3", "nl": "Huis 3 – Communicatie", "en": "House 3 – Communication", "tr": "3. Ev – İletişim"},
+        {"slot_key": "house_4", "nl": "Huis 4 – Thuis", "en": "House 4 – Home", "tr": "4. Ev – Ev"},
+        {"slot_key": "house_5", "nl": "Huis 5 – Creatie", "en": "House 5 – Creation", "tr": "5. Ev – Yaratım"},
+        {"slot_key": "house_6", "nl": "Huis 6 – Werk/gezondheid", "en": "House 6 – Work/Health", "tr": "6. Ev – İş/Sağlık"},
+        {"slot_key": "house_7", "nl": "Huis 7 – Relaties", "en": "House 7 – Relationships", "tr": "7. Ev – İlişkiler"},
+        {"slot_key": "house_8", "nl": "Huis 8 – Transformatie", "en": "House 8 – Transformation", "tr": "8. Ev – Dönüşüm"},
+        {"slot_key": "house_9", "nl": "Huis 9 – Visie", "en": "House 9 – Vision", "tr": "9. Ev – Vizyon"},
+        {"slot_key": "house_10", "nl": "Huis 10 – Loopbaan", "en": "House 10 – Career", "tr": "10. Ev – Kariyer"},
+        {"slot_key": "house_11", "nl": "Huis 11 – Netwerk", "en": "House 11 – Network", "tr": "11. Ev – Ağ"},
+        {"slot_key": "house_12", "nl": "Huis 12 – Innerlijk", "en": "House 12 – Inner", "tr": "12. Ev – İç Dünya"}
+      ],
+      "ui_copy": {
+        "nl": {"title": "Astrologische legging", "subtitle": "Kies 12 kaarten – 1 per huis."},
+        "en": {"title": "Astrological spread", "subtitle": "Pick 12 cards – one per house."},
+        "tr": {"title": "Astrolojik açılım", "subtitle": "12 kart seç – her ev için bir."}
+      },
+      "tags": ["astrology","12-card"]
+    },
+    {
+      "id": "year-ahead-12",
+      "module": "tarot",
+      "deck": "RWS",
+      "name": {"nl": "Jaarlegging (12)", "en": "Year Ahead (12)", "tr": "Yıl Açılımı (12)"},
+      "cards_required": 12,
+      "allow_reversals": true,
+      "layout": {"kind": "circle", "params": {}},
+      "positions": [
+        {"slot_key": "m1", "nl": "Januari", "en": "January", "tr": "Ocak"},
+        {"slot_key": "m2", "nl": "Februari", "en": "February", "tr": "Şubat"},
+        {"slot_key": "m3", "nl": "Maart", "en": "March", "tr": "Mart"},
+        {"slot_key": "m4", "nl": "April", "en": "April", "tr": "Nisan"},
+        {"slot_key": "m5", "nl": "Mei", "en": "May", "tr": "Mayıs"},
+        {"slot_key": "m6", "nl": "Juni", "en": "June", "tr": "Haziran"},
+        {"slot_key": "m7", "nl": "Juli", "en": "July", "tr": "Temmuz"},
+        {"slot_key": "m8", "nl": "Augustus", "en": "August", "tr": "Ağustos"},
+        {"slot_key": "m9", "nl": "September", "en": "September", "tr": "Eylül"},
+        {"slot_key": "m10", "nl": "Oktober", "en": "October", "tr": "Ekim"},
+        {"slot_key": "m11", "nl": "November", "en": "November", "tr": "Kasım"},
+        {"slot_key": "m12", "nl": "December", "en": "December", "tr": "Aralık"}
+      ],
+      "ui_copy": {
+        "nl": {"title": "Jaarlegging", "subtitle": "Kies 12 kaarten – 1 per maand."},
+        "en": {"title": "Year Ahead", "subtitle": "Pick 12 cards – one per month."},
+        "tr": {"title": "Yıl Açılımı", "subtitle": "12 kart seç – her ay için bir."}
+      },
+      "tags": ["year","12-card"]
+    },
+    {
+      "id": "week-ahead-7",
+      "module": "tarot",
+      "deck": "RWS",
+      "name": {"nl": "Weeklegging (7)", "en": "Week Ahead (7)", "tr": "Hafta Açılımı (7)"},
+      "cards_required": 7,
+      "allow_reversals": true,
+      "layout": {"kind": "line", "params": {}},
+      "positions": [
+        {"slot_key": "d1", "nl": "Ma", "en": "Mon", "tr": "Pzt"},
+        {"slot_key": "d2", "nl": "Di", "en": "Tue", "tr": "Sal"},
+        {"slot_key": "d3", "nl": "Wo", "en": "Wed", "tr": "Çar"},
+        {"slot_key": "d4", "nl": "Do", "en": "Thu", "tr": "Per"},
+        {"slot_key": "d5", "nl": "Vr", "en": "Fri", "tr": "Cum"},
+        {"slot_key": "d6", "nl": "Za", "en": "Sat", "tr": "Cmt"},
+        {"slot_key": "d7", "nl": "Zo", "en": "Sun", "tr": "Paz"}
+      ],
+      "ui_copy": {
+        "nl": {"title": "Week vooruit", "subtitle": "Kies 7 kaarten – 1 per dag."},
+        "en": {"title": "Week ahead", "subtitle": "Pick 7 cards – one per day."},
+        "tr": {"title": "Hafta", "subtitle": "7 kart seç – günde bir."}
+      },
+      "tags": ["planning","7-card"]
+    },
+    {
+      "id": "tree-of-life-10",
+      "module": "tarot",
+      "deck": "RWS",
+      "name": {"nl": "Levensboom (10)", "en": "Tree of Life (10)", "tr": "Hayat Ağacı (10)"},
+      "cards_required": 10,
+      "allow_reversals": true,
+      "layout": {"kind": "tree", "params": {}},
+      "positions": [
+        {"slot_key": "kether", "nl": "Kether", "en": "Kether", "tr": "Keter"},
+        {"slot_key": "chokmah", "nl": "Chokmah", "en": "Chokmah", "tr": "Hokmah"},
+        {"slot_key": "binah", "nl": "Binah", "en": "Binah", "tr": "Binah"},
+        {"slot_key": "chesed", "nl": "Chesed", "en": "Chesed", "tr": "Hesed"},
+        {"slot_key": "gevurah", "nl": "Gevurah", "en": "Gevurah", "tr": "Gevura"},
+        {"slot_key": "tiphareth", "nl": "Tiferet", "en": "Tiphareth", "tr": "Tiferet"},
+        {"slot_key": "netzach", "nl": "Netzach", "en": "Netzach", "tr": "Netsah"},
+        {"slot_key": "hod", "nl": "Hod", "en": "Hod", "tr": "Hod"},
+        {"slot_key": "yesod", "nl": "Yesod", "en": "Yesod", "tr": "Yesod"},
+        {"slot_key": "malkuth", "nl": "Malkuth", "en": "Malkuth", "tr": "Malkut"}
+      ],
+      "ui_copy": {
+        "nl": {"title": "Levensboom", "subtitle": "Kies 10 kaarten – sefirot."},
+        "en": {"title": "Tree of Life", "subtitle": "Pick 10 cards – sefirot."},
+        "tr": {"title": "Hayat Ağacı", "subtitle": "10 kart seç – sefirot."}
+      },
+      "tags": ["kabbalah","10-card"]
+    },
+    {
+      "id": "romani-21",
+      "module": "tarot",
+      "deck": "RWS",
+      "name": {"nl": "Romani (21)", "en": "Romani (21)", "tr": "Roman (21)"},
+      "cards_required": 21,
+      "allow_reversals": true,
+      "layout": {"kind": "rows", "params": {}},
+      "positions": [
+        {"slot_key": "r1c1", "nl": "Rij 1 Kaart 1", "en": "Row 1 Card 1", "tr": "Satır 1 Kart 1"},
+        {"slot_key": "r1c2", "nl": "Rij 1 Kaart 2", "en": "Row 1 Card 2", "tr": "Satır 1 Kart 2"},
+        {"slot_key": "r1c3", "nl": "Rij 1 Kaart 3", "en": "Row 1 Card 3", "tr": "Satır 1 Kart 3"},
+        {"slot_key": "r1c4", "nl": "Rij 1 Kaart 4", "en": "Row 1 Card 4", "tr": "Satır 1 Kart 4"},
+        {"slot_key": "r1c5", "nl": "Rij 1 Kaart 5", "en": "Row 1 Card 5", "tr": "Satır 1 Kart 5"},
+        {"slot_key": "r1c6", "nl": "Rij 1 Kaart 6", "en": "Row 1 Card 6", "tr": "Satır 1 Kart 6"},
+        {"slot_key": "r1c7", "nl": "Rij 1 Kaart 7", "en": "Row 1 Card 7", "tr": "Satır 1 Kart 7"},
+        {"slot_key": "r2c1", "nl": "Rij 2 Kaart 1", "en": "Row 2 Card 1", "tr": "Satır 2 Kart 1"},
+        {"slot_key": "r2c2", "nl": "Rij 2 Kaart 2", "en": "Row 2 Card 2", "tr": "Satır 2 Kart 2"},
+        {"slot_key": "r2c3", "nl": "Rij 2 Kaart 3", "en": "Row 2 Card 3", "tr": "Satır 2 Kart 3"},
+        {"slot_key": "r2c4", "nl": "Rij 2 Kaart 4", "en": "Row 2 Card 4", "tr": "Satır 2 Kart 4"},
+        {"slot_key": "r2c5", "nl": "Rij 2 Kaart 5", "en": "Row 2 Card 5", "tr": "Satır 2 Kart 5"},
+        {"slot_key": "r2c6", "nl": "Rij 2 Kaart 6", "en": "Row 2 Card 6", "tr": "Satır 2 Kart 6"},
+        {"slot_key": "r2c7", "nl": "Rij 2 Kaart 7", "en": "Row 2 Card 7", "tr": "Satır 2 Kart 7"},
+        {"slot_key": "r3c1", "nl": "Rij 3 Kaart 1", "en": "Row 3 Card 1", "tr": "Satır 3 Kart 1"},
+        {"slot_key": "r3c2", "nl": "Rij 3 Kaart 2", "en": "Row 3 Card 2", "tr": "Satır 3 Kart 2"},
+        {"slot_key": "r3c3", "nl": "Rij 3 Kaart 3", "en": "Row 3 Card 3", "tr": "Satır 3 Kart 3"},
+        {"slot_key": "r3c4", "nl": "Rij 3 Kaart 4", "en": "Row 3 Card 4", "tr": "Satır 3 Kart 4"},
+        {"slot_key": "r3c5", "nl": "Rij 3 Kaart 5", "en": "Row 3 Card 5", "tr": "Satır 3 Kart 5"},
+        {"slot_key": "r3c6", "nl": "Rij 3 Kaart 6", "en": "Row 3 Card 6", "tr": "Satır 3 Kart 6"},
+        {"slot_key": "r3c7", "nl": "Rij 3 Kaart 7", "en": "Row 3 Card 7", "tr": "Satır 3 Kart 7"}
+      ],
+      "ui_copy": {
+        "nl": {"title": "Romani", "subtitle": "Kies 21 kaarten – 3 rijen van 7."},
+        "en": {"title": "Romani", "subtitle": "Pick 21 cards – 3 rows of 7."},
+        "tr": {"title": "Roman", "subtitle": "21 kart seç – 3 sıra 7'li."}
+      },
+      "tags": ["grand","21-card"]
+    },
+    {
+      "id": "grand-tableau-36",
+      "module": "tarot",
+      "deck": "RWS",
+      "name": {"nl": "Grand Tableau (36)", "en": "Grand Tableau (36)", "tr": "Grand Tableau (36)"},
+      "cards_required": 36,
+      "allow_reversals": true,
+      "layout": {"kind": "grid", "params": {"rows": 4, "cols": 9}},
+      "positions": [],
+      "ui_copy": {
+        "nl": {"title": "Grand Tableau", "subtitle": "Kies 36 kaarten – 4×9 raster."},
+        "en": {"title": "Grand Tableau", "subtitle": "Pick 36 cards – 4×9 grid."},
+        "tr": {"title": "Grand Tableau", "subtitle": "36 kart seç – 4×9 ızgara."}
+      },
+      "tags": ["grand","36-card"]
+    },
+    {
+      "id": "full-deck-78-6x13",
+      "module": "tarot",
+      "deck": "RWS",
+      "name": {"nl": "Volledig Dek (78)", "en": "Full Deck (78)", "tr": "Tam Deste (78)"},
+      "cards_required": 78,
+      "allow_reversals": true,
+      "layout": {"kind": "grid", "params": {"rows": 6, "cols": 13}},
+      "positions": [],
+      "ui_copy": {
+        "nl": {"title": "Volledige deklegging", "subtitle": "Kies 78 kaarten – 6×13 raster."},
+        "en": {"title": "Full-deck reading", "subtitle": "Pick all 78 cards – 6×13 grid."},
+        "tr": {"title": "Tam deste açılımı", "subtitle": "78 kart seç – 6×13 ızgara."}
+      },
+      "tags": ["full","78-card","grid"]
+    }
+  ]
+}

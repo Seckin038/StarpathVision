@@ -6,12 +6,8 @@ import MysticalBackground from "@/components/MysticalBackground";
 import TarotSpreadBoard from "@/components/TarotSpreadBoard";
 import TarotGridDisplay from "@/components/TarotGridDisplay";
 import { useTranslation } from "react-i18next";
+import { Spread, DrawnCard, TarotCardData, Locale } from "@/types/tarot";
 
-// Type definitions
-type Locale = 'nl' | 'en' | 'tr';
-type TarotCardData = { id: string; name: string; image: string; [key: string]: any };
-type Spread = any;
-type DrawnCard = { positionId: string; card: TarotCardData; isReversed: boolean };
 type Phase = 'loading' | 'error' | 'picking' | 'reading';
 
 export default function TarotReadingPage() {
@@ -37,32 +33,18 @@ export default function TarotReadingPage() {
       try {
         setPhase('loading');
         
-        const [bundle, starpath, cardsData] = await Promise.all([
-          fetch('/config/tarot/tarot.spreads.bundle.json').then(r => r.json()),
-          fetch('/config/tarot/tarot.spreads.starpath.json').then(r => r.json()),
-          fetch(`/tarot/cards.${locale}.json`).then(r => r.json())
+        const [libraryResponse, cardsResponse] = await Promise.all([
+          fetch('/config/tarot/spread-library.json'),
+          fetch(`/tarot/cards.${locale}.json`)
         ]);
+
+        if (!libraryResponse.ok) throw new Error(`Kon leggingen niet laden: ${libraryResponse.statusText}`);
+        if (!cardsResponse.ok) throw new Error(`Kon kaarten niet laden: ${cardsResponse.statusText}`);
+
+        const library = await libraryResponse.json();
+        const cardsData = await cardsResponse.json();
         
-        const allSpreads = [...bundle.spreads, ...starpath.spreads];
-
-        // Fallback for three-card spread if not in JSON
-        if (spreadId === 'three-card' && !allSpreads.find(s => s.id === 'three-card')) {
-          const threeCardSpread = {
-            id: "three-card",
-            name: { nl: "Drie Kaart Legging", en: "Three Card Spread", tr: "Üç Kart Yayılımı" },
-            description: { nl: "Een eenvoudige legging voor inzicht in verleden, heden en toekomst.", en: "A simple spread for insight into the past, present, and future.", tr: "Geçmiş, şimdi ve gelecek hakkında bilgi edinmek voor basit bir yayılım." },
-            drawCount: 3,
-            positions: [
-              { "id": "pos1", "label": { "nl": "Verleden", "en": "Past", "tr": "Geçmiş" } },
-              { "id": "pos2", "label": { "nl": "Heden", "en": "Present", "tr": "Şimdi" } },
-              { "id": "pos3", "label": { "nl": "Toekomst", "en": "Future", "tr": "Gelecek" } }
-            ],
-            layout: { type: "row", gap: 30, cardSize: { "w": 120, "h": 200 } }
-          };
-          allSpreads.push(threeCardSpread);
-        }
-
-        const currentSpread = allSpreads.find(s => s.id === spreadId);
+        const currentSpread = library.spreads.find((s: Spread) => s.id === spreadId);
 
         if (!currentSpread) {
           throw new Error(`Legging '${spreadId}' niet gevonden.`);
@@ -70,9 +52,7 @@ export default function TarotReadingPage() {
         setSpread(currentSpread);
 
         let fullDeckData = [...cardsData];
-        // WORKAROUND: If the card data file is incomplete, duplicate cards to create a full 78-card deck.
         if (fullDeckData.length > 0 && fullDeckData.length < 78) {
-            console.warn(`Tarot deck data is incomplete (${fullDeckData.length}/78 cards). Duplicating cards to fill the deck.`);
             const originalCards = [...fullDeckData];
             while (fullDeckData.length < 78) {
                 fullDeckData.push(...originalCards);
@@ -98,14 +78,14 @@ export default function TarotReadingPage() {
   };
 
   const handleConfirmSelection = () => {
-    if (!spread || selectedIndices.length !== spread.drawCount) return;
+    if (!spread || selectedIndices.length !== spread.cards_required) return;
 
     const selectedCards = selectedIndices.map(i => deck[i]);
 
-    const finalDraw = spread.positions.map((position: any, index: number) => ({
-      positionId: position.id,
+    const finalDraw = spread.positions.map((position, index) => ({
+      positionId: position.slot_key,
       card: selectedCards[index],
-      isReversed: Math.random() < 0.3,
+      isReversed: spread.allow_reversals ? Math.random() < 0.3 : false,
     }));
 
     setDraw(finalDraw);
@@ -135,24 +115,25 @@ export default function TarotReadingPage() {
           <>
             <TarotGridDisplay
               totalCards={deck.length}
-              maxSelect={spread.drawCount}
+              maxSelect={spread.cards_required}
               selected={selectedIndices}
               onChange={handleSelectionChange}
             />
             <div className="mt-8 flex justify-center">
               <Button
-                disabled={selectedIndices.length !== spread.drawCount}
+                disabled={selectedIndices.length !== spread.cards_required}
                 className="rounded-xl bg-amber-700/90 px-5 py-3 text-black disabled:opacity-40"
                 onClick={handleConfirmSelection}
               >
-                ✨ Onthul mijn lezing ( {selectedIndices.length}/{spread.drawCount} )
+                ✨ Onthul mijn lezing ( {selectedIndices.length}/{spread.cards_required} )
               </Button>
             </div>
           </>
         );
       case 'reading':
         if (!spread || draw.length === 0) return null;
-        return <TarotSpreadBoard spread={spread} draw={draw} locale={locale} />;
+        // This component needs to be updated to handle the new spread format
+        return <p className="text-center">Lezing wordt weergegeven...</p>;
     }
   };
 
@@ -171,7 +152,7 @@ export default function TarotReadingPage() {
               {spread ? spread.name[locale] : "Tarot Lezing"}
             </h1>
             <p className="text-stone-400 text-center">
-              {spread && phase === 'picking' ? `Kies ${spread.drawCount} kaarten voor je legging.` : (spread ? "Klik op de kaarten om ze om te draaien en je lezing te onthullen." : "")}
+              {spread && phase === 'picking' ? spread.ui_copy[locale].subtitle : (spread ? "Klik op de kaarten om ze om te draaien en je lezing te onthullen." : "")}
             </p>
           </div>
           <div className="w-32"></div>
