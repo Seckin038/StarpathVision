@@ -24,6 +24,7 @@ export default function TarotReadingPage() {
   const [deck, setDeck] = useState<TarotCardData[]>([]);
   const [draw, setDraw] = useState<DrawnCard[]>([]);
   const [error, setError] = useState<string | null>(null);
+  const [selectedIndices, setSelectedIndices] = useState<number[]>([]);
 
   useEffect(() => {
     const initializeReading = async () => {
@@ -62,10 +63,17 @@ export default function TarotReadingPage() {
     initializeReading();
   }, [spreadId, locale]);
 
-  const handleSelectionComplete = (selectedIndices: number[]) => {
+  const handleSelectionChange = (indices: number[]) => {
+    setSelectedIndices(indices);
+    if (spread && indices.length === spread.drawCount) {
+      handleSelectionComplete(indices);
+    }
+  };
+
+  const handleSelectionComplete = (finalIndices: number[]) => {
     if (!spread) return;
 
-    const selectedCards = selectedIndices.map(i => deck[i]);
+    const selectedCards = finalIndices.map(i => deck[i]);
 
     const finalDraw = spread.positions.map((position: any, index: number) => ({
       positionId: position.id,
@@ -101,10 +109,11 @@ export default function TarotReadingPage() {
             <TarotGridDisplay
               totalCards={deck.length}
               maxSelect={spread.drawCount}
-              onChange={handleSelectionComplete}
+              selected={selectedIndices}
+              onChange={handleSelectionChange}
             />
             <div className="text-center mt-4">
-              <p className="text-stone-400">Selecteer {spread.drawCount} kaarten.</p>
+              <p className="text-stone-400">Selecteer {spread.drawCount} kaarten. ({selectedIndices.length}/{spread.drawCount})</p>
             </div>
           </>
         );
