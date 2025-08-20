@@ -4,7 +4,7 @@ export type TarotGridDisplayProps = {
   totalCards?: number; // default 78
   rows?: number; // default 6
   cols?: number; // default 13
-  maxSelect?: number; // optional selection cap (e.g., 3 for three‑card draw)
+  maxSelect?: number; // optional selection cap (e.e.g., 3 for three‑card draw)
   selected?: number[]; // controlled selection
   onChange?: (next: number[]) => void;
   // Optional: custom renderer for a card (e.g., to show numbers or custom backs)
@@ -66,9 +66,10 @@ export default function TarotGridDisplay({
               onClick={() => toggle(i)}
               className={[
                 "relative aspect-[2/3] w-full",
-                "rounded-xl border border-purple-900/40",
-                "bg-[url('/tarot/back.svg')] bg-cover bg-center",
-                "shadow-sm hover:shadow-md transition-shadow",
+                "rounded-xl sv-card",
+                "bg-gradient-to-b from-purple-500/15 to-indigo-600/15",
+                "border border-white/10",
+                "shadow-[0_10px_20px_rgba(0,0,0,.25)]",
                 isSelected ? "ring-2 ring-amber-500" : "ring-0",
               ].join(" ")}
               aria-pressed={isSelected}

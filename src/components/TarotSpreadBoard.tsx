@@ -270,7 +270,10 @@ export default function TarotSpreadBoard({
 
   return (
     <div className="w-full h-full flex flex-col gap-3 text-white">
-      <div ref={ref} className="relative flex-1 rounded-3xl bg-gradient-to-br from-slate-900 to-indigo-950 border border-white/10 overflow-hidden">
+      <div 
+        ref={ref} 
+        className="relative flex-1 rounded-3xl sv-board p-4 md:p-6 min-h-[480px] overflow-hidden"
+      >
         <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'radial-gradient(circle at 50% 50%, rgba(255,255,255,0.06), transparent 60%)' }} />
           <AnimatePresence>
             {positions.map((p, i) => {
