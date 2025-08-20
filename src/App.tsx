@@ -34,25 +34,28 @@ const App = () => (
         <AuthProvider>
           <Routes>
             <Route element={<MainLayout />}>
-              {/* Public Routes */}
+              {/* --- PUBLIC ROUTES --- */}
               <Route path="/" element={<Index />} />
               <Route path="/login" element={<LoginPage />} />
               <Route path="/register" element={<RegisterPage />} />
               <Route path="/forgot-password" element={<ForgotPasswordPage />} />
-              <Route path="/onboarding" element={<Onboarding />} />
               
-              {/* Reading Routes (Public) */}
-              <Route path="/readings/tarot" element={<TarotChoice />} />
-              <Route path="/readings/tarot/spread/:spread" element={<TarotSpreadReading />} />
-              <Route path="/readings/coffee" element={<CoffeeReading />} />
-              <Route path="/readings/coffee/upload" element={<CoffeeReadingWithUpload />} />
-              <Route path="/readings/numerology" element={<NumerologyReading />} />
-              <Route path="/readings/dream" element={<DreamReading />} />
+              {/* Public Daily Tarot */}
+              <Route path="/readings/tarot/spread/ppf-3" element={<TarotSpreadReading />} />
 
-              {/* Protected Routes */}
+              {/* --- PROTECTED ROUTES --- */}
               <Route path="/dashboard" element={<RequireAuth><Dashboard /></RequireAuth>} />
               <Route path="/archive" element={<RequireAuth><Archive /></RequireAuth>} />
               <Route path="/profile" element={<RequireAuth><ProfilePage /></RequireAuth>} />
+              <Route path="/onboarding" element={<RequireAuth><Onboarding /></RequireAuth>} />
+
+              {/* Protected Reading Routes */}
+              <Route path="/readings/tarot" element={<RequireAuth><TarotChoice /></RequireAuth>} />
+              <Route path="/readings/tarot/spread/:spread" element={<RequireAuth><TarotSpreadReading /></RequireAuth>} />
+              <Route path="/readings/coffee" element={<RequireAuth><CoffeeReading /></RequireAuth>} />
+              <Route path="/readings/coffee/upload" element={<RequireAuth><CoffeeReadingWithUpload /></RequireAuth>} />
+              <Route path="/readings/numerology" element={<RequireAuth><NumerologyReading /></RequireAuth>} />
+              <Route path="/readings/dream" element={<RequireAuth><DreamReading /></RequireAuth>} />
               
               {/* Catch-all */}
               <Route path="*" element={<NotFound />} />
