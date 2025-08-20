@@ -2,7 +2,7 @@ import { InterpretationData } from '@/hooks/useTarotInterpretation';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Badge } from '@/components/ui/badge';
-import { Sparkles, BookOpen, ShieldCheck, Star } from 'lucide-react';
+import { Sparkles, BookOpen, ShieldCheck, Star, CheckCircle } from 'lucide-react';
 
 interface TarotInterpretationPanelProps {
   data: InterpretationData;
@@ -35,13 +35,23 @@ export default function TarotInterpretationPanel({ data }: TarotInterpretationPa
               Advies voor Jouw Pad
             </h3>
             <p className="text-stone-300 whitespace-pre-line">{combinedInterpretation.advice}</p>
+            {combinedInterpretation.actions && combinedInterpretation.actions.length > 0 && (
+              <ul className="mt-4 space-y-2">
+                {combinedInterpretation.actions.map((action, index) => (
+                  <li key={index} className="flex items-start gap-2">
+                    <CheckCircle className="h-5 w-5 text-green-400 mt-1 flex-shrink-0" />
+                    <span className="text-stone-300">{action}</span>
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
           <div>
             <h3 className="font-semibold text-amber-300 flex items-center gap-2 mb-2">
               <Star className="h-4 w-4" />
               Affirmatie
             </h3>
-            <p className="text-stone-200 italic text-lg text-center py-2 border-t border-b border-stone-700">
+            <p className="text-stone-200 italic text-xl text-center py-4 border-t border-b border-stone-700">
               "{combinedInterpretation.affirmation}"
             </p>
           </div>
@@ -67,7 +77,7 @@ export default function TarotInterpretationPanel({ data }: TarotInterpretationPa
                       <h4 className="font-semibold">{card.cardName}</h4>
                       <p className="text-sm text-stone-400">{card.positionTitle}</p>
                     </div>
-                    {!card.isReversed && <Badge variant="outline" className="border-red-800/50 text-red-300">Omgekeerd</Badge>}
+                    {card.isReversed && <Badge variant="outline" className="border-red-800/50 text-red-300">Omgekeerd</Badge>}
                   </div>
                 </AccordionTrigger>
                 <AccordionContent className="space-y-4 text-stone-300">

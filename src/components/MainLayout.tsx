@@ -1,11 +1,11 @@
 import { Outlet } from "react-router-dom";
 import Header from "./Header";
-import MysticalBackground from "./MysticalBackground";
+import SiteBackground from "./SiteBackground";
 
 const MainLayout = () => {
   return (
-    <div className="relative min-h-screen bg-stone-950 text-stone-200 p-4 font-serif">
-      <MysticalBackground mode="particles+sigils" intensity="low" />
+    <div className="relative min-h-screen text-stone-200 p-4 font-serif">
+      <SiteBackground mode="all" intensity="med" />
       <div className="relative z-10">
         <Header />
         <main>

@@ -8,6 +8,7 @@ export interface InterpretationData {
     story: string;
     advice: string;
     affirmation: string;
+    actions: string[]; // NEW
   };
   cardInterpretations: {
     cardName: string;
@@ -19,8 +20,9 @@ export interface InterpretationData {
   }[];
 }
 
-interface TarotInterpretationPayload {
+export interface TarotInterpretationPayload {
   locale: Locale;
+  personaId: string; // NEW
   spread: { id: string; name: string };
   spreadGuide: string;
   cards: {

@@ -49,6 +49,13 @@
     --sidebar-border: 220 13% 91%;
 
     --sidebar-ring: 217.2 91.2% 59.8%;
+
+    --glass-bg: rgba(8,10,15,.32);
+    --glass-brd: rgba(255,255,255,.10);
+    --glass-shadow: inset 0 0 80px rgba(0,0,0,.35), 0 10px 30px rgba(0,0,0,.25);
+    --board-from: rgba(24,28,64,.35);
+    --board-via: rgba(16,20,48,.28);
+    --board-to: rgba(8,10,24,.22);
   }
 
   .dark {
@@ -85,60 +92,31 @@
 }
 
 @layer base {
+  html, body, #root {
+    background: transparent;
+  }
+
   * {
     @apply border-border;
   }
 
   body {
     @apply bg-background text-foreground;
+    background: transparent; /* Override */
   }
 }
 
-/* Subtiele film grain */
-.bg-noise::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background-image: url("data:image/svg+xml;utf8,\
-<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140' viewBox='0 0 140 140'>\
-<filter id='n'>\
-<feTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/>\
-<feColorMatrix type='saturate' values='0'/>\
-<feComponentTransfer><feFuncA type='table' tableValues='0 0 0 0 0.05 0.1 0.05 0'/></feComponentTransfer>\
-</filter>\
-<rect width='100%' height='100%' filter='url(%23n)'/>\
-</svg>");
-  opacity: 0.18;
-  mix-blend-mode: overlay;
-}
-
-/* Basis animaties (langzaam, rustgevend) */
-@keyframes slow-pan {
-  0% { transform: translate3d(0,0,0) scale(1); }
-  50% { transform: translate3d(-2%, -2%, 0) scale(1.02); }
-  100% { transform: translate3d(0,0,0) scale(1); }
-}
-@keyframes floatY {
-  0% { transform: translate3d(0, 0, 0); }
-  50% { transform: translate3d(0, -8px, 0); }
-  100% { transform: translate3d(0, 0, 0); }
-}
-@keyframes rotate-slow {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-/* Micro-interacties */
-@keyframes shimmer {
-  0% { transform: translateX(-100%); }
-  100% { transform: translateX(100%); }
-}
-
-/* Toegankelijkheid: beperkte beweging */
-@media (prefers-reduced-motion: reduce) {
-  * {
-    animation: none !important;
-    transition-duration: 0.01ms !important;
+@layer components {
+  .sv-glass {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-brd);
+    backdrop-filter: blur(8px) saturate(110%);
+    box-shadow: var(--glass-shadow);
+  }
+  .sv-board {
+    background: radial-gradient(120% 120% at 50% 0%, var(--board-from) 0%, var(--board-via) 55%, var(--board-to) 100%);
+    border: 1px solid rgba(255,255,255,.06);
+    backdrop-filter: blur(6px);
+    box-shadow: inset 0 0 80px rgba(0,0,0,.35);
   }
 }

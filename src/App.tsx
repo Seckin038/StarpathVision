@@ -22,6 +22,7 @@ import LoginPage from "./pages/Login";
 import RegisterPage from "./pages/Register";
 import ForgotPasswordPage from "./pages/ForgotPassword";
 import ProfilePage from "./pages/Profile";
+import AdminDashboardPage from "./pages/admin/Index";
 
 const queryClient = new QueryClient();
 
@@ -48,6 +49,7 @@ const App = () => (
               <Route path="/archive" element={<RequireAuth><Archive /></RequireAuth>} />
               <Route path="/profile" element={<RequireAuth><ProfilePage /></RequireAuth>} />
               <Route path="/onboarding" element={<RequireAuth><Onboarding /></RequireAuth>} />
+              <Route path="/admin" element={<RequireAuth><AdminDashboardPage /></RequireAuth>} />
 
               {/* Protected Reading Routes */}
               <Route path="/readings/tarot" element={<RequireAuth><TarotChoice /></RequireAuth>} />

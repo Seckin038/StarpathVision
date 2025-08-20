@@ -1,0 +1,60 @@
+import React from 'react';
+import { usePersona } from '@/contexts/PersonaContext';
+import { PERSONAE, gatePersonaMethod } from '@/lib/persona-registry';
+import { useTranslation } from 'react-i18next';
+
+const ORDER = ['orakel','selvara','lyara','mireya','auron','kaelen','tharion','corvan','eryndra','vaelor'];
+
+export function PersonaPicker({
+  method = 'tarot',
+  onPicked,
+}: {
+  method?: 'tarot' | 'coffee' | 'astrology' | 'numerology';
+  onPicked?: () => void;
+}) {
+  const { personaId, setPersonaId } = usePersona();
+  const { i18n } = useTranslation();
+  const locale = i18n.language as 'nl' | 'en' | 'tr';
+
+  return (
+    <div className="w-full max-w-5xl mx-auto">
+      <h3 className="text-amber-200 text-lg mb-2">Kies je waarzegger</h3>
+      <p className="text-stone-400 text-sm mb-4">De gekozen persona begeleidt de hele sessie en geeft de interpretaties in haar/zijn eigen stem.</p>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {ORDER.filter(id => PERSONAE[id]).map((id) => {
+          const p = PERSONAE[id];
+          const gate = gatePersonaMethod(id, method, locale);
+          const disabled = Boolean(gate);
+          const active = personaId === id;
+          const displayName = p.display?.[locale] || p.display?.['nl'] || id;
+          const stylePoints = p.style?.[locale] || p.style?.['nl'] || [];
+
+          return (
+            <button
+              key={id}
+              disabled={disabled}
+              onClick={() => { setPersonaId(id); onPicked?.(); }}
+              className={`relative rounded-2xl border p-4 text-left transition ${active ? 'border-amber-500 bg-amber-500/10' : 'border-white/10 bg-white/5 hover:bg-white/10'} ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`}
+            >
+              <div className="flex items-center justify-between mb-2">
+                <div className="text-amber-100 font-semibold">{displayName}</div>
+                {p.premium && <span className="text-xs px-2 py-0.5 rounded-full bg-amber-600/20 border border-amber-600/40 text-amber-300">Premium</span>}
+              </div>
+              <ul className="text-sm text-amber-200/80 space-y-1 list-disc pl-5">
+                {stylePoints.slice(0, 3).map((s: string, i: number) => (
+                  <li key={i}>{s}</li>
+                ))}
+              </ul>
+              {disabled && (
+                <div className="absolute inset-0 backdrop-blur-[1px] bg-black/40 rounded-2xl grid place-items-center text-amber-200 text-sm p-2 text-center">
+                  {gate}
+                </div>
+              )}
+            </button>
+          );
+        })}
+      </div>
+      <div className="mt-3 text-stone-400 text-sm">Geselecteerd: <span className="text-amber-300 font-medium">{PERSONAE[personaId]?.display?.[locale] || PERSONAE[personaId]?.display?.['nl']}</span></div>
+    </div>
+  );
+}
