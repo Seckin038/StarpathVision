@@ -12,7 +12,6 @@ import Onboarding from "./pages/Onboarding";
 import Dashboard from "./pages/Dashboard";
 import TarotChoice from "./pages/TarotChoice";
 import TarotSpreadReading from "./pages/TarotSpreadReading";
-import TarotDailyReading from "./pages/TarotDailyReading";
 import CoffeeReading from "./pages/CoffeeReading";
 import CoffeeReadingWithUpload from "./pages/CoffeeReadingWithUpload";
 import NumerologyReading from "./pages/NumerologyReading";
@@ -41,8 +40,9 @@ const App = () => (
               <Route path="/register" element={<RegisterPage />} />
               <Route path="/forgot-password" element={<ForgotPasswordPage />} />
               <Route path="/onboarding" element={<Onboarding />} />
-              <Route path="/readings/tarot/daily" element={<TarotDailyReading />} />
-              <Route path="/readings/tarot/pick-three" element={<TarotDailyReading />} />
+              
+              {/* Public Reading Routes */}
+              <Route path="/readings/tarot/spread/three-card" element={<TarotSpreadReading />} />
 
               {/* Protected Routes */}
               <Route path="/dashboard" element={<RequireAuth><Dashboard /></RequireAuth>} />

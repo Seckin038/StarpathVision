@@ -87,14 +87,14 @@ export default function TarotSpreadBoard({
   return (
     <div className={cn('relative w-full min-h-[600px] p-4', className)}>
       <AnimatePresence>
-        {cardPositions.map(({ drawnCard, style, position }) => (
+        {cardPositions.map(({ drawnCard, style, position }, index) => (
           <motion.div
             key={drawnCard.positionId}
             className="absolute"
             style={style}
             initial={{ opacity: 0, scale: 0.8, y: 50 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            transition={{ type: 'spring', damping: 15, stiffness: 100, delay: 0.1 * draw.findIndex(d => d.positionId === drawnCard.positionId) }}
+            transition={{ type: 'spring', damping: 15, stiffness: 100, delay: 0.1 * index }}
           >
             <div className="relative group">
               <Card
@@ -173,13 +173,13 @@ function calculateCardPositions(spread: Spread, draw: DrawnCard[]) {
   const { layout, positions } = spread;
   const cardSize = layout.cardSize || { w: 120, h: 200 };
 
-  const positionMap = new Map(positions.map(p => [p.id, p]));
+  const positionMap = new Map(positions.map((p: SpreadPosition) => [p.id, p]));
 
   let styles: { [key: string]: React.CSSProperties } = {};
 
   switch (layout.type) {
     case 'absolute':
-      layout.coords?.forEach(coord => {
+      layout.coords?.forEach((coord: LayoutCoord) => {
         styles[coord.id] = {
           left: `calc(${layout.origin?.x || '50%'} - ${cardSize.w / 2}px + ${coord.x}px)`,
           top: `calc(${layout.origin?.y || '50%'} - ${cardSize.h / 2}px + ${coord.y}px)`,
@@ -198,8 +198,6 @@ function calculateCardPositions(spread: Spread, draw: DrawnCard[]) {
         };
       });
       break;
-
-    // Andere layout types (circle, arc, etc.) kunnen hier worden toegevoegd
   }
 
   return draw

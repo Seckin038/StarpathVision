@@ -62,8 +62,10 @@ export default function TarotReadingPage() {
     initializeReading();
   }, [spreadId, locale]);
 
-  const handleSelectionComplete = (selectedCards: TarotCardData[]) => {
+  const handleSelectionComplete = (selectedIndices: number[]) => {
     if (!spread) return;
+
+    const selectedCards = selectedIndices.map(i => deck[i]);
 
     const finalDraw = spread.positions.map((position: any, index: number) => ({
       positionId: position.id,
@@ -95,11 +97,16 @@ export default function TarotReadingPage() {
       case 'picking':
         if (!spread) return null;
         return (
-          <TarotGridDisplay
-            deck={deck}
-            selectionLimit={spread.drawCount}
-            onSelectionComplete={handleSelectionComplete}
-          />
+          <>
+            <TarotGridDisplay
+              totalCards={deck.length}
+              maxSelect={spread.drawCount}
+              onChange={handleSelectionComplete}
+            />
+            <div className="text-center mt-4">
+              <p className="text-stone-400">Selecteer {spread.drawCount} kaarten.</p>
+            </div>
+          </>
         );
       case 'reading':
         if (!spread || draw.length === 0) return null;
@@ -122,7 +129,7 @@ export default function TarotReadingPage() {
               {spread ? spread.name[locale] : "Tarot Lezing"}
             </h1>
             <p className="text-stone-400 text-center">
-              {spread && phase === 'picking' ? `Kies ${spread.drawCount} kaarten voor je legging.` : (spread ? spread.description[locale] : "Klik op de kaarten om ze om te draaien.")}
+              {spread && phase === 'picking' ? `Kies ${spread.drawCount} kaarten voor je legging.` : (spread ? "Klik op de kaarten om ze om te draaien en je lezing te onthullen." : "")}
             </p>
           </div>
           <div className="w-32"></div>

@@ -1,31 +1,45 @@
 {
   "spreads": [
     {
-      "id": "star-spread",
-      "name": { "nl": "Sterlegging", "en": "Star Spread", "tr": "Yıldız Açılımı" },
-      "description": { "nl": "Inzicht in je zielsdoel en pad.", "en": "Insight into your soul's purpose and path.", "tr": "Ruh amacınıza ve yolunuza dair içgörü." },
-      "drawCount": 7,
+      "id": "starpath-vision",
+      "name": {
+        "nl": "Starpath Vision",
+        "en": "Starpath Vision",
+        "tr": "Yıldız Yolu Vizyonu"
+      },
+      "description": {
+        "nl": "Een diepgaande legging met 10 kaarten die de reis van de ziel en het pad naar persoonlijke verlichting verkent.",
+        "en": "A profound 10-card spread exploring the soul's journey and the path to personal enlightenment.",
+        "tr": "Ruhun yolculuğunu ve kişisel aydınlanma yolunu araştıran derinlemesine 10 kartlık bir açılım."
+      },
+      "drawCount": 10,
       "positions": [
-        { "id": "core", "label": { "nl": "Kern", "en": "Core", "tr": "Öz" } },
-        { "id": "calling", "label": { "nl": "Roeping", "en": "Calling", "tr": "Çağrı" } },
-        { "id": "talent", "label": { "nl": "Talent", "en": "Talent", "tr": "Yetenek" } },
-        { "id": "growth", "label": { "nl": "Groei", "en": "Growth", "tr": "Büyüme" } },
-        { "id": "challenge", "label": { "nl": "Uitdaging", "en": "Challenge", "tr": "Zorluk" } },
-        { "id": "support", "label": { "nl": "Steun", "en": "Support", "tr": "Destek" } },
-        { "id": "integration", "label": { "nl": "Integratie", "en": "Integration", "tr": "Bütünleşme" } }
+        { "id": "p1", "label": { "nl": "1. Het Zelf", "en": "1. The Self", "tr": "1. Benlik" } },
+        { "id": "p2", "label": { "nl": "2. De Vonk", "en": "2. The Spark", "tr": "2. Kıvılcım" } },
+        { "id": "p3", "label": { "nl": "3. De Basis", "en": "3. The Foundation", "tr": "3. Temel" } },
+        { "id": "p4", "label": { "nl": "4. De Uitdaging", "en": "4. The Challenge", "tr": "4. Zorluk" } },
+        { "id": "p5", "label": { "nl": "5. Het Pad", "en": "5. The Path", "tr": "5. Yol" } },
+        { "id": "p6", "label": { "nl": "6. De Gave", "en": "6. The Gift", "tr": "6. Hediye" } },
+        { "id": "p7", "label": { "nl": "7. De Spiegel", "en": "7. The Mirror", "tr": "7. Ayna" } },
+        { "id": "p8", "label": { "nl": "8. De Sleutel", "en": "8. The Key", "tr": "8. Anahtar" } },
+        { "id": "p9", "label": { "nl": "9. De Visie", "en": "9. The Vision", "tr": "9. Vizyon" } },
+        { "id": "p10", "label": { "nl": "10. De Bestemming", "en": "10. The Destination", "tr": "10. Varış Noktası" } }
       ],
       "layout": {
         "type": "absolute",
         "origin": { "x": "50%", "y": "50%" },
-        "cardSize":{"w":100,"h":160},
+        "cardSize": { "w": 100, "h": 166 },
         "coords": [
-          { "id": "core", "x": 0, "y": 0 },
-          { "id": "calling", "x": 0, "y": -170 },
-          { "id": "talent", "x": 147, "y": -85 },
-          { "id": "growth", "x": 147, "y": 85 },
-          { "id": "challenge", "x": 0, "y": 170 },
-          { "id": "support", "x": -147, "y": 85 },
-          { "id": "integration", "x": -147, "y": -85 }
+          { "id": "p1", "x": 0, "y": 0 },
+          { "id": "p2", "x": 0, "y": -200 },
+          { "id": "p3", "x": 0, "y": 200 },
+          { "id": "p4", "x": -120, "y": 0 },
+          { "id": "p5", "x": 120, "y": 0 },
+          { "id": "p6", "x": -240, "y": -100 },
+          { "id": "p7", "x": 240, "y": -100 },
+          { "id": "p8", "x": -240, "y": 100 },
+          { "id": "p9", "x": 240, "y": 100 },
+          { "id": "p10", "x": 0, "y": -400 }
         ]
       }
     }
