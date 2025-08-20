@@ -41,6 +41,8 @@ const App = () => (
               <Route path="/register" element={<RegisterPage />} />
               <Route path="/forgot-password" element={<ForgotPasswordPage />} />
               <Route path="/onboarding" element={<Onboarding />} />
+              <Route path="/readings/tarot/daily" element={<TarotPickThree />} />
+              <Route path="/readings/tarot/pick-three" element={<TarotPickThree />} />
 
               {/* Protected Routes */}
               <Route path="/dashboard" element={<RequireAuth><Dashboard /></RequireAuth>} />
@@ -49,7 +51,6 @@ const App = () => (
               
               <Route path="/readings/tarot" element={<RequireAuth><TarotChoice /></RequireAuth>} />
               <Route path="/readings/tarot/spread/:spread" element={<TarotSpreadReading />} />
-              <Route path="/readings/tarot/pick-three" element={<RequireAuth><TarotPickThree /></RequireAuth>} />
               <Route path="/readings/coffee" element={<CoffeeReading />} />
               <Route path="/readings/coffee/upload" element={<CoffeeReadingWithUpload />} />
               <Route path="/readings/numerology" element={<NumerologyReading />} />
