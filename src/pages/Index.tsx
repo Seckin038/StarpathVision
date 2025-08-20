@@ -18,6 +18,7 @@ import MysticalBackground from "@/components/MysticalBackground";
 import FancyButton from "@/components/FancyButton";
 import Card3D from "@/components/Card3D";
 import { Button } from "@/components/ui/button";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
 
 const Index = () => {
   const { t } = useTranslation();
@@ -59,6 +60,7 @@ const Index = () => {
             <p className="text-stone-400">{t('subtitle')}</p>
           </div>
           <div className="flex items-center gap-4">
+            <LanguageSwitcher />
             <Link to="/login">
               <Button variant="outline" className="border-amber-800 text-amber-300 hover:bg-amber-900/50 hover:text-amber-200">
                 <LogIn className="h-4 w-4 mr-2" />
