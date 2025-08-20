@@ -3,12 +3,29 @@ import { Link, useParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, Loader2, AlertTriangle } from "lucide-react";
 import MysticalBackground from "@/components/MysticalBackground";
-import TarotSpreadBoard from "@/components/TarotSpreadBoard";
+import TarotSpreadBoard, { SpreadName } from "@/components/TarotSpreadBoard";
 import TarotGridDisplay from "@/components/TarotGridDisplay";
 import { useTranslation } from "react-i18next";
 import { Spread, DrawnCard, TarotCardData, Locale } from "@/types/tarot";
 
 type Phase = 'loading' | 'error' | 'picking' | 'reading';
+
+// Helper to map spread IDs from the library to the layout names in the new component
+function mapSpreadIdToSpreadName(id: string): SpreadName {
+  if (id.includes('celtic-cross')) return 'CelticCross10';
+  if (id.includes('cross-of-truth')) return 'Cross5';
+  if (id.includes('star-6')) return 'Star7';
+  if (id.includes('horseshoe-7')) return 'Horseshoe7';
+  if (id.includes('year-ahead-12') || id.includes('astrological-12')) return 'YearAhead12';
+  if (id.includes('nine-square')) return 'NineSquare';
+  if (id.includes('ppf-3') || id.includes('mind-body-spirit-3') || id.includes('situation-action-outcome-3')) return 'Line3';
+  
+  // Fallback for any other linear spreads
+  if (id.includes('-1') || id.includes('-2') || id.includes('-3') || id.includes('-7')) return 'Line3';
+  
+  return 'Line3'; // Default fallback
+}
+
 
 export default function TarotReadingPage() {
   const { spread: spreadId } = useParams<{ spread: string }>();
@@ -132,7 +149,24 @@ export default function TarotReadingPage() {
         );
       case 'reading':
         if (!spread || draw.length === 0) return null;
-        return <TarotSpreadBoard spread={spread} draw={draw} locale={locale} />;
+        
+        const spreadName = mapSpreadIdToSpreadName(spread.id);
+        const selectedCardsForBoard = draw.map(d => ({
+            id: d.card.id,
+            name: d.card.name,
+            imageUrl: d.card.image,
+        }));
+
+        return (
+          <div className="h-[70vh]">
+            <TarotSpreadBoard
+              deck={deck}
+              selectedCards={selectedCardsForBoard}
+              spread={spreadName}
+              mode="spread"
+            />
+          </div>
+        );
     }
   };
 
@@ -151,7 +185,7 @@ export default function TarotReadingPage() {
               {spread ? spread.name[locale] : "Tarot Lezing"}
             </h1>
             <p className="text-stone-400 text-center">
-              {spread && phase === 'picking' ? spread.ui_copy[locale].subtitle : (spread ? "Klik op de kaarten om ze om te draaien en je lezing te onthullen." : "")}
+              {spread && phase === 'picking' ? spread.ui_copy[locale].subtitle : (spread ? "Je lezing wordt onthuld." : "")}
             </p>
           </div>
           <div className="w-32"></div>
