@@ -1,64 +1,77 @@
-import { useState } from "react";
+import React from "react";
 import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
-import { Sparkles } from "lucide-react";
 
-type TarotCardData = { id: string; [key: string]: any };
+export type TarotGridDisplayProps = {
+  totalCards?: number; // default 78
+  rows?: number; // default 6
+  cols?: number; // default 13
+  maxSelect?: number; // optional selection cap (e.g., 3 for three‑card draw)
+  selected?: number[]; // controlled selection
+  onChange?: (next: number[]) => void;
+  // Optional: custom renderer for a card (e.g., to show numbers or custom backs)
+  renderCard?: (index: number, isSelected: boolean) => React.ReactNode;
+};
 
-interface Props {
-  deck: TarotCardData[];
-  selectionLimit: number;
-  onSelectionComplete: (selectedCards: TarotCardData[]) => void;
-}
+export default function TarotGridDisplay({
+  totalCards = 78,
+  rows = 6,
+  cols = 13,
+  maxSelect,
+  selected,
+  onChange,
+  renderCard,
+}: TarotGridDisplayProps) {
+  const [internalSelected, setInternalSelected] = React.useState<number[]>([]);
+  const sel = selected ?? internalSelected;
 
-export default function TarotGridDisplay({ deck, selectionLimit, onSelectionComplete }: Props) {
-  const [selectedCards, setSelectedCards] = useState<TarotCardData[]>([]);
-
-  const handleCardSelect = (card: TarotCardData) => {
-    setSelectedCards(prev => {
-      if (prev.find(c => c.id === card.id)) {
-        return prev.filter(c => c.id !== card.id);
-      }
-      if (prev.length < selectionLimit) {
-        return [...prev, card];
-      }
-      return prev;
-    });
+  const toggle = (i: number) => {
+    const exists = sel.includes(i);
+    let next = exists ? sel.filter((x) => x !== i) : [...sel, i];
+    if (maxSelect && next.length > maxSelect) {
+      // If over cap, drop the earliest pick
+      next = next.slice(next.length - maxSelect);
+    }
+    if (onChange) onChange(next);
+    else setInternalSelected(next);
   };
+
+  const cards = React.useMemo(() => Array.from({ length: totalCards }, (_, i) => i), [totalCards]);
 
   return (
     <div className="w-full">
-      <div className="grid grid-rows-6 grid-cols-13 gap-2">
-        {deck.map((card, i) => (
-          <motion.div
-            key={card.id}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: i * 0.01 }}
-            onClick={() => handleCardSelect(card)}
-            className="cursor-pointer aspect-[2/3] relative"
-          >
-            <img
-              src="/tarot/back.svg"
-              alt="Tarot Kaart"
-              className={`w-full h-full object-cover rounded-md transition-all duration-300 border-2 ${
-                selectedCards.find(c => c.id === card.id)
-                  ? 'border-amber-400 scale-105 shadow-lg shadow-amber-500/20'
-                  : 'border-transparent hover:border-amber-600/50'
+      <div
+        className="grid gap-2 mx-auto w-full max-w-[min(100%,1400px)]"
+        style={{
+          gridTemplateRows: `repeat(${rows}, minmax(0, 1fr))`,
+          gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))`,
+        }}
+      >
+        {cards.map((i) => {
+          const isSelected = sel.includes(i);
+          return (
+            <motion.button
+              key={i}
+              type="button"
+              onClick={() => toggle(i)}
+              className={`relative aspect-[2/3] w-full rounded-lg border border-purple-900/40 bg-[url('/tarot/back.svg')] bg-cover bg-center shadow-sm hover:shadow-md transition-all duration-300 ${
+                isSelected ? "ring-2 ring-amber-400 scale-105 shadow-lg shadow-amber-500/20" : "ring-0 hover:border-amber-600/50"
               }`}
-            />
-          </motion.div>
-        ))}
-      </div>
-      <div className="text-center mt-8">
-        <Button
-          onClick={() => onSelectionComplete(selectedCards)}
-          disabled={selectedCards.length !== selectionLimit}
-          className="bg-amber-700 hover:bg-amber-600 text-white text-lg px-8 py-6"
-        >
-          <Sparkles className="mr-2 h-5 w-5" />
-          Onthul mijn lezing ({selectedCards.length}/{selectionLimit})
-        </Button>
+              aria-pressed={isSelected}
+              aria-label={`Card ${i + 1}`}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: i * 0.01 }}
+            >
+              {renderCard ? (
+                renderCard(i, isSelected)
+              ) : (
+                <span className="absolute bottom-1 right-2 text-xs font-bold text-black/50 select-none">
+                  {i + 1}
+                </span>
+              )}
+            </motion.button>
+          );
+        })}
       </div>
     </div>
   );
