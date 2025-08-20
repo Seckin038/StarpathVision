@@ -51,7 +51,7 @@ serve(async (req) => {
     const headers = {
       ...corsHeaders,
       "Content-Type": "application/json",
-      "Content-Disposition": `attachment; filename="divinatio_data_${user.id}.json"`,
+      "Content-Disposition": `attachment; filename="starpathvision_data_${user.id}.json"`,
     };
 
     return new Response(jsonString, { headers, status: 200 });

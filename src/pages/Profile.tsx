@@ -89,7 +89,7 @@ export default function ProfilePage() {
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = `divinatio_data.json`;
+      a.download = `starpathvision_data.json`;
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
