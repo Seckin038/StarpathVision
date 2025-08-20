@@ -28,7 +28,7 @@ const Index = () => {
       title: t('tarot'), 
       icon: <BookOpen className="h-6 w-6 text-purple-400" />,
       description: t('tarot_desc'),
-      path: "/readings/tarot/daily",
+      path: "/readings/tarot",
     },
     { 
       title: t('coffee'), 
@@ -125,7 +125,7 @@ const Index = () => {
                 <p className="mt-4 text-stone-300">
                   Vandaag staat in het teken van balans. Vertrouw op je intuïtie bij belangrijke beslissingen.
                 </p>
-                <Link to="/readings/tarot/daily">
+                <Link to="/readings/tarot/spread/three-card">
                   <FancyButton className="w-full mt-6">
                     Ontvang je lezing
                   </FancyButton>
