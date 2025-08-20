@@ -50,7 +50,7 @@ export default function TarotReadingPage() {
           const threeCardSpread = {
             id: "three-card",
             name: { nl: "Drie Kaart Legging", en: "Three Card Spread", tr: "Üç Kart Yayılımı" },
-            description: { nl: "Een eenvoudige legging voor inzicht in verleden, heden en toekomst.", en: "A simple spread for insight into the past, present, and future.", tr: "Geçmiş, şimdi ve gelecek hakkında bilgi edinmek için basit bir yayılım." },
+            description: { nl: "Een eenvoudige legging voor inzicht in verleden, heden en toekomst.", en: "A simple spread for insight into the past, present, and future.", tr: "Geçmiş, şimdi ve gelecek hakkında bilgi edinmek voor basit bir yayılım." },
             drawCount: 3,
             positions: [
               { "id": "pos1", "label": { "nl": "Verleden", "en": "Past", "tr": "Geçmiş" } },
@@ -68,7 +68,19 @@ export default function TarotReadingPage() {
           throw new Error(`Legging '${spreadId}' niet gevonden.`);
         }
         setSpread(currentSpread);
-        setDeck([...cardsData].sort(() => 0.5 - Math.random()));
+
+        let fullDeckData = [...cardsData];
+        // WORKAROUND: If the card data file is incomplete, duplicate cards to create a full 78-card deck.
+        if (fullDeckData.length > 0 && fullDeckData.length < 78) {
+            console.warn(`Tarot deck data is incomplete (${fullDeckData.length}/78 cards). Duplicating cards to fill the deck.`);
+            const originalCards = [...fullDeckData];
+            while (fullDeckData.length < 78) {
+                fullDeckData.push(...originalCards);
+            }
+            fullDeckData = fullDeckData.slice(0, 78);
+        }
+
+        setDeck(fullDeckData.sort(() => 0.5 - Math.random()));
         setPhase('picking');
 
       } catch (err: any) {
