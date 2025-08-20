@@ -65,15 +65,12 @@ export default function TarotReadingPage() {
 
   const handleSelectionChange = (indices: number[]) => {
     setSelectedIndices(indices);
-    if (spread && indices.length === spread.drawCount) {
-      handleSelectionComplete(indices);
-    }
   };
 
-  const handleSelectionComplete = (finalIndices: number[]) => {
-    if (!spread) return;
+  const handleConfirmSelection = () => {
+    if (!spread || selectedIndices.length !== spread.drawCount) return;
 
-    const selectedCards = finalIndices.map(i => deck[i]);
+    const selectedCards = selectedIndices.map(i => deck[i]);
 
     const finalDraw = spread.positions.map((position: any, index: number) => ({
       positionId: position.id,
@@ -112,8 +109,14 @@ export default function TarotReadingPage() {
               selected={selectedIndices}
               onChange={handleSelectionChange}
             />
-            <div className="text-center mt-4">
-              <p className="text-stone-400">Selecteer {spread.drawCount} kaarten. ({selectedIndices.length}/{spread.drawCount})</p>
+            <div className="mt-8 flex justify-center">
+              <Button
+                disabled={selectedIndices.length !== spread.drawCount}
+                className="rounded-xl bg-amber-700/90 px-5 py-3 text-black disabled:opacity-40"
+                onClick={handleConfirmSelection}
+              >
+                ✨ Onthul mijn lezing ( {selectedIndices.length}/{spread.drawCount} )
+              </Button>
             </div>
           </>
         );
