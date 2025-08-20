@@ -125,7 +125,7 @@ const Index = () => {
                 <p className="mt-4 text-stone-300">
                   Vandaag staat in het teken van balans. Vertrouw op je intuïtie bij belangrijke beslissingen.
                 </p>
-                <Link to="/readings/tarot/spread/three-card">
+                <Link to="/readings/tarot/spread/ppf-3">
                   <FancyButton className="w-full mt-6">
                     Ontvang je lezing
                   </FancyButton>

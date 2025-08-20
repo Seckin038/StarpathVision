@@ -1,6 +1,7 @@
 import { serve } from "https://deno.land/std@0.224.0/http/server.ts";
 import { z } from "https://deno.land/x/zod@v3.23.8/mod.ts";
 import { GoogleGenerativeAI } from 'npm:@google/generative-ai';
+import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.45.0'
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -77,8 +78,33 @@ serve(async (req) => {
 
     // Clean the response to ensure it's valid JSON
     text = text.replace(/```json/g, "").replace(/```/g, "").trim();
-
     const jsonData = JSON.parse(text);
+
+    // --- Save reading for authenticated users ---
+    try {
+      const supabaseAdmin = createClient(
+        Deno.env.get("SUPABASE_URL")!,
+        Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!
+      );
+
+      const { data: { user } } = await supabaseAdmin.auth.getUser(req.headers.get('Authorization')?.replace('Bearer ', ''));
+
+      if (user) {
+        await supabaseAdmin.from('readings').insert({
+          user_id: user.id,
+          method: 'tarot',
+          language: validatedBody.locale,
+          input: {
+            spread: validatedBody.spread,
+            cards: validatedBody.cards,
+          },
+          output: jsonData,
+          model: 'gemini-1.5-flash-latest',
+        });
+      }
+    } catch (dbError) {
+      console.error("Failed to save reading to DB (this is non-critical):", dbError.message);
+    }
 
     return new Response(JSON.stringify(jsonData), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },

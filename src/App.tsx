@@ -41,17 +41,18 @@ const App = () => (
               <Route path="/forgot-password" element={<ForgotPasswordPage />} />
               <Route path="/onboarding" element={<Onboarding />} />
               
-              {/* Protected Routes */}
-              <Route path="/dashboard" element={<RequireAuth><Dashboard /></RequireAuth>} />
-              <Route path="/archive" element={<RequireAuth><Archive /></RequireAuth>} />
-              <Route path="/profile" element={<RequireAuth><ProfilePage /></RequireAuth>} />
-              
-              <Route path="/readings/tarot" element={<RequireAuth><TarotChoice /></RequireAuth>} />
+              {/* Reading Routes (Public) */}
+              <Route path="/readings/tarot" element={<TarotChoice />} />
               <Route path="/readings/tarot/spread/:spread" element={<TarotSpreadReading />} />
               <Route path="/readings/coffee" element={<CoffeeReading />} />
               <Route path="/readings/coffee/upload" element={<CoffeeReadingWithUpload />} />
               <Route path="/readings/numerology" element={<NumerologyReading />} />
               <Route path="/readings/dream" element={<DreamReading />} />
+
+              {/* Protected Routes */}
+              <Route path="/dashboard" element={<RequireAuth><Dashboard /></RequireAuth>} />
+              <Route path="/archive" element={<RequireAuth><Archive /></RequireAuth>} />
+              <Route path="/profile" element={<RequireAuth><ProfilePage /></RequireAuth>} />
               
               {/* Catch-all */}
               <Route path="*" element={<NotFound />} />
