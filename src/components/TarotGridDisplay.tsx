@@ -28,7 +28,7 @@ export default function TarotGridDisplay({ deck, selectionLimit, onSelectionComp
 
   return (
     <div className="w-full">
-      <div className="grid grid-cols-13 grid-rows-6 gap-2">
+      <div className="grid grid-rows-6 grid-cols-13 gap-2">
         {deck.map((card, i) => (
           <motion.div
             key={card.id}

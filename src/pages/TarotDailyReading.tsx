@@ -103,7 +103,7 @@ export default function TarotDailyReadingPage() {
         );
       case 'generating':
         return (
-          <div className="text-center">
+          <div className="text-center flex flex-col items-center justify-center h-96">
             <Loader2 className="h-12 w-12 animate-spin text-amber-500 mb-4" />
             <p className="text-stone-400">De kosmos wordt geraadpleegd...</p>
           </div>
@@ -114,7 +114,7 @@ export default function TarotDailyReadingPage() {
             key="reading"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="w-full max-w-4xl"
+            className="w-full max-w-4xl mx-auto"
           >
             <div className="flex justify-center gap-4 md:gap-8 mb-8">
               {selectedCards.map((card, i) => (
@@ -189,7 +189,7 @@ export default function TarotDailyReadingPage() {
           </div>
         </header>
 
-        <main className="min-h-[60vh] flex flex-col items-center justify-center">
+        <main className="min-h-[60vh]">
           <AnimatePresence mode="wait">
             {renderContent()}
           </AnimatePresence>
