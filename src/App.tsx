@@ -41,9 +41,6 @@ const App = () => (
               <Route path="/forgot-password" element={<ForgotPasswordPage />} />
               <Route path="/onboarding" element={<Onboarding />} />
               
-              {/* Public Reading Routes */}
-              <Route path="/readings/tarot/spread/three-card" element={<TarotSpreadReading />} />
-
               {/* Protected Routes */}
               <Route path="/dashboard" element={<RequireAuth><Dashboard /></RequireAuth>} />
               <Route path="/archive" element={<RequireAuth><Archive /></RequireAuth>} />

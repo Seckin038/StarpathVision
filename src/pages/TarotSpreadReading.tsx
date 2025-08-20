@@ -44,6 +44,24 @@ export default function TarotReadingPage() {
         ]);
         
         const allSpreads = [...bundle.spreads, ...starpath.spreads];
+
+        // Fallback for three-card spread if not in JSON
+        if (spreadId === 'three-card' && !allSpreads.find(s => s.id === 'three-card')) {
+          const threeCardSpread = {
+            id: "three-card",
+            name: { nl: "Drie Kaart Legging", en: "Three Card Spread", tr: "Üç Kart Yayılımı" },
+            description: { nl: "Een eenvoudige legging voor inzicht in verleden, heden en toekomst.", en: "A simple spread for insight into the past, present, and future.", tr: "Geçmiş, şimdi ve gelecek hakkında bilgi edinmek için basit bir yayılım." },
+            drawCount: 3,
+            positions: [
+              { "id": "pos1", "label": { "nl": "Verleden", "en": "Past", "tr": "Geçmiş" } },
+              { "id": "pos2", "label": { "nl": "Heden", "en": "Present", "tr": "Şimdi" } },
+              { "id": "pos3", "label": { "nl": "Toekomst", "en": "Future", "tr": "Gelecek" } }
+            ],
+            layout: { type: "row", gap: 30, cardSize: { "w": 120, "h": 200 } }
+          };
+          allSpreads.push(threeCardSpread);
+        }
+
         const currentSpread = allSpreads.find(s => s.id === spreadId);
 
         if (!currentSpread) {
