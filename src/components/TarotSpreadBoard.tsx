@@ -176,18 +176,27 @@ export default function TarotSpreadBoard({
         const p = positions[i];
         if (!p) return null;
 
-        // Calculate card dimensions and clamp position to keep it within bounds
-        const halfW_pct = widthPct / 2;
-        const boardAspectRatio = 16 / 9;
-        const cardAspectRatio = 2 / 3;
-        const cardHeightAsPctOfBoardHeight = widthPct * (boardAspectRatio / cardAspectRatio);
-        const halfH_pct = cardHeightAsPctOfBoardHeight / 2;
+        // Card width as a percentage of the board's width.
+        const cardW = widthPct;
+        // Card height as a percentage of the board's height, calculated from its width and the aspect ratios.
+        const cardH = cardW * (16 / 9) / (2 / 3);
 
-        const clampedX_pct = Math.max(halfW_pct, Math.min(100 - halfW_pct, p.x * 100));
-        const clampedY_pct = Math.max(halfH_pct, Math.min(100 - halfH_pct, p.y * 100));
+        // The card's anchor point is its center, so we need its half-dimensions.
+        const halfW = cardW / 2;
+        const halfH = cardH / 2;
 
-        const left = `${clampedX_pct.toFixed(2)}%`;
-        const top = `${clampedY_pct.toFixed(2)}%`;
+        // The desired center point from the layout data.
+        const targetX = p.x * 100;
+        const targetY = p.y * 100;
+
+        // To keep the card inside, its center cannot be closer to an edge than its half-dimension.
+        // The valid range for the center X is [halfW, 100 - halfW].
+        // The valid range for the center Y is [halfH, 100 - halfH].
+        const finalX = Math.max(halfW, Math.min(100 - halfW, targetX));
+        const finalY = Math.max(halfH, Math.min(100 - halfH, targetY));
+
+        const left = `${finalX.toFixed(2)}%`;
+        const top = `${finalY.toFixed(2)}%`;
         const rot = p.r ?? 0;
         const z = p.z ?? (i + 1);
         const ann = annotations?.[i];
