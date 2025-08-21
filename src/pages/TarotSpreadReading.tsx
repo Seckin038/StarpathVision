@@ -93,15 +93,18 @@ export default function TarotReadingPage() {
     const payload: TarotInterpretationPayload = {
       locale,
       personaId,
-      spread: { id: spread.id, name: spread.name[locale] },
-      spreadGuide: spread.ui_copy[locale]?.subtitle || '',
-      cards: draw.map((c, i) => ({
-        index: i + 1,
-        name: c.card.name,
-        upright: !c.isReversed,
-        position_key: spread.positions[i].slot_key,
-        position_title: spread.positions[i].title[locale],
-      })),
+      spread: { id: spread.id, name: spread.name?.[locale] ?? spread.id },
+      spreadGuide: spread.ui_copy?.[locale]?.subtitle ?? '',
+      cards: draw.map((c, i) => {
+        const position = spread.positions[i];
+        return {
+          index: i + 1,
+          name: c.card.name,
+          upright: !c.isReversed,
+          position_key: position.slot_key,
+          position_title: position.title?.[locale] ?? position.slot_key,
+        };
+      }),
     };
     getInterpretation(payload);
   }, [draw, spread, locale, personaId, getInterpretation]);
@@ -117,7 +120,7 @@ export default function TarotReadingPage() {
     phase === "reading" && spread
       ? draw.map((d, i) => {
           const pos: SpreadPosition = spread.positions[i];
-          const title = (pos.title && pos.title[locale]) || pos.slot_key || `#${i + 1}`;
+          const title = (pos.title?.[locale]) || pos.slot_key || `#${i + 1}`;
           const label = d.isReversed ? t("tarot.reversed") : t("tarot.upright");
           const copy = (d.isReversed ? pos.reversed_copy?.[locale] : pos.upright_copy?.[locale]) || "";
           return { title, label, copy };
@@ -128,7 +131,7 @@ export default function TarotReadingPage() {
     phase === "reading" && spread
       ? draw.map((d, i) => {
           const pos: SpreadPosition = spread.positions[i];
-          const title = (pos.title && pos.title[locale]) || pos.slot_key || `#${i + 1}`;
+          const title = (pos.title?.[locale]) || pos.slot_key || `#${i + 1}`;
           const copy = (d.isReversed ? pos.reversed_copy?.[locale] : pos.upright_copy?.[locale]) || "";
           return {
             index: i + 1,
@@ -211,7 +214,7 @@ export default function TarotReadingPage() {
         <header className="flex items-center justify-between mb-6">
           <Link to="/readings/tarot"><Button variant="outline" className="border-amber-800 text-amber-300"><ChevronLeft className="h-4 w-4" /> Terug</Button></Link>
           <div className="text-center">
-            <h1 className="text-3xl font-serif tracking-wide text-amber-200">{spread ? spread.name[locale] : "Tarot Lezing"}</h1>
+            <h1 className="text-3xl font-serif tracking-wide text-amber-200">{spread ? (spread.name?.[locale] ?? spread.id) : "Tarot Lezing"}</h1>
           </div>
           <div className="w-32 flex justify-end"><PersonaBadge onClick={() => setShowPersonaPicker(true)} /></div>
         </header>
