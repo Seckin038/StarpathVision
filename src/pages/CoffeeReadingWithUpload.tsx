@@ -16,7 +16,6 @@ import { useTranslation } from "react-i18next";
 import { supabase } from "@/lib/supabaseClient";
 import { showLoading, dismissToast, showError, showSuccess } from "@/utils/toast";
 import { usePersona } from "@/contexts/PersonaContext";
-import { loadPersonas } from "@/lib/persona-registry";
 import ReadingPanel from "@/components/ReadingPanel";
 
 const CoffeeReadingWithUpload = () => {
@@ -32,8 +31,7 @@ const CoffeeReadingWithUpload = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    const fetchInitialData = async () => {
-      await loadPersonas();
+    const fetchSymbols = async () => {
       const { data, error } = await supabase
         .from('coffee_symbols')
         .select('*');
@@ -44,7 +42,7 @@ const CoffeeReadingWithUpload = () => {
         setSymbols(data);
       }
     };
-    fetchInitialData();
+    fetchSymbols();
   }, []);
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {

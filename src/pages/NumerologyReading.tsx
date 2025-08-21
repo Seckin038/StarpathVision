@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -13,7 +13,6 @@ import { useTranslation } from "react-i18next";
 import { supabase } from "@/lib/supabaseClient";
 import { showLoading, dismissToast, showError, showSuccess } from "@/utils/toast";
 import { usePersona } from "@/contexts/PersonaContext";
-import { loadPersonas } from "@/lib/persona-registry";
 import ReadingPanel from "@/components/ReadingPanel";
 
 const NumerologyReading = () => {
@@ -23,10 +22,6 @@ const NumerologyReading = () => {
   const [fullName, setFullName] = useState("");
   const [readingResult, setReadingResult] = useState<string | null>(null);
   const [isCalculating, setIsCalculating] = useState(false);
-
-  useEffect(() => {
-    loadPersonas();
-  }, []);
 
   const calculateNumerology = async () => {
     if (!birthDate || !fullName || isCalculating) return;

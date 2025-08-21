@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
@@ -13,7 +13,6 @@ import { useTranslation } from "react-i18next";
 import { supabase } from "@/lib/supabaseClient";
 import { showLoading, dismissToast, showError, showSuccess } from "@/utils/toast";
 import { usePersona } from "@/contexts/PersonaContext";
-import { loadPersonas } from "@/lib/persona-registry";
 import ReadingPanel from "@/components/ReadingPanel";
 
 const DreamReading = () => {
@@ -22,10 +21,6 @@ const DreamReading = () => {
   const [dreamDescription, setDreamDescription] = useState("");
   const [readingResult, setReadingResult] = useState<string | null>(null);
   const [isGenerating, setIsGenerating] = useState(false);
-
-  useEffect(() => {
-    loadPersonas();
-  }, []);
 
   const generateReading = async () => {
     if (!dreamDescription || isGenerating) return;

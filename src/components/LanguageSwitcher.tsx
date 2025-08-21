@@ -1,5 +1,12 @@
 import { useTranslation } from "react-i18next";
 import { Globe } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const LanguageSwitcher = () => {
   const { i18n } = useTranslation();
@@ -10,21 +17,28 @@ const LanguageSwitcher = () => {
     { code: "tr", name: "Türkçe" },
   ];
 
+  const currentLanguage = languageOptions.find(lang => i18n.language.startsWith(lang.code)) || languageOptions[0];
+
   return (
-    <div className="flex items-center gap-2">
-      <Globe className="h-5 w-5 text-stone-400" />
-      <select
-        value={i18n.language}
-        onChange={(e) => i18n.changeLanguage(e.target.value)}
-        className="bg-stone-900/50 border border-stone-700 rounded-md px-2 py-1 text-stone-300 focus:ring-amber-500"
-      >
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant="outline" className="flex items-center gap-2 border-stone-700 text-stone-300 hover:bg-stone-800">
+          <Globe className="h-4 w-4" />
+          <span>{currentLanguage.code.toUpperCase()}</span>
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent className="bg-stone-900 border-stone-700 text-stone-200">
         {languageOptions.map((lang) => (
-          <option key={lang.code} value={lang.code} className="bg-stone-800">
+          <DropdownMenuItem
+            key={lang.code}
+            onClick={() => i18n.changeLanguage(lang.code)}
+            className="cursor-pointer hover:bg-stone-800 focus:bg-stone-800"
+          >
             {lang.name}
-          </option>
+          </DropdownMenuItem>
         ))}
-      </select>
-    </div>
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 };
 

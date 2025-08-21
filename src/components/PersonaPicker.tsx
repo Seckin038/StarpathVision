@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { usePersona } from '@/contexts/PersonaContext';
-import { getCachedPersonas, gatePersonaMethod, loadPersonas } from '@/lib/persona-registry';
 import { useTranslation } from 'react-i18next';
 import { Loader2 } from 'lucide-react';
 
@@ -13,39 +12,31 @@ export function PersonaPicker({
   method?: any;
   onPicked?: () => void;
 }) {
-  const { personaId, setPersonaId } = usePersona();
+  const {
+    personaId,
+    setPersonaId,
+    personas,
+    loading,
+    gatePersonaMethod,
+  } = usePersona();
   const { i18n } = useTranslation();
   const locale = i18n.language as 'nl' | 'en' | 'tr';
-  const [personas, setPersonas] = useState<Record<string, any>>({});
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchPersonas = async () => {
-      setLoading(true);
-      const loadedPersonas = await loadPersonas();
-      setPersonas(loadedPersonas);
-      setLoading(false);
-    };
-    fetchPersonas();
-  }, []);
 
   if (loading) {
     return <div className="flex justify-center items-center h-64"><Loader2 className="h-8 w-8 animate-spin text-amber-500" /></div>;
   }
-
-  const PERSONAE = getCachedPersonas();
 
   return (
     <div className="w-full max-w-5xl mx-auto">
       <h3 className="text-amber-200 text-lg mb-2">Kies je waarzegger</h3>
       <p className="text-stone-400 text-sm mb-4">De gekozen persona begeleidt de hele sessie en geeft de interpretaties in haar/zijn eigen stem.</p>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {ORDER.filter(id => PERSONAE[id]).map((id) => {
-          const p = PERSONAE[id];
+        {ORDER.filter(id => personas[id]).map((id) => {
+          const p = personas[id];
           const gate = gatePersonaMethod(id, method, locale);
           const disabled = Boolean(gate);
           const active = personaId === id;
-          const displayName = p.display?.[locale] || p.display?.['nl'] || id;
+          const displayName = p.display_name?.[locale] || p.display_name?.['nl'] || id;
           const stylePoints = p.style?.[locale] || p.style?.['nl'] || [];
 
           return (
@@ -57,7 +48,7 @@ export function PersonaPicker({
             >
               <div className="flex items-center justify-between mb-2">
                 <div className="text-amber-100 font-semibold">{displayName}</div>
-                {p.premium && <span className="text-xs px-2 py-0.5 rounded-full bg-amber-600/20 border border-amber-600/40 text-amber-300">Premium</span>}
+                {p.is_premium && <span className="text-xs px-2 py-0.5 rounded-full bg-amber-600/20 border border-amber-600/40 text-amber-300">Premium</span>}
               </div>
               <ul className="text-sm text-amber-200/80 space-y-1 list-disc pl-5">
                 {stylePoints.slice(0, 3).map((s: string, i: number) => (
@@ -73,7 +64,7 @@ export function PersonaPicker({
           );
         })}
       </div>
-      <div className="mt-3 text-stone-400 text-sm">Geselecteerd: <span className="text-amber-300 font-medium">{PERSONAE[personaId]?.display?.[locale] || PERSONAE[personaId]?.display?.['nl']}</span></div>
+      <div className="mt-3 text-stone-400 text-sm">Geselecteerd: <span className="text-amber-300 font-medium">{personas[personaId]?.display_name?.[locale] || personas[personaId]?.display_name?.['nl']}</span></div>
     </div>
   );
 }

@@ -15,7 +15,6 @@ import { useTranslation } from "react-i18next";
 import { supabase } from "@/lib/supabaseClient";
 import { showLoading, dismissToast, showError, showSuccess } from "@/utils/toast";
 import { usePersona } from "@/contexts/PersonaContext";
-import { loadPersonas } from "@/lib/persona-registry";
 import ReadingPanel from "@/components/ReadingPanel";
 
 const CoffeeReading = () => {
@@ -28,9 +27,8 @@ const CoffeeReading = () => {
   const [isLoadingSymbols, setIsLoadingSymbols] = useState(true);
 
   useEffect(() => {
-    const fetchInitialData = async () => {
+    const fetchSymbols = async () => {
       setIsLoadingSymbols(true);
-      await loadPersonas();
       const { data, error } = await supabase
         .from('coffee_symbols')
         .select('*')
@@ -52,7 +50,7 @@ const CoffeeReading = () => {
       }
       setIsLoadingSymbols(false);
     };
-    fetchInitialData();
+    fetchSymbols();
   }, []);
 
   const handleSymbolSelect = (symbol: any) => {
