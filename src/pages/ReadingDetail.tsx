@@ -22,14 +22,14 @@ type Reading = {
 };
 
 function mapSpread(id?: string | null): SpreadName {
-  if (!id) return "Line3";
+  if (!id) return "Line";
   if (id.includes("celtic-cross")) return "CelticCross10";
   if (id.includes("cross-of-truth") || id.includes("cross-5")) return "Cross5";
   if (id.includes("star")) return "Star7";
   if (id.includes("horseshoe")) return "Horseshoe7";
   if (id.includes("year") || id.includes("astrological")) return "YearAhead12";
   if (id.includes("nine")) return "NineSquare";
-  return "Line3";
+  return "Line";
 }
 
 export default function ReadingDetailPage() {

@@ -17,13 +17,14 @@ import { useTarotDeck } from "@/hooks/useTarotDeck";
 type Phase = 'loading' | 'error' | 'picking' | 'reading';
 
 function mapSpreadIdToSpreadName(id: string): SpreadName {
+  if (id.includes('grand-tableau')) return 'GrandTableau36';
   if (id.includes('celtic-cross')) return 'CelticCross10';
   if (id.includes('cross-5')) return 'Cross5';
   if (id.includes('star-7')) return 'Star7';
   if (id.includes('horseshoe-7')) return 'Horseshoe7';
   if (id.includes('year-ahead-12')) return 'YearAhead12';
   if (id.includes('nine-square')) return 'NineSquare';
-  return 'Line3';
+  return 'Line';
 }
 
 export default function TarotReadingPage() {

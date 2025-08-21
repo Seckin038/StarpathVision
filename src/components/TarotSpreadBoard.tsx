@@ -6,13 +6,14 @@ import { cn } from '@/lib/utils';
 export type CardItem = { id: string; name: string; imageUrl?: string }
 export type SpreadName =
   | 'Grid6x13'
-  | 'Line3'
+  | 'Line'
   | 'Cross5'
   | 'CelticCross10'
   | 'Star7'
   | 'Horseshoe7'
   | 'YearAhead12'
   | 'NineSquare'
+  | 'GrandTableau36';
 
 export type CardAnnotation = { title: string; label: string; copy?: string };
 
@@ -38,8 +39,22 @@ function layoutFor(
       }
       return positions as any
     }
-    case 'Line3': {
-      const n = Math.min(count, 3)
+    case 'GrandTableau36': {
+      const cols = 9;
+      const rows = 4;
+      const n = Math.min(count, 36);
+      const positions: { x: number; y: number }[] = [];
+      for (let i = 0; i < n; i++) {
+        const row = Math.floor(i / cols);
+        const col = i % cols;
+        const x = (col + 0.5) / cols;
+        const y = (row + 0.5) / rows;
+        positions.push({ x, y });
+      }
+      return positions;
+    }
+    case 'Line': {
+      const n = count;
       const positions = new Array(n).fill(0).map((_, i) => ({
         x: (i + 1) / (n + 1),
         y: 0.5,
@@ -194,20 +209,26 @@ export default function TarotSpreadBoard({
   }, [spread, selectedCards.length])
 
   const cardW = useMemo(() => {
-    const { w, h } = containerSize
-    if (w === 0 || h === 0) return 120
-    const map: Record<SpreadName, number> = {
+    const { w, h } = containerSize;
+    if (w === 0 || h === 0) return 120;
+
+    if (spread === 'Line') {
+      return clamp(Math.round(w / (selectedCards.length + 1.5)), 60, 160);
+    }
+
+    const map: Record<string, number> = {
       CelticCross10: Math.min(w, h) * 0.14,
       Cross5: Math.min(w, h) * 0.16,
       Star7: Math.min(w, h) * 0.14,
       Horseshoe7: Math.min(w, h) * 0.13,
       YearAhead12: Math.min(w, h) * 0.12,
       NineSquare: Math.min(w, h) * 0.14,
-      Line3: Math.min(w, h) * 0.18,
       Grid6x13: Math.min(w, h) * 0.08,
-    }
-    return clamp(Math.round(map[spread]), 72, 200)
-  }, [containerSize, spread])
+      GrandTableau36: Math.min(w, h) * 0.09,
+    };
+    const calculatedW = map[spread];
+    return clamp(Math.round(calculatedW), 72, 200);
+  }, [containerSize, spread, selectedCards.length]);
 
   return (
     <div className="w-full h-full flex flex-col gap-3 text-white">
