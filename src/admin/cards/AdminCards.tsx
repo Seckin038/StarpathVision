@@ -2,297 +2,152 @@ import { useEffect, useState, useRef } from "react";
 import { supabase } from "@/lib/supabaseClient";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { showError, showSuccess, showLoading, dismissToast } from "@/utils/toast";
-import { Loader2, UploadCloud, CheckCircle, XCircle, DownloadCloud } from "lucide-react";
+import { Loader2, UploadCloud, Link as LinkIcon, CheckCircle, XCircle } from "lucide-react";
 
-type TarotCard = {
-  id: string;
-  name: string;
-  number: number;
-  arcana: string;
-  suit: string | null;
-  meaning_up: string;
-  meaning_rev: string;
-  image_url: string | null;
-};
-
-type UploadStatus = {
-  fileName: string;
-  status: 'pending' | 'uploading' | 'success' | 'error';
-  message: string;
-};
-
-function SmartUploader({ onComplete }: { onComplete: () => void }) {
-  const [uploadQueue, setUploadQueue] = useState<File[]>([]);
-  const [uploadStatus, setUploadStatus] = useState<UploadStatus[]>([]);
-  const [isUploading, setIsUploading] = useState(false);
-  const fileInputRef = useRef<HTMLInputElement>(null);
-
-  const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files) {
-      const files = Array.from(e.target.files);
-      setUploadQueue(files);
-      setUploadStatus(files.map(f => ({ fileName: f.name, status: 'pending', message: 'In de wachtrij' })));
-    }
-  };
-
-  const startUpload = async () => {
-    if (uploadQueue.length === 0) return;
-    setIsUploading(true);
-
-    for (let i = 0; i < uploadQueue.length; i++) {
-      const file = uploadQueue[i];
-      
-      setUploadStatus(prev => {
-        const next = [...prev];
-        next[i] = { ...next[i], status: 'uploading', message: 'Bezig met uploaden en herkennen...' };
-        return next;
-      });
-
-      try {
-        const formData = new FormData();
-        formData.append('cardImage', file);
-
-        const { data, error } = await supabase.functions.invoke('identify-and-link-tarot-card', {
-          body: formData,
-        });
-
-        if (error) throw new Error(error.message);
-        if (data.error) throw new Error(data.details);
-
-        setUploadStatus(prev => {
-          const next = [...prev];
-          next[i] = { ...next[i], status: 'success', message: `Herkend als: ${data.cardName}` };
-          return next;
-        });
-
-      } catch (err: any) {
-        setUploadStatus(prev => {
-          const next = [...prev];
-          next[i] = { ...next[i], status: 'error', message: err.message };
-          return next;
-        });
-      }
-    }
-
-    setIsUploading(false);
-    onComplete();
-  };
-
-  return (
-    <Card className="bg-stone-950/50 border-stone-800">
-      <CardHeader>
-        <CardTitle className="text-amber-300 flex items-center gap-2">
-          <UploadCloud /> Slimme Kaart Uploader
-        </CardTitle>
-      </CardHeader>
-      <CardContent className="space-y-4">
-        <p className="text-sm text-stone-400">Selecteer één of meerdere tarotkaart-afbeeldingen. De AI zal ze automatisch herkennen en koppelen.</p>
-        <Input type="file" multiple accept="image/*" onChange={handleFileSelect} ref={fileInputRef} />
-        
-        {uploadStatus.length > 0 && (
-          <div className="space-y-2 max-h-60 overflow-y-auto p-2 border border-stone-800 rounded-md">
-            {uploadStatus.map((s, i) => (
-              <div key={i} className="flex items-center gap-3 text-sm">
-                {s.status === 'pending' && <Loader2 className="h-4 w-4 text-stone-500 animate-pulse" />}
-                {s.status === 'uploading' && <Loader2 className="h-4 w-4 text-amber-500 animate-spin" />}
-                {s.status === 'success' && <CheckCircle className="h-4 w-4 text-green-500" />}
-                {s.status === 'error' && <XCircle className="h-4 w-4 text-red-500" />}
-                <span className="flex-1 truncate">{s.fileName}</span>
-                <span className="text-stone-400">{s.message}</span>
-              </div>
-            ))}
-          </div>
-        )}
-
-        <Button onClick={startUpload} disabled={isUploading || uploadQueue.length === 0}>
-          {isUploading ? 'Bezig...' : `Start Upload (${uploadQueue.length})`}
-        </Button>
-      </CardContent>
-    </Card>
-  );
-}
-
+type TarotCard = { id: string; name: string; number: number; arcana: string; suit: string | null; image_url: string | null; };
 
 export default function AdminCards() {
   const [cards, setCards] = useState<TarotCard[]>([]);
   const [loading, setLoading] = useState(true);
-  const [editing, setEditing] = useState<TarotCard | null>(null);
-  const [isSeeding, setIsSeeding] = useState(false);
 
   const fetchCards = async () => {
     setLoading(true);
-    const { data, error } = await supabase.from("tarot_cards").select("*").order("number");
-    if (error) {
-      showError("Kon tarotkaarten niet laden.");
-    } else {
-      setCards(data as TarotCard[]);
-    }
+    const { data } = await supabase.from("tarot_cards").select("*").order("number");
+    setCards((data || []) as TarotCard[]);
     setLoading(false);
   };
-
-  useEffect(() => {
-    fetchCards();
-  }, []);
-
-  const handleImport = async () => {
-    if (!window.confirm("Weet je zeker dat je de 78 tarotkaarten wilt importeren vanuit de lokale JSON-bestanden? Bestaande kaarten worden overschreven.")) return;
-    
-    const toastId = showLoading("Bezig met importeren...");
-    try {
-      const res = await fetch('/tarot/cards.nl.json');
-      const nlCards = await res.json();
-
-      const cardsToInsert = nlCards.map((card: any) => ({
-        id: card.id,
-        number: card.number,
-        name: card.name,
-        arcana: card.arcana,
-        suit: card.suit,
-        meaning_up: card.meaning_up,
-        meaning_rev: card.meaning_rev,
-        keywords: card.keywords,
-        element: card.element,
-        astrology: card.astrology,
-        numerology: card.numerology,
-        image_url: null, // Start with no image
-      }));
-
-      const { error } = await supabase.from("tarot_cards").upsert(cardsToInsert, { onConflict: 'id' });
-      if (error) throw error;
-
-      dismissToast(toastId);
-      showSuccess("78 kaarten succesvol geïmporteerd in de database!");
-      fetchCards();
-    } catch (err: any) {
-      dismissToast(toastId);
-      showError(`Import mislukt: ${err.message}`);
-    }
-  };
-
-  const handleSeedImages = async () => {
-    if (!window.confirm("Weet je zeker dat je de afbeeldingen voor alle 78 kaarten wilt ophalen van Wikimedia? Dit kan de bestaande afbeeldingen overschrijven.")) return;
-    setIsSeeding(true);
-    const toastId = showLoading("Afbeeldingen worden opgehaald, dit kan even duren...");
-    try {
-      const { data, error } = await supabase.functions.invoke('seed-tarot-images');
-      if (error) throw new Error(error.message);
-      if (data.error) throw new Error(data.details);
-
-      dismissToast(toastId);
-      showSuccess(data.message);
-      if (data.errors && data.errors.length > 0) {
-        console.warn("Seeding errors:", data.errors);
-        showError(`${data.errors.length} afbeeldingen konden niet worden opgehaald. Zie console voor details.`);
-      }
-      fetchCards();
-    } catch (err: any) {
-      dismissToast(toastId);
-      showError(`Ophalen mislukt: ${err.message}`);
-    } finally {
-      setIsSeeding(false);
-    }
-  };
-
-  const handleSave = async () => {
-    if (!editing) return;
-    const { error } = await supabase.from("tarot_cards").update({
-      name: editing.name,
-      meaning_up: editing.meaning_up,
-      meaning_rev: editing.meaning_rev,
-    }).eq("id", editing.id);
-
-    if (error) {
-      showError(`Opslaan mislukt: ${error.message}`);
-    } else {
-      showSuccess("Kaart opgeslagen.");
-      setEditing(null);
-      fetchCards();
-    }
-  };
-
-  if (loading && !editing) {
-    return <div className="flex justify-center items-center h-64"><Loader2 className="animate-spin h-8 w-8 text-amber-400" /></div>;
-  }
-
-  if (editing) {
-    return (
-      <Card className="bg-stone-900/60 border-stone-800">
-        <CardHeader>
-          <CardTitle className="text-amber-200">Bewerk: {editing.name}</CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <div className="grid grid-cols-2 gap-4">
-            <div>
-              <Label>Afbeelding</Label>
-              {editing.image_url ? 
-                <img src={editing.image_url} alt={editing.name} className="w-full rounded-md my-2 border border-stone-700" />
-                : <div className="w-full aspect-[2/3] bg-stone-800 rounded-md my-2 flex items-center justify-center text-stone-500">Geen afbeelding</div>
-              }
-              <p className="text-xs text-stone-400">Upload een nieuwe afbeelding via de 'Slimme Uploader'.</p>
-            </div>
-            <div className="space-y-4">
-              <div>
-                <Label htmlFor="card-name">Naam</Label>
-                <Input id="card-name" value={editing.name} onChange={e => setEditing({ ...editing, name: e.target.value })} />
-              </div>
-              <div>
-                <Label htmlFor="card-meaning-up">Betekenis (rechtop)</Label>
-                <Textarea id="card-meaning-up" value={editing.meaning_up} onChange={e => setEditing({ ...editing, meaning_up: e.target.value })} rows={6} />
-              </div>
-              <div>
-                <Label htmlFor="card-meaning-rev">Betekenis (omgekeerd)</Label>
-                <Textarea id="card-meaning-rev" value={editing.meaning_rev} onChange={e => setEditing({ ...editing, meaning_rev: e.target.value })} rows={6} />
-              </div>
-            </div>
-          </div>
-          <div className="flex gap-2">
-            <Button onClick={handleSave}>Opslaan</Button>
-            <Button variant="outline" onClick={() => setEditing(null)}>Annuleren</Button>
-          </div>
-        </CardContent>
-      </Card>
-    );
-  }
+  useEffect(() => { fetchCards(); }, []);
 
   return (
     <div className="space-y-6">
       <Card className="bg-stone-900/60 border-stone-800">
-        <CardHeader className="flex flex-row items-center justify-between">
-          <CardTitle className="text-amber-200">Tarotkaarten Beheren</CardTitle>
-          <div className="flex gap-2">
-            {cards.length > 0 && (
-              <Button onClick={handleSeedImages} disabled={isSeeding} variant="outline">
-                {isSeeding ? <Loader2 className="h-4 w-4 mr-2 animate-spin" /> : <DownloadCloud className="h-4 w-4 mr-2" />}
-                Haal 78 Wikimedia Afbeeldingen op
-              </Button>
-            )}
-            {cards.length === 0 && (
-              <Button onClick={handleImport}>Importeer 78 Kaartgegevens</Button>
-            )}
-          </div>
-        </CardHeader>
+        <CardHeader><CardTitle className="text-amber-200">Tarotkaarten – Afbeeldingen importeren</CardTitle></CardHeader>
         <CardContent>
-          <SmartUploader onComplete={fetchCards} />
+          <Tabs defaultValue="files" className="w-full">
+            <TabsList>
+              <TabsTrigger value="files"><UploadCloud className="h-4 w-4 mr-1" /> Bestanden</TabsTrigger>
+              <TabsTrigger value="urls"><LinkIcon className="h-4 w-4 mr-1" /> URL’s</TabsTrigger>
+            </TabsList>
+
+            <TabsContent value="files"><FileImporter onDone={fetchCards} /></TabsContent>
+            <TabsContent value="urls"><UrlImporter onDone={fetchCards} /></TabsContent>
+          </Tabs>
         </CardContent>
       </Card>
 
-      <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
-        {cards.map(card => (
-          <Card key={card.id} className="bg-stone-950/50 border-stone-800">
-            <CardHeader className="p-3">
-              <CardTitle className="text-amber-300 text-sm truncate">{card.name}</CardTitle>
-            </CardHeader>
-            <CardContent className="p-3">
-              <img src={card.image_url || '/tarot/back.svg'} alt={card.name} className="w-full rounded-md mb-3 aspect-[2/3] object-cover bg-stone-900" />
-              <Button variant="outline" size="sm" className="w-full" onClick={() => setEditing(card)}>Bewerk Tekst</Button>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
+      {loading ? (
+        <div className="flex justify-center py-12"><Loader2 className="h-6 w-6 animate-spin text-amber-400" /></div>
+      ) : (
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+          {cards.map(c => (
+            <Card key={c.id} className="bg-stone-950/50 border-stone-800">
+              <CardHeader className="p-3"><CardTitle className="text-amber-300 text-sm truncate">{c.name}</CardTitle></CardHeader>
+              <CardContent className="p-3">
+                <img src={c.image_url || "/tarot/back.svg"} className="w-full aspect-[2/3] object-cover rounded-md bg-stone-900 mb-2" />
+                <div className="text-[11px] text-stone-400">{c.image_url ? "✔ gekoppeld" : "• nog geen afbeelding"}</div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function FileImporter({ onDone }: { onDone: () => void }) {
+  const [rows, setRows] = useState<{ name: string; status: "pending"|"uploading"|"ok"|"err"; note?: string }[]>([]);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const pick = () => inputRef.current?.click();
+  const handle = async (files: FileList | null) => {
+    if (!files || !files.length) return;
+    const items = Array.from(files).map(f => ({ name: f.name, status: "pending" as const }));
+    setRows(items);
+
+    const fd = new FormData();
+    for (const f of Array.from(files)) fd.append("files", f);
+
+    // Tip: supabase.functions.invoke + FormData werkt prima in v2
+    const { data, error } = await supabase.functions.invoke("tarot-bulk-import", { body: fd });
+    if (error) {
+      setRows(items.map(it => ({ ...it, status: "err", note: error.message })));
+    } else {
+      const out = (data?.results || []) as any[];
+      setRows(out.map(r => ({
+        name: r.file || r.url || "?",
+        status: r.ok ? "ok" : "err",
+        note: r.ok ? r.name : r.error
+      })));
+    }
+    onDone();
+  };
+
+  return (
+    <div className="space-y-3">
+      <input ref={inputRef} type="file" multiple accept="image/*" className="hidden" onChange={e => handle(e.target.files)} />
+      <Button onClick={pick}><UploadCloud className="h-4 w-4 mr-2" /> Kies bestanden…</Button>
+
+      {rows.length > 0 && (
+        <div className="border border-stone-800 rounded-md p-2 max-h-64 overflow-auto text-sm">
+          {rows.map((r, i) => (
+            <div key={i} className="flex items-center gap-2 py-1">
+              {r.status === "pending" && <Loader2 className="h-4 w-4 text-stone-500 animate-pulse" />}
+              {r.status === "uploading" && <Loader2 className="h-4 w-4 text-amber-500 animate-spin" />}
+              {r.status === "ok" && <CheckCircle className="h-4 w-4 text-green-500" />}
+              {r.status === "err" && <XCircle className="h-4 w-4 text-red-500" />}
+              <span className="flex-1 truncate">{r.name}</span>
+              <span className="text-stone-400">{r.note}</span>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function UrlImporter({ onDone }: { onDone: () => void }) {
+  const [text, setText] = useState("");
+  const [rows, setRows] = useState<{ url: string; status: "pending"|"ok"|"err"; note?: string }[]>([]);
+
+  const start = async () => {
+    const urls = text.split(/\r?\n/).map(s => s.trim()).filter(Boolean);
+    if (!urls.length) return;
+    setRows(urls.map(u => ({ url: u, status: "pending" as const })));
+
+    const { data, error } = await supabase.functions.invoke("tarot-bulk-import", { body: { urls } });
+    if (error) {
+      setRows(urls.map(u => ({ url: u, status: "err", note: error.message })));
+    } else {
+      const out = (data?.results || []) as any[];
+      setRows(out.map(r => ({
+        url: r.url,
+        status: r.ok ? "ok" : "err",
+        note: r.ok ? r.name : r.error
+      })));
+    }
+    onDone();
+  };
+
+  return (
+    <div className="space-y-3">
+      <Label htmlFor="urls">Plak hier 1 URL per regel (max rustig 78):</Label>
+      <Textarea id="urls" rows={6} value={text} onChange={e => setText(e.target.value)} placeholder="https://....jpg\nhttps://....png" />
+      <Button onClick={start}><LinkIcon className="h-4 w-4 mr-2" /> Start import</Button>
+
+      {rows.length > 0 && (
+        <div className="border border-stone-800 rounded-md p-2 max-h-64 overflow-auto text-sm mt-2">
+          {rows.map((r, i) => (
+            <div key={i} className="flex items-center gap-2 py-1">
+              {r.status === "ok" ? <CheckCircle className="h-4 w-4 text-green-500" /> : r.status === "err" ? <XCircle className="h-4 w-4 text-red-500" /> : <Loader2 className="h-4 w-4 text-amber-500 animate-spin" />}
+              <span className="flex-1 truncate">{r.url}</span>
+              <span className="text-stone-400">{r.note}</span>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
