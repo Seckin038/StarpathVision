@@ -256,7 +256,8 @@ function EditorModal({
                     style={{left, top}}>
                     <button
                       onMouseDown={(e)=>startDrag(i,e)}
-                      className="w-14 h-[88px] rounded-lg border border-amber-400/60 bg-amber-400/20 text-amber-200 text-xs shadow"
+                      className="w-14 h-[88px] rounded-lg border border-amber-400/60 bg-amber-400/20 text-amber-200 text-xs shadow transition-transform"
+                      style={{ transform: `rotate(${p.rot}deg)` }}
                       title={`${p.slot_key}`}
                     >
                       <div className="font-semibold">#{i+1}</div>
