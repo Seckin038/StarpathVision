@@ -28,14 +28,15 @@ export default function TarotSpreadBoard({
   cards, kind="ppf-3", customPositions, cardWidthPct, className,
   annotations, cardsFlipped, debugGrid
 }: Props) {
-  const needed = cards.length;
+  const desired = cards.length;
 
-  // ✅ Normaliseer aangeleverde posities
-  const provided = customPositions ? normalizePositions(customPositions) : [];
-  
-  // ✅ Val terug op ingebouwde layout voor ontbrekende posities
-  const builtin = positionsFor(kind, needed);
-  const positions: Position[] = Array.from({ length: needed }, (_, i) => provided[i] ?? builtin[i]);
+  // ✅ Gebruik custom positions alleen als de lengte klopt; anders val terug op het ingebouwde patroon.
+  let positions: Position[];
+  if (customPositions && customPositions.length >= desired) {
+    positions = normalizePositions(customPositions.slice(0, desired));
+  } else {
+    positions = positionsFor(kind, desired);
+  }
 
   const widthPct = cardWidthPct ?? DEFAULT_CARD_WIDTH[kind];
   const halfW = widthPct / 2;
@@ -60,7 +61,7 @@ export default function TarotSpreadBoard({
 
       {cards.map((card, i) => {
         const p = positions[i];
-        if (!p) return null; // Dit zou nu niet meer moeten gebeuren
+        if (!p) return null; // Extra guard, zou niet meer nodig moeten zijn.
 
         const targetX = (p.x ?? 0.5) * 100;
         const targetY = (p.y ?? 0.5) * 100;
