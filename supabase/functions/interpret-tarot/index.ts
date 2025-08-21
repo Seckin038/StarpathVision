@@ -79,7 +79,7 @@ function gatePersonaMethod(personaId: PersonaId, method: Method, locale: Locale 
   return null;
 }
 
-function buildPersonaPreamble(locale: Locale, personaId: PersonaId, isJsonMode = false): string {
+function buildPersonaPreamble(locale: Locale, personaId: PersonaId): string {
   const p = PERSONAE[personaId];
   if (!p) return '';
   const name = p.display[locale] || p.display.nl;
@@ -91,11 +91,7 @@ function buildPersonaPreamble(locale: Locale, personaId: PersonaId, isJsonMode =
     tr: `Sen ${name}'sin. Tarzın: ${style.join(' ')}.`,
   };
 
-  let preamble = langMap[locale];
-  if (isJsonMode) {
-    preamble += ` Je antwoordt ALTIJD in JSON-formaat.`;
-  }
-  return preamble;
+  return langMap[locale];
 }
 // --- END INLINED PERSONA LOGIC ---
 
@@ -122,25 +118,25 @@ const BodySchema = z.object({
 
 function buildPrompt(data: z.infer<typeof BodySchema>): string {
   const locale = data.locale as Locale;
-  const personaIntro = buildPersonaPreamble(locale, data.personaId as PersonaId, true);
+  const personaIntro = buildPersonaPreamble(locale, data.personaId as PersonaId);
 
   const langMap = {
     nl: {
       role: `${personaIntro}`,
       instruction:
-        `Je levert een tarotinterpretatie als gestructureerde JSON. De JSON MOET deze vorm hebben: { combinedInterpretation: { story: string, advice: string, affirmation: string, actions: string[] }, cardInterpretations: [{ cardName: string, positionTitle: string, isReversed: boolean, shortMeaning: string, longMeaning: string, keywords: string[] }] }. Gebruik korte alinea's met warme toon. Voeg 2–3 concrete actiepuntjes toe onder 'actions'. Geef ALLEEN JSON terug, zonder markdown fences.`,
+        `Je levert een tarotinterpretatie als gestructureerde JSON. De JSON MOET deze vorm hebben: { combinedInterpretation: { story: string, advice: string, affirmation: string, actions: string[] }, cardInterpretations: [{ cardName: string, positionTitle: string, isReversed: boolean, shortMeaning: string, longMeaning: string, keywords: string[] }] }. Gebruik korte alinea's met warme toon. Voeg 2–3 concrete actiepuntjes toe onder 'actions'.`,
       reversed: 'omgekeerd',
     },
     en: {
       role: `${personaIntro}`,
       instruction:
-        `Provide a tarot interpretation strictly as JSON with this exact shape: { combinedInterpretation: { story: string, advice: string, affirmation: string, actions: string[] }, cardInterpretations: [{ cardName: string, positionTitle: string, isReversed: boolean, shortMeaning: string, longMeaning: string, keywords: string[] }] }. Use short paragraphs, warm tone. Include 2–3 concrete action bullets in 'actions'. Return ONLY JSON, no fences.`,
+        `Provide a tarot interpretation strictly as JSON with this exact shape: { combinedInterpretation: { story: string, advice: string, affirmation: string, actions: string[] }, cardInterpretations: [{ cardName: string, positionTitle: string, isReversed: boolean, shortMeaning: string, longMeaning: string, keywords: string[] }] }. Use short paragraphs, warm tone. Include 2–3 concrete action bullets in 'actions'.`,
       reversed: 'reversed',
     },
     tr: {
       role: `${personaIntro}`,
       instruction:
-        `Tarot yorumunu yalnızca JSON olarak ver: { combinedInterpretation: { story: string, advice: string, affirmation: string, actions: string[] }, cardInterpretations: [{ cardName: string, positionTitle: string, isReversed: boolean, shortMeaning: string, longMeaning: string, keywords: string[] }] }. Kısa paragraflar en sıcak bir ton kullan. 'actions' altında 2–3 somut madde ekle. Sadece JSON dön, markdown yok.`,
+        `Tarot yorumunu yalnızca JSON olarak ver: { combinedInterpretation: { story: string, advice: string, affirmation: string, actions: string[] }, cardInterpretations: [{ cardName: string, positionTitle: string, isReversed: boolean, shortMeaning: string, longMeaning: string, keywords: string[] }] }. Kısa paragraflar en sıcak bir ton kullan. 'actions' altında 2–3 somut madde ekle.`,
       reversed: 'ters',
     },
   } as const;
@@ -177,13 +173,26 @@ serve(async (req) => {
     }
 
     const genAI = new GoogleGenerativeAI(env('GEMINI_API_KEY'));
-    const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash-latest' });
+    const model = genAI.getGenerativeModel({ 
+      model: 'gemini-1.5-flash-latest',
+      generationConfig: {
+        responseMimeType: "application/json",
+      },
+    });
 
     const prompt = buildPrompt(body);
     const result = await model.generateContent(prompt);
-    let text = result.response.text();
-    text = text.replace(/^```json\n?|```$/g, '').trim();
+    const response = result.response;
 
+    if (!response) {
+      throw new Error("No response from generative model.");
+    }
+    
+    if (response.promptFeedback && response.promptFeedback.blockReason) {
+      throw new Error(`Request was blocked: ${response.promptFeedback.blockReason}`);
+    }
+
+    const text = response.text();
     const jsonData = JSON.parse(text);
     
     try {
@@ -209,6 +218,6 @@ serve(async (req) => {
     return new Response(JSON.stringify(jsonData), { headers: { ...corsHeaders, 'Content-Type': 'application/json' }, status: 200 });
   } catch (err) {
     const msg = err instanceof z.ZodError ? err.flatten() : (err as any)?.message || 'Unexpected error';
-    return new Response(JSON.stringify({ error: msg }), { headers: { ...corsHeaders, 'Content-Type': 'application/json' }, status: 400 });
+    return new Response(JSON.stringify({ error: msg }), { headers: { ...corsHeaders, 'Content-Type': 'application/json' }, status: 500 });
   }
 });
