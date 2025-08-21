@@ -207,6 +207,46 @@ serve(async (req) => {
     const text = response.text();
     const resultJson = JSON.parse(text);
 
+    let readingTitle: string;
+    const { method, payload, locale } = body;
+
+    switch (method) {
+      case 'tarot':
+        readingTitle = payload.spread.name?.[locale] || payload.spread.name?.['nl'] || payload.spread.id;
+        break;
+      case 'koffiedik':
+      case 'coffee':
+        if (payload.symbols && payload.symbols.length > 0) {
+          const symbolNames = payload.symbols
+            .slice(0, 3)
+            .map((s: any) => s[`symbol_name_${locale}`] || s.symbol_name_nl)
+            .join(', ');
+          readingTitle = locale === 'nl' ? `Koffielezing: ${symbolNames}` : `Coffee Reading: ${symbolNames}`;
+        } else {
+          readingTitle = locale === 'nl' ? 'Koffielezing' : 'Coffee Reading';
+        }
+        break;
+      case 'dromen':
+      case 'dream':
+        if (payload.userQuestion) {
+          const dreamSnippet = payload.userQuestion.split(' ').slice(0, 5).join(' ') + '...';
+          readingTitle = locale === 'nl' ? `Droom: ${dreamSnippet}` : `Dream: ${dreamSnippet}`;
+        } else {
+          readingTitle = locale === 'nl' ? 'Droomduiding' : 'Dream Interpretation';
+        }
+        break;
+      case 'numerologie':
+      case 'numerology':
+        if (payload.numerologyData?.fullName) {
+          readingTitle = locale === 'nl' ? `Numerologie voor ${payload.numerologyData.fullName}` : `Numerology for ${payload.numerologyData.fullName}`;
+        } else {
+          readingTitle = locale === 'nl' ? 'Numerologie Lezing' : 'Numerology Reading';
+        }
+        break;
+      default:
+        readingTitle = method;
+    }
+
     // Save to DB
     try {
       const { data: { user } } = await supabaseAdmin.auth.getUser(req.headers.get('Authorization')?.replace('Bearer ', ''));
@@ -218,7 +258,7 @@ serve(async (req) => {
           payload: body.payload,
           interpretation: resultJson,
           spread_id: body.method === 'tarot' ? body.payload.spread.id : null,
-          title: body.method === 'tarot' ? body.payload.spread.name : body.method,
+          title: readingTitle,
         });
       }
     } catch (dbError) {
