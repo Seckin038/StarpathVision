@@ -48,11 +48,8 @@ export default function TarotReadingPage() {
   const [selectedIndices, setSelectedIndices] = useState<number[]>([]);
   const [showPersonaPicker, setShowPersonaPicker] = useState(false);
   const [cardsFlipped, setCardsFlipped] = useState(false);
-  const [overridePositions, setOverridePositions] = useState<Position[] | null>(null);
 
   const { data: interpretation, isLoading: isLoadingInterpretation, error: interpretationError, getInterpretation } = useTarotInterpretation();
-
-  useEffect(() => { setOverridePositions(null); }, [spreadId]);
 
   useEffect(() => {
     const initializeReading = async () => {
@@ -66,12 +63,8 @@ export default function TarotReadingPage() {
         const currentSpread = library.spreads.find((s: Spread) => s.id === spreadId);
         if (!currentSpread) throw new Error(`Legging '${spreadId}' niet gevonden.`);
 
-        // Force-correct the number of cards for known spreads to override faulty config
-        if (spreadId === 'ppf-3') {
-          currentSpread.cards_required = 3;
-        } else if (spreadId === 'star-6') {
-          currentSpread.cards_required = 6;
-        }
+        if (spreadId === 'ppf-3') currentSpread.cards_required = 3;
+        if (spreadId === 'star-6') currentSpread.cards_required = 6;
 
         setSpread(currentSpread);
         setPhase('picking');
@@ -87,39 +80,30 @@ export default function TarotReadingPage() {
     if (!spread || selectedIndices.length !== spread.cards_required || deck.length === 0) return;
 
     const selectedCards = selectedIndices.map(i => deck[i % deck.length]);
-
     if (selectedCards.some(c => c === undefined)) {
       setError("Fout bij het selecteren van kaarten. Probeer het opnieuw.");
       setPhase('error');
       return;
     }
 
-    const hasValidPositions =
-      Array.isArray(spread.positions) && spread.positions.length >= spread.cards_required;
-
+    const hasValidPositions = Array.isArray(spread.positions) && spread.positions.length >= spread.cards_required;
     const positionsToUse = hasValidPositions
       ? spread.positions
       : positionsFor(mapSpreadIdToKind(spread.id), spread.cards_required).map((p, i) => ({
-          slot_key: p.label || `pos_${i + 1}`,
-          idx: i + 1,
-          x: p.x, y: p.y, rot: p.r || 0,
+          slot_key: p.label || `pos_${i + 1}`, idx: i + 1, x: p.x, y: p.y, rot: p.r || 0,
           title: { nl: `Positie ${i + 1}`, en: `Position ${i + 1}`, tr: `Pozisyon ${i + 1}` },
-          upright_copy: { nl: "", en: "", tr: "" },
-          reversed_copy: { nl: "", en: "", tr: "" },
+          upright_copy: { nl: "", en: "", tr: "" }, reversed_copy: { nl: "", en: "", tr: "" },
         }));
 
-    if (!hasValidPositions) {
-      setOverridePositions(
-        normalizePositions(positionsToUse.map(p => ({ x: p.x, y: p.y, rot: p.rot, slot_key: p.slot_key })))
-      );
-      setSpread(prev => prev ? { ...prev, positions: positionsToUse } : null);
-    }
-
-    const finalDraw: DrawnCard[] = positionsToUse.slice(0, spread.cards_required).map((position, index) => ({
-      positionId: position.slot_key,
-      card: selectedCards[index],
-      isReversed: spread.allow_reversals ? Math.random() < 0.3 : false,
-    }));
+    // Definitive fix: ensure draw length is based on selected cards, not positions
+    const finalDraw: DrawnCard[] = selectedCards.map((card, index) => {
+      const position = positionsToUse[index];
+      return {
+        positionId: position.slot_key,
+        card: card,
+        isReversed: spread.allow_reversals ? Math.random() < 0.3 : false,
+      };
+    });
     
     setDraw(finalDraw);
     setPhase('reading');
@@ -147,7 +131,6 @@ export default function TarotReadingPage() {
     getInterpretation(payload);
   }, [draw, spread, locale, personaId, getInterpretation]);
 
-  // Effect to fetch interpretation only once when entering the reading phase
   useEffect(() => {
     if (phase === 'reading' && draw.length > 0 && !interpretation && !isLoadingInterpretation) {
       handleGetInterpretation();
