@@ -175,8 +175,19 @@ export default function TarotSpreadBoard({
       {cards.map((card, i) => {
         const p = positions[i];
         if (!p) return null;
-        const left = `${(p.x * 100).toFixed(2)}%`;
-        const top = `${(p.y * 100).toFixed(2)}%`;
+
+        // Calculate card dimensions and clamp position to keep it within bounds
+        const halfW_pct = widthPct / 2;
+        const boardAspectRatio = 16 / 9;
+        const cardAspectRatio = 2 / 3;
+        const cardHeightAsPctOfBoardHeight = widthPct * (boardAspectRatio / cardAspectRatio);
+        const halfH_pct = cardHeightAsPctOfBoardHeight / 2;
+
+        const clampedX_pct = Math.max(halfW_pct, Math.min(100 - halfW_pct, p.x * 100));
+        const clampedY_pct = Math.max(halfH_pct, Math.min(100 - halfH_pct, p.y * 100));
+
+        const left = `${clampedX_pct.toFixed(2)}%`;
+        const top = `${clampedY_pct.toFixed(2)}%`;
         const rot = p.r ?? 0;
         const z = p.z ?? (i + 1);
         const ann = annotations?.[i];
