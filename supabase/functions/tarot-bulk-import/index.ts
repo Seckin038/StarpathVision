@@ -169,7 +169,7 @@ serve(async (req) => {
           const r = await handleOneUrl(supabaseAdmin, u);
           results.push({ ok: true, via: "url", url: u, ...r });
         } catch (e) {
-          const errorMessage = e.message || String(e);
+          const errorMessage = e instanceof Error ? e.message : String(e);
           results.push({ ok: false, via: "url", url: u, error: errorMessage });
         }
       }
@@ -182,7 +182,7 @@ serve(async (req) => {
           const r = await handleOneBlob(supabaseAdmin, f, (f as File).name);
           results.push({ ok: true, via: "file", file: (f as File).name, ...r });
         } catch (e) {
-          const errorMessage = e.message || String(e);
+          const errorMessage = e instanceof Error ? e.message : String(e);
           results.push({ ok: false, via: "file", file: (f as File).name, error: errorMessage });
         }
       }
@@ -190,7 +190,7 @@ serve(async (req) => {
 
     return new Response(JSON.stringify({ results }), { headers: { ...cors, "Content-Type": "application/json" } });
   } catch (err) {
-    const errorMessage = err.message || String(err);
+    const errorMessage = err instanceof Error ? err.message : String(err);
     return new Response(JSON.stringify({ error: errorMessage }), { headers: { ...cors, "Content-Type": "application/json" }, status: 500 });
   }
 });
