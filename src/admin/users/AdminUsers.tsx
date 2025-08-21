@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabaseClient";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Button } from "@/components/ui/button";
 import { showError, showSuccess } from "@/utils/toast";
-import { Loader2 } from "lucide-react";
+import { Loader2, Trash2 } from "lucide-react";
 
 type Profile = {
   id: string;
@@ -44,6 +45,15 @@ export default function AdminUsers() {
     }
   };
 
+  const handleDeleteUser = async (userId: string) => {
+    if (!window.confirm("Weet je zeker dat je deze gebruiker permanent wilt verwijderen? Dit kan niet ongedaan worden gemaakt.")) {
+      return;
+    }
+    // Note: Deleting a user requires an edge function with admin privileges.
+    // This function needs to be created. For now, we'll call a placeholder.
+    showError("Verwijder-functie is nog niet geïmplementeerd.");
+  }
+
   if (loading) {
     return <div className="flex justify-center items-center h-64"><Loader2 className="animate-spin h-8 w-8 text-amber-400" /></div>;
   }
@@ -61,6 +71,7 @@ export default function AdminUsers() {
                 <th className="p-2">Naam</th>
                 <th className="p-2">User ID</th>
                 <th className="p-2">Rol</th>
+                <th className="p-2">Acties</th>
               </tr>
             </thead>
             <tbody>
@@ -80,6 +91,11 @@ export default function AdminUsers() {
                         <SelectItem value="admin">Admin</SelectItem>
                       </SelectContent>
                     </Select>
+                  </td>
+                  <td className="p-2">
+                    <Button variant="destructive" size="icon" onClick={() => handleDeleteUser(profile.id)}>
+                      <Trash2 className="h-4 w-4" />
+                    </Button>
                   </td>
                 </tr>
               ))}

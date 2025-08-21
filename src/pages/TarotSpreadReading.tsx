@@ -113,22 +113,18 @@ export default function TarotReadingPage() {
     getInterpretation(payload);
   }, [draw, spread, locale, personaId, getInterpretation]);
 
+  // Effect to fetch interpretation only once when entering the reading phase
   useEffect(() => {
-    if (phase === 'reading' && draw.length > 0) {
+    if (phase === 'reading' && draw.length > 0 && !interpretation && !isLoadingInterpretation) {
       handleGetInterpretation();
       if (!cardsFlipped) {
         setTimeout(() => setCardsFlipped(true), 300);
       }
     }
-  }, [phase, draw.length, handleGetInterpretation, cardsFlipped]);
+  }, [phase, draw, interpretation, isLoadingInterpretation, handleGetInterpretation, cardsFlipped]);
 
   const handlePersonaPicked = () => {
     setShowPersonaPicker(false);
-    if (phase === 'reading') {
-      setTimeout(() => {
-        handleGetInterpretation();
-      }, 100);
-    }
   };
 
   const annotations =
@@ -171,6 +167,10 @@ export default function TarotReadingPage() {
       return (
         <div className="space-y-8">
           <div className="text-center text-stone-300">
+            <div className="flex justify-center items-center gap-4 mb-2">
+              <p>Kies je waarzegger:</p>
+              <PersonaBadge onClick={() => setShowPersonaPicker(true)} />
+            </div>
             <p>Kies {spread.cards_required} kaarten.</p>
             <p className="text-sm text-stone-400">Geselecteerd: {selectedIndices.length} / {spread.cards_required}</p>
           </div>
@@ -238,7 +238,7 @@ export default function TarotReadingPage() {
           <div className="text-center">
             <h1 className="text-3xl font-serif tracking-wide text-amber-200">{spread ? (spread.name?.[locale] ?? spread.id) : "Tarot Lezing"}</h1>
           </div>
-          <div className="w-32 flex justify-end"><PersonaBadge onClick={() => setShowPersonaPicker(true)} /></div>
+          <div className="w-32 flex justify-end"></div>
         </header>
         {showPersonaPicker && (
           <div className="fixed inset-0 z-50 grid place-items-center bg-black/60 p-4" onClick={() => setShowPersonaPicker(false)}>
