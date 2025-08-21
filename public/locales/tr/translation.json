@@ -1,6 +1,12 @@
 {
   "tarot": {
     "upright": "Düz",
-    "reversed": "Ters"
+    "reversed": "Ters",
+    "summaryTitle": "Okumanızın Özeti",
+    "storyTitle": "Kartların Hikayesi",
+    "adviceTitle": "Sizin İçin Tavsiye",
+    "affirmationTitle": "Olumlama",
+    "actionsTitle": "Somut Adımlar",
+    "detailsTitle": "Kartların Detayları"
   }
 }

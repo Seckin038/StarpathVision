@@ -1,6 +1,12 @@
 {
   "tarot": {
     "upright": "Rechtop",
-    "reversed": "Omgekeerd"
+    "reversed": "Omgekeerd",
+    "summaryTitle": "Jouw Lezing in het Kort",
+    "storyTitle": "Het Verhaal van de Kaarten",
+    "adviceTitle": "Advies voor Jou",
+    "affirmationTitle": "Affirmatie",
+    "actionsTitle": "Concrete Acties",
+    "detailsTitle": "De Kaarten in Detail"
   }
 }

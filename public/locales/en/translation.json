@@ -1,6 +1,12 @@
 {
   "tarot": {
     "upright": "Upright",
-    "reversed": "Reversed"
+    "reversed": "Reversed",
+    "summaryTitle": "Your Reading in Short",
+    "storyTitle": "The Story of the Cards",
+    "adviceTitle": "Advice for You",
+    "affirmationTitle": "Affirmation",
+    "actionsTitle": "Concrete Actions",
+    "detailsTitle": "The Cards in Detail"
   }
 }

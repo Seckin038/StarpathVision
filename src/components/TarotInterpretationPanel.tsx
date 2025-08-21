@@ -31,31 +31,31 @@ export default function TarotInterpretationPanel({ items, data }: Props) {
           <CardHeader>
             <CardTitle className="text-amber-200 text-2xl flex items-center gap-3">
               <Sparkles className="h-6 w-6" />
-              Jouw Lezing in het Kort
+              {t('tarot.summaryTitle')}
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-6">
             {data.story && (
               <div>
-                <h3 className="flex items-center gap-2 font-semibold text-amber-100 mb-2"><Sparkles className="h-5 w-5" /> Het Verhaal van de Kaarten</h3>
+                <h3 className="flex items-center gap-2 font-semibold text-amber-100 mb-2"><Sparkles className="h-5 w-5" /> {t('tarot.storyTitle')}</h3>
                 <p className="text-stone-300 whitespace-pre-line">{data.story}</p>
               </div>
             )}
             {data.advice && (
               <div>
-                <h3 className="flex items-center gap-2 font-semibold text-amber-100 mb-2"><Heart className="h-5 w-5" /> Advies voor Jou</h3>
+                <h3 className="flex items-center gap-2 font-semibold text-amber-100 mb-2"><Heart className="h-5 w-5" /> {t('tarot.adviceTitle')}</h3>
                 <p className="text-stone-300 whitespace-pre-line">{data.advice}</p>
               </div>
             )}
             {data.affirmation && (
               <div className="bg-stone-900/50 border border-stone-800 rounded-lg p-4">
-                <h3 className="flex items-center gap-2 font-semibold text-amber-100 mb-2"><Quote className="h-5 w-5" /> Affirmatie</h3>
+                <h3 className="flex items-center gap-2 font-semibold text-amber-100 mb-2"><Quote className="h-5 w-5" /> {t('tarot.affirmationTitle')}</h3>
                 <p className="text-stone-300 italic">"{data.affirmation}"</p>
               </div>
             )}
             {data.actions && data.actions.length > 0 && (
               <div>
-                <h3 className="flex items-center gap-2 font-semibold text-amber-100 mb-2"><CheckSquare className="h-5 w-5" /> Concrete Acties</h3>
+                <h3 className="flex items-center gap-2 font-semibold text-amber-100 mb-2"><CheckSquare className="h-5 w-5" /> {t('tarot.actionsTitle')}</h3>
                 <ul className="list-disc list-inside text-stone-300 space-y-1">
                   {data.actions.map((action, i) => <li key={i}>{action}</li>)}
                 </ul>
@@ -67,7 +67,7 @@ export default function TarotInterpretationPanel({ items, data }: Props) {
 
       {/* Per kaart details with interpretation */}
       <div className="space-y-4">
-        <h2 className="text-xl font-bold text-amber-200 text-center">De Kaarten in Detail</h2>
+        <h2 className="text-xl font-bold text-amber-200 text-center">{t('tarot.detailsTitle')}</h2>
         {items.map((item) => {
           const cardInterpretation = data?.card_interpretations?.find(ci => ci.card_index === item.index);
           return (
