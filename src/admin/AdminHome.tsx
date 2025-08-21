@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabaseClient";
 import { Card, CardContent } from "@/components/ui/card";
 import { Loader2 } from "lucide-react";
+import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 type Metrics = {
   total_users: number;
@@ -22,7 +23,12 @@ export default function AdminHome() {
       if (error) {
         setError(error.message);
       } else {
-        setM(data as Metrics);
+        // Formatteer de datum voor de grafiek
+        const formattedData = (data as Metrics).last7.map(item => ({
+          ...item,
+          day: new Date(item.day).toLocaleDateString('nl-NL', { weekday: 'short', day: 'numeric' })
+        }));
+        setM({ ...data, last7: formattedData });
       }
     };
     load(); 
@@ -39,21 +45,29 @@ export default function AdminHome() {
         <StatCard title="Vandaag" value={m.today_readings} />
       </div>
 
-      <div className="grid lg:grid-cols-2 gap-6">
-        <Card className="bg-stone-900/60 border-stone-800">
-          <CardContent className="p-4">
-            <h3 className="font-semibold mb-3 text-amber-200">Afgelopen 7 dagen</h3>
-            <ul className="text-sm space-y-1">
-              {m.last7.map(r => (
-                <li key={r.day} className="flex justify-between">
-                  <span className="opacity-70">{r.day}</span>
-                  <span>{r.cnt}</span>
-                </li>
-              ))}
-            </ul>
-          </CardContent>
-        </Card>
+      <Card className="bg-stone-900/60 border-stone-800">
+        <CardContent className="p-4">
+          <h3 className="font-semibold mb-4 text-amber-200">Activiteit afgelopen 7 dagen</h3>
+          <ResponsiveContainer width="100%" height={300}>
+            <BarChart data={m.last7} margin={{ top: 5, right: 20, left: -10, bottom: 5 }}>
+              <XAxis dataKey="day" stroke="#a8a29e" fontSize={12} tickLine={false} axisLine={false} />
+              <YAxis stroke="#a8a29e" fontSize={12} tickLine={false} axisLine={false} />
+              <Tooltip
+                contentStyle={{
+                  backgroundColor: 'rgba(28, 25, 23, 0.8)',
+                  borderColor: '#44403c',
+                  color: '#f5f5f4'
+                }}
+                cursor={{ fill: 'rgba(251, 191, 36, 0.1)' }}
+              />
+              <Legend wrapperStyle={{ fontSize: "14px" }} />
+              <Bar dataKey="cnt" name="Lezingen" fill="#f59e0b" radius={[4, 4, 0, 0]} />
+            </BarChart>
+          </ResponsiveContainer>
+        </CardContent>
+      </Card>
 
+      <div className="grid lg:grid-cols-2 gap-6">
         <Card className="bg-stone-900/60 border-stone-800">
           <CardContent className="p-4">
             <h3 className="font-semibold mb-3 text-amber-200">Top spreads</h3>
@@ -68,7 +82,7 @@ export default function AdminHome() {
           </CardContent>
         </Card>
 
-        <Card className="bg-stone-900/60 border-stone-800 lg:col-span-2">
+        <Card className="bg-stone-900/60 border-stone-800">
           <CardContent className="p-4">
             <h3 className="font-semibold mb-3 text-amber-200">Taalverdeling</h3>
             <ul className="text-sm flex flex-wrap gap-4">
