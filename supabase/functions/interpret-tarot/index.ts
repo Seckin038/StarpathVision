@@ -1,3 +1,4 @@
+/// <reference types="jsr:@supabase/functions-js/edge-runtime.d.ts" />
 import { serve } from 'https://deno.land/std@0.224.0/http/server.ts';
 import { z } from 'https://deno.land/x/zod@v3.23.8/mod.ts';
 import { GoogleGenerativeAI } from 'npm:@google/generative-ai';
@@ -45,7 +46,7 @@ function buildPrompt(data: z.infer<typeof BodySchema>): string {
     tr: {
       role: `${personaIntro}`,
       instruction:
-        `Tarot yorumunu yalnızca JSON olarak ver: { combinedInterpretation: { story: string, advice: string, affirmation: string, actions: string[] }, cardInterpretations: [{ cardName: string, positionTitle: string, isReversed: boolean, shortMeaning: string, longMeaning: string, keywords: string[] }] }. Kısa paragraflar ve sıcak bir ton kullan. 'actions' altında 2–3 somut madde ekle. Sadece JSON dön, markdown yok.`,
+        `Tarot yorumunu yalnızca JSON olarak ver: { combinedInterpretation: { story: string, advice: string, affirmation: string, actions: string[] }, cardInterpretations: [{ cardName: string, positionTitle: string, isReversed: boolean, shortMeaning: string, longMeaning: string, keywords: string[] }] }. Kısa paragraflar en sıcak bir ton kullan. 'actions' altında 2–3 somut madde ekle. Sadece JSON dön, markdown yok.`,
       reversed: 'ters',
     },
   } as const;
@@ -85,7 +86,6 @@ serve(async (req) => {
 
     const jsonData = JSON.parse(text);
     
-    // Save reading logic from previous step
     try {
       const supabaseAdmin = createClient(
         Deno.env.get("SUPABASE_URL")!,
@@ -96,10 +96,10 @@ serve(async (req) => {
         await supabaseAdmin.from('readings').insert({
           user_id: user.id,
           method: 'tarot',
-          language: body.locale,
-          input: { spread: body.spread, cards: body.cards, personaId: body.personaId },
-          output: jsonData,
-          model: 'gemini-1.5-flash-latest',
+          spread_id: body.spread.id,
+          title: body.spread.name,
+          payload: { spread: body.spread, cards: body.cards, personaId: body.personaId, locale: body.locale },
+          interpretation: jsonData,
         });
       }
     } catch (dbError) {

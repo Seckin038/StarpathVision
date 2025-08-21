@@ -50,7 +50,7 @@ export const PERSONAE = {
     style: {
       nl: [ 'Analytisch, helder, gestructureerd.', 'Kalm en professioneel.', 'Geen AI-termen.' ],
       en: [ 'Analytical, clear, structured.', 'Calm and professional.', 'No AI terms.' ],
-      tr: [ 'Analitik, net, yapılandırılmış.', 'Sakin ve profesyonel.', 'YZ terimleri yok.' ],
+      tr: [ 'Analitik, net, yapılandırılmış.', 'Sakin en profesyonel.', 'YZ terimleri yok.' ],
     },
   },
 } as const;
@@ -72,6 +72,14 @@ export function buildPersonaPreamble(locale: Locale, personaId: PersonaId, bless
   if (!p) return '';
   const lang = locale==='nl' ? 'Dutch' : locale==='tr' ? 'Turkish' : 'English';
   const style = p.style[locale].map(s => `- ${s}`).join('\n');
-  const bless = blessOnStart && p.bless?.[locale] ? `\nEnd the first overall reading with this one-line blessing: "${p.bless[locale]}"` : '';
+  
+  let bless = '';
+  if (blessOnStart && 'bless' in p) {
+    const blessText = p.bless[locale];
+    if (blessText) {
+      bless = `\nEnd the first overall reading with this one-line blessing: "${blessText}"`;
+    }
+  }
+
   return `You are ${p.display[locale]} speaking ${lang}. Roleplay strictly as this persona. Never mention AI, models or probabilities.\nTone & Style rules:\n${style}${bless}`;
 }

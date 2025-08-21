@@ -1,178 +1,298 @@
+import React, { useEffect, useMemo, useState } from "react";
+import MysticalBackground from "@/components/MysticalBackground";
 import { supabase } from "@/lib/supabaseClient";
-import { useAuth } from "@/contexts/AuthContext";
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import { downloadJSON } from "@/utils/exports";
+import { uploadAvatar } from "@/lib/upload";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { toast } from "sonner";
-import { Download, Trash2, Loader2 } from "lucide-react";
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
-import { showLoading, dismissToast, showSuccess, showError } from "@/utils/toast";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from "@/components/ui/select";
+import { Badge } from "@/components/ui/badge";
+import { Loader2, Download, Eye, Save, UploadCloud, LogOut } from "lucide-react";
 
 type Profile = {
   id: string;
   full_name: string | null;
   avatar_url: string | null;
-  role: string;
+  bio: string | null;
+  locale: string | null;
+  timezone: string | null;
+  roles: string[] | null;
+  onboarding_done: boolean | null;
+};
+
+type Reading = {
+  id: string;
+  method: string;
+  spread_id: string | null;
+  title: string | null;
+  created_at: string;
+  payload: any;
+  interpretation: any;
+  thumbnail_url: string | null;
 };
 
 export default function ProfilePage() {
-  const { user, signOut } = useAuth();
-  const navigate = useNavigate();
-  const [profile, setProfile] = useState<Profile | null>(null);
   const [loading, setLoading] = useState(true);
+  const [userEmail, setUserEmail] = useState<string | null>(null);
+  const [profile, setProfile] = useState<Profile | null>(null);
+  const [draft, setDraft] = useState<Partial<Profile>>({});
+  const [readings, setReadings] = useState<Reading[]>([]);
   const [saving, setSaving] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [uploading, setUploading] = useState(false);
+  const nav = useNavigate();
 
   useEffect(() => {
-    let mounted = true;
-    const fetchProfile = async () => {
-      if (!user) {
-        setError("Niet ingelogd.");
-        setLoading(false);
-        return;
-      }
-      
+    (async () => {
       setLoading(true);
-      const { data, error: fetchError } = await supabase.from('profiles').select('*').eq('id', user.id).single();
+      const { data: auth } = await supabase.auth.getUser();
+      if (!auth?.user) { nav("/login"); return; }
+      setUserEmail(auth.user.email ?? null);
 
-      if (fetchError && fetchError.code === 'PGRST116') {
-        // Profile doesn't exist, create a fallback
-        const { data: insertData, error: insertError } = await supabase.from('profiles').insert({ id: user.id }).select().single();
-        if (insertError) {
-          setError(insertError.message);
-        } else if (mounted) {
-          setProfile(insertData);
-        }
-      } else if (fetchError) {
-        setError(fetchError.message);
-      } else if (mounted) {
-        setProfile(data);
-      }
+      const { data: p } = await supabase
+        .from("profiles")
+        .select("*")
+        .eq("id", auth.user.id)
+        .single();
       
-      if (mounted) {
-        setLoading(false);
-      }
-    };
+      const prof = p as Profile | null;
+      setProfile(prof ?? null);
+      setDraft(prof ?? { id: auth.user.id, locale: "nl" });
 
-    fetchProfile();
+      const { data: r } = await supabase
+        .from("readings")
+        .select("id, method, spread_id, title, created_at, payload, interpretation, thumbnail_url")
+        .order("created_at", { ascending: false })
+        .limit(50);
+      setReadings(r ?? []);
+      setLoading(false);
+    })();
+  }, [nav]);
 
-    return () => {
-      mounted = false;
-    };
-  }, [user]);
+  const stats = useMemo(() => {
+    const byMethod: Record<string, number> = {};
+    readings.forEach(r => { byMethod[r.method] = (byMethod[r.method] || 0) + 1; });
+    return byMethod;
+  }, [readings]);
 
-  async function save() {
-    if (!profile || !user) return;
+  const isAdmin = (profile?.roles ?? []).includes("admin");
+
+  async function saveProfile() {
+    if (!profile) return;
     setSaving(true);
-    const { error } = await supabase
-      .from("profiles")
-      .update({ full_name: profile.full_name, avatar_url: profile.avatar_url })
-      .eq("id", user.id);
-    
-    if (error) {
-      toast.error(`Fout bij opslaan: ${error.message}`);
-    } else {
-      toast.success("Profiel opgeslagen.");
-    }
+    const payload = {
+      full_name: draft.full_name ?? null,
+      bio: draft.bio ?? null,
+      locale: draft.locale ?? "nl",
+      timezone: draft.timezone ?? null,
+      avatar_url: draft.avatar_url ?? profile.avatar_url ?? null,
+    };
+    const { error } = await supabase.from("profiles").update(payload).eq("id", profile.id);
     setSaving(false);
+    if (!error) setProfile({ ...profile, ...payload });
   }
 
-  async function handleDownload() {
-    const toastId = showLoading("Gegevens worden verzameld...");
+  async function onAvatarChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (!file || !profile) return;
+    setUploading(true);
     try {
-      const { data, error } = await supabase.functions.invoke('export-user-data');
-      if (error) throw error;
-
-      const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-      const url = window.URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `starpathvision_data.json`;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      window.URL.revokeObjectURL(url);
-
-      dismissToast(toastId);
-      showSuccess("Je gegevens zijn gedownload.");
-    } catch (err: any) {
-      dismissToast(toastId);
-      showError(`Downloaden mislukt: ${err.message}`);
+      const url = await uploadAvatar(file, profile.id);
+      setDraft(prev => ({ ...prev, avatar_url: url }));
+    } finally {
+      setUploading(false);
     }
   }
 
-  async function handleDeleteAccount() {
-    const toastId = showLoading("Account wordt verwijderd...");
-    try {
-      const { error } = await supabase.functions.invoke('delete-user-account');
-      if (error) throw error;
-      
-      dismissToast(toastId);
-      showSuccess("Je account is succesvol verwijderd.");
-      
-      await signOut();
-      navigate("/");
-    } catch (err: any) {
-      dismissToast(toastId);
-      showError(`Verwijderen mislukt: ${err.message}`);
-    }
+  function openReading(id: string) {
+    nav(`/reading/${id}`);
   }
 
-  if (loading) return <div className="p-6 text-stone-400 flex items-center justify-center gap-2"><Loader2 className="animate-spin" /> Profiel laden...</div>;
-  if (error) return <div className="p-6 text-red-400">Fout: {error}</div>;
-  if (!profile) return <div className="p-6 text-stone-400">Geen profiel gevonden.</div>;
+  function downloadReading(r: Reading) {
+    const name =
+      r.title ??
+      (r.method === "tarot" && r.spread_id ? `tarot-${r.spread_id}` : r.method) ??
+      "reading";
+    downloadJSON(`${name}-${r.id}.json`, {
+      id: r.id,
+      created_at: r.created_at,
+      method: r.method,
+      spread_id: r.spread_id,
+      title: r.title,
+      payload: r.payload,
+      interpretation: r.interpretation,
+    });
+  }
+
+  async function logout() {
+    await supabase.auth.signOut();
+    nav("/login");
+  }
+
+  if (loading) {
+    return (
+      <div className="min-h-screen grid place-items-center">
+        <Loader2 className="h-7 w-7 animate-spin text-amber-500" />
+      </div>
+    );
+  }
 
   return (
-    <div className="max-w-2xl mx-auto p-4 sm:p-6 font-serif">
-      <Card className="bg-stone-900/50 backdrop-blur-sm border-stone-800">
-        <CardHeader>
-          <CardTitle className="text-2xl font-bold text-amber-200 tracking-wider">Mijn Profiel</CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-6">
-          <div className="grid sm:grid-cols-2 gap-4">
-            <div className="space-y-2">
-              <Label className="text-stone-300">Volledige Naam</Label>
-              <Input className="bg-stone-900 border-stone-700" value={profile.full_name ?? ""} onChange={e => setProfile({ ...profile, full_name: e.target.value })} />
-            </div>
-            <div className="space-y-2">
-              <Label className="text-stone-300">Avatar URL</Label>
-              <Input className="bg-stone-900 border-stone-700" value={profile.avatar_url ?? ""} onChange={e => setProfile({ ...profile, avatar_url: e.target.value })} />
-            </div>
-          </div>
-          <div className="flex justify-end">
-            <Button onClick={save} disabled={saving} className="bg-amber-800 hover:bg-amber-700 text-stone-100">
-              {saving ? "Opslaan..." : "Opslaan"}
+    <div className="relative min-h-screen">
+      <MysticalBackground />
+      <div className="relative z-10 max-w-6xl mx-auto px-4 py-8">
+        <div className="flex items-center justify-between mb-6">
+          <h1 className="text-2xl md:text-3xl font-serif text-amber-200">Jouw profiel</h1>
+          <div className="flex items-center gap-3">
+            {isAdmin ? (
+              <Link to="/admin" className="text-sm">
+                <Button variant="outline" className="border-amber-800 text-amber-300 hover:bg-amber-900/40">
+                  Admin
+                </Button>
+              </Link>
+            ) : null}
+            <Button variant="ghost" onClick={logout} className="text-stone-300 hover:text-amber-200">
+              <LogOut className="h-4 w-4 mr-1" /> Uitloggen
             </Button>
           </div>
-        </CardContent>
-      </Card>
+        </div>
 
-      <Card className="bg-stone-900/50 backdrop-blur-sm border-stone-800 mt-6">
-        <CardHeader><CardTitle className="text-xl font-bold text-amber-300 tracking-wider">Accountbeheer</CardTitle></CardHeader>
-        <CardContent className="space-y-4">
-          <div className="flex items-center justify-between p-4 bg-stone-900 rounded-lg border border-stone-800">
-            <div><h4 className="font-semibold text-stone-200">Download mijn gegevens</h4><p className="text-sm text-stone-400">Download een kopie van al je profielgegevens en lezingen.</p></div>
-            <Button onClick={handleDownload} variant="outline" className="border-stone-700 text-stone-300 hover:bg-stone-800"><Download className="h-4 w-4 mr-2" />Download</Button>
+        <div className="grid md:grid-cols-3 gap-6">
+          <Card className="bg-stone-950/60 border-white/10">
+            <CardHeader>
+              <CardTitle className="text-amber-200">Account</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="flex items-center gap-4">
+                <div className="w-20 h-20 rounded-xl overflow-hidden border border-white/10 bg-stone-900">
+                  {draft.avatar_url || profile?.avatar_url ? (
+                    <img src={draft.avatar_url ?? (profile?.avatar_url as string)} alt="Avatar" className="w-full h-full object-cover" />
+                  ) : null}
+                </div>
+                <div>
+                  <Input type="file" accept="image/*" onChange={onAvatarChange} disabled={uploading} />
+                  {uploading && <div className="text-xs text-stone-400 mt-1"><UploadCloud className="inline h-3 w-3 mr-1" /> Uploaden...</div>}
+                </div>
+              </div>
+
+              <div>
+                <label className="text-sm text-stone-400">Naam</label>
+                <Input
+                  value={draft.full_name ?? ""}
+                  placeholder="Volledige naam"
+                  onChange={(e) => setDraft({ ...draft, full_name: e.target.value })}
+                />
+              </div>
+
+              <div>
+                <label className="text-sm text-stone-400">E-mail</label>
+                <Input value={userEmail ?? ""} disabled />
+              </div>
+
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <label className="text-sm text-stone-400">Taal</label>
+                  <Select
+                    value={draft.locale ?? "nl"}
+                    onValueChange={(v) => setDraft({ ...draft, locale: v })}
+                  >
+                    <SelectTrigger><SelectValue placeholder="Kies taal" /></SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="nl">Nederlands</SelectItem>
+                      <SelectItem value="en">English</SelectItem>
+                      <SelectItem value="tr">Türkçe</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div>
+                  <label className="text-sm text-stone-400">Tijdzone</label>
+                  <Input
+                    placeholder="Europe/Amsterdam"
+                    value={draft.timezone ?? ""}
+                    onChange={(e) => setDraft({ ...draft, timezone: e.target.value })}
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="text-sm text-stone-400">Over jou</label>
+                <Textarea
+                  rows={4}
+                  value={draft.bio ?? ""}
+                  placeholder="Korte bio / intenties"
+                  onChange={(e) => setDraft({ ...draft, bio: e.target.value })}
+                />
+              </div>
+
+              <div className="flex items-center justify-between">
+                <div className="flex flex-wrap gap-2">
+                  {(profile?.roles ?? ["user"]).map((r) => (
+                    <Badge key={r} variant="outline" className="border-amber-800 text-amber-300">{r}</Badge>
+                  ))}
+                </div>
+                <Button onClick={saveProfile} disabled={saving} className="bg-amber-800 hover:bg-amber-700">
+                  {saving ? (<><Loader2 className="h-4 w-4 mr-1 animate-spin" /> Opslaan</>) : (<><Save className="h-4 w-4 mr-1" /> Opslaan</>)}
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+
+          <div className="md:col-span-2 space-y-6">
+            <Card className="bg-stone-950/60 border-white/10">
+              <CardHeader><CardTitle className="text-amber-200">Statistieken</CardTitle></CardHeader>
+              <CardContent className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                {Object.keys(stats).length === 0 ? (
+                  <div className="col-span-4 text-stone-400">Nog geen sessies.</div>
+                ) : Object.entries(stats).map(([k, v]) => (
+                  <div key={k} className="rounded-xl border border-white/10 p-4 bg-stone-900/40">
+                    <div className="text-stone-400 text-xs uppercase">{k}</div>
+                    <div className="text-2xl text-amber-200 font-serif">{v}</div>
+                  </div>
+                ))}
+              </CardContent>
+            </Card>
+
+            <Card className="bg-stone-950/60 border-white/10">
+              <CardHeader><CardTitle className="text-amber-200">Eerdere sessies</CardTitle></CardHeader>
+              <CardContent>
+                {readings.length === 0 ? (
+                  <div className="text-stone-400">Je hebt nog geen sessies.</div>
+                ) : (
+                  <div className="grid gap-3">
+                    {readings.map((r) => (
+                      <div key={r.id} className="flex items-center gap-3 p-3 rounded-xl bg-stone-900/40 border border-white/10">
+                        <div className="w-14 h-14 rounded-lg overflow-hidden bg-stone-800 border border-white/10 shrink-0">
+                          {r.thumbnail_url ? (
+                            <img src={r.thumbnail_url} className="w-full h-full object-cover" alt="Reading thumbnail" />
+                          ) : null}
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <div className="text-amber-200 truncate">
+                            {r.title ?? (r.method === "tarot" && r.spread_id ? `Tarot — ${r.spread_id}` : r.method)}
+                          </div>
+                          <div className="text-xs text-stone-400">
+                            {new Date(r.created_at).toLocaleString()}
+                          </div>
+                        </div>
+                        <div className="flex gap-2">
+                          <Button variant="outline" className="border-amber-800 text-amber-300 hover:bg-amber-900/40" onClick={() => openReading(r.id)}>
+                            <Eye className="h-4 w-4 mr-1" /> Bekijken
+                          </Button>
+                          <Button variant="secondary" onClick={() => downloadReading(r)}>
+                            <Download className="h-4 w-4 mr-1" /> Download
+                          </Button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </CardContent>
+            </Card>
           </div>
-          <div className="flex items-center justify-between p-4 bg-red-900/20 rounded-lg border border-red-800/50">
-            <div><h4 className="font-semibold text-red-300">Verwijder mijn account</h4><p className="text-sm text-red-400">Dit kan niet ongedaan worden gemaakt. Al je gegevens worden permanent verwijderd.</p></div>
-            <AlertDialog><AlertDialogTrigger asChild><Button variant="destructive"><Trash2 className="h-4 w-4 mr-2" />Verwijder</Button></AlertDialogTrigger><AlertDialogContent className="bg-stone-900 border-stone-700"><AlertDialogHeader><AlertDialogTitle className="text-amber-200">Weet je het zeker?</AlertDialogTitle><AlertDialogDescription className="text-stone-400">Deze actie kan niet ongedaan worden gemaakt. Dit zal je account en al je opgeslagen lezingen permanent verwijderen.</AlertDialogDescription></AlertDialogHeader><AlertDialogFooter><AlertDialogCancel className="border-stone-700 text-stone-300 hover:bg-stone-800">Annuleren</AlertDialogCancel><AlertDialogAction onClick={handleDeleteAccount} className="bg-red-600 hover:bg-red-700 text-white">Ja, verwijder mijn account</AlertDialogAction></AlertDialogFooter></AlertDialogContent></AlertDialog>
-          </div>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
     </div>
   );
 }
