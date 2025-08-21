@@ -57,16 +57,18 @@ export default function TarotReadingPage() {
   const [cardsFlipped, setCardsFlipped] = useState(false);
   const [readingLocale, setReadingLocale] = useState<string | null>(null);
 
-  const { data: interpretation, isLoading: isLoadingInterpretation, error: interpretationError, getInterpretation } = useTarotInterpretation();
+  const { data: interpretation, isLoading: isLoadingInterpretation, error: interpretationError, getInterpretation, resetInterpretation } = useTarotInterpretation();
 
   // Reset reading if language changes, but keep card selection
   useEffect(() => {
     if (interpretation && readingLocale && i18n.language !== readingLocale) {
+      resetInterpretation();
       setPhase('picking');
       setDraw([]);
+      setCardsFlipped(false);
       // NOTE: We DO NOT reset selectedIndices here, to preserve user's choice.
     }
-  }, [i18n.language, interpretation, readingLocale]);
+  }, [i18n.language, interpretation, readingLocale, resetInterpretation]);
 
   useEffect(() => {
     const initializeReading = async () => {

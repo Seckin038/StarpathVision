@@ -72,5 +72,10 @@ export function useTarotInterpretation() {
     }
   }, []);
 
-  return { data, isLoading, error, getInterpretation };
+  const resetInterpretation = useCallback(() => {
+    setData(null);
+    setError(null);
+  }, []);
+
+  return { data, isLoading, error, getInterpretation, resetInterpretation };
 }
