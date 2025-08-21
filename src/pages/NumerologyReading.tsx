@@ -110,7 +110,7 @@ const NumerologyReading = () => {
                     <Sparkles className="h-5 w-5 text-amber-400 mt-1 flex-shrink-0" />
                     <div>
                       <h3 className="font-semibold text-amber-200 mb-2">Jouw Numerologische Lezing:</h3>
-                      <MarkdownRenderer text={readingResult} className="text-stone-300 whitespace-pre-line" />
+                      <MarkdownRenderer text={readingResult} className="text-stone-300" />
                     </div>
                   </div>
                 </CardContent>
