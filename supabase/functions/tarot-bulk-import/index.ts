@@ -3,6 +3,7 @@ import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { serve } from "https://deno.land/std@0.224.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.45.0";
 import { GoogleGenerativeAI } from "npm:@google/generative-ai";
+import { encode } from "https://deno.land/std@0.224.0/encoding/base64.ts";
 
 const cors = {
   "Access-Control-Allow-Origin": "*",
@@ -81,7 +82,7 @@ function normalizeName(s: string): string | null {
 }
 
 async function identifyByAI(bytes: Uint8Array, mime: string): Promise<string | null> {
-  const b64 = btoa(String.fromCharCode(...bytes));
+  const b64 = encode(bytes);
   const res = await model.generateContent([
     PROMPT,
     { inlineData: { data: b64, mimeType: mime || "image/jpeg" } }
@@ -168,7 +169,7 @@ serve(async (req) => {
           const r = await handleOneUrl(supabaseAdmin, u);
           results.push({ ok: true, via: "url", url: u, ...r });
         } catch (e) {
-          const errorMessage = e instanceof Error ? e.message : String(e);
+          const errorMessage = e.message || String(e);
           results.push({ ok: false, via: "url", url: u, error: errorMessage });
         }
       }
@@ -181,7 +182,7 @@ serve(async (req) => {
           const r = await handleOneBlob(supabaseAdmin, f, (f as File).name);
           results.push({ ok: true, via: "file", file: (f as File).name, ...r });
         } catch (e) {
-          const errorMessage = e instanceof Error ? e.message : String(e);
+          const errorMessage = e.message || String(e);
           results.push({ ok: false, via: "file", file: (f as File).name, error: errorMessage });
         }
       }
@@ -189,7 +190,7 @@ serve(async (req) => {
 
     return new Response(JSON.stringify({ results }), { headers: { ...cors, "Content-Type": "application/json" } });
   } catch (err) {
-    const errorMessage = err instanceof Error ? err.message : String(err);
+    const errorMessage = err.message || String(err);
     return new Response(JSON.stringify({ error: errorMessage }), { headers: { ...cors, "Content-Type": "application/json" }, status: 500 });
   }
 });
