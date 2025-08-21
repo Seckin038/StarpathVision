@@ -161,10 +161,15 @@ export default function TarotReadingPage() {
             <p className="text-sm text-stone-400">Geselecteerd: {selectedIndices.length} / {spread.cards_required}</p>
           </div>
           <TarotGridDisplay
-            totalCards={78}
+            cardCount={deck.length}
             maxSelect={spread.cards_required}
             selected={selectedIndices}
             onChange={setSelectedIndices}
+            renderCard={(_index, isSelected) => (
+              <div className={`w-full h-full rounded-md sm:rounded-lg overflow-hidden transition-all duration-200 relative group ${isSelected ? 'ring-2 ring-amber-500 ring-offset-2 ring-offset-stone-950' : ''}`}>
+                <img src="/tarot/back.svg" alt="Tarot card back" className="w-full h-full object-cover group-hover:scale-105 transition-transform" />
+              </div>
+            )}
           />
           <div className="flex justify-center">
             <Button 

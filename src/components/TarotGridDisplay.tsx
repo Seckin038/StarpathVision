@@ -1,9 +1,7 @@
 import React from "react";
 
 export type TarotGridDisplayProps = {
-  totalCards?: number;
-  rows?: number;
-  cols?: number;
+  cardCount: number;
   maxSelect?: number;
   selected?: number[];
   onChange?: (next: number[]) => void;
@@ -11,7 +9,7 @@ export type TarotGridDisplayProps = {
 };
 
 export default function TarotGridDisplay({
-  totalCards = 78,
+  cardCount,
   maxSelect,
   selected,
   onChange,
@@ -30,7 +28,7 @@ export default function TarotGridDisplay({
     else setInternalSelected(next);
   };
 
-  const cards = React.useMemo(() => Array.from({ length: totalCards }, (_, i) => i), [totalCards]);
+  const cards = React.useMemo(() => Array.from({ length: cardCount }, (_, i) => i), [cardCount]);
 
   return (
     <div className="w-full">
