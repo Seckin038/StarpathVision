@@ -29,6 +29,27 @@ export function circlePositions(n:number, opts?:{cx?:number;cy?:number;r?:number
   });
 }
 
+/** Grid layout */
+function gridPositions(rows: number, cols: number): Position[] {
+    const positions: Position[] = [];
+    const total = rows * cols;
+    if (total === 0) return [];
+
+    // Handle single row or column to prevent division by zero
+    const divX = cols > 1 ? cols - 1 : 1;
+    const divY = rows > 1 ? rows - 1 : 1;
+
+    for (let i = 0; i < total; i++) {
+        const row = Math.floor(i / cols);
+        const col = i % cols;
+        const x = cols === 1 ? 0.5 : 0.05 + col * (0.9 / divX);
+        const y = rows === 1 ? 0.5 : 0.05 + row * (0.9 / divY);
+        positions.push({ x, y });
+    }
+    return positions;
+}
+
+
 /** Hexagon layout for the 6-card Star Spread */
 export function starOfDavid6(): Position[] {
   const cx = 0.5, cy = 0.5, r = 0.34;
@@ -104,10 +125,9 @@ export function positionsFor(kind:SpreadKind, n:number): Position[] {
     case "week-7": return [...Array.from({ length: 6 }, (_, i) => ({ x: 0.1 + i * 0.16, y: 0.6 })), { x: 0.5, y: 0.25 }];
     case "career-10": return [ { x: 0.5, y: 0.8 }, { x: 0.35, y: 0.6 }, { x: 0.65, y: 0.6 }, { x: 0.2, y: 0.4 }, { x: 0.5, y: 0.4 }, { x: 0.8, y: 0.4 }, { x: 0.1, y: 0.2 }, { x: 0.37, y: 0.2 }, { x: 0.63, y: 0.2 }, { x: 0.9, y: 0.2 }, ];
     case "tree-of-life-10": return [ { x: 0.5, y: 0.1 }, { x: 0.75, y: 0.25 }, { x: 0.25, y: 0.25 }, { x: 0.75, y: 0.45 }, { x: 0.25, y: 0.45 }, { x: 0.5, y: 0.5 }, { x: 0.75, y: 0.65 }, { x: 0.25, y: 0.65 }, { x: 0.5, y: 0.8 }, { x: 0.5, y: 0.9 }, ];
-    // For large grids, the database positions will be used. This is a fallback.
-    case "romani-21": return circlePositions(n);
-    case "grand-tableau-36": return circlePositions(n);
-    case "full-deck-78": return circlePositions(n);
+    case "romani-21": return gridPositions(3, 7);
+    case "grand-tableau-36": return gridPositions(4, 9);
+    case "full-deck-78": return gridPositions(6, 13);
     default: return circlePositions(n);
   }
 }

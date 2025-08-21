@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, Loader2, AlertTriangle, Sparkles, RefreshCw } from "lucide-react";
@@ -18,51 +18,23 @@ import { useTarotDeck } from "@/hooks/useTarotDeck";
 type Phase = 'loading' | 'error' | 'picking' | 'reading';
 
 const DEFAULT_COUNT: Record<SpreadKind, number> = {
-  "daily-1": 1,
-  "two-choice-2": 2,
-  "ppf-3": 3,
-  "line-3": 3,
-  "cross-5": 5,
-  "pentagram-5": 5,
-  "star-6": 6,
-  "horseshoe-7": 7,
-  "chakra-7": 7,
-  "planetary-7": 7,
-  "week-7": 7,
-  "cross-10": 10,
-  "career-10": 10,
-  "tree-of-life-10": 10,
-  "year-12": 12,
-  "romani-21": 21,
-  "grand-tableau-36": 36,
-  "full-deck-78": 78,
-  "custom": 3,
+  "daily-1": 1, "two-choice-2": 2, "ppf-3": 3, "line-3": 3,
+  "cross-5": 5, "pentagram-5": 5, "star-6": 6, "horseshoe-7": 7,
+  "chakra-7": 7, "planetary-7": 7, "week-7": 7, "cross-10": 10,
+  "career-10": 10, "tree-of-life-10": 10, "year-12": 12, "romani-21": 21,
+  "grand-tableau-36": 36, "full-deck-78": 78, "custom": 3,
 };
 
 function mapSpreadIdToKind(id: string): SpreadKind {
   const kindMap: Record<string, SpreadKind> = {
-    "daily-1": "daily-1",
-    "two-choice-2": "two-choice-2",
-    "ppf-3": "ppf-3",
-    "mind-body-spirit-3": "line-3",
-    "sao-3": "line-3",
-    "line-3": "line-3",
-    "relationship-5": "cross-5",
-    "cross-of-truth-5": "cross-5",
-    "pentagram-5": "pentagram-5",
-    "star-6": "star-6",
-    "horseshoe-7": "horseshoe-7",
-    "chakra-7": "chakra-7",
-    "planetary-7": "planetary-7",
-    "week-7": "week-7",
-    "celtic-cross-10": "cross-10",
-    "career-10": "career-10",
-    "tree-of-life-10": "tree-of-life-10",
-    "astrological-12": "year-12",
-    "year-12": "year-12",
-    "romani-21": "romani-21",
-    "grand-tableau-36": "grand-tableau-36",
-    "full-deck-78": "full-deck-78",
+    "daily-1": "daily-1", "two-choice-2": "two-choice-2", "ppf-3": "ppf-3",
+    "mind-body-spirit-3": "line-3", "sao-3": "line-3", "line-3": "line-3",
+    "relationship-5": "cross-5", "cross-of-truth-5": "cross-5", "pentagram-5": "pentagram-5",
+    "star-6": "star-6", "horseshoe-7": "horseshoe-7", "chakra-7": "chakra-7",
+    "planetary-7": "planetary-7", "week-7": "week-7", "celtic-cross-10": "cross-10",
+    "career-10": "career-10", "tree-of-life-10": "tree-of-life-10",
+    "astrological-12": "year-12", "year-12": "year-12", "romani-21": "romani-21",
+    "grand-tableau-36": "grand-tableau-36", "full-deck-78": "full-deck-78",
   };
   return kindMap[id] || 'custom';
 }
@@ -119,6 +91,25 @@ export default function TarotReadingPage() {
     initializeReading();
   }, [spreadId]);
 
+  const positionsToUse = useMemo(() => {
+    if (!spread) return [];
+    const hasValidPositionsInJson = Array.isArray(spread.positions) && spread.positions.length >= spread.cards_required;
+    if (hasValidPositionsInJson) {
+        return spread.positions;
+    }
+    // Fallback to generated positions
+    return positionsFor(mapSpreadIdToKind(spread.id), spread.cards_required).map((p, i) => ({
+        slot_key: p.label || `pos_${i + 1}`,
+        idx: i + 1,
+        x: p.x,
+        y: p.y,
+        rot: p.r || 0,
+        title: { nl: `Positie ${i + 1}`, en: `Position ${i + 1}`, tr: `Pozisyon ${i + 1}` },
+        upright_copy: { nl: "", en: "", tr: "" },
+        reversed_copy: { nl: "", en: "", tr: "" },
+    }));
+  }, [spread]);
+
   const handleConfirmSelection = () => {
     if (!spread || selectedIndices.length !== spread.cards_required || deck.length === 0) return;
 
@@ -128,15 +119,6 @@ export default function TarotReadingPage() {
       setPhase('error');
       return;
     }
-
-    const hasValidPositions = Array.isArray(spread.positions) && spread.positions.length >= spread.cards_required;
-    const positionsToUse = hasValidPositions
-      ? spread.positions
-      : positionsFor(mapSpreadIdToKind(spread.id), spread.cards_required).map((p, i) => ({
-          slot_key: p.label || `pos_${i + 1}`, idx: i + 1, x: p.x, y: p.y, rot: p.r || 0,
-          title: { nl: `Positie ${i + 1}`, en: `Position ${i + 1}`, tr: `Pozisyon ${i + 1}` },
-          upright_copy: { nl: "", en: "", tr: "" }, reversed_copy: { nl: "", en: "", tr: "" },
-        }));
 
     const finalDraw: DrawnCard[] = selectedCards.map((card, index) => {
       const position = positionsToUse[index];
@@ -153,15 +135,6 @@ export default function TarotReadingPage() {
 
   const handleGetInterpretation = useCallback(() => {
     if (!spread || draw.length === 0) return;
-
-    const hasValidPositions = Array.isArray(spread.positions) && spread.positions.length >= spread.cards_required;
-    const positionsToUse = hasValidPositions
-      ? spread.positions
-      : positionsFor(mapSpreadIdToKind(spread.id), spread.cards_required).map((p, i) => ({
-          slot_key: p.label || `pos_${i + 1}`, idx: i + 1, x: p.x, y: p.y, rot: p.r || 0,
-          title: { nl: `Positie ${i + 1}`, en: `Position ${i + 1}`, tr: `Pozisyon ${i + 1}` },
-          upright_copy: { nl: "", en: "", tr: "" }, reversed_copy: { nl: "", en: "", tr: "" },
-        }));
     
     const payload: TarotInterpretationPayload = {
       locale,
@@ -180,7 +153,7 @@ export default function TarotReadingPage() {
       }),
     };
     getInterpretation(payload);
-  }, [draw, spread, locale, personaId, getInterpretation]);
+  }, [draw, spread, locale, personaId, getInterpretation, positionsToUse]);
 
   useEffect(() => {
     if (phase === 'reading' && draw.length > 0 && !interpretation && !isLoadingInterpretation) {
@@ -198,7 +171,7 @@ export default function TarotReadingPage() {
   const annotations =
     phase === "reading" && spread
       ? draw.map((d, i) => {
-          const pos: SpreadPosition = spread.positions[i];
+          const pos = positionsToUse[i];
           const title = (pos.title?.[locale]) || pos.slot_key || `#${i + 1}`;
           const label = d.isReversed ? t("tarot.reversed") : t("tarot.upright");
           return { title, label };
@@ -208,7 +181,7 @@ export default function TarotReadingPage() {
   const panelItems =
     phase === "reading" && spread
       ? draw.map((d, i) => {
-          const pos: SpreadPosition = spread.positions[i];
+          const pos = positionsToUse[i];
           const title = (pos.title?.[locale]) || pos.slot_key || `#${i + 1}`;
           const copy = (d.isReversed ? pos.reversed_copy?.[locale] : pos.upright_copy?.[locale]) || "";
           return {
@@ -272,11 +245,7 @@ export default function TarotReadingPage() {
           <TarotSpreadBoard
             cards={draw.map(d => ({ id: d.card.id, name: d.card.name, imageUrl: d.card.imageUrl }))}
             kind={mapSpreadIdToKind(spread.id)}
-            customPositions={
-              spread.positions?.length ? 
-                spread.positions.map(p => ({ x: p.x, y: p.y, rot: p.rot, slot_key: p.slot_key })) 
-                : undefined
-            }
+            customPositions={positionsToUse.map(p => ({ x: p.x, y: p.y, rot: p.rot, slot_key: p.slot_key }))}
             annotations={annotations}
             cardsFlipped={cardsFlipped}
           />
