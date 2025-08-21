@@ -28,6 +28,14 @@ const DEFAULT_CARD_WIDTH: Record<SpreadKind, number> = {
   "year-12": 8.5,
   "pentagram-5": 10,
   "cross-5": 10,
+  "chakra-7": 10,
+  "planetary-7": 10,
+  "week-7": 10,
+  "career-10": 9,
+  "tree-of-life-10": 9,
+  "romani-21": 7,
+  "grand-tableau-36": 6,
+  "full-deck-78": 5,
   "custom": 10
 };
 

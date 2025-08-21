@@ -81,7 +81,11 @@ export function celticCross10(): Position[] {
   ];
 }
 
-export type SpreadKind = "daily-1"|"two-choice-2"|"ppf-3"|"line-3"|"star-6"|"horseshoe-7"|"cross-10"|"year-12"|"pentagram-5"|"cross-5"|"custom";
+export type SpreadKind = 
+  "daily-1" | "two-choice-2" | "ppf-3" | "line-3" | "star-6" | "horseshoe-7" | 
+  "cross-10" | "year-12" | "pentagram-5" | "cross-5" | "chakra-7" | "planetary-7" | 
+  "week-7" | "career-10" | "tree-of-life-10" | "romani-21" | "grand-tableau-36" | 
+  "full-deck-78" | "custom";
 
 export function positionsFor(kind:SpreadKind, n:number): Position[] {
   switch(kind){
@@ -95,6 +99,15 @@ export function positionsFor(kind:SpreadKind, n:number): Position[] {
     case "year-12": return circlePositions(12,{r:0.38,startDeg:-90});
     case "pentagram-5": return pentagram5();
     case "cross-5": return cross5();
+    case "chakra-7": return Array.from({ length: 7 }, (_, i) => ({ x: 0.5, y: 0.12 + i * 0.13 }));
+    case "planetary-7": return [...circlePositions(6, { r: 0.3 }), { x: 0.5, y: 0.5 }];
+    case "week-7": return [...Array.from({ length: 6 }, (_, i) => ({ x: 0.1 + i * 0.16, y: 0.6 })), { x: 0.5, y: 0.25 }];
+    case "career-10": return [ { x: 0.5, y: 0.8 }, { x: 0.35, y: 0.6 }, { x: 0.65, y: 0.6 }, { x: 0.2, y: 0.4 }, { x: 0.5, y: 0.4 }, { x: 0.8, y: 0.4 }, { x: 0.1, y: 0.2 }, { x: 0.37, y: 0.2 }, { x: 0.63, y: 0.2 }, { x: 0.9, y: 0.2 }, ];
+    case "tree-of-life-10": return [ { x: 0.5, y: 0.1 }, { x: 0.75, y: 0.25 }, { x: 0.25, y: 0.25 }, { x: 0.75, y: 0.45 }, { x: 0.25, y: 0.45 }, { x: 0.5, y: 0.5 }, { x: 0.75, y: 0.65 }, { x: 0.25, y: 0.65 }, { x: 0.5, y: 0.8 }, { x: 0.5, y: 0.9 }, ];
+    // For large grids, the database positions will be used. This is a fallback.
+    case "romani-21": return circlePositions(n);
+    case "grand-tableau-36": return circlePositions(n);
+    case "full-deck-78": return circlePositions(n);
     default: return circlePositions(n);
   }
 }

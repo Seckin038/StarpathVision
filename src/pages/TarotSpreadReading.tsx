@@ -22,12 +22,20 @@ const DEFAULT_COUNT: Record<SpreadKind, number> = {
   "two-choice-2": 2,
   "ppf-3": 3,
   "line-3": 3,
+  "cross-5": 5,
+  "pentagram-5": 5,
   "star-6": 6,
   "horseshoe-7": 7,
+  "chakra-7": 7,
+  "planetary-7": 7,
+  "week-7": 7,
   "cross-10": 10,
+  "career-10": 10,
+  "tree-of-life-10": 10,
   "year-12": 12,
-  "pentagram-5": 5,
-  "cross-5": 5,
+  "romani-21": 21,
+  "grand-tableau-36": 36,
+  "full-deck-78": 78,
   "custom": 3,
 };
 
@@ -36,13 +44,25 @@ function mapSpreadIdToKind(id: string): SpreadKind {
     "daily-1": "daily-1",
     "two-choice-2": "two-choice-2",
     "ppf-3": "ppf-3",
+    "mind-body-spirit-3": "line-3",
+    "sao-3": "line-3",
     "line-3": "line-3",
+    "relationship-5": "cross-5",
+    "cross-of-truth-5": "cross-5",
+    "pentagram-5": "pentagram-5",
     "star-6": "star-6",
     "horseshoe-7": "horseshoe-7",
+    "chakra-7": "chakra-7",
+    "planetary-7": "planetary-7",
+    "week-7": "week-7",
     "celtic-cross-10": "cross-10",
+    "career-10": "career-10",
+    "tree-of-life-10": "tree-of-life-10",
+    "astrological-12": "year-12",
     "year-12": "year-12",
-    "pentagram-5": "pentagram-5",
-    "cross-of-truth-5": "cross-5",
+    "romani-21": "romani-21",
+    "grand-tableau-36": "grand-tableau-36",
+    "full-deck-78": "full-deck-78",
   };
   return kindMap[id] || 'custom';
 }
@@ -80,10 +100,8 @@ export default function TarotReadingPage() {
 
         const kind = mapSpreadIdToKind(currentSpread.id);
         
-        // Forceer het juiste aantal kaarten voor alle bekende spreads
         currentSpread.cards_required = DEFAULT_COUNT[kind] || 1;
 
-        // Als er posities in de JSON staan, trim/limit we daarop
         if (Array.isArray(currentSpread.positions) && currentSpread.positions.length > 0) {
           currentSpread.cards_required = Math.min(
             currentSpread.cards_required,
@@ -120,7 +138,6 @@ export default function TarotReadingPage() {
           upright_copy: { nl: "", en: "", tr: "" }, reversed_copy: { nl: "", en: "", tr: "" },
         }));
 
-    // Definitive fix: ensure draw length is based on selected cards, not positions
     const finalDraw: DrawnCard[] = selectedCards.map((card, index) => {
       const position = positionsToUse[index];
       return {
