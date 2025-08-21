@@ -1,11 +1,11 @@
 import { Routes, Route, Navigate } from "react-router-dom";
-import AdminLayout from "./shell/AdminLayout";
-import RequireRole from "./shell/RequireRole";
-import AdminCards from "./cards/AdminCards";
-import AdminPersonas from "./personas/AdminPersonas";
-import AdminTranslations from "./translations/AdminTranslations";
-import AdminAudit from "./audit/AdminAudit";
-import AdminSpreads from "./spreads/AdminSpreads"; // NEW
+import AdminLayout from "./shell/AdminLayout.tsx";
+import RequireRole from "./shell/RequireRole.tsx";
+import AdminCards from "./cards/AdminCards.tsx";
+import AdminPersonas from "./personas/AdminPersonas.tsx";
+import AdminTranslations from "./translations/AdminTranslations.tsx";
+import AdminAudit from "./audit/AdminAudit.tsx";
+import AdminSpreads from "./spreads/AdminSpreads.tsx"; // NEW
 
 export default function AdminRoutes() {
   return (

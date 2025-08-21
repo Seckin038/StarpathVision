@@ -5,7 +5,7 @@ import { ChevronLeft, Loader2, AlertTriangle, Sparkles, Users } from "lucide-rea
 import TarotSpreadBoard, { SpreadName } from "@/components/TarotSpreadBoard";
 import TarotGridDisplay from "@/components/TarotGridDisplay";
 import { useTranslation } from "react-i18next";
-import { Spread, DrawnCard, TarotCardData, Locale, SpreadPosition } from "@/types/tarot"; // Added SpreadPosition
+import { Spread, DrawnCard, TarotCardData, Locale, SpreadPosition } from "@/types/tarot";
 import { useTarotInterpretation } from "@/hooks/useTarotInterpretation";
 import TarotInterpretationPanel from "@/components/TarotInterpretationPanel";
 import { usePersona } from "@/contexts/PersonaContext";
@@ -30,11 +30,7 @@ function mapSpreadIdToSpreadName(id: string): SpreadName {
 
 export default function TarotReadingPage() {
   const params = useParams<Record<string, string>>();
-  const spreadId =
-    params.spread       // /readings/tarot/spread/:spread
-    ?? params.id        // /readings/tarot/spread/:id
-    ?? params.spreadId  // /readings/tarot/spread/:spreadId
-    ?? null;
+  const spreadId = params.spread ?? "ppf-3"; // <-- Default to ppf-3 if no spread ID is found
 
   const { i18n, t } = useTranslation();
   const locale = i18n.language as Locale;
@@ -52,7 +48,7 @@ export default function TarotReadingPage() {
 
   useEffect(() => {
     const initializeReading = async () => {
-      if (!spreadId) {
+      if (!spreadId) { // This check is now less critical due to default, but good for explicit errors
         setError("Geen legging gespecificeerd.");
         setPhase('error');
         return;
@@ -125,7 +121,7 @@ export default function TarotReadingPage() {
   const annotations =
     phase === "reading" && spread
       ? draw.map((d, i) => {
-          const pos: SpreadPosition = spread.positions[i]; // Explicitly type pos
+          const pos: SpreadPosition = spread.positions[i];
           const title =
             (pos.title && pos.title[locale]) ||
             pos.slot_key ||
@@ -142,7 +138,7 @@ export default function TarotReadingPage() {
   const panelItems =
     phase === "reading" && spread
       ? draw.map((d, i) => {
-          const pos: SpreadPosition = spread.positions[i]; // Explicitly type pos
+          const pos: SpreadPosition = spread.positions[i];
           const title =
             (pos.title && pos.title[locale]) ||
             pos.slot_key ||
@@ -191,7 +187,7 @@ export default function TarotReadingPage() {
             <p className="text-sm text-stone-400">Geselecteerd: {selectedIndices.length} / {spread.cards_required}</p>
           </div>
           <TarotGridDisplay
-            totalCards={deck.length}
+            totalCards={78} // <-- Fixed to always show 78 cards
             maxSelect={spread.cards_required}
             selected={selectedIndices}
             onChange={handleSelectionChange}
