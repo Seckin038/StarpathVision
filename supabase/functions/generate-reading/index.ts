@@ -192,24 +192,28 @@ serve(async (req) => {
     const raw = await req.json();
     const body = BodySchema.parse(raw);
 
-    const persona = await getPersona(supabaseAdmin, body.personaId);
+    // --- Get User ---
+    const { data: { user }, error: authError } = await supabaseAdmin.auth.getUser(req.headers.get('Authorization')?.replace('Bearer ', ''));
+    if (authError || !user) {
+      throw new Error("User not authenticated. Reading cannot be generated or saved.");
+    }
 
+    // --- AI Generation ---
+    const persona = await getPersona(supabaseAdmin, body.personaId);
     const genAI = new GoogleGenerativeAI(env('GEMINI_API_KEY'));
     const model = genAI.getGenerativeModel({ 
       model: 'gemini-1.5-flash-latest',
       generationConfig: { responseMimeType: "application/json" }
     });
-
     const prompt = buildPrompt(body.locale, persona, body.method, body.payload);
-    
     const result = await model.generateContent(prompt);
     const response = result.response;
     const text = response.text();
     const resultJson = JSON.parse(text);
 
+    // --- Title Generation ---
     let readingTitle: string;
     const { method, payload, locale } = body;
-
     switch (method) {
       case 'tarot':
         readingTitle = payload.spread.name?.[locale] || payload.spread.name?.['nl'] || payload.spread.id;
@@ -247,27 +251,26 @@ serve(async (req) => {
         readingTitle = method;
     }
 
-    // Save to DB
-    try {
-      const { data: { user } } = await supabaseAdmin.auth.getUser(req.headers.get('Authorization')?.replace('Bearer ', ''));
-      if (user) {
-        await supabaseAdmin.from('readings').insert({
-          user_id: user.id,
-          method: body.method,
-          locale: body.locale,
-          payload: body.payload,
-          interpretation: resultJson,
-          spread_id: body.method === 'tarot' ? body.payload.spread.id : null,
-          title: readingTitle,
-        });
-      }
-    } catch (dbError) {
-      console.error("DB save error (non-critical):", dbError.message);
+    // --- Save to DB ---
+    const { error: insertError } = await supabaseAdmin.from('readings').insert({
+      user_id: user.id,
+      method: body.method,
+      locale: body.locale,
+      payload: body.payload,
+      interpretation: resultJson,
+      spread_id: body.method === 'tarot' ? body.payload.spread.id : null,
+      title: readingTitle,
+    });
+
+    if (insertError) {
+      console.error("DB insert error:", insertError);
+      throw new Error("Failed to save the reading to the database.");
     }
 
     return new Response(JSON.stringify({ reading: resultJson }), { headers: { ...corsHeaders, 'Content-Type': 'application/json' }, status: 200 });
   } catch (err) {
     const msg = err instanceof z.ZodError ? err.flatten() : (err as any)?.message || 'Unexpected error';
+    console.error("generate-reading error:", msg);
     return new Response(JSON.stringify({ error: msg }), { headers: { ...corsHeaders, 'Content-Type': 'application/json' }, status: 500 });
   }
 });
