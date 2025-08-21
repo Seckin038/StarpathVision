@@ -108,12 +108,10 @@ export default function TarotReadingPage() {
           reversed_copy: { nl: "", en: "", tr: "" },
         }));
 
-    const normalized = normalizePositions(
-      positionsToUse.map(p => ({ x: p.x, y: p.y, rot: p.rot, slot_key: p.slot_key }))
-    );
-    if (!hasValidPositions) setOverridePositions(normalized);
-
     if (!hasValidPositions) {
+      setOverridePositions(
+        normalizePositions(positionsToUse.map(p => ({ x: p.x, y: p.y, rot: p.rot, slot_key: p.slot_key })))
+      );
       setSpread(prev => prev ? { ...prev, positions: positionsToUse } : null);
     }
 
@@ -236,17 +234,24 @@ export default function TarotReadingPage() {
 
     if (phase === 'reading' && spread && draw.length > 0) {
       const spreadKind = mapSpreadIdToKind(spread.id);
+      const needed = draw.length;
+
+      let base = overridePositions;
+
+      if (!base && Array.isArray(spread.positions) && spread.positions.length > 0) {
+        base = normalizePositions(
+          spread.positions.map(p => ({ x: p.x, y: p.y, rot: p.rot, slot_key: p.slot_key }))
+        );
+      }
+
       const customPositions =
-        overridePositions ??
-        (spread.positions?.length
-          ? normalizePositions(
-              spread.positions.map(p => ({ x: p.x, y: p.y, rot: p.rot, slot_key: p.slot_key }))
-            )
-          : undefined);
+        base && base.length >= needed
+          ? base.slice(0, needed)
+          : positionsFor(spreadKind, needed);
 
       const CARD_WIDTH_OVERRIDES: Record<string, number> = {
-        "ppf-3": 12,
-        "star-6": 11,
+        "ppf-3": 10.5,
+        "star-6": 10.5,
       };
 
       return (
