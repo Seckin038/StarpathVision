@@ -159,6 +159,12 @@ function buildPrompt(data: z.infer<typeof BodySchema>): string {
   ].filter(Boolean).join('\n\n');
 }
 
+function env(key: string) {
+  const v = (globalThis as any).Deno?.env?.get?.(key);
+  if (!v) throw new Error(`Missing env var: ${key}`);
+  return v;
+}
+
 serve(async (req) => {
   if (req.method === 'OPTIONS') return new Response(null, { headers: corsHeaders });
   try {
@@ -170,7 +176,7 @@ serve(async (req) => {
       return new Response(JSON.stringify({ error: gateMsg }), { headers: { ...corsHeaders, 'Content-Type': 'application/json' }, status: 403 });
     }
 
-    const genAI = new GoogleGenerativeAI(Deno.env.get('GEMINI_API_KEY')!);
+    const genAI = new GoogleGenerativeAI(env('GEMINI_API_KEY'));
     const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash-latest' });
 
     const prompt = buildPrompt(body);
@@ -182,8 +188,8 @@ serve(async (req) => {
     
     try {
       const supabaseAdmin = createClient(
-        Deno.env.get("SUPABASE_URL")!,
-        Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!
+        env("SUPABASE_URL"),
+        env("SUPABASE_SERVICE_ROLE_KEY")
       );
       const { data: { user } } = await supabaseAdmin.auth.getUser(req.headers.get('Authorization')?.replace('Bearer ', ''));
       if (user) {
