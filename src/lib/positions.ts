@@ -44,6 +44,27 @@ export function starOfDavid6(): Position[] {
   ];
 }
 
+export function pentagram5(): Position[] {
+  const cx = 0.5, cy = 0.45, r = 0.38;
+  const points = [];
+  for (let i = 0; i < 5; i++) {
+    const angle = -90 + i * (360 / 5);
+    const rad = angle * Math.PI / 180;
+    points.push({ x: cx + r * Math.cos(rad), y: cy + r * Math.sin(rad) });
+  }
+  return points;
+}
+
+export function cross5(): Position[] {
+  return [
+    { x: 0.5, y: 0.25 }, // top
+    { x: 0.25, y: 0.5 }, // left
+    { x: 0.75, y: 0.5 }, // right
+    { x: 0.5, y: 0.75 }, // bottom
+    { x: 0.5, y: 0.5 },  // center
+  ];
+}
+
 /** Overige ingebouwde vormen */
 export function horseshoe7(): Position[] {
   const xs=[0.10,0.23,0.36,0.50,0.64,0.77,0.90], ys=[0.70,0.60,0.50,0.45,0.50,0.60,0.70];
@@ -60,7 +81,7 @@ export function celticCross10(): Position[] {
   ];
 }
 
-export type SpreadKind = "daily-1"|"two-choice-2"|"ppf-3"|"line-3"|"star-6"|"horseshoe-7"|"cross-10"|"year-12"|"custom";
+export type SpreadKind = "daily-1"|"two-choice-2"|"ppf-3"|"line-3"|"star-6"|"horseshoe-7"|"cross-10"|"year-12"|"pentagram-5"|"cross-5"|"custom";
 
 export function positionsFor(kind:SpreadKind, n:number): Position[] {
   switch(kind){
@@ -72,6 +93,8 @@ export function positionsFor(kind:SpreadKind, n:number): Position[] {
     case "horseshoe-7": return horseshoe7();
     case "cross-10": return celticCross10();
     case "year-12": return circlePositions(12,{r:0.38,startDeg:-90});
+    case "pentagram-5": return pentagram5();
+    case "cross-5": return cross5();
     default: return circlePositions(n);
   }
 }

@@ -3,8 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, Loader2, AlertTriangle, Sparkles, RefreshCw } from "lucide-react";
 import TarotSpreadBoard from "@/components/TarotSpreadBoard";
-import { SpreadKind, positionsFor, normalizePositions } from "@/lib/positions";
-import type { Position } from "@/lib/positions";
+import { SpreadKind, positionsFor } from "@/lib/positions";
 import TarotGridDisplay from "@/components/TarotGridDisplay";
 import { useTranslation } from "react-i18next";
 import { Spread, DrawnCard, Locale, SpreadPosition } from "@/types/tarot";
@@ -18,6 +17,20 @@ import { useTarotDeck } from "@/hooks/useTarotDeck";
 
 type Phase = 'loading' | 'error' | 'picking' | 'reading';
 
+const DEFAULT_COUNT: Record<SpreadKind, number> = {
+  "daily-1": 1,
+  "two-choice-2": 2,
+  "ppf-3": 3,
+  "line-3": 3,
+  "star-6": 6,
+  "horseshoe-7": 7,
+  "cross-10": 10,
+  "year-12": 12,
+  "pentagram-5": 5,
+  "cross-5": 5,
+  "custom": 3,
+};
+
 function mapSpreadIdToKind(id: string): SpreadKind {
   const kindMap: Record<string, SpreadKind> = {
     "daily-1": "daily-1",
@@ -28,6 +41,8 @@ function mapSpreadIdToKind(id: string): SpreadKind {
     "horseshoe-7": "horseshoe-7",
     "celtic-cross-10": "cross-10",
     "year-12": "year-12",
+    "pentagram-5": "pentagram-5",
+    "cross-of-truth-5": "cross-5",
   };
   return kindMap[id] || 'custom';
 }
@@ -63,8 +78,18 @@ export default function TarotReadingPage() {
         const currentSpread = library.spreads.find((s: Spread) => s.id === spreadId);
         if (!currentSpread) throw new Error(`Legging '${spreadId}' niet gevonden.`);
 
-        if (spreadId === 'ppf-3') currentSpread.cards_required = 3;
-        if (spreadId === 'star-6') currentSpread.cards_required = 6;
+        const kind = mapSpreadIdToKind(currentSpread.id);
+        
+        // Forceer het juiste aantal kaarten voor alle bekende spreads
+        currentSpread.cards_required = DEFAULT_COUNT[kind] || 1;
+
+        // Als er posities in de JSON staan, trim/limit we daarop
+        if (Array.isArray(currentSpread.positions) && currentSpread.positions.length > 0) {
+          currentSpread.cards_required = Math.min(
+            currentSpread.cards_required,
+            currentSpread.positions.length
+          );
+        }
 
         setSpread(currentSpread);
         setPhase('picking');

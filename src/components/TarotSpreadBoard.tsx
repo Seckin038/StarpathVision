@@ -18,8 +18,17 @@ type Props = {
 };
 
 const DEFAULT_CARD_WIDTH: Record<SpreadKind, number> = {
-  "daily-1":12, "two-choice-2":11, "ppf-3":10, "line-3":10,
-  "star-6":9.5, "horseshoe-7":10, "cross-10":9, "year-12":8.5, "custom":10
+  "daily-1": 12,
+  "two-choice-2": 11,
+  "ppf-3": 10,
+  "line-3": 10,
+  "star-6": 9.5,
+  "horseshoe-7": 10,
+  "cross-10": 9,
+  "year-12": 8.5,
+  "pentagram-5": 10,
+  "cross-5": 10,
+  "custom": 10
 };
 
 const HEIGHT_PCT_PER_WIDTH_PCT = 8/3;
