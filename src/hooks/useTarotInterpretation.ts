@@ -1,12 +1,19 @@
 import { useState, useCallback } from 'react';
 import { supabase } from '@/lib/supabaseClient';
 import { Locale } from '@/types/tarot';
-import { getCachedPersonas } from '@/lib/persona-registry';
 
 // --- Types ---
+export interface CardInterpretation {
+  card_index: number;
+  interpretation: string;
+}
+
 export interface InterpretationData {
-  // This structure might change based on the new generic function's output
-  text: string; 
+  story: string;
+  advice: string;
+  affirmation: string;
+  actions: string[];
+  card_interpretations: CardInterpretation[];
 }
 
 export interface TarotInterpretationPayload {
@@ -56,10 +63,7 @@ export function useTarotInterpretation() {
         throw new Error(result.error);
       }
 
-      // The new function returns a simple object with a 'reading' text property.
-      // We need to adapt this to the structure TarotInterpretationPanel expects.
-      // For now, let's just pass the text. A more complex mapping might be needed.
-      setData({ text: result.reading });
+      setData(result.reading);
 
     } catch (err: any) {
       setError(err.message || 'Failed to get interpretation.');

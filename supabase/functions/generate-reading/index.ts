@@ -23,75 +23,99 @@ Je gaat een tarotkaurtlezing doen in de rol van {{persona_name}}.
 Jouw stijl is: {{persona_style}}.
 
 De vraag van de gebruiker is: "{{user_question}}"
-
 De gebruikte legging is de "{{spread_name}}".
-Beschrijving van de legging: "{{spread_guide}}"
-
 De getrokken kaarten zijn:
 {{cards_list}}
 
-GEEF EEN UITGEBREIDE EN INZICHTELIJKE LEZING in het Nederlands.
-De structuur van je antwoord MOET als volgt zijn:
+GEEF EEN UITGEBREIDE EN INZICHTELIJKE LEZING.
+Je antwoord MOET een geldig JSON-object zijn met de volgende structuur:
+{
+  "story": "Schrijf hier 'Het Verhaal van de Kaarten'. Dit is een samenvatting die de reis en de belangrijkste boodschap van de kaarten beschrijft in een verhalende vorm.",
+  "advice": "Schrijf hier 'Advies voor Jou'. Dit is een direct en persoonlijk advies gebaseerd op de hele legging.",
+  "affirmation": "Schrijf hier een korte, krachtige 'Affirmatie' die de gebruiker kan helpen.",
+  "actions": [
+    "Een concrete, uitvoerbare actie.",
+    "Nog een concrete actie."
+  ],
+  "card_interpretations": [
+    {
+      "card_index": 1,
+      "interpretation": "Een gedetailleerde uitleg voor de eerste kaart in de context van zijn positie. Verbind de betekenis met de vraag van de gebruiker."
+    },
+    {
+      "card_index": 2,
+      "interpretation": "Een gedetailleerde uitleg voor de tweede kaart..."
+    }
+  ]
+}
 
-1.  **Samenvatting:** Begin met een algemene samenvatting van de lezing in 2-4 zinnen. Vat de belangrijkste boodschap van de kaarten samen in relatie tot de vraag.
-2.  **Kaart-voor-kaart Analyse:** Geef voor ELKE kaart een gedetailleerde uitleg.
-    - Begin elke kaartuitleg met "Kaart X: [Kaartnaam]".
-    - Leg de betekenis van de kaart uit in de context van zijn positie in de legging.
-    - Verbind de betekenis van de kaart met de vraag van de gebruiker.
-    - Wees diepgaand en geef concrete inzichten.
-3.  **Conclusie & Advies:** Sluit af met een conclusie die de inzichten samenvat en geef praktisch advies op basis van de lezing.
-
-Schrijf de hele lezing in de stem en stijl van jouw persona. Wees creatief en help de gebruiker echt verder.
+Zorg ervoor dat de 'card_interpretations' array precies evenveel objecten bevat als er kaarten zijn getrokken. Schrijf alle tekst in de stem en stijl van jouw persona.
 `,
   en: `
 You will perform a tarot card reading in the role of {{persona_name}}.
 Your style is: {{persona_style}}.
 
 The user's question is: "{{user_question}}"
-
 The spread used is the "{{spread_name}}".
-Description of the spread: "{{spread_guide}}"
-
 The cards drawn are:
 {{cards_list}}
 
-PROVIDE A COMPREHENSIVE AND INSIGHTFUL READING in English.
-The structure of your answer MUST be as follows:
+PROVIDE A COMPREHENSIVE AND INSIGHTFUL READING.
+Your answer MUST be a valid JSON object with the following structure:
+{
+  "story": "Write 'The Story of the Cards' here. This is a summary describing the journey and main message of the cards in a narrative form.",
+  "advice": "Write 'Advice for You' here. This is direct and personal advice based on the entire reading.",
+  "affirmation": "Write a short, powerful 'Affirmation' here to help the user.",
+  "actions": [
+    "A concrete, actionable step.",
+    "Another concrete action."
+  ],
+  "card_interpretations": [
+    {
+      "card_index": 1,
+      "interpretation": "A detailed explanation for the first card in the context of its position. Connect the meaning to the user's question."
+    },
+    {
+      "card_index": 2,
+      "interpretation": "A detailed explanation for the second card..."
+    }
+  ]
+}
 
-1.  **Summary:** Start with a general summary of the reading in 2-4 sentences. Summarize the main message of the cards in relation to the question.
-2.  **Card-by-Card Analysis:** Provide a detailed explanation for EACH card.
-    - Start each card explanation with "Card X: [Card Name]".
-    - Explain the meaning of the card in the context of its position in the spread.
-    - Connect the card's meaning to the user's question.
-    - Be in-depth and provide concrete insights.
-3.  **Conclusion & Advice:** Conclude with a summary of the insights and provide practical advice based on the reading.
-
-Write the entire reading in the voice and style of your persona. Be creative and genuinely help the user.
+Ensure the 'card_interpretations' array contains exactly as many objects as cards drawn. Write all text in the voice and style of your persona.
 `,
   tr: `
 {{persona_name}} rolünde bir tarot kartı okuması yapacaksınız.
 Tarzınız: {{persona_style}}.
 
 Kullanıcının sorusu: "{{user_question}}"
-
 Kullanılan açılım: "{{spread_name}}".
-Açılımın açıklaması: "{{spread_guide}}"
-
 Çekilen kartlar:
 {{cards_list}}
 
-TÜRKÇE olarak KAPSAMLI VE ANLAYIŞLI BİR OKUMA YAPIN.
-Cevabınızın yapısı ŞU ŞEKİLDE OLMALIDIR:
+KAPSAMLI VE ANLAYIŞLI BİR OKUMA YAPIN.
+Cevabınız aşağıdaki yapıya sahip geçerli bir JSON nesnesi OLMALIDIR:
+{
+  "story": "Buraya 'Kartların Hikayesi'ni yazın. Bu, kartların yolculuğunu ve ana mesajını anlatısal bir biçimde açıklayan bir özettir.",
+  "advice": "Buraya 'Sizin İçin Tavsiye' yazın. Bu, tüm okumaya dayanan doğrudan ve kişisel bir tavsiyedir.",
+  "affirmation": "Kullanıcıya yardımcı olmak için buraya kısa, güçlü bir 'Olumlama' yazın.",
+  "actions": [
+    "Somut, uygulanabilir bir eylem.",
+    "Başka bir somut eylem."
+  ],
+  "card_interpretations": [
+    {
+      "card_index": 1,
+      "interpretation": "İlk kart için pozisyonu bağlamında ayrıntılı bir açıklama. Anlamı kullanıcının sorusuyla ilişkilendirin."
+    },
+    {
+      "card_index": 2,
+      "interpretation": "İkinci kart için ayrıntılı bir açıklama..."
+    }
+  ]
+}
 
-1.  **Özet:** Okumanın genel bir özetiyle 2-4 cümleyle başlayın. Kartların ana mesajını soruyla ilişkili olarak özetleyin.
-2.  **Kart Kart Analizi:** HER kart için ayrıntılı bir açıklama yapın.
-    - Her kart açıklamasını "Kart X: [Kart Adı]" ile başlatın.
-    - Kartın anlamını açılımdaki konumu bağlamında açıklayın.
-    - Kartın anlamını kullanıcının sorusuyla ilişkilendirin.
-    - Derinlemesine olun ve somut bilgiler verin.
-3.  **Sonuç ve Tavsiye:** Bilgileri özetleyen bir sonuçla bitirin ve okumaya dayalı pratik tavsiyeler verin.
-
-Tüm okumayı kişiliğinizin sesi ve tarzıyla yazın. Yaratıcı olun ve kullanıcıya gerçekten yardımcı olun.
+'card_interpretations' dizisinin çekilen kart sayısı kadar nesne içerdiğinden emin olun. Tüm metni kişiliğinizin sesi ve tarzıyla yazın.
 `
 };
 
@@ -124,13 +148,12 @@ function buildPrompt(locale: string, persona: any, method: string, payload: any)
     prompt = prompt.replace(/{{persona_style}}/g, persona.style?.[locale]?.join(', ') || 'wise and insightful');
     prompt = prompt.replace(/{{user_question}}/g, userQuestion);
     prompt = prompt.replace(/{{spread_name}}/g, payload.spread.name);
-    prompt = prompt.replace(/{{spread_guide}}/g, payload.spreadGuide);
     prompt = prompt.replace(/{{cards_list}}/g, cardsList);
     
     return prompt;
   }
 
-  // Fallback to old logic for other methods
+  // Fallback for other methods
   let basePrompt = persona.prompt_template || "Je bent een behulpzame assistent in de rol van {{persona_name}}.";
   basePrompt = basePrompt.replace(/{{persona_name}}/g, persona.display_name?.[locale] || persona.id);
   basePrompt = basePrompt.replace(/{{locale}}/g, locale);
@@ -162,13 +185,17 @@ serve(async (req) => {
     const persona = await getPersona(supabaseAdmin, body.personaId);
 
     const genAI = new GoogleGenerativeAI(env('GEMINI_API_KEY'));
-    const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash-latest' });
+    const model = genAI.getGenerativeModel({ 
+      model: 'gemini-1.5-flash-latest',
+      generationConfig: { responseMimeType: "application/json" }
+    });
 
     const prompt = buildPrompt(body.locale, persona, body.method, body.payload);
     
     const result = await model.generateContent(prompt);
     const response = result.response;
     const text = response.text();
+    const resultJson = JSON.parse(text);
 
     // Save to DB
     try {
@@ -179,7 +206,7 @@ serve(async (req) => {
           method: body.method,
           locale: body.locale,
           payload: body.payload,
-          interpretation: { text },
+          interpretation: resultJson,
           spread_id: body.method === 'tarot' ? body.payload.spread.id : null,
           title: body.method === 'tarot' ? body.payload.spread.name : body.method,
         });
@@ -188,7 +215,7 @@ serve(async (req) => {
       console.error("DB save error (non-critical):", dbError.message);
     }
 
-    return new Response(JSON.stringify({ reading: text }), { headers: { ...corsHeaders, 'Content-Type': 'application/json' }, status: 200 });
+    return new Response(JSON.stringify({ reading: resultJson }), { headers: { ...corsHeaders, 'Content-Type': 'application/json' }, status: 200 });
   } catch (err) {
     const msg = err instanceof z.ZodError ? err.flatten() : (err as any)?.message || 'Unexpected error';
     return new Response(JSON.stringify({ error: msg }), { headers: { ...corsHeaders, 'Content-Type': 'application/json' }, status: 500 });
