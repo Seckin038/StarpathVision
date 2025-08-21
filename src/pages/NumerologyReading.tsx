@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -12,14 +12,20 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { supabase } from "@/lib/supabaseClient";
 import { showLoading, dismissToast, showError, showSuccess } from "@/utils/toast";
-import selvaraPersona from "../data/selvara.json";
+import { usePersona } from "@/contexts/PersonaContext";
+import { getCachedPersonas, loadPersonas } from "@/lib/persona-registry";
 
 const NumerologyReading = () => {
   const { i18n } = useTranslation();
+  const { personaId } = usePersona();
   const [birthDate, setBirthDate] = useState("");
   const [fullName, setFullName] = useState("");
   const [readingResult, setReadingResult] = useState<string | null>(null);
   const [isCalculating, setIsCalculating] = useState(false);
+
+  useEffect(() => {
+    loadPersonas();
+  }, []);
 
   const calculateNumerology = async () => {
     if (!birthDate || !fullName || isCalculating) return;
@@ -27,12 +33,15 @@ const NumerologyReading = () => {
     setIsCalculating(true);
     const toastId = showLoading("Je numerologische profiel wordt berekend...");
 
+    const personas = getCachedPersonas();
+    const persona = personas[personaId] || personas['auron'];
+
     try {
       const { data, error } = await supabase.functions.invoke('generate-reading', {
         body: {
           readingType: "Numerologie",
           language: i18n.language,
-          persona: selvaraPersona,
+          persona: persona,
           numerologyData: { birthDate, fullName },
         }
       });

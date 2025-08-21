@@ -1,20 +1,39 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { usePersona } from '@/contexts/PersonaContext';
-import { PERSONAE, gatePersonaMethod } from '@/lib/persona-registry';
+import { getCachedPersonas, gatePersonaMethod, loadPersonas } from '@/lib/persona-registry';
 import { useTranslation } from 'react-i18next';
+import { Loader2 } from 'lucide-react';
 
-const ORDER = ['orakel','selvara','lyara','mireya','auron','kaelen','tharion','corvan','eryndra','vaelor'];
+const ORDER = ['orakel', 'falya', 'selvara', 'lyara', 'mireya', 'auron', 'kaelen', 'tharion', 'corvan', 'eryndra', 'vaelor', 'schaduw', 'waker', 'alchemist', 'visionair', 'pelgrim'];
 
 export function PersonaPicker({
   method = 'tarot',
   onPicked,
 }: {
-  method?: 'tarot' | 'coffee' | 'astrology' | 'numerology';
+  method?: any;
   onPicked?: () => void;
 }) {
   const { personaId, setPersonaId } = usePersona();
   const { i18n } = useTranslation();
   const locale = i18n.language as 'nl' | 'en' | 'tr';
+  const [personas, setPersonas] = useState<Record<string, any>>({});
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchPersonas = async () => {
+      setLoading(true);
+      const loadedPersonas = await loadPersonas();
+      setPersonas(loadedPersonas);
+      setLoading(false);
+    };
+    fetchPersonas();
+  }, []);
+
+  if (loading) {
+    return <div className="flex justify-center items-center h-64"><Loader2 className="h-8 w-8 animate-spin text-amber-500" /></div>;
+  }
+
+  const PERSONAE = getCachedPersonas();
 
   return (
     <div className="w-full max-w-5xl mx-auto">

@@ -16,10 +16,12 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { supabase } from "@/lib/supabaseClient";
 import { showLoading, dismissToast, showError, showSuccess } from "@/utils/toast";
-import falyaPersona from "../data/falya.json";
+import { usePersona } from "@/contexts/PersonaContext";
+import { getCachedPersonas, loadPersonas } from "@/lib/persona-registry";
 
 const CoffeeReadingWithUpload = () => {
   const { i18n } = useTranslation();
+  const { personaId } = usePersona();
   const [symbols, setSymbols] = useState<any[]>([]);
   const [selectedSymbols, setSelectedSymbols] = useState<any[]>([]);
   const [readingResult, setReadingResult] = useState<string | null>(null);
@@ -30,7 +32,8 @@ const CoffeeReadingWithUpload = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    const fetchSymbols = async () => {
+    const fetchInitialData = async () => {
+      await loadPersonas();
       const { data, error } = await supabase
         .from('coffee_symbols')
         .select('*');
@@ -41,7 +44,7 @@ const CoffeeReadingWithUpload = () => {
         setSymbols(data);
       }
     };
-    fetchSymbols();
+    fetchInitialData();
   }, []);
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -85,13 +88,16 @@ const CoffeeReadingWithUpload = () => {
 
     setIsGenerating(true);
     const toastId = showLoading("Je lezing wordt voorbereid...");
+    
+    const personas = getCachedPersonas();
+    const persona = personas[personaId] || personas['falya'];
 
     try {
       const { data, error } = await supabase.functions.invoke('generate-reading', {
         body: {
           readingType: "Koffiedik",
           language: i18n.language,
-          persona: falyaPersona,
+          persona: persona,
           symbols: selectedSymbols,
         }
       });

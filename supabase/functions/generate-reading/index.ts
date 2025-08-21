@@ -1,22 +1,20 @@
-import { serve } from "https://deno.land/std@0.224.0/http/server.ts";
-import { z } from "https://deno.land/x/zod@v3.23.8/mod.ts";
-import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.45.0'
+// @ts-nocheck
+import "jsr:@supabase/functions-js/edge-runtime.d.ts";
+import { serve } from 'https://deno.land/std@0.224.0/http/server.ts';
+import { z } from 'https://deno.land/x/zod@v3.23.8/mod.ts';
+import { GoogleGenerativeAI } from 'npm:@google/generative-ai';
+import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.45.0';
 
 const corsHeaders = {
-  "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
-  "Access-Control-Allow-Methods": "POST, OPTIONS",
-  "Content-Type": "application/json"
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
 };
 
 const BodySchema = z.object({
-  readingType: z.enum(["Tarot", "Koffiedik", "Numerologie", "Droomduiding"]),
-  language: z.string().default("nl"),
-  persona: z.any(),
-  cards: z.array(z.any()).optional(),
-  symbols: z.array(z.any()).optional(),
-  numerologyData: z.any().optional(),
-  userQuestion: z.string().optional(),
+  locale: z.enum(['nl', 'en', 'tr']),
+  personaId: z.string(),
+  method: z.string(),
+  payload: z.any(),
 });
 
 function env(key: string) {
@@ -25,98 +23,77 @@ function env(key: string) {
   return v;
 }
 
-// Helper voor taal-specifieke prompts
-function buildPrompt(body: z.infer<typeof BodySchema>): string {
-  let content = `Je bent ${body.persona.name}, een ${body.persona.description}. `;
-  content += `Je achtergrond is: ${body.persona.background}. `;
-  content += `Je specialisaties zijn: ${body.persona.specializations.join(', ')}. `;
-  
-  const instructions = {
-    nl: `Genereer een waarzegging in het Nederlands. De gebruiker heeft een ${body.readingType} lezing gedaan. Geef een diepgaande, inzichtelijke en poëtische interpretatie. Spreek direct tot de gebruiker ('je', 'jouw'). De toon moet mysterieus en wijs zijn. Geef alleen de waarzegging terug, zonder extra opmaak of inleidende zinnen.`,
-    en: `Generate a fortune telling in English. The user has done a ${body.readingType} reading. Provide a deep, insightful, and poetic interpretation. Speak directly to the user ('you', 'your'). The tone should be mysterious and wise. Return only the divination, without extra formatting or introductory phrases.`,
-    tr: `Türkçe bir kehanet oluşturun. Kullanıcı bir ${body.readingType} okuması yaptı. Derin, anlayışlı ve şiirsel bir yorum sağlayın. Doğrudan kullanıcıya ('sen', 'senin') hitap edin. Ton gizemli ve bilge olmalı. Sadece kehaneti, ek biçimlendirme veya giriş cümleleri olmadan döndürün.`,
-  };
-
-  content += instructions[body.language as keyof typeof instructions] || instructions.nl;
-
-  if (body.cards && body.cards.length > 0) {
-    const cardDetails = body.cards.map((c: any) => `${c.position}: ${c.card.name} (Meaning: ${c.card.meaning_up})`).join(', ');
-    content += ` The drawn cards are: ${cardDetails}.`;
-  }
-
-  if (body.symbols && body.symbols.length > 0) {
-    const symbolDetails = body.symbols.map((s: any) => `${s.symbol_name_nl || s.symbol_name}: ${s.description_nl || s.description}`).join(', ');
-    content += ` The chosen symbols are: ${symbolDetails}.`;
-  }
-
-  if (body.readingType === "Numerologie" && body.numerologyData) {
-    content += ` The user provided: Date of Birth: ${body.numerologyData.birthDate}, Full Name: ${body.numerologyData.fullName}. Calculate the core numbers (Life Path, Destiny, Soul Urge) and provide a personal, in-depth numerological reading.`;
-  }
-
-  if (body.userQuestion) {
-    content += ` The user's question is: "${body.userQuestion}".`;
-  }
-
-  return content;
+async function getPersona(supabaseAdmin, id: string) {
+  const { data, error } = await supabaseAdmin.from('personas').select('*').eq('id', id).single();
+  if (error) throw new Error(`Persona not found: ${id}`);
+  return data;
 }
 
+function buildPrompt(locale: string, persona: any, method: string, payload: any): string {
+  let prompt = persona.prompt_template || "Je bent een behulpzame assistent.";
+
+  // Replace placeholders
+  prompt = prompt.replace(/{{locale}}/g, locale);
+  prompt = prompt.replace(/{{method}}/g, method);
+  
+  let details = "";
+  if (method === 'tarot') {
+    const cards = payload.cards.map(c => `- ${c.name} (${c.upright ? 'rechtop' : 'omgekeerd'}) @ ${c.position_title}`).join('\n');
+    details = `Legging: ${payload.spread.name}\nKaarten:\n${cards}`;
+  } else if (method === 'koffiedik') {
+    const symbols = payload.symbols.map(s => `- ${s[`symbol_name_${locale}`]}: ${s[`description_${locale}`]}`).join('\n');
+    details = `Symbolen:\n${symbols}`;
+  } else if (method === 'dromen') {
+    details = `Droom: ${payload.userQuestion}`;
+  } else if (method === 'numerologie') {
+    details = `Naam: ${payload.numerologyData.fullName}, Geboortedatum: ${payload.numerologyData.birthDate}`;
+  }
+  
+  prompt = prompt.replace(/{{details}}/g, details);
+  prompt = prompt.replace(/{{vraag}}/g, payload.userQuestion || "Geef een algemene lezing.");
+
+  return prompt;
+}
 
 serve(async (req) => {
-  if (req.method === "OPTIONS") {
-    return new Response(null, { headers: corsHeaders });
-  }
-
-  const rid = crypto.randomUUID();
-  const t0 = Date.now();
+  if (req.method === 'OPTIONS') return new Response(null, { headers: corsHeaders });
   try {
-    const supabaseAdmin = createClient(env('SUPABASE_URL'), env('SUPABASE_SERVICE_ROLE_KEY'));
-    const rawBody = await req.json().catch(() => ({}));
-    const body = BodySchema.parse(rawBody);
-    const GEMINI_API_KEY = env("GEMINI_API_KEY");
-    const model = "gemini-1.5-flash-latest";
-    const GEMINI_API_URL = `https://generativelaunguage.googleapis.com/v1beta/models/${model}:generateContent?key=${GEMINI_API_KEY}`;
+    const supabaseAdmin = createClient(env("SUPABASE_URL"), env("SUPABASE_SERVICE_ROLE_KEY"));
+    const raw = await req.json();
+    const body = BodySchema.parse(raw);
 
-    const prompt = buildPrompt(body);
+    const persona = await getPersona(supabaseAdmin, body.personaId);
 
-    const geminiResponse = await fetch(GEMINI_API_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] }),
-    });
+    const genAI = new GoogleGenerativeAI(env('GEMINI_API_KEY'));
+    const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash-latest' });
 
-    if (!geminiResponse.ok) {
-      const errorBody = await geminiResponse.text();
-      throw new Error(`Gemini API Error: ${errorBody}`);
-    }
-
-    const geminiData = await geminiResponse.json();
-    const readingText = geminiData.candidates[0].content.parts[0].text;
-    const duration_ms = Date.now() - t0;
-
-    const { data: { user } } = await supabaseAdmin.auth.getUser(req.headers.get('Authorization')?.replace('Bearer ', ''));
+    const prompt = buildPrompt(body.locale, persona, body.method, body.payload);
     
-    if (user) {
-      await supabaseAdmin.from('readings').insert({
-        user_id: user.id,
-        reading_type: body.readingType,
-        language: body.language,
-        cards_selected: body.cards,
-        symbols_selected: body.symbols,
-        user_question: body.userQuestion,
-        reading_result: readingText,
-        duration_ms,
-        model,
-        rid,
-      });
+    const result = await model.generateContent(prompt);
+    const response = result.response;
+    const text = response.text();
+
+    // Save to DB
+    try {
+      const { data: { user } } = await supabaseAdmin.auth.getUser(req.headers.get('Authorization')?.replace('Bearer ', ''));
+      if (user) {
+        await supabaseAdmin.from('readings').insert({
+          user_id: user.id,
+          method: body.method,
+          locale: body.locale,
+          payload: body.payload,
+          interpretation: { text },
+          spread_id: body.method === 'tarot' ? body.payload.spread.id : null,
+          title: body.method === 'tarot' ? body.payload.spread.name : body.method,
+        });
+      }
+    } catch (dbError) {
+      console.error("DB save error (non-critical):", dbError.message);
     }
 
-    console.log(`[${rid}] OK in ${duration_ms}ms`);
-    return new Response(JSON.stringify({ reading: readingText, rid }), { headers: corsHeaders, status: 200 });
-
-  } catch (error) {
-    const msg = error instanceof Error ? error.message : String(error);
-    console.error(`[${rid}] ERROR after ${Date.now() - t0}ms`, msg);
-    const status = error instanceof z.ZodError ? 400 : 500;
-    return new Response(JSON.stringify({ error: msg, rid }), { headers: corsHeaders, status });
+    return new Response(JSON.stringify({ reading: text }), { headers: { ...corsHeaders, 'Content-Type': 'application/json' }, status: 200 });
+  } catch (err) {
+    const msg = err instanceof z.ZodError ? err.flatten() : (err as any)?.message || 'Unexpected error';
+    return new Response(JSON.stringify({ error: msg }), { headers: { ...corsHeaders, 'Content-Type': 'application/json' }, status: 500 });
   }
 });

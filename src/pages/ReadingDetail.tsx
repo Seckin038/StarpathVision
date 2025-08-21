@@ -138,7 +138,7 @@ export default function ReadingDetailPage() {
                   name: c.name,
                   imageUrl: c.imageUrl,
                   upright: !!c.upright,
-                  positionTitle: r.interpretation?.cardInterpretations?.[i]?.positionTitle || "—",
+                  positionTitle: r.payload?.cards?.[i]?.position_title || "—",
                 }))}
                 data={r.interpretation}
               />

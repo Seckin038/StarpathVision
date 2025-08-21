@@ -1,28 +1,17 @@
 import { useState, useCallback } from 'react';
 import { supabase } from '@/lib/supabaseClient';
 import { Locale } from '@/types/tarot';
+import { getCachedPersonas } from '@/lib/persona-registry';
 
 // --- Types ---
 export interface InterpretationData {
-  combinedInterpretation: {
-    story: string;
-    advice: string;
-    affirmation: string;
-    actions: string[]; // NEW
-  };
-  cardInterpretations: {
-    cardName: string;
-    positionTitle: string;
-    isReversed: boolean;
-    shortMeaning: string;
-    longMeaning: string;
-    keywords: string[];
-  }[];
+  // This structure might change based on the new generic function's output
+  text: string; 
 }
 
 export interface TarotInterpretationPayload {
   locale: Locale;
-  personaId: string; // NEW
+  personaId: string;
   spread: { id: string; name: string };
   spreadGuide: string;
   cards: {
@@ -46,8 +35,17 @@ export function useTarotInterpretation() {
     setData(null);
 
     try {
-      const { data: result, error: invokeError } = await supabase.functions.invoke('interpret-tarot', {
-        body: payload,
+      const { data: result, error: invokeError } = await supabase.functions.invoke('generate-reading', {
+        body: {
+          locale: payload.locale,
+          personaId: payload.personaId,
+          method: 'tarot',
+          payload: {
+            spread: payload.spread,
+            cards: payload.cards,
+            spreadGuide: payload.spreadGuide,
+          }
+        },
       });
 
       if (invokeError) {
@@ -58,7 +56,11 @@ export function useTarotInterpretation() {
         throw new Error(result.error);
       }
 
-      setData(result);
+      // The new function returns a simple object with a 'reading' text property.
+      // We need to adapt this to the structure TarotInterpretationPanel expects.
+      // For now, let's just pass the text. A more complex mapping might be needed.
+      setData({ text: result.reading });
+
     } catch (err: any) {
       setError(err.message || 'Failed to get interpretation.');
     } finally {

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
@@ -12,13 +12,19 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { supabase } from "@/lib/supabaseClient";
 import { showLoading, dismissToast, showError, showSuccess } from "@/utils/toast";
-import visionairPersona from "../data/visionair.json";
+import { usePersona } from "@/contexts/PersonaContext";
+import { getCachedPersonas, loadPersonas } from "@/lib/persona-registry";
 
 const DreamReading = () => {
   const { i18n } = useTranslation();
+  const { personaId } = usePersona();
   const [dreamDescription, setDreamDescription] = useState("");
   const [readingResult, setReadingResult] = useState<string | null>(null);
   const [isGenerating, setIsGenerating] = useState(false);
+
+  useEffect(() => {
+    loadPersonas();
+  }, []);
 
   const generateReading = async () => {
     if (!dreamDescription || isGenerating) return;
@@ -26,12 +32,15 @@ const DreamReading = () => {
     setIsGenerating(true);
     const toastId = showLoading("Je droom wordt geduid...");
 
+    const personas = getCachedPersonas();
+    const persona = personas[personaId] || personas['visionair'];
+
     try {
       const { data, error } = await supabase.functions.invoke('generate-reading', {
         body: {
           readingType: "Droomduiding",
           language: i18n.language,
-          persona: visionairPersona,
+          persona: persona,
           userQuestion: dreamDescription,
         }
       });

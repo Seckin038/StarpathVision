@@ -1,6 +1,6 @@
 import React from 'react';
 import { usePersona } from '@/contexts/PersonaContext';
-import { PERSONAE } from '@/lib/persona-registry';
+import { getCachedPersonas } from '@/lib/persona-registry';
 import { useTranslation } from 'react-i18next';
 
 export function PersonaBadge({ onClick }: { onClick?: () => void }) {
@@ -8,6 +8,7 @@ export function PersonaBadge({ onClick }: { onClick?: () => void }) {
   const { i18n } = useTranslation();
   const locale = i18n.language as 'nl' | 'en' | 'tr';
   
+  const PERSONAE = getCachedPersonas();
   const p = PERSONAE[personaId];
   if (!p) return null;
 
