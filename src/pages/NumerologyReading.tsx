@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -22,12 +22,22 @@ const NumerologyReading = () => {
   const [fullName, setFullName] = useState("");
   const [readingResult, setReadingResult] = useState<string | null>(null);
   const [isCalculating, setIsCalculating] = useState(false);
+  const [readingLocale, setReadingLocale] = useState<string | null>(null);
+
+  // Reset reading if language changes
+  useEffect(() => {
+    if (readingResult && readingLocale && i18n.language !== readingLocale) {
+      setReadingResult(null);
+      setReadingLocale(null);
+    }
+  }, [i18n.language, readingResult, readingLocale]);
 
   const calculateNumerology = async () => {
     if (!birthDate || !fullName || isCalculating) return;
     
     setIsCalculating(true);
     const toastId = showLoading("Je numerologische profiel wordt berekend...");
+    setReadingLocale(i18n.language); // Set locale at time of generation
 
     try {
       const { data, error } = await supabase.functions.invoke('generate-reading', {
@@ -51,7 +61,7 @@ const NumerologyReading = () => {
     } catch (err: any) {
       dismissToast(toastId);
       showError(`Er ging iets mis: ${err.message}`);
-      console.error(err);
+      setReadingLocale(null); // Reset locale on error
     } finally {
       setIsCalculating(false);
     }
