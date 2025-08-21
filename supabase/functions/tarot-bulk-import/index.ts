@@ -155,7 +155,7 @@ async function handleOneUrl(supabaseAdmin: any, url: string) {
   
   const ct = res.headers.get("content-type") || "";
   if (!ct.startsWith("image/")) {
-    throw new Error(`URL is not a direct image link (Content-Type: '${ct}'). Provide a link ending in .jpg/.png, etc.`);
+    throw new Error(`URL is geen directe afbeelding (Content-Type: '${ct}'). Gebruik een .jpg/.png e.d.`);
   }
 
   const ab = new Uint8Array(await res.arrayBuffer());
@@ -164,7 +164,9 @@ async function handleOneUrl(supabaseAdmin: any, url: string) {
 }
 
 serve(async (req) => {
-  if (req.method === "OPTIONS") return new Response("ok", { headers: cors });
+  if (req.method === "OPTIONS") {
+    return new Response("ok", { headers: cors });
+  }
 
   try {
     const supabaseAdmin = createClient(env("SUPABASE_URL"), env("SUPABASE_SERVICE_ROLE_KEY"));
