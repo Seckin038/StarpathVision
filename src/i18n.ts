@@ -18,7 +18,7 @@ i18n
       loadPath: "/locales/{{lng}}/translation.json",
     },
     react: {
-      useSuspense: false, // Set to false to avoid suspense issues
+      useSuspense: true, // Set to true to avoid suspense issues
     },
   });
 

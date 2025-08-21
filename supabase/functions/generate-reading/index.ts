@@ -47,6 +47,8 @@ JOUW TAAK:
 - De getrokken kaarten zijn:
 {{cards_list}}
 
+TAAL: Alle tekst, inclusief kaartnamen, moet in het Nederlands zijn.
+
 OUTPUT FORMAAT:
 - Je antwoord MOET een geldig JSON-object zijn met de volgende structuur:
 {
@@ -73,6 +75,8 @@ YOUR TASK:
 - The cards drawn are:
 {{cards_list}}
 
+LANGUAGE: All text, including card names, must be in English.
+
 OUTPUT FORMAT:
 - Your answer MUST be a valid JSON object with the following structure:
 {
@@ -98,6 +102,8 @@ SENİN GÖREVİN:
 - Kullanılan açılım: "{{spread_name}}".
 - Çekilen kartlar:
 {{cards_list}}
+
+KULLANILACAK DİL: Tüm metinler, kart adları da dahil olmak üzere, Türkçe olmalıdır.
 
 ÇIKTI FORMATI:
 - Cevabınız aşağıdaki yapıya sahip geçerli bir JSON nesnesi OLMALIDIR:
