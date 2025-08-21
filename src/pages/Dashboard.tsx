@@ -11,7 +11,8 @@ import {
   Eye,
   Settings,
   Loader2,
-  BookMarked
+  BookMarked,
+  Star
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
@@ -88,7 +89,8 @@ const Dashboard = () => {
     { title: "3-Kaart Legging", icon: <Sparkles className="h-5 w-5 text-purple-400" />, path: "/readings/tarot/spread/ppf-3" },
     { title: "Koffielezing", icon: <Coffee className="h-5 w-5 text-amber-400" />, path: "/readings/coffee" },
     { title: "Tarot Leggingen", icon: <BookOpen className="h-5 w-5 text-blue-400" />, path: "/readings/tarot" },
-    { title: "Droomduiding", icon: <Eye className="h-5 w-5 text-indigo-400" />, path: "/readings/dream" }
+    { title: "Droomduiding", icon: <Eye className="h-5 w-5 text-indigo-400" />, path: "/readings/dream" },
+    { title: "Numerologie", icon: <Star className="h-5 w-5 text-yellow-400" />, path: "/readings/numerology" }
   ];
 
   return (
