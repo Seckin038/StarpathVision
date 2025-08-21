@@ -5,12 +5,14 @@ import { useParams, Link } from "react-router-dom";
 import TarotInterpretationPanel from "@/components/TarotInterpretationPanel";
 import { InterpretationData } from "@/hooks/useTarotInterpretation";
 import TarotSpreadBoard from "@/components/TarotSpreadBoard";
-import type { SpreadKind } from "@/lib/positions";
+import type { SpreadKind } from "@/lib/tarot/positions";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ChevronLeft, Loader2, FileText } from "lucide-react";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
+import ReadingInputSummary from "@/components/ReadingInputSummary";
+import ReadingPanel from "@/components/ReadingPanel";
 
 type Reading = {
   id: string;
@@ -20,7 +22,7 @@ type Reading = {
   title: string | null;
   created_at: string;
   payload: any;
-  interpretation: InterpretationData;
+  interpretation: InterpretationData & { reading?: string };
 };
 
 function mapSpreadIdToKind(id: string | null): SpreadKind {
@@ -96,6 +98,7 @@ export default function ReadingDetailPage() {
   };
 
   const cards = useMemo(() => {
+    if (r?.method !== 'tarot') return [];
     const d = r?.payload;
     if (!d) return [];
     const src = d.cards ?? d.selected ?? [];
@@ -114,6 +117,8 @@ export default function ReadingDetailPage() {
     return <div className="p-8 text-center text-red-400">Sessie niet gevonden.</div>;
   }
 
+  const isTarot = r.method === 'tarot';
+
   return (
     <div className="relative min-h-screen">
       <MysticalBackground />
@@ -127,25 +132,34 @@ export default function ReadingDetailPage() {
         </div>
         <div ref={printRef} className="space-y-6">
           <Card className="bg-stone-950/60 border-white/10">
-            <CardHeader><CardTitle className="text-amber-200">{r.title ?? (r.method === "tarot" && r.spread_id ? `Tarot — ${r.spread_id}` : r.method)}</CardTitle></CardHeader>
+            <CardHeader><CardTitle className="text-amber-200">{r.title ?? r.method}</CardTitle></CardHeader>
             <CardContent className="space-y-6">
-              {r.method === "tarot" && cards.length > 0 ? (
+              {isTarot && cards.length > 0 ? (
                 <TarotSpreadBoard
                   cards={cards}
                   kind={mapSpreadIdToKind(r.spread_id)}
                   cardsFlipped={true}
                 />
-              ) : <div className="text-stone-400">Visualisatie voor {r.method} is (nog) niet beschikbaar.</div>}
-              <TarotInterpretationPanel
-                items={cards.map((c: any, i: number) => ({
-                  index: i + 1,
-                  name: c.name,
-                  imageUrl: c.imageUrl,
-                  upright: !!c.upright,
-                  positionTitle: r.payload?.cards?.[i]?.position_title || "—",
-                }))}
-                data={r.interpretation}
-              />
+              ) : (
+                <ReadingInputSummary reading={r} />
+              )}
+              
+              {r.interpretation.story ? (
+                <TarotInterpretationPanel
+                  items={cards.map((c: any, i: number) => ({
+                    index: i + 1,
+                    name: c.name,
+                    imageUrl: c.imageUrl,
+                    upright: !!c.upright,
+                    positionTitle: r.payload?.cards?.[i]?.position_title || "—",
+                  }))}
+                  data={r.interpretation}
+                />
+              ) : r.interpretation.reading ? (
+                <ReadingPanel title={`Duiding voor je ${r.method}`} body={r.interpretation.reading} />
+              ) : (
+                <p className="text-stone-400">Geen interpretatie gevonden voor deze lezing.</p>
+              )}
             </CardContent>
           </Card>
         </div>
