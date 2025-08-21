@@ -63,6 +63,13 @@ export default function TarotReadingPage() {
         const currentSpread = library.spreads.find((s: Spread) => s.id === spreadId);
         if (!currentSpread) throw new Error(`Legging '${spreadId}' niet gevonden.`);
 
+        // Force-correct the number of cards for known spreads to override faulty config
+        if (spreadId === 'ppf-3') {
+          currentSpread.cards_required = 3;
+        } else if (spreadId === 'star-6') {
+          currentSpread.cards_required = 6;
+        }
+
         setSpread(currentSpread);
         setPhase('picking');
       } catch (err: any) {
