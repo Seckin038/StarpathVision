@@ -31,7 +31,7 @@ export default function TarotGridDisplay({
   const cards = React.useMemo(() => Array.from({ length: count }, (_, i) => i), [count]);
 
   return (
-    <div className="w-full max-h-[70vh] overflow-auto px-1">
+    <div className="w-full px-1">
       <div
         className="grid grid-cols-5 sm:grid-cols-8 md:grid-cols-10 lg:grid-cols-13 gap-1 md:gap-2 mx-auto w-full max-w-7xl"
       >
