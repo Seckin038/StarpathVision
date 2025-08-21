@@ -35,6 +35,14 @@ const MAJORS = [
   "Death","Temperance","The Devil","The Tower","The Star","The Moon","The Sun","Judgement","The World"
 ];
 
+const RWS_EN_TO_NL = {
+  "The Fool": "De Dwaas", "The Magician": "De Magiër", "The High Priestess": "De Hogepriesteres", "The Empress": "De Keizerin", "The Emperor": "De Keizer", "The Hierophant": "De Hiërofant", "The Lovers": "De Geliefden", "The Chariot": "De Zegewagen", "Strength": "Kracht", "The Hermit": "De Kluizenaar", "Wheel of Fortune": "Het Rad van Fortuin", "Justice": "Gerechtigheid", "The Hanged Man": "De Gehangene", "Death": "De Dood", "Temperance": "Gematigdheid", "The Devil": "De Duivel", "The Tower": "De Toren", "The Star": "De Ster", "The Moon": "De Maan", "The Sun": "De Zon", "Judgement": "Het Oordeel", "The World": "De Wereld",
+  "Ace of Wands": "Aas van Staven", "Two of Wands": "Twee van Staven", "Three of Wands": "Drie van Staven", "Four of Wands": "Vier van Staven", "Five of Wands": "Vijf van Staven", "Six of Wands": "Zes van Staven", "Seven of Wands": "Zeven van Staven", "Eight of Wands": "Acht van Staven", "Nine of Wands": "Negen van Staven", "Ten of Wands": "Tien van Staven", "Page of Wands": "Page van Staven", "Knight of Wands": "Ridder van Staven", "Queen of Wands": "Koningin van Staven", "King of Wands": "Koning van Staven",
+  "Ace of Cups": "Aas van Kelken", "Two of Cups": "Twee van Kelken", "Three of Cups": "Drie van Kelken", "Four of Cups": "Vier van Kelken", "Five of Cups": "Vijf van Kelken", "Six of Cups": "Zes van Kelken", "Seven of Cups": "Zeven van Kelken", "Eight of Cups": "Acht van Kelken", "Nine of Cups": "Negen van Kelken", "Ten of Cups": "Tien van Kelken", "Page of Cups": "Page van Kelken", "Knight of Cups": "Ridder van Kelken", "Queen of Cups": "Koningin van Kelken", "King of Cups": "Koning van Kelken",
+  "Ace of Swords": "Aas van Zwaarden", "Two of Swords": "Twee van Zwaarden", "Three of Swords": "Drie van Zwaarden", "Four of Swords": "Vier van Zwaarden", "Five of Swords": "Vijf van Zwaarden", "Six of Swords": "Zes van Zwaarden", "Seven of Swords": "Zeven van Zwaarden", "Eight of Swords": "Acht van Zwaarden", "Nine of Swords": "Negen van Zwaarden", "Ten of Swords": "Tien van Zwaarden", "Page of Swords": "Page van Zwaarden", "Knight of Swords": "Ridder van Zwaarden", "Queen of Swords": "Koningin van Zwaarden", "King of Swords": "Koning van Zwaarden",
+  "Ace of Pentacles": "Aas van Pentakels", "Two of Pentacles": "Twee van Pentakels", "Three of Pentacles": "Drie van Pentakels", "Four of Pentacles": "Vier van Pentakels", "Five of Pentacles": "Vijf van Pentakels", "Six of Pentacles": "Zes van Pentakels", "Seven of Pentacles": "Zeven van Pentakels", "Eight of Pentacles": "Acht van Pentakels", "Nine of Pentacles": "Negen van Pentakels", "Ten of Pentacles": "Tien van Pentakels", "Page of Pentacles": "Page van Pentakels", "Knight of Pentacles": "Ridder van Pentakels", "Queen of Pentacles": "Koningin van Pentakels", "King of Pentacles": "Koning van Pentakels"
+};
+
 // normalize AI/file guesses → canonical RWS name
 function normalizeName(s: string): string | null {
   if (!s) return null;
@@ -54,14 +62,12 @@ function normalizeName(s: string): string | null {
   // try majors
   for (const m of MAJORS) if (x.toLowerCase() === m.toLowerCase()) return m;
   // try minors
-  // patterns like "Ace of Wands", "Ten of Pentacles" etc.
   const m = x.match(/(Ace|Two|Three|Four|Five|Six|Seven|Eight|Nine|Ten|Page|Knight|Queen|King)\s+of\s+(Wands|Cups|Swords|Pentacles)/i);
   if (m) {
     const rank = RANKS.find(r => r.toLowerCase() === m[1].toLowerCase());
     const suit = SUITS.find(u => u.toLowerCase() === m[2].toLowerCase());
     return rank && suit ? `${rank} of ${suit}` : null;
   }
-  // filename hints: e.g. RWS_Tarot_08_Strength
   const hint = x.match(/\b(Fool|Magician|Priestess|Empress|Emperor|Hierophant|Lovers|Chariot|Strength|Hermit|Justice|Hanged Man|Death|Temperance|Devil|Tower|Star|Moon|Sun|Judg(e)?ment|World)\b/i);
   if (hint) {
     const guess = hint[0]
@@ -84,39 +90,28 @@ async function identifyByAI(bytes: Uint8Array, mime: string): Promise<string | n
   return text?.trim() || null;
 }
 
-async function upsertImageForCard(supabase: any, cardName: string, file: Blob, ext: string) {
-  // Zoek kaart in DB (case-insensitive). Voorkeur: exact gelijk, anders ilike begins with.
+async function upsertImageForCard(supabase: any, cardNameNl: string, file: Blob, ext: string) {
   let { data: card, error } = await supabase
     .from("tarot_cards")
     .select("id,name")
-    .ilike("name", cardName)
+    .ilike("name", cardNameNl)
     .single();
 
   if (error || !card) {
-    // Probeer begins-with (bijv. "The Hanged Man (Recolor)")
-    const { data: rows } = await supabase
-      .from("tarot_cards")
-      .select("id,name")
-      .ilike("name", `${cardName}%`)
-      .limit(1);
-    if (!rows || !rows[0]) throw new Error(`Card '${cardName}' not found in tarot_cards`);
-    card = rows[0];
+    throw new Error(`Card '${cardNameNl}' not found in tarot_cards`);
   }
 
   const id = card.id;
   const path = `${id}.${ext || "jpg"}`;
 
-  // Upload → bucket
   const { error: upErr } = await supabase.storage
     .from("tarot-cards")
     .upload(path, file, { cacheControl: "31536000", upsert: true });
   if (upErr) throw new Error(`Upload failed: ${upErr.message}`);
 
-  // Public URL
   const { data: urlData } = supabase.storage.from("tarot-cards").getPublicUrl(path);
   const publicUrl = urlData.publicUrl;
 
-  // Update DB
   const { error: updErr } = await supabase
     .from("tarot_cards")
     .update({ image_url: publicUrl })
@@ -127,19 +122,24 @@ async function upsertImageForCard(supabase: any, cardName: string, file: Blob, e
 }
 
 async function handleOneBlob(supabaseAdmin: any, file: Blob, filename?: string) {
+  const MAX_SIZE_MB = 4.5;
+  if (file.size > MAX_SIZE_MB * 1024 * 1024) {
+    throw new Error(`File too large (${(file.size / 1024 / 1024).toFixed(1)}MB). Limit is ${MAX_SIZE_MB}MB.`);
+  }
+
   const buf = new Uint8Array(await file.arrayBuffer());
   const mime = file.type || "image/jpeg";
   const ext = (filename?.split(".").pop() || "").toLowerCase() || mime.split("/")[1] || "jpg";
 
-  // 1) snelle bestandsnaam-heuristiek
   const fromName = filename ? normalizeName(filename) : null;
+  const cardNameEn = fromName ?? (await identifyByAI(buf, mime)) ?? "";
+  const normalizedEn = normalizeName(cardNameEn || "");
+  if (!normalizedEn) throw new Error(`Could not identify card (AI + filename failed)`);
 
-  // 2) AI (indien nodig)
-  const cardName = fromName ?? (await identifyByAI(buf, mime)) ?? "";
-  const normalized = normalizeName(cardName || "");
-  if (!normalized) throw new Error(`Could not identify card (AI + filename failed)`);
+  const cardNameNl = RWS_EN_TO_NL[normalizedEn];
+  if (!cardNameNl) throw new Error(`Could not map English name '${normalizedEn}' to Dutch name.`);
 
-  return await upsertImageForCard(supabaseAdmin, normalized, new Blob([buf], { type: mime }), ext);
+  return await upsertImageForCard(supabaseAdmin, cardNameNl, new Blob([buf], { type: mime }), ext);
 }
 
 async function handleOneUrl(supabaseAdmin: any, url: string) {
@@ -161,7 +161,6 @@ serve(async (req) => {
     const ctype = req.headers.get("content-type") || "";
 
     if (ctype.includes("application/json")) {
-      // JSON body: { urls: string[] }
       const { urls } = await req.json();
       if (!Array.isArray(urls) || urls.length === 0) throw new Error("Body must be { urls: string[] }");
       for (const u of urls) {
@@ -173,7 +172,6 @@ serve(async (req) => {
         }
       }
     } else {
-      // multipart (files[])
       const fd = await req.formData();
       const files = fd.getAll("files").filter(Boolean) as File[];
       if (!files.length) throw new Error("No files[] in form-data");
