@@ -59,13 +59,12 @@ export default function TarotReadingPage() {
 
   const { data: interpretation, isLoading: isLoadingInterpretation, error: interpretationError, getInterpretation } = useTarotInterpretation();
 
-  // Reset reading if language changes
+  // Reset reading if language changes, but keep card selection
   useEffect(() => {
     if (interpretation && readingLocale && i18n.language !== readingLocale) {
       setPhase('picking');
       setDraw([]);
-      setSelectedIndices([]);
-      // The interpretation data will be cleared implicitly when a new one is requested.
+      // NOTE: We DO NOT reset selectedIndices here, to preserve user's choice.
     }
   }, [i18n.language, interpretation, readingLocale]);
 
