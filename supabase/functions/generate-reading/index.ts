@@ -17,18 +17,38 @@ const BodySchema = z.object({
   payload: z.any(),
 });
 
-const TAROT_PROMPT_TEMPLATES = {
+const SYSTEM_INSTRUCTION_TEMPLATES = {
   nl: `
-Je gaat een tarotkaurtlezing doen in de rol van {{persona_name}}.
-Jouw stijl is: {{persona_style}}.
+JOUW ROL:
+- Je bent een waarzegger genaamd {{persona_name}}.
+- Jouw stijl is: {{persona_style}}.
+- Gebruik de volgende richtlijnen voor jouw toon en inhoud: "{{persona_prompt_template}}"
+`,
+  en: `
+YOUR ROLE:
+- You are a seer named {{persona_name}}.
+- Your style is: {{persona_style}}.
+- Use the following guidelines for your tone and content: "{{persona_prompt_template}}"
+`,
+  tr: `
+SENİN ROLÜN:
+- Adın {{persona_name}} olan bir kahinsin.
+- Tarzın: {{persona_style}}.
+- Tonun ve içeriğin için şu yönergeleri kullan: "{{persona_prompt_template}}"
+`
+};
 
-De vraag van de gebruiker is: "{{user_question}}"
-De gebruikte legging is de "{{spread_name}}".
-De getrokken kaarten zijn:
+const TAROT_USER_PROMPT_TEMPLATES = {
+  nl: `
+JOUW TAAK:
+- Voer een tarotkaurtlezing uit.
+- De vraag van de gebruiker is: "{{user_question}}"
+- De gebruikte legging is de "{{spread_name}}".
+- De getrokken kaarten zijn:
 {{cards_list}}
 
-GEEF EEN UITGEBREIDE EN INZICHTELIJKE LEZING.
-Je antwoord MOET een geldig JSON-object zijn met de volgende structuur:
+OUTPUT FORMAAT:
+- Je antwoord MOET een geldig JSON-object zijn met de volgende structuur:
 {
   "story": "Schrijf hier 'Het Verhaal van de Kaarten'. Dit is een samenvatting die de reis en de belangrijkste boodschap van de kaarten beschrijft in een verhalende vorm.",
   "advice": "Schrijf hier 'Advies voor Jou'. Dit is een direct en persoonlijk advies gebaseerd op de hele legging.",
@@ -41,27 +61,20 @@ Je antwoord MOET een geldig JSON-object zijn met de volgende structuur:
     {
       "card_index": 1,
       "interpretation": "Een gedetailleerde uitleg voor de eerste kaart in de context van zijn positie. Verbind de betekenis met de vraag van de gebruiker."
-    },
-    {
-      "card_index": 2,
-      "interpretation": "Een gedetailleerde uitleg voor de tweede kaart..."
     }
   ]
 }
-
-Zorg ervoor dat de 'card_interpretations' array precies evenveel objecten bevat als er kaarten zijn getrokken. Schrijf alle tekst in de stem en stijl van jouw persona.
 `,
   en: `
-You will perform a tarot card reading in the role of {{persona_name}}.
-Your style is: {{persona_style}}.
-
-The user's question is: "{{user_question}}"
-The spread used is the "{{spread_name}}".
-The cards drawn are:
+YOUR TASK:
+- Perform a tarot card reading.
+- The user's question is: "{{user_question}}"
+- The spread used is the "{{spread_name}}".
+- The cards drawn are:
 {{cards_list}}
 
-PROVIDE A COMPREHENSIVE AND INSIGHTFUL READING.
-Your answer MUST be a valid JSON object with the following structure:
+OUTPUT FORMAT:
+- Your answer MUST be a valid JSON object with the following structure:
 {
   "story": "Write 'The Story of the Cards' here. This is a summary describing the journey and main message of the cards in a narrative form.",
   "advice": "Write 'Advice for You' here. This is direct and personal advice based on the entire reading.",
@@ -74,27 +87,20 @@ Your answer MUST be a valid JSON object with the following structure:
     {
       "card_index": 1,
       "interpretation": "A detailed explanation for the first card in the context of its position. Connect the meaning to the user's question."
-    },
-    {
-      "card_index": 2,
-      "interpretation": "A detailed explanation for the second card..."
     }
   ]
 }
-
-Ensure the 'card_interpretations' array contains exactly as many objects as cards drawn. Write all text in the voice and style of your persona.
 `,
   tr: `
-{{persona_name}} rolünde bir tarot kartı okuması yapacaksınız.
-Tarzınız: {{persona_style}}.
-
-Kullanıcının sorusu: "{{user_question}}"
-Kullanılan açılım: "{{spread_name}}".
-Çekilen kartlar:
+SENİN GÖREVİN:
+- Bir tarot kartı okuması yap.
+- Kullanıcının sorusu: "{{user_question}}"
+- Kullanılan açılım: "{{spread_name}}".
+- Çekilen kartlar:
 {{cards_list}}
 
-KAPSAMLI VE ANLAYIŞLI BİR OKUMA YAPIN.
-Cevabınız aşağıdaki yapıya sahip geçerli bir JSON nesnesi OLMALIDIR:
+ÇIKTI FORMATI:
+- Cevabınız aşağıdaki yapıya sahip geçerli bir JSON nesnesi OLMALIDIR:
 {
   "story": "Buraya 'Kartların Hikayesi'ni yazın. Bu, kartların yolculuğunu ve ana mesajını anlatısal bir biçimde açıklayan bir özettir.",
   "advice": "Buraya 'Sizin İçin Tavsiye' yazın. Bu, tüm okumaya dayanan doğrudan ve kişisel bir tavsiyedir.",
@@ -107,30 +113,18 @@ Cevabınız aşağıdaki yapıya sahip geçerli bir JSON nesnesi OLMALIDIR:
     {
       "card_index": 1,
       "interpretation": "İlk kart için pozisyonu bağlamında ayrıntılı bir açıklama. Anlamı kullanıcının sorusuyla ilişkilendirin."
-    },
-    {
-      "card_index": 2,
-      "interpretation": "İkinci kart için ayrıntılı bir açıklama..."
     }
   ]
 }
-
-'card_interpretations' dizisinin çekilen kart sayısı kadar nesne içerdiğinden emin olun. Tüm metni kişiliğinizin sesi ve tarzıyla yazın.
 `
 };
 
-const OTHER_METHOD_PROMPT_TEMPLATES = {
+const OTHER_METHOD_USER_PROMPT_TEMPLATES = {
   nl: `
-JOUW ROL:
-- Je bent een waarzegger genaamd {{persona_name}}.
-- Jouw stijl is: {{persona_style}}.
-- Gebruik de volgende richtlijnen voor jouw toon en inhoud: "{{persona_prompt_template}}"
-
 JOUW TAAK:
 - Voer een '{{method}}' lezing uit.
 - De input van de gebruiker is:
 {{details}}
-- Geef een uitgebreide en inzichtelijke lezing in jouw persona.
 
 OUTPUT FORMAAT:
 - Je antwoord MOET een geldig JSON-object zijn.
@@ -138,16 +132,10 @@ OUTPUT FORMAAT:
 - Binnen de "reading" string, gebruik Markdown voor opmaak (bv. **vet**, *cursief*, ## Titels, - Lijstjes).
 `,
   en: `
-YOUR ROLE:
-- You are a seer named {{persona_name}}.
-- Your style is: {{persona_style}}.
-- Use the following guidelines for your tone and content: "{{persona_prompt_template}}"
-
 YOUR TASK:
 - Perform a '{{method}}' reading.
 - The user's input is:
 {{details}}
-- Provide a comprehensive and insightful reading in your persona.
 
 OUTPUT FORMAT:
 - Your answer MUST be a valid JSON object.
@@ -155,16 +143,10 @@ OUTPUT FORMAT:
 - Within the "reading" string, use Markdown for formatting (e.g., **bold**, *italic*, ## Headings, - Lists).
 `,
   tr: `
-SENİN ROLÜN:
-- Adın {{persona_name}} olan bir kahinsin.
-- Tarzın: {{persona_style}}.
-- Tonun ve içeriğin için şu yönergeleri kullan: "{{persona_prompt_template}}"
-
 SENİN GÖREVİN:
 - Bir '{{method}}' okuması yap.
 - Kullanıcının girdisi:
 {{details}}
-- Kendi kişiliğinle kapsamlı ve anlayışlı bir okuma yap.
 
 ÇIKTI FORMATI:
 - Cevabın geçerli bir JSON nesnesi OLMALIDIR.
@@ -185,9 +167,17 @@ async function getPersona(supabaseAdmin, id: string) {
   return data;
 }
 
-function buildPrompt(locale: string, persona: any, method: string, payload: any): string {
+function buildSystemInstruction(locale: string, persona: any): string {
+  let template = SYSTEM_INSTRUCTION_TEMPLATES[locale] || SYSTEM_INSTRUCTION_TEMPLATES['en'];
+  template = template.replace(/{{persona_name}}/g, persona.display_name?.[locale] || persona.id);
+  template = template.replace(/{{persona_style}}/g, (persona.style?.[locale] || []).join(', ') || 'wijs en inzichtelijk');
+  template = template.replace(/{{persona_prompt_template}}/g, persona.prompt_template || '');
+  return template;
+}
+
+function buildUserPrompt(locale: string, method: string, payload: any): string {
   if (method === 'tarot') {
-    let prompt = TAROT_PROMPT_TEMPLATES[locale] || TAROT_PROMPT_TEMPLATES['en'];
+    let prompt = TAROT_USER_PROMPT_TEMPLATES[locale] || TAROT_USER_PROMPT_TEMPLATES['en'];
     const orientationText = {
       nl: { upright: 'Rechtop', reversed: 'Omgekeerd' },
       en: { upright: 'Upright', reversed: 'Reversed' },
@@ -198,15 +188,13 @@ function buildPrompt(locale: string, persona: any, method: string, payload: any)
     ).join('\n');
     const userQuestion = payload.userQuestion || (locale === 'nl' ? "Geef een algemene lezing over de huidige situatie." : "Give a general reading about the current situation.");
 
-    prompt = prompt.replace(/{{persona_name}}/g, persona.display_name?.[locale] || persona.id);
-    prompt = prompt.replace(/{{persona_style}}/g, persona.style?.[locale]?.join(', ') || 'wise and insightful');
     prompt = prompt.replace(/{{user_question}}/g, userQuestion);
     prompt = prompt.replace(/{{spread_name}}/g, payload.spread.name);
     prompt = prompt.replace(/{{cards_list}}/g, cardsList);
     
     return prompt;
   } else {
-    let prompt = OTHER_METHOD_PROMPT_TEMPLATES[locale] || OTHER_METHOD_PROMPT_TEMPLATES['en'];
+    let prompt = OTHER_METHOD_USER_PROMPT_TEMPLATES[locale] || OTHER_METHOD_USER_PROMPT_TEMPLATES['en'];
     
     let details = "";
     if (method === 'koffiedik' || method === 'coffee') {
@@ -218,9 +206,6 @@ function buildPrompt(locale: string, persona: any, method: string, payload: any)
       details = `Naam: ${payload.numerologyData.fullName}, Geboortedatum: ${payload.numerologyData.birthDate}`;
     }
 
-    prompt = prompt.replace(/{{persona_name}}/g, persona.display_name?.[locale] || persona.id);
-    prompt = prompt.replace(/{{persona_style}}/g, (persona.style?.[locale] || []).join(', ') || 'wijs en inzichtelijk');
-    prompt = prompt.replace(/{{persona_prompt_template}}/g, persona.prompt_template || '');
     prompt = prompt.replace(/{{method}}/g, method);
     prompt = prompt.replace(/{{details}}/g, details);
 
@@ -235,28 +220,27 @@ serve(async (req) => {
     const raw = await req.json();
     const body = BodySchema.parse(raw);
 
-    // --- Get User ---
     const { data: { user }, error: authError } = await supabaseAdmin.auth.getUser(req.headers.get('Authorization')?.replace('Bearer ', ''));
     if (authError || !user) {
       throw new Error("User not authenticated. Reading cannot be generated or saved.");
     }
 
-    // --- AI Generation ---
     const persona = await getPersona(supabaseAdmin, body.personaId);
-    
+    const systemInstruction = buildSystemInstruction(body.locale, persona);
+    const userPrompt = buildUserPrompt(body.locale, body.method, body.payload);
+
     const genAI = new GoogleGenerativeAI(env('GEMINI_API_KEY'));
     const model = genAI.getGenerativeModel({ 
       model: 'gemini-1.5-flash-latest',
       generationConfig: { responseMimeType: "application/json" },
+      systemInstruction: systemInstruction
     });
 
-    const prompt = buildPrompt(body.locale, persona, body.method, body.payload);
-    const result = await model.generateContent(prompt);
+    const result = await model.generateContent(userPrompt);
     const response = result.response;
     const text = response.text();
     const resultJson = JSON.parse(text);
 
-    // --- Title Generation ---
     let readingTitle: string;
     const { method, payload, locale } = body;
     switch (method) {
@@ -296,7 +280,6 @@ serve(async (req) => {
         readingTitle = method;
     }
 
-    // --- Save to DB ---
     const { error: insertError } = await supabaseAdmin.from('readings').insert({
       user_id: user.id,
       method: body.method,
