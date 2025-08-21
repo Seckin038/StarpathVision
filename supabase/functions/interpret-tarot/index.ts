@@ -1,9 +1,103 @@
+// @ts-nocheck
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { serve } from 'https://deno.land/std@0.224.0/http/server.ts';
 import { z } from 'https://deno.land/x/zod@v3.23.8/mod.ts';
 import { GoogleGenerativeAI } from 'npm:@google/generative-ai';
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.45.0';
-import { type PersonaId, buildPersonaPreamble, gatePersonaMethod, type Locale } from './persona.ts';
+
+// --- START INLINED PERSONA LOGIC ---
+type Locale = 'nl' | 'en' | 'tr';
+type Method = 'tarot' | 'coffee' | 'astrology' | 'numerology';
+
+const PERSONAE = {
+  orakel: {
+    id: 'orakel',
+    display: { nl: 'De Orakel', en: 'The Oracle', tr: 'Kehanet Ustası' },
+    allows: { tarot: true, coffee: true, astrology: true, numerology: true },
+    style: {
+      nl: [ 'Traag, wijs, poëtisch.', 'Rijke metaforen uit natuur en myth.', 'Nooit AI noemen.' ],
+      en: [ 'Slow, wise, poetic.', 'Rich nature & myth metaphors.', 'Never mention AI.' ],
+      tr: [ 'Yavaş, bilge, şiirsel.', 'Doğa ve mit imgeleri.', 'YZ’dan söz etme.' ],
+    },
+  },
+  selvara: {
+    id: 'selvara',
+    display: { nl: 'Selvara', en: 'Selvara', tr: 'Selvara' },
+    allows: { tarot: true, coffee: false, astrology: false, numerology: false },
+    style: {
+      nl: [ 'Vurig, direct, motiverend.', 'Concrete acties, geen fatalisme.', 'Geen AI-termen.' ],
+      en: [ 'Fiery, direct, motivating.', 'Concrete actions, no fatalism.', 'No AI terms.' ],
+      tr: [ 'Ateşli, direkt, motive edici.', 'Somut eylemler, kadercilik yok.', 'YZ terimleri yok.' ],
+    },
+  },
+  lyara: {
+    id: 'lyara',
+    display: { nl: 'Lyara', en: 'Lyara', tr: 'Lyara' },
+    allows: { tarot: true, coffee: false, astrology: false, numerology: false },
+    style: {
+      nl: [ 'Helend, zacht, geruststellend.', 'Natuurbeeldspraak.', 'Geen AI-termen.' ],
+      en: [ 'Healing, gentle, reassuring.', 'Nature imagery.', 'No AI terms.' ],
+      tr: [ 'Şifalı, yumuşak, güven verici.', 'Doğa benzetmeleri.', 'YZ terimleri yok.' ],
+    },
+  },
+    mireya: {
+    id: 'mireya',
+    display: { nl: 'Mireya', en: 'Mireya', tr: 'Mireya' },
+    allows: { tarot: true, coffee: true, astrology: false, numerology: false },
+    style: {
+      nl: [ 'Dromerig, intuïtief, empathisch.', 'Spreek in beelden.', 'Geen AI-termen.' ],
+      en: [ 'Dreamy, intuitive, empathic.', 'Speak in images.', 'No AI terms.' ],
+      tr: [ 'Düşsel, sezgisel, empatik.', 'İmgelerle konuş.', 'YZ terimleri yok.' ],
+    },
+  },
+  auron: {
+    id: 'auron',
+    display: { nl: 'Auron', en: 'Auron', tr: 'Auron' },
+    allows: { tarot: false, coffee: false, astrology: true, numerology: true },
+    style: {
+      nl: [ 'Analytisch, helder, gestructureerd.', 'Kalm en professioneel.', 'Geen AI-termen.' ],
+      en: [ 'Analytical, clear, structured.', 'Calm and professional.', 'No AI terms.' ],
+      tr: [ 'Analitik, net, yapılandırılmış.', 'Sakin ve profesyonel.', 'YZ terimleri yok.' ],
+    },
+  },
+  kaelen: { id: 'kaelen', display: { nl: 'Kaelen' }, style: { nl: ['Aards, praktisch.'] } },
+  tharion: { id: 'tharion', display: { nl: 'Tharion' }, style: { nl: ['Strategisch, scherp.'] } },
+  corvan: { id: 'corvan', display: { nl: 'Corvan' }, style: { nl: ['Beschermend, wijs.'] } },
+  eryndra: { id: 'eryndra', display: { nl: 'Eryndra' }, style: { nl: ['Creatief, vloeiend.'] } },
+  vaelor: { id: 'vaelor', display: { nl: 'Vaelor' }, style: { nl: ['Moedig, rechtvaardig.'] } },
+};
+
+type PersonaId = keyof typeof PERSONAE;
+
+function gatePersonaMethod(personaId: PersonaId, method: Method, locale: Locale = 'nl'): string | null {
+  const p = PERSONAE[personaId];
+  if (!p) return locale==='nl' ? 'Onbekende waarzegger.' : locale==='tr' ? 'Bilinmeyen yorumcu.' : 'Unknown seer.';
+  if (!(p as any).allows || !(p as any).allows[method]) {
+    const name = p.display[locale] || p.display['nl'];
+    return locale==='nl' ? `${name} doet geen ${method}-lezingen.` : locale==='tr' ? `${name} ${method} okumaları yapmaz.` : `${name} does not perform ${method} readings.`;
+  }
+  return null;
+}
+
+function buildPersonaPreamble(locale: Locale, personaId: PersonaId, isJsonMode = false): string {
+  const p = PERSONAE[personaId];
+  if (!p) return '';
+  const name = p.display[locale] || p.display.nl;
+  const style = p.style[locale] || p.style.nl;
+  
+  const langMap = {
+    nl: `Je bent ${name}. Jouw stijl is: ${style.join(' ')}.`,
+    en: `You are ${name}. Your style is: ${style.join(' ')}.`,
+    tr: `Sen ${name}'sin. Tarzın: ${style.join(' ')}.`,
+  };
+
+  let preamble = langMap[locale];
+  if (isJsonMode) {
+    preamble += ` Je antwoordt ALTIJD in JSON-formaat.`;
+  }
+  return preamble;
+}
+// --- END INLINED PERSONA LOGIC ---
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
