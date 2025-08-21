@@ -38,13 +38,14 @@ export default function HomePersonaCTA() {
               <Users className="h-4 w-4" /> Kies waarzegger
             </button>
 
-            <button
-              onClick={startThreeCard}
-              className="inline-flex items-center gap-2 rounded-xl bg-amber-600/90 px-5 py-2 text-black hover:bg-amber-500"
-              aria-label="Start 3‑kaart lezing"
-            >
-              <Wand2 className="h-4 w-4" /> Doe een 3‑kaart lezing <ChevronRight className="h-4 w-4" />
-            </button>
+            <Link to="/readings/tarot/spread/ppf-3"> {/* Changed to Link */}
+              <button
+                className="inline-flex items-center gap-2 rounded-xl bg-amber-600/90 px-5 py-2 text-black hover:bg-amber-500"
+                aria-label="Start 3‑kaart lezing"
+              >
+                <Wand2 className="h-4 w-4" /> Doe een 3‑kaart lezing <ChevronRight className="h-4 w-4" />
+              </button>
+            </Link>
           </div>
         </div>
 

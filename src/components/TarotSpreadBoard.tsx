@@ -1,5 +1,6 @@
 import React, { useMemo, useRef, useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { cn } from '@/lib/utils'; // Assuming cn utility is available
 
 // Types
 export type CardItem = { id: string; name: string; imageUrl?: string }
@@ -12,6 +13,8 @@ export type SpreadName =
   | 'Horseshoe7'
   | 'YearAhead12'
   | 'NineSquare'
+
+export type CardAnnotation = { title: string; label: string; copy?: string }; // NEW
 
 // Utility: clamp
 const clamp = (v: number, min: number, max: number) => Math.max(min, Math.min(max, v))
@@ -173,12 +176,14 @@ export default function TarotSpreadBoard({
   spread: spreadProp,
   mode,
   onSpreadChange,
+  annotations, // NEW
 }: {
   deck?: CardItem[]
   selectedCards?: CardItem[]
   spread?: SpreadName
   mode?: 'grid' | 'spread'
   onSpreadChange?: (s: SpreadName) => void
+  annotations?: CardAnnotation[]; // NEW
 }) {
   // Demo fallback deck (78 placeholder cards)
   const fallbackDeck = useMemo<CardItem[]>(() => {
@@ -280,18 +285,39 @@ export default function TarotSpreadBoard({
               const card = picked[i]
               if (!card) return null
               const left = `calc(${(p.x * 100).toFixed(2)}% - ${cardW / 2}px)`
-              const top = `calc(${(p.y * 100).toFixed(2)}% - ${Math.round(cardW*1.62)/2}px)`
+              const cardH = Math.round(cardW * 1.62); // NEW
+              const topCard = `calc(${(p.y * 100).toFixed(2)}% - ${cardH / 2}px)`; // NEW
+              const topLabel = `calc(${(p.y * 100).toFixed(2)}% + ${cardH / 2 + 6}px)`; // NEW
+              const ann = annotations?.[i]; // NEW
+
               return (
-                <motion.div
-                  key={card.id+String(i)}
-                  className="absolute"
-                  style={{ left, top, zIndex: p.z ?? (i + 1) }}
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ type: 'spring', stiffness: 220, damping: 24, delay: i * 0.03 }}
-                >
-                  <TarotCard card={card} w={cardW} r={p.r} label={`#${i+1}`} />
-                </motion.div>
+                <div key={card.id + String(i)}> {/* Wrap card and annotation in a single div */}
+                  {/* kaart */}
+                  <motion.div
+                    className="absolute"
+                    style={{ left, top: topCard, zIndex: (p as any).z ?? (i + 1) }} // Use topCard
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ type: 'spring', stiffness: 220, damping: 24, delay: i * 0.03 }}
+                  >
+                    <TarotCard card={card} w={cardW} r={p.r} label={`#${i+1}`} />
+                  </motion.div>
+
+                  {/* label/copy */}
+                  {ann && ( // NEW
+                    <div
+                      className={cn(
+                        "absolute text-[11px] leading-snug text-amber-100/90",
+                        "px-2 py-1 rounded-md bg-stone-950/70 border border-white/10 backdrop-blur-sm" // Apply styling here
+                      )}
+                      style={{ left, top: topLabel, width: cardW, zIndex: 999 }}
+                    >
+                      <div className="font-semibold truncate">{ann.title}</div>
+                      <div className="opacity-80 italic">{ann.label}</div>
+                      {ann.copy && <div className="opacity-80 mt-1 line-clamp-3">{ann.copy}</div>}
+                    </div>
+                  )}
+                </div>
               )
             })}
           </AnimatePresence>

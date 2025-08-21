@@ -6,8 +6,13 @@ export type LocalizedString = {
 
 export type SpreadPosition = {
   slot_key: string;
-} & {
-  [key in Locale]: string;
+  idx: number;
+  x: number;
+  y: number;
+  rot: number;
+  title: LocalizedString;
+  upright_copy: LocalizedString;
+  reversed_copy: LocalizedString;
 };
 
 export type SpreadLayout = {
@@ -40,7 +45,7 @@ export type Spread = {
 export type TarotCardData = {
   id: string;
   name: string;
-  image: string;
+  imageUrl?: string; // Changed from 'image' to 'imageUrl'
   [key: string]: any;
 };
 
