@@ -146,7 +146,12 @@ async function handleOneBlob(supabaseAdmin: any, file: Blob, filename?: string) 
 async function handleOneUrl(supabaseAdmin: any, url: string) {
   const res = await fetch(url);
   if (!res.ok) throw new Error(`Download failed: ${res.status} ${res.statusText}`);
-  const ct = res.headers.get("content-type") || "image/jpeg";
+  
+  const ct = res.headers.get("content-type") || "";
+  if (!ct.startsWith("image/")) {
+    throw new Error(`URL is not a direct image link (content-type is '${ct}'). Provide a link ending in .jpg, .png, etc.`);
+  }
+
   const ab = new Uint8Array(await res.arrayBuffer());
   const fn = url.split("/").pop() || "image.jpg";
   return await handleOneBlob(supabaseAdmin, new Blob([ab], { type: ct }), fn);
