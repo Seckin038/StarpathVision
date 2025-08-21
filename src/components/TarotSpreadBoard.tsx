@@ -1,8 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
-import type { Position, SpreadKind } from "@/lib/positions";
-import { positionsFor } from "@/lib/positions";
+import { positionsFor, normalizePositions, type Position, type SpreadKind } from "@/lib/positions";
 
 export type CardItem = { id:string; name:string; imageUrl?:string|null };
 export type Annotation = { title:string; label:string };
@@ -30,8 +29,14 @@ export default function TarotSpreadBoard({
   cards, kind="ppf-3", customPositions, cardWidthPct, className,
   annotations, cardsFlipped, debugGrid
 }: Props) {
-  const fallback = positionsFor(kind, cards.length);
-  const positions: Position[] = Array.from({ length: cards.length }, (_, i) => customPositions?.[i] ?? fallback[i]);
+  const needed = cards.length;
+
+  const provided = customPositions && customPositions.length
+    ? normalizePositions(customPositions)
+    : [];
+
+  const builtin = positionsFor(kind, needed);
+  const positions: Position[] = Array.from({ length: needed }, (_, i) => provided[i] ?? builtin[i]);
 
   const widthPct = cardWidthPct ?? DEFAULT_CARD_WIDTH[kind];
   const halfW = widthPct / 2;
