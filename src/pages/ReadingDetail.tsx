@@ -4,7 +4,7 @@ import { supabase } from "@/lib/supabaseClient";
 import { useParams, Link } from "react-router-dom";
 import TarotInterpretationPanel from "@/components/TarotInterpretationPanel";
 import { InterpretationData } from "@/hooks/useTarotInterpretation";
-import TarotSpreadBoard, { SpreadName } from "@/components/TarotSpreadBoard";
+import TarotSpreadBoard, { SpreadKind } from "@/components/TarotSpreadBoard";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ChevronLeft, Loader2, FileText } from "lucide-react";
@@ -22,16 +22,19 @@ type Reading = {
   interpretation: InterpretationData;
 };
 
-function mapSpread(id?: string | null): SpreadName {
-  if (!id) return "Line";
-  if (id.includes("celtic-cross")) return "CelticCross10";
-  if (id.includes("cross-of-truth") || id.includes("cross-5")) return "Cross5";
-  if (id.includes("star")) return "Star7";
-  if (id.includes("horseshoe")) return "Horseshoe7";
-  if (id.includes("year") || id.includes("astrological")) return "YearAhead12";
-  if (id.includes("nine")) return "NineSquare";
-  if (id.includes("grand-tableau")) return "GrandTableau36";
-  return "Line";
+function mapSpreadIdToKind(id: string | null): SpreadKind {
+  if (!id) return "custom";
+  const kindMap: Record<string, SpreadKind> = {
+    "daily-1": "daily-1",
+    "two-choice-2": "two-choice-2",
+    "ppf-3": "ppf-3",
+    "line-3": "line-3",
+    "star-6": "star-6",
+    "horseshoe-7": "horseshoe-7",
+    "celtic-cross-10": "cross-10",
+    "year-12": "year-12",
+  };
+  return kindMap[id] || 'custom';
 }
 
 export default function ReadingDetailPage() {
@@ -127,9 +130,8 @@ export default function ReadingDetailPage() {
             <CardContent className="space-y-6">
               {r.method === "tarot" && cards.length > 0 ? (
                 <TarotSpreadBoard
-                  selectedCards={cards.map((c: any) => ({ id: c.id, name: c.name, imageUrl: c.imageUrl }))}
-                  spread={mapSpread(r.spread_id)}
-                  mode="spread"
+                  cards={cards}
+                  kind={mapSpreadIdToKind(r.spread_id)}
                   cardsFlipped={true}
                 />
               ) : <div className="text-stone-400">Visualisatie voor {r.method} is (nog) niet beschikbaar.</div>}

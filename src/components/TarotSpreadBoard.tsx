@@ -1,284 +1,236 @@
-import React, { useMemo, useRef, useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { cn } from '@/lib/utils';
+import React from "react";
+import { motion } from "framer-motion";
+import { cn } from "@/lib/utils";
 
-// Types
-export type CardItem = { id: string; name: string; imageUrl?: string }
-export type SpreadName =
-  | 'Grid6x13'
-  | 'Line'
-  | 'Cross5'
-  | 'CelticCross10'
-  | 'Star7'
-  | 'Horseshoe7'
-  | 'YearAhead12'
-  | 'NineSquare'
-  | 'GrandTableau36';
+/** Een kaart uit je deck (na de selectie) */
+export type CardItem = {
+  id: string;
+  name: string;
+  imageUrl?: string | null;
+};
 
-export type CardAnnotation = { title: string; label: string; copy?: string };
+export type Position = {
+  /** genormaliseerde positie 0..1 */
+  x: number;
+  y: number;
+  /** rotatie in graden (optioneel) */
+  r?: number;
+  /** z-index voorkeur (optioneel) */
+  z?: number;
+  /** optioneel label (wordt niet gerenderd hier, maar handig voor debug) */
+  label?: string;
+};
 
-// Utility: clamp
-const clamp = (v: number, min: number, max: number) => Math.max(min, Math.min(max, v))
+export type SpreadKind =
+  | "daily-1"
+  | "two-choice-2"
+  | "ppf-3"
+  | "line-3"
+  | "star-6"
+  | "horseshoe-7"
+  | "cross-10"     // Celtic Cross
+  | "year-12"
+  | "custom";
 
-// Calculate positions (0..1) for spreads
-function layoutFor(
-  spread: SpreadName,
-  count: number
-): { x: number; y: number; r?: number; z?: number }[] {
-  switch (spread) {
-    case 'Grid6x13': {
-      const cols = 13
-      const rows = 6
-      const positions: { x: number; y: number }[] = []
-      for (let i = 0; i < 78; i++) {
-        const row = Math.floor(i / cols)
-        const col = i % cols
-        const x = (col + 0.5) / cols
-        const y = (row + 0.5) / rows
-        positions.push({ x, y })
-      }
-      return positions as any
-    }
-    case 'GrandTableau36': {
-      const cols = 9;
-      const rows = 4;
-      const n = Math.min(count, 36);
-      const positions: { x: number; y: number }[] = [];
-      for (let i = 0; i < n; i++) {
-        const row = Math.floor(i / cols);
-        const col = i % cols;
-        const x = (col + 0.5) / cols;
-        const y = (row + 0.5) / rows;
-        positions.push({ x, y });
-      }
-      return positions;
-    }
-    case 'Line': {
-      const n = count;
-      const positions = new Array(n).fill(0).map((_, i) => ({
-        x: (i + 1) / (n + 1),
-        y: 0.5,
-      }))
-      return positions
-    }
-    case 'Cross5': {
-      const map = [
-        { x: 0.5, y: 0.5 },
-        { x: 0.5, y: 0.22 },
-        { x: 0.5, y: 0.78 },
-        { x: 0.22, y: 0.5 },
-        { x: 0.78, y: 0.5 },
-      ]
-      return map.slice(0, Math.min(5, count))
-    }
-    case 'CelticCross10': {
-      const P = {
-        c: { x: 0.35, y: 0.5 },
-        right: 0.7,
-        space: 0.12,
-      }
-      const out = [
-        { x: P.c.x, y: P.c.y },
-        { x: P.c.x, y: P.c.y, r: 90, z: 2 },
-        { x: P.c.x - 0.18, y: P.c.y },
-        { x: P.c.x, y: P.c.y + 0.22 },
-        { x: P.c.x, y: P.c.y - 0.22 },
-        { x: P.c.x + 0.18, y: P.c.y },
-        { x: P.right, y: 0.25 },
-        { x: P.right, y: 0.25 + P.space },
-        { x: P.right, y: 0.25 + P.space * 2 },
-        { x: P.right, y: 0.25 + P.space * 3 },
-      ]
-      return out.slice(0, Math.min(10, count))
-    }
-    case 'Star7': {
-      const around = Math.min(count - 1, 6)
-      const radius = 0.33
-      const cx = 0.5, cy = 0.5
-      const pts: { x: number; y: number }[] = []
-      for (let i = 0; i < around; i++) {
-        const angle = ((-90 + i * (360 / around)) * Math.PI) / 180
-        pts.push({ x: cx + radius * Math.cos(angle), y: cy + radius * Math.sin(angle) })
-      }
-      if (count > 0) pts.push({ x: cx, y: cy })
-      return pts
-    }
-    case 'Horseshoe7': {
-      const n = Math.min(count, 7)
-      const pts: { x: number; y: number }[] = []
-      const start = 200, end = -20
-      for (let i = 0; i < n; i++) {
-        const t = n === 1 ? 0.5 : i / (n - 1)
-        const angle = ((start + t * (end - start)) * Math.PI) / 180
-        const r = 0.36
-        pts.push({ x: 0.5 + r * Math.cos(angle), y: 0.55 + r * Math.sin(angle) })
-      }
-      return pts
-    }
-    case 'YearAhead12': {
-      const n = Math.min(count, 12)
-      const r = 0.38
-      const cx = 0.5, cy = 0.5
-      return new Array(n).fill(0).map((_, i) => {
-        const angle = ((-90 + (i * 360) / n) * Math.PI) / 180
-        return { x: cx + r * Math.cos(angle), y: cy + r * Math.sin(angle) }
-      })
-    }
-    case 'NineSquare': {
-      const cols = 3, rows = 3
-      const n = Math.min(count, 9)
-      const pts: { x: number; y: number }[] = []
-      for (let i = 0; i < n; i++) {
-        const row = Math.floor(i / cols)
-        const col = i % cols
-        pts.push({ x: (col + 0.5) / cols, y: (row + 0.5) / rows })
-      }
-      return pts.map(p => ({ x: 0.5 + (p.x - 0.5) * 0.9, y: 0.5 + (p.y - 0.5) * 0.9 }))
-    }
+export type Annotation = {
+  title: string;
+  label: string;
+};
+
+type Props = {
+  /** Kaarten in slot-volgorde (1..N) */
+  cards: CardItem[];
+  /** Kies een ingebouwde vorm óf gebruik customPositions */
+  kind?: SpreadKind;
+  /** Overschrijf posities (bijv. uit je DB / spread-library) */
+  customPositions?: Position[];
+  /** card breedte als % van bordbreedte (optioneel) */
+  cardWidthPct?: number;
+  /** extra className op board */
+  className?: string;
+  /** Annotaties om onder de kaarten te tonen */
+  annotations?: Annotation[];
+  /** Bepaalt of de annotaties zichtbaar zijn */
+  cardsFlipped?: boolean;
+};
+
+/* ---------- helpers voor vormen ---------- */
+
+function circlePositions(n: number, opts?: { cx?: number; cy?: number; r?: number; startDeg?: number }) {
+  const cx = opts?.cx ?? 0.5;
+  const cy = opts?.cy ?? 0.52;
+  const r  = opts?.r  ?? 0.36;
+  const start = (opts?.startDeg ?? -90) * (Math.PI / 180);
+  const res: Position[] = [];
+  for (let i = 0; i < n; i++) {
+    const t = start + (i * 2 * Math.PI) / n;
+    res.push({ x: cx + r * Math.cos(t), y: cy + r * Math.sin(t) });
+  }
+  return res;
+}
+
+function horseshoe7(): Position[] {
+  const xs = [0.10, 0.23, 0.36, 0.50, 0.64, 0.77, 0.90];
+  const ys = [0.70, 0.60, 0.50, 0.45, 0.50, 0.60, 0.70];
+  return xs.map((x, i) => ({ x, y: ys[i] }));
+}
+
+function celticCross10(): Position[] {
+  return [
+    { x: 0.33, y: 0.50, z: 2 },           // 1
+    { x: 0.33, y: 0.50, r: 90, z: 3 },    // 2 (cross)
+    { x: 0.20, y: 0.50 },                 // 3 (left)
+    { x: 0.33, y: 0.66 },                 // 4 (bottom)
+    { x: 0.33, y: 0.34 },                 // 5 (top)
+    { x: 0.46, y: 0.50 },                 // 6 (right of 1)
+    { x: 0.70, y: 0.65 },                 // 7 (staff, bottom)
+    { x: 0.70, y: 0.51 },                 // 8
+    { x: 0.70, y: 0.37 },                 // 9
+    { x: 0.70, y: 0.23 },                 // 10 (top)
+  ];
+}
+
+function star6(): Position[] {
+  return circlePositions(6, { r: 0.33, startDeg: -90 });
+}
+
+function line3(): Position[] {
+  return [
+    { x: 0.25, y: 0.50 },
+    { x: 0.50, y: 0.50 },
+    { x: 0.75, y: 0.50 },
+  ];
+}
+
+function twoChoice2(): Position[] {
+  return [
+    { x: 0.35, y: 0.50 },
+    { x: 0.65, y: 0.50 },
+  ];
+}
+
+function daily1(): Position[] {
+  return [{ x: 0.50, y: 0.50 }];
+}
+
+function year12(): Position[] {
+  return circlePositions(12, { r: 0.38, startDeg: -90 });
+}
+
+const DEFAULT_CARD_WIDTH: Record<SpreadKind, number> = {
+  "daily-1": 14,
+  "two-choice-2": 13,
+  "ppf-3": 13,
+  "line-3": 13,
+  "star-6": 12,
+  "horseshoe-7": 12,
+  "cross-10": 11,
+  "year-12": 10,
+  "custom": 12,
+};
+
+function positionsFor(kind: SpreadKind, n: number): Position[] {
+  switch (kind) {
+    case "daily-1": return daily1();
+    case "two-choice-2": return twoChoice2();
+    case "ppf-3":
+    case "line-3": return line3();
+    case "star-6": return star6();
+    case "horseshoe-7": return horseshoe7();
+    case "cross-10": return celticCross10();
+    case "year-12": return year12();
     default:
-      return []
+      return circlePositions(n);
   }
 }
 
-// Card visual
-function TarotCard({ card, w, r = 0, isFlipped }: { card: CardItem; w: number; r?: number; isFlipped?: boolean }) {
-  const h = Math.round(w * 1.62)
-  
-  return (
-    <div className="relative select-none" style={{ width: w, height: h, perspective: '1000px' }}>
-      <motion.div
-        className="absolute inset-0"
-        style={{ transformStyle: 'preserve-3d', rotate: r }}
-        initial={{ scale: 0.9, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1, rotateY: isFlipped ? 180 : 0 }}
-        transition={{ type: 'spring', stiffness: 220, damping: 24 }}
-      >
-        {/* Back */}
-        <div className="absolute inset-0 rounded-2xl shadow-lg overflow-hidden border border-white/10 bg-gradient-to-br from-indigo-700/40 to-fuchsia-700/40" style={{ backfaceVisibility: 'hidden' }}>
-          <img src="/tarot/back.svg" alt="Tarot card back" className="w-full h-full object-cover" />
-        </div>
-        {/* Front */}
-        <div className="absolute inset-0 rounded-2xl shadow-lg overflow-hidden border border-white/10 bg-stone-900" style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}>
-          {card.imageUrl ? (
-            <img src={card.imageUrl} alt={card.name} className="w-full h-full object-cover" loading="lazy" />
-          ) : (
-            <div className="w-full h-full flex items-center justify-center text-center p-2">
-              <span className="text-sm font-semibold">{card.name}</span>
-            </div>
-          )}
-        </div>
-      </motion.div>
-    </div>
-  )
-}
+/* ---------- component ---------- */
 
-// Main board component
 export default function TarotSpreadBoard({
-  selectedCards,
-  spread: spreadProp,
+  cards,
+  kind = "ppf-3",
+  customPositions,
+  cardWidthPct,
+  className,
   annotations,
   cardsFlipped,
-  mode,
-}: {
-  selectedCards: CardItem[]
-  spread: SpreadName
-  annotations?: CardAnnotation[];
-  cardsFlipped?: boolean;
-  mode?: 'grid' | 'spread';
-}) {
-  const [spread, setSpread] = useState<SpreadName>(spreadProp ?? 'CelticCross10')
-  useEffect(() => {
-    if (spreadProp) setSpread(spreadProp)
-  }, [spreadProp])
+}: Props) {
+  const positions: Position[] =
+    customPositions && customPositions.length
+      ? customPositions
+      : positionsFor(kind, cards.length);
 
-  const [containerSize, setContainerSize] = useState({ w: 0, h: 0 })
-  const ref = useRef<HTMLDivElement>(null)
-  useEffect(() => {
-    const el = ref.current
-    if (!el) return
-    const ro = new ResizeObserver(entries => {
-      const cr = entries[0].contentRect
-      setContainerSize({ w: cr.width, h: cr.height })
-    })
-    ro.observe(el)
-    return () => ro.disconnect()
-  }, [])
-
-  const positions = useMemo(() => {
-    return layoutFor(spread, selectedCards.length)
-  }, [spread, selectedCards.length])
-
-  const cardW = useMemo(() => {
-    const { w, h } = containerSize;
-    if (w === 0 || h === 0) return 120;
-
-    if (spread === 'Line') {
-      return clamp(Math.round(w / (selectedCards.length + 1.5)), 60, 160);
-    }
-
-    const map: Record<string, number> = {
-      CelticCross10: Math.min(w, h) * 0.14,
-      Cross5: Math.min(w, h) * 0.16,
-      Star7: Math.min(w, h) * 0.14,
-      Horseshoe7: Math.min(w, h) * 0.13,
-      YearAhead12: Math.min(w, h) * 0.12,
-      NineSquare: Math.min(w, h) * 0.14,
-      Grid6x13: Math.min(w, h) * 0.08,
-      GrandTableau36: Math.min(w, h) * 0.09,
-    };
-    const calculatedW = map[spread];
-    return clamp(Math.round(calculatedW), 72, 200);
-  }, [containerSize, spread, selectedCards.length]);
+  const widthPct = cardWidthPct ?? DEFAULT_CARD_WIDTH[kind];
 
   return (
-    <div className="w-full h-full flex flex-col gap-3 text-white">
-      <div 
-        ref={ref} 
-        className="relative flex-1 rounded-3xl sv-board p-4 md:p-6 min-h-[480px] overflow-hidden"
-      >
-        <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'radial-gradient(circle at 50% 50%, rgba(255,255,255,0.06), transparent 60%)' }} />
-          <AnimatePresence>
-            {positions.map((p, i) => {
-              const card = selectedCards[i]
-              if (!card) return null
-              const left = `calc(${(p.x * 100).toFixed(2)}% - ${cardW / 2}px)`
-              const cardH = Math.round(cardW * 1.62);
-              const topCard = `calc(${(p.y * 100).toFixed(2)}% - ${cardH / 2}px)`;
-              const topLabel = `calc(${(p.y * 100).toFixed(2)}% + ${cardH / 2 + 6}px)`;
-              const ann = annotations?.[i];
+    <div
+      className={
+        "relative w-full rounded-2xl border border-white/10 " +
+        "bg-gradient-to-b from-purple-500/10 to-indigo-600/10 overflow-hidden " +
+        "shadow-[inset_0_0_40px_rgba(0,0,0,.35)] " +
+        (className || "")
+      }
+      style={{ aspectRatio: "16 / 9" }}
+    >
+      {cards.map((card, i) => {
+        const p = positions[i];
+        if (!p) return null;
+        const left = `${(p.x * 100).toFixed(2)}%`;
+        const top = `${(p.y * 100).toFixed(2)}%`;
+        const rot = p.r ?? 0;
+        const z = p.z ?? (i + 1);
+        const ann = annotations?.[i];
 
-              return (
-                <React.Fragment key={card.id + String(i)}>
-                  <motion.div
-                    className="absolute"
-                    style={{ left, top: topCard, zIndex: (p as any).z ?? (i + 1) }}
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ type: 'spring', stiffness: 220, damping: 24, delay: i * 0.03 }}
-                  >
-                    <TarotCard card={card} w={cardW} r={p.r} isFlipped={cardsFlipped} />
-                  </motion.div>
-
-                  {ann && cardsFlipped && (
-                    <motion.div
-                      className={cn(
-                        "absolute text-[11px] leading-snug text-amber-100/90",
-                        "px-2 py-1 rounded-md bg-stone-950/70 border border-white/10 backdrop-blur-sm"
-                      )}
-                      style={{ left, top: topLabel, width: cardW, zIndex: 999 }}
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{ delay: 0.5 + i * 0.05 }}
-                    >
-                      <div className="font-semibold truncate">{ann.title}</div>
-                      <div className="opacity-80 italic">{ann.label}</div>
-                    </motion.div>
-                  )}
-                </React.Fragment>
-              )
-            })}
-          </AnimatePresence>
-      </div>
+        return (
+          <div
+            key={card.id + "_" + i}
+            className="absolute"
+            style={{
+              left,
+              top,
+              width: `${widthPct}%`,
+              transform: `translate(-50%, -50%) rotate(${rot}deg)`,
+              zIndex: z,
+            }}
+          >
+            <div
+              className="relative w-full rounded-xl overflow-hidden border border-white/10
+                         bg-gradient-to-b from-stone-800/40 to-stone-900/60"
+              style={{ aspectRatio: "2 / 3" }}
+            >
+              {card.imageUrl ? (
+                <img
+                  src={card.imageUrl}
+                  alt={card.name}
+                  className="absolute inset-0 w-full h-full object-cover"
+                />
+              ) : (
+                <div className="absolute inset-0 grid place-items-center text-xs text-stone-300">
+                  {card.name}
+                </div>
+              )}
+              <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(255,255,255,.10),transparent_55%)]" />
+            </div>
+            
+            {ann && cardsFlipped && (
+              <motion.div
+                className="absolute left-1/2 -translate-x-1/2 top-full mt-2 w-full text-center"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.5 + i * 0.05 }}
+              >
+                <div className={cn(
+                  "inline-block text-[11px] leading-snug text-amber-100/90",
+                  "px-2 py-1 rounded-md bg-stone-950/70 border border-white/10 backdrop-blur-sm"
+                )}>
+                  <div className="font-semibold truncate">{ann.title}</div>
+                  <div className="opacity-80 italic">{ann.label}</div>
+                </div>
+              </motion.div>
+            )}
+          </div>
+        );
+      })}
     </div>
-  )
+  );
 }
