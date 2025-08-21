@@ -233,22 +233,16 @@ export default function TarotReadingPage() {
     }
 
     if (phase === 'reading' && spread && draw.length > 0) {
-      const spreadKind = mapSpreadIdToKind(spread.id);
-      
-      const customPositions =
-        overridePositions ??
-        (spread.positions?.length
-          ? normalizePositions(
-              spread.positions.map(p => ({ x: p.x, y: p.y, rot: p.rot, slot_key: p.slot_key }))
-            )
-          : undefined);
-
       return (
         <div className="space-y-8">
           <TarotSpreadBoard
             cards={draw.map(d => ({ id: d.card.id, name: d.card.name, imageUrl: d.card.imageUrl }))}
-            kind={spreadKind}
-            customPositions={customPositions}
+            kind={mapSpreadIdToKind(spread.id)}
+            customPositions={
+              spread.positions?.length ? 
+                spread.positions.map(p => ({ x: p.x, y: p.y, rot: p.rot, slot_key: p.slot_key })) 
+                : undefined
+            }
             annotations={annotations}
             cardsFlipped={cardsFlipped}
           />
