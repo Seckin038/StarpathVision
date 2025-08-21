@@ -11,7 +11,7 @@ import TarotInterpretationPanel from "@/components/TarotInterpretationPanel";
 import { usePersona } from "@/contexts/PersonaContext";
 import { PersonaPicker } from "@/components/PersonaPicker";
 import { PersonaBadge } from "@/components/PersonaBadge";
-import { Card, CardContent } from "@/components/ui/card"; // Added import
+import { Card, CardContent } from "@/components/ui/card";
 
 type Phase = 'loading' | 'error' | 'picking' | 'reading';
 
@@ -28,7 +28,13 @@ function mapSpreadIdToSpreadName(id: string): SpreadName {
 }
 
 export default function TarotReadingPage() {
-  const { spread: spreadId } = useParams<{ spread: string }>();
+  const params = useParams<Record<string, string>>();
+  const spreadId =
+    params.spread       // /readings/tarot/spread/:spread
+    ?? params.id        // /readings/tarot/spread/:id
+    ?? params.spreadId  // /readings/tarot/spread/:spreadId
+    ?? null;
+
   const { i18n } = useTranslation();
   const locale = i18n.language as Locale;
   const { personaId } = usePersona();
@@ -60,8 +66,18 @@ export default function TarotReadingPage() {
         if (!cardsResponse.ok) throw new Error(`Kon kaarten niet laden: ${cardsResponse.statusText}`);
         const library = await libraryResponse.json();
         const cardsData = await cardsResponse.json();
-        const currentSpread = library.spreads.find((s: Spread) => s.id === spreadId);
-        if (!currentSpread) throw new Error(`Legging '${spreadId}' niet gevonden.`);
+        
+        const currentSpread = library.spreads.find((s: Spread) => s.id === spreadId)
+          ?? { id: "ppf-3", cards_required: 3, allow_reversals: true,
+               name: { nl: "Verleden-Heden-Toekomst", en: "Past-Present-Future", tr: "Geçmiş-Şimdi-Gelecek" },
+               ui_copy: { nl: { subtitle: "Kies 3 kaarten." }, en: { subtitle: "Pick 3 cards." }, tr: { subtitle: "3 kart seçin." } },
+               positions: [
+                 { slot_key: "past", nl: "Verleden", en: "Past", tr: "Geçmiş" },
+                 { slot_key: "present", nl: "Heden", en: "Present", tr: "Şimdi" },
+                 { slot_key: "future", nl: "Toekomst", en: "Future", tr: "Gelecek" },
+               ],
+             };
+
         setSpread(currentSpread);
         setDeck([...cardsData].sort(() => 0.5 - Math.random()));
         setPhase('picking');
@@ -77,7 +93,15 @@ export default function TarotReadingPage() {
 
   const handleConfirmSelection = () => {
     if (!spread || selectedIndices.length !== spread.cards_required) return;
-    const selectedCards = selectedIndices.map(i => deck[i]);
+
+    // Maak een 78-kaarten “pool” op basis van je deck
+    const pool: TarotCardData[] =
+      deck.length === 78
+        ? deck
+        : Array.from({ length: 78 }, (_, i) => deck[i % deck.length]); // veilige fallback
+
+    const selectedCards = selectedIndices.map(i => pool[i]);
+
     const finalDraw = spread.positions.map((position, index) => ({
       positionId: position.slot_key,
       card: selectedCards[index],
@@ -134,16 +158,21 @@ export default function TarotReadingPage() {
             <p className="text-sm text-stone-400">Geselecteerd: {selectedIndices.length} / {spread.cards_required}</p>
           </div>
           <TarotGridDisplay
-            totalCards={deck.length}
+            totalCards={78} // Altijd 78 backs tonen
             maxSelect={spread.cards_required}
             selected={selectedIndices}
             onChange={handleSelectionChange}
             renderCard={(idx, isSelected) => (
               <img
                 src="/tarot/back.svg" // Use a generic card back image
+                onError={(e) => {
+                  const el = e.currentTarget;
+                  el.removeAttribute("src");
+                  el.className +=
+                    " bg-gradient-to-b from-purple-500/15 to-indigo-600/15 border border-white/10 shadow-[0_10px_20px_rgba(0,0,0,.25)]";
+                }}
                 alt="Tarot Card Back"
                 className={`w-full h-full object-cover rounded-xl transition-transform duration-200 
-                  bg-gradient-to-b from-purple-500/15 to-indigo-600/15 border border-white/10 shadow-[0_10px_20px_rgba(0,0,0,.25)]
                   ${isSelected ? 'scale-105 ring-2 ring-amber-500' : ''}`}
               />
             )}
