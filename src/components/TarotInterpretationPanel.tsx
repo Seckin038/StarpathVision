@@ -3,163 +3,133 @@ import { useTranslation } from "react-i18next";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
+import { Sparkles, Lightbulb, Heart, CheckCircle } from "lucide-react";
 
+// Type voor de data die we van de AI-functie verwachten
+export interface InterpretationData {
+  combinedInterpretation: {
+    story: string;
+    advice: string;
+    affirmation: string;
+    actions: string[];
+  };
+  cardInterpretations: {
+    cardName: string;
+    positionTitle: string;
+    isReversed: boolean;
+    shortMeaning: string;
+    longMeaning: string;
+    keywords: string[];
+  }[];
+}
+
+// Type voor de statische kaartinformatie
 export type TarotPanelItem = {
   index: number;
   name: string;
   imageUrl?: string;
   upright: boolean;
-  positionTitle: string;   // bv. "Verleden / Huidig / Toekomst"
-  positionCopy?: string;   // korte uitleg per positie (upright/reversed)
+  positionTitle: string;
+  positionCopy?: string;
 };
 
 type Props = {
-  /** Geëxtraheerde kaart/positie data uit de reading */
   items: TarotPanelItem[];
-  /** AI interpretatie (vorm tolerant; we proberen de meest voorkomende keys) */
-  data?: any;
+  data?: InterpretationData | null;
 };
 
-function getAiForCard(data: any, i: number) {
-  if (!data) return {};
-  // Tolerante extractie voor veel voorkomende vormen
-  // 1) { cards: [ { summary, details[] } ] }
-  // 2) { per_card: [ { summary, details[] } ] }
-  // 3) { items: [ ... ] }
-  const fromArray =
-    data.cards?.[i] ??
-    data.per_card?.[i] ??
-    data.items?.[i] ??
-    data[i];
-
-  if (!fromArray || typeof fromArray !== "object") return {};
-
-  const title =
-    fromArray.title ||
-    fromArray.heading ||
-    undefined;
-
-  const summary =
-    fromArray.summary ||
-    fromArray.synopsis ||
-    fromArray.text ||
-    fromArray.description ||
-    undefined;
-
-  const bullets: string[] =
-    fromArray.details ||
-    fromArray.bullets ||
-    fromArray.points ||
-    [];
-
-  return { title, summary, bullets };
-}
-
 export default function TarotInterpretationPanel({ items, data }: Props) {
-  const { t, i18n } = useTranslation();
-  const locale = i18n.language as "nl" | "en" | "tr";
+  const { t } = useTranslation();
 
-  // Overkoepelende samenvatting (optioneel)
-  const overallTitle =
-    data?.overall_title ||
-    data?.summary_title ||
-    (locale === "nl" ? "Samenvatting" : locale === "tr" ? "Özet" : "Summary");
-
-  const overallText =
-    data?.overall ||
-    data?.summary ||
-    data?.synopsis ||
-    "";
+  const combined = data?.combinedInterpretation;
+  const cardInts = data?.cardInterpretations;
 
   return (
-    <section className="space-y-6">
-      {/* Overall summary (optioneel) */}
-      {(overallText || overallTitle) && (
+    <section className="space-y-8">
+      {/* Algehele samenvatting */}
+      {combined && (
         <Card className="bg-stone-900/50 backdrop-blur-sm border-stone-800">
           <CardHeader>
-            <CardTitle className="text-amber-200">{overallTitle}</CardTitle>
+            <CardTitle className="text-amber-200 text-2xl flex items-center gap-3">
+              <Sparkles className="h-6 w-6" />
+              Jouw Lezing in het Kort
+            </CardTitle>
           </CardHeader>
-          <CardContent>
-            <p className="text-stone-200">{overallText}</p>
+          <CardContent className="space-y-6">
+            <div>
+              <h3 className="font-semibold text-amber-300 mb-2 flex items-center gap-2"><Lightbulb className="h-4 w-4" />Het Verhaal van de Kaarten</h3>
+              <p className="text-stone-300 whitespace-pre-line">{combined.story}</p>
+            </div>
+            <div>
+              <h3 className="font-semibold text-amber-300 mb-2 flex items-center gap-2"><Heart className="h-4 w-4" />Advies voor Jou</h3>
+              <p className="text-stone-300 whitespace-pre-line">{combined.advice}</p>
+            </div>
+            {combined.affirmation && (
+              <div className="bg-stone-900 p-4 rounded-lg border border-stone-800">
+                <h4 className="font-semibold text-amber-200 mb-2">Affirmatie</h4>
+                <p className="text-stone-200 italic">"{combined.affirmation}"</p>
+              </div>
+            )}
+            {combined.actions && combined.actions.length > 0 && (
+               <div>
+                <h3 className="font-semibold text-amber-300 mb-2 flex items-center gap-2"><CheckCircle className="h-4 w-4" />Concrete Acties</h3>
+                <ul className="list-disc list-inside text-stone-300 space-y-1">
+                  {combined.actions.map((action, i) => <li key={i}>{action}</li>)}
+                </ul>
+              </div>
+            )}
           </CardContent>
         </Card>
       )}
 
       {/* Per kaart */}
-      <div className="grid gap-4 md:gap-6">
-        {items.map((it, i) => {
-          const ai = getAiForCard(data, i);
+      <div className="space-y-4">
+        <h2 className="text-xl font-bold text-amber-200 text-center">De Kaarten in Detail</h2>
+        {items.map((item, i) => {
+          const interpretation = cardInts?.[i];
           return (
-            <Card
-              key={i}
-              className="bg-stone-950/60 border border-white/10 backdrop-blur-sm"
-            >
-              <CardHeader className="pb-2">
-                <div className="flex items-start gap-3">
-                  {/* Kaartafbeelding */}
-                  <div
-                    className={cn(
-                      "w-16 h-24 rounded-md overflow-hidden border border-white/10 shrink-0",
-                      !it.imageUrl && "bg-gradient-to-b from-purple-500/15 to-indigo-600/15"
-                    )}
-                  >
-                    {it.imageUrl ? (
-                      <img
-                        src={it.imageUrl}
-                        alt={it.name}
-                        className="w-full h-full object-cover"
-                      />
-                    ) : null}
-                  </div>
-
-                  {/* Titels + badges */}
-                  <div className="flex-1 min-w-0">
-                    <div className="flex flex-wrap items-center gap-2">
-                      <CardTitle className="text-amber-200 truncate">
-                        {it.index}. {it.name}
-                      </CardTitle>
+            <Card key={i} className="bg-stone-950/60 border border-white/10 backdrop-blur-sm overflow-hidden">
+              <div className="md:grid md:grid-cols-3">
+                {/* Kaart info */}
+                <div className="p-4 border-b md:border-b-0 md:border-r border-stone-800">
+                  <div className="flex items-start gap-4">
+                    <img
+                      src={item.imageUrl || '/tarot/back.svg'}
+                      alt={item.name}
+                      className="w-16 h-auto rounded-md border border-white/10 shrink-0"
+                    />
+                    <div>
+                      <h4 className="font-bold text-amber-200">{item.index}. {item.name}</h4>
                       <Badge
                         variant="outline"
-                        className={cn(
-                          "uppercase tracking-wide",
-                          it.upright
-                            ? "border-emerald-700 text-emerald-300"
-                            : "border-rose-700 text-rose-300"
-                        )}
+                        className={cn("mt-1", item.upright ? "border-emerald-700 text-emerald-300" : "border-rose-700 text-rose-300")}
                       >
-                        {it.upright ? t("tarot.upright") : t("tarot.reversed")}
+                        {item.upright ? t("tarot.upright") : t("tarot.reversed")}
                       </Badge>
                     </div>
-                    <div className="text-stone-400 text-sm">
-                      <span className="font-medium text-stone-300">
-                        {it.positionTitle}
-                      </span>
-                      {it.positionCopy ? (
-                        <span className="opacity-80"> — {it.positionCopy}</span>
-                      ) : null}
-                    </div>
+                  </div>
+                  <div className="mt-3 text-sm">
+                    <p className="font-semibold text-stone-300">{item.positionTitle}</p>
+                    <p className="text-stone-400">{item.positionCopy}</p>
                   </div>
                 </div>
-              </CardHeader>
 
-              <CardContent className="pt-0">
-                {/* AI block (title/summary/bullets) */}
-                {ai?.title ? (
-                  <div className="text-amber-200 font-semibold mb-1">
-                    {ai.title}
-                  </div>
-                ) : null}
-                {ai?.summary ? (
-                  <p className="text-stone-200">{ai.summary}</p>
-                ) : null}
-                {Array.isArray(ai?.bullets) && ai.bullets.length > 0 ? (
-                  <ul className="mt-3 space-y-1 list-disc list-inside text-stone-300">
-                    {ai.bullets.map((b: string, j: number) => (
-                      <li key={j}>{b}</li>
-                    ))}
-                  </ul>
-                ) : null}
-              </CardContent>
+                {/* AI Interpretatie */}
+                <div className="p-4 md:col-span-2">
+                  {interpretation ? (
+                    <div className="space-y-3">
+                      <p className="text-stone-300 whitespace-pre-line">{interpretation.longMeaning}</p>
+                      {interpretation.keywords && interpretation.keywords.length > 0 && (
+                        <div className="flex flex-wrap gap-2">
+                          {interpretation.keywords.map(kw => <Badge key={kw} variant="outline" className="text-stone-400 border-stone-700">{kw}</Badge>)}
+                        </div>
+                      )}
+                    </div>
+                  ) : (
+                    <p className="text-stone-500">Geen gedetailleerde interpretatie beschikbaar.</p>
+                  )}
+                </div>
+              </div>
             </Card>
           );
         })}
