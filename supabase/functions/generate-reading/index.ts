@@ -121,37 +121,55 @@ Cevabınız aşağıdaki yapıya sahip geçerli bir JSON nesnesi OLMALIDIR:
 
 const OTHER_METHOD_PROMPT_TEMPLATES = {
   nl: `
-De gebruiker wil een lezing met de methode '{{method}}'.
-De input is:
-{{details}}
+JOUW ROL:
+- Je bent een waarzegger genaamd {{persona_name}}.
+- Jouw stijl is: {{persona_style}}.
+- Gebruik de volgende richtlijnen voor jouw toon en inhoud: "{{persona_prompt_template}}"
 
-GEEF EEN UITGEBREIDE EN INZICHTELIJKE LEZING.
-Je antwoord MOET een geldig JSON-object zijn met de volgende structuur:
-{
-  "reading": "Schrijf hier de volledige lezing. Gebruik Markdown voor opmaak: **vet**, *cursief*, ## Titels, - Lijst-items, en > Quotes. Gebruik \\n\\n voor nieuwe alinea's."
-}
+JOUW TAAK:
+- Voer een '{{method}}' lezing uit.
+- De input van de gebruiker is:
+{{details}}
+- Geef een uitgebreide en inzichtelijke lezing in jouw persona.
+
+OUTPUT FORMAAT:
+- Je antwoord MOET een geldig JSON-object zijn.
+- Gebruik exact deze structuur: { "reading": "Jouw volledige lezing hier..." }
+- Binnen de "reading" string, gebruik Markdown voor opmaak (bv. **vet**, *cursief*, ## Titels, - Lijstjes).
 `,
   en: `
-The user wants a reading using the '{{method}}' method.
-The input is:
-{{details}}
+YOUR ROLE:
+- You are a seer named {{persona_name}}.
+- Your style is: {{persona_style}}.
+- Use the following guidelines for your tone and content: "{{persona_prompt_template}}"
 
-PROVIDE A COMPREHENSIVE AND INSIGHTFUL READING.
-Your answer MUST be a valid JSON object with the following structure:
-{
-  "reading": "Write the full reading here. Use Markdown for formatting: **bold**, *italic*, ## Headings, - List items, and > Quotes. Use \\n\\n for new paragraphs."
-}
+YOUR TASK:
+- Perform a '{{method}}' reading.
+- The user's input is:
+{{details}}
+- Provide a comprehensive and insightful reading in your persona.
+
+OUTPUT FORMAT:
+- Your answer MUST be a valid JSON object.
+- Use this exact structure: { "reading": "Your full reading here..." }
+- Within the "reading" string, use Markdown for formatting (e.g., **bold**, *italic*, ## Headings, - Lists).
 `,
   tr: `
-Kullanıcı '{{method}}' yöntemini kullanarak bir okuma istiyor.
-Girdi:
-{{details}}
+SENİN ROLÜN:
+- Adın {{persona_name}} olan bir kahinsin.
+- Tarzın: {{persona_style}}.
+- Tonun ve içeriğin için şu yönergeleri kullan: "{{persona_prompt_template}}"
 
-KAPSAMLI VE ANLAYIŞLI BİR OKUMA YAPIN.
-Cevabınız aşağıdaki yapıya sahip geçerli bir JSON nesnesi OLMALIDIR:
-{
-  "reading": "Tam okumayı buraya yazın. Biçimlendirme için Markdown kullanın: **kalın**, *italik*, ## Başlıklar, - Liste öğeleri ve > Alıntılar. Yeni paragraflar için \\n\\n kullanın."
-}
+SENİN GÖREVİN:
+- Bir '{{method}}' okuması yap.
+- Kullanıcının girdisi:
+{{details}}
+- Kendi kişiliğinle kapsamlı ve anlayışlı bir okuma yap.
+
+ÇIKTI FORMATI:
+- Cevabın geçerli bir JSON nesnesi OLMALIDIR.
+- Tam olarak şu yapıyı kullan: { "reading": "Tam okuman buraya..." }
+- "reading" dizesi içinde, biçimlendirme için Markdown kullan (ör. **kalın**, *italik*, ## Başlıklar, - Listeler).
 `
 };
 
@@ -200,6 +218,9 @@ function buildPrompt(locale: string, persona: any, method: string, payload: any)
       details = `Naam: ${payload.numerologyData.fullName}, Geboortedatum: ${payload.numerologyData.birthDate}`;
     }
 
+    prompt = prompt.replace(/{{persona_name}}/g, persona.display_name?.[locale] || persona.id);
+    prompt = prompt.replace(/{{persona_style}}/g, (persona.style?.[locale] || []).join(', ') || 'wijs en inzichtelijk');
+    prompt = prompt.replace(/{{persona_prompt_template}}/g, persona.prompt_template || '');
     prompt = prompt.replace(/{{method}}/g, method);
     prompt = prompt.replace(/{{details}}/g, details);
 
@@ -223,18 +244,10 @@ serve(async (req) => {
     // --- AI Generation ---
     const persona = await getPersona(supabaseAdmin, body.personaId);
     
-    const systemInstructionParts = [
-      `Je bent een waarzegger in de rol van ${persona.display_name?.[body.locale] || persona.id}.`,
-      `Jouw stijl is: ${persona.style?.[body.locale]?.join(', ') || 'wijs en inzichtelijk'}.`,
-      persona.prompt_template || ''
-    ];
-    const systemInstruction = systemInstructionParts.join('\n');
-
     const genAI = new GoogleGenerativeAI(env('GEMINI_API_KEY'));
     const model = genAI.getGenerativeModel({ 
       model: 'gemini-1.5-flash-latest',
       generationConfig: { responseMimeType: "application/json" },
-      systemInstruction: systemInstruction
     });
 
     const prompt = buildPrompt(body.locale, persona, body.method, body.payload);
