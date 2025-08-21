@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { showError, showSuccess, showLoading, dismissToast } from "@/utils/toast";
-import { Loader2, UploadCloud, CheckCircle, XCircle } from "lucide-react";
+import { Loader2, UploadCloud, CheckCircle, XCircle, DownloadCloud } from "lucide-react";
 
 type TarotCard = {
   id: string;
@@ -121,6 +121,7 @@ export default function AdminCards() {
   const [cards, setCards] = useState<TarotCard[]>([]);
   const [loading, setLoading] = useState(true);
   const [editing, setEditing] = useState<TarotCard | null>(null);
+  const [isSeeding, setIsSeeding] = useState(false);
 
   const fetchCards = async () => {
     setLoading(true);
@@ -169,6 +170,30 @@ export default function AdminCards() {
     } catch (err: any) {
       dismissToast(toastId);
       showError(`Import mislukt: ${err.message}`);
+    }
+  };
+
+  const handleSeedImages = async () => {
+    if (!window.confirm("Weet je zeker dat je de afbeeldingen voor alle 78 kaarten wilt ophalen van Wikimedia? Dit kan de bestaande afbeeldingen overschrijven.")) return;
+    setIsSeeding(true);
+    const toastId = showLoading("Afbeeldingen worden opgehaald, dit kan even duren...");
+    try {
+      const { data, error } = await supabase.functions.invoke('seed-tarot-images');
+      if (error) throw new Error(error.message);
+      if (data.error) throw new Error(data.details);
+
+      dismissToast(toastId);
+      showSuccess(data.message);
+      if (data.errors && data.errors.length > 0) {
+        console.warn("Seeding errors:", data.errors);
+        showError(`${data.errors.length} afbeeldingen konden niet worden opgehaald. Zie console voor details.`);
+      }
+      fetchCards();
+    } catch (err: any) {
+      dismissToast(toastId);
+      showError(`Ophalen mislukt: ${err.message}`);
+    } finally {
+      setIsSeeding(false);
     }
   };
 
@@ -238,9 +263,17 @@ export default function AdminCards() {
       <Card className="bg-stone-900/60 border-stone-800">
         <CardHeader className="flex flex-row items-center justify-between">
           <CardTitle className="text-amber-200">Tarotkaarten Beheren</CardTitle>
-          {cards.length === 0 && (
-            <Button onClick={handleImport}>Importeer 78 Kaartgegevens</Button>
-          )}
+          <div className="flex gap-2">
+            {cards.length > 0 && (
+              <Button onClick={handleSeedImages} disabled={isSeeding} variant="outline">
+                {isSeeding ? <Loader2 className="h-4 w-4 mr-2 animate-spin" /> : <DownloadCloud className="h-4 w-4 mr-2" />}
+                Haal 78 Wikimedia Afbeeldingen op
+              </Button>
+            )}
+            {cards.length === 0 && (
+              <Button onClick={handleImport}>Importeer 78 Kaartgegevens</Button>
+            )}
+          </div>
         </CardHeader>
         <CardContent>
           <SmartUploader onComplete={fetchCards} />
