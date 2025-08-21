@@ -111,6 +111,15 @@ export default function TarotReadingPage() {
 
   const handleGetInterpretation = useCallback(() => {
     if (!spread || draw.length === 0) return;
+
+    const hasValidPositions = Array.isArray(spread.positions) && spread.positions.length >= spread.cards_required;
+    const positionsToUse = hasValidPositions
+      ? spread.positions
+      : positionsFor(mapSpreadIdToKind(spread.id), spread.cards_required).map((p, i) => ({
+          slot_key: p.label || `pos_${i + 1}`, idx: i + 1, x: p.x, y: p.y, rot: p.r || 0,
+          title: { nl: `Positie ${i + 1}`, en: `Position ${i + 1}`, tr: `Pozisyon ${i + 1}` },
+          upright_copy: { nl: "", en: "", tr: "" }, reversed_copy: { nl: "", en: "", tr: "" },
+        }));
     
     const payload: TarotInterpretationPayload = {
       locale,
@@ -118,7 +127,7 @@ export default function TarotReadingPage() {
       spread: { id: spread.id, name: spread.name?.[locale] ?? spread.id },
       spreadGuide: spread.ui_copy?.[locale]?.subtitle ?? '',
       cards: draw.map((c, i) => {
-        const position = spread.positions[i];
+        const position = positionsToUse[i];
         return {
           index: i + 1,
           name: c.card.name,

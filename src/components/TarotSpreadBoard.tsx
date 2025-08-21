@@ -29,13 +29,18 @@ export default function TarotSpreadBoard({
   annotations, cardsFlipped, debugGrid
 }: Props) {
   const desired = cards.length;
-
-  // ✅ Gebruik custom positions alleen als de lengte klopt; anders val terug op het ingebouwde patroon.
   let positions: Position[];
-  if (customPositions && customPositions.length >= desired) {
+
+  // If a specific `kind` is provided (not 'custom'), always use its predefined layout.
+  // This ensures consistency for standard spreads.
+  // `customPositions` will only be used for `kind: 'custom'`.
+  if (kind !== 'custom') {
+    positions = positionsFor(kind, desired);
+  } else if (customPositions && customPositions.length >= desired) {
     positions = normalizePositions(customPositions.slice(0, desired));
   } else {
-    positions = positionsFor(kind, desired);
+    // Fallback for 'custom' kind when positions are missing or insufficient.
+    positions = positionsFor('custom', desired);
   }
 
   const widthPct = cardWidthPct ?? DEFAULT_CARD_WIDTH[kind];
