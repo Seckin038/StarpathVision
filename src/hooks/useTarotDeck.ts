@@ -19,7 +19,7 @@ const fetchTarotDeck = async (locale: "nl" | "en" | "tr"): Promise<TarotDeckCard
 
 export function useTarotDeck(locale: "nl" | "en" | "tr") {
   const { data: deck = [], isLoading: loading, error } = useQuery({
-    queryKey: ['tarotDeck', locale],
+    queryKey: ['tarotDeckJson', locale], // Changed key to invalidate cache
     queryFn: () => fetchTarotDeck(locale),
     staleTime: 1000 * 60 * 60, // Cache for 1 hour
     refetchOnWindowFocus: false,
