@@ -1,9 +1,9 @@
-import "jsr:@supabase/functions-js/edge-runtime.d.ts";
+/// <reference types="jsr:@supabase/functions-js/edge-runtime.d.ts" />
 import { serve } from 'https://deno.land/std@0.224.0/http/server.ts';
 import { z } from 'https://deno.land/x/zod@v3.23.8/mod.ts';
 import { GoogleGenerativeAI } from 'npm:@google/generative-ai';
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.45.0';
-import { type PersonaId, buildPersonaPreamble, gatePersonaMethod, type Locale } from './../_shared/persona.ts';
+import { type PersonaId, buildPersonaPreamble, gatePersonaMethod, type Locale } from 'shared/persona.ts';
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',

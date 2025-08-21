@@ -1,5 +1,3 @@
 {
-  "compilerOptions": {
-    "lib": ["deno.ns", "dom"]
-  }
+  "importMap": "./supabase/functions/import_map.json"
 }
