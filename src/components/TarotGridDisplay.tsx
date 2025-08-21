@@ -1,7 +1,7 @@
 import React from "react";
 
 export type TarotGridDisplayProps = {
-  cardCount: number;
+  totalCards?: number;
   maxSelect?: number;
   selected?: number[];
   onChange?: (next: number[]) => void;
@@ -9,34 +9,34 @@ export type TarotGridDisplayProps = {
 };
 
 export default function TarotGridDisplay({
-  cardCount,
-  maxSelect,
-  selected,
+  totalCards,
+  maxSelect = 78,
+  selected = [],
   onChange,
   renderCard,
 }: TarotGridDisplayProps) {
-  const [internalSelected, setInternalSelected] = React.useState<number[]>([]);
-  const sel = selected ?? internalSelected;
+  const count = totalCards ?? 78;
 
   const toggle = (i: number) => {
-    const exists = sel.includes(i);
-    let next = exists ? sel.filter((x) => x !== i) : [...sel, i];
-    if (maxSelect && next.length > maxSelect) {
-      next = next.slice(next.length - maxSelect);
-    }
-    if (onChange) onChange(next);
-    else setInternalSelected(next);
+    if (!onChange) return;
+    const isSelected = selected.includes(i);
+    const nextSelection = isSelected
+      ? selected.filter((item) => item !== i)
+      : selected.length < maxSelect
+      ? [...selected, i]
+      : selected;
+    onChange(nextSelection);
   };
 
-  const cards = React.useMemo(() => Array.from({ length: cardCount }, (_, i) => i), [cardCount]);
+  const cards = React.useMemo(() => Array.from({ length: count }, (_, i) => i), [count]);
 
   return (
-    <div className="w-full">
+    <div className="w-full max-h-[70vh] overflow-auto px-1">
       <div
         className="grid grid-cols-5 sm:grid-cols-8 md:grid-cols-10 lg:grid-cols-13 gap-1 md:gap-2 mx-auto w-full max-w-7xl"
       >
         {cards.map((i) => {
-          const isSelected = sel.includes(i);
+          const isSelected = selected.includes(i);
           return (
             <button
               key={i}

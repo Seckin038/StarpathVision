@@ -70,7 +70,7 @@ export default function TarotReadingPage() {
   const handleConfirmSelection = () => {
     if (!spread || selectedIndices.length !== spread.cards_required || deck.length === 0) return;
 
-    const selectedCards = selectedIndices.map(i => deck[i]);
+    const selectedCards = selectedIndices.map(i => deck[i % deck.length]);
 
     if (selectedCards.some(c => c === undefined)) {
       setError("Fout bij het selecteren van kaarten. Probeer het opnieuw.");
@@ -153,7 +153,7 @@ export default function TarotReadingPage() {
       return <div className="text-center py-12 text-red-400"><AlertTriangle className="h-12 w-12 mx-auto mb-4" /><p>{error || (deckError as Error)?.message}</p></div>;
     }
 
-    if (phase === 'picking' && spread && deck.length > 0) {
+    if (phase === 'picking' && spread) {
       return (
         <div className="space-y-8">
           <div className="text-center text-stone-300">
@@ -161,7 +161,7 @@ export default function TarotReadingPage() {
             <p className="text-sm text-stone-400">Geselecteerd: {selectedIndices.length} / {spread.cards_required}</p>
           </div>
           <TarotGridDisplay
-            cardCount={deck.length}
+            totalCards={78}
             maxSelect={spread.cards_required}
             selected={selectedIndices}
             onChange={setSelectedIndices}
