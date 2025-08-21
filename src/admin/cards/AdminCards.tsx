@@ -1,14 +1,14 @@
 import { useEffect, useState, useRef } from "react";
 import { supabase } from "@/lib/supabaseClient";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogDescription } from "@/components/ui/dialog";
-import { Loader2, UploadCloud, Link as LinkIcon, CheckCircle, XCircle } from "lucide-react";
-import { showError, showSuccess } from "@/utils/toast";
+import { Loader2, UploadCloud, Link as LinkIcon, CheckCircle, XCircle, Database } from "lucide-react";
+import { showError, showSuccess, showLoading, dismissToast } from "@/utils/toast";
 
 type TarotCard = {
   id: string;
@@ -26,6 +26,7 @@ export default function AdminCards() {
   const [cards, setCards] = useState<TarotCard[]>([]);
   const [loading, setLoading] = useState(true);
   const [editing, setEditing] = useState<TarotCard | null>(null);
+  const [isSeeding, setIsSeeding] = useState(false);
 
   const fetchCards = async () => {
     setLoading(true);
@@ -48,11 +49,47 @@ export default function AdminCards() {
     }
   };
 
+  const handleSeed = async () => {
+    if (!window.confirm("Weet je zeker dat je de 78 basis tarotkaarten wilt importeren? Dit zal bestaande kaarten met dezelfde ID updaten en kan niet ongedaan worden gemaakt.")) return;
+    setIsSeeding(true);
+    const toastId = showLoading("Bezig met importeren van 78 basiskaarten...");
+    const { error } = await supabase.functions.invoke("seed-tarot-cards");
+    dismissToast(toastId);
+    if (error) {
+      showError(`Importeren mislukt: ${error.message}`);
+    } else {
+      showSuccess("78 kaarten succesvol geïmporteerd/geüpdatet.");
+      fetchCards();
+    }
+    setIsSeeding(false);
+  };
+
   return (
     <div className="space-y-6">
+      {/* --- Seeder --- */}
+      <Card className="bg-stone-900/60 border-stone-800">
+        <CardHeader>
+          <CardTitle className="text-amber-200">Stap 1: Basisgegevens Importeren</CardTitle>
+          <CardDescription>
+            Klik hier om de 78 standaard RWS-kaarten (namen, betekenissen, etc.) in de database te laden. Dit is eenmalig nodig, of om de teksten te herstellen naar de standaard.
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <Button onClick={handleSeed} disabled={isSeeding}>
+            {isSeeding ? <Loader2 className="h-4 w-4 mr-2 animate-spin" /> : <Database className="h-4 w-4 mr-2" />}
+            Importeer 78 Kaartgegevens
+          </Button>
+        </CardContent>
+      </Card>
+
       {/* --- Bulk Importer --- */}
       <Card className="bg-stone-900/60 border-stone-800">
-        <CardHeader><CardTitle className="text-amber-200">Tarotkaarten – Afbeeldingen importeren</CardTitle></CardHeader>
+        <CardHeader>
+          <CardTitle className="text-amber-200">Stap 2: Afbeeldingen Importeren</CardTitle>
+          <CardDescription>
+            Upload hier de afbeeldingen voor de kaarten. De AI herkent welke kaart het is en koppelt de afbeelding automatisch.
+          </CardDescription>
+        </CardHeader>
         <CardContent>
           <Tabs defaultValue="files" className="w-full">
             <TabsList>
@@ -66,7 +103,8 @@ export default function AdminCards() {
       </Card>
 
       {/* --- Card Grid --- */}
-      <h2 className="text-xl font-serif text-stone-300">Kaarten bewerken (klik op een kaart)</h2>
+      <h2 className="text-xl font-serif text-stone-300">Stap 3: Details Bewerken (optioneel)</h2>
+      <p className="text-stone-400 -mt-4">Klik op een kaart om de naam, betekenissen of trefwoorden aan te passen.</p>
       {loading ? (
         <div className="flex justify-center py-12"><Loader2 className="h-6 w-6 animate-spin text-amber-400" /></div>
       ) : (
