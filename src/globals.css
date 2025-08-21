@@ -119,4 +119,17 @@
     backdrop-filter: blur(6px);
     box-shadow: inset 0 0 80px rgba(0,0,0,.35);
   }
+  .spread-stage {
+    position: relative;
+    width: 100%;
+    border-radius: 1rem; /* 16px */
+    overflow: hidden; /* voorkomt "buiten beeld" */
+  }
+  .tarot-card-container {
+    position: absolute;
+    user-select: none;
+    touch-action: none;
+    will-change: transform, left, top;
+    transform-origin: center center;
+  }
 }
