@@ -64,6 +64,7 @@ export default function ProfilePage() {
       const { data: r } = await supabase
         .from("readings")
         .select("id, method, spread_id, title, created_at, payload, interpretation, thumbnail_url")
+        .eq("user_id", auth.user.id)
         .order("created_at", { ascending: false })
         .limit(50);
       setReadings(r ?? []);
