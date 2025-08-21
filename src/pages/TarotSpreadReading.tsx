@@ -3,7 +3,8 @@ import { Link, useParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, Loader2, AlertTriangle, Sparkles, RefreshCw } from "lucide-react";
 import TarotSpreadBoard from "@/components/TarotSpreadBoard";
-import { SpreadKind, positionsFor } from "@/lib/positions";
+import { SpreadKind, positionsFor, normalizePositions } from "@/lib/positions";
+import type { Position } from "@/lib/positions";
 import TarotGridDisplay from "@/components/TarotGridDisplay";
 import { useTranslation } from "react-i18next";
 import { Spread, DrawnCard, Locale, SpreadPosition } from "@/types/tarot";
@@ -14,7 +15,6 @@ import { PersonaPicker } from "@/components/PersonaPicker";
 import { PersonaBadge } from "@/components/PersonaBadge";
 import { Card, CardContent } from "@/components/ui/card";
 import { useTarotDeck } from "@/hooks/useTarotDeck";
-import { normalizePositions } from "@/lib/positions";
 
 type Phase = 'loading' | 'error' | 'picking' | 'reading';
 
@@ -48,8 +48,11 @@ export default function TarotReadingPage() {
   const [selectedIndices, setSelectedIndices] = useState<number[]>([]);
   const [showPersonaPicker, setShowPersonaPicker] = useState(false);
   const [cardsFlipped, setCardsFlipped] = useState(false);
+  const [overridePositions, setOverridePositions] = useState<Position[] | null>(null);
 
   const { data: interpretation, isLoading: isLoadingInterpretation, error: interpretationError, getInterpretation } = useTarotInterpretation();
+
+  useEffect(() => { setOverridePositions(null); }, [spreadId]);
 
   useEffect(() => {
     const initializeReading = async () => {
@@ -91,20 +94,28 @@ export default function TarotReadingPage() {
       return;
     }
 
-    // Fallback logic: if positions in JSON are incomplete, generate them from hardcoded layouts.
-    const hasValidPositions = spread.positions && spread.positions.length >= spread.cards_required;
+    const hasValidPositions =
+      Array.isArray(spread.positions) && spread.positions.length >= spread.cards_required;
+
     const positionsToUse = hasValidPositions
       ? spread.positions
       : positionsFor(mapSpreadIdToKind(spread.id), spread.cards_required).map((p, i) => ({
           slot_key: p.label || `pos_${i + 1}`,
           idx: i + 1,
-          x: p.x,
-          y: p.y,
-          rot: p.r || 0,
+          x: p.x, y: p.y, rot: p.r || 0,
           title: { nl: `Positie ${i + 1}`, en: `Position ${i + 1}`, tr: `Pozisyon ${i + 1}` },
-          upright_copy: { nl: '', en: '', tr: '' },
-          reversed_copy: { nl: '', en: '', tr: '' },
-      }));
+          upright_copy: { nl: "", en: "", tr: "" },
+          reversed_copy: { nl: "", en: "", tr: "" },
+        }));
+
+    const normalized = normalizePositions(
+      positionsToUse.map(p => ({ x: p.x, y: p.y, rot: p.rot, slot_key: p.slot_key }))
+    );
+    if (!hasValidPositions) setOverridePositions(normalized);
+
+    if (!hasValidPositions) {
+      setSpread(prev => prev ? { ...prev, positions: positionsToUse } : null);
+    }
 
     const finalDraw: DrawnCard[] = positionsToUse.slice(0, spread.cards_required).map((position, index) => ({
       positionId: position.slot_key,
@@ -112,11 +123,6 @@ export default function TarotReadingPage() {
       isReversed: spread.allow_reversals ? Math.random() < 0.3 : false,
     }));
     
-    // If we used the fallback, update the spread in state so the interpretation panel has position data.
-    if (!hasValidPositions) {
-      setSpread(prevSpread => prevSpread ? { ...prevSpread, positions: positionsToUse } : null);
-    }
-
     setDraw(finalDraw);
     setPhase('reading');
   };
@@ -231,9 +237,17 @@ export default function TarotReadingPage() {
     if (phase === 'reading' && spread && draw.length > 0) {
       const spreadKind = mapSpreadIdToKind(spread.id);
       const customPositions =
-        (spread.positions?.length ?? 0) >= spread.cards_required
-          ? normalizePositions(spread.positions.map(p => ({ x:p.x, y:p.y, rot:p.rot, slot_key:p.slot_key })))
-          : undefined;
+        overridePositions ??
+        (spread.positions?.length
+          ? normalizePositions(
+              spread.positions.map(p => ({ x: p.x, y: p.y, rot: p.rot, slot_key: p.slot_key }))
+            )
+          : undefined);
+
+      const CARD_WIDTH_OVERRIDES: Record<string, number> = {
+        "ppf-3": 12,
+        "star-6": 11,
+      };
 
       return (
         <div className="space-y-8">
@@ -243,6 +257,7 @@ export default function TarotReadingPage() {
             customPositions={customPositions}
             annotations={annotations}
             cardsFlipped={cardsFlipped}
+            cardWidthPct={CARD_WIDTH_OVERRIDES[spread.id]}
           />
           {isLoadingInterpretation && (
             <Card className="bg-stone-900/50"><CardContent className="pt-6 text-center"><Loader2 className="h-8 w-8 text-amber-600 animate-spin" /></CardContent></Card>
