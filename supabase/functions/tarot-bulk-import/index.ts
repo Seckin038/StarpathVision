@@ -122,7 +122,7 @@ async function upsertImageForCard(supabase: any, cardNameNl: string, file: Blob,
 }
 
 async function handleOneBlob(supabaseAdmin: any, file: Blob, filename?: string) {
-  const MAX_SIZE_MB = 4.5;
+  const MAX_SIZE_MB = 20;
   if (file.size > MAX_SIZE_MB * 1024 * 1024) {
     throw new Error(`File too large (${(file.size / 1024 / 1024).toFixed(1)}MB). Limit is ${MAX_SIZE_MB}MB.`);
   }
