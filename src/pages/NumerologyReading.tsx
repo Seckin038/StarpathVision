@@ -14,7 +14,7 @@ import { supabase } from "@/lib/supabaseClient";
 import { showLoading, dismissToast, showError, showSuccess } from "@/utils/toast";
 import { usePersona } from "@/contexts/PersonaContext";
 import { loadPersonas } from "@/lib/persona-registry";
-import MarkdownRenderer from "@/components/MarkdownRenderer";
+import ReadingPanel from "@/components/ReadingPanel";
 
 const NumerologyReading = () => {
   const { i18n } = useTranslation();
@@ -104,17 +104,7 @@ const NumerologyReading = () => {
             </div>
           ) : (
             <div className="space-y-6">
-              <Card className="bg-stone-900 border-stone-800">
-                <CardContent className="pt-6">
-                  <div className="flex items-start gap-3">
-                    <Sparkles className="h-5 w-5 text-amber-400 mt-1 flex-shrink-0" />
-                    <div>
-                      <h3 className="font-semibold text-amber-200 mb-2">Jouw Numerologische Lezing:</h3>
-                      <MarkdownRenderer text={readingResult} className="text-stone-300" />
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
+              <ReadingPanel title="Jouw Numerologische Lezing" body={readingResult} />
               <div className="flex justify-center">
                 <Button onClick={() => setReadingResult(null)} variant="outline" className="border-stone-700 text-stone-300 hover:bg-stone-800">Nieuwe berekening</Button>
               </div>

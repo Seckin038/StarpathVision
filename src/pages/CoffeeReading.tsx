@@ -6,7 +6,6 @@ import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { 
   Coffee, 
-  Sparkles, 
   Upload,
   ChevronLeft,
   Loader2
@@ -17,7 +16,7 @@ import { supabase } from "@/lib/supabaseClient";
 import { showLoading, dismissToast, showError, showSuccess } from "@/utils/toast";
 import { usePersona } from "@/contexts/PersonaContext";
 import { loadPersonas } from "@/lib/persona-registry";
-import MarkdownRenderer from "@/components/MarkdownRenderer";
+import ReadingPanel from "@/components/ReadingPanel";
 
 const CoffeeReading = () => {
   const { i18n } = useTranslation();
@@ -205,17 +204,9 @@ const CoffeeReading = () => {
           </div>
 
           {readingResult && (
-            <Card className="mt-6 bg-stone-900 border-stone-800">
-              <CardContent className="pt-6">
-                <div className="flex items-start gap-3">
-                  <Sparkles className="h-5 w-5 text-amber-400 mt-1 flex-shrink-0" />
-                  <div>
-                    <h3 className="font-semibold text-amber-200 mb-2">Je lezing:</h3>
-                    <MarkdownRenderer text={readingResult} className="text-stone-300" />
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+            <div className="mt-6">
+              <ReadingPanel title="Je lezing" body={readingResult} />
+            </div>
           )}
         </CardContent>
       </Card>

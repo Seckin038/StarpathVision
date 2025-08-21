@@ -177,7 +177,7 @@ function buildPrompt(locale: string, persona: any, method: string, payload: any)
 GEEF EEN UITGEBREIDE EN INZICHTELIJKE LEZING.
 Je antwoord MOET een geldig JSON-object zijn met de volgende structuur:
 {
-  "reading": "Schrijf hier de volledige lezing als een enkele string. Gebruik markdown voor opmaak (bv. **vetgedrukt** voor titels). Gebruik \\n\\n voor nieuwe alinea's om de tekst leesbaar te maken."
+  "reading": "Schrijf hier de volledige lezing. Gebruik Markdown voor opmaak: **vet**, *cursief*, ## Titels, - Lijst-items, en > Quotes. Gebruik \\n\\n voor nieuwe alinea's."
 }
 Schrijf alle tekst in de stem en stijl van jouw persona.
 `;
