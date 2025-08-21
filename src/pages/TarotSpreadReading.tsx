@@ -58,6 +58,25 @@ export default function TarotReadingPage() {
         const currentSpread = library.spreads.find((s: Spread) => s.id === spreadId);
         if (!currentSpread) throw new Error(`Legging '${spreadId}' niet gevonden.`);
 
+        // FIX: If positions are missing or incomplete, generate placeholders.
+        if (!currentSpread.positions || currentSpread.positions.length < currentSpread.cards_required) {
+          const generatedPositions: SpreadPosition[] = [];
+          for (let i = 0; i < currentSpread.cards_required; i++) {
+            const existingPos = currentSpread.positions?.[i];
+            generatedPositions.push({
+              slot_key: existingPos?.slot_key || `pos_${i + 1}`,
+              idx: existingPos?.idx || i + 1,
+              x: existingPos?.x || 0, 
+              y: existingPos?.y || 0, 
+              rot: existingPos?.rot || 0,
+              title: existingPos?.title || { nl: `Positie ${i + 1}`, en: `Position ${i + 1}`, tr: `Pozisyon ${i + 1}` },
+              upright_copy: existingPos?.upright_copy || { nl: '', en: '', tr: '' },
+              reversed_copy: existingPos?.reversed_copy || { nl: '', en: '', tr: '' },
+            });
+          }
+          currentSpread.positions = generatedPositions;
+        }
+
         setSpread(currentSpread);
         setPhase('picking');
       } catch (err: any) {
