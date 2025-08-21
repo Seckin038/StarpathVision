@@ -1,7 +1,6 @@
-import React, { useState, useEffect, useRef, useMemo } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
-import { clamp } from "@/lib/spreadUtils";
 
 /** Een kaart uit je deck (na de selectie) */
 export type CardItem = {
@@ -45,6 +44,8 @@ type Props = {
   kind?: SpreadKind;
   /** Overschrijf posities (bijv. uit je DB / spread-library) */
   customPositions?: Position[];
+  /** card breedte als % van bordbreedte (optioneel) */
+  cardWidthPct?: number;
   /** extra className op board */
   className?: string;
   /** Annotaties om onder de kaarten te tonen */
@@ -116,21 +117,30 @@ function year12(): Position[] {
   return circlePositions(12, { r: 0.38, startDeg: -90 });
 }
 
-const CARD_WIDTH_FRACTION: Record<SpreadKind, number> = {
-  "daily-1": 0.14, "two-choice-2": 0.13, "ppf-3": 0.13, "line-3": 0.13,
-  "star-6": 0.12, "horseshoe-7": 0.12, "cross-10": 0.11, "year-12": 0.10, "custom": 0.12,
+const DEFAULT_CARD_WIDTH: Record<SpreadKind, number> = {
+  "daily-1": 14,
+  "two-choice-2": 13,
+  "ppf-3": 13,
+  "line-3": 13,
+  "star-6": 12,
+  "horseshoe-7": 12,
+  "cross-10": 11,
+  "year-12": 10,
+  "custom": 12,
 };
 
 function positionsFor(kind: SpreadKind, n: number): Position[] {
   switch (kind) {
     case "daily-1": return daily1();
     case "two-choice-2": return twoChoice2();
-    case "ppf-3": case "line-3": return line3();
+    case "ppf-3":
+    case "line-3": return line3();
     case "star-6": return star6();
     case "horseshoe-7": return horseshoe7();
     case "cross-10": return celticCross10();
     case "year-12": return year12();
-    default: return circlePositions(n);
+    default:
+      return circlePositions(n);
   }
 }
 
@@ -140,58 +150,46 @@ export default function TarotSpreadBoard({
   cards,
   kind = "ppf-3",
   customPositions,
+  cardWidthPct,
   className,
   annotations,
   cardsFlipped,
 }: Props) {
-  const stageRef = useRef<HTMLDivElement>(null);
-  const [boardSize, setBoardSize] = useState({ w: 0, h: 0 });
-
-  useEffect(() => {
-    const measure = () => {
-      const el = stageRef.current;
-      if (!el) return;
-      const rect = el.getBoundingClientRect();
-      setBoardSize({ w: rect.width, h: rect.height });
-    };
-    measure();
-    const ro = new ResizeObserver(measure);
-    if (stageRef.current) ro.observe(stageRef.current);
-    return () => ro.disconnect();
-  }, []);
-
-  const cardSize = useMemo(() => {
-    const CARD_ASPECT_RATIO = 65 / 112;
-    const widthFraction = CARD_WIDTH_FRACTION[kind] || 0.12;
-    const w = Math.min(boardSize.w * widthFraction, 180);
-    const h = w / CARD_ASPECT_RATIO;
-    return { w, h };
-  }, [boardSize, kind]);
-
-  const positions: Position[] = customPositions && customPositions.length
+  const positions: Position[] =
+    customPositions && customPositions.length
       ? customPositions
       : positionsFor(kind, cards.length);
 
+  const widthPct = cardWidthPct ?? DEFAULT_CARD_WIDTH[kind];
+
+  const boardAspectRatio = 16 / 9;
+  const cardAspectRatio = 65 / 112;
+  const heightPct = widthPct * (boardAspectRatio / cardAspectRatio);
+  const halfW = widthPct / 2;
+  const halfH = heightPct / 2;
+
   return (
     <div
-      ref={stageRef}
       className={cn(
-        "spread-stage bg-gradient-to-b from-purple-500/10 to-indigo-600/10",
+        "relative w-full rounded-2xl border border-white/10",
+        "bg-gradient-to-b from-purple-500/10 to-indigo-600/10 overflow-hidden",
         "shadow-[inset_0_0_40px_rgba(0,0,0,.35)]",
         className
       )}
       style={{ aspectRatio: "16 / 9" }}
     >
-      {boardSize.w > 0 && cards.map((card, i) => {
+      {cards.map((card, i) => {
         const p = positions[i];
         if (!p) return null;
 
-        const targetX = p.x * boardSize.w;
-        const targetY = p.y * boardSize.h;
+        const targetX = p.x * 100;
+        const targetY = p.y * 100;
 
-        const left = clamp(targetX - cardSize.w / 2, 0, boardSize.w - cardSize.w);
-        const top = clamp(targetY - cardSize.h / 2, 0, boardSize.h - cardSize.h);
-        
+        const finalX = Math.max(halfW, Math.min(100 - halfW, targetX));
+        const finalY = Math.max(halfH, Math.min(100 - halfH, targetY));
+
+        const left = `${finalX.toFixed(2)}%`;
+        const top = `${finalY.toFixed(2)}%`;
         const rot = p.r ?? 0;
         const z = p.z ?? (i + 1);
         const ann = annotations?.[i];
@@ -199,19 +197,19 @@ export default function TarotSpreadBoard({
         return (
           <div
             key={card.id + "_" + i}
-            className="tarot-card-container"
+            className="absolute"
             style={{
-              width: cardSize.w,
-              height: cardSize.h,
-              left: left,
-              top: top,
-              transform: `rotate(${rot}deg)`,
+              left,
+              top,
+              width: `${widthPct}%`,
+              transform: `translate(-50%, -50%) rotate(${rot}deg)`,
               zIndex: z,
             }}
           >
             <div
-              className="relative w-full h-full rounded-xl overflow-hidden border border-white/10
+              className="relative w-full rounded-xl overflow-hidden border border-white/10
                          bg-gradient-to-b from-stone-800/40 to-stone-900/60"
+              style={{ aspectRatio: `${cardAspectRatio}` }}
             >
               <img
                 src={card.imageUrl || '/tarot/back.svg'}
