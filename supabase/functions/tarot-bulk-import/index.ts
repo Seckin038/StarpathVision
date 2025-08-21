@@ -8,6 +8,8 @@ import { encode } from "https://deno.land/std@0.224.0/encoding/base64.ts";
 const cors = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
+  "Access-Control-Allow-Methods": "POST, OPTIONS",
+  "Access-Control-Max-Age": "86400",
 };
 
 function env(k: string) {
@@ -15,10 +17,6 @@ function env(k: string) {
   if (!v) throw new Error(`Missing env var: ${k}`);
   return v;
 }
-
-// --- AI model (Gemini) ---
-const genAI = new GoogleGenerativeAI(env("GEMINI_API_KEY"));
-const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash-latest" });
 
 const PROMPT = `
 You are an expert in Rider–Waite–Smith tarot identification.
@@ -43,6 +41,13 @@ const RWS_EN_TO_NL = {
   "Ace of Swords": "Aas van Zwaarden", "Two of Swords": "Twee van Zwaarden", "Three of Swords": "Drie van Zwaarden", "Four of Swords": "Vier van Zwaarden", "Five of Swords": "Vijf van Zwaarden", "Six of Swords": "Zes van Zwaarden", "Seven of Swords": "Zeven van Zwaarden", "Eight of Swords": "Acht van Zwaarden", "Nine of Swords": "Negen van Zwaarden", "Ten of Swords": "Tien van Zwaarden", "Page of Swords": "Page van Zwaarden", "Knight of Swords": "Ridder van Zwaarden", "Queen of Swords": "Koningin van Zwaarden", "King of Swords": "Koning van Zwaarden",
   "Ace of Pentacles": "Aas van Pentakels", "Two of Pentacles": "Twee van Pentakels", "Three of Pentacles": "Drie van Pentakels", "Four of Pentacles": "Vier van Pentakels", "Five of Pentacles": "Vijf van Pentakels", "Six of Pentacles": "Zes van Pentakels", "Seven of Pentacles": "Zeven van Pentakels", "Eight of Pentacles": "Acht van Pentakels", "Nine of Pentacles": "Negen van Pentakels", "Ten of Pentacles": "Tien van Pentakels", "Page of Pentacles": "Page van Pentakels", "Knight of Pentacles": "Ridder van Pentakels", "Queen of Pentacles": "Koningin van Pentakels", "King of Pentacles": "Koning van Pentakels"
 };
+
+function getModel() {
+  const key = Deno.env.get("GEMINI_API_KEY");
+  if (!key) return null;
+  const genAI = new GoogleGenerativeAI(key);
+  return genAI.getGenerativeModel({ model: "gemini-1.5-flash-latest" });
+}
 
 // normalize AI/file guesses → canonical RWS name
 function normalizeName(s: string): string | null {
@@ -82,13 +87,14 @@ function normalizeName(s: string): string | null {
 }
 
 async function identifyByAI(bytes: Uint8Array, mime: string): Promise<string | null> {
+  const model = getModel();
+  if (!model) return null;
   const b64 = encode(bytes);
   const res = await model.generateContent([
     PROMPT,
-    { inlineData: { data: b64, mimeType: mime || "image/jpeg" } }
+    { inlineData: { data: b64, mimeType: mime || "image/jpeg" } },
   ]);
-  const text = res?.response?.text?.() ?? "";
-  return text?.trim() || null;
+  return res?.response?.text?.()?.trim() || null;
 }
 
 async function upsertImageForCard(supabase: any, cardNameNl: string, file: Blob, ext: string) {
@@ -149,7 +155,7 @@ async function handleOneUrl(supabaseAdmin: any, url: string) {
   
   const ct = res.headers.get("content-type") || "";
   if (!ct.startsWith("image/")) {
-    throw new Error(`URL is not a direct image link (content-type is '${ct}'). Provide a link ending in .jpg, .png, etc.`);
+    throw new Error(`URL is not a direct image link (Content-Type: '${ct}'). Provide a link ending in .jpg/.png, etc.`);
   }
 
   const ab = new Uint8Array(await res.arrayBuffer());
@@ -158,7 +164,7 @@ async function handleOneUrl(supabaseAdmin: any, url: string) {
 }
 
 serve(async (req) => {
-  if (req.method === "OPTIONS") return new Response(null, { headers: cors });
+  if (req.method === "OPTIONS") return new Response("ok", { headers: cors });
 
   try {
     const supabaseAdmin = createClient(env("SUPABASE_URL"), env("SUPABASE_SERVICE_ROLE_KEY"));
@@ -193,9 +199,14 @@ serve(async (req) => {
       }
     }
 
-    return new Response(JSON.stringify({ results }), { headers: { ...cors, "Content-Type": "application/json" } });
+    return new Response(JSON.stringify({ results }), {
+      headers: { ...cors, "Content-Type": "application/json" },
+    });
   } catch (err) {
-    const errorMessage = err instanceof Error ? err.message : String(err);
-    return new Response(JSON.stringify({ error: errorMessage }), { headers: { ...cors, "Content-Type": "application/json" }, status: 500 });
+    const msg = err instanceof Error ? err.message : String(err);
+    return new Response(JSON.stringify({ error: msg }), {
+      status: 500,
+      headers: { ...cors, "Content-Type": "application/json" },
+    });
   }
 });
