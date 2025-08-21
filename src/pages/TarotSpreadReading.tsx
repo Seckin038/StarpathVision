@@ -3,7 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, Loader2, AlertTriangle, Sparkles, RefreshCw } from "lucide-react";
 import TarotSpreadBoard from "@/components/TarotSpreadBoard";
-import { SpreadKind } from "@/lib/positions";
+import { SpreadKind, positionsFor } from "@/lib/positions";
 import TarotGridDisplay from "@/components/TarotGridDisplay";
 import { useTranslation } from "react-i18next";
 import { Spread, DrawnCard, Locale, SpreadPosition } from "@/types/tarot";
@@ -84,11 +84,32 @@ export default function TarotReadingPage() {
       return;
     }
 
-    const finalDraw: DrawnCard[] = spread.positions.slice(0, spread.cards_required).map((position, index) => ({
+    // Fallback logic: if positions in JSON are incomplete, generate them from hardcoded layouts.
+    const hasValidPositions = spread.positions && spread.positions.length >= spread.cards_required;
+    const positionsToUse = hasValidPositions
+      ? spread.positions
+      : positionsFor(mapSpreadIdToKind(spread.id), spread.cards_required).map((p, i) => ({
+          slot_key: p.label || `pos_${i + 1}`,
+          idx: i + 1,
+          x: p.x,
+          y: p.y,
+          rot: p.r || 0,
+          title: { nl: `Positie ${i + 1}`, en: `Position ${i + 1}`, tr: `Pozisyon ${i + 1}` },
+          upright_copy: { nl: '', en: '', tr: '' },
+          reversed_copy: { nl: '', en: '', tr: '' },
+      }));
+
+    const finalDraw: DrawnCard[] = positionsToUse.slice(0, spread.cards_required).map((position, index) => ({
       positionId: position.slot_key,
       card: selectedCards[index],
       isReversed: spread.allow_reversals ? Math.random() < 0.3 : false,
     }));
+    
+    // If we used the fallback, update the spread in state so the interpretation panel has position data.
+    if (!hasValidPositions) {
+      setSpread(prevSpread => prevSpread ? { ...prevSpread, positions: positionsToUse } : null);
+    }
+
     setDraw(finalDraw);
     setPhase('reading');
   };

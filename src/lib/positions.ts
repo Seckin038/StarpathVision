@@ -29,14 +29,15 @@ export function circlePositions(n:number, opts?:{cx?:number;cy?:number;r?:number
   });
 }
 
-/** Star of David (6 punten), echte 'Sterlegging' */
+/** Hexagon layout for the 6-card Star Spread */
 export function starOfDavid6(): Position[] {
-  const cx = 0.5, cy = 0.5, r = 0.34;
-  const base = (deg:number)=>({ x: cx + r*Math.cos(deg*Math.PI/180), y: cy + r*Math.sin(deg*Math.PI/180) });
-  // twee gelijkzijdige driehoeken met 60° offset
   return [
-    base(-90), base(30), base(150),     // ▲
-    base(-30), base(90), base(210)      // ▼
+    { x: 0.50, y: 0.16 }, // Top
+    { x: 0.79, y: 0.33 }, // Top-right
+    { x: 0.79, y: 0.67 }, // Bottom-right
+    { x: 0.50, y: 0.84 }, // Bottom
+    { x: 0.21, y: 0.67 }, // Bottom-left
+    { x: 0.21, y: 0.33 }, // Top-left
   ];
 }
 
