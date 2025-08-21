@@ -12,12 +12,6 @@ const cors = {
   "Access-Control-Max-Age": "86400",
 };
 
-function env(k: string) {
-  const v = Deno.env.get(k);
-  if (!v) throw new Error(`Missing env var: ${k}`);
-  return v;
-}
-
 const PROMPT = `
 You are an expert in Rider–Waite–Smith tarot identification.
 Return ONLY the official English card name, no extra words.
@@ -49,7 +43,6 @@ function getModel() {
   return genAI.getGenerativeModel({ model: "gemini-1.5-flash-latest" });
 }
 
-// normalize AI/file guesses → canonical RWS name
 function normalizeName(s: string): string | null {
   if (!s) return null;
   let x = s.trim()
@@ -65,9 +58,7 @@ function normalizeName(s: string): string | null {
     .replace(/\bthe hanged man\b/gi,"The Hanged Man")
     .replace(/\bwheel of fortune\b/gi,"Wheel of Fortune")
     .replace(/\b(stregnth|strenght)\b/gi,"Strength");
-  // try majors
   for (const m of MAJORS) if (x.toLowerCase() === m.toLowerCase()) return m;
-  // try minors
   const m = x.match(/(Ace|Two|Three|Four|Five|Six|Seven|Eight|Nine|Ten|Page|Knight|Queen|King)\s+of\s+(Wands|Cups|Swords|Pentacles)/i);
   if (m) {
     const rank = RANKS.find(r => r.toLowerCase() === m[1].toLowerCase());
@@ -103,28 +94,20 @@ async function upsertImageForCard(supabase: any, cardNameNl: string, file: Blob,
     .select("id,name")
     .ilike("name", cardNameNl)
     .single();
-
-  if (error || !card) {
-    throw new Error(`Card '${cardNameNl}' not found in tarot_cards`);
-  }
-
+  if (error || !card) throw new Error(`Card '${cardNameNl}' not found in tarot_cards`);
   const id = card.id;
   const path = `${id}.${ext || "jpg"}`;
-
   const { error: upErr } = await supabase.storage
     .from("tarot-cards")
     .upload(path, file, { cacheControl: "31536000", upsert: true });
   if (upErr) throw new Error(`Upload failed: ${upErr.message}`);
-
   const { data: urlData } = supabase.storage.from("tarot-cards").getPublicUrl(path);
   const publicUrl = urlData.publicUrl;
-
   const { error: updErr } = await supabase
     .from("tarot_cards")
     .update({ image_url: publicUrl })
     .eq("id", id);
   if (updErr) throw new Error(`DB update failed: ${updErr.message}`);
-
   return { id, name: card.name, imageUrl: publicUrl };
 }
 
@@ -133,31 +116,25 @@ async function handleOneBlob(supabaseAdmin: any, file: Blob, filename?: string) 
   if (file.size > MAX_SIZE_MB * 1024 * 1024) {
     throw new Error(`File too large (${(file.size / 1024 / 1024).toFixed(1)}MB). Limit is ${MAX_SIZE_MB}MB.`);
   }
-
   const buf = new Uint8Array(await file.arrayBuffer());
   const mime = file.type || "image/jpeg";
   const ext = (filename?.split(".").pop() || "").toLowerCase() || mime.split("/")[1] || "jpg";
-
   const fromName = filename ? normalizeName(filename) : null;
   const cardNameEn = fromName ?? (await identifyByAI(buf, mime)) ?? "";
   const normalizedEn = normalizeName(cardNameEn || "");
   if (!normalizedEn) throw new Error(`Could not identify card (AI + filename failed)`);
-
   const cardNameNl = RWS_EN_TO_NL[normalizedEn];
   if (!cardNameNl) throw new Error(`Could not map English name '${normalizedEn}' to Dutch name.`);
-
   return await upsertImageForCard(supabaseAdmin, cardNameNl, new Blob([buf], { type: mime }), ext);
 }
 
 async function handleOneUrl(supabaseAdmin: any, url: string) {
   const res = await fetch(url);
   if (!res.ok) throw new Error(`Download failed: ${res.status} ${res.statusText}`);
-  
   const ct = res.headers.get("content-type") || "";
   if (!ct.startsWith("image/")) {
     throw new Error(`URL is geen directe afbeelding (Content-Type: '${ct}'). Gebruik een .jpg/.png e.d.`);
   }
-
   const ab = new Uint8Array(await res.arrayBuffer());
   const fn = url.split("/").pop() || "image.jpg";
   return await handleOneBlob(supabaseAdmin, new Blob([ab], { type: ct }), fn);
@@ -169,7 +146,12 @@ serve(async (req) => {
   }
 
   try {
-    const supabaseAdmin = createClient(env("SUPABASE_URL"), env("SUPABASE_SERVICE_ROLE_KEY"));
+    const supabaseUrl = Deno.env.get("SUPABASE_URL");
+    const serviceRoleKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
+    if (!supabaseUrl || !serviceRoleKey) {
+      throw new Error("Missing Supabase environment variables on server.");
+    }
+    const supabaseAdmin = createClient(supabaseUrl, serviceRoleKey);
 
     let results: any[] = [];
     const ctype = req.headers.get("content-type") || "";
@@ -182,8 +164,7 @@ serve(async (req) => {
           const r = await handleOneUrl(supabaseAdmin, u);
           results.push({ ok: true, via: "url", url: u, ...r });
         } catch (e) {
-          const errorMessage = e instanceof Error ? e.message : String(e);
-          results.push({ ok: false, via: "url", url: u, error: errorMessage });
+          results.push({ ok: false, via: "url", url: u, error: e.message });
         }
       }
     } else {
@@ -195,8 +176,7 @@ serve(async (req) => {
           const r = await handleOneBlob(supabaseAdmin, f, (f as File).name);
           results.push({ ok: true, via: "file", file: (f as File).name, ...r });
         } catch (e) {
-          const errorMessage = e instanceof Error ? e.message : String(e);
-          results.push({ ok: false, via: "file", file: (f as File).name, error: errorMessage });
+          results.push({ ok: false, via: "file", file: (f as File).name, error: e.message });
         }
       }
     }
