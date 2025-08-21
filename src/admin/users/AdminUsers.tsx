@@ -46,12 +46,20 @@ export default function AdminUsers() {
   };
 
   const handleDeleteUser = async (userId: string) => {
-    if (!window.confirm("Weet je zeker dat je deze gebruiker permanent wilt verwijderen? Dit kan niet ongedaan worden gemaakt.")) {
+    if (!window.confirm("Weet je zeker dat je deze gebruiker permanent wilt verwijderen? Dit kan niet ongedaan worden gemaakt en verwijdert de gebruiker uit de 'auth.users' tabel.")) {
       return;
     }
-    // Note: Deleting a user requires an edge function with admin privileges.
-    // This function needs to be created. For now, we'll call a placeholder.
-    showError("Verwijder-functie is nog niet geïmplementeerd.");
+    
+    const { error } = await supabase.functions.invoke("admin-delete-user", {
+      body: { userIdToDelete: userId },
+    });
+
+    if (error) {
+      showError(`Verwijderen mislukt: ${error.message}`);
+    } else {
+      showSuccess("Gebruiker succesvol verwijderd.");
+      fetchProfiles(); // Refresh the list
+    }
   }
 
   if (loading) {
