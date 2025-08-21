@@ -2,7 +2,8 @@ import { useState, useEffect, useCallback } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, Loader2, AlertTriangle, Sparkles, RefreshCw } from "lucide-react";
-import TarotSpreadBoard, { SpreadKind, Position } from "@/components/TarotSpreadBoard";
+import TarotSpreadBoard from "@/components/TarotSpreadBoard";
+import { SpreadKind } from "@/lib/positions";
 import TarotGridDisplay from "@/components/TarotGridDisplay";
 import { useTranslation } from "react-i18next";
 import { Spread, DrawnCard, Locale, SpreadPosition } from "@/types/tarot";
@@ -13,6 +14,7 @@ import { PersonaPicker } from "@/components/PersonaPicker";
 import { PersonaBadge } from "@/components/PersonaBadge";
 import { Card, CardContent } from "@/components/ui/card";
 import { useTarotDeck } from "@/hooks/useTarotDeck";
+import { normalizePositions } from "@/lib/positions";
 
 type Phase = 'loading' | 'error' | 'picking' | 'reading';
 
@@ -200,13 +202,15 @@ export default function TarotReadingPage() {
 
     if (phase === 'reading' && spread && draw.length > 0) {
       const spreadKind = mapSpreadIdToKind(spread.id);
-      const customPositions = spread.positions?.map(p => ({ x: p.x, y: p.y, r: p.rot, label: p.slot_key }));
+      const customPositions = spread.positions?.length
+        ? normalizePositions(spread.positions.map(p => ({ x:p.x, y:p.y, rot:p.rot, slot_key:p.slot_key })))
+        : undefined;
 
       return (
         <div className="space-y-8">
           <TarotSpreadBoard
             cards={draw.map(d => ({ id: d.card.id, name: d.card.name, imageUrl: d.card.imageUrl }))}
-            kind={spreadKind}
+            kind={customPositions ? "custom" : spreadKind}
             customPositions={customPositions}
             annotations={annotations}
             cardsFlipped={cardsFlipped}
