@@ -30,7 +30,8 @@ export default function TarotSpreadBoard({
   cards, kind="ppf-3", customPositions, cardWidthPct, className,
   annotations, cardsFlipped, debugGrid
 }: Props) {
-  const positions: Position[] = (customPositions?.length ? customPositions : positionsFor(kind, cards.length));
+  const fallback = positionsFor(kind, cards.length);
+  const positions: Position[] = Array.from({ length: cards.length }, (_, i) => customPositions?.[i] ?? fallback[i]);
 
   const widthPct = cardWidthPct ?? DEFAULT_CARD_WIDTH[kind];
   const halfW = widthPct / 2;

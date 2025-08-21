@@ -230,9 +230,10 @@ export default function TarotReadingPage() {
 
     if (phase === 'reading' && spread && draw.length > 0) {
       const spreadKind = mapSpreadIdToKind(spread.id);
-      const customPositions = spread.positions?.length
-        ? normalizePositions(spread.positions.map(p => ({ x:p.x, y:p.y, rot:p.rot, slot_key:p.slot_key })))
-        : undefined;
+      const customPositions =
+        (spread.positions?.length ?? 0) >= spread.cards_required
+          ? normalizePositions(spread.positions.map(p => ({ x:p.x, y:p.y, rot:p.rot, slot_key:p.slot_key })))
+          : undefined;
 
       return (
         <div className="space-y-8">
