@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import AdminLayout from "./shell/AdminLayout";
 import RequireRole from "./shell/RequireRole";
 import AdminCards from "./cards/AdminCards";
@@ -8,13 +8,14 @@ import AdminAudit from "./audit/AdminAudit";
 import AdminSpreads from "./spreads/AdminSpreads";
 import AdminUsers from "./users/AdminUsers";
 import AdminFeatures from "./features/AdminFeatures";
+import AdminHome from "./AdminHome";
 
 export default function AdminRoutes() {
   return (
     <RequireRole roles={["admin","editor"]}>
       <AdminLayout>
         <Routes>
-          <Route path="/" element={<Navigate to="spreads" replace />} />
+          <Route path="/" element={<AdminHome />} />
           <Route path="cards" element={<AdminCards />} />
           <Route path="personas" element={<AdminPersonas />} />
           <Route path="translations" element={<AdminTranslations />} />

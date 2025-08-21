@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
+import AdminRoleSwitch from "@/components/AdminRoleSwitch";
 
 const Dashboard = () => {
   const { user, signOut } = useAuth();
@@ -61,6 +62,7 @@ const Dashboard = () => {
           <p className="text-stone-400">Wat wil je vandaag ontdekken?</p>
         </div>
         <div className="flex items-center gap-2">
+          <AdminRoleSwitch />
           <Link to="/profile">
             <Button variant="outline" size="icon" className="border-stone-700 text-stone-300 hover:bg-stone-800">
               <Settings className="h-4 w-4" />

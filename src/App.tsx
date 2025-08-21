@@ -22,8 +22,8 @@ import LoginPage from "./pages/Login";
 import RegisterPage from "./pages/Register";
 import ForgotPasswordPage from "./pages/ForgotPassword";
 import ProfilePage from "./pages/Profile";
-import AdminDashboardPage from "./pages/admin/Index";
-import ReadingDetailPage from "./pages/ReadingDetail"; // Nieuwe import
+import AdminRoutes from "./admin";
+import ReadingDetailPage from "./pages/ReadingDetail";
 
 const queryClient = new QueryClient();
 
@@ -49,9 +49,11 @@ const App = () => (
               <Route path="/dashboard" element={<RequireAuth><Dashboard /></RequireAuth>} />
               <Route path="/archive" element={<RequireAuth><Archive /></RequireAuth>} />
               <Route path="/profile" element={<RequireAuth><ProfilePage /></RequireAuth>} />
-              <Route path="/reading/:id" element={<RequireAuth><ReadingDetailPage /></RequireAuth>} /> {/* Nieuwe route */}
+              <Route path="/reading/:id" element={<RequireAuth><ReadingDetailPage /></RequireAuth>} />
               <Route path="/onboarding" element={<RequireAuth><Onboarding /></RequireAuth>} />
-              <Route path="/admin" element={<RequireAuth><AdminDashboardPage /></RequireAuth>} />
+              
+              {/* Admin Routes */}
+              <Route path="/admin/*" element={<AdminRoutes />} />
 
               {/* Protected Reading Routes */}
               <Route path="/readings/tarot" element={<RequireAuth><TarotChoice /></RequireAuth>} />

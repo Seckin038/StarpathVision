@@ -207,7 +207,8 @@ serve(async (req) => {
           method: 'tarot',
           spread_id: body.spread.id,
           title: body.spread.name,
-          payload: { spread: body.spread, cards: body.cards, personaId: body.personaId, locale: body.locale },
+          locale: body.locale,
+          payload: { spread: body.spread, cards: body.cards, personaId: body.personaId },
           interpretation: jsonData,
         });
       }
