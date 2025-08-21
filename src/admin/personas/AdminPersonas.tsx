@@ -22,12 +22,14 @@ type Persona = {
   symbols: string[];
   rules: string[];
   archetypes: string[];
-  usage_stats: any;
-  example_answers: any;
   prompt_template: string;
   is_premium: boolean;
   quality_of_service: number;
 };
+
+// Helper to convert array to comma-separated string and back
+const arrayToString = (arr: string[] | null | undefined) => (arr || []).join(", ");
+const stringToArray = (str: string) => str.split(",").map(s => s.trim()).filter(Boolean);
 
 export default function AdminPersonas() {
   const [personas, setPersonas] = useState<Persona[]>([]);
@@ -75,8 +77,6 @@ export default function AdminPersonas() {
       symbols: [],
       rules: [],
       archetypes: [],
-      usage_stats: {},
-      example_answers: {},
       prompt_template: "",
       is_premium: false,
       quality_of_service: 3,
@@ -93,20 +93,47 @@ export default function AdminPersonas() {
         <CardHeader>
           <CardTitle className="text-amber-200">{editing.id ? `Bewerk: ${editing.id}` : "Nieuwe Persona"}</CardTitle>
         </CardHeader>
-        <CardContent className="space-y-4">
-          <Input placeholder="ID" value={editing.id} onChange={e => setEditing({ ...editing, id: e.target.value })} />
-          {/* Add more fields for editing here */}
-          <Textarea 
-            placeholder="Prompt Template" 
-            value={editing.prompt_template} 
-            onChange={e => setEditing({ ...editing, prompt_template: e.target.value })}
-            rows={5}
-          />
-          <div className="flex items-center space-x-2">
-            <Switch id="is_premium" checked={editing.is_premium} onCheckedChange={c => setEditing({...editing, is_premium: c})} />
-            <Label htmlFor="is_premium">Premium</Label>
+        <CardContent className="space-y-6 pt-4">
+          <div className="grid md:grid-cols-2 gap-6">
+            <div className="space-y-4">
+              <Input placeholder="ID (uniek, bv. 'falya')" value={editing.id} onChange={e => setEditing({ ...editing, id: e.target.value })} />
+              <div className="grid grid-cols-2 gap-2">
+                <Input placeholder="Gender" value={editing.gender} onChange={e => setEditing({ ...editing, gender: e.target.value })} />
+                <Input type="number" placeholder="Leeftijd" value={editing.age} onChange={e => setEditing({ ...editing, age: parseInt(e.target.value) || 0 })} />
+              </div>
+              <Label>Display Naam</Label>
+              <div className="grid grid-cols-3 gap-2">
+                <Input placeholder="nl" value={editing.display_name?.nl || ""} onChange={e => setEditing({ ...editing, display_name: {...editing.display_name, nl: e.target.value} })} />
+                <Input placeholder="en" value={editing.display_name?.en || ""} onChange={e => setEditing({ ...editing, display_name: {...editing.display_name, en: e.target.value} })} />
+                <Input placeholder="tr" value={editing.display_name?.tr || ""} onChange={e => setEditing({ ...editing, display_name: {...editing.display_name, tr: e.target.value} })} />
+              </div>
+              <Label>Achtergrond</Label>
+              <Textarea placeholder="nl" value={editing.background?.nl || ""} onChange={e => setEditing({ ...editing, background: {...editing.background, nl: e.target.value} })} />
+              <Label>Methodes (komma-gescheiden)</Label>
+              <Textarea value={arrayToString(editing.methods)} onChange={e => setEditing({ ...editing, methods: stringToArray(e.target.value) })} />
+            </div>
+            <div className="space-y-4">
+              <Label>Stijl (1 per regel per taal)</Label>
+              <div className="grid grid-cols-3 gap-2">
+                <Textarea placeholder="nl" value={(editing.style?.nl || []).join('\n')} onChange={e => setEditing({ ...editing, style: {...editing.style, nl: e.target.value.split('\n')} })} />
+                <Textarea placeholder="en" value={(editing.style?.en || []).join('\n')} onChange={e => setEditing({ ...editing, style: {...editing.style, en: e.target.value.split('\n')} })} />
+                <Textarea placeholder="tr" value={(editing.style?.tr || []).join('\n')} onChange={e => setEditing({ ...editing, style: {...editing.style, tr: e.target.value.split('\n')} })} />
+              </div>
+              <Label>Prompt Template</Label>
+              <Textarea value={editing.prompt_template} onChange={e => setEditing({ ...editing, prompt_template: e.target.value })} rows={8} />
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-2">
+                  <Switch id="is_premium" checked={editing.is_premium} onCheckedChange={c => setEditing({...editing, is_premium: c})} />
+                  <Label htmlFor="is_premium">Premium</Label>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Label>QoS</Label>
+                  <Input type="number" min="1" max="5" className="w-20" value={editing.quality_of_service} onChange={e => setEditing({ ...editing, quality_of_service: parseInt(e.target.value) || 3 })} />
+                </div>
+              </div>
+            </div>
           </div>
-          <div className="flex gap-2">
+          <div className="flex gap-2 pt-4 border-t border-stone-800">
             <Button onClick={handleSave}>Opslaan</Button>
             <Button variant="outline" onClick={() => setEditing(null)}>Annuleren</Button>
           </div>
