@@ -1,6 +1,6 @@
 import React, { useMemo, useRef, useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { cn } from '@/lib/utils'; // Assuming cn utility is available
+import { cn } from '@/lib/utils';
 
 // Types
 export type CardItem = { id: string; name: string; imageUrl?: string }
@@ -14,7 +14,7 @@ export type SpreadName =
   | 'YearAhead12'
   | 'NineSquare'
 
-export type CardAnnotation = { title: string; label: string; copy?: string }; // NEW
+export type CardAnnotation = { title: string; label: string; copy?: string };
 
 // Utility: clamp
 const clamp = (v: number, min: number, max: number) => Math.max(min, Math.min(max, v))
@@ -47,7 +47,6 @@ function layoutFor(
       return positions
     }
     case 'Cross5': {
-      // center, north, south, west, east
       const map = [
         { x: 0.5, y: 0.5 },
         { x: 0.5, y: 0.22 },
@@ -58,37 +57,29 @@ function layoutFor(
       return map.slice(0, Math.min(5, count))
     }
     case 'CelticCross10': {
-      // Classic 10-card layout
-      //  1 center, 2 crossing (rotated), 3 left, 4 below, 5 above, 6 right,
-      //  7..10 vertical staff on right
       const P = {
-        c: { x: 0.35, y: 0.5 }, // center cluster area
+        c: { x: 0.35, y: 0.5 },
         right: 0.7,
-        left: 0.1,
-        top: 0.25,
-        bottom: 0.75,
-        space: 0.12, // spacing between staff cards
+        space: 0.12,
       }
       const out = [
-        { x: P.c.x, y: P.c.y }, // 1
-        { x: P.c.x, y: P.c.y, r: 90, z: 2 }, // 2 (crossing)
-        { x: P.c.x - 0.18, y: P.c.y }, // 3 left
-        { x: P.c.x, y: P.c.y + 0.22 }, // 4 bottom
-        { x: P.c.x, y: P.c.y - 0.22 }, // 5 top
-        { x: P.c.x + 0.18, y: P.c.y }, // 6 right (bridge to staff)
-        { x: P.right, y: P.top }, // 7
-        { x: P.right, y: P.top + P.space }, // 8
-        { x: P.right, y: P.top + P.space * 2 }, // 9
-        { x: P.right, y: P.top + P.space * 3 }, // 10
+        { x: P.c.x, y: P.c.y },
+        { x: P.c.x, y: P.c.y, r: 90, z: 2 },
+        { x: P.c.x - 0.18, y: P.c.y },
+        { x: P.c.x, y: P.c.y + 0.22 },
+        { x: P.c.x, y: P.c.y - 0.22 },
+        { x: P.c.x + 0.18, y: P.c.y },
+        { x: P.right, y: 0.25 },
+        { x: P.right, y: 0.25 + P.space },
+        { x: P.right, y: 0.25 + P.space * 2 },
+        { x: P.right, y: 0.25 + P.space * 3 },
       ]
       return out.slice(0, Math.min(10, count))
     }
     case 'Star7': {
-      // 6 around + 1 center (hexagram-like ring, center last)
       const around = Math.min(count - 1, 6)
       const radius = 0.33
-      const cx = 0.5
-      const cy = 0.5
+      const cx = 0.5, cy = 0.5
       const pts: { x: number; y: number }[] = []
       for (let i = 0; i < around; i++) {
         const angle = ((-90 + i * (360 / around)) * Math.PI) / 180
@@ -98,11 +89,9 @@ function layoutFor(
       return pts
     }
     case 'Horseshoe7': {
-      // 7-card arc from left to right (open at top)
       const n = Math.min(count, 7)
       const pts: { x: number; y: number }[] = []
-      const start = 200
-      const end = -20
+      const start = 200, end = -20
       for (let i = 0; i < n; i++) {
         const t = n === 1 ? 0.5 : i / (n - 1)
         const angle = ((start + t * (end - start)) * Math.PI) / 180
@@ -112,20 +101,16 @@ function layoutFor(
       return pts
     }
     case 'YearAhead12': {
-      // 12 months around a circle
       const n = Math.min(count, 12)
       const r = 0.38
-      const cx = 0.5
-      const cy = 0.5
+      const cx = 0.5, cy = 0.5
       return new Array(n).fill(0).map((_, i) => {
         const angle = ((-90 + (i * 360) / n) * Math.PI) / 180
         return { x: cx + r * Math.cos(angle), y: cy + r * Math.sin(angle) }
       })
     }
     case 'NineSquare': {
-      // 3×3 box (past-present-future × mind-heart-action, for example)
-      const cols = 3
-      const rows = 3
+      const cols = 3, rows = 3
       const n = Math.min(count, 9)
       const pts: { x: number; y: number }[] = []
       for (let i = 0; i < n; i++) {
@@ -133,7 +118,6 @@ function layoutFor(
         const col = i % cols
         pts.push({ x: (col + 0.5) / cols, y: (row + 0.5) / rows })
       }
-      // center layout inside board (shrink slightly)
       return pts.map(p => ({ x: 0.5 + (p.x - 0.5) * 0.9, y: 0.5 + (p.y - 0.5) * 0.9 }))
     }
     default:
@@ -142,28 +126,32 @@ function layoutFor(
 }
 
 // Card visual
-function TarotCard({ card, w, r = 0, label }: { card: CardItem; w: number; r?: number; label?: string }) {
+function TarotCard({ card, w, r = 0, isFlipped }: { card: CardItem; w: number; r?: number; isFlipped?: boolean }) {
   const h = Math.round(w * 1.62)
-  const hasImg = !!card.imageUrl
+  
   return (
-    <div className="relative select-none" style={{ width: w, height: h }}>
+    <div className="relative select-none" style={{ width: w, height: h, perspective: '1000px' }}>
       <motion.div
-        className="absolute inset-0 rounded-2xl shadow-lg overflow-hidden border border-white/10 bg-gradient-to-br from-indigo-700/40 to-fuchsia-700/40 backdrop-blur-sm"
-        style={{ rotate: r }}
+        className="absolute inset-0"
+        style={{ transformStyle: 'preserve-3d', rotate: r }}
         initial={{ scale: 0.9, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
+        animate={{ scale: 1, opacity: 1, rotateY: isFlipped ? 180 : 0 }}
         transition={{ type: 'spring', stiffness: 220, damping: 24 }}
       >
-        {hasImg ? (
-          <img src={card.imageUrl} alt={card.name} className="w-full h-full object-cover" />
-        ) : (
-          <div className="w-full h-full flex items-center justify-center">
-            <div className="text-center px-2">
-              <div className="text-xs uppercase tracking-widest opacity-70">{label ?? card.id}</div>
-              <div className="text-sm font-semibold">{card.name}</div>
+        {/* Back */}
+        <div className="absolute inset-0 rounded-2xl shadow-lg overflow-hidden border border-white/10 bg-gradient-to-br from-indigo-700/40 to-fuchsia-700/40" style={{ backfaceVisibility: 'hidden' }}>
+          <img src="/tarot/back.svg" alt="Tarot card back" className="w-full h-full object-cover" />
+        </div>
+        {/* Front */}
+        <div className="absolute inset-0 rounded-2xl shadow-lg overflow-hidden border border-white/10 bg-stone-900" style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}>
+          {card.imageUrl ? (
+            <img src={card.imageUrl} alt={card.name} className="w-full h-full object-cover" loading="lazy" />
+          ) : (
+            <div className="w-full h-full flex items-center justify-center text-center p-2">
+              <span className="text-sm font-semibold">{card.name}</span>
             </div>
-          </div>
-        )}
+          )}
+        </div>
       </motion.div>
     </div>
   )
@@ -171,50 +159,22 @@ function TarotCard({ card, w, r = 0, label }: { card: CardItem; w: number; r?: n
 
 // Main board component
 export default function TarotSpreadBoard({
-  deck,
   selectedCards,
   spread: spreadProp,
-  mode,
-  onSpreadChange,
-  annotations, // NEW
+  annotations,
   cardsFlipped,
+  mode,
 }: {
-  deck?: CardItem[]
-  selectedCards?: CardItem[]
-  spread?: SpreadName
-  mode?: 'grid' | 'spread'
-  onSpreadChange?: (s: SpreadName) => void
-  annotations?: CardAnnotation[]; // NEW
+  selectedCards: CardItem[]
+  spread: SpreadName
+  annotations?: CardAnnotation[];
   cardsFlipped?: boolean;
+  mode?: 'grid' | 'spread';
 }) {
-  // Demo fallback deck (78 placeholder cards)
-  const fallbackDeck = useMemo<CardItem[]>(() => {
-    const names = [
-      'The Fool','The Magician','The High Priestess','The Empress','The Emperor','The Hierophant','The Lovers','The Chariot','Strength','The Hermit','Wheel of Fortune','Justice','The Hanged Man','Death','Temperance','The Devil','The Tower','The Star','The Moon','The Sun','Judgement','The World',
-    ]
-    // 22 majors + 56 minors placeholder labels
-    const majors = names.map((n, i) => ({ id: `MA${i+0}`.padStart(3,'0'), name: n }))
-    const suits = ['Wands','Cups','Swords','Pentacles']
-    const ranks = ['Ace','Two','Three','Four','Five','Six','Seven','Eight','Nine','Ten','Page','Knight','Queen','King']
-    const minors: CardItem[] = []
-    suits.forEach((suit, s) => {
-      ranks.forEach((rank, r) => minors.push({ id: `MI${s}${r}`.padStart(3,'0'), name: `${rank} of ${suit}` }))
-    })
-    const full = [...majors, ...minors]
-    return full.slice(0, 78)
-  }, [])
-
-  const DECK = deck && deck.length === 78 ? deck : fallbackDeck
-
   const [spread, setSpread] = useState<SpreadName>(spreadProp ?? 'CelticCross10')
   useEffect(() => {
     if (spreadProp) setSpread(spreadProp)
   }, [spreadProp])
-
-  const [picked, setPicked] = useState<CardItem[]>(selectedCards ?? [])
-  useEffect(() => {
-    if (selectedCards) setPicked(selectedCards)
-  }, [selectedCards])
 
   const [containerSize, setContainerSize] = useState({ w: 0, h: 0 })
   const ref = useRef<HTMLDivElement>(null)
@@ -229,39 +189,13 @@ export default function TarotSpreadBoard({
     return () => ro.disconnect()
   }, [])
 
-  const effectiveMode: 'grid' | 'spread' = mode ?? (picked.length ? 'spread' : 'grid')
-
   const positions = useMemo(() => {
-    if (effectiveMode === 'grid') return layoutFor('Grid6x13', 78)
-    switch (spread) {
-      case 'CelticCross10':
-        return layoutFor('CelticCross10', Math.min(picked.length, 10))
-      case 'Cross5':
-        return layoutFor('Cross5', Math.min(picked.length, 5))
-      case 'Star7':
-        return layoutFor('Star7', Math.min(picked.length, 7))
-      case 'Horseshoe7':
-        return layoutFor('Horseshoe7', Math.min(picked.length, 7))
-      case 'YearAhead12':
-        return layoutFor('YearAhead12', Math.min(picked.length, 12))
-      case 'NineSquare':
-        return layoutFor('NineSquare', Math.min(picked.length, 9))
-      case 'Line3':
-      default:
-        return layoutFor('Line3', Math.min(picked.length, 3))
-    }
-  }, [effectiveMode, spread, picked.length])
+    return layoutFor(spread, selectedCards.length)
+  }, [spread, selectedCards.length])
 
-  // Compute card width from container & spread density
   const cardW = useMemo(() => {
     const { w, h } = containerSize
     if (w === 0 || h === 0) return 120
-    if (effectiveMode === 'grid') {
-      // 13 columns with gaps
-      const g = 8
-      return clamp(Math.floor((w - g * 12) / 13), 60, 160)
-    }
-    // heuristic sizes per spread
     const map: Record<SpreadName, number> = {
       CelticCross10: Math.min(w, h) * 0.14,
       Cross5: Math.min(w, h) * 0.16,
@@ -273,7 +207,7 @@ export default function TarotSpreadBoard({
       Grid6x13: Math.min(w, h) * 0.08,
     }
     return clamp(Math.round(map[spread]), 72, 200)
-  }, [containerSize, spread, effectiveMode])
+  }, [containerSize, spread])
 
   return (
     <div className="w-full h-full flex flex-col gap-3 text-white">
@@ -284,42 +218,42 @@ export default function TarotSpreadBoard({
         <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'radial-gradient(circle at 50% 50%, rgba(255,255,255,0.06), transparent 60%)' }} />
           <AnimatePresence>
             {positions.map((p, i) => {
-              const card = picked[i]
+              const card = selectedCards[i]
               if (!card) return null
               const left = `calc(${(p.x * 100).toFixed(2)}% - ${cardW / 2}px)`
-              const cardH = Math.round(cardW * 1.62); // NEW
-              const topCard = `calc(${(p.y * 100).toFixed(2)}% - ${cardH / 2}px)`; // NEW
-              const topLabel = `calc(${(p.y * 100).toFixed(2)}% + ${cardH / 2 + 6}px)`; // NEW
-              const ann = annotations?.[i]; // NEW
+              const cardH = Math.round(cardW * 1.62);
+              const topCard = `calc(${(p.y * 100).toFixed(2)}% - ${cardH / 2}px)`;
+              const topLabel = `calc(${(p.y * 100).toFixed(2)}% + ${cardH / 2 + 6}px)`;
+              const ann = annotations?.[i];
 
               return (
-                <div key={card.id + String(i)}> {/* Wrap card and annotation in a single div */}
-                  {/* kaart */}
+                <React.Fragment key={card.id + String(i)}>
                   <motion.div
                     className="absolute"
-                    style={{ left, top: topCard, zIndex: (p as any).z ?? (i + 1) }} // Use topCard
+                    style={{ left, top: topCard, zIndex: (p as any).z ?? (i + 1) }}
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ type: 'spring', stiffness: 220, damping: 24, delay: i * 0.03 }}
                   >
-                    <TarotCard card={card} w={cardW} r={p.r} label={`#${i+1}`} />
+                    <TarotCard card={card} w={cardW} r={p.r} isFlipped={cardsFlipped} />
                   </motion.div>
 
-                  {/* label/copy */}
-                  {ann && ( // NEW
-                    <div
+                  {ann && cardsFlipped && (
+                    <motion.div
                       className={cn(
                         "absolute text-[11px] leading-snug text-amber-100/90",
-                        "px-2 py-1 rounded-md bg-stone-950/70 border border-white/10 backdrop-blur-sm" // Apply styling here
+                        "px-2 py-1 rounded-md bg-stone-950/70 border border-white/10 backdrop-blur-sm"
                       )}
                       style={{ left, top: topLabel, width: cardW, zIndex: 999 }}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ delay: 0.5 + i * 0.05 }}
                     >
                       <div className="font-semibold truncate">{ann.title}</div>
                       <div className="opacity-80 italic">{ann.label}</div>
-                      {ann.copy && <div className="opacity-80 mt-1 line-clamp-3">{ann.copy}</div>}
-                    </div>
+                    </motion.div>
                   )}
-                </div>
+                </React.Fragment>
               )
             })}
           </AnimatePresence>

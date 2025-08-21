@@ -1,12 +1,12 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, Loader2, AlertTriangle, Sparkles, RefreshCw } from "lucide-react";
-import TarotSpreadBoard from "@/components/TarotSpreadBoard";
+import TarotSpreadBoard, { SpreadName } from "@/components/TarotSpreadBoard";
 import TarotGridDisplay from "@/components/TarotGridDisplay";
 import { useTranslation } from "react-i18next";
 import { Spread, DrawnCard, Locale, SpreadPosition } from "@/types/tarot";
-import { useTarotInterpretation } from "@/hooks/useTarotInterpretation";
+import { useTarotInterpretation, TarotInterpretationPayload } from "@/hooks/useTarotInterpretation";
 import TarotInterpretationPanel from "@/components/TarotInterpretationPanel";
 import { usePersona } from "@/contexts/PersonaContext";
 import { PersonaPicker } from "@/components/PersonaPicker";
@@ -16,9 +16,13 @@ import { useTarotDeck } from "@/hooks/useTarotDeck";
 
 type Phase = 'loading' | 'error' | 'picking' | 'reading';
 
-function mapSpreadIdToSpreadName(id: string) {
-  // This mapping can be improved, but works as a basic example
+function mapSpreadIdToSpreadName(id: string): SpreadName {
   if (id.includes('celtic-cross')) return 'CelticCross10';
+  if (id.includes('cross-5')) return 'Cross5';
+  if (id.includes('star-7')) return 'Star7';
+  if (id.includes('horseshoe-7')) return 'Horseshoe7';
+  if (id.includes('year-ahead-12')) return 'YearAhead12';
+  if (id.includes('nine-square')) return 'NineSquare';
   return 'Line3';
 }
 
@@ -63,9 +67,9 @@ export default function TarotReadingPage() {
   }, [spreadId, locale]);
 
   const handleConfirmSelection = () => {
-    if (!spread || selectedIndices.length !== spread.cards_required) return;
+    if (!spread || selectedIndices.length !== spread.cards_required || deck.length === 0) return;
 
-    const selectedCards = selectedIndices.map(i => deck[i % deck.length]);
+    const selectedCards = selectedIndices.map(i => deck[i]);
 
     const finalDraw: DrawnCard[] = spread.positions.map((position, index) => ({
       positionId: position.slot_key,
@@ -76,25 +80,31 @@ export default function TarotReadingPage() {
     setPhase('reading');
   };
 
+  const handleGetInterpretation = useCallback(() => {
+    if (!spread || draw.length === 0) return;
+    
+    const payload: TarotInterpretationPayload = {
+      locale,
+      personaId,
+      spread: { id: spread.id, name: spread.name[locale] },
+      spreadGuide: spread.ui_copy[locale]?.subtitle || '',
+      cards: draw.map((c, i) => ({
+        index: i + 1,
+        name: c.card.name,
+        upright: !c.isReversed,
+        position_key: spread.positions[i].slot_key,
+        position_title: spread.positions[i].title[locale],
+      })),
+    };
+    getInterpretation(payload);
+  }, [draw, spread, locale, personaId, getInterpretation]);
+
   useEffect(() => {
-    if (phase === 'reading' && draw.length > 0 && spread && !interpretation) {
-      const payload = {
-        locale,
-        personaId,
-        spread: { id: spread.id, name: spread.name[locale] },
-        spreadGuide: spread.ui_copy[locale]?.subtitle || '',
-        cards: draw.map((c, i) => ({
-          index: i + 1,
-          name: c.card.name,
-          upright: !c.isReversed,
-          position_key: spread.positions[i].slot_key,
-          position_title: spread.positions[i].title[locale],
-        })),
-      };
-      getInterpretation(payload);
-      setTimeout(() => setCardsFlipped(true), 300); // Flip cards after a short delay
+    if (phase === 'reading' && !interpretation && !isLoadingInterpretation && !interpretationError) {
+      handleGetInterpretation();
+      setTimeout(() => setCardsFlipped(true), 300);
     }
-  }, [phase, draw, spread, locale, personaId, getInterpretation, interpretation]);
+  }, [phase, interpretation, isLoadingInterpretation, interpretationError, handleGetInterpretation]);
 
   const annotations =
     phase === "reading" && spread
@@ -173,7 +183,7 @@ export default function TarotReadingPage() {
               <CardContent className="pt-6 text-center">
                 <AlertTriangle className="h-8 w-8 mx-auto mb-2" />
                 <p>Fout bij genereren van lezing: {interpretationError}</p>
-                <Button onClick={() => getInterpretation({} as any)} variant="outline" className="mt-4"><RefreshCw className="h-4 w-4 mr-2" /> Probeer opnieuw</Button>
+                <Button onClick={handleGetInterpretation} variant="outline" className="mt-4"><RefreshCw className="h-4 w-4 mr-2" /> Probeer opnieuw</Button>
               </CardContent>
             </Card>
           )}
