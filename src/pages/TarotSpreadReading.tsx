@@ -33,7 +33,7 @@ export default function TarotReadingPage() {
   const { i18n, t } = useTranslation();
   const locale = i18n.language as Locale;
   const { personaId } = usePersona();
-  const { deck, loading: deckLoading } = useTarotDeck(locale);
+  const { deck, loading: deckLoading, error: deckError } = useTarotDeck(locale);
 
   const [phase, setPhase] = useState<Phase>('loading');
   const [spread, setSpread] = useState<Spread | null>(null);
@@ -49,6 +49,7 @@ export default function TarotReadingPage() {
     const initializeReading = async () => {
       try {
         setPhase('loading');
+        setError(null);
         const libraryResponse = await fetch('/config/tarot/spread-library.json');
         if (!libraryResponse.ok) throw new Error(`Kon leggingen niet laden: ${libraryResponse.statusText}`);
         const library = await libraryResponse.json();
@@ -70,6 +71,12 @@ export default function TarotReadingPage() {
     if (!spread || selectedIndices.length !== spread.cards_required || deck.length === 0) return;
 
     const selectedCards = selectedIndices.map(i => deck[i]);
+
+    if (selectedCards.some(c => c === undefined)) {
+      setError("Fout bij het selecteren van kaarten. Probeer het opnieuw.");
+      setPhase('error');
+      return;
+    }
 
     const finalDraw: DrawnCard[] = spread.positions.map((position, index) => ({
       positionId: position.slot_key,
@@ -139,8 +146,8 @@ export default function TarotReadingPage() {
       return <div className="text-center py-12"><Loader2 className="h-8 w-8 text-amber-600 animate-spin" /></div>;
     }
 
-    if (phase === 'error' && error) {
-      return <div className="text-center py-12 text-red-400"><AlertTriangle className="h-12 w-12 mx-auto mb-4" /><p>{error}</p></div>;
+    if (phase === 'error' || deckError) {
+      return <div className="text-center py-12 text-red-400"><AlertTriangle className="h-12 w-12 mx-auto mb-4" /><p>{error || (deckError as Error)?.message}</p></div>;
     }
 
     if (phase === 'picking' && spread && deck.length > 0) {
@@ -157,7 +164,11 @@ export default function TarotReadingPage() {
             onChange={setSelectedIndices}
           />
           <div className="flex justify-center">
-            <Button onClick={handleConfirmSelection} disabled={selectedIndices.length !== spread.cards_required} className="bg-amber-800 hover:bg-amber-700 text-stone-100 px-6 py-3">
+            <Button 
+              onClick={handleConfirmSelection} 
+              disabled={selectedIndices.length !== spread.cards_required || deckLoading} 
+              className="bg-amber-800 hover:bg-amber-700 text-stone-100 px-6 py-3"
+            >
               <Sparkles className="h-4 w-4 mr-2" /> Bevestig selectie
             </Button>
           </div>
