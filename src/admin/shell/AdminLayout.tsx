@@ -11,12 +11,14 @@ export default function AdminLayout({ children }: any) {
       <header className="border-b border-stone-800 px-4 py-3 flex items-center gap-3">
         <Link to="/" className="text-stone-300 hover:text-white">← Terug</Link>
         <h1 className="font-serif text-xl">Admin</h1>
-        <div className="ml-auto flex gap-2">
+        <div className="ml-auto flex gap-2 flex-wrap">
+          {link("/admin/spreads","Spreads")}
           {link("/admin/cards","Cards")}
           {link("/admin/personas","Personas")}
           {link("/admin/translations","Translations")}
+          {link("/admin/users","Users")}
+          {link("/admin/features","Features")}
           {link("/admin/audit","Audit")}
-          {link("/admin/spreads","Spreads")} {/* NEW */}
         </div>
       </header>
       <main className="p-4 max-w-7xl mx-auto w-full">

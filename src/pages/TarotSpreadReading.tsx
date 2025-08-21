@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ChevronLeft, Loader2, AlertTriangle, Sparkles, Users } from "lucide-react";
-import TarotSpreadBoard, { SpreadName } from "@/components/TarotSpreadBoard";
+import { ChevronLeft, Loader2, AlertTriangle, Sparkles, RefreshCw } from "lucide-react";
+import TarotSpreadBoard from "@/components/TarotSpreadBoard";
 import TarotGridDisplay from "@/components/TarotGridDisplay";
 import { useTranslation } from "react-i18next";
-import { Spread, DrawnCard, TarotCardData, Locale, SpreadPosition } from "@/types/tarot";
+import { Spread, DrawnCard, Locale, SpreadPosition } from "@/types/tarot";
 import { useTarotInterpretation } from "@/hooks/useTarotInterpretation";
 import TarotInterpretationPanel from "@/components/TarotInterpretationPanel";
 import { usePersona } from "@/contexts/PersonaContext";
@@ -16,21 +16,15 @@ import { useTarotDeck } from "@/hooks/useTarotDeck";
 
 type Phase = 'loading' | 'error' | 'picking' | 'reading';
 
-function mapSpreadIdToSpreadName(id: string): SpreadName {
+function mapSpreadIdToSpreadName(id: string) {
+  // This mapping can be improved, but works as a basic example
   if (id.includes('celtic-cross')) return 'CelticCross10';
-  if (id.includes('cross-of-truth')) return 'Cross5';
-  if (id.includes('star-6')) return 'Star7';
-  if (id.includes('horseshoe-7')) return 'Horseshoe7';
-  if (id.includes('year-ahead-12') || id.includes('astrological-12')) return 'YearAhead12';
-  if (id.includes('nine-square')) return 'NineSquare';
-  if (id.includes('ppf-3') || id.includes('mind-body-spirit-3') || id.includes('situation-action-outcome-3')) return 'Line3';
-  if (id.includes('-1') || id.includes('-2') || id.includes('-3') || id.includes('-7')) return 'Line3';
   return 'Line3';
 }
 
 export default function TarotReadingPage() {
   const params = useParams<Record<string, string>>();
-  const spreadId = params.spread ?? "ppf-3"; // <-- Default to ppf-3 if no spread ID is found
+  const spreadId = params.spread ?? "ppf-3";
 
   const { i18n, t } = useTranslation();
   const locale = i18n.language as Locale;
@@ -43,32 +37,20 @@ export default function TarotReadingPage() {
   const [error, setError] = useState<string | null>(null);
   const [selectedIndices, setSelectedIndices] = useState<number[]>([]);
   const [showPersonaPicker, setShowPersonaPicker] = useState(false);
+  const [cardsFlipped, setCardsFlipped] = useState(false);
 
   const { data: interpretation, isLoading: isLoadingInterpretation, error: interpretationError, getInterpretation } = useTarotInterpretation();
 
   useEffect(() => {
     const initializeReading = async () => {
-      if (!spreadId) { // This check is now less critical due to default, but good for explicit errors
-        setError("Geen legging gespecificeerd.");
-        setPhase('error');
-        return;
-      }
       try {
         setPhase('loading');
         const libraryResponse = await fetch('/config/tarot/spread-library.json');
         if (!libraryResponse.ok) throw new Error(`Kon leggingen niet laden: ${libraryResponse.statusText}`);
         const library = await libraryResponse.json();
         
-        const currentSpread = library.spreads.find((s: Spread) => s.id === spreadId)
-          ?? { id: "ppf-3", cards_required: 3, allow_reversals: true,
-               name: { nl: "Verleden-Heden-Toekomst", en: "Past-Present-Future", tr: "Geçmiş-Şimdi-Gelecek" },
-               ui_copy: { nl: { subtitle: "Kies 3 kaarten." }, en: { subtitle: "Pick 3 cards." }, tr: { subtitle: "3 kart seçin." } },
-               positions: [
-                 { slot_key: "past", idx: 1, x: 0.25, y: 0.5, rot: 0, title: {nl:"Verleden",en:"Past",tr:"Geçmiş"}, upright_copy: {nl:"Invloeden uit het verleden.",en:"Past influences.",tr:"Geçmişin etkileri."}, reversed_copy: {nl:"Verleden (omgekeerd).",en:"Past (reversed).",tr:"Geçmiş (ters)."} },
-                 { slot_key: "present", idx: 2, x: 0.5, y: 0.5, rot: 0, title: {nl:"Heden",en:"Present",tr:"Şimdi"}, upright_copy: {nl:"Huidige situatie.",en:"Current situation.",tr:"Mevcut durum."}, reversed_copy: {nl:"Heden (omgekeerd).",en:"Present (reversed).",tr:"Şimdi (ters)."} },
-                 { slot_key: "future", idx: 3, x: 0.75, y: 0.5, rot: 0, title: {nl:"Toekomst",en:"Future",tr:"Gelecek"}, upright_copy: {nl:"Waarschijnlijke uitkomst.",en:"Likely outcome.",tr:"Muhtemel sonuç."}, reversed_copy: {nl:"Toekomst (omgekeerd).",en:"Future (reversed).",tr:"Gelecek (ters)."} },
-               ],
-             };
+        const currentSpread = library.spreads.find((s: Spread) => s.id === spreadId);
+        if (!currentSpread) throw new Error(`Legging '${spreadId}' niet gevonden.`);
 
         setSpread(currentSpread);
         setPhase('picking');
@@ -80,17 +62,12 @@ export default function TarotReadingPage() {
     initializeReading();
   }, [spreadId, locale]);
 
-  const handleSelectionChange = (indices: number[]) => setSelectedIndices(indices);
-
   const handleConfirmSelection = () => {
     if (!spread || selectedIndices.length !== spread.cards_required) return;
 
-    // Maak een 78-kaarten “pool” op basis van je deck
-    const pool = deck.length === 78 ? deck : Array.from({ length: 78 }, (_, i) => deck[i % deck.length]); // veilige fallback
+    const selectedCards = selectedIndices.map(i => deck[i % deck.length]);
 
-    const selectedCards = selectedIndices.map(i => pool[i]);
-
-    const finalDraw: DrawnCard[] = spread.positions.map((position, index) => ({ // Explicitly type finalDraw
+    const finalDraw: DrawnCard[] = spread.positions.map((position, index) => ({
       positionId: position.slot_key,
       card: selectedCards[index],
       isReversed: spread.allow_reversals ? Math.random() < 0.3 : false,
@@ -100,7 +77,7 @@ export default function TarotReadingPage() {
   };
 
   useEffect(() => {
-    if (phase === 'reading' && draw.length > 0 && spread) {
+    if (phase === 'reading' && draw.length > 0 && spread && !interpretation) {
       const payload = {
         locale,
         personaId,
@@ -111,26 +88,21 @@ export default function TarotReadingPage() {
           name: c.card.name,
           upright: !c.isReversed,
           position_key: spread.positions[i].slot_key,
-          position_title: spread.positions[i][locale],
+          position_title: spread.positions[i].title[locale],
         })),
       };
       getInterpretation(payload);
+      setTimeout(() => setCardsFlipped(true), 300); // Flip cards after a short delay
     }
-  }, [phase, draw, spread, locale, personaId, getInterpretation]);
+  }, [phase, draw, spread, locale, personaId, getInterpretation, interpretation]);
 
   const annotations =
     phase === "reading" && spread
       ? draw.map((d, i) => {
           const pos: SpreadPosition = spread.positions[i];
-          const title =
-            (pos.title && pos.title[locale]) ||
-            pos.slot_key ||
-            `#${i + 1}`;
+          const title = (pos.title && pos.title[locale]) || pos.slot_key || `#${i + 1}`;
           const label = d.isReversed ? t("tarot.reversed") : t("tarot.upright");
-          const copy =
-            (d.isReversed
-              ? pos.reversed_copy?.[locale]
-              : pos.upright_copy?.[locale]) || "";
+          const copy = (d.isReversed ? pos.reversed_copy?.[locale] : pos.upright_copy?.[locale]) || "";
           return { title, label, copy };
         })
       : [];
@@ -139,15 +111,8 @@ export default function TarotReadingPage() {
     phase === "reading" && spread
       ? draw.map((d, i) => {
           const pos: SpreadPosition = spread.positions[i];
-          const title =
-            (pos.title && pos.title[locale]) ||
-            pos.slot_key ||
-            `#${i + 1}`;
-          const copy =
-            (d.isReversed
-              ? pos.reversed_copy?.[locale]
-              : pos.upright_copy?.[locale]) || "";
-
+          const title = (pos.title && pos.title[locale]) || pos.slot_key || `#${i + 1}`;
+          const copy = (d.isReversed ? pos.reversed_copy?.[locale] : pos.upright_copy?.[locale]) || "";
           return {
             index: i + 1,
             name: d.card.name,
@@ -161,54 +126,29 @@ export default function TarotReadingPage() {
 
   const renderContent = () => {
     if (phase === 'loading' || deckLoading) {
-      return (
-        <div className="text-center py-12 flex justify-center items-center gap-2">
-          <Loader2 className="h-8 w-8 text-amber-600 animate-spin" />
-          <p className="text-stone-400">Legging wordt geladen...</p>
-        </div>
-      );
+      return <div className="text-center py-12"><Loader2 className="h-8 w-8 text-amber-600 animate-spin" /></div>;
     }
 
     if (phase === 'error' && error) {
-      return (
-        <div className="text-center py-12 text-red-400 bg-red-900/20 border border-red-800 rounded-lg p-8">
-          <AlertTriangle className="h-12 w-12 mx-auto mb-4" />
-          <h2 className="text-xl font-bold mb-2">Er is iets misgegaan</h2>
-          <p>{error}</p>
-        </div>
-      );
+      return <div className="text-center py-12 text-red-400"><AlertTriangle className="h-12 w-12 mx-auto mb-4" /><p>{error}</p></div>;
     }
 
     if (phase === 'picking' && spread && deck.length > 0) {
       return (
         <div className="space-y-8">
           <div className="text-center text-stone-300">
-            <p>Kies {spread.cards_required} kaarten uit de stapel.</p>
+            <p>Kies {spread.cards_required} kaarten.</p>
             <p className="text-sm text-stone-400">Geselecteerd: {selectedIndices.length} / {spread.cards_required}</p>
           </div>
           <TarotGridDisplay
-            totalCards={78} // <-- Fixed to always show 78 cards
+            totalCards={78}
             maxSelect={spread.cards_required}
             selected={selectedIndices}
-            onChange={handleSelectionChange}
-            renderCard={(idx, isSelected) => (
-              <img
-                src="/tarot/back.svg"
-                alt="Tarot Card Back"
-                className={`w-full h-full object-cover rounded-xl transition-transform duration-200 
-                  bg-gradient-to-b from-purple-500/15 to-indigo-600/15 border border-white/10 shadow-[0_10px_20px_rgba(0,0,0,.25)]
-                  ${isSelected ? 'scale-105 ring-2 ring-amber-500' : ''}`}
-              />
-            )}
+            onChange={setSelectedIndices}
           />
           <div className="flex justify-center">
-            <Button
-              onClick={handleConfirmSelection}
-              disabled={selectedIndices.length !== spread.cards_required}
-              className="bg-amber-800 hover:bg-amber-700 text-stone-100 flex items-center gap-2 px-6 py-3"
-            >
-              <Sparkles className="h-4 w-4" />
-              Bevestig selectie
+            <Button onClick={handleConfirmSelection} disabled={selectedIndices.length !== spread.cards_required} className="bg-amber-800 hover:bg-amber-700 text-stone-100 px-6 py-3">
+              <Sparkles className="h-4 w-4 mr-2" /> Bevestig selectie
             </Button>
           </div>
         </div>
@@ -223,30 +163,21 @@ export default function TarotReadingPage() {
             spread={mapSpreadIdToSpreadName(spread.id)}
             mode="spread"
             annotations={annotations}
+            cardsFlipped={cardsFlipped}
           />
-          {(isLoadingInterpretation || interpretationError || !interpretation) ? (
-            <Card className="bg-stone-900/50 backdrop-blur-sm border-stone-800">
+          {isLoadingInterpretation && (
+            <Card className="bg-stone-900/50"><CardContent className="pt-6 text-center"><Loader2 className="h-8 w-8 text-amber-600 animate-spin" /></CardContent></Card>
+          )}
+          {interpretationError && (
+            <Card className="bg-red-900/20 border-red-800 text-red-300">
               <CardContent className="pt-6 text-center">
-                {isLoadingInterpretation && (
-                  <div className="flex items-center justify-center gap-2">
-                    <Loader2 className="h-8 w-8 text-amber-600 animate-spin" />
-                    <p className="text-stone-400">Lezing wordt gegenereerd...</p>
-                  </div>
-                )}
-                {interpretationError && (
-                  <div className="text-red-400">
-                    <AlertTriangle className="h-8 w-8 mx-auto mb-2" />
-                    <p>Fout bij genereren van lezing: {interpretationError}</p>
-                  </div>
-                )}
-                {!isLoadingInterpretation && !interpretationError && !interpretation && (
-                  <p className="text-stone-400">Geen interpretatie beschikbaar.</p>
-                )}
+                <AlertTriangle className="h-8 w-8 mx-auto mb-2" />
+                <p>Fout bij genereren van lezing: {interpretationError}</p>
+                <Button onClick={() => getInterpretation({} as any)} variant="outline" className="mt-4"><RefreshCw className="h-4 w-4 mr-2" /> Probeer opnieuw</Button>
               </CardContent>
             </Card>
-          ) : (
-            <TarotInterpretationPanel items={panelItems} data={interpretation} />
           )}
+          {interpretation && <TarotInterpretationPanel items={panelItems} data={interpretation} />}
         </div>
       );
     }
@@ -257,39 +188,20 @@ export default function TarotReadingPage() {
     <div className="relative min-h-screen p-4 font-serif">
       <div className="relative z-10 max-w-7xl mx-auto">
         <header className="flex items-center justify-between mb-6">
-          <Link to="/readings/tarot">
-            <Button variant="outline" className="flex items-center gap-2 border-amber-800 text-amber-300 hover:bg-amber-900/50 hover:text-amber-200">
-              <ChevronLeft className="h-4 w-4" /> Terug
-            </Button>
-          </Link>
+          <Link to="/readings/tarot"><Button variant="outline" className="border-amber-800 text-amber-300"><ChevronLeft className="h-4 w-4" /> Terug</Button></Link>
           <div className="text-center">
-            <h1 className="text-3xl font-serif tracking-wide text-amber-200">
-              {spread ? spread.name[locale] : "Tarot Lezing"}
-            </h1>
-            <p className="text-stone-400">
-              {spread && phase === 'picking' ? spread.ui_copy[locale].subtitle : (spread ? "Je lezing wordt onthuld." : "")}
-            </p>
+            <h1 className="text-3xl font-serif tracking-wide text-amber-200">{spread ? spread.name[locale] : "Tarot Lezing"}</h1>
           </div>
-          <div className="w-32 flex justify-end">
-            <PersonaBadge onClick={() => setShowPersonaPicker(true)} />
-          </div>
+          <div className="w-32 flex justify-end"><PersonaBadge onClick={() => setShowPersonaPicker(true)} /></div>
         </header>
-
         {showPersonaPicker && (
-          <div className="fixed inset-0 z-50 grid place-items-center bg-black/60 p-4" role="dialog" aria-modal="true">
-            <div className="w-full max-w-5xl rounded-3xl border border-white/10 bg-stone-950 p-6">
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="text-xl font-serif text-amber-200">Kies je waarzegger</h3>
-                <button onClick={() => setShowPersonaPicker(false)} className="text-stone-300 hover:text-amber-200">Sluiten</button>
-              </div>
+          <div className="fixed inset-0 z-50 grid place-items-center bg-black/60 p-4" onClick={() => setShowPersonaPicker(false)}>
+            <div className="w-full max-w-5xl rounded-3xl border border-white/10 bg-stone-950 p-6" onClick={e => e.stopPropagation()}>
               <PersonaPicker method="tarot" onPicked={() => setShowPersonaPicker(false)} />
             </div>
           </div>
         )}
-
-        <main>
-          {renderContent()}
-        </main>
+        <main>{renderContent()}</main>
       </div>
     </div>
   );

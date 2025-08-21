@@ -177,6 +177,7 @@ export default function TarotSpreadBoard({
   mode,
   onSpreadChange,
   annotations, // NEW
+  cardsFlipped,
 }: {
   deck?: CardItem[]
   selectedCards?: CardItem[]
@@ -184,6 +185,7 @@ export default function TarotSpreadBoard({
   mode?: 'grid' | 'spread'
   onSpreadChange?: (s: SpreadName) => void
   annotations?: CardAnnotation[]; // NEW
+  cardsFlipped?: boolean;
 }) {
   // Demo fallback deck (78 placeholder cards)
   const fallbackDeck = useMemo<CardItem[]>(() => {
