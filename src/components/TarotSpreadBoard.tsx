@@ -1,8 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
-import type { Position, SpreadKind } from "@/lib/positions";
-import { positionsFor, normalizePositions } from "@/lib/positions";
+import { positionsFor, normalizePositions, type Position, type SpreadKind } from "@/lib/positions";
 
 export type CardItem = { id:string; name:string; imageUrl?:string|null };
 export type Annotation = { title:string; label:string };
@@ -18,7 +17,6 @@ type Props = {
   debugGrid?: boolean;
 };
 
-// iets kleinere default breedtes
 const DEFAULT_CARD_WIDTH: Record<SpreadKind, number> = {
   "daily-1":12, "two-choice-2":11, "ppf-3":10, "line-3":10,
   "star-6":9.5, "horseshoe-7":10, "cross-10":9, "year-12":8.5, "custom":10
@@ -30,15 +28,14 @@ export default function TarotSpreadBoard({
   cards, kind="ppf-3", customPositions, cardWidthPct, className,
   annotations, cardsFlipped, debugGrid
 }: Props) {
-  const desired = cards.length;
+  const needed = cards.length;
 
-  // ✅ gebruik custom alleen als de lengte klopt; anders ingebouwd patroon
-  let positions: Position[];
-  if (customPositions && customPositions.length === desired) {
-    positions = normalizePositions(customPositions);
-  } else {
-    positions = positionsFor(kind, desired);
-  }
+  // ✅ Normaliseer aangeleverde posities
+  const provided = customPositions ? normalizePositions(customPositions) : [];
+  
+  // ✅ Val terug op ingebouwde layout voor ontbrekende posities
+  const builtin = positionsFor(kind, needed);
+  const positions: Position[] = Array.from({ length: needed }, (_, i) => provided[i] ?? builtin[i]);
 
   const widthPct = cardWidthPct ?? DEFAULT_CARD_WIDTH[kind];
   const halfW = widthPct / 2;
@@ -63,7 +60,7 @@ export default function TarotSpreadBoard({
 
       {cards.map((card, i) => {
         const p = positions[i];
-        if (!p) return null;
+        if (!p) return null; // Dit zou nu niet meer moeten gebeuren
 
         const targetX = (p.x ?? 0.5) * 100;
         const targetY = (p.y ?? 0.5) * 100;
