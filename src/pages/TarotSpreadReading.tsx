@@ -55,8 +55,19 @@ export default function TarotReadingPage() {
   const [selectedIndices, setSelectedIndices] = useState<number[]>([]);
   const [showPersonaPicker, setShowPersonaPicker] = useState(false);
   const [cardsFlipped, setCardsFlipped] = useState(false);
+  const [readingLocale, setReadingLocale] = useState<string | null>(null);
 
   const { data: interpretation, isLoading: isLoadingInterpretation, error: interpretationError, getInterpretation } = useTarotInterpretation();
+
+  // Reset reading if language changes
+  useEffect(() => {
+    if (interpretation && readingLocale && i18n.language !== readingLocale) {
+      setPhase('picking');
+      setDraw([]);
+      setSelectedIndices([]);
+      // The interpretation data will be cleared implicitly when a new one is requested.
+    }
+  }, [i18n.language, interpretation, readingLocale]);
 
   useEffect(() => {
     const initializeReading = async () => {
@@ -136,6 +147,7 @@ export default function TarotReadingPage() {
   const handleGetInterpretation = useCallback(() => {
     if (!spread || draw.length === 0) return;
     
+    setReadingLocale(locale);
     const payload: TarotInterpretationPayload = {
       locale,
       personaId,

@@ -25,6 +25,15 @@ const CoffeeReading = () => {
   const [readingResult, setReadingResult] = useState<string | null>(null);
   const [isGenerating, setIsGenerating] = useState(false);
   const [isLoadingSymbols, setIsLoadingSymbols] = useState(true);
+  const [readingLocale, setReadingLocale] = useState<string | null>(null);
+
+  // Reset reading if language changes
+  useEffect(() => {
+    if (readingResult && readingLocale && i18n.language !== readingLocale) {
+      setReadingResult(null);
+      setReadingLocale(null);
+    }
+  }, [i18n.language, readingResult, readingLocale]);
 
   useEffect(() => {
     const fetchSymbols = async () => {
@@ -67,6 +76,7 @@ const CoffeeReading = () => {
 
     setIsGenerating(true);
     const toastId = showLoading("Je lezing wordt voorbereid...");
+    setReadingLocale(i18n.language);
     
     try {
       const { data, error } = await supabase.functions.invoke('generate-reading', {
@@ -90,6 +100,7 @@ const CoffeeReading = () => {
     } catch (err: any) {
       dismissToast(toastId);
       showError(`Er ging iets mis: ${err.message}`);
+      setReadingLocale(null);
       console.error(err);
     } finally {
       setIsGenerating(false);
