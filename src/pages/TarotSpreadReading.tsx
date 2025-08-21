@@ -234,35 +234,23 @@ export default function TarotReadingPage() {
 
     if (phase === 'reading' && spread && draw.length > 0) {
       const spreadKind = mapSpreadIdToKind(spread.id);
-      const needed = draw.length;
-
-      let base = overridePositions;
-
-      if (!base && Array.isArray(spread.positions) && spread.positions.length > 0) {
-        base = normalizePositions(
-          spread.positions.map(p => ({ x: p.x, y: p.y, rot: p.rot, slot_key: p.slot_key }))
-        );
-      }
-
+      
       const customPositions =
-        base && base.length >= needed
-          ? base.slice(0, needed)
-          : positionsFor(spreadKind, needed);
-
-      const CARD_WIDTH_OVERRIDES: Record<string, number> = {
-        "ppf-3": 10.5,
-        "star-6": 10.5,
-      };
+        overridePositions ??
+        (spread.positions?.length
+          ? normalizePositions(
+              spread.positions.map(p => ({ x: p.x, y: p.y, rot: p.rot, slot_key: p.slot_key }))
+            )
+          : undefined);
 
       return (
         <div className="space-y-8">
           <TarotSpreadBoard
             cards={draw.map(d => ({ id: d.card.id, name: d.card.name, imageUrl: d.card.imageUrl }))}
-            kind={customPositions ? "custom" : spreadKind}
+            kind={spreadKind}
             customPositions={customPositions}
             annotations={annotations}
             cardsFlipped={cardsFlipped}
-            cardWidthPct={CARD_WIDTH_OVERRIDES[spread.id]}
           />
           {isLoadingInterpretation && (
             <Card className="bg-stone-900/50"><CardContent className="pt-6 text-center"><Loader2 className="h-8 w-8 text-amber-600 animate-spin" /></CardContent></Card>

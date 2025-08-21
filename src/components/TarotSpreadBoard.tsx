@@ -1,7 +1,8 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
-import { positionsFor, normalizePositions, type Position, type SpreadKind } from "@/lib/positions";
+import type { Position, SpreadKind } from "@/lib/positions";
+import { positionsFor, normalizePositions } from "@/lib/positions";
 
 export type CardItem = { id:string; name:string; imageUrl?:string|null };
 export type Annotation = { title:string; label:string };
@@ -10,33 +11,34 @@ type Props = {
   cards: CardItem[];
   kind?: SpreadKind;
   customPositions?: Position[];
-  cardWidthPct?: number;   // t.o.v. board-breedte
+  cardWidthPct?: number;
   className?: string;
   annotations?: Annotation[];
   cardsFlipped?: boolean;
   debugGrid?: boolean;
 };
 
+// iets kleinere default breedtes
 const DEFAULT_CARD_WIDTH: Record<SpreadKind, number> = {
-  "daily-1":14,"two-choice-2":13,"ppf-3":13,"line-3":13,
-  "star-6":12,"horseshoe-7":12,"cross-10":11,"year-12":10,"custom":12
+  "daily-1":12, "two-choice-2":11, "ppf-3":10, "line-3":10,
+  "star-6":9.5, "horseshoe-7":10, "cross-10":9, "year-12":8.5, "custom":10
 };
 
-// 1% van board-breedte vertaalt naar (16/9) / (2/3) = 8/3 % van board-hoogte
-const HEIGHT_PCT_PER_WIDTH_PCT = 8/3; // ≈ 2.6667
+const HEIGHT_PCT_PER_WIDTH_PCT = 8/3;
 
 export default function TarotSpreadBoard({
   cards, kind="ppf-3", customPositions, cardWidthPct, className,
   annotations, cardsFlipped, debugGrid
 }: Props) {
-  const needed = cards.length;
+  const desired = cards.length;
 
-  const provided = customPositions && customPositions.length
-    ? normalizePositions(customPositions)
-    : [];
-
-  const builtin = positionsFor(kind, needed);
-  const positions: Position[] = Array.from({ length: needed }, (_, i) => provided[i] ?? builtin[i]);
+  // ✅ gebruik custom alleen als de lengte klopt; anders ingebouwd patroon
+  let positions: Position[];
+  if (customPositions && customPositions.length === desired) {
+    positions = normalizePositions(customPositions);
+  } else {
+    positions = positionsFor(kind, desired);
+  }
 
   const widthPct = cardWidthPct ?? DEFAULT_CARD_WIDTH[kind];
   const halfW = widthPct / 2;
@@ -54,9 +56,7 @@ export default function TarotSpreadBoard({
       {debugGrid && (
         <div className="absolute inset-0 opacity-30 pointer-events-none">
           <div className="absolute inset-0 grid grid-cols-10 grid-rows-10">
-            {Array.from({length:100}).map((_,i)=>(
-              <div key={i} className="border border-white/5" />
-            ))}
+            {Array.from({length:100}).map((_,i)=>(<div key={i} className="border border-white/5" />))}
           </div>
         </div>
       )}
@@ -85,11 +85,9 @@ export default function TarotSpreadBoard({
               zIndex: p.z ?? (i+1),
             }}
           >
-            <div
-              className="relative w-full rounded-xl overflow-hidden border border-white/10
-                         bg-gradient-to-b from-stone-800/40 to-stone-900/60"
-              style={{ aspectRatio: "2 / 3" }}
-            >
+            <div className="relative w-full rounded-xl overflow-hidden border border-white/10
+                            bg-gradient-to-b from-stone-800/40 to-stone-900/60"
+                 style={{ aspectRatio: "2 / 3" }}>
               <img src={card.imageUrl || "/tarot/back.svg"} alt={card.name}
                    className="absolute inset-0 w-full h-full object-cover" />
               <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(255,255,255,.10),transparent_55%)]" />
