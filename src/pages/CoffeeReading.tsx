@@ -16,7 +16,7 @@ import { useTranslation } from "react-i18next";
 import { supabase } from "@/lib/supabaseClient";
 import { showLoading, dismissToast, showError, showSuccess } from "@/utils/toast";
 import { usePersona } from "@/contexts/PersonaContext";
-import { getCachedPersonas, loadPersonas } from "@/lib/persona-registry";
+import { loadPersonas } from "@/lib/persona-registry";
 
 const CoffeeReading = () => {
   const { i18n } = useTranslation();
@@ -70,22 +70,22 @@ const CoffeeReading = () => {
     setIsGenerating(true);
     const toastId = showLoading("Je lezing wordt voorbereid...");
     
-    const personas = getCachedPersonas();
-    const persona = personas[personaId] || personas['falya'];
-
     try {
       const { data, error } = await supabase.functions.invoke('generate-reading', {
         body: {
-          readingType: "Koffiedik",
-          language: i18n.language,
-          persona: persona,
-          symbols: selectedSymbols,
+          locale: i18n.language,
+          personaId: personaId,
+          method: 'koffiedik',
+          payload: {
+            symbols: selectedSymbols,
+          }
         }
       });
 
       if (error) throw new Error(error.message);
+      if (data.error) throw new Error(JSON.stringify(data.error));
 
-      setReadingResult(data.reading);
+      setReadingResult(data.reading.reading);
       dismissToast(toastId);
       showSuccess("Je lezing is klaar!");
 

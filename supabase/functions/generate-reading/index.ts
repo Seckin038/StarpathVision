@@ -161,7 +161,7 @@ function buildPrompt(locale: string, persona: any, method: string, payload: any)
   
   let details = "";
   if (method === 'koffiedik') {
-    const symbols = payload.symbols.map(s => `- ${s[`symbol_name_${locale}`]}: ${s[`description_${locale}`]}`).join('\n');
+    const symbols = payload.symbols.map((s:any) => `- ${s[`symbol_name_${locale}`] || s.symbol_name_nl}: ${s[`description_${locale}`] || s.description_nl}`).join('\n');
     details = `Symbolen:\n${symbols}`;
   } else if (method === 'dromen') {
     details = `Droom: ${payload.userQuestion}`;
@@ -172,7 +172,17 @@ function buildPrompt(locale: string, persona: any, method: string, payload: any)
   basePrompt = basePrompt.replace(/{{details}}/g, details);
   basePrompt = basePrompt.replace(/{{vraag}}/g, payload.userQuestion || "Geef een algemene lezing.");
 
-  return basePrompt;
+  const jsonInstruction = `
+
+GEEF EEN UITGEBREIDE EN INZICHTELIJKE LEZING.
+Je antwoord MOET een geldig JSON-object zijn met de volgende structuur:
+{
+  "reading": "Schrijf hier de volledige lezing als een enkele string. Gebruik markdown voor opmaak (bv. **vetgedrukt**)."
+}
+Schrijf alle tekst in de stem en stijl van jouw persona.
+`;
+  
+  return basePrompt + jsonInstruction;
 }
 
 serve(async (req) => {

@@ -13,7 +13,7 @@ import { useTranslation } from "react-i18next";
 import { supabase } from "@/lib/supabaseClient";
 import { showLoading, dismissToast, showError, showSuccess } from "@/utils/toast";
 import { usePersona } from "@/contexts/PersonaContext";
-import { getCachedPersonas, loadPersonas } from "@/lib/persona-registry";
+import { loadPersonas } from "@/lib/persona-registry";
 
 const DreamReading = () => {
   const { i18n } = useTranslation();
@@ -32,22 +32,22 @@ const DreamReading = () => {
     setIsGenerating(true);
     const toastId = showLoading("Je droom wordt geduid...");
 
-    const personas = getCachedPersonas();
-    const persona = personas[personaId] || personas['visionair'];
-
     try {
       const { data, error } = await supabase.functions.invoke('generate-reading', {
         body: {
-          readingType: "Droomduiding",
-          language: i18n.language,
-          persona: persona,
-          userQuestion: dreamDescription,
+          locale: i18n.language,
+          personaId: personaId,
+          method: 'dromen',
+          payload: {
+            userQuestion: dreamDescription,
+          }
         }
       });
 
       if (error) throw new Error(error.message);
+      if (data.error) throw new Error(JSON.stringify(data.error));
 
-      setReadingResult(data.reading);
+      setReadingResult(data.reading.reading);
       dismissToast(toastId);
       showSuccess("Je droomduiding is klaar!");
 

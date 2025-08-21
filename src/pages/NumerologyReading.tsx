@@ -13,7 +13,7 @@ import { useTranslation } from "react-i18next";
 import { supabase } from "@/lib/supabaseClient";
 import { showLoading, dismissToast, showError, showSuccess } from "@/utils/toast";
 import { usePersona } from "@/contexts/PersonaContext";
-import { getCachedPersonas, loadPersonas } from "@/lib/persona-registry";
+import { loadPersonas } from "@/lib/persona-registry";
 
 const NumerologyReading = () => {
   const { i18n } = useTranslation();
@@ -33,22 +33,22 @@ const NumerologyReading = () => {
     setIsCalculating(true);
     const toastId = showLoading("Je numerologische profiel wordt berekend...");
 
-    const personas = getCachedPersonas();
-    const persona = personas[personaId] || personas['auron'];
-
     try {
       const { data, error } = await supabase.functions.invoke('generate-reading', {
         body: {
-          readingType: "Numerologie",
-          language: i18n.language,
-          persona: persona,
-          numerologyData: { birthDate, fullName },
+          locale: i18n.language,
+          personaId: personaId,
+          method: 'numerologie',
+          payload: {
+            numerologyData: { birthDate, fullName },
+          }
         }
       });
 
       if (error) throw new Error(error.message);
+      if (data.error) throw new Error(JSON.stringify(data.error));
 
-      setReadingResult(data.reading);
+      setReadingResult(data.reading.reading);
       dismissToast(toastId);
       showSuccess("Je profiel is klaar!");
 
