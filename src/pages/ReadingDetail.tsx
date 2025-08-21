@@ -55,18 +55,35 @@ export default function ReadingDetailPage() {
     setIsDownloading(true);
 
     const canvas = await html2canvas(element, {
-      backgroundColor: "#0a090c", // Dark background for consistency
-      scale: 2, // Higher resolution
+      backgroundColor: "#0a090c",
+      scale: 2,
       useCORS: true,
-      windowWidth: 1200, // Set a consistent width
+      windowWidth: element.scrollWidth,
+      windowHeight: element.scrollHeight,
     });
 
     const imgData = canvas.toDataURL('image/png');
     const pdf = new jsPDF('p', 'mm', 'a4');
     const pdfWidth = pdf.internal.pageSize.getWidth();
-    const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+    const pdfHeight = pdf.internal.pageSize.getHeight();
+    const canvasWidth = canvas.width;
+    const canvasHeight = canvas.height;
+    const ratio = canvasWidth / canvasHeight;
+    const scaledCanvasHeight = pdfWidth / ratio;
+
+    let position = 0;
+    let heightLeft = scaledCanvasHeight;
+
+    pdf.addImage(imgData, 'PNG', 0, position, pdfWidth, scaledCanvasHeight);
+    heightLeft -= pdfHeight;
+
+    while (heightLeft > 0) {
+      position -= pdfHeight;
+      pdf.addPage();
+      pdf.addImage(imgData, 'PNG', 0, position, pdfWidth, scaledCanvasHeight);
+      heightLeft -= pdfHeight;
+    }
     
-    pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
     pdf.save(`Starpathvision-Lezing-${r.id}.pdf`);
 
     setIsDownloading(false);
