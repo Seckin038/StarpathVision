@@ -121,11 +121,8 @@ Cevabınız aşağıdaki yapıya sahip geçerli bir JSON nesnesi OLMALIDIR:
 
 const OTHER_METHOD_PROMPT_TEMPLATES = {
   nl: `
-Je gaat een lezing doen in de rol van {{persona_name}}.
-Jouw stijl is: {{persona_style}}.
-De methode is: {{method}}.
-
-De input van de gebruiker is:
+De gebruiker wil een lezing met de methode '{{method}}'.
+De input is:
 {{details}}
 
 GEEF EEN UITGEBREIDE EN INZICHTELIJKE LEZING.
@@ -133,15 +130,10 @@ Je antwoord MOET een geldig JSON-object zijn met de volgende structuur:
 {
   "reading": "Schrijf hier de volledige lezing. Gebruik Markdown voor opmaak: **vet**, *cursief*, ## Titels, - Lijst-items, en > Quotes. Gebruik \\n\\n voor nieuwe alinea's."
 }
-Schrijf alle tekst in de stem en stijl van jouw persona. Gebruik de prompt template van de persona als leidraad voor de toon en inhoud, maar houd je strikt aan de gevraagde JSON-structuur.
-Persona prompt template: """{{persona_prompt_template}}"""
 `,
   en: `
-You will perform a reading in the role of {{persona_name}}.
-Your style is: {{persona_style}}.
-The method is: {{method}}.
-
-The user's input is:
+The user wants a reading using the '{{method}}' method.
+The input is:
 {{details}}
 
 PROVIDE A COMPREHENSIVE AND INSIGHTFUL READING.
@@ -149,15 +141,10 @@ Your answer MUST be a valid JSON object with the following structure:
 {
   "reading": "Write the full reading here. Use Markdown for formatting: **bold**, *italic*, ## Headings, - List items, and > Quotes. Use \\n\\n for new paragraphs."
 }
-Write all text in the voice and style of your persona. Use the persona's prompt template as a guide for tone and content, but strictly adhere to the requested JSON structure.
-Persona prompt template: """{{persona_prompt_template}}"""
 `,
   tr: `
-{{persona_name}} rolünde bir okuma yapacaksınız.
-Tarzınız: {{persona_style}}.
-Yöntem: {{method}}.
-
-Kullanıcının girdisi:
+Kullanıcı '{{method}}' yöntemini kullanarak bir okuma istiyor.
+Girdi:
 {{details}}
 
 KAPSAMLI VE ANLAYIŞLI BİR OKUMA YAPIN.
@@ -165,8 +152,6 @@ Cevabınız aşağıdaki yapıya sahip geçerli bir JSON nesnesi OLMALIDIR:
 {
   "reading": "Tam okumayı buraya yazın. Biçimlendirme için Markdown kullanın: **kalın**, *italik*, ## Başlıklar, - Liste öğeleri ve > Alıntılar. Yeni paragraflar için \\n\\n kullanın."
 }
-Tüm metni kişiliğinizin sesi ve tarzıyla yazın. Kişinin prompt şablonunu ton ve içerik için bir rehber olarak kullanın, ancak istenen JSON yapısına sıkı sıkıya bağlı kalın.
-Persona prompt şablonu: """{{persona_prompt_template}}"""
 `
 };
 
@@ -215,11 +200,8 @@ function buildPrompt(locale: string, persona: any, method: string, payload: any)
       details = `Naam: ${payload.numerologyData.fullName}, Geboortedatum: ${payload.numerologyData.birthDate}`;
     }
 
-    prompt = prompt.replace(/{{persona_name}}/g, persona.display_name?.[locale] || persona.id);
-    prompt = prompt.replace(/{{persona_style}}/g, persona.style?.[locale]?.join(', ') || 'wise and insightful');
     prompt = prompt.replace(/{{method}}/g, method);
     prompt = prompt.replace(/{{details}}/g, details);
-    prompt = prompt.replace(/{{persona_prompt_template}}/g, persona.prompt_template || '');
 
     return prompt;
   }
@@ -240,11 +222,21 @@ serve(async (req) => {
 
     // --- AI Generation ---
     const persona = await getPersona(supabaseAdmin, body.personaId);
+    
+    const systemInstructionParts = [
+      `Je bent een waarzegger in de rol van ${persona.display_name?.[body.locale] || persona.id}.`,
+      `Jouw stijl is: ${persona.style?.[body.locale]?.join(', ') || 'wijs en inzichtelijk'}.`,
+      persona.prompt_template || ''
+    ];
+    const systemInstruction = systemInstructionParts.join('\n');
+
     const genAI = new GoogleGenerativeAI(env('GEMINI_API_KEY'));
     const model = genAI.getGenerativeModel({ 
       model: 'gemini-1.5-flash-latest',
-      generationConfig: { responseMimeType: "application/json" }
+      generationConfig: { responseMimeType: "application/json" },
+      systemInstruction: systemInstruction
     });
+
     const prompt = buildPrompt(body.locale, persona, body.method, body.payload);
     const result = await model.generateContent(prompt);
     const response = result.response;
