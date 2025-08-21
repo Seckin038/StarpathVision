@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import { Sparkles } from "lucide-react";
+import MarkdownRenderer from "./MarkdownRenderer";
 
 // The new data structure is much simpler
 export interface InterpretationData {
@@ -40,7 +41,9 @@ export default function TarotInterpretationPanel({ items, data }: Props) {
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-6">
-            <p className="text-stone-300 whitespace-pre-line">{data.text}</p>
+            <div className="text-stone-300 whitespace-pre-line leading-relaxed">
+              <MarkdownRenderer text={data.text} />
+            </div>
           </CardContent>
         </Card>
       )}

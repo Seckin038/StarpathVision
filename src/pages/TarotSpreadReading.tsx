@@ -58,7 +58,6 @@ export default function TarotReadingPage() {
         const currentSpread = library.spreads.find((s: Spread) => s.id === spreadId);
         if (!currentSpread) throw new Error(`Legging '${spreadId}' niet gevonden.`);
 
-        // FIX: If positions are missing or incomplete, generate placeholders.
         if (!currentSpread.positions || currentSpread.positions.length < currentSpread.cards_required) {
           const generatedPositions: SpreadPosition[] = [];
           for (let i = 0; i < currentSpread.cards_required; i++) {
@@ -135,6 +134,16 @@ export default function TarotReadingPage() {
       setTimeout(() => setCardsFlipped(true), 300);
     }
   }, [phase, interpretation, isLoadingInterpretation, interpretationError, handleGetInterpretation]);
+
+  const handlePersonaPicked = () => {
+    setShowPersonaPicker(false);
+    if (phase === 'reading') {
+      // Use a timeout to allow the personaId context to update before re-fetching
+      setTimeout(() => {
+        handleGetInterpretation();
+      }, 100);
+    }
+  };
 
   const annotations =
     phase === "reading" && spread
@@ -246,7 +255,7 @@ export default function TarotReadingPage() {
         {showPersonaPicker && (
           <div className="fixed inset-0 z-50 grid place-items-center bg-black/60 p-4" onClick={() => setShowPersonaPicker(false)}>
             <div className="w-full max-w-5xl rounded-3xl border border-white/10 bg-stone-950 p-6" onClick={e => e.stopPropagation()}>
-              <PersonaPicker method="tarot" onPicked={() => setShowPersonaPicker(false)} />
+              <PersonaPicker method="tarot" onPicked={handlePersonaPicked} />
             </div>
           </div>
         )}
