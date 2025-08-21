@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { supabase } from "@/lib/supabaseClient";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -6,8 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { showError, showSuccess, showLoading, dismissToast } from "@/utils/toast";
-import { Loader2, UploadCloud } from "lucide-react";
-import { uploadTarotCardImage } from "@/lib/upload";
+import { Loader2, UploadCloud, CheckCircle, XCircle } from "lucide-react";
 
 type TarotCard = {
   id: string;
@@ -18,14 +17,110 @@ type TarotCard = {
   meaning_up: string;
   meaning_rev: string;
   image_url: string | null;
-  // Add other fields as needed
 };
+
+type UploadStatus = {
+  fileName: string;
+  status: 'pending' | 'uploading' | 'success' | 'error';
+  message: string;
+};
+
+function SmartUploader({ onComplete }: { onComplete: () => void }) {
+  const [uploadQueue, setUploadQueue] = useState<File[]>([]);
+  const [uploadStatus, setUploadStatus] = useState<UploadStatus[]>([]);
+  const [isUploading, setIsUploading] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      const files = Array.from(e.target.files);
+      setUploadQueue(files);
+      setUploadStatus(files.map(f => ({ fileName: f.name, status: 'pending', message: 'In de wachtrij' })));
+    }
+  };
+
+  const startUpload = async () => {
+    if (uploadQueue.length === 0) return;
+    setIsUploading(true);
+
+    for (let i = 0; i < uploadQueue.length; i++) {
+      const file = uploadQueue[i];
+      
+      setUploadStatus(prev => {
+        const next = [...prev];
+        next[i] = { ...next[i], status: 'uploading', message: 'Bezig met uploaden en herkennen...' };
+        return next;
+      });
+
+      try {
+        const formData = new FormData();
+        formData.append('cardImage', file);
+
+        const { data, error } = await supabase.functions.invoke('identify-and-link-tarot-card', {
+          body: formData,
+        });
+
+        if (error) throw new Error(error.message);
+        if (data.error) throw new Error(data.details);
+
+        setUploadStatus(prev => {
+          const next = [...prev];
+          next[i] = { ...next[i], status: 'success', message: `Herkend als: ${data.cardName}` };
+          return next;
+        });
+
+      } catch (err: any) {
+        setUploadStatus(prev => {
+          const next = [...prev];
+          next[i] = { ...next[i], status: 'error', message: err.message };
+          return next;
+        });
+      }
+    }
+
+    setIsUploading(false);
+    onComplete();
+  };
+
+  return (
+    <Card className="bg-stone-950/50 border-stone-800">
+      <CardHeader>
+        <CardTitle className="text-amber-300 flex items-center gap-2">
+          <UploadCloud /> Slimme Kaart Uploader
+        </CardTitle>
+      </CardHeader>
+      <CardContent className="space-y-4">
+        <p className="text-sm text-stone-400">Selecteer één of meerdere tarotkaart-afbeeldingen. De AI zal ze automatisch herkennen en koppelen.</p>
+        <Input type="file" multiple accept="image/*" onChange={handleFileSelect} ref={fileInputRef} />
+        
+        {uploadStatus.length > 0 && (
+          <div className="space-y-2 max-h-60 overflow-y-auto p-2 border border-stone-800 rounded-md">
+            {uploadStatus.map((s, i) => (
+              <div key={i} className="flex items-center gap-3 text-sm">
+                {s.status === 'pending' && <Loader2 className="h-4 w-4 text-stone-500 animate-pulse" />}
+                {s.status === 'uploading' && <Loader2 className="h-4 w-4 text-amber-500 animate-spin" />}
+                {s.status === 'success' && <CheckCircle className="h-4 w-4 text-green-500" />}
+                {s.status === 'error' && <XCircle className="h-4 w-4 text-red-500" />}
+                <span className="flex-1 truncate">{s.fileName}</span>
+                <span className="text-stone-400">{s.message}</span>
+              </div>
+            ))}
+          </div>
+        )}
+
+        <Button onClick={startUpload} disabled={isUploading || uploadQueue.length === 0}>
+          {isUploading ? 'Bezig...' : `Start Upload (${uploadQueue.length})`}
+        </Button>
+      </CardContent>
+    </Card>
+  );
+}
+
 
 export default function AdminCards() {
   const [cards, setCards] = useState<TarotCard[]>([]);
   const [loading, setLoading] = useState(true);
   const [editing, setEditing] = useState<TarotCard | null>(null);
-  const [uploading, setUploading] = useState(false);
 
   const fetchCards = async () => {
     setLoading(true);
@@ -62,12 +157,10 @@ export default function AdminCards() {
         element: card.element,
         astrology: card.astrology,
         numerology: card.numerology,
-        image_url: `/tarot/${card.image}`, // Tijdelijke URL
+        image_url: null, // Start with no image
       }));
 
-      // Upsert all cards in one go
       const { error } = await supabase.from("tarot_cards").upsert(cardsToInsert, { onConflict: 'id' });
-
       if (error) throw error;
 
       dismissToast(toastId);
@@ -85,7 +178,6 @@ export default function AdminCards() {
       name: editing.name,
       meaning_up: editing.meaning_up,
       meaning_rev: editing.meaning_rev,
-      image_url: editing.image_url,
     }).eq("id", editing.id);
 
     if (error) {
@@ -94,21 +186,6 @@ export default function AdminCards() {
       showSuccess("Kaart opgeslagen.");
       setEditing(null);
       fetchCards();
-    }
-  };
-
-  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!e.target.files || e.target.files.length === 0 || !editing) return;
-    const file = e.target.files[0];
-    setUploading(true);
-    try {
-      const publicUrl = await uploadTarotCardImage(file, editing.id);
-      setEditing({ ...editing, image_url: publicUrl });
-      showSuccess("Afbeelding geüpload!");
-    } catch (err: any) {
-      showError(`Upload mislukt: ${err.message}`);
-    } finally {
-      setUploading(false);
     }
   };
 
@@ -126,9 +203,11 @@ export default function AdminCards() {
           <div className="grid grid-cols-2 gap-4">
             <div>
               <Label>Afbeelding</Label>
-              {editing.image_url && <img src={editing.image_url} alt={editing.name} className="w-full rounded-md my-2 border border-stone-700" />}
-              <Input type="file" accept="image/*" onChange={handleImageUpload} disabled={uploading} />
-              {uploading && <div className="text-sm text-stone-400 mt-1 flex items-center gap-2"><Loader2 className="animate-spin h-4 w-4" /> Bezig met uploaden...</div>}
+              {editing.image_url ? 
+                <img src={editing.image_url} alt={editing.name} className="w-full rounded-md my-2 border border-stone-700" />
+                : <div className="w-full aspect-[2/3] bg-stone-800 rounded-md my-2 flex items-center justify-center text-stone-500">Geen afbeelding</div>
+              }
+              <p className="text-xs text-stone-400">Upload een nieuwe afbeelding via de 'Slimme Uploader'.</p>
             </div>
             <div className="space-y-4">
               <div>
@@ -146,7 +225,7 @@ export default function AdminCards() {
             </div>
           </div>
           <div className="flex gap-2">
-            <Button onClick={handleSave} disabled={uploading}>Opslaan</Button>
+            <Button onClick={handleSave}>Opslaan</Button>
             <Button variant="outline" onClick={() => setEditing(null)}>Annuleren</Button>
           </div>
         </CardContent>
@@ -155,28 +234,32 @@ export default function AdminCards() {
   }
 
   return (
-    <Card className="bg-stone-900/60 border-stone-800">
-      <CardHeader className="flex flex-row items-center justify-between">
-        <CardTitle className="text-amber-200">Tarotkaarten Beheren</CardTitle>
-        {cards.length === 0 && (
-          <Button onClick={handleImport}>Importeer 78 Kaarten</Button>
-        )}
-      </CardHeader>
-      <CardContent>
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
-          {cards.map(card => (
-            <Card key={card.id} className="bg-stone-950/50 border-stone-800">
-              <CardHeader className="p-3">
-                <CardTitle className="text-amber-300 text-sm">{card.name}</CardTitle>
-              </CardHeader>
-              <CardContent className="p-3">
-                <img src={card.image_url || '/tarot/back.svg'} alt={card.name} className="w-full rounded-md mb-3 aspect-[2/3] object-cover bg-stone-900" />
-                <Button variant="outline" size="sm" className="w-full" onClick={() => setEditing(card)}>Bewerken</Button>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-      </CardContent>
-    </Card>
+    <div className="space-y-6">
+      <Card className="bg-stone-900/60 border-stone-800">
+        <CardHeader className="flex flex-row items-center justify-between">
+          <CardTitle className="text-amber-200">Tarotkaarten Beheren</CardTitle>
+          {cards.length === 0 && (
+            <Button onClick={handleImport}>Importeer 78 Kaartgegevens</Button>
+          )}
+        </CardHeader>
+        <CardContent>
+          <SmartUploader onComplete={fetchCards} />
+        </CardContent>
+      </Card>
+
+      <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+        {cards.map(card => (
+          <Card key={card.id} className="bg-stone-950/50 border-stone-800">
+            <CardHeader className="p-3">
+              <CardTitle className="text-amber-300 text-sm truncate">{card.name}</CardTitle>
+            </CardHeader>
+            <CardContent className="p-3">
+              <img src={card.image_url || '/tarot/back.svg'} alt={card.name} className="w-full rounded-md mb-3 aspect-[2/3] object-cover bg-stone-900" />
+              <Button variant="outline" size="sm" className="w-full" onClick={() => setEditing(card)}>Bewerk Tekst</Button>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+    </div>
   );
 }
