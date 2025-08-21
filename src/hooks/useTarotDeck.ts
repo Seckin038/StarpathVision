@@ -1,25 +1,31 @@
 import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@/lib/supabaseClient";
+import { Locale } from "@/types/tarot";
 
 export type TarotDeckCard = { id: string; name: string; imageUrl?: string };
 
-const fetchTarotDeck = async (locale: "nl" | "en" | "tr"): Promise<TarotDeckCard[]> => {
-  // Laad de kaarten altijd uit de lokale JSON-bestanden,
-  // omdat deze de volledige set van 78 kaarten bevatten.
-  const res = await fetch(`/tarot/cards.${locale}.json`);
-  if (!res.ok) {
-    throw new Error(`Failed to fetch tarot deck from JSON for locale: ${locale}`);
+const fetchTarotDeck = async (locale: Locale): Promise<TarotDeckCard[]> => {
+  // TODO: In the future, support localized names from the database.
+  // For now, we fetch the primary card data.
+  const { data, error } = await supabase
+    .from("tarot_cards")
+    .select("id, name, image_url")
+    .order("number", { ascending: true });
+
+  if (error) {
+    throw new Error(`Failed to fetch tarot deck from Supabase: ${error.message}`);
   }
-  const json = await res.json();
-  return json.map((c: any) => ({
+
+  return data.map((c: any) => ({
     id: c.id,
-    name: c.name,
-    imageUrl: c.image ? `/tarot/${c.image}` : undefined,
+    name: c.name, // This will need localization in the future
+    imageUrl: c.image_url,
   }));
 };
 
-export function useTarotDeck(locale: "nl" | "en" | "tr") {
+export function useTarotDeck(locale: Locale) {
   const { data: deck = [], isLoading: loading, error } = useQuery({
-    queryKey: ['tarotDeckJson', locale], // Changed key to invalidate cache
+    queryKey: ['tarotDeckSupabase', locale], // Use locale in key to refetch on lang change
     queryFn: () => fetchTarotDeck(locale),
     staleTime: 1000 * 60 * 60, // Cache for 1 hour
     refetchOnWindowFocus: false,
