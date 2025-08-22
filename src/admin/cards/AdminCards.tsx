@@ -202,40 +202,23 @@ function FileImporter({ onDone }: { onDone: () => void }) {
 
     for (const [idx, file] of files.entries()) {
       try {
-        // 1) upload naar tijdelijke bucket
         setItems((prev) => prev.map((it, i) => i === idx ? { ...it, status: "uploading", message: t('cards.importer.uploading') } : it));
-
         const ext = file.name.split(".").pop()?.toLowerCase() || "png";
         const tmpPath = `admin/${crypto.randomUUID()}.${ext}`;
+        const { error: uploadError } = await supabase.storage.from("tarot-card-uploads").upload(tmpPath, file);
+        if (uploadError) throw uploadError;
 
-        const up = await supabase.storage.from("tarot-card-uploads").upload(tmpPath, file, {
-          cacheControl: "3600",
-          upsert: false,
-          contentType: file.type || "image/*",
-        });
-        if (up.error) throw up.error;
-
-        // 2) Edge Function aanroepen
         setItems((prev) => prev.map((it, i) => i === idx ? { ...it, status: "processing", message: t('cards.importer.processing') } : it));
-
-        const { data, error } = await supabase.functions.invoke("process-tarot-upload", {
-          body: { filePath: up.data.path },
+        const { data, error: invokeError } = await supabase.functions.invoke("process-tarot-upload", {
+          body: { filePath: tmpPath },
         });
-        if (error) throw error;
-        if (data.error) throw new Error(data.error);
 
+        if (invokeError) throw new Error(`Invoke failed: ${invokeError.message}`);
+        if (data.error) throw new Error(`Function error: ${data.error}`);
 
-        setItems((prev) =>
-          prev.map((it, i) =>
-            i === idx ? { ...it, status: "done", message: data?.message ?? "OK" } : it
-          )
-        );
+        setItems((prev) => prev.map((it, i) => i === idx ? { ...it, status: "done", message: data?.message ?? "OK" } : it));
       } catch (err: any) {
-        setItems((prev) =>
-          prev.map((it, i) =>
-            i === idx ? { ...it, status: "error", message: String(err?.message ?? err) } : it
-          )
-        );
+        setItems((prev) => prev.map((it, i) => i === idx ? { ...it, status: "error", message: err.message } : it));
       }
     }
     onDone();
