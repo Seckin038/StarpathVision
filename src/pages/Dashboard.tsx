@@ -46,20 +46,21 @@ const Dashboard = () => {
     if (deckLoading || deck.length === 0) return;
 
     const today = new Date().toISOString().split('T')[0];
-    const storedCardJSON = localStorage.getItem('dailyTarotCard');
-    let storedCard = null;
+    const storageKey = 'dailyTarotCard';
+    const storedCardJSON = localStorage.getItem(storageKey);
+    let storedCardInfo = null;
     if (storedCardJSON) {
-      try { storedCard = JSON.parse(storedCardJSON); } catch (e) { /* ignore */ }
+      try { storedCardInfo = JSON.parse(storedCardJSON); } catch (e) { /* ignore */ }
     }
 
-    if (storedCard && storedCard.date === today) {
-      const cardData = deck.find(c => c.id === storedCard.cardId);
+    if (storedCardInfo && storedCardInfo.date === today && typeof storedCardInfo.cardIndex === 'number') {
+      const cardData = deck[storedCardInfo.cardIndex];
       setDailyCard(cardData || null);
     } else {
       const randomIndex = Math.floor(Math.random() * deck.length);
       const newCard = deck[randomIndex];
       setDailyCard(newCard);
-      localStorage.setItem('dailyTarotCard', JSON.stringify({ cardId: newCard.id, date: today }));
+      localStorage.setItem(storageKey, JSON.stringify({ cardIndex: randomIndex, date: today }));
     }
   }, [deck, deckLoading]);
 
