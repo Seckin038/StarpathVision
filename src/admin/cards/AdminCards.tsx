@@ -202,21 +202,23 @@ function FileImporter({ onDone }: { onDone: () => void }) {
 
     for (const [idx, file] of files.entries()) {
       try {
-        setItems((prev) => prev.map((it, i) => i === idx ? { ...it, status: "uploading", message: t('cards.importer.uploading') } : it));
+        // 1. Upload to temp bucket
+        const tmpBucket = 'tarot-card-uploads';
         const ext = file.name.split(".").pop()?.toLowerCase() || "png";
         const tmpPath = `admin/${crypto.randomUUID()}.${ext}`;
-        const { error: uploadError } = await supabase.storage.from("tarot-card-uploads").upload(tmpPath, file);
+        setItems((prev) => prev.map((it, i) => i === idx ? { ...it, status: "uploading", message: t('cards.importer.uploading') } : it));
+        const { error: uploadError, data: uploadData } = await supabase.storage.from(tmpBucket).upload(tmpPath, file);
         if (uploadError) throw uploadError;
 
+        // 2. Invoke new function
         setItems((prev) => prev.map((it, i) => i === idx ? { ...it, status: "processing", message: t('cards.importer.processing') } : it));
-        const { data, error: invokeError } = await supabase.functions.invoke("process-tarot-upload", {
-          body: { filePath: tmpPath },
-        });
+        const { data, error: invokeError } = await supabase.functions.invoke('cards-import', { body: { path: uploadData.path } });
 
         if (invokeError) throw new Error(`Invoke failed: ${invokeError.message}`);
-        if (data.error) throw new Error(`Function error: ${data.error}`);
+        if (!data?.ok) throw new Error(data?.error || 'Function failed');
 
-        setItems((prev) => prev.map((it, i) => i === idx ? { ...it, status: "done", message: data?.message ?? "OK" } : it));
+        // 3. Update UI
+        setItems((prev) => prev.map((it, i) => i === idx ? { ...it, status: "done", message: `Matched: ${data.matched}` } : it));
       } catch (err: any) {
         setItems((prev) => prev.map((it, i) => i === idx ? { ...it, status: "error", message: err.message } : it));
       }
