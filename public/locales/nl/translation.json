@@ -4,7 +4,8 @@
     "close": "Sluiten",
     "save": "Opslaan",
     "cancel": "Annuleren",
-    "confirmSelection": "Selectie Bevestigen"
+    "confirmSelection": "Selectie Bevestigen",
+    "viewAll": "Bekijk alles"
   },
   "header": {
     "admin": "Admin",
@@ -13,10 +14,6 @@
     "login": "Inloggen"
   },
   "home": {
-    "yourGuide": "Jouw Gids",
-    "seerDescription": "De gekozen waarzegger begeleidt je door de lezing, elk met een unieke stem en wijsheid. Wie kies jij om je pad te verlichten?",
-    "chooseSeer": "Kies Waarzegger",
-    "do3CardReading": "Doe een 3-kaart legging",
     "subtitle": "JOUW GIDS NAAR DE STERREN",
     "startJourney": "Begin Jouw Reis"
   },
@@ -40,5 +37,94 @@
       "title": "Numerologie",
       "description": "Ontdek de kracht van getallen en hoe jouw geboortedatum en naam je levenspad en persoonlijkheid beïnvloeden."
     }
+  },
+  "dashboard": {
+    "welcomeBack": "Welkom terug, {{name}}",
+    "discoverToday": "Wat zul je vandaag ontdekken?",
+    "dayEnergy": "De energie van de dag",
+    "yourCardToday": "Jouw kaart voor vandaag is...",
+    "recentReadings": "Recente Lezingen",
+    "noReadings": "Je hebt nog geen lezingen gedaan.",
+    "choosePath": "Kies je pad",
+    "quickAction": {
+      "3card": "3-kaart legging",
+      "coffee": "Koffiedik",
+      "tarot": "Tarot",
+      "dream": "Dromen",
+      "numerology": "Numerologie"
+    }
+  },
+  "profile": {
+    "title": "Mijn Profiel",
+    "account": "Accountgegevens",
+    "name": "Naam",
+    "email": "E-mailadres",
+    "language": "Taal",
+    "timezone": "Tijdzone",
+    "about": "Over mij",
+    "stats": "Statistieken",
+    "sessions": "Recente Sessies",
+    "view": "Bekijk",
+    "download": "Download"
+  },
+  "tarotChoice": {
+    "loading": "Leggingen worden geladen...",
+    "errorTitle": "Fout opgetreden",
+    "errorBody": "Kon de tarot leggingen niet laden. Probeer het later opnieuw.",
+    "title": "Kies een Tarot Legging",
+    "subtitle": "Elke legging biedt een uniek perspectief op je vragen.",
+    "startSpread": "Start legging"
+  },
+  "tarotReading": {
+    "chooseSeer": "Kies je waarzegger:",
+    "chooseCards": "Kies {{count}} kaarten uit het deck.",
+    "selected": "{{selected}} van de {{total}} kaarten gekozen"
+  },
+  "tarot": {
+    "upright": "Rechtop",
+    "reversed": "Omgekeerd",
+    "summaryTitle": "Jouw Lezing Samengevat",
+    "storyTitle": "Het Verhaal van de Kaarten",
+    "adviceTitle": "Advies voor Jou",
+    "affirmationTitle": "Affirmatie",
+    "actionsTitle": "Concrete Acties",
+    "detailsTitle": "Kaartdetails"
+  },
+  "coffee": {
+    "title": "Koffiedik Kijken",
+    "titleWithUpload": "Koffiedik Lezing met Foto",
+    "chooseSymbols": "Kies je symbolen",
+    "selectedSymbols": "Geselecteerde Symbolen",
+    "noneSelected": "Nog geen symbolen geselecteerd.",
+    "allSymbols": "Alle Symbolen",
+    "uploadPhoto": "Upload foto",
+    "generateReading": "Genereer Lezing",
+    "uploadTitle": "Upload een foto van je kopje",
+    "uploadDesc": "Laat de AI de symbolen voor je vinden.",
+    "choosePhoto": "Kies foto",
+    "tipsTitle": "Tips voor een goede foto",
+    "tips": [
+      "Zorg voor goed, helder licht.",
+      "Maak een foto recht van boven.",
+      "Draai het kopje een paar keer voor verschillende hoeken."
+    ],
+    "analyzing": "Bezig met analyseren...",
+    "detectedSymbols": "Gedetecteerde Symbolen",
+    "clickToUse": "Klik op de symbolen die je wilt gebruiken voor je lezing."
+  },
+  "dream": {
+    "title": "Droomduiding",
+    "yourDreamWorld": "Jouw Droomwereld",
+    "describe": "Beschrijf je droom zo gedetailleerd mogelijk. Wat gebeurde er? Wie was er? Hoe voelde je je?",
+    "yourDream": "Jouw droom",
+    "interpret": "Duiding"
+  },
+  "numerology": {
+    "title": "Numerologie Lezing",
+    "yourProfile": "Jouw Numerologisch Profiel",
+    "discover": "Ontdek je levenspad-, lots- en zielgetal door je volledige naam en geboortedatum in te vullen.",
+    "fullName": "Volledige naam (zoals op geboorteakte)",
+    "birthDate": "Geboortedatum",
+    "calculate": "Bereken"
   }
 }

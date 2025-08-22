@@ -4,7 +4,8 @@
     "close": "Close",
     "save": "Save",
     "cancel": "Cancel",
-    "confirmSelection": "Confirm Selection"
+    "confirmSelection": "Confirm Selection",
+    "viewAll": "View all"
   },
   "header": {
     "admin": "Admin",
@@ -13,10 +14,6 @@
     "login": "Log in"
   },
   "home": {
-    "yourGuide": "Your Guide",
-    "seerDescription": "The chosen seer will guide you through the reading, each with a unique voice and wisdom. Who will you choose to light your path?",
-    "chooseSeer": "Choose Seer",
-    "do3CardReading": "Do a 3-card reading",
     "subtitle": "YOUR GUIDE TO THE STARS",
     "startJourney": "Start Your Journey"
   },
@@ -40,5 +37,94 @@
       "title": "Numerology",
       "description": "Discover the power of numbers and how your birth date and name influence your life path and personality."
     }
+  },
+  "dashboard": {
+    "welcomeBack": "Welcome back, {{name}}",
+    "discoverToday": "What will you discover today?",
+    "dayEnergy": "The day's energy",
+    "yourCardToday": "Your card for today is...",
+    "recentReadings": "Recent Readings",
+    "noReadings": "You haven't done any readings yet.",
+    "choosePath": "Choose your path",
+    "quickAction": {
+      "3card": "3-card spread",
+      "coffee": "Coffee",
+      "tarot": "Tarot",
+      "dream": "Dreams",
+      "numerology": "Numerology"
+    }
+  },
+  "profile": {
+    "title": "My Profile",
+    "account": "Account Details",
+    "name": "Name",
+    "email": "Email Address",
+    "language": "Language",
+    "timezone": "Timezone",
+    "about": "About me",
+    "stats": "Statistics",
+    "sessions": "Recent Sessions",
+    "view": "View",
+    "download": "Download"
+  },
+  "tarotChoice": {
+    "loading": "Loading spreads...",
+    "errorTitle": "An Error Occurred",
+    "errorBody": "Could not load the tarot spreads. Please try again later.",
+    "title": "Choose a Tarot Spread",
+    "subtitle": "Each spread offers a unique perspective on your questions.",
+    "startSpread": "Start spread"
+  },
+  "tarotReading": {
+    "chooseSeer": "Choose your seer:",
+    "chooseCards": "Choose {{count}} cards from the deck.",
+    "selected": "{{selected}} of {{total}} cards chosen"
+  },
+  "tarot": {
+    "upright": "Upright",
+    "reversed": "Reversed",
+    "summaryTitle": "Your Reading Summary",
+    "storyTitle": "The Story of the Cards",
+    "adviceTitle": "Advice for You",
+    "affirmationTitle": "Affirmation",
+    "actionsTitle": "Concrete Actions",
+    "detailsTitle": "Card Details"
+  },
+  "coffee": {
+    "title": "Coffee Ground Reading",
+    "titleWithUpload": "Coffee Reading with Photo",
+    "chooseSymbols": "Choose your symbols",
+    "selectedSymbols": "Selected Symbols",
+    "noneSelected": "No symbols selected yet.",
+    "allSymbols": "All Symbols",
+    "uploadPhoto": "Upload photo",
+    "generateReading": "Generate Reading",
+    "uploadTitle": "Upload a photo of your cup",
+    "uploadDesc": "Let the AI find the symbols for you.",
+    "choosePhoto": "Choose photo",
+    "tipsTitle": "Tips for a good photo",
+    "tips": [
+      "Ensure good, bright lighting.",
+      "Take a photo directly from above.",
+      "Rotate the cup a few times for different angles."
+    ],
+    "analyzing": "Analyzing...",
+    "detectedSymbols": "Detected Symbols",
+    "clickToUse": "Click on the symbols you want to use for your reading."
+  },
+  "dream": {
+    "title": "Dream Interpretation",
+    "yourDreamWorld": "Your Dream World",
+    "describe": "Describe your dream in as much detail as possible. What happened? Who was there? How did you feel?",
+    "yourDream": "Your dream",
+    "interpret": "Interpret"
+  },
+  "numerology": {
+    "title": "Numerology Reading",
+    "yourProfile": "Your Numerological Profile",
+    "discover": "Discover your life path, destiny, and soul numbers by entering your full name and date of birth.",
+    "fullName": "Full name (as on birth certificate)",
+    "birthDate": "Date of birth",
+    "calculate": "Calculate"
   }
 }

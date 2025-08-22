@@ -17,7 +17,8 @@ import {
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { supabase } from "@/lib/supabaseClient";
-import { showError } from "@/utils/toast";
+import { showError, showSuccess, showLoading, dismissToast } from "@/utils/toast";
+import { downloadJSON } from "@/utils/exports";
 
 interface Reading {
   id: string;
@@ -90,6 +91,34 @@ const Archive = () => {
     }
   };
 
+  const downloadSingleReading = (reading: Reading) => {
+    downloadJSON(`starpathvision_lezing_${reading.id}.json`, reading);
+  };
+
+  const downloadAllData = async () => {
+    const toastId = showLoading("Bezig met exporteren...");
+    try {
+        const { data, error } = await supabase.functions.invoke('export-user-data');
+        if (error) throw error;
+        
+        const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `starpathvision_data.json`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+
+        dismissToast(toastId);
+        showSuccess("Gegevens succesvol geëxporteerd.");
+    } catch (err: any) {
+        dismissToast(toastId);
+        showError(`Export mislukt: ${err.message}`);
+    }
+  };
+
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString('nl-NL', {
       day: 'numeric',
@@ -109,7 +138,7 @@ const Archive = () => {
         </Link>
         <h1 className="text-2xl font-bold text-amber-200 tracking-wider">Mijn Lezingen</h1>
         <div className="w-32 flex justify-end">
-          <Button variant="outline" className="border-stone-700 text-stone-300 hover:bg-stone-800"><Download className="h-4 w-4" /></Button>
+          <Button onClick={downloadAllData} variant="outline" className="border-stone-700 text-stone-300 hover:bg-stone-800"><Download className="h-4 w-4" /></Button>
         </div>
       </div>
 
@@ -169,7 +198,7 @@ const Archive = () => {
                           <p className="text-stone-300 text-sm line-clamp-2">{getReadingSummary(reading)}</p>
                         </div>
                         <div className="flex flex-col gap-2 ml-4">
-                          <Button variant="outline" size="sm" className="border-stone-700 text-stone-300 hover:bg-stone-800"><Download className="h-4 w-4" /></Button>
+                          <Button onClick={() => downloadSingleReading(reading)} variant="outline" size="sm" className="border-stone-700 text-stone-300 hover:bg-stone-800"><Download className="h-4 w-4" /></Button>
                           <Button variant="outline" size="sm" onClick={() => deleteReading(reading.id)} className="border-red-900/50 text-red-400 hover:bg-red-900/20"><Trash2 className="h-4 w-4" /></Button>
                         </div>
                       </div>

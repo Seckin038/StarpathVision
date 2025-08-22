@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
@@ -133,15 +133,15 @@ const Dashboard = () => {
           </CardContent>
         </Card>
 
-        <Card className="bg-stone-900/50 backdrop-blur-sm border-stone-800">
+        <Card className="bg-stone-900/50 backdrop-blur-sm border-stone-800 flex flex-col">
           <CardHeader>
             <CardTitle className="text-amber-300 flex items-center gap-2 text-xl"><BookMarked className="h-5 w-5" /> {t('dashboard.recentReadings')}</CardTitle>
           </CardHeader>
-          <CardContent className="p-0">
+          <CardContent className="p-0 flex-grow">
             {loadingReadings ? (
-              <div className="flex justify-center items-center h-32"><Loader2 className="h-6 w-6 animate-spin text-amber-500" /></div>
+              <div className="flex justify-center items-center h-full"><Loader2 className="h-6 w-6 animate-spin text-amber-500" /></div>
             ) : recentReadings.length === 0 ? (
-              <p className="text-stone-400 text-center py-12">{t('dashboard.noReadings')}</p>
+              <p className="text-stone-400 text-center py-12 px-4">{t('dashboard.noReadings')}</p>
             ) : (
               recentReadings.map((reading, index) => (
                 <Link to={`/reading/${reading.id}`} key={reading.id}>
@@ -159,6 +159,15 @@ const Dashboard = () => {
               ))
             )}
           </CardContent>
+          {recentReadings.length > 0 && (
+            <CardFooter className="p-4 mt-auto">
+              <Link to="/archive" className="w-full">
+                <Button variant="outline" className="w-full border-stone-700 text-stone-300 hover:bg-stone-800">
+                  {t('common.viewAll')}
+                </Button>
+              </Link>
+            </CardFooter>
+          )}
         </Card>
       </div>
 
