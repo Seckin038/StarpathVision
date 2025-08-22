@@ -254,8 +254,9 @@ serve(async (req) => {
 
     // Only save the reading if the user is authenticated.
     if (user) {
-      let readingTitle: string;
       const { method, payload, locale } = body;
+      let readingTitle: string;
+      
       switch (method) {
         case 'tarot':
           readingTitle = payload.spread.name?.[locale] || payload.spread.name?.['nl'] || payload.spread.id;
