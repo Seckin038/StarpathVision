@@ -13,18 +13,12 @@ const corsHeaders = {
 
 const PROMPT = `
 You are an expert in Rider–Waite–Smith tarot identification.
-Return ONLY the official English card name, no extra words.
-Examples: "The Fool", "Ace of Wands", "Ten of Pentacles", "Judgement".
-If you see "Coins" assume "Pentacles". If you see "Rods/Staves" assume "Wands".
+Your task is to identify the tarot card from the provided image.
+Return ONLY the official English card name, and nothing else.
+Examples of valid responses: "The Fool", "Ace of Wands", "Ten of Pentacles", "Judgement".
+If you see "Coins", interpret it as "Pentacles". If you see "Rods" or "Staves", interpret it as "Wands".
+Do not add any extra words, punctuation, or explanations.
 `;
-
-const RWS_EN_TO_NL = {
-  "The Fool": "De Dwaas", "The Magician": "De Magiër", "The High Priestess": "De Hogepriesteres", "The Empress": "De Keizerin", "The Emperor": "De Keizer", "The Hierophant": "De Hiërofant", "The Lovers": "De Geliefden", "The Chariot": "De Zegewagen", "Strength": "Kracht", "The Hermit": "De Kluizenaar", "Wheel of Fortune": "Het Rad van Fortuin", "Justice": "Gerechtigheid", "The Hanged Man": "De Gehangene", "Death": "De Dood", "Temperance": "Gematigdheid", "The Devil": "De Duivel", "The Tower": "De Toren", "The Star": "De Ster", "The Moon": "De Maan", "The Sun": "De Zon", "Judgement": "Het Oordeel", "The World": "De Wereld",
-  "Ace of Wands": "Aas van Staven", "Two of Wands": "Twee van Staven", "Three of Wands": "Drie van Staven", "Four of Wands": "Vier van Staven", "Five of Wands": "Vijf van Staven", "Six of Wands": "Zes van Staven", "Seven of Wands": "Zeven van Staven", "Eight of Wands": "Acht van Staven", "Nine of Wands": "Negen van Staven", "Ten of Wands": "Tien van Staven", "Page of Wands": "Page van Staven", "Knight of Wands": "Ridder van Staven", "Queen of Wands": "Koningin van Staven", "King of Wands": "Koning van Staven",
-  "Ace of Cups": "Aas van Kelken", "Two of Cups": "Twee van Kelken", "Three of Cups": "Drie van Kelken", "Four of Cups": "Vier van Kelken", "Five of Cups": "Vijf van Kelken", "Six of Cups": "Zes van Kelken", "Seven of Cups": "Zeven van Kelken", "Eight of Cups": "Acht van Kelken", "Nine of Cups": "Negen van Kelken", "Ten of Cups": "Tien van Kelken", "Page of Cups": "Page van Kelken", "Knight of Cups": "Ridder van Kelken", "Queen of Cups": "Koningin van Kelken", "King of Cups": "Koning van Kelken",
-  "Ace of Swords": "Aas van Zwaarden", "Two of Swords": "Twee van Zwaarden", "Three of Swords": "Drie van Zwaarden", "Four of Swords": "Vier van Zwaarden", "Five of Swords": "Vijf van Zwaarden", "Six of Swords": "Zes van Zwaarden", "Seven of Swords": "Zeven van Zwaarden", "Eight of Swords": "Acht van Zwaarden", "Nine of Swords": "Negen van Zwaarden", "Ten of Swords": "Tien van Zwaarden", "Page of Swords": "Page van Zwaarden", "Knight of Swords": "Ridder van Zwaarden", "Queen of Swords": "Koningin van Zwaarden", "King of Swords": "Koning van Zwaarden",
-  "Ace of Pentacles": "Aas van Pentakels", "Two of Pentacles": "Twee van Pentakels", "Three of Pentacles": "Drie van Pentakels", "Four of Pentacles": "Vier van Pentakels", "Five of Pentacles": "Vijf van Pentakels", "Six of Pentacles": "Zes van Pentakels", "Seven of Pentacles": "Zeven van Pentakels", "Eight of Pentacles": "Acht van Pentakels", "Nine of Pentacles": "Negen van Pentakels", "Ten of Pentacles": "Tien van Pentakels", "Page of Pentacles": "Page van Pentakels", "Knight of Pentacles": "Ridder van Pentakels", "Queen of Pentacles": "Koningin van Pentakels", "King of Pentacles": "Koning van Pentakels"
-};
 
 function env(key: string) {
   const v = Deno.env.get(key);
@@ -55,48 +49,55 @@ serve(async (req) => {
 
     const supabaseAdmin = createClient(env("SUPABASE_URL"), env("SUPABASE_SERVICE_ROLE_KEY"));
 
+    // 1. Download the uploaded image
     const { data: blob, error: downloadError } = await supabaseAdmin.storage
       .from("tarot-card-uploads")
       .download(filePath);
     if (downloadError) throw new Error(`Download failed: ${downloadError.message}`);
 
+    // 2. Identify the card using AI
     const bytes = new Uint8Array(await blob.arrayBuffer());
     const cardNameEn = await identifyByAI(bytes, blob.type);
     if (!cardNameEn) throw new Error("AI could not identify the card.");
     
-    const cardNameNl = RWS_EN_TO_NL[cardNameEn];
-    if (!cardNameNl) throw new Error(`Could not map English name '${cardNameEn}' to Dutch.`);
+    // 3. Find the corresponding card in the database using its English name
+    // We fetch from a public JSON file instead of a large hardcoded map
+    const cardsResponse = await fetch(new URL('/tarot/cards.en.json', env("SUPABASE_URL")).href);
+    if (!cardsResponse.ok) throw new Error("Could not fetch English card data.");
+    const cardsEn = await cardsResponse.json();
+    const matchedCardEn = cardsEn.find(c => c.name.toLowerCase() === cardNameEn.toLowerCase());
+    if (!matchedCardEn) throw new Error(`Card '${cardNameEn}' not found in English card list.`);
 
-    const { data: card, error: dbError } = await supabaseAdmin
-      .from("tarot_cards")
-      .select("id, name")
-      .eq("name", cardNameNl)
-      .single();
-    if (dbError) throw new Error(`Card '${cardNameNl}' not found in database.`);
+    // 4. Use the ID from the matched card to update the correct record
+    const cardId = matchedCardEn.id;
 
+    // 5. Upload the image to the final public bucket
     const ext = filePath.split(".").pop() || "jpg";
-    const finalPath = `${card.id}.${ext}`;
+    const finalPath = `${cardId}.${ext}`;
     const { error: uploadError } = await supabaseAdmin.storage
       .from("tarot-cards")
       .upload(finalPath, blob, { upsert: true, contentType: blob.type });
     if (uploadError) throw new Error(`Final upload failed: ${uploadError.message}`);
 
+    // 6. Update the image_url in the database
     const { data: urlData } = supabaseAdmin.storage.from("tarot-cards").getPublicUrl(finalPath);
     const { error: updateError } = await supabaseAdmin
       .from("tarot_cards")
-      .update({ image_url: urlData.publicUrl })
-      .eq("id", card.id);
+      .update({ image_url: urlData.publicUrl, updated_at: new Date().toISOString() })
+      .eq("id", cardId);
     if (updateError) throw new Error(`DB update failed: ${updateError.message}`);
 
+    // 7. Clean up the temporary file
     await supabaseAdmin.storage.from("tarot-card-uploads").remove([filePath]);
 
-    return new Response(JSON.stringify({ success: true, cardName: card.name, imageUrl: urlData.publicUrl }), {
+    return new Response(JSON.stringify({ success: true, cardId: cardId, imageUrl: urlData.publicUrl }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
       status: 200,
     });
 
   } catch (err) {
     const msg = err instanceof Error ? err.message : String(err);
+    console.error("process-tarot-upload error:", msg);
     return new Response(JSON.stringify({ error: msg }), {
       status: 500,
       headers: { ...corsHeaders, "Content-Type": "application/json" },

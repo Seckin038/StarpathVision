@@ -35,6 +35,10 @@ const App = () => (
       <BrowserRouter>
         <AuthProvider>
           <Routes>
+            {/* Admin routes now use their own layout structure */}
+            <Route path="/admin/*" element={<AdminRoutes />} />
+
+            {/* Main site uses the MainLayout */}
             <Route element={<MainLayout />}>
               {/* --- PUBLIC ROUTES --- */}
               <Route path="/" element={<Index />} />
@@ -52,9 +56,6 @@ const App = () => (
               <Route path="/reading/:id" element={<RequireAuth><ReadingDetailPage /></RequireAuth>} />
               <Route path="/onboarding" element={<RequireAuth><Onboarding /></RequireAuth>} />
               
-              {/* Admin Routes */}
-              <Route path="/admin/*" element={<AdminRoutes />} />
-
               {/* Protected Reading Routes */}
               <Route path="/readings/tarot" element={<RequireAuth><TarotChoice /></RequireAuth>} />
               <Route path="/readings/tarot/spread/:spread" element={<RequireAuth><TarotSpreadReading /></RequireAuth>} />

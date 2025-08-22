@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import AdminLayout from "./shell/AdminLayout";
+import AdminMainLayout from "./shell/AdminMainLayout";
 import RequireRole from "./shell/RequireRole";
 import AdminCards from "./cards/AdminCards";
 import AdminPersonas from "./personas/AdminPersonas";
@@ -13,8 +13,8 @@ import AdminHome from "./AdminHome";
 export default function AdminRoutes() {
   return (
     <RequireRole roles={["admin","editor"]}>
-      <AdminLayout>
-        <Routes>
+      <Routes>
+        <Route element={<AdminMainLayout />}>
           <Route path="/" element={<AdminHome />} />
           <Route path="cards" element={<AdminCards />} />
           <Route path="personas" element={<AdminPersonas />} />
@@ -23,8 +23,8 @@ export default function AdminRoutes() {
           <Route path="spreads" element={<AdminSpreads />} />
           <Route path="users" element={<RequireRole roles={["admin"]}><AdminUsers /></RequireRole>} />
           <Route path="features" element={<RequireRole roles={["admin"]}><AdminFeatures /></RequireRole>} />
-        </Routes>
-      </AdminLayout>
+        </Route>
+      </Routes>
     </RequireRole>
   );
 }
