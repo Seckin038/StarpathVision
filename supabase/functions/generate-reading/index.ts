@@ -66,6 +66,8 @@ OUTPUT FORMAAT:
     }
   ]
 }
+
+BELANGRIJK: Voordat je je JSON afrondt, controleer dubbel of je geen Engelse kaartnamen zoals 'The Star' of 'King of Cups' hebt gebruikt. Gebruik alleen de verstrekte Nederlandse namen.
 `,
   en: `
 YOUR TASK:
@@ -94,6 +96,8 @@ OUTPUT FORMAT:
     }
   ]
 }
+
+IMPORTANT: Before finalizing your JSON, double-check to ensure you have not used any non-English card names. Use only the English names provided.
 `,
   tr: `
 SENİN GÖREVİN:
@@ -122,6 +126,8 @@ KULLANILACAK DİL: Tüm metinler, kart adları da dahil olmak üzere, Türkçe o
     }
   ]
 }
+
+ÖNEMLİ: JSON'unuzu sonlandırmadan önce, 'The Star' veya 'King of Cups' gibi İngilizce kart adları kullanmadığınızdan emin olmak için iki kez kontrol edin. Yalnızca sağlanan Türkçe adları kullanın.
 `
 };
 
