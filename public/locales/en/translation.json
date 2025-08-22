@@ -17,6 +17,11 @@
     "subtitle": "YOUR GUIDE TO THE STARS",
     "startJourney": "Start Your Journey"
   },
+  "freeReading": {
+    "title": "Try a Free Tarot Reading",
+    "subtitle": "Get instant insight into your past, present, and future with our popular 3-card spread. No registration required.",
+    "cta": "Start Your Free Reading"
+  },
   "features": {
     "title": "Discover the Worlds Within",
     "subtitle": "After registering, you'll gain access to a suite of mystical tools to illuminate your path. Discover what the stars have in store for you.",
