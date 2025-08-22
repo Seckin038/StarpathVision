@@ -1,4 +1,6 @@
 // @ts-nocheck
+// Deno Edge Function
+// supabase/functions/process-tarot-upload/index.ts
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { serve } from "https://deno.land/std@0.224.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.45.0";
@@ -47,7 +49,7 @@ async function identifyWithGemini(bytes: Uint8Array, mime: string, apiKey: strin
   return text;
 }
 
-serve(async (req) => {
+Deno.serve(async (req) => {
   const corsHeaders = cors(req);
 
   // Always answer preflight so the browser will proceed to POST.

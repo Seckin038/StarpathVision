@@ -187,54 +187,51 @@ export default function AdminCards() {
   );
 }
 
-type RowStatus = "pending" | "uploading" | "processing" | "ok" | "err";
-type Row = { name: string; status: RowStatus; note?: string };
+type Item = { file: File; status: "pending"|"uploading"|"processing"|"done"|"error"; message?: string };
 
 function FileImporter({ onDone }: { onDone: () => void }) {
-  const [rows, setRows] = useState<Row[]>([]);
+  const [items, setItems] = useState<Item[]>([]);
   const inputRef = useRef<HTMLInputElement>(null);
   const { t } = useTranslation('admin');
 
-  const handleFileSelection = async (files: FileList | null) => {
-    if (!files || !files.length) return;
-    
-    const initialRows = Array.from(files).map(f => ({ name: f.name, status: "pending" as const }));
-    setRows(initialRows);
+  const onFiles = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = Array.from(e.target.files ?? []);
+    if (!files.length) return;
 
-    for (let i = 0; i < files.length; i++) {
-      const file = files[i];
-      const updateRow = (status: RowStatus, note?: string) => {
-        setRows(prev => prev.map((r, idx) => idx === i ? { ...r, status, note } : r));
-      };
+    setItems(files.map((f) => ({ file: f, status: "pending" })));
 
+    for (const [idx, file] of files.entries()) {
       try {
-        updateRow("uploading", t('cards.importer.uploading'));
-        const ext = file.name.split('.').pop()?.toLowerCase() || 'jpg';
-        const filePath = `${crypto.randomUUID()}.${ext}`;
-        
-        const { error: uploadError } = await supabase.storage
-          .from('tarot-card-uploads')
-          .upload(filePath, file);
+        setItems((prev) => prev.map((it, i) => i === idx ? { ...it, status: "uploading", message: t('cards.importer.uploading') } : it));
 
-        if (uploadError) throw new Error(t('cards.importer.uploadFailed', { message: uploadError.message }));
+        const ext = file.name.split(".").pop()?.toLowerCase() || "png";
+        const tmpPath = `admin/${crypto.randomUUID()}.${ext}`;
 
-        updateRow("processing", t('cards.importer.processing'));
-
-        const { data: { session }, error: sessionError } = await supabase.auth.getSession();
-        if (sessionError || !session) throw new Error(t('cards.importer.sessionFailed'));
-
-        const { error: invokeError } = await supabase.functions.invoke("process-tarot-upload", {
-          body: { filePath },
+        const { error: uploadError } = await supabase.storage.from("tarot-card-uploads").upload(tmpPath, file, {
+          cacheControl: "3600",
+          upsert: false,
+          contentType: file.type || "image/*",
         });
+        if (uploadError) throw uploadError;
 
-        if (invokeError) {
-          throw new Error(t('cards.importer.processingFailed', { message: invokeError.message }));
-        }
+        setItems((prev) => prev.map((it, i) => i === idx ? { ...it, status: "processing", message: t('cards.importer.processing') } : it));
 
-        updateRow("ok", t('cards.importer.success'));
+        const { data, error: invokeError } = await supabase.functions.invoke("process-tarot-upload", {
+          body: { filePath: tmpPath },
+        });
+        if (invokeError) throw invokeError;
 
-      } catch (err) {
-        updateRow("err", err instanceof Error ? err.message : t('cards.importer.unknownError'));
+        setItems((prev) =>
+          prev.map((it, i) =>
+            i === idx ? { ...it, status: "done", message: data?.message ?? t('cards.importer.success') } : it
+          )
+        );
+      } catch (err: any) {
+        setItems((prev) =>
+          prev.map((it, i) =>
+            i === idx ? { ...it, status: "error", message: String(err?.message ?? t('cards.importer.unknownError')) } : it
+          )
+        );
       }
     }
     onDone();
@@ -242,20 +239,20 @@ function FileImporter({ onDone }: { onDone: () => void }) {
 
   return (
     <div className="space-y-3 pt-4">
-      <input ref={inputRef} type="file" multiple accept="image/*" className="hidden" onChange={e => handleFileSelection(e.target.files)} />
+      <input ref={inputRef} type="file" multiple accept="image/*" className="hidden" onChange={onFiles} />
       <Button onClick={() => inputRef.current?.click()}><UploadCloud className="h-4 w-4 mr-2" /> {t('cards.chooseFiles')}</Button>
 
-      {rows.length > 0 && (
+      {items.length > 0 && (
         <div className="border border-stone-800 rounded-md p-2 max-h-64 overflow-auto text-sm">
-          {rows.map((r, i) => (
+          {items.map((it, i) => (
             <div key={i} className="flex items-center gap-2 py-1">
-              {r.status === "pending" && <Loader2 className="h-4 w-4 text-stone-500 animate-pulse" />}
-              {r.status === "uploading" && <Loader2 className="h-4 w-4 text-amber-500 animate-spin" />}
-              {r.status === "processing" && <Loader2 className="h-4 w-4 text-blue-500 animate-spin" />}
-              {r.status === "ok" && <CheckCircle className="h-4 w-4 text-green-500" />}
-              {r.status === "err" && <XCircle className="h-4 w-4 text-red-500" />}
-              <span className="flex-1 truncate">{r.name}</span>
-              <span className="text-stone-400">{r.note}</span>
+              {it.status === "pending" && <Loader2 className="h-4 w-4 text-stone-500 animate-pulse" />}
+              {it.status === "uploading" && <Loader2 className="h-4 w-4 text-amber-500 animate-spin" />}
+              {it.status === "processing" && <Loader2 className="h-4 w-4 text-blue-500 animate-spin" />}
+              {it.status === "done" && <CheckCircle className="h-4 w-4 text-green-500" />}
+              {it.status === "error" && <XCircle className="h-4 w-4 text-red-500" />}
+              <span className="flex-1 truncate">{it.file.name}</span>
+              <span className="text-stone-400">{it.message}</span>
             </div>
           ))}
         </div>
