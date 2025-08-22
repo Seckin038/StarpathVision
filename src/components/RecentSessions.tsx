@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { fetchReadingsPage, Reading } from "../lib/readings";
+import { fetchReadingsPage, Reading } from "@/lib/readings";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 
