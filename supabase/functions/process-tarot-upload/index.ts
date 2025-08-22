@@ -5,12 +5,6 @@ import { createClient } from "https://esm.sh/@supabase/supabase-js@2.45.0";
 import { GoogleGenerativeAI } from "npm:@google/generative-ai";
 import { encode } from "https://deno.land/std@0.224.0/encoding/base64.ts";
 
-const corsHeaders = {
-  "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
-  "Access-Control-Allow-Methods": "POST, OPTIONS",
-};
-
 const PROMPT = `
 You are an expert in Rider–Waite–Smith tarot identification.
 Your task is to identify the tarot card from the provided image.
@@ -42,6 +36,14 @@ async function identifyByAI(bytes: Uint8Array, mime: string): Promise<string | n
 }
 
 serve(async (req) => {
+  // Handle CORS preflight requests
+  const origin = req.headers.get("Origin") || "*";
+  const corsHeaders = {
+    "Access-Control-Allow-Origin": origin,
+    "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
+    "Access-Control-Allow-Methods": "POST, OPTIONS",
+  };
+
   if (req.method === "OPTIONS") {
     return new Response("ok", { headers: corsHeaders });
   }
