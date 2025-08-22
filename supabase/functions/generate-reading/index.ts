@@ -58,6 +58,15 @@ Deno.serve(async (req) => {
       throw new Error(`Unsupported method '${method}'`);
     }
 
+    // Map to English terms for DB consistency to satisfy the check constraint
+    const dbMethodMap: { [key: string]: string } = {
+      tarot: 'tarot',
+      koffiedik: 'coffee',
+      dromen: 'dream',
+      numerologie: 'numerology',
+    };
+    const dbMethod = dbMethodMap[method] || method;
+
     const token = req.headers.get("Authorization")?.replace("Bearer ", "") ?? "";
     const { data: userRes, error: userErr } = await supa.auth.getUser(token);
     if (userErr) throw new Error(`Auth error: ${userErr.message}`);
@@ -101,7 +110,7 @@ Deno.serve(async (req) => {
     if (user) {
       const insertRow = {
         user_id: user.id,
-        method: method, // Use the original Dutch method name
+        method: dbMethod, // Use the mapped English method here
         locale: body?.locale ?? "nl",
         title,
         spread_id,

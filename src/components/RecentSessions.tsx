@@ -3,10 +3,18 @@ import { fetchReadingsPage, Reading } from "@/lib/readings";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 
-const METHODS: Array<Reading["method"] | "all"> = ["all","tarot","koffiedik","dromen","numerologie"];
+const METHODS = [
+  { value: "all", label: "Alles" },
+  { value: "tarot", label: "Tarot" },
+  { value: "coffee", label: "Koffiedik" },
+  { value: "dream", label: "Dromen" },
+  { value: "numerology", label: "Numerologie" },
+] as const;
+
+type MethodValue = typeof METHODS[number]['value'];
 
 export default function RecentSessions() {
-  const [method, setMethod] = useState<"all" | Reading["method"]>("all");
+  const [method, setMethod] = useState<MethodValue>("all");
   const [page, setPage] = useState(1);
   const [rows, setRows] = useState<Reading[]>([]);
   const [total, setTotal] = useState(0);
@@ -25,18 +33,23 @@ export default function RecentSessions() {
 
   const pages = Math.max(1, Math.ceil(total / PER_PAGE));
 
+  const displayMethod = (methodValue: Reading['method']) => {
+    const found = METHODS.find(m => m.value === methodValue);
+    return found ? found.label : methodValue;
+  };
+
   return (
     <div className="space-y-3">
       <div className="flex gap-2 flex-wrap">
         {METHODS.map(m => (
           <Button
-            key={m}
+            key={m.value}
             size="sm"
-            variant={method === m ? "default" : "outline"}
-            onClick={() => { setMethod(m as any); setPage(1); }}
+            variant={method === m.value ? "default" : "outline"}
+            onClick={() => { setMethod(m.value); setPage(1); }}
             className="capitalize"
           >
-            {m === "all" ? "Alles" : m}
+            {m.label}
           </Button>
         ))}
       </div>
@@ -50,10 +63,10 @@ export default function RecentSessions() {
               <li key={r.id}>
                 <Link to={`/reading/${r.id}`} className="flex items-center justify-between rounded-lg border border-stone-800 p-3 bg-stone-900/50 hover:bg-stone-800/50 transition-colors">
                   <div className="min-w-0">
-                    <div className="text-stone-100 truncate">{r.title ?? r.method}</div>
+                    <div className="text-stone-100 truncate">{r.title ?? displayMethod(r.method)}</div>
                     <div className="text-xs text-stone-400">{new Date(r.created_at).toLocaleString()}</div>
                   </div>
-                  <div className="text-xs uppercase text-stone-400 ml-4 shrink-0">{r.method}</div>
+                  <div className="text-xs uppercase text-stone-400 ml-4 shrink-0">{displayMethod(r.method)}</div>
                 </Link>
               </li>
             ))}

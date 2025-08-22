@@ -2,7 +2,7 @@ import { supabase } from "@/lib/supabaseClient";
 
 export type Reading = {
   id: string;
-  method: "tarot" | "koffiedik" | "dromen" | "numerologie";
+  method: "tarot" | "coffee" | "dream" | "numerology";
   title: string | null;
   created_at: string;
   thumbnail_url: string | null;
