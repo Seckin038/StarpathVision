@@ -232,9 +232,7 @@ serve(async (req) => {
     const raw = await req.json();
     const body = BodySchema.parse(raw);
 
-    // Try to get user, but don't fail if they're not logged in.
     const { data: { user } } = await supabaseAdmin.auth.getUser(req.headers.get('Authorization')?.replace('Bearer ', ''));
-    // We ignore authError here and just check if user is null.
 
     const persona = await getPersona(supabaseAdmin, body.personaId);
     const systemInstruction = buildSystemInstruction(body.locale, persona);
@@ -252,7 +250,6 @@ serve(async (req) => {
     const text = response.text();
     const resultJson = JSON.parse(text);
 
-    // Only save the reading if the user is authenticated.
     if (user) {
       const { method, payload, locale } = body;
       let readingTitle: string;
@@ -294,10 +291,8 @@ serve(async (req) => {
           readingTitle = method;
       }
 
-      // Sanitize payload to ensure it's clean JSON before inserting
       let payloadToSave = JSON.parse(JSON.stringify(body.payload));
 
-      // More specific sanitization for coffee readings to ensure DB compatibility
       if ((body.method === 'koffiedik' || body.method === 'coffee') && Array.isArray(payloadToSave.symbols)) {
         payloadToSave.symbols = payloadToSave.symbols.map((s: any) => ({
           symbol_name_nl: s.symbol_name_nl,
@@ -317,8 +312,8 @@ serve(async (req) => {
       });
 
       if (insertError) {
-        // Log the error but don't fail the request, as the user got their reading.
         console.error("DB insert error:", insertError);
+        throw new Error(`Database save failed: ${insertError.message}`);
       }
     }
 
