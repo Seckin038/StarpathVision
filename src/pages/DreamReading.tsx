@@ -16,7 +16,7 @@ import { usePersona } from "@/contexts/PersonaContext";
 import ReadingPanel from "@/components/ReadingPanel";
 
 const DreamReading = () => {
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation();
   const { personaId } = usePersona();
   const [dreamDescription, setDreamDescription] = useState("");
   const [readingResult, setReadingResult] = useState<string | null>(null);
@@ -72,10 +72,10 @@ const DreamReading = () => {
         <Link to="/dashboard">
           <Button variant="outline" className="flex items-center gap-2 border-amber-800 text-amber-300 hover:bg-amber-900/50 hover:text-amber-200">
             <ChevronLeft className="h-4 w-4" />
-            Terug
+            {t('common.back')}
           </Button>
         </Link>
-        <h1 className="text-2xl font-bold text-amber-200 tracking-wider">Droomduiding</h1>
+        <h1 className="text-2xl font-bold text-amber-200 tracking-wider">{t('dream.title')}</h1>
         <div className="w-32"></div>
       </div>
 
@@ -83,18 +83,18 @@ const DreamReading = () => {
         <CardHeader>
           <CardTitle className="text-amber-300 flex items-center gap-2 text-xl">
             <Eye className="h-5 w-5" />
-            Jouw Droomwereld
+            {t('dream.yourDreamWorld')}
           </CardTitle>
         </CardHeader>
         <CardContent>
           {!readingResult ? (
             <div className="space-y-6">
               <p className="text-stone-300">
-                Beschrijf je droom zo gedetailleerd mogelijk. Wat gebeurde er, wie was er, en wat voelde je?
+                {t('dream.describe')}
               </p>
               <div className="space-y-4">
                 <div>
-                  <Label htmlFor="dreamDescription" className="text-stone-300">Jouw droom</Label>
+                  <Label htmlFor="dreamDescription" className="text-stone-300">{t('dream.yourDream')}</Label>
                   <Textarea 
                     id="dreamDescription" 
                     value={dreamDescription} 
@@ -105,7 +105,7 @@ const DreamReading = () => {
                 </div>
               </div>
               <Button onClick={generateReading} disabled={!dreamDescription || isGenerating} className="w-full bg-amber-800 hover:bg-amber-700 text-stone-100 flex items-center justify-center gap-2">
-                {isGenerating ? <><div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>Duiding...</> : <><Sparkles className="h-4 w-4" />Duid mijn droom</>}
+                {isGenerating ? <><div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>Duiding...</> : <><Sparkles className="h-4 w-4" />{t('dream.interpret')}</>}
               </Button>
             </div>
           ) : (

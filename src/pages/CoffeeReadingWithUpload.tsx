@@ -19,7 +19,7 @@ import { usePersona } from "@/contexts/PersonaContext";
 import ReadingPanel from "@/components/ReadingPanel";
 
 const CoffeeReadingWithUpload = () => {
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation();
   const { personaId } = usePersona();
   const [symbols, setSymbols] = useState<any[]>([]);
   const [selectedSymbols, setSelectedSymbols] = useState<any[]>([]);
@@ -135,10 +135,10 @@ const CoffeeReadingWithUpload = () => {
         <Link to="/dashboard">
           <Button variant="outline" className="flex items-center gap-2 border-amber-800 text-amber-300 hover:bg-amber-900/50 hover:text-amber-200">
             <ChevronLeft className="h-4 w-4" />
-            Terug
+            {t('common.back')}
           </Button>
         </Link>
-        <h1 className="text-2xl font-bold text-amber-200 tracking-wider">Koffielezing met Foto</h1>
+        <h1 className="text-2xl font-bold text-amber-200 tracking-wider">{t('coffee.titleWithUpload')}</h1>
         <div className="w-32"></div>
       </div>
 
@@ -146,7 +146,7 @@ const CoffeeReadingWithUpload = () => {
         <CardHeader>
           <CardTitle className="text-amber-300 flex items-center gap-2 text-xl">
             <Camera className="h-5 w-5" />
-            Upload je koffiekop
+            {t('coffee.uploadTitle')}
           </CardTitle>
         </CardHeader>
         <CardContent>
@@ -157,7 +157,7 @@ const CoffeeReadingWithUpload = () => {
                 onClick={() => fileInputRef.current?.click()}
               >
                 <Camera className="h-12 w-12 text-amber-400 mx-auto mb-3" />
-                <h3 className="font-medium text-stone-200">Upload een foto van je koffiekop</h3>
+                <h3 className="font-medium text-stone-200">{t('coffee.uploadDesc')}</h3>
                 <p className="text-stone-400 text-sm mt-1">
                   Of maak een foto met je camera
                 </p>
@@ -169,20 +169,19 @@ const CoffeeReadingWithUpload = () => {
                   }}
                 >
                   <Upload className="h-4 w-4 mr-2" />
-                  Kies foto
+                  {t('coffee.choosePhoto')}
                 </Button>
               </div>
               
               <div className="mt-4 p-4 bg-stone-900 rounded-lg border border-stone-800">
                 <div className="flex items-center gap-2 mb-3">
                   <AlertCircle className="h-4 w-4 text-amber-400" />
-                  <span className="text-sm font-medium text-stone-200">Tips voor een goede foto</span>
+                  <span className="text-sm font-medium text-stone-200">{t('coffee.tipsTitle')}</span>
                 </div>
                 <ul className="text-sm text-stone-400 space-y-1 list-disc list-inside">
-                  <li>Zorg voor voldoende licht</li>
-                  <li>Fotografeer de binnenkant van de kop</li>
-                  <li>Zorg dat de symbolen duidelijk zichtbaar zijn</li>
-                  <li>Gebruik geen flits</li>
+                  {(t('coffee.tips', { returnObjects: true }) as string[]).map((tip: string, index: number) => (
+                    <li key={index}>{tip}</li>
+                  ))}
                 </ul>
               </div>
               
@@ -215,12 +214,12 @@ const CoffeeReadingWithUpload = () => {
               {isAnalyzing ? (
                 <div className="mt-4 text-center">
                   <div className="inline-block animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-amber-500 mb-2"></div>
-                  <p className="text-stone-400">Beeld wordt geanalyseerd...</p>
+                  <p className="text-stone-400">{t('coffee.analyzing')}</p>
                 </div>
               ) : detectedSymbols.length > 0 && (
                 <div className="mt-4">
-                  <h3 className="font-semibold text-amber-200 mb-2">Gedetecteerde symbolen:</h3>
-                  <p className="text-sm text-stone-400 mb-3">Klik op de symbolen die je wilt gebruiken voor je lezing.</p>
+                  <h3 className="font-semibold text-amber-200 mb-2">{t('coffee.detectedSymbols')}</h3>
+                  <p className="text-sm text-stone-400 mb-3">{t('coffee.clickToUse')}</p>
                   <div className="flex flex-wrap gap-2">
                     {detectedSymbols.map((symbol) => (
                       <Badge 
@@ -252,7 +251,7 @@ const CoffeeReadingWithUpload = () => {
                   className="bg-amber-800 hover:bg-amber-700 text-stone-100 flex items-center gap-2 px-6 py-3"
                 >
                   {isGenerating ? <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div> : <Coffee className="h-5 w-5" />}
-                  Lezing genereren
+                  {t('coffee.generateReading')}
                 </Button>
               </div>
             </>

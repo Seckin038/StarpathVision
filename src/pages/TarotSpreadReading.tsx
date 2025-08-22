@@ -222,11 +222,11 @@ export default function TarotReadingPage() {
         <div className="space-y-8">
           <div className="text-center text-stone-300">
             <div className="flex justify-center items-center gap-4 mb-2">
-              <p>Kies je waarzegger:</p>
+              <p>{t('tarotReading.chooseSeer')}</p>
               <PersonaBadge onClick={() => setShowPersonaPicker(true)} />
             </div>
-            <p>Kies {spread.cards_required} kaarten.</p>
-            <p className="text-sm text-stone-400">Geselecteerd: {selectedIndices.length} / {spread.cards_required}</p>
+            <p>{t('tarotReading.chooseCards', { count: spread.cards_required })}</p>
+            <p className="text-sm text-stone-400">{t('tarotReading.selected', { selected: selectedIndices.length, total: spread.cards_required })}</p>
           </div>
           <TarotGridDisplay
             totalCards={78}
@@ -245,7 +245,7 @@ export default function TarotReadingPage() {
               disabled={selectedIndices.length !== spread.cards_required || deckLoading} 
               className="bg-amber-800 hover:bg-amber-700 text-stone-100 px-6 py-3"
             >
-              <Sparkles className="h-4 w-4 mr-2" /> Bevestig selectie
+              <Sparkles className="h-4 w-4 mr-2" /> {t('common.confirmSelection')}
             </Button>
           </div>
         </div>
@@ -285,7 +285,7 @@ export default function TarotReadingPage() {
     <div className="relative min-h-screen p-4 font-serif">
       <div className="relative z-10 max-w-7xl mx-auto">
         <header className="flex items-center justify-between mb-6">
-          <Link to="/readings/tarot"><Button variant="outline" className="border-amber-800 text-amber-300"><ChevronLeft className="h-4 w-4" /> Terug</Button></Link>
+          <Link to="/readings/tarot"><Button variant="outline" className="border-amber-800 text-amber-300"><ChevronLeft className="h-4 w-4" /> {t('common.back')}</Button></Link>
           <div className="text-center">
             <h1 className="text-3xl font-serif tracking-wide text-amber-200">{spread ? (spread.name?.[locale] ?? spread.id) : "Tarot Lezing"}</h1>
           </div>

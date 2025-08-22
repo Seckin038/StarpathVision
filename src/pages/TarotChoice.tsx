@@ -7,7 +7,7 @@ import { useTranslation } from "react-i18next";
 import { Spread, Locale } from "@/types/tarot";
 
 const TarotChoice = () => {
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation();
   const locale = i18n.language as Locale;
 
   const [spreads, setSpreads] = useState<Spread[]>([]);
@@ -44,7 +44,7 @@ const TarotChoice = () => {
       return (
         <div className="flex flex-col items-center justify-center h-64 text-stone-400">
           <Loader2 className="h-12 w-12 animate-spin text-amber-500 mb-4" />
-          <p>Leggingen worden geladen...</p>
+          <p>{t('tarotChoice.loading')}</p>
         </div>
       );
     }
@@ -53,8 +53,8 @@ const TarotChoice = () => {
       return (
         <div className="flex flex-col items-center justify-center h-64 text-red-400 bg-red-900/20 border border-red-800 rounded-lg p-8">
           <AlertTriangle className="h-12 w-12 mb-4" />
-          <h2 className="text-xl font-bold mb-2">Er is iets misgegaan</h2>
-          <p>{error}</p>
+          <h2 className="text-xl font-bold mb-2">{t('tarotChoice.errorTitle')}</h2>
+          <p>{t('tarotChoice.errorBody')}</p>
         </div>
       );
     }
@@ -75,7 +75,7 @@ const TarotChoice = () => {
                 <div className="flex justify-between items-center">
                   <span className="text-xs text-stone-500">{spread.cards_required} kaarten</span>
                   <Button variant="outline" size="sm" className="border-amber-800 text-amber-300 group-hover:bg-amber-900/50 group-hover:text-amber-200">
-                    Start legging
+                    {t('tarotChoice.startSpread')}
                   </Button>
                 </div>
               </CardContent>
@@ -91,15 +91,15 @@ const TarotChoice = () => {
       <header className="flex items-center justify-between mb-8">
         <Link to="/dashboard">
           <Button variant="outline" className="flex items-center gap-2 border-amber-800 text-amber-300 hover:bg-amber-900/50 hover:text-amber-200">
-            <ChevronLeft className="h-4 w-4" /> Terug
+            <ChevronLeft className="h-4 w-4" /> {t('common.back')}
           </Button>
         </Link>
         <div className="text-center">
           <h1 className="text-3xl font-serif tracking-wide text-amber-200">
-            Kies een Tarot Legging
+            {t('tarotChoice.title')}
           </h1>
           <p className="text-stone-400">
-            Selecteer een legging die resoneert met je vraag.
+            {t('tarotChoice.subtitle')}
           </p>
         </div>
         <div className="w-32"></div>

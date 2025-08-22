@@ -1,15 +1,17 @@
-import { Link, useNavigate } from "react-router-dom"; // Added useNavigate
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import { Button } from "@/components/ui/button";
 import { LogIn, LayoutDashboard, Sparkles } from "lucide-react";
-import { supabase } from "@/lib/supabaseClient"; // Added supabase import
-import { useEffect, useState } from "react"; // Added useEffect and useState
+import { supabase } from "@/lib/supabaseClient";
+import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const Header = () => {
   const { user, signOut } = useAuth();
-  const navigate = useNavigate(); // Initialize useNavigate
-  const [isAdmin, setIsAdmin] = useState(false); // State to track admin status
+  const navigate = useNavigate();
+  const [isAdmin, setIsAdmin] = useState(false);
+  const { t } = useTranslation();
 
   useEffect(() => {
     const checkAdminStatus = async () => {
@@ -41,29 +43,29 @@ const Header = () => {
         <LanguageSwitcher />
         {user ? (
           <>
-            {isAdmin && ( // Conditionally render admin dashboard button
+            {isAdmin && (
               <Link to="/admin">
                 <Button variant="outline" className="border-amber-800 text-amber-300 hover:bg-amber-900/50 hover:text-amber-200">
                   <LayoutDashboard className="h-4 w-4 mr-2" />
-                  Admin
+                  {t('header.admin')}
                 </Button>
               </Link>
             )}
             <Link to="/dashboard">
               <Button variant="outline" className="border-amber-800 text-amber-300 hover:bg-amber-900/50 hover:text-amber-200">
                 <LayoutDashboard className="h-4 w-4 mr-2" />
-                Dashboard
+                {t('header.dashboard')}
               </Button>
             </Link>
             <Button onClick={signOut} variant="outline" className="border-amber-800 text-amber-300 hover:bg-amber-900/50 hover:text-amber-200">
-              Uitloggen
+              {t('header.logout')}
             </Button>
           </>
         ) : (
           <Link to="/login">
             <Button variant="outline" className="border-amber-800 text-amber-300 hover:bg-amber-900/50 hover:text-amber-200">
               <LogIn className="h-4 w-4 mr-2" />
-              Inloggen
+              {t('header.login')}
             </Button>
           </Link>
         )}

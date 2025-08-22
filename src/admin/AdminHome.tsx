@@ -3,6 +3,7 @@ import { supabase } from "@/lib/supabaseClient";
 import { Card, CardContent } from "@/components/ui/card";
 import { Loader2 } from "lucide-react";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { useTranslation } from "react-i18next";
 
 type Metrics = {
   total_users: number;
@@ -16,6 +17,7 @@ type Metrics = {
 export default function AdminHome() {
   const [m, setM] = useState<Metrics | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const { t } = useTranslation();
 
   useEffect(()=>{ 
     const load = async () => {
@@ -40,14 +42,14 @@ export default function AdminHome() {
   return (
     <div className="space-y-6">
       <div className="grid sm:grid-cols-3 gap-4">
-        <StatCard title="Gebruikers" value={m.total_users} />
-        <StatCard title="Lezingen (totaal)" value={m.total_readings} />
-        <StatCard title="Vandaag" value={m.today_readings} />
+        <StatCard title={t('admin.home.users')} value={m.total_users} />
+        <StatCard title={t('admin.home.readingsTotal')} value={m.total_readings} />
+        <StatCard title={t('admin.home.readingsToday')} value={m.today_readings} />
       </div>
 
       <Card className="bg-stone-900/60 border-stone-800">
         <CardContent className="p-4">
-          <h3 className="font-semibold mb-4 text-amber-200">Activiteit afgelopen 7 dagen</h3>
+          <h3 className="font-semibold mb-4 text-amber-200">{t('admin.home.activity7days')}</h3>
           <ResponsiveContainer width="100%" height={300}>
             <BarChart data={m.last7} margin={{ top: 5, right: 20, left: -10, bottom: 5 }}>
               <XAxis dataKey="day" stroke="#a8a29e" fontSize={12} tickLine={false} axisLine={false} />
@@ -61,7 +63,7 @@ export default function AdminHome() {
                 cursor={{ fill: 'rgba(251, 191, 36, 0.1)' }}
               />
               <Legend wrapperStyle={{ fontSize: "14px" }} />
-              <Bar dataKey="cnt" name="Lezingen" fill="#f59e0b" radius={[4, 4, 0, 0]} />
+              <Bar dataKey="cnt" name={t('admin.home.readings')} fill="#f59e0b" radius={[4, 4, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </CardContent>
@@ -70,7 +72,7 @@ export default function AdminHome() {
       <div className="grid lg:grid-cols-2 gap-6">
         <Card className="bg-stone-900/60 border-stone-800">
           <CardContent className="p-4">
-            <h3 className="font-semibold mb-3 text-amber-200">Top spreads</h3>
+            <h3 className="font-semibold mb-3 text-amber-200">{t('admin.home.topSpreads')}</h3>
             <ul className="text-sm space-y-1">
               {m.top_spreads.map(r => (
                 <li key={r.spread_id} className="flex justify-between">
@@ -84,7 +86,7 @@ export default function AdminHome() {
 
         <Card className="bg-stone-900/60 border-stone-800">
           <CardContent className="p-4">
-            <h3 className="font-semibold mb-3 text-amber-200">Taalverdeling</h3>
+            <h3 className="font-semibold mb-3 text-amber-200">{t('admin.home.languageDistribution')}</h3>
             <ul className="text-sm flex flex-wrap gap-4">
               {m.langs.map(r => (
                 <li key={r.locale} className="flex items-center gap-2">

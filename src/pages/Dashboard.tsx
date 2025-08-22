@@ -32,7 +32,7 @@ type Reading = {
 
 const Dashboard = () => {
   const { user, signOut } = useAuth();
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation();
   const locale = i18n.language as Locale;
 
   const [recentReadings, setRecentReadings] = useState<Reading[]>([]);
@@ -86,31 +86,31 @@ const Dashboard = () => {
   }, [user]);
 
   const quickActions = [
-    { title: "3-Kaart Legging", icon: <Sparkles className="h-5 w-5 text-purple-400" />, path: "/readings/tarot/spread/ppf-3" },
-    { title: "Koffielezing", icon: <Coffee className="h-5 w-5 text-amber-400" />, path: "/readings/coffee" },
-    { title: "Tarot Leggingen", icon: <BookOpen className="h-5 w-5 text-blue-400" />, path: "/readings/tarot" },
-    { title: "Droomduiding", icon: <Eye className="h-5 w-5 text-indigo-400" />, path: "/readings/dream" },
-    { title: "Numerologie", icon: <Star className="h-5 w-5 text-yellow-400" />, path: "/readings/numerology" }
+    { title: t("dashboard.quickAction.3card"), icon: <Sparkles className="h-5 w-5 text-purple-400" />, path: "/readings/tarot/spread/ppf-3" },
+    { title: t("dashboard.quickAction.coffee"), icon: <Coffee className="h-5 w-5 text-amber-400" />, path: "/readings/coffee" },
+    { title: t("dashboard.quickAction.tarot"), icon: <BookOpen className="h-5 w-5 text-blue-400" />, path: "/readings/tarot" },
+    { title: t("dashboard.quickAction.dream"), icon: <Eye className="h-5 w-5 text-indigo-400" />, path: "/readings/dream" },
+    { title: t("dashboard.quickAction.numerology"), icon: <Star className="h-5 w-5 text-yellow-400" />, path: "/readings/numerology" }
   ];
 
   return (
     <div className="max-w-4xl mx-auto">
       <header className="flex justify-between items-center mb-12">
         <div>
-          <h1 className="text-4xl font-bold text-amber-200 tracking-wider">Welkom terug, {user?.email?.split('@')[0] || "Zoeker"}</h1>
-          <p className="text-stone-400">Wat wil je vandaag ontdekken?</p>
+          <h1 className="text-4xl font-bold text-amber-200 tracking-wider">{t('dashboard.welcomeBack', { name: user?.email?.split('@')[0] || "Zoeker" })}</h1>
+          <p className="text-stone-400">{t('dashboard.discoverToday')}</p>
         </div>
         <div className="flex items-center gap-2">
           <AdminRoleSwitch />
           <Link to="/profile"><Button variant="outline" size="icon" className="border-stone-700 text-stone-300 hover:bg-stone-800"><Settings className="h-4 w-4" /></Button></Link>
-          <Button onClick={signOut} variant="outline" className="border-amber-800 text-amber-300 hover:bg-amber-900/50 hover:text-amber-200">Uitloggen</Button>
+          <Button onClick={signOut} variant="outline" className="border-amber-800 text-amber-300 hover:bg-amber-900/50 hover:text-amber-200">{t('header.logout')}</Button>
         </div>
       </header>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
         <Card className="bg-stone-900/50 backdrop-blur-sm border-stone-800">
           <CardHeader>
-            <CardTitle className="text-amber-300 flex items-center gap-2 text-xl"><Sparkles className="h-5 w-5" /> Energie van de Dag</CardTitle>
+            <CardTitle className="text-amber-300 flex items-center gap-2 text-xl"><Sparkles className="h-5 w-5" /> {t('dashboard.dayEnergy')}</CardTitle>
           </CardHeader>
           <CardContent>
             {deckLoading || !dailyCard ? (
@@ -120,7 +120,7 @@ const Dashboard = () => {
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-2xl font-bold text-stone-100">{dailyCard.name}</p>
-                    <p className="text-stone-400">Jouw kaart voor vandaag</p>
+                    <p className="text-stone-400">{t('dashboard.yourCardToday')}</p>
                   </div>
                   <div className="bg-stone-800/50 p-3 rounded-full border border-stone-700">
                     <img src={dailyCard.imageUrl || '/tarot/back.svg'} alt={dailyCard.name} className="h-8 w-auto" />
@@ -134,13 +134,13 @@ const Dashboard = () => {
 
         <Card className="bg-stone-900/50 backdrop-blur-sm border-stone-800">
           <CardHeader>
-            <CardTitle className="text-amber-300 flex items-center gap-2 text-xl"><BookMarked className="h-5 w-5" /> Recente Lezingen</CardTitle>
+            <CardTitle className="text-amber-300 flex items-center gap-2 text-xl"><BookMarked className="h-5 w-5" /> {t('dashboard.recentReadings')}</CardTitle>
           </CardHeader>
           <CardContent className="p-0">
             {loadingReadings ? (
               <div className="flex justify-center items-center h-32"><Loader2 className="h-6 w-6 animate-spin text-amber-500" /></div>
             ) : recentReadings.length === 0 ? (
-              <p className="text-stone-400 text-center py-12">Je hebt nog geen lezingen gedaan.</p>
+              <p className="text-stone-400 text-center py-12">{t('dashboard.noReadings')}</p>
             ) : (
               recentReadings.map((reading, index) => (
                 <Link to={`/reading/${reading.id}`} key={reading.id}>
@@ -162,7 +162,7 @@ const Dashboard = () => {
       </div>
 
       <div className="mb-12">
-        <h2 className="text-3xl font-bold text-amber-200 mb-6 text-center tracking-wider">Kies Je Pad</h2>
+        <h2 className="text-3xl font-bold text-amber-200 mb-6 text-center tracking-wider">{t('dashboard.choosePath')}</h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
           {quickActions.map((action, index) => (
             <Link to={action.path} key={index}>

@@ -9,6 +9,7 @@ import { Input } from "@/components/ui/input";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogDescription } from "@/components/ui/dialog";
 import { Loader2, UploadCloud, Link as LinkIcon, CheckCircle, XCircle, Database } from "lucide-react";
 import { showError, showSuccess, showLoading, dismissToast } from "@/utils/toast";
+import { useTranslation } from "react-i18next";
 
 type TarotCard = {
   id: string;
@@ -27,6 +28,7 @@ export default function AdminCards() {
   const [loading, setLoading] = useState(true);
   const [editing, setEditing] = useState<TarotCard | null>(null);
   const [isSeeding, setIsSeeding] = useState(false);
+  const { t } = useTranslation();
 
   const fetchCards = async () => {
     setLoading(true);
@@ -69,15 +71,13 @@ export default function AdminCards() {
       {/* --- Seeder --- */}
       <Card className="bg-stone-900/60 border-stone-800">
         <CardHeader>
-          <CardTitle className="text-amber-200">Stap 1: Basisgegevens Importeren</CardTitle>
-          <CardDescription>
-            Klik hier om de 78 standaard RWS-kaarten (namen, betekenissen, etc.) in de database te laden. Dit is eenmalig nodig, of om de teksten te herstellen naar de standaard.
-          </CardDescription>
+          <CardTitle className="text-amber-200">{t('admin.cards.step1Title')}</CardTitle>
+          <CardDescription>{t('admin.cards.step1Desc')}</CardDescription>
         </CardHeader>
         <CardContent>
           <Button onClick={handleSeed} disabled={isSeeding}>
             {isSeeding ? <Loader2 className="h-4 w-4 mr-2 animate-spin" /> : <Database className="h-4 w-4 mr-2" />}
-            Importeer 78 Kaartgegevens
+            {t('admin.cards.importDataBtn')}
           </Button>
         </CardContent>
       </Card>
@@ -85,16 +85,14 @@ export default function AdminCards() {
       {/* --- Bulk Importer --- */}
       <Card className="bg-stone-900/60 border-stone-800">
         <CardHeader>
-          <CardTitle className="text-amber-200">Stap 2: Afbeeldingen Importeren</CardTitle>
-          <CardDescription>
-            Upload hier de afbeeldingen voor de kaarten. De AI herkent welke kaart het is en koppelt de afbeelding automatisch.
-          </CardDescription>
+          <CardTitle className="text-amber-200">{t('admin.cards.step2Title')}</CardTitle>
+          <CardDescription>{t('admin.cards.step2Desc')}</CardDescription>
         </CardHeader>
         <CardContent>
           <Tabs defaultValue="files" className="w-full">
             <TabsList>
-              <TabsTrigger value="files"><UploadCloud className="h-4 w-4 mr-1" /> Bestanden</TabsTrigger>
-              <TabsTrigger value="urls"><LinkIcon className="h-4 w-4 mr-1" /> URL’s</TabsTrigger>
+              <TabsTrigger value="files"><UploadCloud className="h-4 w-4 mr-1" /> {t('admin.cards.files')}</TabsTrigger>
+              <TabsTrigger value="urls"><LinkIcon className="h-4 w-4 mr-1" /> {t('admin.cards.urls')}</TabsTrigger>
             </TabsList>
             <TabsContent value="files"><FileImporter onDone={fetchCards} /></TabsContent>
             <TabsContent value="urls"><UrlImporter onDone={fetchCards} /></TabsContent>
@@ -103,8 +101,8 @@ export default function AdminCards() {
       </Card>
 
       {/* --- Card Grid --- */}
-      <h2 className="text-xl font-serif text-stone-300">Stap 3: Details Bewerken (optioneel)</h2>
-      <p className="text-stone-400 -mt-4">Klik op een kaart om de naam, betekenissen of trefwoorden aan te passen.</p>
+      <h2 className="text-xl font-serif text-stone-300">{t('admin.cards.step3Title')}</h2>
+      <p className="text-stone-400 -mt-4">{t('admin.cards.step3Desc')}</p>
       {loading ? (
         <div className="flex justify-center py-12"><Loader2 className="h-6 w-6 animate-spin text-amber-400" /></div>
       ) : (
@@ -129,10 +127,8 @@ export default function AdminCards() {
       <Dialog open={!!editing} onOpenChange={(isOpen) => !isOpen && setEditing(null)}>
         <DialogContent className="max-w-3xl bg-stone-950 border-stone-800 text-stone-200">
           <DialogHeader>
-            <DialogTitle className="text-amber-200">Bewerk: {editing?.name}</DialogTitle>
-            <DialogDescription>
-              Pas hier de teksten voor de kaart aan. De afbeelding kan je via de bulk-importer wijzigen.
-            </DialogDescription>
+            <DialogTitle className="text-amber-200">{t('admin.cards.editTitle', { name: editing?.name })}</DialogTitle>
+            <DialogDescription>{t('admin.cards.editDesc')}</DialogDescription>
           </DialogHeader>
           {editing && (
             <div className="grid grid-cols-3 gap-6 py-4">
@@ -141,27 +137,27 @@ export default function AdminCards() {
               </div>
               <div className="col-span-2 space-y-4">
                 <div>
-                  <Label htmlFor="name">Naam</Label>
+                  <Label htmlFor="name">{t('admin.cards.name')}</Label>
                   <Input id="name" value={editing.name} onChange={e => setEditing({ ...editing, name: e.target.value })} />
                 </div>
                 <div>
-                  <Label htmlFor="meaning_up">Betekenis (rechtop)</Label>
+                  <Label htmlFor="meaning_up">{t('admin.cards.meaningUp')}</Label>
                   <Textarea id="meaning_up" rows={4} value={editing.meaning_up || ""} onChange={e => setEditing({ ...editing, meaning_up: e.target.value })} />
                 </div>
                 <div>
-                  <Label htmlFor="meaning_rev">Betekenis (omgekeerd)</Label>
+                  <Label htmlFor="meaning_rev">{t('admin.cards.meaningRev')}</Label>
                   <Textarea id="meaning_rev" rows={4} value={editing.meaning_rev || ""} onChange={e => setEditing({ ...editing, meaning_rev: e.target.value })} />
                 </div>
                 <div>
-                  <Label htmlFor="keywords">Keywords (komma-gescheiden)</Label>
+                  <Label htmlFor="keywords">{t('admin.cards.keywords')}</Label>
                   <Input id="keywords" value={(editing.keywords || []).join(", ")} onChange={e => setEditing({ ...editing, keywords: e.target.value.split(",").map(k => k.trim()) })} />
                 </div>
               </div>
             </div>
           )}
           <DialogFooter>
-            <Button variant="outline" onClick={() => setEditing(null)}>Annuleren</Button>
-            <Button onClick={handleSave}>Opslaan</Button>
+            <Button variant="outline" onClick={() => setEditing(null)}>{t('common.cancel')}</Button>
+            <Button onClick={handleSave}>{t('common.save')}</Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
@@ -169,11 +165,10 @@ export default function AdminCards() {
   );
 }
 
-// --- Helper Components for Bulk Import ---
-
 function FileImporter({ onDone }: { onDone: () => void }) {
   const [rows, setRows] = useState<{ name: string; status: "pending"|"uploading"|"ok"|"err"; note?: string }[]>([]);
   const inputRef = useRef<HTMLInputElement>(null);
+  const { t } = useTranslation();
 
   const pick = () => inputRef.current?.click();
   const handle = async (files: FileList | null) => {
@@ -201,7 +196,7 @@ function FileImporter({ onDone }: { onDone: () => void }) {
   return (
     <div className="space-y-3 pt-4">
       <input ref={inputRef} type="file" multiple accept="image/*" className="hidden" onChange={e => handle(e.target.files)} />
-      <Button onClick={pick}><UploadCloud className="h-4 w-4 mr-2" /> Kies bestanden…</Button>
+      <Button onClick={pick}><UploadCloud className="h-4 w-4 mr-2" /> {t('admin.cards.chooseFiles')}</Button>
 
       {rows.length > 0 && (
         <div className="border border-stone-800 rounded-md p-2 max-h-64 overflow-auto text-sm">
@@ -224,6 +219,7 @@ function FileImporter({ onDone }: { onDone: () => void }) {
 function UrlImporter({ onDone }: { onDone: () => void }) {
   const [text, setText] = useState("");
   const [rows, setRows] = useState<{ url: string; status: "pending"|"ok"|"err"; note?: string }[]>([]);
+  const { t } = useTranslation();
 
   const start = async () => {
     const urls = text.split(/\r?\n/).map(s => s.trim()).filter(Boolean);

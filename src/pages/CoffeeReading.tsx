@@ -18,7 +18,7 @@ import { usePersona } from "@/contexts/PersonaContext";
 import ReadingPanel from "@/components/ReadingPanel";
 
 const CoffeeReading = () => {
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation();
   const { personaId } = usePersona();
   const [groupedSymbols, setGroupedSymbols] = useState<Record<string, any[]>>({});
   const [selectedSymbols, setSelectedSymbols] = useState<any[]>([]);
@@ -122,10 +122,10 @@ const CoffeeReading = () => {
         <Link to="/dashboard">
           <Button variant="outline" className="flex items-center gap-2 border-amber-800 text-amber-300 hover:bg-amber-900/50 hover:text-amber-200">
             <ChevronLeft className="h-4 w-4" />
-            Terug
+            {t('common.back')}
           </Button>
         </Link>
-        <h1 className="text-2xl font-bold text-amber-200 tracking-wider">Koffielezing</h1>
+        <h1 className="text-2xl font-bold text-amber-200 tracking-wider">{t('coffee.title')}</h1>
         <div className="w-32"></div>
       </div>
 
@@ -133,12 +133,12 @@ const CoffeeReading = () => {
         <CardHeader>
           <CardTitle className="text-amber-300 flex items-center gap-2 text-xl">
             <Coffee className="h-5 w-5" />
-            Kies Symbolen uit je Koffiekop
+            {t('coffee.chooseSymbols')}
           </CardTitle>
         </CardHeader>
         <CardContent>
           <div className="mb-6">
-            <h3 className="font-semibold text-amber-200 mb-2">Geselecteerde symbolen:</h3>
+            <h3 className="font-semibold text-amber-200 mb-2">{t('coffee.selectedSymbols')}</h3>
             <div className="flex flex-wrap gap-2">
               {selectedSymbols.length > 0 ? (
                 selectedSymbols.map((symbol) => (
@@ -151,14 +151,14 @@ const CoffeeReading = () => {
                   </Badge>
                 ))
               ) : (
-                <p className="text-stone-400 text-sm">Nog geen symbolen geselecteerd</p>
+                <p className="text-stone-400 text-sm">{t('coffee.noneSelected')}</p>
               )}
             </div>
           </div>
 
           <Separator className="my-4 bg-stone-800" />
 
-          <h3 className="font-semibold text-amber-200 mb-3">Koffiesymbolen:</h3>
+          <h3 className="font-semibold text-amber-200 mb-3">{t('coffee.allSymbols')}</h3>
           <ScrollArea className="h-96 rounded-md border border-stone-800 p-4 bg-stone-950/50">
             {isLoadingSymbols ? (
               <div className="flex items-center justify-center h-full">
@@ -199,7 +199,7 @@ const CoffeeReading = () => {
                 className="border-amber-800 text-amber-300 hover:bg-amber-900/50 hover:text-amber-200 flex items-center gap-2"
               >
                 <Upload className="h-4 w-4" />
-                Foto uploaden
+                {t('coffee.uploadPhoto')}
               </Button>
             </Link>
             <Button 
@@ -208,7 +208,7 @@ const CoffeeReading = () => {
               className="bg-amber-800 hover:bg-amber-700 text-stone-100 flex items-center gap-2 px-6 py-3"
             >
               {isGenerating ? <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div> : <Coffee className="h-5 w-5" />}
-              Lezing genereren
+              {t('coffee.generateReading')}
             </Button>
           </div>
 

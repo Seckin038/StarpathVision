@@ -1,12 +1,144 @@
 {
+  "common": {
+    "back": "Terug",
+    "confirmSelection": "Bevestig selectie",
+    "loading": "Laden...",
+    "upright": "Rechtop",
+    "reversed": "Omgekeerd",
+    "save": "Opslaan",
+    "cancel": "Annuleren",
+    "edit": "Bewerken",
+    "delete": "Verwijderen",
+    "close": "Sluiten"
+  },
+  "header": {
+    "admin": "Admin",
+    "dashboard": "Dashboard",
+    "logout": "Uitloggen",
+    "login": "Inloggen"
+  },
+  "home": {
+    "yourGuide": "Jouw gids voor vandaag",
+    "chooseSeer": "Kies je waarzegger",
+    "seerDescription": "Kies je waarzegger. De gekozen persona begeleidt je complete sessie en geeft alle uitleggingen in haar/zijne eigen stem. Je kunt dit altijd wijzigen.",
+    "do3CardReading": "Doe een 3-kaart lezing"
+  },
+  "dashboard": {
+    "welcomeBack": "Welkom terug, {{name}}",
+    "discoverToday": "Wat wil je vandaag ontdekken?",
+    "dayEnergy": "Energie van de Dag",
+    "yourCardToday": "Jouw kaart voor vandaag",
+    "recentReadings": "Recente Lezingen",
+    "noReadings": "Je hebt nog geen lezingen gedaan.",
+    "choosePath": "Kies Je Pad",
+    "quickAction": {
+      "3card": "3-Kaart Legging",
+      "coffee": "Koffielezing",
+      "tarot": "Tarot Leggingen",
+      "dream": "Droomduiding",
+      "numerology": "Numerologie"
+    }
+  },
+  "coffee": {
+    "title": "Koffielezing",
+    "titleWithUpload": "Koffielezing met Foto",
+    "chooseSymbols": "Kies Symbolen uit je Koffiekop",
+    "selectedSymbols": "Geselecteerde symbolen:",
+    "noneSelected": "Nog geen symbolen geselecteerd",
+    "allSymbols": "Koffiesymbolen:",
+    "uploadPhoto": "Foto uploaden",
+    "generateReading": "Lezing genereren",
+    "uploadTitle": "Upload je koffiekop",
+    "uploadDesc": "Upload een foto van je koffiekop",
+    "choosePhoto": "Kies foto",
+    "tipsTitle": "Tips voor een goede foto",
+    "tips": [
+      "Zorg voor voldoende licht",
+      "Fotografeer de binnenkant van de kop",
+      "Zorg dat de symbolen duidelijk zichtbaar zijn",
+      "Gebruik geen flits"
+    ],
+    "analyzing": "Beeld wordt geanalyseerd...",
+    "detectedSymbols": "Gedetecteerde symbolen:",
+    "clickToUse": "Klik op de symbolen die je wilt gebruiken voor je lezing.",
+    "reset": "Nieuwe foto"
+  },
+  "dream": {
+    "title": "Droomduiding",
+    "yourDreamWorld": "Jouw Droomwereld",
+    "describe": "Beschrijf je droom zo gedetailleerd mogelijk. Wat gebeurde er, wie was er, en wat voelde je?",
+    "yourDream": "Jouw droom",
+    "interpret": "Duid mijn droom"
+  },
+  "numerology": {
+    "title": "Numerologie Lezing",
+    "yourProfile": "Jouw Numerologische Profiel",
+    "discover": "Ontdek de getallen die jouw pad beïnvloeden. Vul je geboortedatum en volledige naam in.",
+    "fullName": "Volledige naam",
+    "birthDate": "Geboortedatum",
+    "calculate": "Bereken mijn numerologie"
+  },
+  "tarotChoice": {
+    "title": "Kies een Tarot Legging",
+    "subtitle": "Selecteer een legging die resoneert met je vraag.",
+    "startSpread": "Start legging",
+    "loading": "Leggingen worden geladen...",
+    "errorTitle": "Er is iets misgegaan",
+    "errorBody": "Kon de tarot leggingen niet laden."
+  },
+  "tarotReading": {
+    "chooseSeer": "Kies je waarzegger:",
+    "chooseCards": "Kies {{count}} kaarten.",
+    "selected": "Geselecteerd: {{selected}} / {{total}}"
+  },
   "tarot": {
     "upright": "Rechtop",
     "reversed": "Omgekeerd",
-    "summaryTitle": "Jouw Lezing in het Kort",
+    "summaryTitle": "Samenvatting van je Lezing",
     "storyTitle": "Het Verhaal van de Kaarten",
     "adviceTitle": "Advies voor Jou",
     "affirmationTitle": "Affirmatie",
-    "actionsTitle": "Concrete Acties",
-    "detailsTitle": "De Kaarten in Detail"
+    "actionsTitle": "Concrete Stappen",
+    "detailsTitle": "Details van de Kaarten"
+  },
+  "admin": {
+    "backToSite": "← Terug naar site",
+    "nav": {
+      "spreads": "Spreads",
+      "cards": "Kaarten",
+      "personas": "Personas",
+      "translations": "Vertalingen",
+      "users": "Gebruikers",
+      "features": "Features",
+      "audit": "Audit"
+    },
+    "home": {
+      "title": "Admin",
+      "users": "Gebruikers",
+      "readingsTotal": "Lezingen (totaal)",
+      "readingsToday": "Vandaag",
+      "activity7days": "Activiteit afgelopen 7 dagen",
+      "readings": "Lezingen",
+      "topSpreads": "Top spreads",
+      "languageDistribution": "Taalverdeling"
+    },
+    "cards": {
+      "step1Title": "Stap 1: Basisgegevens Importeren",
+      "step1Desc": "Klik hier om de 78 standaard RWS-kaarten (namen, betekenissen, etc.) in de database te laden. Dit is eenmalig nodig, of om de teksten te herstellen naar de standaard.",
+      "importDataBtn": "Importeer 78 Kaartgegevens",
+      "step2Title": "Stap 2: Afbeeldingen Importeren",
+      "step2Desc": "Upload hier de afbeeldingen voor de kaarten. De AI herkent welke kaart het is en koppelt de afbeelding automatisch.",
+      "files": "Bestanden",
+      "urls": "URL’s",
+      "chooseFiles": "Kies bestanden…",
+      "step3Title": "Stap 3: Details Bewerken (optioneel)",
+      "step3Desc": "Klik op een kaart om de naam, betekenissen of trefwoorden aan te passen.",
+      "editTitle": "Bewerk: {{name}}",
+      "editDesc": "Pas hier de teksten voor de kaart aan. De afbeelding kan je via de bulk-importer wijzigen.",
+      "name": "Naam",
+      "meaningUp": "Betekenis (rechtop)",
+      "meaningRev": "Betekenis (omgekeerd)",
+      "keywords": "Keywords (komma-gescheiden)"
+    }
   }
 }

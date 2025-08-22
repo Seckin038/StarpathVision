@@ -16,7 +16,7 @@ import { usePersona } from "@/contexts/PersonaContext";
 import ReadingPanel from "@/components/ReadingPanel";
 
 const NumerologyReading = () => {
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation();
   const { personaId } = usePersona();
   const [birthDate, setBirthDate] = useState("");
   const [fullName, setFullName] = useState("");
@@ -73,10 +73,10 @@ const NumerologyReading = () => {
         <Link to="/dashboard">
           <Button variant="outline" className="flex items-center gap-2 border-amber-800 text-amber-300 hover:bg-amber-900/50 hover:text-amber-200">
             <ChevronLeft className="h-4 w-4" />
-            Terug
+            {t('common.back')}
           </Button>
         </Link>
-        <h1 className="text-2xl font-bold text-amber-200 tracking-wider">Numerologie Lezing</h1>
+        <h1 className="text-2xl font-bold text-amber-200 tracking-wider">{t('numerology.title')}</h1>
         <div className="w-32"></div>
       </div>
 
@@ -84,27 +84,27 @@ const NumerologyReading = () => {
         <CardHeader>
           <CardTitle className="text-amber-300 flex items-center gap-2 text-xl">
             <Star className="h-5 w-5" />
-            Jouw Numerologische Profiel
+            {t('numerology.yourProfile')}
           </CardTitle>
         </CardHeader>
         <CardContent>
           {!readingResult ? (
             <div className="space-y-6">
               <p className="text-stone-300">
-                Ontdek de getallen die jouw pad beïnvloeden. Vul je geboortedatum en volledige naam in.
+                {t('numerology.discover')}
               </p>
               <div className="space-y-4">
                 <div>
-                  <Label htmlFor="fullName" className="text-stone-300">Volledige naam</Label>
+                  <Label htmlFor="fullName" className="text-stone-300">{t('numerology.fullName')}</Label>
                   <Input id="fullName" value={fullName} onChange={(e) => setFullName(e.target.value)} placeholder="Bijv. Jan van der Berg" className="mt-2 bg-stone-900 border-stone-700 focus:ring-amber-500" />
                 </div>
                 <div>
-                  <Label htmlFor="birthDate" className="text-stone-300">Geboortedatum</Label>
+                  <Label htmlFor="birthDate" className="text-stone-300">{t('numerology.birthDate')}</Label>
                   <Input id="birthDate" type="date" value={birthDate} onChange={(e) => setBirthDate(e.target.value)} className="mt-2 bg-stone-900 border-stone-700 focus:ring-amber-500" />
                 </div>
               </div>
               <Button onClick={calculateNumerology} disabled={!birthDate || !fullName || isCalculating} className="w-full bg-amber-800 hover:bg-amber-700 text-stone-100 flex items-center justify-center gap-2">
-                {isCalculating ? <><div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>Berekenen...</> : <><Sparkles className="h-4 w-4" />Bereken mijn numerologie</>}
+                {isCalculating ? <><div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>Berekenen...</> : <><Sparkles className="h-4 w-4" />{t('numerology.calculate')}</>}
               </Button>
             </div>
           ) : (
