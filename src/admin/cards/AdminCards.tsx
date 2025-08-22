@@ -9,6 +9,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogD
 import { Loader2, UploadCloud, CheckCircle, XCircle } from "lucide-react";
 import { showError, showSuccess } from "@/utils/toast";
 import { useTranslation } from "react-i18next";
+import { uploadTarotCardImage } from "@/lib/upload";
 
 type TarotCard = {
   id: string;
@@ -26,6 +27,8 @@ export default function AdminCards() {
   const [cards, setCards] = useState<TarotCard[]>([]);
   const [loading, setLoading] = useState(true);
   const [editing, setEditing] = useState<TarotCard | null>(null);
+  const [isUploading, setIsUploading] = useState(false);
+  const singleFileRef = useRef<HTMLInputElement>(null);
   const { t } = useTranslation();
 
   const fetchCards = async () => {
@@ -47,6 +50,43 @@ export default function AdminCards() {
       setEditing(null);
       fetchCards();
     }
+  };
+
+  const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!e.target.files?.length || !editing) return;
+    const file = e.target.files[0];
+    setIsUploading(true);
+    try {
+        const newUrl = await uploadTarotCardImage(file, editing.id);
+        const { error } = await supabase.from("tarot_cards").update({ image_url: newUrl }).eq("id", editing.id);
+        if (error) throw error;
+        setEditing({ ...editing, image_url: newUrl });
+        showSuccess("Afbeelding succesvol bijgewerkt.");
+    } catch (err: any) {
+        showError(err.message || "Kon afbeelding niet uploaden.");
+    } finally {
+        setIsUploading(false);
+        if (singleFileRef.current) singleFileRef.current.value = "";
+    }
+  };
+
+  const handleImageRemove = async () => {
+      if (!editing || !editing.image_url) return;
+      if (!window.confirm("Weet je zeker dat je deze afbeelding wilt verwijderen?")) return;
+
+      try {
+          const path = editing.image_url.split('/tarot-cards/')[1];
+          if (path) {
+              await supabase.storage.from("tarot-cards").remove([path]);
+          }
+          const { error: dbError } = await supabase.from("tarot_cards").update({ image_url: null }).eq("id", editing.id);
+          if (dbError) throw dbError;
+
+          setEditing({ ...editing, image_url: null });
+          showSuccess("Afbeelding succesvol verwijderd.");
+      } catch (err: any) {
+          showError(err.message || "Kon afbeelding niet verwijderen.");
+      }
   };
 
   return (
@@ -92,8 +132,15 @@ export default function AdminCards() {
           </DialogHeader>
           {editing && (
             <div className="grid grid-cols-3 gap-6 py-4">
-              <div className="col-span-1">
+              <div className="col-span-1 space-y-2">
                 <img src={editing.image_url || "/tarot/back.svg"} alt={editing.name} className="w-full aspect-[2/3] object-cover rounded-md bg-stone-900" />
+                <input type="file" accept="image/*" ref={singleFileRef} className="hidden" onChange={handleImageChange} />
+                <Button variant="outline" className="w-full" onClick={() => singleFileRef.current?.click()} disabled={isUploading}>
+                    {isUploading ? <Loader2 className="h-4 w-4 animate-spin" /> : 'Afbeelding wijzigen'}
+                </Button>
+                <Button variant="destructive" className="w-full" onClick={handleImageRemove} disabled={!editing.image_url}>
+                    Afbeelding verwijderen
+                </Button>
               </div>
               <div className="col-span-2 space-y-4">
                 <div>
