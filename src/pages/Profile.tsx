@@ -81,9 +81,19 @@ export default function ProfilePage() {
   }, [nav]);
 
   const stats = useMemo(() => {
-    const byMethod: Record<string, number> = {};
-    readings.forEach(r => { byMethod[r.method] = (byMethod[r.method] || 0) + 1; });
-    return byMethod;
+    const statsByMethod: Record<string, number> = {
+      tarot: 0,
+      koffiedik: 0,
+      dromen: 0,
+      numerologie: 0,
+    };
+
+    readings.forEach(r => {
+      if (statsByMethod.hasOwnProperty(r.method)) {
+        statsByMethod[r.method]++;
+      }
+    });
+    return statsByMethod;
   }, [readings]);
 
   const filteredReadings = useMemo(() => {
@@ -272,9 +282,7 @@ export default function ProfilePage() {
             <Card className="bg-stone-950/60 border-white/10">
               <CardHeader><CardTitle className="text-amber-200">{t('profile.stats')}</CardTitle></CardHeader>
               <CardContent className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                {Object.keys(stats).length === 0 ? (
-                  <div className="col-span-4 text-stone-400">Nog geen sessies.</div>
-                ) : Object.entries(stats).map(([k, v]) => (
+                {Object.entries(stats).map(([k, v]) => (
                   <div key={k} className="rounded-xl border border-white/10 p-4 bg-stone-900/40">
                     <div className="text-stone-400 text-xs uppercase">{k}</div>
                     <div className="text-2xl text-amber-200 font-serif">{v}</div>
