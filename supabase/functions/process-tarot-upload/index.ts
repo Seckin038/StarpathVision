@@ -66,14 +66,14 @@ Deno.serve(async (req: Request) => {
     }
     const blob = await getRes.blob();
 
-    // 4b) (Optioneel) kaartnaam bepalen (AI/heuristiek). Hier simpel:
-    const guessed = (filePath.split("/").pop() || "card.png").replace(/\.[^/.]+$/, "");
+    // 4b) Kaart ID uit bestandsnaam halen
+    const guessedId = (filePath.split("/").pop() || "card.png").replace(/\.[^/.]+$/, "");
     const ext = (filePath.split(".").pop()?.toLowerCase() || "png");
     
-    const { data: card, error: findErr } = await fetch(`${SUPABASE_URL}/rest/v1/tarot_cards?name->>en=ilike.${encodeURIComponent(guessed.replace(/_/g, ' '))}&select=id`, { headers: sbHeaders }).then(r => r.json());
+    const { data: card, error: findErr } = await fetch(`${SUPABASE_URL}/rest/v1/tarot_cards?id=eq.${encodeURIComponent(guessedId)}&select=id`, { headers: sbHeaders }).then(r => r.json());
     
     if (findErr || !card || card.length === 0) {
-        throw new Error(`Card '${guessed}' not found in DB.`);
+        throw new Error(`Card with ID '${guessedId}' not found in DB.`);
     }
     const cardId = card[0].id;
     const finalName = `${cardId}.${ext}`;
