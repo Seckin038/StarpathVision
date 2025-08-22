@@ -2,7 +2,6 @@ import React, { useEffect, useMemo, useState } from "react";
 import MysticalBackground from "@/components/MysticalBackground";
 import { supabase } from "@/lib/supabaseClient";
 import { useNavigate, Link } from "react-router-dom";
-import { downloadJSON } from "@/utils/exports";
 import { uploadAvatar } from "@/lib/upload";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -10,8 +9,9 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
-import { Loader2, Download, Eye, Save, UploadCloud, LogOut, Trash2 } from "lucide-react";
+import { Loader2, Save, UploadCloud, LogOut } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import RecentSessions from "@/components/RecentSessions"; // Import the new component
 
 type Profile = {
   id: string;
@@ -24,33 +24,15 @@ type Profile = {
   onboarding_done: boolean | null;
 };
 
-type Reading = {
-  id: string;
-  method: string;
-  spread_id: string | null;
-  title: string | null;
-  created_at: string;
-  payload: any;
-  interpretation: any;
-  thumbnail_url: string | null;
-};
-
-const READING_METHODS = ['tarot', 'koffiedik', 'dromen', 'numerologie'];
-
 export default function ProfilePage() {
   const [loading, setLoading] = useState(true);
   const [userEmail, setUserEmail] = useState<string | null>(null);
   const [profile, setProfile] = useState<Profile | null>(null);
   const [draft, setDraft] = useState<Partial<Profile>>({});
-  const [readings, setReadings] = useState<Reading[]>([]);
   const [saving, setSaving] = useState(false);
   const [uploading, setUploading] = useState(false);
   const nav = useNavigate();
   const { t } = useTranslation();
-
-  const [filterMethod, setFilterMethod] = useState('all');
-  const [visibleCount, setVisibleCount] = useState(25);
-  const READINGS_PER_PAGE = 25;
 
   useEffect(() => {
     (async () => {
@@ -68,42 +50,9 @@ export default function ProfilePage() {
       const prof = p as Profile | null;
       setProfile(prof ?? null);
       setDraft(prof ?? { id: auth.user.id, locale: "nl" });
-
-      const { data: r } = await supabase
-        .from("readings")
-        .select("id, method, spread_id, title, created_at, payload, interpretation, thumbnail_url")
-        .eq("user_id", auth.user.id)
-        .order("created_at", { ascending: false })
-        .limit(1000); // Increased limit to fetch all readings
-      setReadings(r ?? []);
       setLoading(false);
     })();
   }, [nav]);
-
-  const stats = useMemo(() => {
-    const statsByMethod: Record<string, number> = {
-      tarot: 0,
-      koffiedik: 0,
-      dromen: 0,
-      numerologie: 0,
-    };
-
-    readings.forEach(r => {
-      if (statsByMethod.hasOwnProperty(r.method)) {
-        statsByMethod[r.method]++;
-      }
-    });
-    return statsByMethod;
-  }, [readings]);
-
-  const filteredReadings = useMemo(() => {
-    if (filterMethod === 'all') return readings;
-    return readings.filter(r => r.method === filterMethod);
-  }, [readings, filterMethod]);
-
-  const paginatedReadings = useMemo(() => {
-    return filteredReadings.slice(0, visibleCount);
-  }, [filteredReadings, visibleCount]);
 
   const isAdmin = (profile?.roles ?? []).includes("admin");
 
@@ -131,37 +80,6 @@ export default function ProfilePage() {
       setDraft(prev => ({ ...prev, avatar_url: url }));
     } finally {
       setUploading(false);
-    }
-  }
-
-  function openReading(id: string) {
-    nav(`/reading/${id}`);
-  }
-
-  function downloadReading(r: Reading) {
-    const name =
-      r.title ??
-      (r.method === "tarot" && r.spread_id ? `tarot-${r.spread_id}` : r.method) ??
-      "reading";
-    downloadJSON(`${name}-${r.id}.json`, {
-      id: r.id,
-      created_at: r.created_at,
-      method: r.method,
-      spread_id: r.spread_id,
-      title: r.title,
-      payload: r.payload,
-      interpretation: r.interpretation,
-    });
-  }
-
-  async function deleteReading(id: string) {
-    if (window.confirm("Weet je zeker dat je deze lezing wilt verwijderen?")) {
-      const { error } = await supabase.from("readings").delete().eq("id", id);
-      if (error) {
-        console.error("Could not delete reading", error);
-      } else {
-        setReadings(prev => prev.filter(r => r.id !== id));
-      }
     }
   }
 
@@ -280,73 +198,9 @@ export default function ProfilePage() {
 
           <div className="md:col-span-2 space-y-6">
             <Card className="bg-stone-950/60 border-white/10">
-              <CardHeader><CardTitle className="text-amber-200">{t('profile.stats')}</CardTitle></CardHeader>
-              <CardContent className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                {Object.entries(stats).map(([k, v]) => (
-                  <div key={k} className="rounded-xl border border-white/10 p-4 bg-stone-900/40">
-                    <div className="text-stone-400 text-xs uppercase">{k}</div>
-                    <div className="text-2xl text-amber-200 font-serif">{v}</div>
-                  </div>
-                ))}
-              </CardContent>
-            </Card>
-
-            <Card className="bg-stone-950/60 border-white/10">
               <CardHeader><CardTitle className="text-amber-200">{t('profile.sessions')}</CardTitle></CardHeader>
               <CardContent>
-                <div className="flex flex-wrap gap-2 mb-4">
-                  <Button size="sm" variant={filterMethod === 'all' ? 'default' : 'outline'} onClick={() => setFilterMethod('all')}>Alles</Button>
-                  {READING_METHODS.map(method => (
-                    <Button key={method} size="sm" variant={filterMethod === method ? 'default' : 'outline'} onClick={() => setFilterMethod(method)} className="capitalize">
-                      {method}
-                    </Button>
-                  ))}
-                </div>
-                {paginatedReadings.length === 0 ? (
-                  <div className="text-stone-400 text-center py-8">U heeft nog geen sessies van dit type.</div>
-                ) : (
-                  <div className="grid gap-3">
-                    {paginatedReadings.map((r) => (
-                      <div key={r.id} className="flex items-center gap-3 p-3 rounded-xl bg-stone-900/40 border border-white/10">
-                        <div className="w-14 h-14 rounded-lg overflow-hidden bg-stone-800 border border-white/10 shrink-0">
-                          {r.thumbnail_url ? (
-                            <img src={r.thumbnail_url} className="w-full h-full object-cover" alt="Reading thumbnail" />
-                          ) : null}
-                        </div>
-                        <div className="flex-1 min-w-0">
-                          <div className="text-amber-200 truncate">
-                            {r.title ?? (r.method === "tarot" && r.spread_id ? `Tarot — ${r.spread_id}` : r.method)}
-                          </div>
-                          <div className="text-xs text-stone-400">
-                            {new Date(r.created_at).toLocaleString()}
-                          </div>
-                        </div>
-                        <div className="flex gap-2">
-                          <Button variant="outline" size="sm" className="border-amber-800 text-amber-300 hover:bg-amber-900/40" onClick={() => openReading(r.id)}>
-                            <Eye className="h-4 w-4 mr-1" /> {t('profile.view')}
-                          </Button>
-                          <Button variant="secondary" size="sm" onClick={() => downloadReading(r)}>
-                            <Download className="h-4 w-4 mr-1" /> {t('profile.download')}
-                          </Button>
-                          <Button variant="destructive" size="icon" onClick={() => deleteReading(r.id)}>
-                            <Trash2 className="h-4 w-4" />
-                          </Button>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                )}
-                {visibleCount < filteredReadings.length && (
-                  <div className="mt-4">
-                    <Button 
-                      variant="outline" 
-                      className="w-full" 
-                      onClick={() => setVisibleCount(prev => prev + READINGS_PER_PAGE)}
-                    >
-                      Laad meer ({filteredReadings.length - visibleCount} resterend)
-                    </Button>
-                  </div>
-                )}
+                <RecentSessions />
               </CardContent>
             </Card>
           </div>
