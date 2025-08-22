@@ -23,10 +23,12 @@ function extractAndParseJson(text: string): any {
   if (match && match[1]) {
     jsonString = match[1];
   } else {
-    const firstBrace = text.indexOf('{');
-    const lastBrace = text.lastIndexOf('}');
+    // Trim whitespace and newlines that might surround the JSON object
+    jsonString = jsonString.trim();
+    const firstBrace = jsonString.indexOf('{');
+    const lastBrace = jsonString.lastIndexOf('}');
     if (firstBrace !== -1 && lastBrace > firstBrace) {
-      jsonString = text.substring(firstBrace, lastBrace + 1);
+      jsonString = jsonString.substring(firstBrace, lastBrace + 1);
     }
   }
 
@@ -58,7 +60,6 @@ Deno.serve(async (req) => {
       throw new Error(`Unsupported method '${method}'`);
     }
 
-    // Map to English terms for DB consistency to satisfy the check constraint
     const dbMethodMap: { [key: string]: string } = {
       tarot: 'tarot',
       koffiedik: 'coffee',
@@ -73,22 +74,63 @@ Deno.serve(async (req) => {
     const user = userRes?.user ?? null;
 
     const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash-latest", generationConfig: { responseMimeType: "application/json" } });
 
-    let instruction = "Return valid JSON only.";
-    if (method !== 'tarot') {
-      instruction += " The JSON should have a single key 'reading' which contains the full interpretation as a string. Example: {\"reading\": \"Your full text interpretation here...\"}";
+    let instruction = "";
+    let jsonSchema = {};
+
+    if (method === 'tarot') {
+      instruction = `You are a mystical tarot reader. Based on the user's reading, provide a detailed and insightful interpretation in the requested language.`;
+      jsonSchema = {
+        type: "object",
+        properties: {
+          story: { type: "string", description: "A narrative weaving the cards' meanings together." },
+          advice: { type: "string", description: "Actionable advice for the user." },
+          affirmation: { type: "string", description: "A positive affirmation." },
+          actions: { type: "array", items: { type: "string" }, description: "An array of 3-5 concrete next steps." },
+          card_interpretations: {
+            type: "array",
+            items: {
+              type: "object",
+              properties: {
+                card_index: { type: "number" },
+                interpretation: { type: "string" },
+              },
+              required: ["card_index", "interpretation"],
+            },
+            description: "An array of objects, one for each card, with its index and specific interpretation in the context of its position."
+          },
+        },
+        required: ["story", "advice", "affirmation", "actions", "card_interpretations"],
+      };
+    } else {
+      instruction = `You are a mystical reader. Based on the user's input for the specified method, provide a detailed and insightful interpretation in the requested language.`;
+      jsonSchema = {
+        type: "object",
+        properties: {
+          reading: { type: "string", description: "The full, detailed interpretation as a single string, formatted with markdown." },
+        },
+        required: ["reading"],
+      };
     }
 
+    const model = genAI.getGenerativeModel({ 
+      model: "gemini-1.5-flash-latest", 
+      generationConfig: { 
+        responseMimeType: "application/json",
+        responseSchema: jsonSchema,
+      } 
+    });
+
     const prompt = JSON.stringify({
+      instruction,
       method,
       locale: body?.locale ?? "nl",
-      instruction,
       payload: body?.payload ?? {}
     });
 
     const result = await model.generateContent(prompt);
     const rawText = result?.response?.text?.() ?? "{}";
+    // With responseSchema, the text should be valid JSON, so extractAndParseJson is more of a safety net.
     const interpretation = extractAndParseJson(rawText);
 
     let payload = JSON.parse(JSON.stringify(body?.payload ?? {}));
@@ -110,7 +152,7 @@ Deno.serve(async (req) => {
     if (user) {
       const insertRow = {
         user_id: user.id,
-        method: dbMethod, // Use the mapped English method here
+        method: dbMethod,
         locale: body?.locale ?? "nl",
         title,
         spread_id,
