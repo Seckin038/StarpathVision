@@ -2,100 +2,133 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { serve } from "https://deno.land/std@0.224.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.45.0";
-import { GoogleGenerativeAI } from "npm:@google/generative-ai";
 import { encode } from "https://deno.land/std@0.224.0/encoding/base64.ts";
 
 const PROMPT = `
 You are an expert in Rider–Waite–Smith tarot identification.
-Your task is to identify the tarot card from the provided image.
-Return ONLY the official English card name, and nothing else.
-Examples of valid responses: "The Fool", "Ace of Wands", "Ten of Pentacles", "Judgement".
-If you see "Coins", interpret it as "Pentacles". If you see "Rods" or "Staves", interpret it as "Wands".
-Do not add any extra words, punctuation, or explanations.
+Return ONLY the official English card name (e.g., "The Fool", "Ace of Wands", "Judgement").
+If you see "Coins" -> Pentacles; "Rods"/"Staves" -> Wands.
+No extra words.
 `;
 
-const SUPABASE_URL = Deno.env.get('SUPABASE_URL');
-if (!SUPABASE_URL) throw new Error("FATAL: Missing env var: SUPABASE_URL");
-const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY');
-if (!SUPABASE_SERVICE_ROLE_KEY) throw new Error("FATAL: Missing env var: SUPABASE_SERVICE_ROLE_KEY");
-const GEMINI_API_KEY = Deno.env.get('GEMINI_API_KEY');
-if (!GEMINI_API_KEY) throw new Error("FATAL: Missing env var: GEMINI_API_KEY");
+// Reflect exact headers the browser requests (preflight-safe).
+function cors(req: Request) {
+  const origin = req.headers.get("Origin") ?? "*";
+  const reqHdrs = req.headers.get("Access-Control-Request-Headers")
+    ?? "authorization, x-client-info, apikey, content-type, x-supabase-authorization";
+  return {
+    "Access-Control-Allow-Origin": origin,
+    "Vary": "Origin",
+    "Access-Control-Allow-Methods": "POST, OPTIONS",
+    "Access-Control-Allow-Headers": reqHdrs,
+    "Access-Control-Max-Age": "86400",
+  };
+}
 
-async function identifyByAI(bytes: Uint8Array, mime: string): Promise<string | null> {
-  const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
-  const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash-latest" });
+async function identifyWithGemini(bytes: Uint8Array, mime: string, apiKey: string) {
   const b64 = encode(bytes);
-  const res = await model.generateContent([
-    PROMPT,
-    { inlineData: { data: b64, mimeType: mime || "image/jpeg" } },
-  ]);
-  const text = res?.response?.text?.()?.trim() || null;
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${apiKey}`;
+  const body = {
+    contents: [{
+      parts: [
+        { text: PROMPT.trim() },
+        { inline_data: { mime_type: mime || "image/jpeg", data: b64 } },
+      ],
+    }],
+  };
+  const r = await fetch(url, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body),
+  });
+  if (!r.ok) throw new Error(`Gemini HTTP ${r.status}`);
+  const j = await r.json();
+  const text = j?.candidates?.[0]?.content?.parts?.[0]?.text?.trim() ?? null;
   return text;
 }
 
 serve(async (req) => {
-  const origin = req.headers.get("Origin") ?? "*";
-  const corsHeaders = {
-    "Access-Control-Allow-Origin": origin,
-    "Vary": "Origin",
-    "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
-    "Access-Control-Allow-Methods": "POST, OPTIONS",
-  };
+  const corsHeaders = cors(req);
 
+  // Always answer preflight so the browser will proceed to POST.
   if (req.method === "OPTIONS") {
     return new Response("ok", { headers: corsHeaders });
   }
 
   try {
-    const { filePath } = await req.json();
-    if (!filePath) throw new Error("filePath is required");
-
-    const supabaseAdmin = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
-
-    const { data: blob, error: downloadError } = await supabaseAdmin.storage
-      .from("tarot-card-uploads")
-      .download(filePath);
-    if (downloadError) throw new Error(`Download failed: ${downloadError.message}`);
-
-    const bytes = new Uint8Array(await blob.arrayBuffer());
-    const cardNameEn = await identifyByAI(bytes, blob.type);
-    if (!cardNameEn) throw new Error("AI could not identify the card.");
-    
-    const { data: matchedCard, error: findError } = await supabaseAdmin
-      .from('tarot_cards')
-      .select('id')
-      .ilike('name->>en', cardNameEn)
-      .single();
-    if (findError || !matchedCard) {
-      throw new Error(`Card '${cardNameEn}' not found in database. ${findError?.message || ''}`);
+    const body = await req.json().catch(() => ({}));
+    if (body?.ping) {
+      return new Response(JSON.stringify({ pong: true }), {
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
     }
-    const cardId = matchedCard.id;
 
-    const ext = filePath.split(".").pop() || "jpg";
+    // Read env inside the handler (no top-level throws).
+    const SUPABASE_URL = Deno.env.get("SUPABASE_URL") ?? "";
+    const SERVICE_KEY  = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? "";
+    const GEMINI_KEY   = Deno.env.get("GEMINI_API_KEY") ?? "";
+
+    if (!SUPABASE_URL || !SERVICE_KEY) {
+      throw new Error("Missing SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY");
+    }
+    if (!body?.filePath) throw new Error("filePath is required");
+
+    const sb = createClient(SUPABASE_URL, SERVICE_KEY);
+
+    // 1) download temp upload
+    const { data: blob, error: dlErr } = await sb.storage
+      .from("tarot-card-uploads")
+      .download(body.filePath);
+    if (dlErr) throw new Error(`Download failed: ${dlErr.message}`);
+
+    // 2) AI identify (with graceful fallback if GEMINI_KEY absent)
+    let cardNameEn: string | null = null;
+    if (GEMINI_KEY) {
+      const bytes = new Uint8Array(await blob.arrayBuffer());
+      cardNameEn = await identifyWithGemini(bytes, blob.type, GEMINI_KEY);
+    }
+    if (!cardNameEn) {
+      // Fallback: try from filename like "major_arcana_chariot.png" -> "The Chariot"
+      const base = body.filePath.split("/").pop() || "";
+      const guess = base.replace(/[_-]/g, " ").replace(/\.[^.]+$/, "").trim();
+      if (guess) cardNameEn = guess; // DB lookup will validate or fail below
+    }
+
+    // 3) find card id
+    const { data: card, error: findErr } = await sb
+      .from("tarot_cards")
+      .select("id")
+      .ilike("name->>en", cardNameEn!)
+      .single();
+    if (findErr || !card) throw new Error(`Card '${cardNameEn}' not found`);
+
+    const cardId = card.id;
+    const ext = (body.filePath.split(".").pop() || "jpg").toLowerCase();
     const finalPath = `${cardId}.${ext}`;
-    const { error: uploadError } = await supabaseAdmin.storage
+
+    // 4) upsert to final bucket
+    const { error: upErr } = await sb.storage
       .from("tarot-cards")
       .upload(finalPath, blob, { upsert: true, contentType: blob.type });
-    if (uploadError) throw new Error(`Final upload failed: ${uploadError.message}`);
+    if (upErr) throw new Error(`Final upload failed: ${upErr.message}`);
 
-    const { data: urlData } = supabaseAdmin.storage.from("tarot-cards").getPublicUrl(finalPath);
-    const { error: updateError } = await supabaseAdmin
+    // 5) public URL + DB update
+    const { data: urlData } = sb.storage.from("tarot-cards").getPublicUrl(finalPath);
+    const { error: updErr } = await sb
       .from("tarot_cards")
       .update({ image_url: urlData.publicUrl, updated_at: new Date().toISOString() })
       .eq("id", cardId);
-    if (updateError) throw new Error(`DB update failed: ${updateError.message}`);
+    if (updErr) throw new Error(`DB update failed: ${updErr.message}`);
 
-    await supabaseAdmin.storage.from("tarot-card-uploads").remove([filePath]);
+    // 6) cleanup temp
+    await sb.storage.from("tarot-card-uploads").remove([body.filePath]);
 
-    return new Response(JSON.stringify({ success: true, cardId: cardId, imageUrl: urlData.publicUrl }), {
+    return new Response(JSON.stringify({ success: true, cardId, imageUrl: urlData.publicUrl }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
-      status: 200,
     });
-
-  } catch (err) {
-    const msg = err instanceof Error ? err.message : String(err);
-    console.error("CRITICAL ERROR in function:", msg);
-    return new Response(JSON.stringify({ error: `A critical error occurred in the Edge Function: ${msg}` }), {
+  } catch (e) {
+    const msg = e instanceof Error ? e.message : String(e);
+    return new Response(JSON.stringify({ error: msg }), {
       status: 500,
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
