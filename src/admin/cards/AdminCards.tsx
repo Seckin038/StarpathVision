@@ -2,12 +2,11 @@ import { useEffect, useState, useRef } from "react";
 import { supabase } from "@/lib/supabaseClient";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogDescription } from "@/components/ui/dialog";
-import { Loader2, UploadCloud, Link as LinkIcon, CheckCircle, XCircle, Database } from "lucide-react";
+import { Loader2, UploadCloud, CheckCircle, XCircle, Database } from "lucide-react";
 import { showError, showSuccess, showLoading, dismissToast } from "@/utils/toast";
 import { useTranslation } from "react-i18next";
 
@@ -68,7 +67,6 @@ export default function AdminCards() {
 
   return (
     <div className="space-y-6">
-      {/* --- Seeder --- */}
       <Card className="bg-stone-900/60 border-stone-800">
         <CardHeader>
           <CardTitle className="text-amber-200">{t('admin.cards.step1Title')}</CardTitle>
@@ -82,25 +80,16 @@ export default function AdminCards() {
         </CardContent>
       </Card>
 
-      {/* --- Bulk Importer --- */}
       <Card className="bg-stone-900/60 border-stone-800">
         <CardHeader>
           <CardTitle className="text-amber-200">{t('admin.cards.step2Title')}</CardTitle>
           <CardDescription>{t('admin.cards.step2Desc')}</CardDescription>
         </CardHeader>
         <CardContent>
-          <Tabs defaultValue="files" className="w-full">
-            <TabsList>
-              <TabsTrigger value="files"><UploadCloud className="h-4 w-4 mr-1" /> {t('admin.cards.files')}</TabsTrigger>
-              <TabsTrigger value="urls"><LinkIcon className="h-4 w-4 mr-1" /> {t('admin.cards.urls')}</TabsTrigger>
-            </TabsList>
-            <TabsContent value="files"><FileImporter onDone={fetchCards} /></TabsContent>
-            <TabsContent value="urls"><UrlImporter onDone={fetchCards} /></TabsContent>
-          </Tabs>
+          <FileImporter onDone={fetchCards} />
         </CardContent>
       </Card>
 
-      {/* --- Card Grid --- */}
       <h2 className="text-xl font-serif text-stone-300">{t('admin.cards.step3Title')}</h2>
       <p className="text-stone-400 -mt-4">{t('admin.cards.step3Desc')}</p>
       {loading ? (
@@ -123,7 +112,6 @@ export default function AdminCards() {
         </div>
       )}
 
-      {/* --- Editing Modal --- */}
       <Dialog open={!!editing} onOpenChange={(isOpen) => !isOpen && setEditing(null)}>
         <DialogContent className="max-w-3xl bg-stone-950 border-stone-800 text-stone-200">
           <DialogHeader>
@@ -165,38 +153,57 @@ export default function AdminCards() {
   );
 }
 
+type RowStatus = "pending" | "uploading" | "processing" | "ok" | "err";
+type Row = { name: string; status: RowStatus; note?: string };
+
 function FileImporter({ onDone }: { onDone: () => void }) {
-  const [rows, setRows] = useState<{ name: string; status: "pending"|"uploading"|"ok"|"err"; note?: string }[]>([]);
+  const [rows, setRows] = useState<Row[]>([]);
   const inputRef = useRef<HTMLInputElement>(null);
   const { t } = useTranslation();
 
-  const pick = () => inputRef.current?.click();
-  const handle = async (files: FileList | null) => {
+  const handleFileSelection = async (files: FileList | null) => {
     if (!files || !files.length) return;
-    const items = Array.from(files).map(f => ({ name: f.name, status: "pending" as const }));
-    setRows(items);
+    
+    const initialRows = Array.from(files).map(f => ({ name: f.name, status: "pending" as const }));
+    setRows(initialRows);
 
-    const fd = new FormData();
-    for (const f of Array.from(files)) fd.append("files", f);
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i];
+      const updateRow = (status: RowStatus, note?: string) => {
+        setRows(prev => prev.map((r, idx) => idx === i ? { ...r, status, note } : r));
+      };
 
-    const { data, error } = await supabase.functions.invoke("tarot-bulk-import", { body: fd });
-    if (error) {
-      setRows(items.map(it => ({ ...it, status: "err", note: error.message })));
-    } else {
-      const out = (data?.results || []) as any[];
-      setRows(out.map(r => ({
-        name: r.file || r.url || "?",
-        status: r.ok ? "ok" : "err",
-        note: r.ok ? r.name : r.error
-      })));
+      try {
+        updateRow("uploading", "Bezig met uploaden...");
+        const ext = file.name.split('.').pop()?.toLowerCase() || 'jpg';
+        const filePath = `${crypto.randomUUID()}.${ext}`;
+        
+        const { error: uploadError } = await supabase.storage
+          .from('tarot-card-uploads')
+          .upload(filePath, file);
+
+        if (uploadError) throw new Error(`Upload mislukt: ${uploadError.message}`);
+
+        updateRow("processing", "AI analyse gestart...");
+        const { error: processError } = await supabase.functions.invoke('process-tarot-upload', {
+          body: { filePath },
+        });
+
+        if (processError) throw new Error(`Verwerking mislukt: ${processError.message}`);
+
+        updateRow("ok", "Succesvol verwerkt!");
+
+      } catch (err) {
+        updateRow("err", err instanceof Error ? err.message : "Onbekende fout");
+      }
     }
     onDone();
   };
 
   return (
     <div className="space-y-3 pt-4">
-      <input ref={inputRef} type="file" multiple accept="image/*" className="hidden" onChange={e => handle(e.target.files)} />
-      <Button onClick={pick}><UploadCloud className="h-4 w-4 mr-2" /> {t('admin.cards.chooseFiles')}</Button>
+      <input ref={inputRef} type="file" multiple accept="image/*" className="hidden" onChange={e => handleFileSelection(e.target.files)} />
+      <Button onClick={() => inputRef.current?.click()}><UploadCloud className="h-4 w-4 mr-2" /> {t('admin.cards.chooseFiles')}</Button>
 
       {rows.length > 0 && (
         <div className="border border-stone-800 rounded-md p-2 max-h-64 overflow-auto text-sm">
@@ -204,54 +211,10 @@ function FileImporter({ onDone }: { onDone: () => void }) {
             <div key={i} className="flex items-center gap-2 py-1">
               {r.status === "pending" && <Loader2 className="h-4 w-4 text-stone-500 animate-pulse" />}
               {r.status === "uploading" && <Loader2 className="h-4 w-4 text-amber-500 animate-spin" />}
+              {r.status === "processing" && <Loader2 className="h-4 w-4 text-blue-500 animate-spin" />}
               {r.status === "ok" && <CheckCircle className="h-4 w-4 text-green-500" />}
               {r.status === "err" && <XCircle className="h-4 w-4 text-red-500" />}
               <span className="flex-1 truncate">{r.name}</span>
-              <span className="text-stone-400">{r.note}</span>
-            </div>
-          ))}
-        </div>
-      )}
-    </div>
-  );
-}
-
-function UrlImporter({ onDone }: { onDone: () => void }) {
-  const [text, setText] = useState("");
-  const [rows, setRows] = useState<{ url: string; status: "pending"|"ok"|"err"; note?: string }[]>([]);
-  const { t } = useTranslation();
-
-  const start = async () => {
-    const urls = text.split(/\r?\n/).map(s => s.trim()).filter(Boolean);
-    if (!urls.length) return;
-    setRows(urls.map(u => ({ url: u, status: "pending" as const })));
-
-    const { data, error } = await supabase.functions.invoke("tarot-bulk-import", { body: { urls } });
-    if (error) {
-      setRows(urls.map(u => ({ url: u, status: "err", note: error.message })));
-    } else {
-      const out = (data?.results || []) as any[];
-      setRows(out.map(r => ({
-        url: r.url,
-        status: r.ok ? "ok" : "err",
-        note: r.ok ? r.name : r.error
-      })));
-    }
-    onDone();
-  };
-
-  return (
-    <div className="space-y-3 pt-4">
-      <Label htmlFor="urls">Plak hier 1 URL per regel (max rustig 78):</Label>
-      <Textarea id="urls" rows={6} value={text} onChange={e => setText(e.target.value)} placeholder="https://....jpg\nhttps://....png" />
-      <Button onClick={start}><LinkIcon className="h-4 w-4 mr-2" /> Start import</Button>
-
-      {rows.length > 0 && (
-        <div className="border border-stone-800 rounded-md p-2 max-h-64 overflow-auto text-sm mt-2">
-          {rows.map((r, i) => (
-            <div key={i} className="flex items-center gap-2 py-1">
-              {r.status === "ok" ? <CheckCircle className="h-4 w-4 text-green-500" /> : r.status === "err" ? <XCircle className="h-4 w-4 text-red-500" /> : <Loader2 className="h-4 w-4 text-amber-500 animate-spin" />}
-              <span className="flex-1 truncate">{r.url}</span>
               <span className="text-stone-400">{r.note}</span>
             </div>
           ))}
