@@ -43,7 +43,7 @@ async function identifyByAI(bytes: Uint8Array, mime: string): Promise<string | n
 
 serve(async (req) => {
   if (req.method === "OPTIONS") {
-    return new Response(null, { status: 204, headers: corsHeaders });
+    return new Response("ok", { headers: corsHeaders });
   }
 
   try {
