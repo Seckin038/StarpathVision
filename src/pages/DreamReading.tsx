@@ -51,7 +51,10 @@ const DreamReading = () => {
         }
       });
 
-      if (error) throw new Error(error.message);
+      if (error) {
+        const detailedError = error.context?.error || error.message;
+        throw new Error(detailedError);
+      }
       if (data.error) throw new Error(JSON.stringify(data.error));
 
       setReadingResult(data.reading.reading);

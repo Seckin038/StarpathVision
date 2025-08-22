@@ -56,7 +56,8 @@ export function useTarotInterpretation() {
       });
 
       if (invokeError) {
-        throw new Error(invokeError.message);
+        const detailedError = invokeError.context?.error || invokeError.message;
+        throw new Error(detailedError);
       }
       
       if (result.error) {
