@@ -23,15 +23,19 @@ interface Reading {
   id: string;
   created_at: string;
   method: string;
-  output: {
-    summary?: string;
-    ai_summary?: string;
-  };
-  input: {
-    text?: string;
-  };
-  language: string;
+  title: string | null;
+  interpretation: any;
+  payload: any;
+  locale: string | null;
 }
+
+const getReadingSummary = (reading: Reading): string => {
+  if (!reading.interpretation) return "Geen samenvatting beschikbaar.";
+  if (reading.method === 'tarot') {
+    return reading.interpretation.story || reading.interpretation.advice || "Tarot lezing.";
+  }
+  return reading.interpretation.reading || "Lezing beschikbaar.";
+};
 
 const Archive = () => {
   const [readings, setReadings] = useState<Reading[]>([]);
@@ -63,10 +67,10 @@ const Archive = () => {
     let result = readings;
     if (searchTerm) {
       result = result.filter(r => {
-        const output = r.output?.summary || r.output?.ai_summary || '';
-        const input = r.input?.text || '';
-        return output.toLowerCase().includes(searchTerm.toLowerCase()) ||
-               input.toLowerCase().includes(searchTerm.toLowerCase());
+        const interpretationText = JSON.stringify(r.interpretation || {});
+        const titleText = r.title || '';
+        return interpretationText.toLowerCase().includes(searchTerm.toLowerCase()) ||
+               titleText.toLowerCase().includes(searchTerm.toLowerCase());
       });
     }
     if (filterMethod !== "all") {
@@ -150,17 +154,19 @@ const Archive = () => {
                       <div className="flex justify-between items-start">
                         <div className="flex-1">
                           <div className="flex items-center gap-2 mb-2 flex-wrap">
-                            <h3 className="font-semibold text-stone-200">{reading.input.text || `Lezing van ${formatDate(reading.created_at)}`}</h3>
+                            <h3 className="font-semibold text-stone-200">{reading.title || `Lezing van ${formatDate(reading.created_at)}`}</h3>
                             <Badge variant="outline" className="text-stone-300 border-stone-700">{reading.method}</Badge>
-                            <Badge variant="outline" className="text-stone-300 border-stone-700 flex items-center gap-1">
-                              <Globe className="h-3 w-3" />
-                              {reading.language.toUpperCase()}
-                            </Badge>
+                            {reading.locale && (
+                              <Badge variant="outline" className="text-stone-300 border-stone-700 flex items-center gap-1">
+                                <Globe className="h-3 w-3" />
+                                {reading.locale.toUpperCase()}
+                              </Badge>
+                            )}
                           </div>
                           <div className="flex items-center gap-4 text-sm text-stone-400 mb-3">
                             <div className="flex items-center gap-1"><Calendar className="h-4 w-4" /><span>{formatDate(reading.created_at)}</span></div>
                           </div>
-                          <p className="text-stone-300 text-sm line-clamp-2">{reading.output?.summary || reading.output?.ai_summary}</p>
+                          <p className="text-stone-300 text-sm line-clamp-2">{getReadingSummary(reading)}</p>
                         </div>
                         <div className="flex flex-col gap-2 ml-4">
                           <Button variant="outline" size="sm" className="border-stone-700 text-stone-300 hover:bg-stone-800"><Download className="h-4 w-4" /></Button>

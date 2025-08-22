@@ -8,7 +8,7 @@ import AdminAudit from "./audit/AdminAudit";
 import AdminSpreads from "./spreads/AdminSpreads";
 import AdminUsers from "./users/AdminUsers";
 import AdminFeatures from "./features/AdminFeatures";
-import AdminHome from "./AdminHome";
+import AdminHome from "./pages/AdminHome";
 
 export default function AdminRoutes() {
   return (
