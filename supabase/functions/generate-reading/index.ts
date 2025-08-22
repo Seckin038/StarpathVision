@@ -295,7 +295,16 @@ serve(async (req) => {
       }
 
       // Sanitize payload to ensure it's clean JSON before inserting
-      const payloadToSave = JSON.parse(JSON.stringify(body.payload));
+      let payloadToSave = JSON.parse(JSON.stringify(body.payload));
+
+      // More specific sanitization for coffee readings to ensure DB compatibility
+      if ((body.method === 'koffiedik' || body.method === 'coffee') && Array.isArray(payloadToSave.symbols)) {
+        payloadToSave.symbols = payloadToSave.symbols.map((s: any) => ({
+          symbol_name_nl: s.symbol_name_nl,
+          symbol_name_en: s.symbol_name_en,
+          symbol_name_tr: s.symbol_name_tr,
+        }));
+      }
 
       const { error: insertError } = await supabaseAdmin.from('readings').insert({
         user_id: user.id,
