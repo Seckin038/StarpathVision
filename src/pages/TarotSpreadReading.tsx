@@ -101,7 +101,7 @@ export default function TarotReadingPage() {
       }
     };
     initializeReading();
-  }, [spreadId]);
+  }, [spreadId, locale]);
 
   const positionsToUse = useMemo(() => {
     if (!spread) return [];
