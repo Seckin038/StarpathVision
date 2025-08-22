@@ -6,6 +6,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogDescription } from "@/components/ui/dialog";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Loader2, UploadCloud, CheckCircle, XCircle } from "lucide-react";
 import { showError, showSuccess } from "@/utils/toast";
 import { useTranslation } from "react-i18next";
@@ -13,13 +14,13 @@ import { uploadTarotCardImage } from "@/lib/upload";
 
 type TarotCard = {
   id: string;
-  name: string;
+  name: Record<string, string>;
   number: number;
   arcana: string;
   suit: string | null;
   image_url: string | null;
-  meaning_up: string | null;
-  meaning_rev: string | null;
+  meaning_up: Record<string, string> | null;
+  meaning_rev: Record<string, string> | null;
   keywords: string[] | null;
 };
 
@@ -29,7 +30,8 @@ export default function AdminCards() {
   const [editing, setEditing] = useState<TarotCard | null>(null);
   const [isUploading, setIsUploading] = useState(false);
   const singleFileRef = useRef<HTMLInputElement>(null);
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const locale = i18n.language;
 
   const fetchCards = async () => {
     setLoading(true);
@@ -46,7 +48,7 @@ export default function AdminCards() {
     if (error) {
       showError(`Opslaan mislukt: ${error.message}`);
     } else {
-      showSuccess(`${editing.name} opgeslagen.`);
+      showSuccess(`${editing.name[locale] || editing.id} opgeslagen.`);
       setEditing(null);
       fetchCards();
     }
@@ -114,9 +116,9 @@ export default function AdminCards() {
               className="bg-stone-950/50 border-stone-800 cursor-pointer hover:border-amber-700 transition-colors"
               onClick={() => setEditing(c)}
             >
-              <CardHeader className="p-3"><CardTitle className="text-amber-300 text-sm truncate">{c.name}</CardTitle></CardHeader>
+              <CardHeader className="p-3"><CardTitle className="text-amber-300 text-sm truncate">{c.name[locale] || c.name['nl'] || c.id}</CardTitle></CardHeader>
               <CardContent className="p-3">
-                <img src={c.image_url || "/tarot/back.svg"} alt={c.name} className="w-full aspect-[2/3] object-cover rounded-md bg-stone-900 mb-2" />
+                <img src={c.image_url || "/tarot/back.svg"} alt={c.name[locale] || c.id} className="w-full aspect-[2/3] object-cover rounded-md bg-stone-900 mb-2" />
                 <div className="text-[11px] text-stone-400">{c.image_url ? "✔ afbeelding gekoppeld" : "• nog geen afbeelding"}</div>
               </CardContent>
             </Card>
@@ -127,13 +129,13 @@ export default function AdminCards() {
       <Dialog open={!!editing} onOpenChange={(isOpen) => !isOpen && setEditing(null)}>
         <DialogContent className="max-w-3xl bg-stone-950 border-stone-800 text-stone-200">
           <DialogHeader>
-            <DialogTitle className="text-amber-200">{t('admin.cards.editTitle', { name: editing?.name })}</DialogTitle>
+            <DialogTitle className="text-amber-200">{t('admin.cards.editTitle', { name: editing?.name[locale] || editing?.id })}</DialogTitle>
             <DialogDescription>{t('admin.cards.editDesc')}</DialogDescription>
           </DialogHeader>
           {editing && (
             <div className="grid grid-cols-3 gap-6 py-4">
               <div className="col-span-1 space-y-2">
-                <img src={editing.image_url || "/tarot/back.svg"} alt={editing.name} className="w-full aspect-[2/3] object-cover rounded-md bg-stone-900" />
+                <img src={editing.image_url || "/tarot/back.svg"} alt={editing.name[locale] || editing.id} className="w-full aspect-[2/3] object-cover rounded-md bg-stone-900" />
                 <input type="file" accept="image/*" ref={singleFileRef} className="hidden" onChange={handleImageChange} />
                 <Button variant="outline" className="w-full" onClick={() => singleFileRef.current?.click()} disabled={isUploading}>
                     {isUploading ? <Loader2 className="h-4 w-4 animate-spin" /> : 'Afbeelding wijzigen'}
@@ -142,20 +144,31 @@ export default function AdminCards() {
                     Afbeelding verwijderen
                 </Button>
               </div>
-              <div className="col-span-2 space-y-4">
-                <div>
-                  <Label htmlFor="name">{t('admin.cards.name', 'Naam')}</Label>
-                  <Input id="name" value={editing.name} onChange={e => setEditing({ ...editing, name: e.target.value })} />
-                </div>
-                <div>
-                  <Label htmlFor="meaning_up">{t('admin.cards.meaningUp', 'Betekenis (Rechtop)')}</Label>
-                  <Textarea id="meaning_up" rows={4} value={editing.meaning_up || ""} onChange={e => setEditing({ ...editing, meaning_up: e.target.value })} />
-                </div>
-                <div>
-                  <Label htmlFor="meaning_rev">{t('admin.cards.meaningRev', 'Betekenis (Omgekeerd)')}</Label>
-                  <Textarea id="meaning_rev" rows={4} value={editing.meaning_rev || ""} onChange={e => setEditing({ ...editing, meaning_rev: e.target.value })} />
-                </div>
-                <div>
+              <div className="col-span-2">
+                <Tabs defaultValue="nl" className="w-full">
+                  <TabsList>
+                    <TabsTrigger value="nl">Nederlands</TabsTrigger>
+                    <TabsTrigger value="en">English</TabsTrigger>
+                    <TabsTrigger value="tr">Türkçe</TabsTrigger>
+                  </TabsList>
+                  {(['nl', 'en', 'tr'] as const).map(lang => (
+                    <TabsContent key={lang} value={lang} className="space-y-4 pt-4">
+                      <div>
+                        <Label htmlFor={`name_${lang}`}>{t('admin.cards.name', 'Naam')}</Label>
+                        <Input id={`name_${lang}`} value={editing.name?.[lang] || ""} onChange={e => setEditing({ ...editing, name: {...editing.name, [lang]: e.target.value} })} />
+                      </div>
+                      <div>
+                        <Label htmlFor={`meaning_up_${lang}`}>{t('admin.cards.meaningUp', 'Betekenis (Rechtop)')}</Label>
+                        <Textarea id={`meaning_up_${lang}`} rows={3} value={editing.meaning_up?.[lang] || ""} onChange={e => setEditing({ ...editing, meaning_up: {...editing.meaning_up, [lang]: e.target.value} })} />
+                      </div>
+                      <div>
+                        <Label htmlFor={`meaning_rev_${lang}`}>{t('admin.cards.meaningRev', 'Betekenis (Omgekeerd)')}</Label>
+                        <Textarea id={`meaning_rev_${lang}`} rows={3} value={editing.meaning_rev?.[lang] || ""} onChange={e => setEditing({ ...editing, meaning_rev: {...editing.meaning_rev, [lang]: e.target.value} })} />
+                      </div>
+                    </TabsContent>
+                  ))}
+                </Tabs>
+                 <div className="mt-4">
                   <Label htmlFor="keywords">{t('admin.cards.keywords', 'Sleutelwoorden (komma-gescheiden)')}</Label>
                   <Input id="keywords" value={(editing.keywords || []).join(", ")} onChange={e => setEditing({ ...editing, keywords: e.target.value.split(",").map(k => k.trim()) })} />
                 </div>
