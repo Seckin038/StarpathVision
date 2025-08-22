@@ -190,8 +190,8 @@ export default function AdminCards() {
 type Item = { file: File; status: "pending"|"uploading"|"processing"|"done"|"error"; message?: string };
 
 function FileImporter({ onDone }: { onDone: () => void }) {
-  const [items, setItems] = useState<Item[]>([]);
   const inputRef = useRef<HTMLInputElement>(null);
+  const [items, setItems] = useState<Item[]>([]);
   const { t } = useTranslation('admin');
 
   const onFiles = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -202,34 +202,38 @@ function FileImporter({ onDone }: { onDone: () => void }) {
 
     for (const [idx, file] of files.entries()) {
       try {
+        // 1) upload naar tijdelijke bucket
         setItems((prev) => prev.map((it, i) => i === idx ? { ...it, status: "uploading", message: t('cards.importer.uploading') } : it));
 
         const ext = file.name.split(".").pop()?.toLowerCase() || "png";
         const tmpPath = `admin/${crypto.randomUUID()}.${ext}`;
 
-        const { error: uploadError } = await supabase.storage.from("tarot-card-uploads").upload(tmpPath, file, {
+        const up = await supabase.storage.from("tarot-card-uploads").upload(tmpPath, file, {
           cacheControl: "3600",
           upsert: false,
           contentType: file.type || "image/*",
         });
-        if (uploadError) throw uploadError;
+        if (up.error) throw up.error;
 
+        // 2) Edge Function aanroepen
         setItems((prev) => prev.map((it, i) => i === idx ? { ...it, status: "processing", message: t('cards.importer.processing') } : it));
 
-        const { data, error: invokeError } = await supabase.functions.invoke("process-tarot-upload", {
-          body: { filePath: tmpPath },
+        const { data, error } = await supabase.functions.invoke("process-tarot-upload", {
+          body: { filePath: up.data.path },
         });
-        if (invokeError) throw invokeError;
+        if (error) throw error;
+        if (data.error) throw new Error(data.error);
+
 
         setItems((prev) =>
           prev.map((it, i) =>
-            i === idx ? { ...it, status: "done", message: data?.message ?? t('cards.importer.success') } : it
+            i === idx ? { ...it, status: "done", message: data?.message ?? "OK" } : it
           )
         );
       } catch (err: any) {
         setItems((prev) =>
           prev.map((it, i) =>
-            i === idx ? { ...it, status: "error", message: String(err?.message ?? t('cards.importer.unknownError')) } : it
+            i === idx ? { ...it, status: "error", message: String(err?.message ?? err) } : it
           )
         );
       }
@@ -239,7 +243,7 @@ function FileImporter({ onDone }: { onDone: () => void }) {
 
   return (
     <div className="space-y-3 pt-4">
-      <input ref={inputRef} type="file" multiple accept="image/*" className="hidden" onChange={onFiles} />
+      <input ref={inputRef} type="file" accept="image/*" multiple hidden onChange={onFiles} />
       <Button onClick={() => inputRef.current?.click()}><UploadCloud className="h-4 w-4 mr-2" /> {t('cards.chooseFiles')}</Button>
 
       {items.length > 0 && (
