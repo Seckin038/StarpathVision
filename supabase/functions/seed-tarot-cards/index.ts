@@ -6,6 +6,7 @@ import { createClient } from "https://esm.sh/@supabase/supabase-js@2.45.0";
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
+  "Access-Control-Allow-Methods": "POST, OPTIONS",
 };
 
 function env(k: string) {
@@ -15,7 +16,6 @@ function env(k: string) {
 }
 
 // Data for all 78 Rider-Waite-Smith cards
-// NOTE: Meanings and keywords are truncated for brevity but would be complete in a real scenario.
 const CARDS_DATA = [
   // Major Arcana
   { id: "maj00", name: "De Dwaas", number: 0, arcana: "Major Arcana", suit: null, meaning_up: "Nieuw begin, onschuld, spontaniteit.", meaning_rev: "Roekeloosheid, risico's nemen.", keywords: ["begin", "onschuld", "vrijheid"] },
@@ -40,7 +40,6 @@ const CARDS_DATA = [
   { id: "maj19", name: "De Zon", number: 19, arcana: "Major Arcana", suit: null, meaning_up: "Succes, vitaliteit, positiviteit.", meaning_rev: "Innerlijk kind, pessimisme.", keywords: ["succes", "vreugde", "helderheid"] },
   { id: "maj20", name: "Het Oordeel", number: 20, arcana: "Major Arcana", suit: null, meaning_up: "Oordeel, wedergeboorte, innerlijke roeping.", meaning_rev: "Zelftwijfel, negeren van de roeping.", keywords: ["oordeel", "wedergeboorte", "vergeving"] },
   { id: "maj21", name: "De Wereld", number: 21, arcana: "Major Arcana", suit: null, meaning_up: "Voltooiing, integratie, vervulling.", meaning_rev: "Onvoltooide zaken, gebrek aan afsluiting.", keywords: ["voltooiing", "succes", "reizen"] },
-  // Wands
   { id: "wan01", name: "Aas van Staven", number: 22, arcana: "Minor Arcana", suit: "Wands", meaning_up: "Inspiratie, nieuwe kansen.", meaning_rev: "Gebrek aan motivatie.", keywords: ["creativiteit", "begin", "potentieel"] },
   { id: "wan02", name: "Twee van Staven", number: 23, arcana: "Minor Arcana", suit: "Wands", meaning_up: "Toekomstplanning, beslissingen.", meaning_rev: "Angst voor het onbekende.", keywords: ["planning", "beslissing", "ontdekking"] },
   { id: "wan03", name: "Drie van Staven", number: 24, arcana: "Minor Arcana", suit: "Wands", meaning_up: "Uitbreiding, vooruitziende blik.", meaning_rev: "Obstakels, vertragingen.", keywords: ["expansie", "handel", "vooruitzicht"] },
@@ -55,7 +54,6 @@ const CARDS_DATA = [
   { id: "wan12", name: "Ridder van Staven", number: 33, arcana: "Minor Arcana", suit: "Wands", meaning_up: "Energie, passie, avontuur.", meaning_rev: "Impulsiviteit, roekeloosheid.", keywords: ["passie", "avontuur", "energie"] },
   { id: "wan13", name: "Koningin van Staven", number: 34, arcana: "Minor Arcana", suit: "Wands", meaning_up: "Moed, zelfvertrouwen, onafhankelijkheid.", meaning_rev: "Intimidatie, jaloezie.", keywords: ["zelfvertrouwen", "onafhankelijkheid", "charisma"] },
   { id: "wan14", name: "Koning van Staven", number: 35, arcana: "Minor Arcana", suit: "Wands", meaning_up: "Leiderschap, visie, actie.", meaning_rev: "Autoritair, impulsief.", keywords: ["leiderschap", "visie", "inspiratie"] },
-  // Cups
   { id: "cup01", name: "Aas van Kelken", number: 36, arcana: "Minor Arcana", suit: "Cups", meaning_up: "Nieuwe liefde, emoties.", meaning_rev: "Onderdrukte emoties.", keywords: ["liefde", "emotie", "creativiteit"] },
   { id: "cup02", name: "Twee van Kelken", number: 37, arcana: "Minor Arcana", suit: "Cups", meaning_up: "Vereniging, partnerschap.", meaning_rev: "Onbalans, breuk.", keywords: ["partnerschap", "liefde", "verbinding"] },
   { id: "cup03", name: "Drie van Kelken", number: 38, arcana: "Minor Arcana", suit: "Cups", meaning_up: "Viering, vriendschap.", meaning_rev: "Roddel, isolatie.", keywords: ["viering", "vriendschap", "gemeenschap"] },
@@ -70,7 +68,6 @@ const CARDS_DATA = [
   { id: "cup12", name: "Ridder van Kelken", number: 47, arcana: "Minor Arcana", suit: "Cups", meaning_up: "Romantiek, charme, verbeelding.", meaning_rev: "Onrealistische dromen, humeurigheid.", keywords: ["romantiek", "charme", "verbeelding"] },
   { id: "cup13", name: "Koningin van Kelken", number: 48, arcana: "Minor Arcana", suit: "Cups", meaning_up: "Compassie, intuïtie, kalmte.", meaning_rev: "Emotionele onzekerheid, afhankelijkheid.", keywords: ["compassie", "intuïtie", "zorg"] },
   { id: "cup14", name: "Koning van Kelken", number: 49, arcana: "Minor Arcana", suit: "Cups", meaning_up: "Emotionele volwassenheid, controle.", meaning_rev: "Emotionele manipulatie, stemmingswisselingen.", keywords: ["emotionele balans", "mededogen", "diplomatie"] },
-  // Swords
   { id: "swd01", name: "Aas van Zwaarden", number: 50, arcana: "Minor Arcana", suit: "Swords", meaning_up: "Doorbraak, helderheid.", meaning_rev: "Verwarring, chaos.", keywords: ["helderheid", "waarheid", "doorbraak"] },
   { id: "swd02", name: "Twee van Zwaarden", number: 51, arcana: "Minor Arcana", suit: "Swords", meaning_up: "Moeilijke keuze, impasse.", meaning_rev: "Besluiteloosheid, verwarring.", keywords: ["keuze", "impasse", "wapenstilstand"] },
   { id: "swd03", name: "Drie van Zwaarden", number: 52, arcana: "Minor Arcana", suit: "Swords", meaning_up: "Hartzeer, verdriet, verlies.", meaning_rev: "Herstel, vergeving.", keywords: ["hartzeer", "verdriet", "verlies"] },
@@ -85,7 +82,6 @@ const CARDS_DATA = [
   { id: "swd12", name: "Ridder van Zwaarden", number: 61, arcana: "Minor Arcana", suit: "Swords", meaning_up: "Ambitie, actie, snelheid.", meaning_rev: "Roekeloosheid, impulsiviteit.", keywords: ["ambitie", "actie", "snelheid"] },
   { id: "swd13", name: "Koningin van Zwaarden", number: 62, arcana: "Minor Arcana", suit: "Swords", meaning_up: "Onafhankelijkheid, helder denken.", meaning_rev: "Koude, kritische houding.", keywords: ["onafhankelijkheid", "intelligentie", "helderheid"] },
   { id: "swd14", name: "Koning van Zwaarden", number: 63, arcana: "Minor Arcana", suit: "Swords", meaning_up: "Intellectuele kracht, autoriteit.", meaning_rev: "Manipulatie, machtsmisbruik.", keywords: ["autoriteit", "intellect", "waarheid"] },
-  // Pentacles
   { id: "pen01", name: "Aas van Pentakels", number: 64, arcana: "Minor Arcana", suit: "Pentacles", meaning_up: "Nieuwe kansen, welvaart.", meaning_rev: "Gemiste kansen.", keywords: ["welvaart", "manifestatie", "kans"] },
   { id: "pen02", name: "Twee van Pentakels", number: 65, arcana: "Minor Arcana", suit: "Pentacles", meaning_up: "Balans, prioriteiten stellen.", meaning_rev: "Onbalans, desorganisatie.", keywords: ["balans", "flexibiliteit", "prioriteiten"] },
   { id: "pen03", name: "Drie van Pentakels", number: 66, arcana: "Minor Arcana", suit: "Pentacles", meaning_up: "Teamwerk, samenwerking.", meaning_rev: "Gebrek aan teamwork.", keywords: ["teamwerk", "samenwerking", "vakmanschap"] },
