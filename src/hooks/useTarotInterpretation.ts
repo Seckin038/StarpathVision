@@ -64,7 +64,7 @@ export function useTarotInterpretation() {
         throw new Error(result.error);
       }
 
-      setData(result.reading);
+      setData(result.interpretation);
 
     } catch (err: any) {
       setError(err.message || 'Failed to get interpretation.');

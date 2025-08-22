@@ -14,6 +14,30 @@ const cors = (req: Request) => {
   };
 };
 
+// Helper to find and parse JSON from a string that might contain markdown fences or other text
+function extractAndParseJson(text: string): any {
+  const jsonRegex = /```json\n([\s\S]*?)\n```/;
+  const match = text.match(jsonRegex);
+  
+  let jsonString = text;
+  if (match && match[1]) {
+    jsonString = match[1];
+  } else {
+    const firstBrace = text.indexOf('{');
+    const lastBrace = text.lastIndexOf('}');
+    if (firstBrace !== -1 && lastBrace > firstBrace) {
+      jsonString = text.substring(firstBrace, lastBrace + 1);
+    }
+  }
+
+  try {
+    return JSON.parse(jsonString);
+  } catch (e) {
+    console.error("Failed to parse JSON from AI response:", jsonString);
+    throw new Error("AI returned invalid JSON response.");
+  }
+}
+
 Deno.serve(async (req) => {
   const corsHeaders = cors(req);
   if (req.method === "OPTIONS") return new Response("ok", { headers: corsHeaders });
@@ -29,23 +53,19 @@ Deno.serve(async (req) => {
     const supa = createClient(SUPABASE_URL, SERVICE_KEY);
     const body = await req.json();
 
-    // Verwacht: { locale, personaId, method, payload }
-    const method = String(body?.method ?? "").toLowerCase(); // tarot | koffiedik | dromen | numerologie
+    const method = String(body?.method ?? "").toLowerCase();
     if (!["tarot","koffiedik","dromen","numerologie"].includes(method)) {
       throw new Error(`Unsupported method '${method}'`);
     }
 
-    // Haal user uit token
     const token = req.headers.get("Authorization")?.replace("Bearer ", "") ?? "";
     const { data: userRes, error: userErr } = await supa.auth.getUser(token);
     if (userErr) throw new Error(`Auth error: ${userErr.message}`);
     const user = userRes?.user ?? null;
 
-    // === GENEREER LEZING (ingekort; jouw prompt/pipeline kan hier blijven) ===
     const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
     const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash-latest", generationConfig: { responseMimeType: "application/json" } });
 
-    // Minimal prompt per methode
     const prompt = JSON.stringify({
       method,
       locale: body?.locale ?? "nl",
@@ -54,10 +74,9 @@ Deno.serve(async (req) => {
     });
 
     const result = await model.generateContent(prompt);
-    const jsonText = result?.response?.text?.() ?? "{}";
-    const interpretation = JSON.parse(jsonText);
+    const rawText = result?.response?.text?.() ?? "{}";
+    const interpretation = extractAndParseJson(rawText);
 
-    // === SANITIZE PAYLOAD (licht) ===
     let payload = JSON.parse(JSON.stringify(body?.payload ?? {}));
     if (method === "koffiedik" && Array.isArray(payload.symbols)) {
       payload.symbols = payload.symbols.map((s: any) => ({
@@ -67,7 +86,6 @@ Deno.serve(async (req) => {
       }));
     }
 
-    // === TITEL + SPREAD_ID ===
     let title = body?.title ?? method;
     let spread_id: string | null = null;
     if (method === "tarot" && body?.payload?.spread?.id) {
@@ -75,10 +93,9 @@ Deno.serve(async (req) => {
       title = body?.payload?.spread?.name?.[body?.locale ?? "nl"] ?? spread_id;
     }
 
-    // === OPSLAAN (alleen als ingelogd) ===
     if (user) {
       const insertRow = {
-        user_id: user.id,          // <- matcht RLS
+        user_id: user.id,
         method,
         locale: body?.locale ?? "nl",
         title,
@@ -90,7 +107,6 @@ Deno.serve(async (req) => {
 
       const { error: insertError } = await supa.from("readings").insert(insertRow);
       if (insertError) {
-        // NIET verzwijgen → UI krijgt dit terug
         throw new Error(`DB insert failed: ${insertError.message}`);
       }
     }

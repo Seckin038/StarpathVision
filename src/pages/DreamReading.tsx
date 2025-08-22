@@ -55,9 +55,9 @@ const DreamReading = () => {
         const detailedError = error.context?.error || error.message;
         throw new Error(detailedError);
       }
-      if (data.error) throw new Error(JSON.stringify(data.error));
+      if (data.error) throw new Error(data.error);
 
-      setReadingResult(data.reading.reading);
+      setReadingResult(data.interpretation.reading);
       dismissToast(toastId);
       showSuccess("Je droomduiding is klaar!");
 
