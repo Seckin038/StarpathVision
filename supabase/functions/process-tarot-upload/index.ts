@@ -8,6 +8,7 @@ import { encode } from "https://deno.land/std@0.224.0/encoding/base64.ts";
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
+  "Access-Control-Allow-Methods": "POST, OPTIONS",
 };
 
 const PROMPT = `
@@ -45,7 +46,7 @@ async function identifyByAI(bytes: Uint8Array, mime: string): Promise<string | n
 
 serve(async (req) => {
   if (req.method === "OPTIONS") {
-    return new Response("ok", { headers: corsHeaders });
+    return new Response(null, { status: 204, headers: corsHeaders });
   }
 
   try {
@@ -54,13 +55,11 @@ serve(async (req) => {
 
     const supabaseAdmin = createClient(env("SUPABASE_URL"), env("SUPABASE_SERVICE_ROLE_KEY"));
 
-    // 1. Download the file from the temporary bucket
     const { data: blob, error: downloadError } = await supabaseAdmin.storage
       .from("tarot-card-uploads")
       .download(filePath);
     if (downloadError) throw new Error(`Download failed: ${downloadError.message}`);
 
-    // 2. Identify the card using AI
     const bytes = new Uint8Array(await blob.arrayBuffer());
     const cardNameEn = await identifyByAI(bytes, blob.type);
     if (!cardNameEn) throw new Error("AI could not identify the card.");
@@ -68,7 +67,6 @@ serve(async (req) => {
     const cardNameNl = RWS_EN_TO_NL[cardNameEn];
     if (!cardNameNl) throw new Error(`Could not map English name '${cardNameEn}' to Dutch.`);
 
-    // 3. Find the card in the database
     const { data: card, error: dbError } = await supabaseAdmin
       .from("tarot_cards")
       .select("id, name")
@@ -76,7 +74,6 @@ serve(async (req) => {
       .single();
     if (dbError) throw new Error(`Card '${cardNameNl}' not found in database.`);
 
-    // 4. Upload the image to the final bucket with the correct ID
     const ext = filePath.split(".").pop() || "jpg";
     const finalPath = `${card.id}.${ext}`;
     const { error: uploadError } = await supabaseAdmin.storage
@@ -84,7 +81,6 @@ serve(async (req) => {
       .upload(finalPath, blob, { upsert: true, contentType: blob.type });
     if (uploadError) throw new Error(`Final upload failed: ${uploadError.message}`);
 
-    // 5. Get public URL and update the database
     const { data: urlData } = supabaseAdmin.storage.from("tarot-cards").getPublicUrl(finalPath);
     const { error: updateError } = await supabaseAdmin
       .from("tarot_cards")
@@ -92,11 +88,11 @@ serve(async (req) => {
       .eq("id", card.id);
     if (updateError) throw new Error(`DB update failed: ${updateError.message}`);
 
-    // 6. Clean up the temporary file
     await supabaseAdmin.storage.from("tarot-card-uploads").remove([filePath]);
 
     return new Response(JSON.stringify({ success: true, cardName: card.name, imageUrl: urlData.publicUrl }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
+      status: 200,
     });
 
   } catch (err) {
