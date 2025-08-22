@@ -21,7 +21,7 @@ Do not add any extra words, punctuation, or explanations.
 `;
 
 function env(key: string) {
-  const v = (globalThis as any).Deno?.env?.get?.(key);
+  const v = Deno.env.get(key);
   if (!v) throw new Error(`Missing env var: ${key}`);
   return v;
 }
