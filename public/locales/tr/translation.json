@@ -1,160 +1,44 @@
 {
   "common": {
     "back": "Geri",
-    "confirmSelection": "Seçimi Onayla",
-    "loading": "Yükleniyor...",
-    "upright": "Düz",
-    "reversed": "Ters",
+    "close": "Kapat",
     "save": "Kaydet",
     "cancel": "İptal",
-    "edit": "Düzenle",
-    "delete": "Sil",
-    "close": "Kapat"
+    "confirmSelection": "Seçimi Onayla"
   },
   "header": {
     "admin": "Yönetici",
-    "dashboard": "Kontrol Paneli",
+    "dashboard": "Panel",
     "logout": "Çıkış Yap",
     "login": "Giriş Yap"
   },
   "home": {
-    "yourGuide": "Bugünkü rehberin",
-    "chooseSeer": "Kahinini seç",
-    "seerDescription": "Kahininizi seçin. Seçilen persona tüm seansınıza rehberlik edecek ve tüm yorumları kendi sesleriyle sunacaktır. Bunu istediğiniz zaman değiştirebilirsiniz.",
-    "do3CardReading": "3 kartlı bir okuma yapın"
+    "yourGuide": "Rehberin",
+    "seerDescription": "Seçilen kahin, her biri benzersiz bir sese ve bilgeliğe sahip olarak okuma boyunca size rehberlik edecektir. Yolunuzu aydınlatmak için kimi seçeceksiniz?",
+    "chooseSeer": "Kahin Seç",
+    "do3CardReading": "3 kart okuması yap",
+    "subtitle": "YILDIZLARA GİDEN REHBERİNİZ",
+    "startJourney": "Yolculuğuna Başla"
   },
-  "dashboard": {
-    "welcomeBack": "Tekrar hoş geldin, {{name}}",
-    "discoverToday": "Bugün ne keşfetmek istersin?",
-    "dayEnergy": "Günün Enerjisi",
-    "yourCardToday": "Bugünkü kartın",
-    "recentReadings": "Son Okumalar",
-    "noReadings": "Henüz bir okumanız yok.",
-    "choosePath": "Yolunu Seç",
-    "quickAction": {
-      "3card": "3 Kart Açılımı",
-      "coffee": "Kahve Falı",
-      "tarot": "Tarot Açılımları",
-      "dream": "Rüya Yorumu",
-      "numerology": "Numeroloji"
-    }
-  },
-  "coffee": {
-    "title": "Kahve Falı",
-    "titleWithUpload": "Fotoğraflı Kahve Falı",
-    "chooseSymbols": "Kahve Fincanınızdan Semboller Seçin",
-    "selectedSymbols": "Seçilen semboller:",
-    "noneSelected": "Henüz sembol seçilmedi",
-    "allSymbols": "Kahve Sembolleri:",
-    "uploadPhoto": "Fotoğraf Yükle",
-    "generateReading": "Yorum Oluştur",
-    "uploadTitle": "Kahve fincanınızı yükleyin",
-    "uploadDesc": "Kahve fincanınızın bir fotoğrafını yükleyin",
-    "choosePhoto": "Fotoğraf seç",
-    "tipsTitle": "İyi bir fotoğraf için ipuçları",
-    "tips": [
-      "Yeterli ışık olduğundan emin olun",
-      "Fincanın içini fotoğraflayın",
-      "Sembollerin net bir şekilde göründüğünden emin olun",
-      "Flaş kullanmayın"
-    ],
-    "analyzing": "Görüntü analiz ediliyor...",
-    "detectedSymbols": "Tespit edilen semboller:",
-    "clickToUse": "Okumanız için kullanmak istediğiniz sembollere tıklayın.",
-    "reset": "Yeni fotoğraf"
-  },
-  "dream": {
-    "title": "Rüya Yorumu",
-    "yourDreamWorld": "Rüya Dünyanız",
-    "describe": "Rüyanızı olabildiğince ayrıntılı olarak tanımlayın. Ne oldu, kimler vardı ve ne hissettiniz?",
-    "yourDream": "Rüyanız",
-    "interpret": "Rüyamı yorumla"
-  },
-  "numerology": {
-    "title": "Numeroloji Okuması",
-    "yourProfile": "Numerolojik Profiliniz",
-    "discover": "Yolunuzu etkileyen sayıları keşfedin. Doğum tarihinizi ve tam adınızı girin.",
-    "fullName": "Tam ad",
-    "birthDate": "Doğum tarihi",
-    "calculate": "Numerolojimi hesapla"
-  },
-  "tarotChoice": {
-    "title": "Bir Tarot Açılımı Seçin",
-    "subtitle": "Sorunuza uygun bir açılım seçin.",
-    "startSpread": "Açılımı başlat",
-    "loading": "Açılımlar yükleniyor...",
-    "errorTitle": "Bir şeyler ters gitti",
-    "errorBody": "Tarot açılımları yüklenemedi."
-  },
-  "tarotReading": {
-    "chooseSeer": "Kahininizi seçin:",
-    "chooseCards": "{{count}} kart seçin.",
-    "selected": "Seçilen: {{selected}} / {{total}}"
-  },
-  "tarot": {
-    "upright": "Düz",
-    "reversed": "Ters",
-    "summaryTitle": "Okumanızın Özeti",
-    "storyTitle": "Kartların Hikayesi",
-    "adviceTitle": "Sizin İçin Tavsiye",
-    "affirmationTitle": "Olumlama",
-    "actionsTitle": "Somut Adımlar",
-    "detailsTitle": "Kartların Detayları",
-    "past": "Geçmiş",
-    "present": "Şimdi",
-    "future": "Gelecek"
-  },
-  "profile": {
-    "title": "Profilin",
-    "account": "Hesap",
-    "stats": "İstatistikler",
-    "sessions": "Önceki Seanslar",
-    "name": "İsim",
-    "email": "E-posta",
-    "language": "Dil",
-    "timezone": "Saat dilimi",
-    "about": "Hakkında",
-    "view": "Görüntüle",
-    "download": "İndir"
-  },
-  "admin": {
-    "backToSite": "← Siteye Geri Dön",
-    "nav": {
-      "spreads": "Açılımlar",
-      "cards": "Kartlar",
-      "personas": "Personalar",
-      "translations": "Çeviriler",
-      "users": "Kullanıcılar",
-      "features": "Özellikler",
-      "audit": "Denetim"
+  "features": {
+    "title": "İçindeki Dünyaları Keşfet",
+    "subtitle": "Kaydolduktan sonra, yolunuzu aydınlatacak bir dizi mistik araca erişim kazanacaksınız. Yıldızların sizin için neler sakladığını keşfedin.",
+    "tarot": {
+      "title": "Tarot Okumaları",
+      "description": "Geçmiş, şimdi ve gelecekten karmaşık hayat sorularına kadar çeşitli kart açılımlarıyla içgörü kazanın.",
+      "badge": "Ücretsiz 3 kart açılımı"
     },
-    "home": {
-      "title": "Yönetici",
-      "users": "Kullanıcılar",
-      "readingsTotal": "Okumalar (toplam)",
-      "readingsToday": "Bugün",
-      "activity7days": "Son 7 günün etkinliği",
-      "readings": "Okumalar",
-      "topSpreads": "En iyi açılımlar",
-      "languageDistribution": "Dil dağılımı"
+    "coffee": {
+      "title": "Kahve Falı",
+      "description": "Kahve fincanınızdaki sembolleri çözün ve geleceğiniz ve içsel benliğiniz hakkındaki mesajları ortaya çıkarın."
     },
-    "cards": {
-      "step1Title": "Adım 1: Temel Verileri İçe Aktar",
-      "step1Desc": "78 standart RWS kartını (isimler, anlamlar vb.) veritabanına yüklemek için buraya tıklayın. Bu bir kez gereklidir veya metinleri varsayılana geri yüklemek için.",
-      "importDataBtn": "78 Kart Verisini İçe Aktar",
-      "step2Title": "Adım 2: Resimleri İçe Aktar",
-      "step2Desc": "Kartlar için resimleri buraya yükleyin. AI hangi kart olduğunu tanıyacak ve resmi otomatik olarak bağlayacaktır.",
-      "files": "Dosyalar",
-      "urls": "URL'ler",
-      "chooseFiles": "Dosyaları seç…",
-      "step3Title": "Adım 3: Ayrıntıları Düzenle (isteğe bağlı)",
-      "step3Desc": "Adı, anlamları veya anahtar kelimeleri ayarlamak için bir karta tıklayın.",
-      "editTitle": "Düzenle: {{name}}",
-      "editDesc": "Kart metinlerini buradan ayarlayın. Resmi toplu ithalatçı aracılığıyla değiştirebilirsiniz.",
-      "name": "İsim",
-      "meaningUp": "Anlam (düz)",
-      "meaningRev": "Anlam (ters)",
-      "keywords": "Anahtar Kelimeler (virgülle ayrılmış)"
+    "dream": {
+      "title": "Rüya Yorumu",
+      "description": "Rüyalarınızın gizli anlamlarını keşfedin ve bilinçaltınızın size ne anlatmaya çalıştığını anlayın."
+    },
+    "numerology": {
+      "title": "Numeroloji",
+      "description": "Sayıların gücünü ve doğum tarihinizin ve adınızın hayat yolunuzu ve kişiliğinizi nasıl etkilediğini keşfedin."
     }
   }
 }

@@ -1,15 +1,10 @@
 {
   "common": {
     "back": "Back",
-    "confirmSelection": "Confirm Selection",
-    "loading": "Loading...",
-    "upright": "Upright",
-    "reversed": "Reversed",
+    "close": "Close",
     "save": "Save",
     "cancel": "Cancel",
-    "edit": "Edit",
-    "delete": "Delete",
-    "close": "Close"
+    "confirmSelection": "Confirm Selection"
   },
   "header": {
     "admin": "Admin",
@@ -18,143 +13,32 @@
     "login": "Log in"
   },
   "home": {
-    "yourGuide": "Your guide for today",
-    "chooseSeer": "Choose your seer",
-    "seerDescription": "Choose your seer. The chosen persona will guide your entire session and provide all interpretations in their own voice. You can change this at any time.",
-    "do3CardReading": "Do a 3-card reading"
+    "yourGuide": "Your Guide",
+    "seerDescription": "The chosen seer will guide you through the reading, each with a unique voice and wisdom. Who will you choose to light your path?",
+    "chooseSeer": "Choose Seer",
+    "do3CardReading": "Do a 3-card reading",
+    "subtitle": "YOUR GUIDE TO THE STARS",
+    "startJourney": "Start Your Journey"
   },
-  "dashboard": {
-    "welcomeBack": "Welcome back, {{name}}",
-    "discoverToday": "What do you want to discover today?",
-    "dayEnergy": "Energy of the Day",
-    "yourCardToday": "Your card for today",
-    "recentReadings": "Recent Readings",
-    "noReadings": "You have no readings yet.",
-    "choosePath": "Choose Your Path",
-    "quickAction": {
-      "3card": "3-Card Spread",
-      "coffee": "Coffee Reading",
-      "tarot": "Tarot Spreads",
-      "dream": "Dream Interpretation",
-      "numerology": "Numerology"
-    }
-  },
-  "coffee": {
-    "title": "Coffee Reading",
-    "titleWithUpload": "Coffee Reading with Photo",
-    "chooseSymbols": "Choose Symbols from Your Coffee Cup",
-    "selectedSymbols": "Selected symbols:",
-    "noneSelected": "No symbols selected yet",
-    "allSymbols": "Coffee Symbols:",
-    "uploadPhoto": "Upload Photo",
-    "generateReading": "Generate Reading",
-    "uploadTitle": "Upload your coffee cup",
-    "uploadDesc": "Upload a photo of your coffee cup",
-    "choosePhoto": "Choose photo",
-    "tipsTitle": "Tips for a good photo",
-    "tips": [
-      "Ensure sufficient light",
-      "Photograph the inside of the cup",
-      "Make sure the symbols are clearly visible",
-      "Do not use flash"
-    ],
-    "analyzing": "Analyzing image...",
-    "detectedSymbols": "Detected symbols:",
-    "clickToUse": "Click on the symbols you want to use for your reading.",
-    "reset": "New photo"
-  },
-  "dream": {
-    "title": "Dream Interpretation",
-    "yourDreamWorld": "Your Dream World",
-    "describe": "Describe your dream in as much detail as possible. What happened, who was there, and what did you feel?",
-    "yourDream": "Your dream",
-    "interpret": "Interpret my dream"
-  },
-  "numerology": {
-    "title": "Numerology Reading",
-    "yourProfile": "Your Numerological Profile",
-    "discover": "Discover the numbers that influence your path. Enter your date of birth and full name.",
-    "fullName": "Full name",
-    "birthDate": "Date of birth",
-    "calculate": "Calculate my numerology"
-  },
-  "tarotChoice": {
-    "title": "Choose a Tarot Spread",
-    "subtitle": "Select a spread that resonates with your question.",
-    "startSpread": "Start spread",
-    "loading": "Loading spreads...",
-    "errorTitle": "Something went wrong",
-    "errorBody": "Could not load the tarot spreads."
-  },
-  "tarotReading": {
-    "chooseSeer": "Choose your seer:",
-    "chooseCards": "Choose {{count}} cards.",
-    "selected": "Selected: {{selected}} / {{total}}"
-  },
-  "tarot": {
-    "upright": "Upright",
-    "reversed": "Reversed",
-    "summaryTitle": "Summary of Your Reading",
-    "storyTitle": "The Story of the Cards",
-    "adviceTitle": "Advice for You",
-    "affirmationTitle": "Affirmation",
-    "actionsTitle": "Concrete Steps",
-    "detailsTitle": "Details of the Cards",
-    "past": "Past",
-    "present": "Present",
-    "future": "Future"
-  },
-  "profile": {
-    "title": "Your Profile",
-    "account": "Account",
-    "stats": "Statistics",
-    "sessions": "Previous Sessions",
-    "name": "Name",
-    "email": "E-mail",
-    "language": "Language",
-    "timezone": "Timezone",
-    "about": "About you",
-    "view": "View",
-    "download": "Download"
-  },
-  "admin": {
-    "backToSite": "← Back to Site",
-    "nav": {
-      "spreads": "Spreads",
-      "cards": "Cards",
-      "personas": "Personas",
-      "translations": "Translations",
-      "users": "Users",
-      "features": "Features",
-      "audit": "Audit"
+  "features": {
+    "title": "Discover the Worlds Within",
+    "subtitle": "After registering, you'll gain access to a suite of mystical tools to illuminate your path. Discover what the stars have in store for you.",
+    "tarot": {
+      "title": "Tarot Readings",
+      "description": "Gain insight with various card spreads, from past, present, and future to complex life questions.",
+      "badge": "Free 3-card spread"
     },
-    "home": {
-      "title": "Admin",
-      "users": "Users",
-      "readingsTotal": "Readings (total)",
-      "readingsToday": "Today",
-      "activity7days": "Activity last 7 days",
-      "readings": "Readings",
-      "topSpreads": "Top spreads",
-      "languageDistribution": "Language distribution"
+    "coffee": {
+      "title": "Coffee Ground Reading",
+      "description": "Decipher the symbols in your coffee cup and unveil messages about your future and inner self."
     },
-    "cards": {
-      "step1Title": "Step 1: Import Base Data",
-      "step1Desc": "Click here to load the 78 standard RWS cards (names, meanings, etc.) into the database. This is needed once, or to restore the texts to the default.",
-      "importDataBtn": "Import 78 Card Data",
-      "step2Title": "Step 2: Import Images",
-      "step2Desc": "Upload the images for the cards here. The AI will recognize which card it is and link the image automatically.",
-      "files": "Files",
-      "urls": "URLs",
-      "chooseFiles": "Choose files…",
-      "step3Title": "Step 3: Edit Details (optional)",
-      "step3Desc": "Click on a card to adjust the name, meanings, or keywords.",
-      "editTitle": "Edit: {{name}}",
-      "editDesc": "Adjust the texts for the card here. You can change the image via the bulk importer.",
-      "name": "Name",
-      "meaningUp": "Meaning (upright)",
-      "meaningRev": "Meaning (reversed)",
-      "keywords": "Keywords (comma-separated)"
+    "dream": {
+      "title": "Dream Interpretation",
+      "description": "Explore the hidden meanings of your dreams and understand what your subconscious is trying to tell you."
+    },
+    "numerology": {
+      "title": "Numerology",
+      "description": "Discover the power of numbers and how your birth date and name influence your life path and personality."
     }
   }
 }

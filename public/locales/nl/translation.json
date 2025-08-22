@@ -1,15 +1,10 @@
 {
   "common": {
     "back": "Terug",
-    "confirmSelection": "Bevestig selectie",
-    "loading": "Laden...",
-    "upright": "Rechtop",
-    "reversed": "Omgekeerd",
+    "close": "Sluiten",
     "save": "Opslaan",
     "cancel": "Annuleren",
-    "edit": "Bewerken",
-    "delete": "Verwijderen",
-    "close": "Sluiten"
+    "confirmSelection": "Selectie Bevestigen"
   },
   "header": {
     "admin": "Admin",
@@ -18,143 +13,32 @@
     "login": "Inloggen"
   },
   "home": {
-    "yourGuide": "Jouw gids voor vandaag",
-    "chooseSeer": "Kies je waarzegger",
-    "seerDescription": "Kies je waarzegger. De gekozen persona begeleidt je complete sessie en geeft alle uitleggingen in haar/zijne eigen stem. Je kunt dit altijd wijzigen.",
-    "do3CardReading": "Doe een 3-kaart lezing"
+    "yourGuide": "Jouw Gids",
+    "seerDescription": "De gekozen waarzegger begeleidt je door de lezing, elk met een unieke stem en wijsheid. Wie kies jij om je pad te verlichten?",
+    "chooseSeer": "Kies Waarzegger",
+    "do3CardReading": "Doe een 3-kaart legging",
+    "subtitle": "JOUW GIDS NAAR DE STERREN",
+    "startJourney": "Begin Jouw Reis"
   },
-  "dashboard": {
-    "welcomeBack": "Welkom terug, {{name}}",
-    "discoverToday": "Wat wil je vandaag ontdekken?",
-    "dayEnergy": "Energie van de Dag",
-    "yourCardToday": "Jouw kaart voor vandaag",
-    "recentReadings": "Recente Lezingen",
-    "noReadings": "Je hebt nog geen lezingen gedaan.",
-    "choosePath": "Kies Je Pad",
-    "quickAction": {
-      "3card": "3-Kaart Legging",
-      "coffee": "Koffielezing",
-      "tarot": "Tarot Leggingen",
-      "dream": "Droomduiding",
-      "numerology": "Numerologie"
-    }
-  },
-  "coffee": {
-    "title": "Koffielezing",
-    "titleWithUpload": "Koffielezing met Foto",
-    "chooseSymbols": "Kies Symbolen uit je Koffiekop",
-    "selectedSymbols": "Geselecteerde symbolen:",
-    "noneSelected": "Nog geen symbolen geselecteerd",
-    "allSymbols": "Koffiesymbolen:",
-    "uploadPhoto": "Foto uploaden",
-    "generateReading": "Lezing genereren",
-    "uploadTitle": "Upload je koffiekop",
-    "uploadDesc": "Upload een foto van je koffiekop",
-    "choosePhoto": "Kies foto",
-    "tipsTitle": "Tips voor een goede foto",
-    "tips": [
-      "Zorg voor voldoende licht",
-      "Fotografeer de binnenkant van de kop",
-      "Zorg dat de symbolen duidelijk zichtbaar zijn",
-      "Gebruik geen flits"
-    ],
-    "analyzing": "Beeld wordt geanalyseerd...",
-    "detectedSymbols": "Gedetecteerde symbolen:",
-    "clickToUse": "Klik op de symbolen die je wilt gebruiken voor je lezing.",
-    "reset": "Nieuwe foto"
-  },
-  "dream": {
-    "title": "Droomduiding",
-    "yourDreamWorld": "Jouw Droomwereld",
-    "describe": "Beschrijf je droom zo gedetailleerd mogelijk. Wat gebeurde er, wie was er, en wat voelde je?",
-    "yourDream": "Jouw droom",
-    "interpret": "Duid mijn droom"
-  },
-  "numerology": {
-    "title": "Numerologie Lezing",
-    "yourProfile": "Jouw Numerologische Profiel",
-    "discover": "Ontdek de getallen die jouw pad beïnvloeden. Vul je geboortedatum en volledige naam in.",
-    "fullName": "Volledige naam",
-    "birthDate": "Geboortedatum",
-    "calculate": "Bereken mijn numerologie"
-  },
-  "tarotChoice": {
-    "title": "Kies een Tarot Legging",
-    "subtitle": "Selecteer een legging die resoneert met je vraag.",
-    "startSpread": "Start legging",
-    "loading": "Leggingen worden geladen...",
-    "errorTitle": "Er is iets misgegaan",
-    "errorBody": "Kon de tarot leggingen niet laden."
-  },
-  "tarotReading": {
-    "chooseSeer": "Kies je waarzegger:",
-    "chooseCards": "Kies {{count}} kaarten.",
-    "selected": "Geselecteerd: {{selected}} / {{total}}"
-  },
-  "tarot": {
-    "upright": "Rechtop",
-    "reversed": "Omgekeerd",
-    "summaryTitle": "Samenvatting van je Lezing",
-    "storyTitle": "Het Verhaal van de Kaarten",
-    "adviceTitle": "Advies voor Jou",
-    "affirmationTitle": "Affirmatie",
-    "actionsTitle": "Concrete Stappen",
-    "detailsTitle": "Details van de Kaarten",
-    "past": "Verleden",
-    "present": "Heden",
-    "future": "Toekomst"
-  },
-  "profile": {
-    "title": "Jouw Profiel",
-    "account": "Account",
-    "stats": "Statistieken",
-    "sessions": "Eerdere Sessies",
-    "name": "Naam",
-    "email": "E-mail",
-    "language": "Taal",
-    "timezone": "Tijdzone",
-    "about": "Over jou",
-    "view": "Bekijken",
-    "download": "Download"
-  },
-  "admin": {
-    "backToSite": "← Terug naar site",
-    "nav": {
-      "spreads": "Spreads",
-      "cards": "Kaarten",
-      "personas": "Personas",
-      "translations": "Vertalingen",
-      "users": "Gebruikers",
-      "features": "Features",
-      "audit": "Audit"
+  "features": {
+    "title": "Ontdek de Werelden Binnenin",
+    "subtitle": "Na registratie krijg je toegang tot een reeks mystieke tools om je pad te verlichten. Ontdek wat de sterren voor jou in petto hebben.",
+    "tarot": {
+      "title": "Tarot Lezingen",
+      "description": "Krijg inzicht met diverse kaartleggingen, van verleden, heden en toekomst tot complexe levensvragen.",
+      "badge": "Gratis 3-kaart legging"
     },
-    "home": {
-      "title": "Admin",
-      "users": "Gebruikers",
-      "readingsTotal": "Lezingen (totaal)",
-      "readingsToday": "Vandaag",
-      "activity7days": "Activiteit afgelopen 7 dagen",
-      "readings": "Lezingen",
-      "topSpreads": "Top spreads",
-      "languageDistribution": "Taalverdeling"
+    "coffee": {
+      "title": "Koffiedik Kijken",
+      "description": "Ontcijfer de symbolen in je koffiekopje en onthul boodschappen over je toekomst en innerlijke zelf."
     },
-    "cards": {
-      "step1Title": "Stap 1: Basisgegevens Importeren",
-      "step1Desc": "Klik hier om de 78 standaard RWS-kaarten (namen, betekenissen, etc.) in de database te laden. Dit is eenmalig nodig, of om de teksten te herstellen naar de standaard.",
-      "importDataBtn": "Importeer 78 Kaartgegevens",
-      "step2Title": "Stap 2: Afbeeldingen Importeren",
-      "step2Desc": "Upload hier de afbeeldingen voor de kaarten. De AI herkent welke kaart het is en koppelt de afbeelding automatisch.",
-      "files": "Bestanden",
-      "urls": "URL’s",
-      "chooseFiles": "Kies bestanden…",
-      "step3Title": "Stap 3: Details Bewerken (optioneel)",
-      "step3Desc": "Klik op een kaart om de naam, betekenissen of trefwoorden aan te passen.",
-      "editTitle": "Bewerk: {{name}}",
-      "editDesc": "Pas hier de teksten voor de kaart aan. De afbeelding kan je via de bulk-importer wijzigen.",
-      "name": "Naam",
-      "meaningUp": "Betekenis (rechtop)",
-      "meaningRev": "Betekenis (omgekeerd)",
-      "keywords": "Keywords (komma-gescheiden)"
+    "dream": {
+      "title": "Droomduiding",
+      "description": "Verken de verborgen betekenissen van je dromen en begrijp wat je onderbewustzijn je probeert te vertellen."
+    },
+    "numerology": {
+      "title": "Numerologie",
+      "description": "Ontdek de kracht van getallen en hoe jouw geboortedatum en naam je levenspad en persoonlijkheid beïnvloeden."
     }
   }
 }
