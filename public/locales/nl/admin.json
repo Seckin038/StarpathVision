@@ -1,0 +1,34 @@
+{
+  "home": {
+    "title": "Admin Panel",
+    "users": "Gebruikers",
+    "readingsTotal": "Lezingen (totaal)",
+    "readingsToday": "Vandaag",
+    "activity7days": "Activiteit afgelopen 7 dagen",
+    "readings": "Lezingen",
+    "topSpreads": "Top spreads",
+    "languageDistribution": "Taalverdeling"
+  },
+  "nav": {
+    "spreads": "Spreads",
+    "cards": "Kaarten",
+    "personas": "Personas",
+    "translations": "Vertalingen",
+    "users": "Gebruikers",
+    "features": "Features",
+    "audit": "Audit"
+  },
+  "cards": {
+    "importTitle": "Kaartafbeeldingen Importeren",
+    "importDesc": "Upload hier een batch met tarotkaart-afbeeldingen. De AI zal proberen elke afbeelding te herkennen en automatisch te koppelen aan de juiste kaart in de database.",
+    "editListTitle": "Alle Kaarten Bewerken",
+    "editListDesc": "Hieronder ziet u alle 78 kaarten. Klik op een kaart om de details, betekenissen of de gekoppelde afbeelding handmatig aan te passen.",
+    "editTitle": "Bewerk: {{name}}",
+    "editDesc": "Pas hier de details van de kaart aan voor alle talen.",
+    "name": "Naam",
+    "meaningUp": "Betekenis (Rechtop)",
+    "meaningRev": "Betekenis (Omgekeerd)",
+    "keywords": "Sleutelwoorden (komma-gescheiden)",
+    "chooseFiles": "Kies bestanden..."
+  }
+}

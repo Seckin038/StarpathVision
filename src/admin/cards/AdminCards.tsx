@@ -30,7 +30,7 @@ export default function AdminCards() {
   const [editing, setEditing] = useState<TarotCard | null>(null);
   const [isUploading, setIsUploading] = useState(false);
   const singleFileRef = useRef<HTMLInputElement>(null);
-  const { t, i18n } = useTranslation();
+  const { t, i18n } = useTranslation('admin');
   const locale = i18n.language;
 
   const fetchCards = async () => {
@@ -97,16 +97,16 @@ export default function AdminCards() {
     <div className="space-y-6">
       <Card className="bg-stone-900/60 border-stone-800">
         <CardHeader>
-          <CardTitle className="text-amber-200">{t('admin.cards.importTitle', 'Kaartafbeeldingen Importeren')}</CardTitle>
-          <CardDescription>{t('admin.cards.importDesc', 'Upload hier een batch met tarotkaart-afbeeldingen. De AI zal proberen elke afbeelding te herkennen en automatisch te koppelen aan de juiste kaart in de database.')}</CardDescription>
+          <CardTitle className="text-amber-200">{t('cards.importTitle')}</CardTitle>
+          <CardDescription>{t('cards.importDesc')}</CardDescription>
         </CardHeader>
         <CardContent>
           <FileImporter onDone={fetchCards} />
         </CardContent>
       </Card>
 
-      <h2 className="text-xl font-serif text-stone-300">{t('admin.cards.editListTitle', 'Alle Kaarten Bewerken')}</h2>
-      <p className="text-stone-400 -mt-4">{t('admin.cards.editListDesc', 'Hieronder ziet u alle 78 kaarten. Klik op een kaart om de details, betekenissen of de gekoppelde afbeelding handmatig aan te passen.')}</p>
+      <h2 className="text-xl font-serif text-stone-300">{t('cards.editListTitle')}</h2>
+      <p className="text-stone-400 -mt-4">{t('cards.editListDesc')}</p>
       
       {loading ? (
         <div className="flex justify-center py-12"><Loader2 className="h-6 w-6 animate-spin text-amber-400" /></div>
@@ -131,8 +131,8 @@ export default function AdminCards() {
       <Dialog open={!!editing} onOpenChange={(isOpen) => !isOpen && setEditing(null)}>
         <DialogContent className="max-w-3xl bg-stone-950 border-stone-800 text-stone-200">
           <DialogHeader>
-            <DialogTitle className="text-amber-200">{t('admin.cards.editTitle', { name: editing?.name[locale] || editing?.id })}</DialogTitle>
-            <DialogDescription>{t('admin.cards.editDesc')}</DialogDescription>
+            <DialogTitle className="text-amber-200">{t('cards.editTitle', { name: editing?.name[locale] || editing?.id })}</DialogTitle>
+            <DialogDescription>{t('cards.editDesc')}</DialogDescription>
           </DialogHeader>
           {editing && (
             <div className="grid grid-cols-3 gap-6 py-4">
@@ -156,30 +156,30 @@ export default function AdminCards() {
                   {(['nl', 'en', 'tr'] as const).map(lang => (
                     <TabsContent key={lang} value={lang} className="space-y-4 pt-4">
                       <div>
-                        <Label htmlFor={`name_${lang}`}>{t('admin.cards.name', 'Naam')}</Label>
+                        <Label htmlFor={`name_${lang}`}>{t('cards.name')}</Label>
                         <Input id={`name_${lang}`} value={editing.name?.[lang] || ""} onChange={e => setEditing({ ...editing, name: {...editing.name, [lang]: e.target.value} })} />
                       </div>
                       <div>
-                        <Label htmlFor={`meaning_up_${lang}`}>{t('admin.cards.meaningUp', 'Betekenis (Rechtop)')}</Label>
+                        <Label htmlFor={`meaning_up_${lang}`}>{t('cards.meaningUp')}</Label>
                         <Textarea id={`meaning_up_${lang}`} rows={3} value={editing.meaning_up?.[lang] || ""} onChange={e => setEditing({ ...editing, meaning_up: {...editing.meaning_up, [lang]: e.target.value} })} />
                       </div>
                       <div>
-                        <Label htmlFor={`meaning_rev_${lang}`}>{t('admin.cards.meaningRev', 'Betekenis (Omgekeerd)')}</Label>
+                        <Label htmlFor={`meaning_rev_${lang}`}>{t('cards.meaningRev')}</Label>
                         <Textarea id={`meaning_rev_${lang}`} rows={3} value={editing.meaning_rev?.[lang] || ""} onChange={e => setEditing({ ...editing, meaning_rev: {...editing.meaning_rev, [lang]: e.target.value} })} />
                       </div>
                     </TabsContent>
                   ))}
                 </Tabs>
                  <div className="mt-4">
-                  <Label htmlFor="keywords">{t('admin.cards.keywords', 'Sleutelwoorden (komma-gescheiden)')}</Label>
+                  <Label htmlFor="keywords">{t('cards.keywords')}</Label>
                   <Input id="keywords" value={(editing.keywords || []).join(", ")} onChange={e => setEditing({ ...editing, keywords: e.target.value.split(",").map(k => k.trim()) })} />
                 </div>
               </div>
             </div>
           )}
           <DialogFooter>
-            <Button variant="outline" onClick={() => setEditing(null)}>{t('common.cancel', 'Annuleren')}</Button>
-            <Button onClick={handleSave}>{t('common.save', 'Opslaan')}</Button>
+            <Button variant="outline" onClick={() => setEditing(null)}>{t('common:cancel', 'Annuleren')}</Button>
+            <Button onClick={handleSave}>{t('common:save', 'Opslaan')}</Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
@@ -193,7 +193,7 @@ type Row = { name: string; status: RowStatus; note?: string };
 function FileImporter({ onDone }: { onDone: () => void }) {
   const [rows, setRows] = useState<Row[]>([]);
   const inputRef = useRef<HTMLInputElement>(null);
-  const { t } = useTranslation();
+  const { t } = useTranslation('admin');
 
   const handleFileSelection = async (files: FileList | null) => {
     if (!files || !files.length) return;
@@ -243,7 +243,7 @@ function FileImporter({ onDone }: { onDone: () => void }) {
   return (
     <div className="space-y-3 pt-4">
       <input ref={inputRef} type="file" multiple accept="image/*" className="hidden" onChange={e => handleFileSelection(e.target.files)} />
-      <Button onClick={() => inputRef.current?.click()}><UploadCloud className="h-4 w-4 mr-2" /> {t('admin.cards.chooseFiles', 'Kies bestanden...')}</Button>
+      <Button onClick={() => inputRef.current?.click()}><UploadCloud className="h-4 w-4 mr-2" /> {t('cards.chooseFiles')}</Button>
 
       {rows.length > 0 && (
         <div className="border border-stone-800 rounded-md p-2 max-h-64 overflow-auto text-sm">

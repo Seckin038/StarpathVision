@@ -1,0 +1,34 @@
+{
+  "home": {
+    "title": "Yönetici Paneli",
+    "users": "Kullanıcılar",
+    "readingsTotal": "Okumalar (toplam)",
+    "readingsToday": "Bugün",
+    "activity7days": "Son 7 günün etkinliği",
+    "readings": "Okumalar",
+    "topSpreads": "En popüler açılımlar",
+    "languageDistribution": "Dil dağılımı"
+  },
+  "nav": {
+    "spreads": "Açılımlar",
+    "cards": "Kartlar",
+    "personas": "Personalar",
+    "translations": "Çeviriler",
+    "users": "Kullanıcılar",
+    "features": "Özellikler",
+    "audit": "Denetim"
+  },
+  "cards": {
+    "importTitle": "Kart Resimlerini İçe Aktar",
+    "importDesc": "Buraya bir grup tarot kartı resmi yükleyin. Yapay zeka her resmi tanımaya çalışacak ve veritabanındaki doğru kartla otomatik olarak eşleştirecektir.",
+    "editListTitle": "Tüm Kartları Düzenle",
+    "editListDesc": "Aşağıda 78 kartın tamamını görüyorsunuz. Ayrıntıları, anlamları veya bağlantılı resmi manuel olarak ayarlamak için bir karta tıklayın.",
+    "editTitle": "Düzenle: {{name}}",
+    "editDesc": "Kart ayrıntılarını tüm diller için buradan ayarlayın.",
+    "name": "İsim",
+    "meaningUp": "Anlamı (Düz)",
+    "meaningRev": "Anlamı (Ters)",
+    "keywords": "Anahtar Kelimeler (virgülle ayrılmış)",
+    "chooseFiles": "Dosyaları seç..."
+  }
+}

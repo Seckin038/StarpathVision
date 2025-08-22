@@ -1,0 +1,34 @@
+{
+  "home": {
+    "title": "Admin Panel",
+    "users": "Users",
+    "readingsTotal": "Readings (total)",
+    "readingsToday": "Today",
+    "activity7days": "Activity last 7 days",
+    "readings": "Readings",
+    "topSpreads": "Top spreads",
+    "languageDistribution": "Language distribution"
+  },
+  "nav": {
+    "spreads": "Spreads",
+    "cards": "Cards",
+    "personas": "Personas",
+    "translations": "Translations",
+    "users": "Users",
+    "features": "Features",
+    "audit": "Audit"
+  },
+  "cards": {
+    "importTitle": "Import Card Images",
+    "importDesc": "Upload a batch of tarot card images here. The AI will attempt to recognize each image and automatically link it to the correct card in the database.",
+    "editListTitle": "Edit All Cards",
+    "editListDesc": "Below you see all 78 cards. Click on a card to manually adjust the details, meanings, or the linked image.",
+    "editTitle": "Edit: {{name}}",
+    "editDesc": "Adjust the card details here for all languages.",
+    "name": "Name",
+    "meaningUp": "Meaning (Upright)",
+    "meaningRev": "Meaning (Reversed)",
+    "keywords": "Keywords (comma-separated)",
+    "chooseFiles": "Choose files..."
+  }
+}

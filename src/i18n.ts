@@ -14,8 +14,11 @@ i18n
       order: ["path", "cookie", "htmlTag", "localStorage", "subdomain"],
       caches: ["cookie"],
     },
+    // Add namespaces for different sections of the app
+    ns: ['translation', 'admin'],
+    defaultNS: 'translation',
     backend: {
-      loadPath: "/locales/{{lng}}/translation.json",
+      loadPath: "/locales/{{lng}}/{{ns}}.json",
     },
     react: {
       useSuspense: true, // Set to true to avoid suspense issues
