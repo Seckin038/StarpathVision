@@ -64,6 +64,7 @@ export default function AdminCards() {
         if (error) throw error;
         setEditing({ ...editing, image_url: newUrl });
         showSuccess("Afbeelding succesvol bijgewerkt.");
+        fetchCards(); // Refresh the main list
     } catch (err: any) {
         showError(err.message || "Kon afbeelding niet uploaden.");
     } finally {
@@ -86,6 +87,7 @@ export default function AdminCards() {
 
           setEditing({ ...editing, image_url: null });
           showSuccess("Afbeelding succesvol verwijderd.");
+          fetchCards(); // Refresh the main list
       } catch (err: any) {
           showError(err.message || "Kon afbeelding niet verwijderen.");
       }
