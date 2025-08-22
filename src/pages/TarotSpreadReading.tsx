@@ -181,11 +181,17 @@ export default function TarotReadingPage() {
     setShowPersonaPicker(false);
   };
 
+  const getPositionTitle = (pos: SpreadPosition) => {
+    const rawTitle = pos.title?.[locale] || pos.slot_key;
+    const translationKey = `tarot.${rawTitle.toLowerCase()}`;
+    return i18n.exists(translationKey) ? t(translationKey) : rawTitle;
+  };
+
   const annotations =
     phase === "reading" && spread
       ? draw.map((d, i) => {
           const pos = positionsToUse[i];
-          const title = (pos.title?.[locale]) || pos.slot_key || `#${i + 1}`;
+          const title = getPositionTitle(pos);
           const label = d.isReversed ? t("tarot.reversed") : t("tarot.upright");
           return { title, label };
         })
@@ -195,7 +201,7 @@ export default function TarotReadingPage() {
     phase === "reading" && spread
       ? draw.map((d, i) => {
           const pos = positionsToUse[i];
-          const title = (pos.title?.[locale]) || pos.slot_key || `#${i + 1}`;
+          const title = getPositionTitle(pos);
           const copy = (d.isReversed ? pos.reversed_copy?.[locale] : pos.upright_copy?.[locale]) || "";
           return {
             index: i + 1,

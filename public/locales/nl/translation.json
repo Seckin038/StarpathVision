@@ -99,7 +99,23 @@
     "adviceTitle": "Advies voor Jou",
     "affirmationTitle": "Affirmatie",
     "actionsTitle": "Concrete Stappen",
-    "detailsTitle": "Details van de Kaarten"
+    "detailsTitle": "Details van de Kaarten",
+    "past": "Verleden",
+    "present": "Heden",
+    "future": "Toekomst"
+  },
+  "profile": {
+    "title": "Jouw Profiel",
+    "account": "Account",
+    "stats": "Statistieken",
+    "sessions": "Eerdere Sessies",
+    "name": "Naam",
+    "email": "E-mail",
+    "language": "Taal",
+    "timezone": "Tijdzone",
+    "about": "Over jou",
+    "view": "Bekijken",
+    "download": "Download"
   },
   "admin": {
     "backToSite": "← Terug naar site",

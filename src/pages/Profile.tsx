@@ -11,6 +11,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
 import { Loader2, Download, Eye, Save, UploadCloud, LogOut } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 type Profile = {
   id: string;
@@ -43,6 +44,7 @@ export default function ProfilePage() {
   const [saving, setSaving] = useState(false);
   const [uploading, setUploading] = useState(false);
   const nav = useNavigate();
+  const { t } = useTranslation();
 
   useEffect(() => {
     (async () => {
@@ -145,17 +147,17 @@ export default function ProfilePage() {
       <MysticalBackground />
       <div className="relative z-10 max-w-6xl mx-auto px-4 py-8">
         <div className="flex items-center justify-between mb-6">
-          <h1 className="text-2xl md:text-3xl font-serif text-amber-200">Jouw profiel</h1>
+          <h1 className="text-2xl md:text-3xl font-serif text-amber-200">{t('profile.title')}</h1>
           <div className="flex items-center gap-3">
             {isAdmin ? (
               <Link to="/admin" className="text-sm">
                 <Button variant="outline" className="border-amber-800 text-amber-300 hover:bg-amber-900/40">
-                  Admin
+                  {t('header.admin')}
                 </Button>
               </Link>
             ) : null}
             <Button variant="ghost" onClick={logout} className="text-stone-300 hover:text-amber-200">
-              <LogOut className="h-4 w-4 mr-1" /> Uitloggen
+              <LogOut className="h-4 w-4 mr-1" /> {t('header.logout')}
             </Button>
           </div>
         </div>
@@ -163,7 +165,7 @@ export default function ProfilePage() {
         <div className="grid md:grid-cols-3 gap-6">
           <Card className="bg-stone-950/60 border-white/10">
             <CardHeader>
-              <CardTitle className="text-amber-200">Account</CardTitle>
+              <CardTitle className="text-amber-200">{t('profile.account')}</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="flex items-center gap-4">
@@ -179,7 +181,7 @@ export default function ProfilePage() {
               </div>
 
               <div>
-                <label className="text-sm text-stone-400">Naam</label>
+                <label className="text-sm text-stone-400">{t('profile.name')}</label>
                 <Input
                   value={draft.full_name ?? ""}
                   placeholder="Volledige naam"
@@ -188,13 +190,13 @@ export default function ProfilePage() {
               </div>
 
               <div>
-                <label className="text-sm text-stone-400">E-mail</label>
+                <label className="text-sm text-stone-400">{t('profile.email')}</label>
                 <Input value={userEmail ?? ""} disabled />
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="text-sm text-stone-400">Taal</label>
+                  <label className="text-sm text-stone-400">{t('profile.language')}</label>
                   <Select
                     value={draft.locale ?? "nl"}
                     onValueChange={(v) => setDraft({ ...draft, locale: v })}
@@ -208,7 +210,7 @@ export default function ProfilePage() {
                   </Select>
                 </div>
                 <div>
-                  <label className="text-sm text-stone-400">Tijdzone</label>
+                  <label className="text-sm text-stone-400">{t('profile.timezone')}</label>
                   <Input
                     placeholder="Europe/Amsterdam"
                     value={draft.timezone ?? ""}
@@ -218,7 +220,7 @@ export default function ProfilePage() {
               </div>
 
               <div>
-                <label className="text-sm text-stone-400">Over jou</label>
+                <label className="text-sm text-stone-400">{t('profile.about')}</label>
                 <Textarea
                   rows={4}
                   value={draft.bio ?? ""}
@@ -234,7 +236,7 @@ export default function ProfilePage() {
                   ))}
                 </div>
                 <Button onClick={saveProfile} disabled={saving} className="bg-amber-800 hover:bg-amber-700">
-                  {saving ? (<><Loader2 className="h-4 w-4 mr-1 animate-spin" /> Opslaan</>) : (<><Save className="h-4 w-4 mr-1" /> Opslaan</>)}
+                  {saving ? (<><Loader2 className="h-4 w-4 mr-1 animate-spin" /> {t('common.save')}</>) : (<><Save className="h-4 w-4 mr-1" /> {t('common.save')}</>)}
                 </Button>
               </div>
             </CardContent>
@@ -242,7 +244,7 @@ export default function ProfilePage() {
 
           <div className="md:col-span-2 space-y-6">
             <Card className="bg-stone-950/60 border-white/10">
-              <CardHeader><CardTitle className="text-amber-200">Statistieken</CardTitle></CardHeader>
+              <CardHeader><CardTitle className="text-amber-200">{t('profile.stats')}</CardTitle></CardHeader>
               <CardContent className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 {Object.keys(stats).length === 0 ? (
                   <div className="col-span-4 text-stone-400">Nog geen sessies.</div>
@@ -256,7 +258,7 @@ export default function ProfilePage() {
             </Card>
 
             <Card className="bg-stone-950/60 border-white/10">
-              <CardHeader><CardTitle className="text-amber-200">Eerdere sessies</CardTitle></CardHeader>
+              <CardHeader><CardTitle className="text-amber-200">{t('profile.sessions')}</CardTitle></CardHeader>
               <CardContent>
                 {readings.length === 0 ? (
                   <div className="text-stone-400">Je hebt nog geen sessies.</div>
@@ -279,10 +281,10 @@ export default function ProfilePage() {
                         </div>
                         <div className="flex gap-2">
                           <Button variant="outline" className="border-amber-800 text-amber-300 hover:bg-amber-900/40" onClick={() => openReading(r.id)}>
-                            <Eye className="h-4 w-4 mr-1" /> Bekijken
+                            <Eye className="h-4 w-4 mr-1" /> {t('profile.view')}
                           </Button>
                           <Button variant="secondary" onClick={() => downloadReading(r)}>
-                            <Download className="h-4 w-4 mr-1" /> Download
+                            <Download className="h-4 w-4 mr-1" /> {t('profile.download')}
                           </Button>
                         </div>
                       </div>

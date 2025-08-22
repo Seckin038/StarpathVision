@@ -99,7 +99,23 @@
     "adviceTitle": "Sizin İçin Tavsiye",
     "affirmationTitle": "Olumlama",
     "actionsTitle": "Somut Adımlar",
-    "detailsTitle": "Kartların Detayları"
+    "detailsTitle": "Kartların Detayları",
+    "past": "Geçmiş",
+    "present": "Şimdi",
+    "future": "Gelecek"
+  },
+  "profile": {
+    "title": "Profilin",
+    "account": "Hesap",
+    "stats": "İstatistikler",
+    "sessions": "Önceki Seanslar",
+    "name": "İsim",
+    "email": "E-posta",
+    "language": "Dil",
+    "timezone": "Saat dilimi",
+    "about": "Hakkında",
+    "view": "Görüntüle",
+    "download": "İndir"
   },
   "admin": {
     "backToSite": "← Siteye Geri Dön",

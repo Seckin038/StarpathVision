@@ -99,7 +99,23 @@
     "adviceTitle": "Advice for You",
     "affirmationTitle": "Affirmation",
     "actionsTitle": "Concrete Steps",
-    "detailsTitle": "Details of the Cards"
+    "detailsTitle": "Details of the Cards",
+    "past": "Past",
+    "present": "Present",
+    "future": "Future"
+  },
+  "profile": {
+    "title": "Your Profile",
+    "account": "Account",
+    "stats": "Statistics",
+    "sessions": "Previous Sessions",
+    "name": "Name",
+    "email": "E-mail",
+    "language": "Language",
+    "timezone": "Timezone",
+    "about": "About you",
+    "view": "View",
+    "download": "Download"
   },
   "admin": {
     "backToSite": "← Back to Site",
