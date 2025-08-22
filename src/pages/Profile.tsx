@@ -10,7 +10,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
-import { Loader2, Download, Eye, Save, UploadCloud, LogOut } from "lucide-react";
+import { Loader2, Download, Eye, Save, UploadCloud, LogOut, Trash2 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 type Profile = {
@@ -68,7 +68,7 @@ export default function ProfilePage() {
         .select("id, method, spread_id, title, created_at, payload, interpretation, thumbnail_url")
         .eq("user_id", auth.user.id)
         .order("created_at", { ascending: false })
-        .limit(50);
+        .limit(100);
       setReadings(r ?? []);
       setLoading(false);
     })();
@@ -127,6 +127,17 @@ export default function ProfilePage() {
       payload: r.payload,
       interpretation: r.interpretation,
     });
+  }
+
+  async function deleteReading(id: string) {
+    if (window.confirm("Weet je zeker dat je deze lezing wilt verwijderen?")) {
+      const { error } = await supabase.from("readings").delete().eq("id", id);
+      if (error) {
+        console.error("Could not delete reading", error);
+      } else {
+        setReadings(prev => prev.filter(r => r.id !== id));
+      }
+    }
   }
 
   async function logout() {
@@ -280,11 +291,14 @@ export default function ProfilePage() {
                           </div>
                         </div>
                         <div className="flex gap-2">
-                          <Button variant="outline" className="border-amber-800 text-amber-300 hover:bg-amber-900/40" onClick={() => openReading(r.id)}>
+                          <Button variant="outline" size="sm" className="border-amber-800 text-amber-300 hover:bg-amber-900/40" onClick={() => openReading(r.id)}>
                             <Eye className="h-4 w-4 mr-1" /> {t('profile.view')}
                           </Button>
-                          <Button variant="secondary" onClick={() => downloadReading(r)}>
+                          <Button variant="secondary" size="sm" onClick={() => downloadReading(r)}>
                             <Download className="h-4 w-4 mr-1" /> {t('profile.download')}
+                          </Button>
+                          <Button variant="destructive" size="icon" onClick={() => deleteReading(r.id)}>
+                            <Trash2 className="h-4 w-4" />
                           </Button>
                         </div>
                       </div>

@@ -156,9 +156,9 @@ const Archive = () => {
               <select value={filterMethod} onChange={(e) => setFilterMethod(e.target.value)} className="border border-stone-700 rounded-md px-3 py-2 bg-stone-900 text-stone-300 focus:ring-amber-500 focus:border-amber-500">
                 <option value="all">{t('archive.filter.all')}</option>
                 <option value="tarot">{t('archive.filter.tarot')}</option>
-                <option value="numerology">{t('archive.filter.numerology')}</option>
-                <option value="coffee">{t('archive.filter.coffee')}</option>
-                <option value="dreams">{t('archive.filter.dreams')}</option>
+                <option value="numerologie">{t('archive.filter.numerology')}</option>
+                <option value="koffiedik">{t('archive.filter.coffee')}</option>
+                <option value="dromen">{t('archive.filter.dreams')}</option>
               </select>
             </div>
           </div>

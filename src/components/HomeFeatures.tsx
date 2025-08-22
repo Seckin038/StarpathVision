@@ -1,7 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { BookOpen, Coffee, Eye, Star } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
 
 const features = [
@@ -9,7 +8,6 @@ const features = [
     icon: <BookOpen className="h-8 w-8 text-blue-400" />,
     titleKey: "features.tarot.title",
     descriptionKey: "features.tarot.description",
-    badgeKey: "features.tarot.badge",
     path: "/readings/tarot",
   },
   {
@@ -57,7 +55,6 @@ const HomeFeatures = () => {
               </CardHeader>
               <CardContent>
                 <p className="text-stone-400 text-sm mb-4 h-24">{t(feature.descriptionKey)}</p>
-                {feature.badgeKey && <Badge variant="outline" className="border-emerald-700 text-emerald-300">{t(feature.badgeKey)}</Badge>}
               </CardContent>
             </Card>
           </Link>
