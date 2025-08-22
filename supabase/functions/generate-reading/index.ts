@@ -293,11 +293,14 @@ serve(async (req) => {
           readingTitle = method;
       }
 
+      // Sanitize payload to ensure it's clean JSON before inserting
+      const payloadToSave = JSON.parse(JSON.stringify(body.payload));
+
       const { error: insertError } = await supabaseAdmin.from('readings').insert({
         user_id: user.id,
         method: body.method,
         locale: body.locale,
-        payload: body.payload,
+        payload: payloadToSave,
         interpretation: resultJson,
         spread_id: body.method === 'tarot' ? body.payload.spread.id : null,
         title: readingTitle,
