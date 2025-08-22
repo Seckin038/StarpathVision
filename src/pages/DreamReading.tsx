@@ -51,10 +51,7 @@ const DreamReading = () => {
         }
       });
 
-      if (error) {
-        const detailedError = error.context?.error || error.message;
-        throw new Error(detailedError);
-      }
+      if (error) throw error;
       if (data.error) throw new Error(data.error);
 
       setReadingResult(data.interpretation.reading);
@@ -63,8 +60,16 @@ const DreamReading = () => {
 
     } catch (err: any) {
       dismissToast(toastId);
-      showError(`Er ging iets mis: ${err.message}`);
+      let errorMessage = err.message;
+      if (err.context) {
+        try {
+          const errorBody = await err.context.json();
+          errorMessage = errorBody.error || err.message;
+        } catch {}
+      }
+      showError(`Er ging iets mis: ${errorMessage}`);
       setReadingLocale(null); // Reset locale on error
+      console.error(err);
     } finally {
       setIsGenerating(false);
     }

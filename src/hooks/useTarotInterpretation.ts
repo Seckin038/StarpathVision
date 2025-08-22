@@ -55,19 +55,23 @@ export function useTarotInterpretation() {
         },
       });
 
-      if (invokeError) {
-        const detailedError = invokeError.context?.error || invokeError.message;
-        throw new Error(detailedError);
-      }
-      
-      if (result.error) {
-        throw new Error(result.error);
-      }
+      if (invokeError) throw invokeError;
+      if (result.error) throw new Error(result.error);
 
       setData(result.interpretation);
 
     } catch (err: any) {
-      setError(err.message || 'Failed to get interpretation.');
+      let errorMessage = err.message;
+      if (err.context) {
+        try {
+          const errorBody = await err.context.json();
+          errorMessage = errorBody.error || err.message;
+        } catch {
+          // Ignore if parsing fails
+        }
+      }
+      setError(errorMessage || 'Failed to get interpretation.');
+      console.error(err);
     } finally {
       setIsLoading(false);
     }

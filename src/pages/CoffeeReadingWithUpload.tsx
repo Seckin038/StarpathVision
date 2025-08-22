@@ -99,16 +99,23 @@ const CoffeeReadingWithUpload = () => {
         }
       });
 
-      if (error) throw new Error(error.message);
-      if (data.error) throw new Error(JSON.stringify(data.error));
+      if (error) throw error;
+      if (data.error) throw new Error(data.error);
 
-      setReadingResult(data.reading.reading);
+      setReadingResult(data.interpretation.reading);
       dismissToast(toastId);
       showSuccess("Je lezing is klaar!");
 
     } catch (err: any) {
       dismissToast(toastId);
-      showError(`Er ging iets mis: ${err.message}`);
+      let errorMessage = err.message;
+      if (err.context) {
+        try {
+          const errorBody = await err.context.json();
+          errorMessage = errorBody.error || err.message;
+        } catch {}
+      }
+      showError(`Er ging iets mis: ${errorMessage}`);
       console.error(err);
     } finally {
       setIsGenerating(false);
