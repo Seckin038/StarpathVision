@@ -14,6 +14,7 @@ import { supabase } from "@/lib/supabaseClient";
 import { showLoading, dismissToast, showError, showSuccess } from "@/utils/toast";
 import { usePersona } from "@/contexts/PersonaContext";
 import ReadingPanel from "@/components/ReadingPanel";
+import PersonaSelector from "@/components/PersonaSelector";
 
 const NumerologyReading = () => {
   const { i18n, t } = useTranslation();
@@ -90,6 +91,7 @@ const NumerologyReading = () => {
         <CardContent>
           {!readingResult ? (
             <div className="space-y-6">
+              <PersonaSelector method="numerology" />
               <p className="text-stone-300">
                 {t('numerology.discover')}
               </p>

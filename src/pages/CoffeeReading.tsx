@@ -16,6 +16,7 @@ import { supabase } from "@/lib/supabaseClient";
 import { showLoading, dismissToast, showError, showSuccess } from "@/utils/toast";
 import { usePersona } from "@/contexts/PersonaContext";
 import ReadingPanel from "@/components/ReadingPanel";
+import PersonaSelector from "@/components/PersonaSelector";
 
 const CoffeeReading = () => {
   const { i18n, t } = useTranslation();
@@ -137,6 +138,7 @@ const CoffeeReading = () => {
           </CardTitle>
         </CardHeader>
         <CardContent>
+          <PersonaSelector method="coffee" />
           <div className="mb-6">
             <h3 className="font-semibold text-amber-200 mb-2">{t('coffee.selectedSymbols')}</h3>
             <div className="flex flex-wrap gap-2">

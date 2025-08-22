@@ -5,11 +5,13 @@ import { Loader2 } from 'lucide-react';
 
 const ORDER = ['orakel', 'falya', 'selvara', 'lyara', 'mireya', 'auron', 'kaelen', 'tharion', 'corvan', 'eryndra', 'vaelor', 'schaduw', 'waker', 'alchemist', 'visionair', 'pelgrim'];
 
+export type ReadingMethod = 'tarot' | 'coffee' | 'dromen' | 'numerology';
+
 export function PersonaPicker({
   method = 'tarot',
   onPicked,
 }: {
-  method?: any;
+  method?: ReadingMethod;
   onPicked?: () => void;
 }) {
   const {
