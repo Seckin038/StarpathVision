@@ -75,10 +75,15 @@ Deno.serve(async (req) => {
     const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
     const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash-latest", generationConfig: { responseMimeType: "application/json" } });
 
+    let instruction = "Return valid JSON only.";
+    if (method !== 'tarot') {
+      instruction += " The JSON should have a single key 'reading' which contains the full interpretation as a string. Example: {\"reading\": \"Your full text interpretation here...\"}";
+    }
+
     const prompt = JSON.stringify({
       method,
       locale: body?.locale ?? "nl",
-      instruction: "Return valid JSON only.",
+      instruction,
       payload: body?.payload ?? {}
     });
 

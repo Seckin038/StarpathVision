@@ -54,9 +54,17 @@ const DreamReading = () => {
       if (error) throw error;
       if (data.error) throw new Error(data.error);
 
-      setReadingResult(data.interpretation.reading);
-      dismissToast(toastId);
-      showSuccess("Je droomduiding is klaar!");
+      const interpretation = data.interpretation;
+      if (interpretation && typeof interpretation.reading === 'string') {
+        setReadingResult(interpretation.reading);
+        dismissToast(toastId);
+        showSuccess("Je droomduiding is klaar!");
+      } else {
+        dismissToast(toastId);
+        showError("De lezing kon niet correct worden weergegeven.");
+        const fallbackText = "Er is een onverwacht antwoord ontvangen van de AI. Hier is de ruwe data:\n\n" + JSON.stringify(interpretation, null, 2);
+        setReadingResult(fallbackText);
+      }
 
     } catch (err: any) {
       dismissToast(toastId);
