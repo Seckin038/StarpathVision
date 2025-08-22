@@ -185,11 +185,35 @@ function FileImporter({ onDone }: { onDone: () => void }) {
         if (uploadError) throw new Error(`Upload mislukt: ${uploadError.message}`);
 
         updateRow("processing", "AI analyse gestart...");
-        const { error: processError } = await supabase.functions.invoke('process-tarot-upload', {
-          body: { filePath },
-        });
 
-        if (processError) throw new Error(`Verwerking mislukt: ${processError.message}`);
+        // Manual fetch instead of invoke for robustness
+        const { data: { session }, error: sessionError } = await supabase.auth.getSession();
+        if (sessionError || !session) throw new Error("Kon gebruikerssessie niet ophalen.");
+
+        const SUPABASE_URL = "https://dmsrsgecdvoswxopylfm.supabase.co";
+        const ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRtc3JzZ2VjZHZvc3d4b3B5bGZtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTU0ODg2NTMsImV4cCI6MjA3MTA2NDY1M30._S7NgAKdoVNZSYx6kcJhRrRbUuxXPrR0bdKqHCjOjxk";
+
+        const response = await fetch(
+          `${SUPABASE_URL}/functions/v1/process-tarot-upload`,
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${session.access_token}`,
+              'apikey': ANON_KEY
+            },
+            body: JSON.stringify({ filePath }),
+          }
+        );
+
+        if (!response.ok) {
+          let errorMsg = `HTTP error! status: ${response.status}`;
+          try {
+            const errorBody = await response.json();
+            errorMsg = errorBody.error || errorBody.details || errorMsg;
+          } catch (e) { /* Ignore if response is not JSON */ }
+          throw new Error(`Verwerking mislukt: ${errorMsg}`);
+        }
 
         updateRow("ok", "Succesvol verwerkt!");
 
