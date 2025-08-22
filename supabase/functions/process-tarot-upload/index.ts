@@ -61,15 +61,18 @@ serve(async (req) => {
     if (!cardNameEn) throw new Error("AI could not identify the card.");
     
     // 3. Find the corresponding card in the database using its English name
-    // We fetch from a public JSON file instead of a large hardcoded map
-    const cardsResponse = await fetch(new URL('/tarot/cards.en.json', env("SUPABASE_URL")).href);
-    if (!cardsResponse.ok) throw new Error("Could not fetch English card data.");
-    const cardsEn = await cardsResponse.json();
-    const matchedCardEn = cardsEn.find(c => c.name.toLowerCase() === cardNameEn.toLowerCase());
-    if (!matchedCardEn) throw new Error(`Card '${cardNameEn}' not found in English card list.`);
+    const { data: matchedCard, error: findError } = await supabaseAdmin
+      .from('tarot_cards')
+      .select('id')
+      .ilike('name->>en', cardNameEn)
+      .single();
+
+    if (findError || !matchedCard) {
+      throw new Error(`Card '${cardNameEn}' not found in database. ${findError?.message || ''}`);
+    }
 
     // 4. Use the ID from the matched card to update the correct record
-    const cardId = matchedCardEn.id;
+    const cardId = matchedCard.id;
 
     // 5. Upload the image to the final public bucket
     const ext = filePath.split(".").pop() || "jpg";

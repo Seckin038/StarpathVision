@@ -29,6 +29,15 @@
     "meaningUp": "Betekenis (Rechtop)",
     "meaningRev": "Betekenis (Omgekeerd)",
     "keywords": "Sleutelwoorden (komma-gescheiden)",
-    "chooseFiles": "Kies bestanden..."
+    "chooseFiles": "Kies bestanden...",
+    "importer": {
+      "uploading": "Bezig met uploaden...",
+      "processing": "AI analyse gestart...",
+      "success": "Succesvol verwerkt!",
+      "uploadFailed": "Upload mislukt: {{message}}",
+      "processingFailed": "Verwerking mislukt: {{message}}",
+      "sessionFailed": "Kon gebruikerssessie niet ophalen.",
+      "unknownError": "Onbekende fout"
+    }
   }
 }

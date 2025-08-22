@@ -29,6 +29,15 @@
     "meaningUp": "Anlamı (Düz)",
     "meaningRev": "Anlamı (Ters)",
     "keywords": "Anahtar Kelimeler (virgülle ayrılmış)",
-    "chooseFiles": "Dosyaları seç..."
+    "chooseFiles": "Dosyaları seç...",
+    "importer": {
+      "uploading": "Yükleniyor...",
+      "processing": "AI analizi başlatılıyor...",
+      "success": "Başarıyla işlendi!",
+      "uploadFailed": "Yükleme başarısız: {{message}}",
+      "processingFailed": "İşleme başarısız: {{message}}",
+      "sessionFailed": "Kullanıcı oturumu alınamadı.",
+      "unknownError": "Bilinmeyen hata"
+    }
   }
 }

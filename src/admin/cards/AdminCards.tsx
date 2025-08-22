@@ -208,7 +208,7 @@ function FileImporter({ onDone }: { onDone: () => void }) {
       };
 
       try {
-        updateRow("uploading", "Bezig met uploaden...");
+        updateRow("uploading", t('cards.importer.uploading'));
         const ext = file.name.split('.').pop()?.toLowerCase() || 'jpg';
         const filePath = `${crypto.randomUUID()}.${ext}`;
         
@@ -216,25 +216,25 @@ function FileImporter({ onDone }: { onDone: () => void }) {
           .from('tarot-card-uploads')
           .upload(filePath, file);
 
-        if (uploadError) throw new Error(`Upload mislukt: ${uploadError.message}`);
+        if (uploadError) throw new Error(t('cards.importer.uploadFailed', { message: uploadError.message }));
 
-        updateRow("processing", "AI analyse gestart...");
+        updateRow("processing", t('cards.importer.processing'));
 
         const { data: { session }, error: sessionError } = await supabase.auth.getSession();
-        if (sessionError || !session) throw new Error("Kon gebruikerssessie niet ophalen.");
+        if (sessionError || !session) throw new Error(t('cards.importer.sessionFailed'));
 
         const { error: invokeError } = await supabase.functions.invoke("process-tarot-upload", {
           body: { filePath },
         });
 
         if (invokeError) {
-          throw new Error(`Verwerking mislukt: ${invokeError.message}`);
+          throw new Error(t('cards.importer.processingFailed', { message: invokeError.message }));
         }
 
-        updateRow("ok", "Succesvol verwerkt!");
+        updateRow("ok", t('cards.importer.success'));
 
       } catch (err) {
-        updateRow("err", err instanceof Error ? err.message : "Onbekende fout");
+        updateRow("err", err instanceof Error ? err.message : t('cards.importer.unknownError'));
       }
     }
     onDone();

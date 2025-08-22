@@ -29,6 +29,15 @@
     "meaningUp": "Meaning (Upright)",
     "meaningRev": "Meaning (Reversed)",
     "keywords": "Keywords (comma-separated)",
-    "chooseFiles": "Choose files..."
+    "chooseFiles": "Choose files...",
+    "importer": {
+      "uploading": "Uploading...",
+      "processing": "Starting AI analysis...",
+      "success": "Processed successfully!",
+      "uploadFailed": "Upload failed: {{message}}",
+      "processingFailed": "Processing failed: {{message}}",
+      "sessionFailed": "Could not retrieve user session.",
+      "unknownError": "Unknown error"
+    }
   }
 }
