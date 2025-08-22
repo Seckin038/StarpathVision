@@ -72,6 +72,31 @@
     "view": "Bekijk",
     "download": "Download"
   },
+  "archive": {
+    "title": "Mijn Lezingen",
+    "historyTitle": "Lezing Geschiedenis",
+    "searchPlaceholder": "Zoek lezingen...",
+    "filter": {
+      "all": "Alle methodes",
+      "tarot": "Tarot",
+      "numerology": "Numerologie",
+      "coffee": "Koffiedik",
+      "dreams": "Dromen"
+    },
+    "noResults": {
+      "title": "Geen lezingen gevonden",
+      "body": "Er zijn geen lezingen die voldoen aan je zoekcriteria.",
+      "reset": "Reset filters"
+    },
+    "readingOf": "Lezing van {{date}}"
+  },
+  "readingDetail": {
+    "backToProfile": "Terug naar profiel",
+    "downloadPdf": "Download PDF",
+    "title": "Duiding voor je {{method}}",
+    "noInterpretation": "Geen interpretatie gevonden voor deze lezing.",
+    "notFound": "Sessie niet gevonden."
+  },
   "tarotChoice": {
     "loading": "Leggingen worden geladen...",
     "errorTitle": "Fout opgetreden",

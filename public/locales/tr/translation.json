@@ -72,6 +72,31 @@
     "view": "Görüntüle",
     "download": "İndir"
   },
+  "archive": {
+    "title": "Okumalarım",
+    "historyTitle": "Okuma Geçmişi",
+    "searchPlaceholder": "Okumalarda ara...",
+    "filter": {
+      "all": "Tüm yöntemler",
+      "tarot": "Tarot",
+      "numerology": "Numeroloji",
+      "coffee": "Kahve",
+      "dreams": "Rüyalar"
+    },
+    "noResults": {
+      "title": "Okuma bulunamadı",
+      "body": "Arama kriterlerinize uyan okuma bulunamadı.",
+      "reset": "Filtreleri sıfırla"
+    },
+    "readingOf": "{{date}} tarihli okuma"
+  },
+  "readingDetail": {
+    "backToProfile": "Profile geri dön",
+    "downloadPdf": "PDF İndir",
+    "title": "{{method}} için yorum",
+    "noInterpretation": "Bu okuma için yorum bulunamadı.",
+    "notFound": "Oturum bulunamadı."
+  },
   "tarotChoice": {
     "loading": "Açılımlar yükleniyor...",
     "errorTitle": "Bir Hata Oluştu",

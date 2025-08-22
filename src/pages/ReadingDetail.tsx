@@ -13,6 +13,7 @@ import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 import ReadingInputSummary from "@/components/ReadingInputSummary";
 import ReadingPanel from "@/components/ReadingPanel";
+import { useTranslation } from "react-i18next";
 
 type Reading = {
   id: string;
@@ -42,6 +43,7 @@ function mapSpreadIdToKind(id: string | null): SpreadKind {
 
 export default function ReadingDetailPage() {
   const { id } = useParams<{ id: string }>();
+  const { t } = useTranslation();
   const [r, setR] = useState<Reading | null>(null);
   const [loading, setLoading] = useState(true);
   const [isDownloading, setIsDownloading] = useState(false);
@@ -114,7 +116,7 @@ export default function ReadingDetailPage() {
     return <div className="min-h-screen grid place-items-center"><Loader2 className="h-7 w-7 animate-spin text-amber-500" /></div>;
   }
   if (!r) {
-    return <div className="p-8 text-center text-red-400">Sessie niet gevonden.</div>;
+    return <div className="p-8 text-center text-red-400">{t('readingDetail.notFound')}</div>;
   }
 
   const isTarot = r.method === 'tarot';
@@ -124,10 +126,10 @@ export default function ReadingDetailPage() {
       <MysticalBackground />
       <div className="relative z-10 max-w-6xl mx-auto px-4 py-8">
         <div className="flex items-center justify-between mb-6">
-          <Link to="/profile"><Button variant="outline" className="border-amber-800 text-amber-300 hover:bg-amber-900/40"><ChevronLeft className="h-4 w-4 mr-1" /> Terug naar profiel</Button></Link>
+          <Link to="/profile"><Button variant="outline" className="border-amber-800 text-amber-300 hover:bg-amber-900/40"><ChevronLeft className="h-4 w-4 mr-1" /> {t('readingDetail.backToProfile')}</Button></Link>
           <Button onClick={downloadPDF} disabled={isDownloading}>
             {isDownloading ? <Loader2 className="h-4 w-4 mr-2 animate-spin" /> : <FileText className="h-4 w-4 mr-2" />}
-            Download PDF
+            {t('readingDetail.downloadPdf')}
           </Button>
         </div>
         <div ref={printRef} className="space-y-6">
@@ -156,9 +158,9 @@ export default function ReadingDetailPage() {
                   data={r.interpretation}
                 />
               ) : r.interpretation.reading ? (
-                <ReadingPanel title={`Duiding voor je ${r.method}`} body={r.interpretation.reading} />
+                <ReadingPanel title={t('readingDetail.title', { method: r.method })} body={r.interpretation.reading} />
               ) : (
-                <p className="text-stone-400">Geen interpretatie gevonden voor deze lezing.</p>
+                <p className="text-stone-400">{t('readingDetail.noInterpretation')}</p>
               )}
             </CardContent>
           </Card>

@@ -72,6 +72,31 @@
     "view": "View",
     "download": "Download"
   },
+  "archive": {
+    "title": "My Readings",
+    "historyTitle": "Reading History",
+    "searchPlaceholder": "Search readings...",
+    "filter": {
+      "all": "All methods",
+      "tarot": "Tarot",
+      "numerology": "Numerology",
+      "coffee": "Coffee",
+      "dreams": "Dreams"
+    },
+    "noResults": {
+      "title": "No readings found",
+      "body": "There are no readings that match your search criteria.",
+      "reset": "Reset filters"
+    },
+    "readingOf": "Reading from {{date}}"
+  },
+  "readingDetail": {
+    "backToProfile": "Back to profile",
+    "downloadPdf": "Download PDF",
+    "title": "Interpretation for your {{method}}",
+    "noInterpretation": "No interpretation found for this reading.",
+    "notFound": "Session not found."
+  },
   "tarotChoice": {
     "loading": "Loading spreads...",
     "errorTitle": "An Error Occurred",

@@ -19,6 +19,7 @@ import { Link } from "react-router-dom";
 import { supabase } from "@/lib/supabaseClient";
 import { showError, showSuccess, showLoading, dismissToast } from "@/utils/toast";
 import { downloadJSON } from "@/utils/exports";
+import { useTranslation } from "react-i18next";
 
 interface Reading {
   id: string;
@@ -30,20 +31,21 @@ interface Reading {
   locale: string | null;
 }
 
-const getReadingSummary = (reading: Reading): string => {
-  if (!reading.interpretation) return "Geen samenvatting beschikbaar.";
-  if (reading.method === 'tarot') {
-    return reading.interpretation.story || reading.interpretation.advice || "Tarot lezing.";
-  }
-  return reading.interpretation.reading || "Lezing beschikbaar.";
-};
-
 const Archive = () => {
+  const { t } = useTranslation();
   const [readings, setReadings] = useState<Reading[]>([]);
   const [filteredReadings, setFilteredReadings] = useState<Reading[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [filterMethod, setFilterMethod] = useState("all");
   const [loading, setLoading] = useState(true);
+
+  const getReadingSummary = (reading: Reading): string => {
+    if (!reading.interpretation) return t('archive.summary.none');
+    if (reading.method === 'tarot') {
+      return reading.interpretation.story || reading.interpretation.advice || t('archive.summary.tarot');
+    }
+    return reading.interpretation.reading || t('archive.summary.default');
+  };
 
   useEffect(() => {
     const fetchReadings = async () => {
@@ -133,10 +135,10 @@ const Archive = () => {
         <Link to="/dashboard">
           <Button variant="outline" className="flex items-center gap-2 border-amber-800 text-amber-300 hover:bg-amber-900/50 hover:text-amber-200">
             <ChevronLeft className="h-4 w-4" />
-            Terug
+            {t('common.back')}
           </Button>
         </Link>
-        <h1 className="text-2xl font-bold text-amber-200 tracking-wider">Mijn Lezingen</h1>
+        <h1 className="text-2xl font-bold text-amber-200 tracking-wider">{t('archive.title')}</h1>
         <div className="w-32 flex justify-end">
           <Button onClick={downloadAllData} variant="outline" className="border-stone-700 text-stone-300 hover:bg-stone-800"><Download className="h-4 w-4" /></Button>
         </div>
@@ -145,18 +147,18 @@ const Archive = () => {
       <Card className="bg-stone-900/50 backdrop-blur-sm border-stone-800">
         <CardHeader>
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-            <CardTitle className="text-amber-300 flex items-center gap-2 text-xl"><Sparkles className="h-5 w-5" />Lezing Geschiedenis</CardTitle>
+            <CardTitle className="text-amber-300 flex items-center gap-2 text-xl"><Sparkles className="h-5 w-5" />{t('archive.historyTitle')}</CardTitle>
             <div className="flex gap-2">
               <div className="relative">
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-stone-500" />
-                <Input placeholder="Zoek lezingen..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} className="pl-10 bg-stone-900 border-stone-700 focus:ring-amber-500" />
+                <Input placeholder={t('archive.searchPlaceholder')} value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} className="pl-10 bg-stone-900 border-stone-700 focus:ring-amber-500" />
               </div>
               <select value={filterMethod} onChange={(e) => setFilterMethod(e.target.value)} className="border border-stone-700 rounded-md px-3 py-2 bg-stone-900 text-stone-300 focus:ring-amber-500 focus:border-amber-500">
-                <option value="all">Alle methodes</option>
-                <option value="tarot">Tarot</option>
-                <option value="numerology">Numerologie</option>
-                <option value="coffee">Koffiedik</option>
-                <option value="dreams">Dromen</option>
+                <option value="all">{t('archive.filter.all')}</option>
+                <option value="tarot">{t('archive.filter.tarot')}</option>
+                <option value="numerology">{t('archive.filter.numerology')}</option>
+                <option value="coffee">{t('archive.filter.coffee')}</option>
+                <option value="dreams">{t('archive.filter.dreams')}</option>
               </select>
             </div>
           </div>
@@ -170,9 +172,9 @@ const Archive = () => {
           ) : filteredReadings.length === 0 ? (
             <div className="text-center py-12">
               <Coffee className="h-12 w-12 text-amber-600 mx-auto mb-4" />
-              <h3 className="font-semibold text-amber-200 mb-2">Geen lezingen gevonden</h3>
-              <p className="text-stone-400 mb-4">Er zijn geen lezingen die voldoen aan je zoekcriteria.</p>
-              <Button onClick={() => { setSearchTerm(""); setFilterMethod("all"); }} className="bg-amber-800 hover:bg-amber-700 text-stone-100">Reset filters</Button>
+              <h3 className="font-semibold text-amber-200 mb-2">{t('archive.noResults.title')}</h3>
+              <p className="text-stone-400 mb-4">{t('archive.noResults.body')}</p>
+              <Button onClick={() => { setSearchTerm(""); setFilterMethod("all"); }} className="bg-amber-800 hover:bg-amber-700 text-stone-100">{t('archive.noResults.reset')}</Button>
             </div>
           ) : (
             <ScrollArea className="h-[calc(100vh-300px)]">
@@ -183,7 +185,7 @@ const Archive = () => {
                       <div className="flex justify-between items-start">
                         <div className="flex-1">
                           <div className="flex items-center gap-2 mb-2 flex-wrap">
-                            <h3 className="font-semibold text-stone-200">{reading.title || `Lezing van ${formatDate(reading.created_at)}`}</h3>
+                            <h3 className="font-semibold text-stone-200">{reading.title || t('archive.readingOf', { date: formatDate(reading.created_at) })}</h3>
                             <Badge variant="outline" className="text-stone-300 border-stone-700">{reading.method}</Badge>
                             {reading.locale && (
                               <Badge variant="outline" className="text-stone-300 border-stone-700 flex items-center gap-1">
