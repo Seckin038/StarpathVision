@@ -299,7 +299,7 @@ export default function TarotReadingPage() {
         </header>
         {showPersonaPicker && (
           <div className="fixed inset-0 z-50 grid place-items-center bg-black/60 p-4" onClick={() => setShowPersonaPicker(false)}>
-            <div className="w-full max-w-5xl rounded-3xl border border-white/10 bg-stone-950 p-6" onClick={e => e.stopPropagation()}>
+            <div className="w-full max-w-5xl rounded-3xl border border-white/10 bg-stone-950 p-6 overflow-y-auto max-h-[90vh]" onClick={e => e.stopPropagation()}>
               <PersonaPicker method="tarot" onPicked={handlePersonaPicked} />
             </div>
           </div>
