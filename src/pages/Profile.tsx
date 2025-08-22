@@ -35,6 +35,8 @@ type Reading = {
   thumbnail_url: string | null;
 };
 
+const READING_METHODS = ['tarot', 'koffiedik', 'dromen', 'numerologie'];
+
 export default function ProfilePage() {
   const [loading, setLoading] = useState(true);
   const [userEmail, setUserEmail] = useState<string | null>(null);
@@ -45,6 +47,10 @@ export default function ProfilePage() {
   const [uploading, setUploading] = useState(false);
   const nav = useNavigate();
   const { t } = useTranslation();
+
+  const [filterMethod, setFilterMethod] = useState('all');
+  const [visibleCount, setVisibleCount] = useState(25);
+  const READINGS_PER_PAGE = 25;
 
   useEffect(() => {
     (async () => {
@@ -68,7 +74,7 @@ export default function ProfilePage() {
         .select("id, method, spread_id, title, created_at, payload, interpretation, thumbnail_url")
         .eq("user_id", auth.user.id)
         .order("created_at", { ascending: false })
-        .limit(100);
+        .limit(1000); // Increased limit to fetch all readings
       setReadings(r ?? []);
       setLoading(false);
     })();
@@ -79,6 +85,15 @@ export default function ProfilePage() {
     readings.forEach(r => { byMethod[r.method] = (byMethod[r.method] || 0) + 1; });
     return byMethod;
   }, [readings]);
+
+  const filteredReadings = useMemo(() => {
+    if (filterMethod === 'all') return readings;
+    return readings.filter(r => r.method === filterMethod);
+  }, [readings, filterMethod]);
+
+  const paginatedReadings = useMemo(() => {
+    return filteredReadings.slice(0, visibleCount);
+  }, [filteredReadings, visibleCount]);
 
   const isAdmin = (profile?.roles ?? []).includes("admin");
 
@@ -271,11 +286,19 @@ export default function ProfilePage() {
             <Card className="bg-stone-950/60 border-white/10">
               <CardHeader><CardTitle className="text-amber-200">{t('profile.sessions')}</CardTitle></CardHeader>
               <CardContent>
-                {readings.length === 0 ? (
-                  <div className="text-stone-400">Je hebt nog geen sessies.</div>
+                <div className="flex flex-wrap gap-2 mb-4">
+                  <Button size="sm" variant={filterMethod === 'all' ? 'default' : 'outline'} onClick={() => setFilterMethod('all')}>Alles</Button>
+                  {READING_METHODS.map(method => (
+                    <Button key={method} size="sm" variant={filterMethod === method ? 'default' : 'outline'} onClick={() => setFilterMethod(method)} className="capitalize">
+                      {method}
+                    </Button>
+                  ))}
+                </div>
+                {paginatedReadings.length === 0 ? (
+                  <div className="text-stone-400 text-center py-8">U heeft nog geen sessies van dit type.</div>
                 ) : (
                   <div className="grid gap-3">
-                    {readings.map((r) => (
+                    {paginatedReadings.map((r) => (
                       <div key={r.id} className="flex items-center gap-3 p-3 rounded-xl bg-stone-900/40 border border-white/10">
                         <div className="w-14 h-14 rounded-lg overflow-hidden bg-stone-800 border border-white/10 shrink-0">
                           {r.thumbnail_url ? (
@@ -303,6 +326,17 @@ export default function ProfilePage() {
                         </div>
                       </div>
                     ))}
+                  </div>
+                )}
+                {visibleCount < filteredReadings.length && (
+                  <div className="mt-4">
+                    <Button 
+                      variant="outline" 
+                      className="w-full" 
+                      onClick={() => setVisibleCount(prev => prev + READINGS_PER_PAGE)}
+                    >
+                      Laad meer ({filteredReadings.length - visibleCount} resterend)
+                    </Button>
                   </div>
                 )}
               </CardContent>

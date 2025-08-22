@@ -31,6 +31,8 @@ interface Reading {
   locale: string | null;
 }
 
+const READINGS_PER_PAGE = 25;
+
 const Archive = () => {
   const { t } = useTranslation();
   const [readings, setReadings] = useState<Reading[]>([]);
@@ -38,6 +40,7 @@ const Archive = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [filterMethod, setFilterMethod] = useState("all");
   const [loading, setLoading] = useState(true);
+  const [visibleCount, setVisibleCount] = useState(READINGS_PER_PAGE);
 
   const getReadingSummary = (reading: Reading): string => {
     if (!reading.interpretation) return t('archive.summary.none');
@@ -80,6 +83,7 @@ const Archive = () => {
       result = result.filter(r => r.method === filterMethod);
     }
     setFilteredReadings(result);
+    setVisibleCount(READINGS_PER_PAGE); // Reset pagination on filter change
   }, [searchTerm, filterMethod, readings]);
 
   const deleteReading = async (id: string) => {
@@ -177,38 +181,50 @@ const Archive = () => {
               <Button onClick={() => { setSearchTerm(""); setFilterMethod("all"); }} className="bg-amber-800 hover:bg-amber-700 text-stone-100">{t('archive.noResults.reset')}</Button>
             </div>
           ) : (
-            <ScrollArea className="h-[calc(100vh-300px)]">
-              <div className="space-y-4 pr-4">
-                {filteredReadings.map((reading) => (
-                  <Card key={reading.id} className="bg-stone-900 border-stone-800">
-                    <CardContent className="p-4">
-                      <div className="flex justify-between items-start">
-                        <div className="flex-1">
-                          <div className="flex items-center gap-2 mb-2 flex-wrap">
-                            <h3 className="font-semibold text-stone-200">{reading.title || t('archive.readingOf', { date: formatDate(reading.created_at) })}</h3>
-                            <Badge variant="outline" className="text-stone-300 border-stone-700">{reading.method}</Badge>
-                            {reading.locale && (
-                              <Badge variant="outline" className="text-stone-300 border-stone-700 flex items-center gap-1">
-                                <Globe className="h-3 w-3" />
-                                {reading.locale.toUpperCase()}
-                              </Badge>
-                            )}
+            <>
+              <ScrollArea className="h-[calc(100vh-350px)]">
+                <div className="space-y-4 pr-4">
+                  {filteredReadings.slice(0, visibleCount).map((reading) => (
+                    <Card key={reading.id} className="bg-stone-900 border-stone-800">
+                      <CardContent className="p-4">
+                        <div className="flex justify-between items-start">
+                          <div className="flex-1">
+                            <div className="flex items-center gap-2 mb-2 flex-wrap">
+                              <h3 className="font-semibold text-stone-200">{reading.title || t('archive.readingOf', { date: formatDate(reading.created_at) })}</h3>
+                              <Badge variant="outline" className="text-stone-300 border-stone-700">{reading.method}</Badge>
+                              {reading.locale && (
+                                <Badge variant="outline" className="text-stone-300 border-stone-700 flex items-center gap-1">
+                                  <Globe className="h-3 w-3" />
+                                  {reading.locale.toUpperCase()}
+                                </Badge>
+                              )}
+                            </div>
+                            <div className="flex items-center gap-4 text-sm text-stone-400 mb-3">
+                              <div className="flex items-center gap-1"><Calendar className="h-4 w-4" /><span>{formatDate(reading.created_at)}</span></div>
+                            </div>
+                            <p className="text-stone-300 text-sm line-clamp-2">{getReadingSummary(reading)}</p>
                           </div>
-                          <div className="flex items-center gap-4 text-sm text-stone-400 mb-3">
-                            <div className="flex items-center gap-1"><Calendar className="h-4 w-4" /><span>{formatDate(reading.created_at)}</span></div>
+                          <div className="flex flex-col gap-2 ml-4">
+                            <Button onClick={() => downloadSingleReading(reading)} variant="outline" size="sm" className="border-stone-700 text-stone-300 hover:bg-stone-800"><Download className="h-4 w-4" /></Button>
+                            <Button variant="outline" size="sm" onClick={() => deleteReading(reading.id)} className="border-red-900/50 text-red-400 hover:bg-red-900/20"><Trash2 className="h-4 w-4" /></Button>
                           </div>
-                          <p className="text-stone-300 text-sm line-clamp-2">{getReadingSummary(reading)}</p>
                         </div>
-                        <div className="flex flex-col gap-2 ml-4">
-                          <Button onClick={() => downloadSingleReading(reading)} variant="outline" size="sm" className="border-stone-700 text-stone-300 hover:bg-stone-800"><Download className="h-4 w-4" /></Button>
-                          <Button variant="outline" size="sm" onClick={() => deleteReading(reading.id)} className="border-red-900/50 text-red-400 hover:bg-red-900/20"><Trash2 className="h-4 w-4" /></Button>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
-            </ScrollArea>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              </ScrollArea>
+              {visibleCount < filteredReadings.length && (
+                <div className="mt-4 text-center">
+                  <Button 
+                    onClick={() => setVisibleCount(prev => prev + READINGS_PER_PAGE)}
+                    variant="outline"
+                  >
+                    Laad meer ({filteredReadings.length - visibleCount} resterend)
+                  </Button>
+                </div>
+              )}
+            </>
           )}
         </CardContent>
       </Card>
