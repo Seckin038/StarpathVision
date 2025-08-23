@@ -10,6 +10,7 @@ const corsHeaders = {
   "Access-Control-Allow-Methods": "POST, OPTIONS",
 };
 
+// AI function is kept, but will not be called in this version.
 async function aiIdentify(bytes: Uint8Array, mime: string, key?: string){
   if (!key) return null;
   const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${key}`;
@@ -46,27 +47,18 @@ serve(async (req) => {
     const dl = await sb.storage.from(tmpBucket).download(path);
     if (dl.error) throw new Error(`Download failed: ${dl.error.message}`);
     const blob = dl.data;
-    const bytes = new Uint8Array(await blob.arrayBuffer());
-
+    
     let nameEn: string | null = null;
-    try {
-        nameEn = await aiIdentify(bytes, blob.type, GEMINI_KEY);
-        console.log(`AI identified card as: ${nameEn}`);
-    } catch (aiError) {
-        console.error("AI identification failed:", aiError.message);
-        nameEn = null;
-    }
 
-    if (!nameEn){
-      console.log("AI identification failed or was skipped. Falling back to filename.");
-      const filenameToParse = originalFilename || path;
-      const base = (filenameToParse.split('/').pop()||'').replace(/[_-]+/g,' ').replace(/\.[^.]+$/, '').trim();
-      nameEn = base.replace(/^\d+\s*/, '').replace(/([A-Z])/g, ' $1').trim();
-      console.log(`Fallback identified card as: ${nameEn}`);
-    }
+    // --- AI IDENTIFICATION IS TEMPORARILY DISABLED FOR DIAGNOSTICS ---
+    console.log("AI identification is temporarily disabled. Falling back to filename.");
+    const filenameToParse = originalFilename || path;
+    const base = (filenameToParse.split('/').pop()||'').replace(/[_-]+/g,' ').replace(/\.[^.]+$/, '').trim();
+    nameEn = base.replace(/^\d+\s*/, '').replace(/([A-Z])/g, ' $1').trim();
+    console.log(`Fallback identified card as: ${nameEn}`);
     
     if (!nameEn) {
-        throw new Error("Could not determine card name from AI or filename.");
+        throw new Error("Could not determine card name from filename.");
     }
 
     const { data: cardData, error: dbError } = await sb.from('tarot_cards').select('id, name').ilike('name->>en', `%${nameEn}%`).maybeSingle();
