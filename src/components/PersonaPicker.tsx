@@ -2,6 +2,9 @@ import React from 'react';
 import { usePersona } from '@/contexts/PersonaContext';
 import { useTranslation } from 'react-i18next';
 import { Loader2 } from 'lucide-react';
+import { useAuth } from '@/contexts/AuthContext';
+import { Link } from 'react-router-dom';
+import { Button } from './ui/button';
 
 const ORDER = ['orakel', 'falya', 'selvara', 'lyara', 'mireya', 'auron', 'kaelen', 'tharion', 'corvan', 'eryndra', 'vaelor', 'schaduw', 'waker', 'alchemist', 'visionair', 'pelgrim'];
 
@@ -21,6 +24,7 @@ export function PersonaPicker({
     loading,
     gatePersonaMethod,
   } = usePersona();
+  const { profile } = useAuth();
   const { i18n } = useTranslation();
   const locale = i18n.language as 'nl' | 'en' | 'tr';
 
@@ -34,7 +38,9 @@ export function PersonaPicker({
         {ORDER.filter(id => personas[id]).map((id) => {
           const p = personas[id];
           const gate = gatePersonaMethod(id, method, locale);
-          const disabled = Boolean(gate);
+          const isPremiumFeature = p.is_premium;
+          const hasAccess = !isPremiumFeature || profile?.plan === 'premium';
+          const disabled = Boolean(gate) || !hasAccess;
           const active = personaId === id;
           const displayName = p.display_name?.[locale] || p.display_name?.['nl'] || id;
           const stylePoints = p.style?.[locale] || p.style?.['nl'] || [];
@@ -57,7 +63,11 @@ export function PersonaPicker({
               </ul>
               {disabled && (
                 <div className="absolute inset-0 backdrop-blur-[1px] bg-black/40 rounded-2xl grid place-items-center text-amber-200 text-sm p-2 text-center">
-                  {gate}
+                  {gate ? gate : (
+                    <Button asChild size="sm" className="bg-amber-700 hover:bg-amber-600 text-white">
+                      <Link to="/pricing" onClick={e => e.stopPropagation()}>Upgrade voor deze Waarzegger</Link>
+                    </Button>
+                  )}
                 </div>
               )}
             </button>

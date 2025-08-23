@@ -24,6 +24,7 @@ import ForgotPasswordPage from "./pages/ForgotPassword";
 import ProfilePage from "./pages/Profile";
 import AdminRoutes from "./admin";
 import ReadingDetailPage from "./pages/ReadingDetail";
+import PricingPage from "./pages/PricingPage";
 
 const queryClient = new QueryClient();
 
@@ -55,6 +56,7 @@ const App = () => (
               <Route path="/profile" element={<RequireAuth><ProfilePage /></RequireAuth>} />
               <Route path="/reading/:id" element={<RequireAuth><ReadingDetailPage /></RequireAuth>} />
               <Route path="/onboarding" element={<RequireAuth><Onboarding /></RequireAuth>} />
+              <Route path="/pricing" element={<RequireAuth><PricingPage /></RequireAuth>} />
               
               {/* Protected Reading Routes */}
               <Route path="/readings/tarot" element={<RequireAuth><TarotChoice /></RequireAuth>} />
