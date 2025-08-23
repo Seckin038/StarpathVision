@@ -6,7 +6,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { showError, showSuccess } from "@/utils/toast";
-import { Loader2, Trash2, UserPlus, FileDown, Edit, ShieldAlert, History } from "lucide-react";
+import { Loader2, Trash2, UserPlus, FileDown } from "lucide-react";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogDescription } from "@/components/ui/dialog";
+import { Link } from "react-router-dom";
 
 type UserWithProfile = {
   id: string;
@@ -28,6 +30,8 @@ export default function AdminUsers() {
   const [planFilter, setPlanFilter] = useState("all");
   const [statusFilter, setStatusFilter] = useState("all");
   const [currentPage, setCurrentPage] = useState(1);
+  const [editingUser, setEditingUser] = useState<UserWithProfile | null>(null);
+  const [newRole, setNewRole] = useState("");
 
   const fetchUsers = async () => {
     setLoading(true);
@@ -61,6 +65,26 @@ export default function AdminUsers() {
   }, [filteredUsers, currentPage]);
 
   const totalPages = Math.ceil(filteredUsers.length / USERS_PER_PAGE);
+
+  const handleOpenRoleModal = (user: UserWithProfile) => {
+    setNewRole(user.role || 'user');
+    setEditingUser(user);
+  };
+
+  const handleUpdateRole = async () => {
+    if (!editingUser) return;
+    const { error } = await supabase.rpc('set_user_role', {
+        target_user_id: editingUser.id,
+        new_role: newRole,
+    });
+    if (error) {
+        showError(`Rol wijzigen mislukt: ${error.message}`);
+    } else {
+        showSuccess("Rol succesvol gewijzigd.");
+        fetchUsers();
+        setEditingUser(null);
+    }
+  };
 
   const handleStatusChange = async (userId: string, currentStatus: string | null) => {
     const newStatus = currentStatus === 'Actief' ? 'Geblokkeerd' : 'Actief';
@@ -161,12 +185,20 @@ export default function AdminUsers() {
                       <td className="p-2"><Badge variant="outline" className={getBadgeClass('plan', user.plan)}>{user.plan || 'Free'}</Badge></td>
                       <td className="p-2"><Badge variant="outline" className={getBadgeClass('status', user.status)}>{user.status || 'Actief'}</Badge></td>
                       <td className="p-2">{new Date(user.created_at).toLocaleDateString('nl-NL')}</td>
-                      <td className="p-2">
-                        <div className="flex gap-1">
-                          <Button variant="ghost" size="icon" className="h-7 w-7"><Edit className="h-4 w-4" /></Button>
-                          <Button variant="ghost" size="icon" className="h-7 w-7" onClick={() => handleStatusChange(user.id, user.status)}><ShieldAlert className="h-4 w-4" /></Button>
-                          <Button variant="ghost" size="icon" className="h-7 w-7"><History className="h-4 w-4" /></Button>
-                          <Button variant="ghost" size="icon" className="h-7 w-7 text-red-400 hover:text-red-300" onClick={() => handleDeleteUser(user.id)}><Trash2 className="h-4 w-4" /></Button>
+                      <td className="p-2 whitespace-nowrap">
+                        <div className="flex items-center gap-2">
+                          <Button size="sm" variant="ghost" onClick={() => handleOpenRoleModal(user)}>Wijzig rol</Button>
+                          <Button 
+                              size="sm" 
+                              className={`px-2 h-6 rounded ${user.status !== 'Geblokkeerd' ? 'bg-red-800 hover:bg-red-700 text-white' : 'bg-green-700 hover:bg-green-600 text-white'}`}
+                              onClick={() => handleStatusChange(user.id, user.status)}
+                          >
+                              {user.status !== 'Geblokkeerd' ? 'Blokkeer' : 'Deblokkeer'}
+                          </Button>
+                          <Link to={`/admin/audit?userId=${user.id}`}>
+                              <Button size="sm" variant="ghost">Audit</Button>
+                          </Link>
+                          <Button size="sm" variant="ghost" className="text-red-400 hover:text-red-300" onClick={() => handleDeleteUser(user.id)}>Verwijder</Button>
                         </div>
                       </td>
                     </tr>
@@ -184,6 +216,30 @@ export default function AdminUsers() {
           </>
         )}
       </CardContent>
+      {editingUser && (
+        <Dialog open={!!editingUser} onOpenChange={() => setEditingUser(null)}>
+            <DialogContent className="bg-stone-900 border-stone-800">
+                <DialogHeader>
+                    <DialogTitle className="text-amber-200">Wijzig rol voor {editingUser.email}</DialogTitle>
+                    <DialogDescription>Selecteer de nieuwe rol voor de gebruiker.</DialogDescription>
+                </DialogHeader>
+                <div className="py-4">
+                    <Select value={newRole} onValueChange={setNewRole}>
+                        <SelectTrigger><SelectValue /></SelectTrigger>
+                        <SelectContent>
+                            <SelectItem value="user">User</SelectItem>
+                            <SelectItem value="editor">Editor</SelectItem>
+                            <SelectItem value="admin">Admin</SelectItem>
+                        </SelectContent>
+                    </Select>
+                </div>
+                <DialogFooter>
+                    <Button variant="outline" onClick={() => setEditingUser(null)}>Annuleren</Button>
+                    <Button onClick={handleUpdateRole}>Opslaan</Button>
+                </DialogFooter>
+            </DialogContent>
+        </Dialog>
+      )}
     </Card>
   );
 }

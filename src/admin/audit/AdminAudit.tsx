@@ -3,6 +3,8 @@ import { supabase } from "@/lib/supabaseClient";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Loader2 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { useSearchParams, Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
 
 type AuditLog = {
   id: number;
@@ -15,15 +17,23 @@ type AuditLog = {
 export default function AdminAudit() {
   const [logs, setLogs] = useState<AuditLog[]>([]);
   const [loading, setLoading] = useState(true);
+  const [searchParams] = useSearchParams();
+  const userId = searchParams.get("userId");
 
   useEffect(() => {
     const fetchLogs = async () => {
       setLoading(true);
-      const { data, error } = await supabase
+      let query = supabase
         .from("audit_logs")
         .select("*")
         .order("created_at", { ascending: false })
         .limit(100);
+      
+      if (userId) {
+        query = query.eq("user_id", userId);
+      }
+      
+      const { data, error } = await query;
       
       if (error) {
         console.error("Error fetching audit logs:", error);
@@ -33,7 +43,7 @@ export default function AdminAudit() {
       setLoading(false);
     };
     fetchLogs();
-  }, []);
+  }, [searchParams, userId]);
 
   if (loading) {
     return <div className="flex justify-center py-12"><Loader2 className="h-6 w-6 animate-spin text-amber-400" /></div>;
@@ -42,7 +52,17 @@ export default function AdminAudit() {
   return (
     <Card className="bg-stone-900/60 border-stone-800">
       <CardHeader>
-        <CardTitle className="text-amber-200">Audit Logs</CardTitle>
+        <div className="flex justify-between items-center">
+          <CardTitle className="text-amber-200">
+            {userId ? `Audit Logs voor gebruiker` : 'Audit Logs'}
+          </CardTitle>
+          {userId && (
+            <Button asChild variant="outline">
+              <Link to="/admin/audit">Filter wissen</Link>
+            </Button>
+          )}
+        </div>
+        {userId && <p className="text-sm text-stone-400 font-mono pt-2">{userId}</p>}
       </CardHeader>
       <CardContent>
         <div className="overflow-x-auto">
