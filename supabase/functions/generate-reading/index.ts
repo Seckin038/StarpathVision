@@ -89,7 +89,27 @@ Deno.serve(async (req) => {
 
     if (method === 'tarot') {
       instruction = `You are a mystical tarot reader. Based on the user's reading, provide a detailed and insightful interpretation in the requested language.`;
-      jsonSchema = { /* ... schema as before ... */ };
+      jsonSchema = {
+        type: "object",
+        properties: {
+          story: { type: "string", description: "A cohesive narrative that weaves all the cards together." },
+          advice: { type: "string", description: "Actionable, compassionate advice based on the reading." },
+          affirmation: { type: "string", description: "A positive affirmation for the user to focus on." },
+          actions: { type: "array", items: { type: "string" }, description: "A list of 3-5 concrete next steps." },
+          card_interpretations: {
+            type: "array",
+            items: {
+              type: "object",
+              properties: {
+                card_index: { type: "number", description: "The 1-based index of the card in the spread." },
+                interpretation: { type: "string", description: "The specific meaning of this card in its position." }
+              },
+              required: ["card_index", "interpretation"]
+            }
+          }
+        },
+        required: ["story", "advice", "affirmation", "actions", "card_interpretations"]
+      };
     } else {
       instruction = `You are a mystical reader. Based on the user's input for the specified method, provide a detailed and insightful interpretation in the requested language.`;
       jsonSchema = { type: "object", properties: { reading: { type: "string" } }, required: ["reading"] };
