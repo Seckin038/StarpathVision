@@ -87,15 +87,16 @@ export default function TarotInterpretationPanel({ items, data }: Props) {
                     >
                       {item.upright ? t("tarot.upright") : t("tarot.reversed")}
                     </Badge>
+                    
                     <div className="mt-3 text-sm">
                       <p className="font-semibold text-stone-300">{item.positionTitle}</p>
-                      <p className="text-stone-400">{item.positionCopy}</p>
-                    </div>
-                    {cardInterpretation && (
-                      <div className="mt-4 pt-4 border-t border-white/10">
-                        <p className="text-stone-300 whitespace-pre-line">{cardInterpretation.interpretation}</p>
+                      <div className="mt-2 text-stone-400 space-y-3">
+                        {item.positionCopy && <p className="italic">{item.positionCopy}</p>}
+                        {cardInterpretation && (
+                          <p className="text-stone-300 whitespace-pre-line pt-3 border-t border-stone-800">{cardInterpretation.interpretation}</p>
+                        )}
                       </div>
-                    )}
+                    </div>
                   </div>
                 </div>
               </div>
