@@ -38,6 +38,7 @@ export default function AdminUsers() {
   const [inviteEmail, setInviteEmail] = useState("");
   const [invitePassword, setInvitePassword] = useState("");
   const [inviteMethod, setInviteMethod] = useState("invite");
+  const [inviteRole, setInviteRole] = useState("user");
   const [isInviting, setIsInviting] = useState(false);
 
   const fetchUsers = async () => {
@@ -152,6 +153,7 @@ export default function AdminUsers() {
         email: inviteEmail,
         password: inviteMethod === 'create' ? invitePassword : null,
         sendInvite: inviteMethod === 'invite',
+        role: inviteRole,
     };
 
     const { error } = await supabase.functions.invoke("admin-create-user", { body });
@@ -165,6 +167,7 @@ export default function AdminUsers() {
         setIsInviteModalOpen(false);
         setInviteEmail("");
         setInvitePassword("");
+        setInviteRole("user");
         fetchUsers();
     }
   };
@@ -292,6 +295,17 @@ export default function AdminUsers() {
                   <div>
                       <Label htmlFor="invite-email">E-mailadres</Label>
                       <Input id="invite-email" type="email" value={inviteEmail} onChange={e => setInviteEmail(e.target.value)} placeholder="gebruiker@email.com" />
+                  </div>
+                  <div>
+                      <Label htmlFor="invite-role">Rol</Label>
+                      <Select value={inviteRole} onValueChange={setInviteRole}>
+                          <SelectTrigger id="invite-role"><SelectValue /></SelectTrigger>
+                          <SelectContent>
+                              <SelectItem value="user">User</SelectItem>
+                              <SelectItem value="editor">Editor</SelectItem>
+                              <SelectItem value="admin">Admin</SelectItem>
+                          </SelectContent>
+                      </Select>
                   </div>
                   <RadioGroup value={inviteMethod} onValueChange={setInviteMethod}>
                       <div className="flex items-center space-x-2">

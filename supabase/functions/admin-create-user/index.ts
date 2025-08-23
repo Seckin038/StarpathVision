@@ -49,7 +49,7 @@ serve(async (req) => {
     }
 
     // 3. Get the new user details from the request body
-    const { email, password, sendInvite } = await req.json();
+    const { email, password, sendInvite, role } = await req.json();
     if (!email) {
       return new Response(JSON.stringify({ error: "Bad Request: email is required" }), {
         headers: { ...corsHeaders, "Content-Type": "application/json" },
@@ -60,12 +60,10 @@ serve(async (req) => {
     // 4. Create the user
     let userResponse;
     if (sendInvite) {
-        // Send an invitation link
         const { data, error } = await supabaseAdmin.auth.admin.inviteUserByEmail(email);
         if (error) throw error;
         userResponse = data;
     } else {
-        // Create user directly with a password
         if (!password) {
             return new Response(JSON.stringify({ error: "Bad Request: password is required when not sending an invite" }), {
                 headers: { ...corsHeaders, "Content-Type": "application/json" },
@@ -75,16 +73,29 @@ serve(async (req) => {
         const { data, error } = await supabaseAdmin.auth.admin.createUser({
             email,
             password,
-            email_confirm: true, // User is created as confirmed
+            email_confirm: true,
         });
         if (error) throw error;
         userResponse = data;
     }
 
-    // 5. Log the action
+    // 5. Set the role for the new user
+    const newUser = userResponse.user;
+    if (newUser && role) {
+        // The handle_new_user trigger creates the profile, so we update it.
+        const { error: profileUpdateError } = await supabaseAdmin
+            .from('profiles')
+            .update({ role: role })
+            .eq('id', newUser.id);
+        if (profileUpdateError) {
+            console.warn(`User ${newUser.id} created, but failed to set role to '${role}':`, profileUpdateError.message);
+        }
+    }
+
+    // 6. Log the action
     await supabaseAdmin.from("audit_logs").insert({
       action: "admin_create_user",
-      meta: { created_user_email: email, send_invite: sendInvite },
+      meta: { created_user_email: email, send_invite: sendInvite, role: role },
       user_id: caller.id,
     });
 
