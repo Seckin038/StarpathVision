@@ -5,6 +5,7 @@ import {
   Coffee, 
   Sparkles, 
   BookOpen, 
+  User, 
   Eye,
   Settings,
   Loader2,
@@ -101,7 +102,12 @@ const Dashboard = () => {
         </div>
         <div className="flex items-center gap-2">
           <AdminRoleSwitch />
-          <Link to="/profile"><Button variant="outline" size="icon" className="border-stone-700 text-stone-300 hover:bg-stone-800"><Settings className="h-4 w-4" /></Button></Link>
+          <Link to="/profile">
+            <Button variant="outline" className="border-stone-700 text-stone-300 hover:bg-stone-800">
+              <User className="h-4 w-4 mr-2" />
+              {t('dashboard.myProfile')}
+            </Button>
+          </Link>
         </div>
       </header>
 
