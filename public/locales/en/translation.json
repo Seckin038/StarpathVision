@@ -141,5 +141,9 @@
     "downloadPdf": "Download as PDF",
     "title": "{{method}} Reading",
     "noInterpretation": "No interpretation available for this reading."
+  },
+  "personaPicker": {
+    "title": "Choose your seer",
+    "subtitle": "The chosen persona guides the entire session and provides interpretations in their own voice."
   }
 }

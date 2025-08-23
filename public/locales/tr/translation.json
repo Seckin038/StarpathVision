@@ -141,5 +141,9 @@
     "downloadPdf": "PDF olarak indir",
     "title": "{{method}} Okuması",
     "noInterpretation": "Bu okuma için yorum mevcut değil."
+  },
+  "personaPicker": {
+    "title": "Kahinini seç",
+    "subtitle": "Seçilen persona tüm seansa rehberlik eder ve yorumları kendi sesiyle sunar."
   }
 }

@@ -141,5 +141,9 @@
     "downloadPdf": "Download als PDF",
     "title": "{{method}} Lezing",
     "noInterpretation": "Geen interpretatie beschikbaar voor deze lezing."
+  },
+  "personaPicker": {
+    "title": "Kies je waarzegger",
+    "subtitle": "De gekozen persona begeleidt de hele sessie en geeft de interpretaties in haar/zijn eigen stem."
   }
 }

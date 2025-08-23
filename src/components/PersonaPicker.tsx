@@ -30,8 +30,6 @@ export function PersonaPicker({
 
   return (
     <div className="w-full max-w-5xl mx-auto">
-      <h3 className="text-amber-200 text-lg mb-2">Kies je waarzegger</h3>
-      <p className="text-stone-400 text-sm mb-4">De gekozen persona begeleidt de hele sessie en geeft de interpretaties in haar/zijn eigen stem.</p>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {ORDER.filter(id => personas[id]).map((id) => {
           const p = personas[id];
