@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import MysticalBackground from "@/components/MysticalBackground";
 import { supabase } from "@/lib/supabaseClient";
 import { useNavigate, Link } from "react-router-dom";
@@ -11,7 +11,8 @@ import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from "@
 import { Badge } from "@/components/ui/badge";
 import { Loader2, Save, UploadCloud, LogOut } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import RecentSessions from "@/components/RecentSessions"; // Import the new component
+import RecentSessions from "@/components/RecentSessions";
+import StatisticsPanel from "@/components/StatisticsPanel";
 
 type Profile = {
   id: string;
@@ -117,7 +118,7 @@ export default function ProfilePage() {
         </div>
 
         <div className="grid md:grid-cols-3 gap-6">
-          <Card className="bg-stone-950/60 border-white/10">
+          <Card className="md:col-span-1 bg-stone-950/60 border-white/10">
             <CardHeader>
               <CardTitle className="text-amber-200">{t('profile.account')}</CardTitle>
             </CardHeader>
@@ -197,6 +198,7 @@ export default function ProfilePage() {
           </Card>
 
           <div className="md:col-span-2 space-y-6">
+            <StatisticsPanel />
             <Card className="bg-stone-950/60 border-white/10">
               <CardHeader><CardTitle className="text-amber-200">{t('profile.sessions')}</CardTitle></CardHeader>
               <CardContent>

@@ -1,11 +1,8 @@
 {
-  "common": {
-    "back": "Terug",
-    "close": "Sluiten",
-    "save": "Opslaan",
-    "cancel": "Annuleren",
-    "confirmSelection": "Selectie Bevestigen",
-    "viewAll": "Bekijk alles"
+  "home": {
+    "subtitle": "JOUW GIDS NAAR DE STERREN",
+    "startJourney": "Begin Jouw Reis",
+    "chooseSeer": "Kies je waarzegger"
   },
   "header": {
     "admin": "Admin",
@@ -13,130 +10,71 @@
     "logout": "Uitloggen",
     "login": "Inloggen"
   },
-  "home": {
-    "subtitle": "JOUW GIDS NAAR DE STERREN",
-    "startJourney": "Begin Jouw Reis"
-  },
-  "freeReading": {
-    "title": "Probeer een Gratis Tarot Legging",
-    "subtitle": "Krijg direct inzicht in je verleden, heden en toekomst met onze populaire 3-kaart legging. Geen registratie nodig.",
-    "cta": "Start Je Gratis Legging"
-  },
-  "features": {
-    "title": "Ontdek de Werelden Binnenin",
-    "subtitle": "Na registratie krijg je toegang tot een reeks mystieke tools om je pad te verlichten. Ontdek wat de sterren voor jou in petto hebben.",
-    "tarot": {
-      "title": "Tarot Lezingen",
-      "description": "Krijg inzicht met diverse kaartleggingen, van verleden, heden en toekomst tot complexe levensvragen.",
-      "badge": "Gratis 3-kaart legging"
-    },
-    "coffee": {
-      "title": "Koffiedik Kijken",
-      "description": "Ontcijfer de symbolen in je koffiekopje en onthul boodschappen over je toekomst en innerlijke zelf."
-    },
-    "dream": {
-      "title": "Droomduiding",
-      "description": "Verken de verborgen betekenissen van je dromen en begrijp wat je onderbewustzijn je probeert te vertellen."
-    },
-    "numerology": {
-      "title": "Numerologie",
-      "description": "Ontdek de kracht van getallen en hoe jouw geboortedatum en naam je levenspad en persoonlijkheid beïnvloeden."
-    }
-  },
   "dashboard": {
     "welcomeBack": "Welkom terug, {{name}}",
-    "discoverToday": "Wat zul je vandaag ontdekken?",
-    "dayEnergy": "De energie van de dag",
+    "discoverToday": "Ontdek wat de kosmos vandaag voor je in petto heeft.",
+    "dayEnergy": "Energie van de Dag",
     "yourCardToday": "Jouw kaart voor vandaag is...",
     "recentReadings": "Recente Lezingen",
     "noReadings": "Je hebt nog geen lezingen gedaan.",
-    "choosePath": "Kies je pad",
-    "quickAction": {
-      "3card": "3-kaart legging",
-      "coffee": "Koffiedik",
-      "tarot": "Tarot",
-      "dream": "Dromen",
-      "numerology": "Numerologie"
-    }
+    "choosePath": "Kies Je Pad"
   },
-  "profile": {
-    "title": "Mijn Profiel",
-    "account": "Accountgegevens",
-    "name": "Naam",
-    "email": "E-mailadres",
-    "language": "Taal",
-    "timezone": "Tijdzone",
-    "about": "Over mij",
-    "stats": "Statistieken",
-    "sessions": "Recente Sessies",
-    "view": "Bekijk",
-    "download": "Download"
+  "dashboard.quickAction": {
+    "3card": "3-Kaart Legging",
+    "coffee": "Koffiedik Kijken",
+    "tarot": "Tarot Leggingen",
+    "dream": "Droomduiding",
+    "numerology": "Numerologie"
   },
-  "archive": {
-    "title": "Mijn Lezingen",
-    "historyTitle": "Lezing Geschiedenis",
-    "searchPlaceholder": "Zoek lezingen...",
-    "filter": {
-      "all": "Alle methodes",
-      "tarot": "Tarot",
-      "numerology": "Numerologie",
-      "coffee": "Koffiedik",
-      "dreams": "Dromen"
-    },
-    "noResults": {
-      "title": "Geen lezingen gevonden",
-      "body": "Er zijn geen lezingen die voldoen aan je zoekcriteria.",
-      "reset": "Reset filters"
-    },
-    "readingOf": "Lezing van {{date}}"
-  },
-  "readingDetail": {
-    "backToProfile": "Terug naar profiel",
-    "downloadPdf": "Download PDF",
-    "title": "Duiding voor je {{method}}",
-    "noInterpretation": "Geen interpretatie gevonden voor deze lezing.",
-    "notFound": "Sessie niet gevonden."
+  "common": {
+    "back": "Terug",
+    "confirmSelection": "Selectie Bevestigen",
+    "viewAll": "Bekijk Alles",
+    "save": "Opslaan",
+    "cancel": "Annuleren",
+    "close": "Sluiten"
   },
   "tarotChoice": {
     "loading": "Leggingen worden geladen...",
     "errorTitle": "Fout opgetreden",
     "errorBody": "Kon de tarot leggingen niet laden. Probeer het later opnieuw.",
+    "startSpread": "Start Legging",
     "title": "Kies een Tarot Legging",
-    "subtitle": "Elke legging biedt een uniek perspectief op je vragen.",
-    "startSpread": "Start legging"
+    "subtitle": "Elke legging biedt een uniek perspectief op je vragen."
   },
   "tarotReading": {
-    "chooseSeer": "Kies je waarzegger:",
-    "chooseCards": "Kies {{count}} kaarten uit het deck.",
-    "selected": "{{selected}} van de {{total}} kaarten gekozen"
+    "chooseSeer": "Je wordt begeleid door:",
+    "chooseCards": "Kies {{count}} kaarten uit het dek.",
+    "selected": "{{selected}} van de {{total}} kaarten gekozen."
   },
   "tarot": {
     "upright": "Rechtop",
     "reversed": "Omgekeerd",
-    "summaryTitle": "Jouw Lezing Samengevat",
+    "summaryTitle": "Samenvatting van je Legging",
     "storyTitle": "Het Verhaal van de Kaarten",
     "adviceTitle": "Advies voor Jou",
     "affirmationTitle": "Affirmatie",
-    "actionsTitle": "Concrete Acties",
-    "detailsTitle": "Kaartdetails"
+    "actionsTitle": "Concrete Volgende Stappen",
+    "detailsTitle": "Details per Kaart"
   },
   "coffee": {
     "title": "Koffiedik Kijken",
-    "titleWithUpload": "Koffiedik Lezing met Foto",
-    "chooseSymbols": "Kies je symbolen",
+    "titleWithUpload": "Koffiedik Kijken met Foto",
+    "chooseSymbols": "Kies je Symbolen",
     "selectedSymbols": "Geselecteerde Symbolen",
     "noneSelected": "Nog geen symbolen geselecteerd.",
     "allSymbols": "Alle Symbolen",
-    "uploadPhoto": "Upload foto",
+    "uploadPhoto": "Upload Foto",
     "generateReading": "Genereer Lezing",
-    "uploadTitle": "Upload een foto van je kopje",
-    "uploadDesc": "Laat de AI de symbolen voor je vinden.",
-    "choosePhoto": "Kies foto",
-    "tipsTitle": "Tips voor een goede foto",
+    "uploadTitle": "Upload je Koffiekopje",
+    "uploadDesc": "Klik hier om een bestand te selecteren",
+    "choosePhoto": "Kies Foto",
+    "tipsTitle": "Tips voor de beste foto:",
     "tips": [
       "Zorg voor goed, helder licht.",
-      "Maak een foto recht van boven.",
-      "Draai het kopje een paar keer voor verschillende hoeken."
+      "Houd je camera stil voor een scherpe foto.",
+      "Fotografeer de binnenkant van het kopje recht van boven.",
+      "Zorg dat de symbolen duidelijk zichtbaar zijn."
     ],
     "analyzing": "Bezig met analyseren...",
     "detectedSymbols": "Gedetecteerde Symbolen",
@@ -145,16 +83,63 @@
   "dream": {
     "title": "Droomduiding",
     "yourDreamWorld": "Jouw Droomwereld",
-    "describe": "Beschrijf je droom zo gedetailleerd mogelijk. Wat gebeurde er? Wie was er? Hoe voelde je je?",
-    "yourDream": "Jouw droom",
+    "describe": "Beschrijf je droom zo gedetailleerd mogelijk. Wat gebeurde er? Wie was er? Hoe voelde je je? Hoe meer details, hoe beter de duiding.",
+    "yourDream": "Jouw Droom",
     "interpret": "Duiding"
   },
   "numerology": {
-    "title": "Numerologie Lezing",
+    "title": "Numerologie",
     "yourProfile": "Jouw Numerologisch Profiel",
-    "discover": "Ontdek je levenspad-, lots- en zielgetal door je volledige naam en geboortedatum in te vullen.",
-    "fullName": "Volledige naam (zoals op geboorteakte)",
+    "discover": "Ontdek de betekenis van de getallen in je leven. Vul je volledige geboortenaam en geboortedatum in om je levenspad-, ziels- en persoonlijkheidsgetallen te onthullen.",
+    "fullName": "Volledige Geboortenaam",
     "birthDate": "Geboortedatum",
     "calculate": "Bereken"
+  },
+  "archive": {
+    "title": "Mijn Archief",
+    "historyTitle": "Sessie Geschiedenis"
+  },
+  "profile": {
+    "title": "Mijn Profiel",
+    "account": "Account Details",
+    "name": "Naam",
+    "email": "Email Adres",
+    "language": "Taal",
+    "timezone": "Tijdzone",
+    "about": "Over Mij / Intenties",
+    "sessions": "Recente Sessies",
+    "statistics": "Statistieken"
+  },
+  "readingDetail": {
+    "notFound": "Lezing niet gevonden.",
+    "backToProfile": "Terug naar Profiel",
+    "downloadPdf": "Download als PDF",
+    "title": "{{method}} Lezing",
+    "noInterpretation": "Er is nog geen interpretatie voor deze lezing."
+  },
+  "freeReading": {
+    "title": "Probeer een Gratis Legging",
+    "subtitle": "Krijg direct inzicht met onze populaire Verleden, Heden & Toekomst legging. Geen registratie nodig.",
+    "cta": "Start Gratis Legging"
+  },
+  "features": {
+    "title": "Ontdek de Werelden Binnenin",
+    "subtitle": "Na registratie krijg je toegang tot een reeks mystieke tools om je pad te verlichten. Ontdek wat de sterren voor jou in petto hebben.",
+    "tarot": {
+      "title": "Tarot Leggingen",
+      "description": "Krijg diepgaand inzicht in elke situatie met een verscheidenheid aan kaartleggingen, van een snelle dagkaart tot het uitgebreide Keltische Kruis."
+    },
+    "coffee": {
+      "title": "Koffiedik Kijken",
+      "description": "Ontdek de verborgen boodschappen in je koffiekopje. Kies de symbolen die je ziet of upload een foto voor een traditionele Turkse koffielezing."
+    },
+    "dream": {
+      "title": "Droomduiding",
+      "description": "Je dromen bevatten waardevolle inzichten. Beschrijf je nachtelijke avonturen en laat onze AI de symboliek en betekenis voor je ontrafelen."
+    },
+    "numerology": {
+      "title": "Numerologie",
+      "description": "De getallen in je leven zijn geen toeval. Ontdek je levenspad, zielsverlangen en persoonlijkheid op basis van je naam en geboortedatum."
+    }
   }
 }

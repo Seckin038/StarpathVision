@@ -6,9 +6,9 @@ import { Link } from "react-router-dom";
 const METHODS = [
   { value: "all", label: "Alles" },
   { value: "tarot", label: "Tarot" },
-  { value: "koffiedik", label: "Koffiedik" },
-  { value: "dromen", label: "Dromen" },
-  { value: "numerologie", label: "Numerologie" },
+  { value: "coffee", label: "Koffiedik" },
+  { value: "dream", label: "Dromen" },
+  { value: "numerology", label: "Numerologie" },
 ] as const;
 
 type MethodValue = typeof METHODS[number]['value'];
