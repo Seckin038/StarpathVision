@@ -39,7 +39,7 @@ const Header = () => {
   };
 
   return (
-    <header className="relative z-20 max-w-6xl mx-auto flex justify-between items-center py-4 px-4 font-serif">
+    <header className="relative max-w-6xl mx-auto flex justify-between items-center py-4 px-4 font-serif">
       <Link to="/" className="text-2xl font-bold text-amber-200 tracking-wider flex items-center gap-2">
         <Sparkles className="h-6 w-6" />
         Starpathvision
