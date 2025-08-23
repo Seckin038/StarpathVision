@@ -79,7 +79,7 @@ export default function TarotInterpretationPanel({ items, data }: Props) {
                     alt={item.name}
                     className="w-24 h-auto rounded-md border border-white/10 shrink-0"
                   />
-                  <div>
+                  <div className="flex-1">
                     <h4 className="font-bold text-amber-200">{item.index}. {item.name}</h4>
                     <Badge
                       variant="outline"
@@ -91,13 +91,13 @@ export default function TarotInterpretationPanel({ items, data }: Props) {
                       <p className="font-semibold text-stone-300">{item.positionTitle}</p>
                       <p className="text-stone-400">{item.positionCopy}</p>
                     </div>
+                    {cardInterpretation && (
+                      <div className="mt-4 pt-4 border-t border-white/10">
+                        <p className="text-stone-300 whitespace-pre-line">{cardInterpretation.interpretation}</p>
+                      </div>
+                    )}
                   </div>
                 </div>
-                {cardInterpretation && (
-                  <div className="mt-4 pt-4 border-t border-white/10">
-                    <p className="text-stone-300 whitespace-pre-line">{cardInterpretation.interpretation}</p>
-                  </div>
-                )}
               </div>
             </Card>
           );
