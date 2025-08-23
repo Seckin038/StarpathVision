@@ -212,7 +212,12 @@ function FileImporter({ onDone }: { onDone: () => void }) {
 
         // 2. Invoke new function
         setItems((prev) => prev.map((it, i) => i === idx ? { ...it, status: "processing", message: t('admin:cards.importer.processing') } : it));
-        const { data, error: invokeError } = await supabase.functions.invoke('cards-import', { body: { path: uploadData.path } });
+        const { data, error: invokeError } = await supabase.functions.invoke('cards-import', { 
+          body: { 
+            path: uploadData.path,
+            originalFilename: file.name 
+          } 
+        });
 
         if (invokeError) throw new Error(`Invoke failed: ${invokeError.message}`);
         if (!data?.ok) throw new Error(data?.error || 'Function failed');
