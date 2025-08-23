@@ -3,7 +3,7 @@ import { supabase } from "@/lib/supabaseClient"; // Corrected import path
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { useTranslation } from "react-i18next";
 
 type Spread = {
   id: string;
@@ -30,7 +30,12 @@ export default function AdminSpreads(){
   const [q,setQ] = useState("");
   const [editing, setEditing] = useState<Spread|null>(null);
   const [positions, setPositions] = useState<Pos[]>([]);
+  const { i18n, t } = useTranslation('admin');
   const [locale, setLocale] = useState<"nl"|"en"|"tr">("nl");
+
+  useEffect(() => {
+    setLocale(i18n.language as "nl" | "en" | "tr");
+  }, [i18n.language]);
 
   const load = async () => {
     const { data } = await supabase.from("spreads").select("*").order("id");
@@ -133,10 +138,10 @@ export default function AdminSpreads(){
     <div className="space-y-4">
       <Card className="bg-stone-900/60 border-stone-800">
         <CardContent className="pt-6 flex gap-3 items-center">
-          <Input placeholder="Zoek op id/naam…" value={q} onChange={e=>setQ(e.target.value)} />
-          <Button onClick={addNew}>+ Nieuwe spread</Button>
+          <Input placeholder={t('spreads.search_placeholder')} value={q} onChange={e=>setQ(e.target.value)} />
+          <Button onClick={addNew}>{t('spreads.new_spread')}</Button>
           <div className="ml-auto flex gap-2">
-            <Button variant="outline" onClick={exportLibrary}>Export → spread-library.json</Button>
+            <Button variant="outline" onClick={exportLibrary}>{t('spreads.export')}</Button>
           </div>
         </CardContent>
       </Card>
@@ -149,8 +154,8 @@ export default function AdminSpreads(){
               <div className="text-sm opacity-80">{s.name?.[locale]||"—"}</div>
               <div className="text-xs opacity-70">cards: {s.cards_required} · reversals: {String(s.allow_reversals)}</div>
               <div className="flex gap-2">
-                <Button variant="outline" onClick={()=>open(s)}>Bewerken</Button>
-                <Button variant="destructive" onClick={()=>removeSpread(s.id)}>Verwijderen</Button>
+                <Button variant="outline" onClick={()=>open(s)}>{t('spreads.edit')}</Button>
+                <Button variant="destructive" onClick={()=>removeSpread(s.id)}>{t('spreads.delete')}</Button>
               </div>
             </CardContent>
           </Card>
@@ -169,6 +174,7 @@ export default function AdminSpreads(){
           onSavePositions={savePositions}
           onAddPos={addPos}
           onClose={()=>{ setEditing(null); setPositions([]); }}
+          t={t}
         />
       )}
     </div>
@@ -177,7 +183,7 @@ export default function AdminSpreads(){
 
 function EditorModal({
   spread, setSpread, positions, setPositions, locale, setLocale,
-  onSaveSpread, onSavePositions, onAddPos, onClose
+  onSaveSpread, onSavePositions, onAddPos, onClose, t
 }: any){
   const boxRef = useRef<HTMLDivElement>(null);
 
@@ -211,14 +217,14 @@ function EditorModal({
     <Card className="fixed inset-0 z-50 max-w-6xl mx-auto my-6 bg-stone-950 border-stone-800 overflow-auto">
       <CardContent className="p-6 space-y-4">
         <div className="flex items-center gap-3">
-          <div className="font-serif text-xl">Spread bewerken</div>
+          <div className="font-serif text-xl">{t('spreads.editor_title')}</div>
           <div className="ml-auto flex items-center gap-2">
             <select value={locale} onChange={e=>setLocale(e.target.value)} className="bg-stone-900 border-stone-700 rounded-md px-3 py-2">
               <option value="nl">nl</option><option value="en">en</option><option value="tr">tr</option>
             </select>
-            <Button variant="outline" onClick={onSaveSpread}>Spread opslaan</Button>
-            <Button onClick={onSavePositions}>Posities opslaan</Button>
-            <Button variant="outline" onClick={onClose}>Sluiten</Button>
+            <Button variant="outline" onClick={onSaveSpread}>{t('spreads.save_spread')}</Button>
+            <Button onClick={onSavePositions}>{t('spreads.save_positions')}</Button>
+            <Button variant="outline" onClick={onClose}>{t('spreads.close')}</Button>
           </div>
         </div>
 
@@ -240,7 +246,7 @@ function EditorModal({
             </div>
             <Input placeholder={`subtitle (${locale})`} value={spread.ui_copy?.[locale]?.subtitle||""}
               onChange={e=>setSpread({...spread, ui_copy:{...spread.ui_copy, [locale]:{...(spread.ui_copy?.[locale]||{}), subtitle:e.target.value}}})}/>
-            <Button variant="outline" onClick={onAddPos}>+ Positie</Button>
+            <Button variant="outline" onClick={onAddPos}>{t('spreads.add_position')}</Button>
           </div>
 
           {/* Visual board */}

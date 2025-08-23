@@ -1,43 +1,112 @@
 {
   "home": {
-    "title": "Admin Panel",
+    "title": "Admin Dashboard",
     "users": "Users",
-    "readingsTotal": "Readings (total)",
-    "readingsToday": "Today",
-    "activity7days": "Activity last 7 days",
-    "readings": "Readings",
-    "topSpreads": "Top spreads",
-    "languageDistribution": "Language distribution"
+    "readings_total": "Readings (total)",
+    "readings_today": "Today",
+    "last7_days": "Last 7 days",
+    "top_spreads": "Top spreads",
+    "language_distribution": "Language distribution",
+    "loading_error": "Error loading: {{error}}",
+    "loading": "Loading…"
   },
   "nav": {
     "spreads": "Spreads",
     "cards": "Cards",
     "personas": "Personas",
-    "translations": "Translations",
     "users": "Users",
     "features": "Features",
     "audit": "Audit"
   },
+  "users": {
+    "title": "User Management",
+    "invite": "Invite user",
+    "export": "Export CSV",
+    "search_placeholder": "Search by name or email...",
+    "all_roles": "All roles",
+    "all_plans": "All plans",
+    "all_statuses": "All statuses",
+    "headers": {
+      "email": "Email",
+      "name": "Name",
+      "role": "Role",
+      "plan": "Plan",
+      "status": "Status",
+      "created_at": "Created",
+      "actions": "Actions"
+    },
+    "actions": {
+      "change_role": "Change role",
+      "block": "Block",
+      "unblock": "Unblock",
+      "audit": "Audit",
+      "delete": "Delete"
+    },
+    "pagination": "Page {{currentPage}} of {{totalPages}} ({{totalResults}} results)",
+    "edit_role_title": "Change role for {{email}}",
+    "edit_role_desc": "Select the new role for the user.",
+    "invite_modal_title": "Invite new user",
+    "invite_modal_desc": "Choose whether to send an invitation link or create the user directly with a password.",
+    "invite_email_label": "Email address",
+    "invite_role_label": "Role",
+    "invite_method_link": "Send invite link",
+    "invite_method_create": "Create directly with password",
+    "invite_password_label": "Temporary password",
+    "send_invite": "Send invitation",
+    "create_user": "Create user"
+  },
+  "spreads": {
+    "search_placeholder": "Search by id/name…",
+    "new_spread": "+ New spread",
+    "export": "Export → spread-library.json",
+    "edit": "Edit",
+    "delete": "Delete",
+    "editor_title": "Edit Spread",
+    "save_spread": "Save Spread",
+    "save_positions": "Save Positions",
+    "close": "Close",
+    "add_position": "+ Add Position"
+  },
+  "personas": {
+    "title": "Manage Personas",
+    "new": "+ New Persona",
+    "edit": "Edit",
+    "edit_title": "Edit: {{id}}",
+    "new_title": "New Persona",
+    "save": "Save",
+    "cancel": "Cancel"
+  },
+  "features": {
+    "title": "Feature Flags",
+    "new_flag_title": "New Flag",
+    "create": "Create"
+  },
+  "audit": {
+    "title": "Audit Logs",
+    "title_for_user": "Audit Logs for user",
+    "clear_filter": "Clear filter",
+    "headers": {
+      "timestamp": "Timestamp",
+      "action": "Action",
+      "details": "Details",
+      "user_id": "User ID"
+    }
+  },
   "cards": {
     "importTitle": "Import Card Images",
-    "importDesc": "Upload a batch of tarot card images here. The AI will attempt to recognize each image and automatically link it to the correct card in the database.",
+    "importDesc": "Upload a batch of tarot card images here. The AI will try to recognize each image and automatically link it to the correct card in the database.",
     "editListTitle": "Edit All Cards",
-    "editListDesc": "Below you see all 78 cards. Click on a card to manually adjust the details, meanings, or the linked image.",
+    "editListDesc": "Below are all 78 cards. Click on a card to manually edit its details, meanings, or the associated image.",
     "editTitle": "Edit: {{name}}",
-    "editDesc": "Adjust the card details here for all languages.",
+    "editDesc": "Adjust the details and meanings of the card here.",
     "name": "Name",
-    "meaningUp": "Meaning (Upright)",
-    "meaningRev": "Meaning (Reversed)",
+    "meaningUp": "Meaning (upright)",
+    "meaningRev": "Meaning (reversed)",
     "keywords": "Keywords (comma-separated)",
     "chooseFiles": "Choose files...",
     "importer": {
       "uploading": "Uploading...",
-      "processing": "Starting AI analysis...",
-      "success": "Processed successfully!",
-      "uploadFailed": "Upload failed: {{message}}",
-      "processingFailed": "Processing failed: {{message}}",
-      "sessionFailed": "Could not retrieve user session.",
-      "unknownError": "Unknown error"
+      "processing": "Processing..."
     }
   }
 }

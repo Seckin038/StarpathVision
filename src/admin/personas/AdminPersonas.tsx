@@ -8,6 +8,7 @@ import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { showError, showSuccess } from "@/utils/toast";
 import { Loader2 } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 type Persona = {
   id: string;
@@ -35,6 +36,7 @@ export default function AdminPersonas() {
   const [personas, setPersonas] = useState<Persona[]>([]);
   const [loading, setLoading] = useState(true);
   const [editing, setEditing] = useState<Persona | null>(null);
+  const { t } = useTranslation('admin');
 
   const fetchPersonas = async () => {
     setLoading(true);
@@ -91,7 +93,7 @@ export default function AdminPersonas() {
     return (
       <Card className="bg-stone-900/60 border-stone-800">
         <CardHeader>
-          <CardTitle className="text-amber-200">{editing.id ? `Bewerk: ${editing.id}` : "Nieuwe Persona"}</CardTitle>
+          <CardTitle className="text-amber-200">{editing.id ? t('personas.edit_title', { id: editing.id }) : t('personas.new_title')}</CardTitle>
         </CardHeader>
         <CardContent className="space-y-6 pt-4">
           <div className="grid md:grid-cols-2 gap-6">
@@ -134,8 +136,8 @@ export default function AdminPersonas() {
             </div>
           </div>
           <div className="flex gap-2 pt-4 border-t border-stone-800">
-            <Button onClick={handleSave}>Opslaan</Button>
-            <Button variant="outline" onClick={() => setEditing(null)}>Annuleren</Button>
+            <Button onClick={handleSave}>{t('personas.save')}</Button>
+            <Button variant="outline" onClick={() => setEditing(null)}>{t('personas.cancel')}</Button>
           </div>
         </CardContent>
       </Card>
@@ -145,8 +147,8 @@ export default function AdminPersonas() {
   return (
     <Card className="bg-stone-900/60 border-stone-800">
       <CardHeader className="flex flex-row items-center justify-between">
-        <CardTitle className="text-amber-200">Personas Beheren</CardTitle>
-        <Button onClick={handleAddNew}>+ Nieuwe Persona</Button>
+        <CardTitle className="text-amber-200">{t('personas.title')}</CardTitle>
+        <Button onClick={handleAddNew}>{t('personas.new')}</Button>
       </CardHeader>
       <CardContent>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -158,7 +160,7 @@ export default function AdminPersonas() {
               <CardContent>
                 <p className="text-sm text-stone-400 h-16 overflow-hidden">{p.background?.nl}</p>
                 <div className="mt-4 flex justify-end">
-                  <Button variant="outline" onClick={() => setEditing(p)}>Bewerken</Button>
+                  <Button variant="outline" onClick={() => setEditing(p)}>{t('personas.edit')}</Button>
                 </div>
               </CardContent>
             </Card>

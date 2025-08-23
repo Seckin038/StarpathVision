@@ -5,6 +5,7 @@ import { Loader2 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { useSearchParams, Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { useTranslation } from "react-i18next";
 
 type AuditLog = {
   id: number;
@@ -19,6 +20,7 @@ export default function AdminAudit() {
   const [loading, setLoading] = useState(true);
   const [searchParams] = useSearchParams();
   const userId = searchParams.get("userId");
+  const { t } = useTranslation('admin');
 
   useEffect(() => {
     const fetchLogs = async () => {
@@ -54,11 +56,11 @@ export default function AdminAudit() {
       <CardHeader>
         <div className="flex justify-between items-center">
           <CardTitle className="text-amber-200">
-            {userId ? `Audit Logs voor gebruiker` : 'Audit Logs'}
+            {userId ? t('audit.title_for_user') : t('audit.title')}
           </CardTitle>
           {userId && (
             <Button asChild variant="outline">
-              <Link to="/admin/audit">Filter wissen</Link>
+              <Link to="/admin/audit">{t('audit.clear_filter')}</Link>
             </Button>
           )}
         </div>
@@ -69,10 +71,10 @@ export default function AdminAudit() {
           <table className="w-full text-sm">
             <thead>
               <tr className="text-left text-stone-400">
-                <th className="p-2">Tijdstip</th>
-                <th className="p-2">Actie</th>
-                <th className="p-2">Details</th>
-                <th className="p-2">User ID</th>
+                <th className="p-2">{t('audit.headers.timestamp')}</th>
+                <th className="p-2">{t('audit.headers.action')}</th>
+                <th className="p-2">{t('audit.headers.details')}</th>
+                <th className="p-2">{t('audit.headers.user_id')}</th>
               </tr>
             </thead>
             <tbody>

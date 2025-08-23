@@ -1,43 +1,112 @@
 {
   "home": {
-    "title": "Admin Panel",
+    "title": "Admin Dashboard",
     "users": "Gebruikers",
-    "readingsTotal": "Lezingen (totaal)",
-    "readingsToday": "Vandaag",
-    "activity7days": "Activiteit afgelopen 7 dagen",
-    "readings": "Lezingen",
-    "topSpreads": "Top spreads",
-    "languageDistribution": "Taalverdeling"
+    "readings_total": "Lezingen (totaal)",
+    "readings_today": "Vandaag",
+    "last7_days": "Afgelopen 7 dagen",
+    "top_spreads": "Top spreads",
+    "language_distribution": "Taalverdeling",
+    "loading_error": "Fout bij laden: {{error}}",
+    "loading": "Laden…"
   },
   "nav": {
     "spreads": "Spreads",
     "cards": "Kaarten",
     "personas": "Personas",
-    "translations": "Vertalingen",
     "users": "Gebruikers",
     "features": "Features",
     "audit": "Audit"
   },
+  "users": {
+    "title": "Gebruikersbeheer",
+    "invite": "Nodig gebruiker uit",
+    "export": "Export CSV",
+    "search_placeholder": "Zoek op naam of e-mail...",
+    "all_roles": "Alle rollen",
+    "all_plans": "Alle plannen",
+    "all_statuses": "Alle statussen",
+    "headers": {
+      "email": "E-mail",
+      "name": "Naam",
+      "role": "Rol",
+      "plan": "Plan",
+      "status": "Status",
+      "created_at": "Aangemaakt",
+      "actions": "Acties"
+    },
+    "actions": {
+      "change_role": "Wijzig rol",
+      "block": "Blokkeer",
+      "unblock": "Deblokkeer",
+      "audit": "Audit",
+      "delete": "Verwijder"
+    },
+    "pagination": "Pagina {{currentPage}} van {{totalPages}} ({{totalResults}} resultaten)",
+    "edit_role_title": "Wijzig rol voor {{email}}",
+    "edit_role_desc": "Selecteer de nieuwe rol voor de gebruiker.",
+    "invite_modal_title": "Nieuwe gebruiker uitnodigen",
+    "invite_modal_desc": "Kies of je een uitnodigingslink wilt sturen of de gebruiker direct wilt aanmaken met een wachtwoord.",
+    "invite_email_label": "E-mailadres",
+    "invite_role_label": "Rol",
+    "invite_method_link": "Invite link sturen",
+    "invite_method_create": "Direct aanmaken met wachtwoord",
+    "invite_password_label": "Tijdelijk wachtwoord",
+    "send_invite": "Verstuur uitnodiging",
+    "create_user": "Gebruiker aanmaken"
+  },
+  "spreads": {
+    "search_placeholder": "Zoek op id/naam…",
+    "new_spread": "+ Nieuwe spread",
+    "export": "Export → spread-library.json",
+    "edit": "Bewerken",
+    "delete": "Verwijderen",
+    "editor_title": "Spread bewerken",
+    "save_spread": "Spread opslaan",
+    "save_positions": "Posities opslaan",
+    "close": "Sluiten",
+    "add_position": "+ Positie"
+  },
+  "personas": {
+    "title": "Personas Beheren",
+    "new": "+ Nieuwe Persona",
+    "edit": "Bewerken",
+    "edit_title": "Bewerk: {{id}}",
+    "new_title": "Nieuwe Persona",
+    "save": "Opslaan",
+    "cancel": "Annuleren"
+  },
+  "features": {
+    "title": "Feature Flags",
+    "new_flag_title": "Nieuwe Flag",
+    "create": "Aanmaken"
+  },
+  "audit": {
+    "title": "Audit Logs",
+    "title_for_user": "Audit Logs voor gebruiker",
+    "clear_filter": "Filter wissen",
+    "headers": {
+      "timestamp": "Tijdstip",
+      "action": "Actie",
+      "details": "Details",
+      "user_id": "User ID"
+    }
+  },
   "cards": {
     "importTitle": "Kaartafbeeldingen Importeren",
-    "importDesc": "Upload hier een batch met tarotkaart-afbeeldingen. De AI zal proberen elke afbeelding te herkennen en automatisch te koppelen aan de juiste kaart in de database.",
+    "importDesc": "Upload hier een batch met tarotkaart-afbeeldingen. De AI zal probeer elke afbeelding te herkennen en automatisch te koppelen aan de juiste kaart in de database.",
     "editListTitle": "Alle Kaarten Bewerken",
     "editListDesc": "Hieronder ziet u alle 78 kaarten. Klik op een kaart om de details, betekenissen of de gekoppelde afbeelding handmatig aan te passen.",
     "editTitle": "Bewerk: {{name}}",
-    "editDesc": "Pas hier de details van de kaart aan voor alle talen.",
+    "editDesc": "Pas hier de details en betekenissen van de kaart aan.",
     "name": "Naam",
-    "meaningUp": "Betekenis (Rechtop)",
-    "meaningRev": "Betekenis (Omgekeerd)",
-    "keywords": "Sleutelwoorden (komma-gescheiden)",
+    "meaningUp": "Betekenis (rechtop)",
+    "meaningRev": "Betekenis (omgekeerd)",
+    "keywords": "Trefwoorden (komma-gescheiden)",
     "chooseFiles": "Kies bestanden...",
     "importer": {
-      "uploading": "Bezig met uploaden...",
-      "processing": "AI analyse gestart...",
-      "success": "Succesvol verwerkt!",
-      "uploadFailed": "Upload mislukt: {{message}}",
-      "processingFailed": "Verwerking mislukt: {{message}}",
-      "sessionFailed": "Kon gebruikerssessie niet ophalen.",
-      "unknownError": "Onbekende fout"
+      "uploading": "Uploaden...",
+      "processing": "Verwerken..."
     }
   }
 }

@@ -2,42 +2,111 @@
   "home": {
     "title": "Yönetici Paneli",
     "users": "Kullanıcılar",
-    "readingsTotal": "Okumalar (toplam)",
-    "readingsToday": "Bugün",
-    "activity7days": "Son 7 günün etkinliği",
-    "readings": "Okumalar",
-    "topSpreads": "En popüler açılımlar",
-    "languageDistribution": "Dil dağılımı"
+    "readings_total": "Okumalar (toplam)",
+    "readings_today": "Bugün",
+    "last7_days": "Son 7 gün",
+    "top_spreads": "Popüler açılımlar",
+    "language_distribution": "Dil dağılımı",
+    "loading_error": "Yükleme hatası: {{error}}",
+    "loading": "Yükleniyor…"
   },
   "nav": {
     "spreads": "Açılımlar",
     "cards": "Kartlar",
     "personas": "Personalar",
-    "translations": "Çeviriler",
     "users": "Kullanıcılar",
     "features": "Özellikler",
     "audit": "Denetim"
   },
+  "users": {
+    "title": "Kullanıcı Yönetimi",
+    "invite": "Kullanıcı davet et",
+    "export": "CSV Dışa Aktar",
+    "search_placeholder": "İsim veya e-posta ile ara...",
+    "all_roles": "Tüm roller",
+    "all_plans": "Tüm planlar",
+    "all_statuses": "Tüm durumlar",
+    "headers": {
+      "email": "E-posta",
+      "name": "İsim",
+      "role": "Rol",
+      "plan": "Plan",
+      "status": "Durum",
+      "created_at": "Oluşturulma",
+      "actions": "Eylemler"
+    },
+    "actions": {
+      "change_role": "Rolü değiştir",
+      "block": "Engelle",
+      "unblock": "Engeli kaldır",
+      "audit": "Denetim",
+      "delete": "Sil"
+    },
+    "pagination": "{{totalPages}} sayfadan {{currentPage}}. sayfa ({{totalResults}} sonuç)",
+    "edit_role_title": "{{email}} için rolü değiştir",
+    "edit_role_desc": "Kullanıcı için yeni rolü seçin.",
+    "invite_modal_title": "Yeni kullanıcı davet et",
+    "invite_modal_desc": "Bir davet bağlantısı mı göndermek yoksa kullanıcıyı doğrudan bir şifreyle mi oluşturmak istediğinizi seçin.",
+    "invite_email_label": "E-posta adresi",
+    "invite_role_label": "Rol",
+    "invite_method_link": "Davet bağlantısı gönder",
+    "invite_method_create": "Doğrudan şifreyle oluştur",
+    "invite_password_label": "Geçici şifre",
+    "send_invite": "Davet gönder",
+    "create_user": "Kullanıcı oluştur"
+  },
+  "spreads": {
+    "search_placeholder": "ID/isim ile ara…",
+    "new_spread": "+ Yeni açılım",
+    "export": "Dışa Aktar → spread-library.json",
+    "edit": "Düzenle",
+    "delete": "Sil",
+    "editor_title": "Açılımı Düzenle",
+    "save_spread": "Açılımı Kaydet",
+    "save_positions": "Pozisyonları Kaydet",
+    "close": "Kapat",
+    "add_position": "+ Pozisyon Ekle"
+  },
+  "personas": {
+    "title": "Personaları Yönet",
+    "new": "+ Yeni Persona",
+    "edit": "Düzenle",
+    "edit_title": "Düzenle: {{id}}",
+    "new_title": "Yeni Persona",
+    "save": "Kaydet",
+    "cancel": "İptal"
+  },
+  "features": {
+    "title": "Özellik Bayrakları",
+    "new_flag_title": "Yeni Bayrak",
+    "create": "Oluştur"
+  },
+  "audit": {
+    "title": "Denetim Kayıtları",
+    "title_for_user": "Kullanıcı için denetim kayıtları",
+    "clear_filter": "Filtreyi temizle",
+    "headers": {
+      "timestamp": "Zaman damgası",
+      "action": "Eylem",
+      "details": "Detaylar",
+      "user_id": "Kullanıcı ID"
+    }
+  },
   "cards": {
     "importTitle": "Kart Resimlerini İçe Aktar",
-    "importDesc": "Buraya bir grup tarot kartı resmi yükleyin. Yapay zeka her resmi tanımaya çalışacak ve veritabanındaki doğru kartla otomatik olarak eşleştirecektir.",
+    "importDesc": "Buraya bir grup tarot kartı resmi yükleyin. AI, her resmi tanımaya ve veritabanındaki doğru kartla otomatik olarak eşleştirmeye çalışacaktır.",
     "editListTitle": "Tüm Kartları Düzenle",
-    "editListDesc": "Aşağıda 78 kartın tamamını görüyorsunuz. Ayrıntıları, anlamları veya bağlantılı resmi manuel olarak ayarlamak için bir karta tıklayın.",
+    "editListDesc": "Aşağıda 78 kartın tamamı bulunmaktadır. Ayrıntılarını, anlamlarını veya ilişkili resmi manuel olarak düzenlemek için bir karta tıklayın.",
     "editTitle": "Düzenle: {{name}}",
-    "editDesc": "Kart ayrıntılarını tüm diller için buradan ayarlayın.",
+    "editDesc": "Kartın ayrıntılarını ve anlamlarını burada ayarlayın.",
     "name": "İsim",
-    "meaningUp": "Anlamı (Düz)",
-    "meaningRev": "Anlamı (Ters)",
-    "keywords": "Anahtar Kelimeler (virgülle ayrılmış)",
+    "meaningUp": "Anlam (düz)",
+    "meaningRev": "Anlam (ters)",
+    "keywords": "Anahtar kelimeler (virgülle ayrılmış)",
     "chooseFiles": "Dosyaları seç...",
     "importer": {
       "uploading": "Yükleniyor...",
-      "processing": "AI analizi başlatılıyor...",
-      "success": "Başarıyla işlendi!",
-      "uploadFailed": "Yükleme başarısız: {{message}}",
-      "processingFailed": "İşleme başarısız: {{message}}",
-      "sessionFailed": "Kullanıcı oturumu alınamadı.",
-      "unknownError": "Bilinmeyen hata"
+      "processing": "İşleniyor..."
     }
   }
 }

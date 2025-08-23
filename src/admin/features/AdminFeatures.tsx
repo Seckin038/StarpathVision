@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { showError, showSuccess } from "@/utils/toast";
 import { Loader2 } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 type Flag = {
   id: number;
@@ -18,6 +19,7 @@ export default function AdminFeatures() {
   const [flags, setFlags] = useState<Flag[]>([]);
   const [loading, setLoading] = useState(true);
   const [newFlag, setNewFlag] = useState({ key: "", description: "" });
+  const { t } = useTranslation('admin');
 
   const fetchFlags = async () => {
     setLoading(true);
@@ -73,7 +75,7 @@ export default function AdminFeatures() {
   return (
     <div className="space-y-6">
       <Card className="bg-stone-900/60 border-stone-800">
-        <CardHeader><CardTitle className="text-amber-200">Feature Flags</CardTitle></CardHeader>
+        <CardHeader><CardTitle className="text-amber-200">{t('features.title')}</CardTitle></CardHeader>
         <CardContent>
           {flags.map((flag) => (
             <div key={flag.id} className="flex items-center justify-between p-2 border-b border-stone-800">
@@ -90,11 +92,11 @@ export default function AdminFeatures() {
         </CardContent>
       </Card>
       <Card className="bg-stone-900/60 border-stone-800">
-        <CardHeader><CardTitle className="text-amber-200">Nieuwe Flag</CardTitle></CardHeader>
+        <CardHeader><CardTitle className="text-amber-200">{t('features.new_flag_title')}</CardTitle></CardHeader>
         <CardContent className="space-y-3">
           <Input placeholder="flag-key (uniek)" value={newFlag.key} onChange={e => setNewFlag({...newFlag, key: e.target.value})} />
           <Input placeholder="Beschrijving" value={newFlag.description} onChange={e => setNewFlag({...newFlag, description: e.target.value})} />
-          <Button onClick={handleCreate}>Aanmaken</Button>
+          <Button onClick={handleCreate}>{t('features.create')}</Button>
         </CardContent>
       </Card>
     </div>

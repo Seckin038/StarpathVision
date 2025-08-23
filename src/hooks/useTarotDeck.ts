@@ -1,46 +1,55 @@
 import { useQuery } from "@tanstack/react-query";
 import { Locale } from "@/types/tarot";
+import { supabase } from "@/lib/supabaseClient";
 
 export type TarotDeckCard = { id: string; name: string; imageUrl?: string; meaning_up?: string | null };
 
 const fetchTarotDeck = async (locale: Locale): Promise<TarotDeckCard[]> => {
-  let targetLocale: Locale = locale;
   try {
-    let response = await fetch(`/tarot/cards.${targetLocale}.json`);
-    if (!response.ok) {
-      console.warn(`Tarot deck for locale '${targetLocale}' not found, falling back to 'en'.`);
-      targetLocale = 'en';
-      response = await fetch(`/tarot/cards.en.json`);
-      if (!response.ok) {
-        throw new Error(`Failed to fetch tarot deck for fallback 'en'`);
-      }
-    }
-    
-    const rawData: any[] = await response.json();
+    const { data, error } = await supabase
+      .from("tarot_cards")
+      .select("id, name, image_url, meaning_up, number")
+      .order("number");
 
-    // Process raw data which might have localized objects
-    return rawData.map(card => ({
+    if (error) {
+      throw error;
+    }
+
+    return data.map(card => ({
       id: card.id,
-      name: (typeof card.name === 'object' && card.name !== null) 
-        ? (card.name[targetLocale] ?? card.name['en'] ?? card.id) 
-        : (card.name || card.id),
-      imageUrl: card.image_url || card.imageUrl,
-      meaning_up: (typeof card.meaning_up === 'object' && card.meaning_up !== null)
-        ? (card.meaning_up[targetLocale] ?? card.meaning_up['en'] ?? null)
-        : (card.meaning_up || null),
+      name: card.name?.[locale] ?? card.name?.['en'] ?? card.id,
+      imageUrl: card.image_url,
+      meaning_up: card.meaning_up?.[locale] ?? card.meaning_up?.['en'] ?? null,
     }));
 
   } catch (error) {
-    console.error("Error fetching tarot deck:", error);
-    return [];
+    console.error("Error fetching tarot deck from Supabase:", error);
+    // Fallback to local JSON if Supabase fails
+    try {
+      const response = await fetch(`/tarot/cards.en.json`);
+      const rawData: any[] = await response.json();
+      return rawData.map(card => ({
+        id: card.id,
+        name: (typeof card.name === 'object' && card.name !== null) 
+          ? (card.name[locale] ?? card.name['en'] ?? card.id) 
+          : (card.name || card.id),
+        imageUrl: card.image_url || card.imageUrl,
+        meaning_up: (typeof card.meaning_up === 'object' && card.meaning_up !== null)
+          ? (card.meaning_up[locale] ?? card.meaning_up['en'] ?? null)
+          : (card.meaning_up || null),
+      }));
+    } catch (fallbackError) {
+      console.error("Fallback to local JSON also failed:", fallbackError);
+      return [];
+    }
   }
 };
 
 export function useTarotDeck(locale: Locale) {
   const { data: deck = [], isLoading: loading, error } = useQuery({
-    queryKey: ['tarotDeckJson', locale], // Use locale in key to refetch on lang change
+    queryKey: ['tarotDeck', locale], // Use locale in key to refetch on lang change
     queryFn: () => fetchTarotDeck(locale),
-    staleTime: 1000 * 60 * 60, // Cache for 1 hour
+    staleTime: 1000 * 60 * 5, // Cache for 5 minutes
     refetchOnWindowFocus: false,
   });
 
