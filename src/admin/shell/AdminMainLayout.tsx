@@ -26,11 +26,9 @@ const AdminMainLayout = () => {
           <div className="max-w-7xl mx-auto flex items-center gap-2">
             <Link to="/admin" className="font-serif text-lg mr-4">{t('admin:home.title')}</Link>
             <div className="flex gap-1 flex-wrap">
-              {link("/admin/spreads", t('admin:nav.spreads'))}
               {link("/admin/cards", t('admin:nav.cards'))}
               {link("/admin/personas", t('admin:nav.personas'))}
               {link("/admin/users", t('admin:nav.users'))}
-              {link("/admin/features", t('admin:nav.features'))}
               {link("/admin/audit", t('admin:nav.audit'))}
             </div>
           </div>
