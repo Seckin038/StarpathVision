@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { supabase } from "@/lib/supabaseClient";
 import { Session, User } from "@supabase/supabase-js";
-import { Loader2 } from "lucide-react";
+import { Loader2, AlertTriangle } from "lucide-react";
 
 type Profile = {
   plan: string;
@@ -13,6 +13,7 @@ type AuthCtx = {
   session: Session | null;
   profile: Profile | null;
   loading: boolean;
+  error: string | null;
   signOut: () => Promise<void>;
 };
 
@@ -23,32 +24,46 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [session, setSession] = useState<Session | null>(null);
   const [profile, setProfile] = useState<Profile | null>(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    // 1. Fetch the initial session to guarantee the loading state is resolved.
-    supabase.auth.getSession().then(async ({ data: { session } }) => {
-      setSession(session);
-      if (session?.user) {
-        const { data, error } = await supabase
-          .from('profiles')
-          .select('*')
-          .eq('id', session.user.id)
-          .single();
-        setProfile(error ? null : data as Profile);
-      }
-      setLoading(false);
-    });
+    setLoading(true);
+    setError(null);
 
-    // 2. Listen for future auth changes.
+    const sessionPromise = supabase.auth.getSession();
+    const timeoutPromise = new Promise((_, reject) => 
+      setTimeout(() => reject(new Error("Supabase connection timed out. Please check your network and Supabase configuration.")), 8000)
+    );
+
+    Promise.race([sessionPromise, timeoutPromise])
+      .then(async ({ data: { session } }: any) => {
+        setSession(session);
+        if (session?.user) {
+          const { data, error: profileError } = await supabase
+            .from('profiles')
+            .select('*')
+            .eq('id', session.user.id)
+            .single();
+          setProfile(profileError ? null : data as Profile);
+        }
+      })
+      .catch((err) => {
+        console.error("Auth init error:", err);
+        setError(err.message);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+
     const { data: { subscription } } = supabase.auth.onAuthStateChange(async (_event, session) => {
       setSession(session);
       if (session?.user) {
-        const { data, error } = await supabase
+        const { data: profileError } = await supabase
           .from('profiles')
           .select('*')
           .eq('id', session.user.id)
           .single();
-        setProfile(error ? null : data as Profile);
+        setProfile(profileError ? null : (profileError as any));
       } else {
         setProfile(null);
       }
@@ -64,6 +79,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     session,
     profile,
     loading,
+    error,
     signOut: async () => {
       await supabase.auth.signOut();
     },
@@ -73,6 +89,20 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     return (
       <div className="fixed inset-0 z-50 flex items-center justify-center bg-stone-950">
         <Loader2 className="h-8 w-8 animate-spin text-amber-500" />
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="fixed inset-0 z-50 flex items-center justify-center bg-stone-950 p-4">
+        <div className="w-full max-w-md rounded-lg border border-red-800 bg-red-900/20 p-6 text-center text-red-200">
+          <AlertTriangle className="mx-auto h-10 w-10 text-red-400" />
+          <h2 className="mt-4 text-xl font-bold">Connection Error</h2>
+          <p className="mt-2 text-sm text-red-300">Could not connect to the backend. This is likely a configuration issue.</p>
+          <p className="mt-4 text-xs font-mono bg-black/20 p-2 rounded">{error}</p>
+          <p className="mt-4 text-xs text-red-300/80">Please verify your Supabase URL and Key in `src/lib/supabaseClient.ts` and check your project's RLS policies.</p>
+        </div>
       </div>
     );
   }
