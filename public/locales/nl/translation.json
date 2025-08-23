@@ -58,7 +58,8 @@
       "tarot": "Tarot Legging",
       "dream": "Droom Duiding",
       "numerology": "Numerologie"
-    }
+    },
+    "noMeaningAvailable": "Betekenis niet beschikbaar."
   },
   "tarotChoice": {
     "loading": "Leggingen worden geladen...",

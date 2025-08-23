@@ -58,7 +58,8 @@
       "tarot": "Tarot Okuması",
       "dream": "Rüya Yorumu",
       "numerology": "Numeroloji"
-    }
+    },
+    "noMeaningAvailable": "Anlam mevcut değil."
   },
   "tarotChoice": {
     "loading": "Açılımlar yükleniyor...",

@@ -58,7 +58,8 @@
       "tarot": "Tarot Reading",
       "dream": "Dream Interpretation",
       "numerology": "Numerology"
-    }
+    },
+    "noMeaningAvailable": "Meaning not available."
   },
   "tarotChoice": {
     "loading": "Loading spreads...",
