@@ -65,7 +65,10 @@ Deno.serve(async (req) => {
 
     const token = req.headers.get("Authorization")?.replace("Bearer ", "") ?? "";
     const { data: userRes, error: userErr } = await supa.auth.getUser(token);
-    if (userErr) throw new Error(`Auth error: ${userErr.message}`);
+    if (userErr) {
+      // Don't throw, just log. This allows unauthenticated users for free readings.
+      console.log("Could not get user, proceeding as public user:", userErr.message);
+    }
     const user = userRes?.user ?? null;
 
     // --- FETCH USER PROFILE ---
