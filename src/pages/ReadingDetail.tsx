@@ -1,7 +1,7 @@
-import React, { useEffect, useState, useMemo, useRef } from "react";
+import React, { useEffect, useState, useMemo, useRef, useCallback } from "react";
 import MysticalBackground from "@/components/MysticalBackground";
 import { supabase } from "@/lib/supabaseClient";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useLocation } from "react-router-dom";
 import TarotInterpretationPanel from "@/components/TarotInterpretationPanel";
 import { InterpretationData } from "@/hooks/useTarotInterpretation";
 import TarotSpreadBoard from "@/components/TarotSpreadBoard";
@@ -43,6 +43,7 @@ function mapSpreadIdToKind(id: string | null): SpreadKind {
 
 export default function ReadingDetailPage() {
   const { id } = useParams<{ id: string }>();
+  const location = useLocation();
   const { t } = useTranslation();
   const [r, setR] = useState<Reading | null>(null);
   const [loading, setLoading] = useState(true);
@@ -58,7 +59,7 @@ export default function ReadingDetailPage() {
     })();
   }, [id]);
 
-  const downloadPDF = async () => {
+  const downloadPDF = useCallback(async () => {
     const element = printRef.current;
     if (!element || !r) return;
 
@@ -97,7 +98,19 @@ export default function ReadingDetailPage() {
     pdf.save(`Starpathvision-Lezing-${r.id}.pdf`);
 
     setIsDownloading(false);
-  };
+  }, [r]);
+
+  useEffect(() => {
+    const queryParams = new URLSearchParams(location.search);
+    if (queryParams.get('download') === 'pdf' && printRef.current && r && !isDownloading) {
+      const download = async () => {
+        // A small delay to ensure full render, especially images.
+        await new Promise(resolve => setTimeout(resolve, 1500));
+        await downloadPDF();
+      };
+      download();
+    }
+  }, [location.search, r, isDownloading, downloadPDF]);
 
   const cards = useMemo(() => {
     if (r?.method !== 'tarot') return [];
