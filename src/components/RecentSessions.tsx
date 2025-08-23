@@ -2,6 +2,10 @@ import { useEffect, useState } from "react";
 import { fetchReadingsPage, Reading } from "@/lib/readings";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import { supabase } from "@/lib/supabaseClient";
+import { downloadJSON } from "@/utils/exports";
+import { showLoading, dismissToast, showError } from "@/utils/toast";
+import { Eye, Download } from "lucide-react";
 
 const METHODS = [
   { value: "all", label: "Alles" },
@@ -30,6 +34,26 @@ export default function RecentSessions() {
       setLoading(false);
     })();
   }, [method, page]);
+
+  const handleDownload = async (readingId: string, readingTitle: string | null) => {
+    const toastId = showLoading("Lezing wordt voorbereid...");
+    try {
+      const { data, error } = await supabase
+        .from("readings")
+        .select("*")
+        .eq("id", readingId)
+        .single();
+
+      if (error) throw error;
+
+      const filename = `starpathvision-lezing-${readingTitle || readingId}.json`;
+      downloadJSON(filename, data);
+      dismissToast(toastId);
+    } catch (err: any) {
+      dismissToast(toastId);
+      showError(`Download mislukt: ${err.message}`);
+    }
+  };
 
   const pages = Math.max(1, Math.ceil(total / PER_PAGE));
 
@@ -60,14 +84,26 @@ export default function RecentSessions() {
         <>
           <ul className="space-y-2">
             {rows.map(r => (
-              <li key={r.id}>
-                <Link to={`/reading/${r.id}`} className="flex items-center justify-between rounded-lg border border-stone-800 p-3 bg-stone-900/50 hover:bg-stone-800/50 transition-colors">
-                  <div className="min-w-0">
-                    <div className="text-stone-100 truncate">{r.title ?? displayMethod(r.method)}</div>
-                    <div className="text-xs text-stone-400">{new Date(r.created_at).toLocaleString()}</div>
-                  </div>
-                  <div className="text-xs uppercase text-stone-400 ml-4 shrink-0">{displayMethod(r.method)}</div>
-                </Link>
+              <li key={r.id} className="flex items-center justify-between rounded-lg border border-stone-800 p-3 bg-stone-900/50">
+                <div className="min-w-0">
+                  <div className="text-stone-100 truncate">{r.title ?? displayMethod(r.method)}</div>
+                  <div className="text-xs text-stone-400">{new Date(r.created_at).toLocaleString()}</div>
+                </div>
+                <div className="flex items-center gap-2 ml-4 shrink-0">
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    onClick={() => handleDownload(r.id, r.title)}
+                    title="Download JSON"
+                  >
+                    <Download className="h-4 w-4" />
+                  </Button>
+                  <Button asChild variant="outline" size="icon" title="Bekijk Lezing">
+                    <Link to={`/reading/${r.id}`}>
+                      <Eye className="h-4 w-4" />
+                    </Link>
+                  </Button>
+                </div>
               </li>
             ))}
             {rows.length === 0 && (
