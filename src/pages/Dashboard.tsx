@@ -101,11 +101,14 @@ const Dashboard = () => {
           </CardHeader>
           <CardContent>
             {deckLoading || !dailyCard ? (
-              <div className="flex items-center justify-center h-32"><Loader2 className="h-6 w-6 animate-spin text-amber-500" /></div>
+              <div className="flex items-center justify-center h-full min-h-[160px]"><Loader2 className="h-6 w-6 animate-spin text-amber-500" /></div>
             ) : (
-              <div>
-                <h3 className="text-2xl font-bold text-stone-100">{dailyCard.name}</h3>
-                <p className="text-stone-400 mt-2 text-sm">{dailyCard.meaning_up}</p>
+              <div className="flex items-center gap-6">
+                <img src={dailyCard.imageUrl || '/tarot/back.svg'} alt={dailyCard.name} className="w-24 h-auto rounded-lg border border-stone-700" />
+                <div className="flex-1">
+                  <h3 className="text-2xl font-bold text-stone-100">{dailyCard.name}</h3>
+                  <p className="text-stone-400 mt-2 text-sm line-clamp-4">{dailyCard.meaning_up}</p>
+                </div>
               </div>
             )}
           </CardContent>

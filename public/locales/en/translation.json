@@ -46,7 +46,7 @@
   },
   "dashboard": {
     "welcomeMessage": "Welcome back, {{name}}",
-    "welcomeSubtitle": "Ready to unveil today's mysteries?",
+    "welcomeSubtitle": "Discover what the cosmos has in store for you today",
     "dailyCardTitle": "Energy of the Day",
     "recentReadingsTitle": "Recent Readings",
     "noReadings": "You haven't done any readings yet.",

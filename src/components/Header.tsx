@@ -46,18 +46,18 @@ const Header = () => {
       <div className="flex items-center gap-2">
         {user ? (
           <>
-            <Link to="/profile" className="px-3 py-2 rounded-md text-sm font-medium text-stone-300 bg-stone-800/50 hover:bg-stone-700/80 transition-colors">
+            <Link to="/profile" className="px-3 py-2 rounded-md text-sm font-medium text-amber-300 hover:text-amber-200 bg-stone-800/50 hover:bg-stone-700/80 transition-colors">
               {t('header.myProfile')}
             </Link>
             {isAdmin && (
-              <Link to="/admin" className="px-3 py-2 rounded-md text-sm font-medium text-stone-300 bg-stone-800/50 hover:bg-stone-700/80 transition-colors">
+              <Link to="/admin" className="px-3 py-2 rounded-md text-sm font-medium text-amber-300 hover:text-amber-200 bg-stone-800/50 hover:bg-stone-700/80 transition-colors">
                 {t('header.admin')}
               </Link>
             )}
-            <Link to="/dashboard" className="px-3 py-2 rounded-md text-sm font-medium text-stone-300 bg-stone-800/50 hover:bg-stone-700/80 transition-colors">
+            <Link to="/dashboard" className="px-3 py-2 rounded-md text-sm font-medium text-amber-300 hover:text-amber-200 bg-stone-800/50 hover:bg-stone-700/80 transition-colors">
               {t('header.dashboard')}
             </Link>
-            <Button onClick={handleSignOut} variant="ghost" className="px-3 py-2 h-auto rounded-md text-sm font-medium text-stone-300 bg-stone-800/50 hover:bg-stone-700/80 transition-colors">
+            <Button onClick={handleSignOut} variant="ghost" className="px-3 py-2 h-auto rounded-md text-sm font-medium text-amber-300 hover:text-amber-200 bg-stone-800/50 hover:bg-stone-700/80 transition-colors">
               {t('header.logout')}
             </Button>
           </>

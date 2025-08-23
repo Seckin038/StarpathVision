@@ -46,7 +46,7 @@
   },
   "dashboard": {
     "welcomeMessage": "Tekrar hoş geldin, {{name}}",
-    "welcomeSubtitle": "Bugünün gizemlerini açığa çıkarmaya hazır mısın?",
+    "welcomeSubtitle": "Bugün kozmosun senin için neler sakladığını keşfet",
     "dailyCardTitle": "Günün Enerjisi",
     "recentReadingsTitle": "Son Okumalar",
     "noReadings": "Henüz bir okuma yapmadın.",
