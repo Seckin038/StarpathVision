@@ -24,44 +24,23 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchSessionAndProfile = async () => {
-      try {
-        const { data: { session }, error } = await supabase.auth.getSession();
-        if (error) throw error;
-        
-        setSession(session);
-        if (session?.user) {
-          const { data: profileData, error: profileError } = await supabase
-            .from('profiles')
-            .select('*')
-            .eq('id', session.user.id)
-            .single();
-          if (profileError) throw profileError;
-          setProfile(profileData as Profile);
-        } else {
-          setProfile(null);
-        }
-      } catch (error) {
-        console.error("Error fetching initial session/profile:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchSessionAndProfile();
-
+    // onAuthStateChange fires once with the initial session state, then for any changes.
+    // This is the most reliable way to handle auth state.
     const { data: { subscription } } = supabase.auth.onAuthStateChange(async (_event, session) => {
       setSession(session);
+      
       if (session?.user) {
-        const { data: profileData, error: profileError } = await supabase
+        const { data, error } = await supabase
           .from('profiles')
           .select('*')
           .eq('id', session.user.id)
           .single();
-        setProfile(profileError ? null : profileData as Profile);
+        setProfile(error ? null : data as Profile);
       } else {
         setProfile(null);
       }
+      // Set loading to false only after the initial check is complete.
+      setLoading(false);
     });
 
     return () => {
