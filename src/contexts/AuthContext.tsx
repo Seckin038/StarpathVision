@@ -25,31 +25,32 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    // 1. Fetch the initial session to guarantee the loading state is resolved.
+    supabase.auth.getSession().then(async ({ data: { session } }) => {
+      setSession(session);
+      if (session?.user) {
+        const { data, error } = await supabase
+          .from('profiles')
+          .select('*')
+          .eq('id', session.user.id)
+          .single();
+        setProfile(error ? null : data as Profile);
+      }
+      setLoading(false);
+    });
+
+    // 2. Listen for future auth changes.
     const { data: { subscription } } = supabase.auth.onAuthStateChange(async (_event, session) => {
-      try {
-        setSession(session);
-        if (session?.user) {
-          const { data, error } = await supabase
-            .from('profiles')
-            .select('*')
-            .eq('id', session.user.id)
-            .single();
-          
-          if (error) {
-            console.error("Profile fetch error on auth change:", error);
-            setProfile(null);
-          } else {
-            setProfile(data as Profile);
-          }
-        } else {
-          setProfile(null);
-        }
-      } catch (e) {
-        console.error("Critical error in onAuthStateChange:", e);
-      } finally {
-        // This is the crucial fix: ensure loading is always set to false
-        // after the initial auth check completes, regardless of success or failure.
-        setLoading(false);
+      setSession(session);
+      if (session?.user) {
+        const { data, error } = await supabase
+          .from('profiles')
+          .select('*')
+          .eq('id', session.user.id)
+          .single();
+        setProfile(error ? null : data as Profile);
+      } else {
+        setProfile(null);
       }
     });
 
