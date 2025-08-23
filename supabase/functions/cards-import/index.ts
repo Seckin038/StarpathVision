@@ -4,19 +4,12 @@ import { serve } from "https://deno.land/std@0.224.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.45.0";
 import { encode } from "https://deno.land/std@0.224.0/encoding/base64.ts";
 
-// ===== CORS helper =====
-function cors(req: Request){
-  const origin = req.headers.get("Origin") ?? "*";
-  const reqHdrs = req.headers.get("Access-Control-Request-Headers") ??
-    "authorization, x-client-info, apikey, content-type";
-  return {
-    "Access-Control-Allow-Origin": origin,
-    "Vary": "Origin",
-    "Access-Control-Allow-Methods": "POST, OPTIONS",
-    "Access-Control-Allow-Headers": reqHdrs,
-    "Access-Control-Max-Age": "86400",
-  } as const;
-}
+// Static CORS headers for robustness
+const corsHeaders = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
+  "Access-Control-Allow-Methods": "POST, OPTIONS",
+};
 
 // ===== (optioneel) eenvoudige AI via Gemini REST =====
 async function aiIdentify(bytes: Uint8Array, mime: string, key?: string){
@@ -34,11 +27,13 @@ async function aiIdentify(bytes: Uint8Array, mime: string, key?: string){
 }
 
 serve(async (req) => {
-  const CORS = cors(req);
-  if (req.method === "OPTIONS") return new Response("ok", { headers: CORS });
+  // Handle OPTIONS preflight request
+  if (req.method === "OPTIONS") {
+    return new Response("ok", { headers: corsHeaders });
+  }
 
   try {
-    if (req.method !== "POST") return new Response(JSON.stringify({error:"METHOD"}), { status:405, headers:{...CORS, "Content-Type":"application/json"} });
+    if (req.method !== "POST") return new Response(JSON.stringify({error:"METHOD"}), { status:405, headers:{...corsHeaders, "Content-Type":"application/json"} });
 
     const { path } = await req.json().catch(()=>({}));
     if (!path) throw new Error("'path' is required (temp storage path)");
@@ -86,13 +81,13 @@ serve(async (req) => {
     await sb.storage.from(tmpBucket).remove([path]);
 
     return new Response(JSON.stringify({ ok:true, cardId, imageUrl: pub.data.publicUrl, matched:nameEn }), {
-      headers: { ...CORS, "Content-Type":"application/json" },
+      headers: { ...corsHeaders, "Content-Type":"application/json" },
       status: 200,
     });
   } catch (e) {
     return new Response(JSON.stringify({ ok:false, error: String(e?.message ?? e) }), {
       status: 500,
-      headers: { ...CORS, "Content-Type":"application/json" },
+      headers: { ...corsHeaders, "Content-Type":"application/json" },
     });
   }
 });
