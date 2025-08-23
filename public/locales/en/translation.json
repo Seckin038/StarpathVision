@@ -44,20 +44,31 @@
     }
   },
   "dashboard": {
-    "welcomeBack": "Welcome back, {{name}}",
-    "discoverToday": "Discover what the cosmos has in store for you today.",
+    "welcomeMessage": "Welcome back, {{name}}",
+    "welcomeSubtitle": "Ready to unveil today's mysteries?",
+    "dailyCardTitle": "Daily Card",
+    "viewDetails": "View Details",
+    "recentReadingsTitle": "Recent Readings",
+    "startNewReadingTitle": "Start a New Reading",
+    "tarot": {
+      "title": "Tarot Reading",
+      "description": "Gain insight with the cards."
+    },
+    "coffee": {
+      "title": "Coffee Reading",
+      "description": "Discover symbols in your cup."
+    },
+    "dream": {
+      "title": "Dream Interpretation",
+      "description": "Find meaning in your dreams."
+    },
+    "numerology": {
+      "title": "Numerology",
+      "description": "The power of your numbers."
+    },
     "dayEnergy": "Energy of the Day",
     "yourCardToday": "Your card for today is...",
-    "recentReadings": "Recent Readings",
-    "noReadings": "You haven't done any readings yet.",
-    "choosePath": "Choose Your Path",
-    "quickAction": {
-      "3card": "3-Card Spread",
-      "coffee": "Coffee Reading",
-      "tarot": "Tarot Reading",
-      "dream": "Dream Interpretation",
-      "numerology": "Numerology"
-    }
+    "noReadings": "You haven't done any readings yet."
   },
   "tarotChoice": {
     "loading": "Loading spreads...",

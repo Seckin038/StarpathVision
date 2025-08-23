@@ -44,20 +44,31 @@
     }
   },
   "dashboard": {
-    "welcomeBack": "Welkom terug, {{name}}",
-    "discoverToday": "Ontdek wat de kosmos vandaag voor je in petto heeft.",
+    "welcomeMessage": "Welkom terug, {{name}}",
+    "welcomeSubtitle": "Klaar om de mysteries van vandaag te onthullen?",
+    "dailyCardTitle": "Dagelijkse Kaart",
+    "viewDetails": "Bekijk Details",
+    "recentReadingsTitle": "Recente Lezingen",
+    "startNewReadingTitle": "Start een Nieuwe Lezing",
+    "tarot": {
+      "title": "Tarot Legging",
+      "description": "Krijg inzicht met de kaarten."
+    },
+    "coffee": {
+      "title": "Koffiedik Kijken",
+      "description": "Ontdek symbolen in je kopje."
+    },
+    "dream": {
+      "title": "Droom Duiding",
+      "description": "Vind betekenis in je dromen."
+    },
+    "numerology": {
+      "title": "Numerologie",
+      "description": "De kracht van jouw getallen."
+    },
     "dayEnergy": "Energie van de Dag",
     "yourCardToday": "Jouw kaart voor vandaag is...",
-    "recentReadings": "Recente Lezingen",
-    "noReadings": "Je hebt nog geen lezingen gedaan.",
-    "choosePath": "Kies Je Pad",
-    "quickAction": {
-      "3card": "3-Kaarten Legging",
-      "coffee": "Koffiedik Kijken",
-      "tarot": "Tarot Legging",
-      "dream": "Droom Duiding",
-      "numerology": "Numerologie"
-    }
+    "noReadings": "Je hebt nog geen lezingen gedaan."
   },
   "tarotChoice": {
     "loading": "Leggingen worden geladen...",
