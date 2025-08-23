@@ -19,6 +19,7 @@ import { showError } from "@/utils/toast";
 import { useTarotDeck, TarotDeckCard } from "@/hooks/useTarotDeck";
 import { useTranslation } from "react-i18next";
 import { Locale } from "@/types/tarot";
+import TarotCardDetailModal from "@/components/TarotCardDetailModal";
 
 type Reading = {
   id: string;
@@ -35,6 +36,7 @@ const Dashboard = () => {
   const [recentReadings, setRecentReadings] = useState<Reading[]>([]);
   const [loadingReadings, setLoadingReadings] = useState(true);
   const [dailyCard, setDailyCard] = useState<TarotDeckCard | null>(null);
+  const [viewingCard, setViewingCard] = useState<TarotDeckCard | null>(null);
 
   const { deck, loading: deckLoading } = useTarotDeck(locale);
 
@@ -95,7 +97,10 @@ const Dashboard = () => {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Daily Card */}
-        <Card className="bg-stone-900/50 backdrop-blur-sm border-stone-800">
+        <Card 
+          className="bg-stone-900/50 backdrop-blur-sm border-stone-800 hover:border-amber-700/50 cursor-pointer transition-colors"
+          onClick={() => setViewingCard(dailyCard)}
+        >
           <CardHeader>
             <CardTitle className="text-amber-300 flex items-center gap-2 text-xl"><Sparkles className="h-5 w-5" /> {t('dashboard.dailyCardTitle')}</CardTitle>
           </CardHeader>
@@ -107,7 +112,7 @@ const Dashboard = () => {
                 <img src={(dailyCard as any).image_url || dailyCard.imageUrl || '/tarot/back.svg'} alt={dailyCard.name} className="w-24 h-auto rounded-lg border border-stone-700" />
                 <div className="flex-1">
                   <h3 className="text-2xl font-bold text-stone-100">{dailyCard.name}</h3>
-                  <p className="text-stone-400 mt-2 text-sm line-clamp-4">{dailyCard.meaning_up || t('dashboard.noMeaningAvailable')}</p>
+                  <p className="text-stone-400 mt-2 text-sm">{dailyCard.meaning_up || t('dashboard.noMeaningAvailable')}</p>
                 </div>
               </div>
             )}
@@ -167,6 +172,7 @@ const Dashboard = () => {
           ))}
         </div>
       </div>
+      <TarotCardDetailModal card={viewingCard} isOpen={!!viewingCard} onClose={() => setViewingCard(null)} />
     </div>
   );
 };
