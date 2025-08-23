@@ -30,7 +30,7 @@ type Reading = {
 const Dashboard = () => {
   const { user } = useAuth();
   const { i18n, t } = useTranslation();
-  const locale = i18n.language as Locale;
+  const locale = i18n.language.split('-')[0] as Locale;
 
   const [recentReadings, setRecentReadings] = useState<Reading[]>([]);
   const [loadingReadings, setLoadingReadings] = useState(true);

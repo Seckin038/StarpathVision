@@ -5,6 +5,7 @@ import { Sparkles } from "lucide-react";
 import { supabase } from "@/lib/supabaseClient";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 const Header = () => {
   const { user, signOut } = useAuth();
@@ -44,6 +45,7 @@ const Header = () => {
         Starpathvision
       </Link>
       <div className="flex items-center gap-2">
+        <LanguageSwitcher />
         {user ? (
           <>
             <Link to="/profile" className="px-3 py-2 rounded-md text-sm font-medium text-amber-200 hover:text-amber-100 bg-stone-800/50 hover:bg-stone-700/80 transition-colors">
