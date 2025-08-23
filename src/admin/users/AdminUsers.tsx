@@ -6,9 +6,11 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { showError, showSuccess } from "@/utils/toast";
-import { Loader2, Trash2, UserPlus, FileDown } from "lucide-react";
+import { Loader2, UserPlus, FileDown } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogDescription } from "@/components/ui/dialog";
 import { Link } from "react-router-dom";
+import { Label } from "@/components/ui/label";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
 type UserWithProfile = {
   id: string;
@@ -32,6 +34,11 @@ export default function AdminUsers() {
   const [currentPage, setCurrentPage] = useState(1);
   const [editingUser, setEditingUser] = useState<UserWithProfile | null>(null);
   const [newRole, setNewRole] = useState("");
+  const [isInviteModalOpen, setIsInviteModalOpen] = useState(false);
+  const [inviteEmail, setInviteEmail] = useState("");
+  const [invitePassword, setInvitePassword] = useState("");
+  const [inviteMethod, setInviteMethod] = useState("invite");
+  const [isInviting, setIsInviting] = useState(false);
 
   const fetchUsers = async () => {
     setLoading(true);
@@ -129,6 +136,39 @@ export default function AdminUsers() {
     document.body.removeChild(link);
   };
 
+  const handleInviteUser = async () => {
+    if (!inviteEmail) {
+        showError("E-mailadres is verplicht.");
+        return;
+    }
+    if (inviteMethod === 'create' && !invitePassword) {
+        showError("Wachtwoord is verplicht bij direct aanmaken.");
+        return;
+    }
+
+    setIsInviting(true);
+
+    const body = {
+        email: inviteEmail,
+        password: inviteMethod === 'create' ? invitePassword : null,
+        sendInvite: inviteMethod === 'invite',
+    };
+
+    const { error } = await supabase.functions.invoke("admin-create-user", { body });
+
+    setIsInviting(false);
+
+    if (error) {
+        showError(`Uitnodigen mislukt: ${error.message}`);
+    } else {
+        showSuccess("Gebruiker succesvol aangemaakt/uitgenodigd.");
+        setIsInviteModalOpen(false);
+        setInviteEmail("");
+        setInvitePassword("");
+        fetchUsers();
+    }
+  };
+
   const getBadgeClass = (type: 'role' | 'plan' | 'status', value: string | null) => {
     const v = value?.toLowerCase();
     switch (type) {
@@ -154,7 +194,7 @@ export default function AdminUsers() {
         <div className="flex justify-between items-center">
           <CardTitle className="text-amber-200">Gebruikersbeheer</CardTitle>
           <div className="flex gap-2">
-            <Button variant="outline"><UserPlus className="h-4 w-4 mr-2" /> Nodig gebruiker uit</Button>
+            <Button variant="outline" onClick={() => setIsInviteModalOpen(true)}><UserPlus className="h-4 w-4 mr-2" /> Nodig gebruiker uit</Button>
             <Button variant="outline" onClick={exportToCSV}><FileDown className="h-4 w-4 mr-2" /> Export CSV</Button>
           </div>
         </div>
@@ -240,6 +280,45 @@ export default function AdminUsers() {
             </DialogContent>
         </Dialog>
       )}
+      <Dialog open={isInviteModalOpen} onOpenChange={setIsInviteModalOpen}>
+          <DialogContent className="bg-stone-900 border-stone-800">
+              <DialogHeader>
+                  <DialogTitle className="text-amber-200">Nieuwe gebruiker uitnodigen</DialogTitle>
+                  <DialogDescription>
+                      Kies of je een uitnodigingslink wilt sturen of de gebruiker direct wilt aanmaken met een wachtwoord.
+                  </DialogDescription>
+              </DialogHeader>
+              <div className="py-4 space-y-4">
+                  <div>
+                      <Label htmlFor="invite-email">E-mailadres</Label>
+                      <Input id="invite-email" type="email" value={inviteEmail} onChange={e => setInviteEmail(e.target.value)} placeholder="gebruiker@email.com" />
+                  </div>
+                  <RadioGroup value={inviteMethod} onValueChange={setInviteMethod}>
+                      <div className="flex items-center space-x-2">
+                          <RadioGroupItem value="invite" id="r-invite" />
+                          <Label htmlFor="r-invite">Invite link sturen</Label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                          <RadioGroupItem value="create" id="r-create" />
+                          <Label htmlFor="r-create">Direct aanmaken met wachtwoord</Label>
+                      </div>
+                  </RadioGroup>
+                  {inviteMethod === 'create' && (
+                      <div>
+                          <Label htmlFor="invite-password">Tijdelijk wachtwoord</Label>
+                          <Input id="invite-password" type="text" value={invitePassword} onChange={e => setInvitePassword(e.target.value)} placeholder="Een sterk wachtwoord" />
+                      </div>
+                  )}
+              </div>
+              <DialogFooter>
+                  <Button variant="outline" onClick={() => setIsInviteModalOpen(false)}>Annuleren</Button>
+                  <Button onClick={handleInviteUser} disabled={isInviting}>
+                      {isInviting ? <Loader2 className="animate-spin mr-2" /> : null}
+                      {inviteMethod === 'invite' ? 'Verstuur uitnodiging' : 'Gebruiker aanmaken'}
+                  </Button>
+              </DialogFooter>
+          </DialogContent>
+      </Dialog>
     </Card>
   );
 }
