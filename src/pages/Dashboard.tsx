@@ -31,7 +31,7 @@ type Reading = {
 };
 
 const Dashboard = () => {
-  const { user, signOut } = useAuth();
+  const { user } = useAuth();
   const { i18n, t } = useTranslation();
   const locale = i18n.language as Locale;
 
@@ -104,7 +104,6 @@ const Dashboard = () => {
         <div className="flex items-center gap-2">
           <AdminRoleSwitch />
           <Link to="/profile"><Button variant="outline" size="icon" className="border-stone-700 text-stone-300 hover:bg-stone-800"><Settings className="h-4 w-4" /></Button></Link>
-          <Button onClick={signOut} variant="outline" className="border-amber-800 text-amber-300 hover:bg-amber-900/50 hover:text-amber-200">{t('header.logout')}</Button>
         </div>
       </header>
 
@@ -149,11 +148,9 @@ const Dashboard = () => {
                   <div className="p-4 hover:bg-stone-800/50 transition-colors flex justify-between items-center">
                     <div>
                       <h3 className="font-medium text-stone-200">{reading.title || reading.method}</h3>
-                      <div className="flex items-center gap-2 mt-1">
-                        <Badge variant="outline" className="text-stone-300 border-stone-700 text-xs">{reading.method}</Badge>
-                      </div>
+                      <Badge variant="outline" className="text-stone-400 border-stone-700 text-xs capitalize">{reading.method}</Badge>
                     </div>
-                    <div className="text-right"><p className="text-sm text-stone-400">{new Date(reading.created_at).toLocaleDateString('nl-NL')}</p></div>
+                    <p className="text-sm text-stone-400">{new Date(reading.created_at).toLocaleDateString('nl-NL', { day: '2-digit', month: '2-digit', year: 'numeric' })}</p>
                   </div>
                 </Link>
               ))

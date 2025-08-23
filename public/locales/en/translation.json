@@ -1,14 +1,47 @@
 {
-  "home": {
-    "subtitle": "YOUR GUIDE TO THE STARS",
-    "startJourney": "Start Your Journey",
-    "chooseSeer": "Choose your seer"
-  },
   "header": {
     "admin": "Admin",
     "dashboard": "Dashboard",
     "logout": "Log out",
     "login": "Log in"
+  },
+  "common": {
+    "back": "Back",
+    "viewAll": "View All",
+    "confirmSelection": "Confirm Selection",
+    "close": "Close",
+    "save": "Save",
+    "cancel": "Cancel"
+  },
+  "home": {
+    "subtitle": "YOUR GUIDE TO THE STARS",
+    "startJourney": "Start Your Journey",
+    "chooseSeer": "Choose your seer"
+  },
+  "freeReading": {
+    "title": "Try a Free Reading",
+    "subtitle": "Get instant insight with our popular 3-card tarot spread. No registration required.",
+    "cta": "Start Free Reading"
+  },
+  "features": {
+    "title": "Discover the Worlds Within",
+    "subtitle": "After registering, you'll gain access to a suite of mystical tools to illuminate your path. Discover what the stars have in store for you.",
+    "tarot": {
+      "title": "Tarot",
+      "description": "Gain insight into past, present, and future with various card spreads."
+    },
+    "coffee": {
+      "title": "Coffee Reading",
+      "description": "Discover the symbols and meanings hidden in your coffee cup."
+    },
+    "dream": {
+      "title": "Dream Interpretation",
+      "description": "Analyze your dreams and unveil the messages from your subconscious."
+    },
+    "numerology": {
+      "title": "Numerology",
+      "description": "Explore the mystical relationship between numbers and life events."
+    }
   },
   "dashboard": {
     "welcomeBack": "Welcome back, {{name}}",
@@ -17,22 +50,14 @@
     "yourCardToday": "Your card for today is...",
     "recentReadings": "Recent Readings",
     "noReadings": "You haven't done any readings yet.",
-    "choosePath": "Choose Your Path"
-  },
-  "dashboard.quickAction": {
-    "3card": "3-Card Spread",
-    "coffee": "Coffee Reading",
-    "tarot": "Tarot Spreads",
-    "dream": "Dream Interpretation",
-    "numerology": "Numerology"
-  },
-  "common": {
-    "back": "Back",
-    "confirmSelection": "Confirm Selection",
-    "viewAll": "View All",
-    "save": "Save",
-    "cancel": "Cancel",
-    "close": "Close"
+    "choosePath": "Choose Your Path",
+    "quickAction": {
+      "3card": "3-Card Spread",
+      "coffee": "Coffee Reading",
+      "tarot": "Tarot Reading",
+      "dream": "Dream Interpretation",
+      "numerology": "Numerology"
+    }
   },
   "tarotChoice": {
     "loading": "Loading spreads...",
@@ -40,12 +65,12 @@
     "errorBody": "Could not load the tarot spreads. Please try again later.",
     "startSpread": "Start Spread",
     "title": "Choose a Tarot Spread",
-    "subtitle": "Each spread offers a unique perspective on your questions."
+    "subtitle": "Each spread offers a unique perspective on your life questions."
   },
   "tarotReading": {
     "chooseSeer": "You are guided by:",
     "chooseCards": "Choose {{count}} cards from the deck.",
-    "selected": "{{selected}} of {{total}} cards chosen."
+    "selected": "{{selected}} of {{total}} cards chosen"
   },
   "tarot": {
     "upright": "Upright",
@@ -54,27 +79,25 @@
     "storyTitle": "The Story of the Cards",
     "adviceTitle": "Advice for You",
     "affirmationTitle": "Affirmation",
-    "actionsTitle": "Concrete Next Steps",
+    "actionsTitle": "Concrete Steps",
     "detailsTitle": "Details per Card"
   },
   "coffee": {
-    "title": "Coffee Ground Reading",
-    "titleWithUpload": "Coffee Reading with Photo",
-    "chooseSymbols": "Choose your Symbols",
+    "title": "Coffee Reading",
+    "titleWithUpload": "Coffee Reading via Photo",
+    "chooseSymbols": "Choose your symbols",
     "selectedSymbols": "Selected Symbols",
-    "noneSelected": "No symbols selected yet.",
+    "noneSelected": "No symbols chosen yet.",
     "allSymbols": "All Symbols",
     "uploadPhoto": "Upload Photo",
     "generateReading": "Generate Reading",
-    "uploadTitle": "Upload your Coffee Cup",
-    "uploadDesc": "Click here to select a file",
-    "choosePhoto": "Choose Photo",
-    "tipsTitle": "Tips for the best photo:",
+    "uploadTitle": "Upload a photo of your coffee cup",
+    "uploadDesc": "Drag a file here or click to select",
+    "tipsTitle": "Tips for a good photo:",
     "tips": [
-      "Ensure good, bright lighting.",
-      "Hold your camera steady for a sharp photo.",
-      "Photograph the inside of the cup from directly above.",
-      "Make sure the symbols are clearly visible."
+      "Ensure good lighting.",
+      "Hold the camera steady for a sharp photo.",
+      "Photograph the inside of the cup."
     ],
     "analyzing": "Analyzing...",
     "detectedSymbols": "Detected Symbols",
@@ -83,21 +106,21 @@
   "dream": {
     "title": "Dream Interpretation",
     "yourDreamWorld": "Your Dream World",
-    "describe": "Describe your dream in as much detail as possible. What happened? Who was there? How did you feel? The more details, the better the interpretation.",
-    "yourDream": "Your Dream",
+    "describe": "Describe your dream in as much detail as possible. What happened? Who was there? How did you feel?",
+    "yourDream": "Your dream",
     "interpret": "Interpret"
   },
   "numerology": {
-    "title": "Numerology",
+    "title": "Numerology Reading",
     "yourProfile": "Your Numerological Profile",
-    "discover": "Discover the meaning of the numbers in your life. Enter your full birth name and date of birth to reveal your life path, soul, and personality numbers.",
+    "discover": "Discover the meaning of the numbers in your life based on your name and date of birth.",
     "fullName": "Full Birth Name",
     "birthDate": "Date of Birth",
-    "calculate": "Calculate"
+    "calculate": "Calculate Profile"
   },
   "archive": {
-    "title": "My Archive",
-    "historyTitle": "Session History"
+    "title": "Session Archive",
+    "historyTitle": "Reading History"
   },
   "profile": {
     "title": "My Profile",
@@ -106,7 +129,7 @@
     "email": "Email Address",
     "language": "Language",
     "timezone": "Timezone",
-    "about": "About Me / Intentions",
+    "about": "About me",
     "sessions": "Recent Sessions",
     "statistics": "Statistics"
   },
@@ -115,31 +138,6 @@
     "backToProfile": "Back to Profile",
     "downloadPdf": "Download as PDF",
     "title": "{{method}} Reading",
-    "noInterpretation": "There is no interpretation for this reading yet."
-  },
-  "freeReading": {
-    "title": "Try a Free Reading",
-    "subtitle": "Get instant insight with our popular Past, Present & Future spread. No registration required.",
-    "cta": "Start Free Reading"
-  },
-  "features": {
-    "title": "Discover the Worlds Within",
-    "subtitle": "After registering, you'll gain access to a suite of mystical tools to illuminate your path. Discover what the stars have in store for you.",
-    "tarot": {
-      "title": "Tarot Spreads",
-      "description": "Gain deep insight into any situation with a variety of card spreads, from a quick daily card to the comprehensive Celtic Cross."
-    },
-    "coffee": {
-      "title": "Coffee Reading",
-      "description": "Discover the hidden messages in your coffee cup. Choose the symbols you see or upload a photo for a traditional Turkish coffee reading."
-    },
-    "dream": {
-      "title": "Dream Interpretation",
-      "description": "Your dreams contain valuable insights. Describe your nightly adventures and let our AI unravel the symbolism and meaning for you."
-    },
-    "numerology": {
-      "title": "Numerology",
-      "description": "The numbers in your life are no coincidence. Discover your life path, soul's desire, and personality based on your name and date of birth."
-    }
+    "noInterpretation": "No interpretation available for this reading."
   }
 }

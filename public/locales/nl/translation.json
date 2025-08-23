@@ -1,14 +1,47 @@
 {
-  "home": {
-    "subtitle": "JOUW GIDS NAAR DE STERREN",
-    "startJourney": "Begin Jouw Reis",
-    "chooseSeer": "Kies je waarzegger"
-  },
   "header": {
     "admin": "Admin",
     "dashboard": "Dashboard",
     "logout": "Uitloggen",
     "login": "Inloggen"
+  },
+  "common": {
+    "back": "Terug",
+    "viewAll": "Bekijk Alles",
+    "confirmSelection": "Selectie Bevestigen",
+    "close": "Sluiten",
+    "save": "Opslaan",
+    "cancel": "Annuleren"
+  },
+  "home": {
+    "subtitle": "JOUW GIDS NAAR DE STERREN",
+    "startJourney": "Begin Jouw Reis",
+    "chooseSeer": "Kies je waarzegger"
+  },
+  "freeReading": {
+    "title": "Probeer een Gratis Lezing",
+    "subtitle": "Krijg direct inzicht met onze populaire 3-kaarten tarot legging. Geen registratie nodig.",
+    "cta": "Start Gratis Lezing"
+  },
+  "features": {
+    "title": "Ontdek de Werelden Binnenin",
+    "subtitle": "Na registratie krijg je toegang tot een reeks mystieke tools om je pad te verlichten. Ontdek wat de sterren voor jou in petto hebben.",
+    "tarot": {
+      "title": "Tarot",
+      "description": "Krijg inzicht in verleden, heden en toekomst met diverse kaartleggingen."
+    },
+    "coffee": {
+      "title": "Koffiedik Kijken",
+      "description": "Ontdek de symbolen en betekenissen die verborgen liggen in je koffiekopje."
+    },
+    "dream": {
+      "title": "Droomduiding",
+      "description": "Analyseer je dromen en onthul de boodschappen van je onderbewustzijn."
+    },
+    "numerology": {
+      "title": "Numerologie",
+      "description": "Verken de mystieke relatie tussen getallen en de gebeurtenissen in je leven."
+    }
   },
   "dashboard": {
     "welcomeBack": "Welkom terug, {{name}}",
@@ -17,22 +50,14 @@
     "yourCardToday": "Jouw kaart voor vandaag is...",
     "recentReadings": "Recente Lezingen",
     "noReadings": "Je hebt nog geen lezingen gedaan.",
-    "choosePath": "Kies Je Pad"
-  },
-  "dashboard.quickAction": {
-    "3card": "3-Kaart Legging",
-    "coffee": "Koffiedik Kijken",
-    "tarot": "Tarot Leggingen",
-    "dream": "Droomduiding",
-    "numerology": "Numerologie"
-  },
-  "common": {
-    "back": "Terug",
-    "confirmSelection": "Selectie Bevestigen",
-    "viewAll": "Bekijk Alles",
-    "save": "Opslaan",
-    "cancel": "Annuleren",
-    "close": "Sluiten"
+    "choosePath": "Kies Je Pad",
+    "quickAction": {
+      "3card": "3-Kaarten Legging",
+      "coffee": "Koffiedik Kijken",
+      "tarot": "Tarot Legging",
+      "dream": "Droom Duiding",
+      "numerology": "Numerologie"
+    }
   },
   "tarotChoice": {
     "loading": "Leggingen worden geladen...",
@@ -40,12 +65,12 @@
     "errorBody": "Kon de tarot leggingen niet laden. Probeer het later opnieuw.",
     "startSpread": "Start Legging",
     "title": "Kies een Tarot Legging",
-    "subtitle": "Elke legging biedt een uniek perspectief op je vragen."
+    "subtitle": "Elke legging biedt een uniek perspectief op jouw levensvragen."
   },
   "tarotReading": {
     "chooseSeer": "Je wordt begeleid door:",
-    "chooseCards": "Kies {{count}} kaarten uit het dek.",
-    "selected": "{{selected}} van de {{total}} kaarten gekozen."
+    "chooseCards": "Kies {{count}} kaarten uit het deck.",
+    "selected": "{{selected}} van de {{total}} kaarten gekozen"
   },
   "tarot": {
     "upright": "Rechtop",
@@ -54,27 +79,25 @@
     "storyTitle": "Het Verhaal van de Kaarten",
     "adviceTitle": "Advies voor Jou",
     "affirmationTitle": "Affirmatie",
-    "actionsTitle": "Concrete Volgende Stappen",
+    "actionsTitle": "Concrete Stappen",
     "detailsTitle": "Details per Kaart"
   },
   "coffee": {
-    "title": "Koffiedik Kijken",
-    "titleWithUpload": "Koffiedik Kijken met Foto",
-    "chooseSymbols": "Kies je Symbolen",
+    "title": "Koffiedik Lezing",
+    "titleWithUpload": "Koffiedik Lezing via Foto",
+    "chooseSymbols": "Kies je symbolen",
     "selectedSymbols": "Geselecteerde Symbolen",
-    "noneSelected": "Nog geen symbolen geselecteerd.",
+    "noneSelected": "Nog geen symbolen gekozen.",
     "allSymbols": "Alle Symbolen",
     "uploadPhoto": "Upload Foto",
     "generateReading": "Genereer Lezing",
-    "uploadTitle": "Upload je Koffiekopje",
-    "uploadDesc": "Klik hier om een bestand te selecteren",
-    "choosePhoto": "Kies Foto",
-    "tipsTitle": "Tips voor de beste foto:",
+    "uploadTitle": "Upload een foto van je koffiekopje",
+    "uploadDesc": "Sleep een bestand hierheen of klik om te selecteren",
+    "tipsTitle": "Tips voor een goede foto:",
     "tips": [
-      "Zorg voor goed, helder licht.",
-      "Houd je camera stil voor een scherpe foto.",
-      "Fotografeer de binnenkant van het kopje recht van boven.",
-      "Zorg dat de symbolen duidelijk zichtbaar zijn."
+      "Zorg voor goede belichting.",
+      "Houd de camera stil voor een scherpe foto.",
+      "Fotografeer de binnenkant van het kopje."
     ],
     "analyzing": "Bezig met analyseren...",
     "detectedSymbols": "Gedetecteerde Symbolen",
@@ -83,30 +106,30 @@
   "dream": {
     "title": "Droomduiding",
     "yourDreamWorld": "Jouw Droomwereld",
-    "describe": "Beschrijf je droom zo gedetailleerd mogelijk. Wat gebeurde er? Wie was er? Hoe voelde je je? Hoe meer details, hoe beter de duiding.",
-    "yourDream": "Jouw Droom",
+    "describe": "Beschrijf je droom zo gedetailleerd mogelijk. Wat gebeurde er? Wie was erbij? Hoe voelde je je?",
+    "yourDream": "Jouw droom",
     "interpret": "Duiding"
   },
   "numerology": {
-    "title": "Numerologie",
+    "title": "Numerologie Lezing",
     "yourProfile": "Jouw Numerologisch Profiel",
-    "discover": "Ontdek de betekenis van de getallen in je leven. Vul je volledige geboortenaam en geboortedatum in om je levenspad-, ziels- en persoonlijkheidsgetallen te onthullen.",
+    "discover": "Ontdek de betekenis van de getallen in je leven op basis van je naam en geboortedatum.",
     "fullName": "Volledige Geboortenaam",
     "birthDate": "Geboortedatum",
-    "calculate": "Bereken"
+    "calculate": "Bereken Profiel"
   },
   "archive": {
-    "title": "Mijn Archief",
-    "historyTitle": "Sessie Geschiedenis"
+    "title": "Sessie Archief",
+    "historyTitle": "Lezing Geschiedenis"
   },
   "profile": {
     "title": "Mijn Profiel",
-    "account": "Account Details",
+    "account": "Accountgegevens",
     "name": "Naam",
-    "email": "Email Adres",
+    "email": "E-mailadres",
     "language": "Taal",
     "timezone": "Tijdzone",
-    "about": "Over Mij / Intenties",
+    "about": "Over mij",
     "sessions": "Recente Sessies",
     "statistics": "Statistieken"
   },
@@ -115,31 +138,6 @@
     "backToProfile": "Terug naar Profiel",
     "downloadPdf": "Download als PDF",
     "title": "{{method}} Lezing",
-    "noInterpretation": "Er is nog geen interpretatie voor deze lezing."
-  },
-  "freeReading": {
-    "title": "Probeer een Gratis Legging",
-    "subtitle": "Krijg direct inzicht met onze populaire Verleden, Heden & Toekomst legging. Geen registratie nodig.",
-    "cta": "Start Gratis Legging"
-  },
-  "features": {
-    "title": "Ontdek de Werelden Binnenin",
-    "subtitle": "Na registratie krijg je toegang tot een reeks mystieke tools om je pad te verlichten. Ontdek wat de sterren voor jou in petto hebben.",
-    "tarot": {
-      "title": "Tarot Leggingen",
-      "description": "Krijg diepgaand inzicht in elke situatie met een verscheidenheid aan kaartleggingen, van een snelle dagkaart tot het uitgebreide Keltische Kruis."
-    },
-    "coffee": {
-      "title": "Koffiedik Kijken",
-      "description": "Ontdek de verborgen boodschappen in je koffiekopje. Kies de symbolen die je ziet of upload een foto voor een traditionele Turkse koffielezing."
-    },
-    "dream": {
-      "title": "Droomduiding",
-      "description": "Je dromen bevatten waardevolle inzichten. Beschrijf je nachtelijke avonturen en laat onze AI de symboliek en betekenis voor je ontrafelen."
-    },
-    "numerology": {
-      "title": "Numerologie",
-      "description": "De getallen in je leven zijn geen toeval. Ontdek je levenspad, zielsverlangen en persoonlijkheid op basis van je naam en geboortedatum."
-    }
+    "noInterpretation": "Geen interpretatie beschikbaar voor deze lezing."
   }
 }
