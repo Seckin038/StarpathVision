@@ -71,14 +71,10 @@ function gridPositions(rows: number, cols: number): Position[] {
 export function starOfDavid6(): Position[] {
   const cx = 0.5, cy = 0.5, r = 0.34;
   const base = (deg:number)=>({ x: cx + r*Math.cos(deg*Math.PI/180), y: cy + r*Math.sin(deg*Math.PI/180) });
-  // Twee gelijkzijdige driehoeken met 60° offset
+  // twee gelijkzijdige driehoeken met 60° offset
   return [
-    base(-90),  // Top
-    base(-30),  // Boven-rechts
-    base(90),   // Onder-rechts
-    base(150),  // Onder-links
-    base(210),  // Boven-links
-    base(30),   // Midden (aangepast)
+    base(-90), base(30), base(150),     // ▲
+    base(-30), base(90), base(210)      // ▼
   ];
 }
 

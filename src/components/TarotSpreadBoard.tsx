@@ -106,9 +106,13 @@ export default function TarotSpreadBoard({
               left: `${leftPct}%`,
               top: `${topPct}%`,
               width: `${widthPct}%`,
-              transform: `translate(-50%, -50%) rotate(${p.r ?? 0}deg)`,
               zIndex: p.z ?? (i+1),
+              // The transform origin is crucial for scaling from the center
+              transformOrigin: 'center center',
             }}
+            // Use individual transform properties for framer-motion
+            initial={{ translateX: '-50%', translateY: '-50%', rotate: p.r ?? 0 }}
+            animate={{ translateX: '-50%', translateY: '-50%', rotate: p.r ?? 0 }}
             whileHover={{ scale: 1.05, zIndex: 100 }}
             transition={{ duration: 0.2 }}
           >
