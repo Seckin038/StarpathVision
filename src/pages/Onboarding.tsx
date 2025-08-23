@@ -1,29 +1,56 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { User, Calendar, Globe, Heart } from "lucide-react";
+import { User, Heart, Star, Loader2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { getCoreValues, updateMyProfile } from "@/lib/profile";
+import { showError, showSuccess } from "@/utils/toast";
+
+type CoreValue = { id: string; name_nl: string; name_en: string; name_tr: string };
 
 const Onboarding = () => {
   const navigate = useNavigate();
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
     gender: "",
-    ageGroup: "",
-    culture: "",
-    language: "nl-NL",
-    interests: [] as string[],
+    focus_areas: [] as string[],
+    core_values: [] as string[],
   });
+  const [coreValues, setCoreValues] = useState<CoreValue[]>([]);
+  const [loading, setLoading] = useState(false);
 
-  const handleNext = () => {
-    if (step < 4) {
+  useEffect(() => {
+    const fetchValues = async () => {
+      try {
+        const values = await getCoreValues();
+        setCoreValues(values);
+      } catch (error) {
+        showError("Kon kernwaarden niet laden.");
+      }
+    };
+    fetchValues();
+  }, []);
+
+  const handleNext = async () => {
+    if (step < 3) {
       setStep(step + 1);
     } else {
-      localStorage.setItem("userPreferences", JSON.stringify(formData));
-      navigate("/dashboard");
+      setLoading(true);
+      try {
+        await updateMyProfile({
+          focus_areas: formData.focus_areas,
+          core_values: formData.core_values,
+          onboarding_done: true,
+        });
+        showSuccess("Profiel opgeslagen!");
+        navigate("/dashboard");
+      } catch (error: any) {
+        showError(`Opslaan mislukt: ${error.message}`);
+      } finally {
+        setLoading(false);
+      }
     }
   };
 
@@ -35,13 +62,18 @@ const Onboarding = () => {
     }
   };
 
-  const handleInterestToggle = (interest: string) => {
-    setFormData(prev => ({
-      ...prev,
-      interests: prev.interests.includes(interest)
-        ? prev.interests.filter(i => i !== interest)
-        : [...prev.interests, interest],
-    }));
+  const handleToggle = (field: 'focus_areas' | 'core_values', value: string, max: number) => {
+    setFormData(prev => {
+      const currentValues = prev[field];
+      const newValues = currentValues.includes(value)
+        ? currentValues.filter(i => i !== value)
+        : [...currentValues, value];
+      
+      if (newValues.length > max) {
+        return prev; // Do not update if max is exceeded
+      }
+      return { ...prev, [field]: newValues };
+    });
   };
 
   const renderStep = () => {
@@ -73,25 +105,36 @@ const Onboarding = () => {
         );
       
       case 2:
+        const focusOptions = [
+          { id: 'love', label: 'Liefde & Relaties' },
+          { id: 'career', label: 'Carrière & Werk' },
+          { id: 'growth', label: 'Persoonlijke Groei' },
+          { id: 'health', label: 'Gezondheid & Welzijn' },
+          { id: 'spirituality', label: 'Spiritualiteit' },
+          { id: 'finance', label: 'Financiën' },
+        ];
         return (
           <div className="space-y-6">
             <div className="text-center">
-              <Calendar className="h-12 w-12 text-amber-400 mx-auto mb-4" />
-              <h2 className="text-2xl font-bold text-amber-200">Leeftijd</h2>
-              <p className="text-stone-400 mt-2">Welke leeftijdsgroep voelt het beste bij je?</p>
+              <Heart className="h-12 w-12 text-amber-400 mx-auto mb-4" />
+              <h2 className="text-2xl font-bold text-amber-200">Focusgebieden</h2>
+              <p className="text-stone-400 mt-2">Kies 1 of 2 gebieden die nu belangrijk voor je zijn.</p>
             </div>
-            <RadioGroup 
-              value={formData.ageGroup} 
-              onValueChange={(value) => setFormData({...formData, ageGroup: value})}
-              className="space-y-3"
-            >
-              {["18-25", "26-40", "41-60", "60+"].map(age => (
-                <div key={age} className="flex items-center space-x-3">
-                  <RadioGroupItem value={age} id={age} />
-                  <Label htmlFor={age}>{age} jaar</Label>
-                </div>
+            <div className="grid grid-cols-2 gap-3">
+              {focusOptions.map((item) => (
+                <button
+                  key={item.id}
+                  onClick={() => handleToggle('focus_areas', item.id, 2)}
+                  className={`p-4 rounded-lg border-2 transition-all ${
+                    formData.focus_areas.includes(item.id)
+                      ? "border-amber-700 bg-stone-800 text-amber-200"
+                      : "border-stone-700 hover:border-stone-600 bg-stone-900/50"
+                  }`}
+                >
+                  {item.label}
+                </button>
               ))}
-            </RadioGroup>
+            </div>
           </div>
         );
       
@@ -99,62 +142,22 @@ const Onboarding = () => {
         return (
           <div className="space-y-6">
             <div className="text-center">
-              <Globe className="h-12 w-12 text-amber-400 mx-auto mb-4" />
-              <h2 className="text-2xl font-bold text-amber-200">Cultuur & Taal</h2>
-              <p className="text-stone-400 mt-2">Waar voel je je cultureel verbonden?</p>
+              <Star className="h-12 w-12 text-amber-400 mx-auto mb-4" />
+              <h2 className="text-2xl font-bold text-amber-200">Kernwaarden</h2>
+              <p className="text-stone-400 mt-2">Selecteer 3 tot 5 waarden die jou definiëren.</p>
             </div>
-            <div className="space-y-4">
-              <div>
-                <Label className="text-stone-300">Cultuur</Label>
-                <Select value={formData.culture} onValueChange={(value) => setFormData({...formData, culture: value})}>
-                  <SelectTrigger className="w-full mt-2 bg-stone-900 border-stone-700"><SelectValue placeholder="Selecteer je cultuur" /></SelectTrigger>
-                  <SelectContent className="bg-stone-900 border-stone-700 text-stone-200">
-                    <SelectItem value="nl">Nederland</SelectItem>
-                    <SelectItem value="be">België</SelectItem>
-                    <SelectItem value="tr">Turkije</SelectItem>
-                    <SelectItem value="de">Duitsland</SelectItem>
-                    <SelectItem value="gb">Verenigd Koninkrijk</SelectItem>
-                    <SelectItem value="fr">Frankrijk</SelectItem>
-                    <SelectItem value="ma">Marokko</SelectItem>
-                    <SelectItem value="other">Anders / Internationaal</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-              <div>
-                <Label className="text-stone-300">Voorkeurstaal</Label>
-                <Select value={formData.language} onValueChange={(value) => setFormData({...formData, language: value})}>
-                  <SelectTrigger className="w-full mt-2 bg-stone-900 border-stone-700"><SelectValue placeholder="Selecteer je taal" /></SelectTrigger>
-                  <SelectContent className="bg-stone-900 border-stone-700 text-stone-200">
-                    <SelectItem value="nl-NL">Nederlands</SelectItem>
-                    <SelectItem value="en-GB">English</SelectItem>
-                    <SelectItem value="tr-TR">Türkçe</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-            </div>
-          </div>
-        );
-      
-      case 4:
-        return (
-          <div className="space-y-6">
-            <div className="text-center">
-              <Heart className="h-12 w-12 text-amber-400 mx-auto mb-4" />
-              <h2 className="text-2xl font-bold text-amber-200">Jouw Interesses</h2>
-              <p className="text-stone-400 mt-2">Waar ben je nieuwsgierig naar?</p>
-            </div>
-            <div className="grid grid-cols-2 gap-3">
-              {["Tarot", "Koffiedik", "Numerologie", "Droomduiding", "Aura/Chakra", "Astrologie"].map((interest) => (
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+              {coreValues.map((value) => (
                 <button
-                  key={interest}
-                  onClick={() => handleInterestToggle(interest)}
-                  className={`p-4 rounded-lg border-2 transition-all ${
-                    formData.interests.includes(interest)
+                  key={value.id}
+                  onClick={() => handleToggle('core_values', value.id, 5)}
+                  className={`p-3 rounded-lg border-2 transition-all text-sm ${
+                    formData.core_values.includes(value.id)
                       ? "border-amber-700 bg-stone-800 text-amber-200"
                       : "border-stone-700 hover:border-stone-600 bg-stone-900/50"
                   }`}
                 >
-                  {interest}
+                  {value.name_nl}
                 </button>
               ))}
             </div>
@@ -165,6 +168,8 @@ const Onboarding = () => {
     }
   };
 
+  const TOTAL_STEPS = 3;
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-stone-950 via-black to-stone-950 text-stone-200 p-4 flex items-center justify-center font-serif">
       <div className="w-full max-w-md">
@@ -172,13 +177,13 @@ const Onboarding = () => {
           <CardHeader>
             <CardTitle>
               <div className="flex justify-between items-center mb-4">
-                <span className="text-sm text-stone-400">Stap {step} van 4</span>
-                <span className="text-sm text-stone-400">{Math.round((step / 4) * 100)}%</span>
+                <span className="text-sm text-stone-400">Stap {step} van {TOTAL_STEPS}</span>
+                <span className="text-sm text-stone-400">{Math.round((step / TOTAL_STEPS) * 100)}%</span>
               </div>
               <div className="w-full bg-stone-800 rounded-full h-2">
                 <div 
                   className="bg-amber-600 h-2 rounded-full transition-all duration-300" 
-                  style={{ width: `${(step / 4) * 100}%` }}
+                  style={{ width: `${(step / TOTAL_STEPS) * 100}%` }}
                 ></div>
               </div>
             </CardTitle>
@@ -191,12 +196,13 @@ const Onboarding = () => {
                 onClick={handleNext}
                 className="bg-amber-800 hover:bg-amber-700 text-stone-100"
                 disabled={
+                  loading ||
                   (step === 1 && !formData.gender) ||
-                  (step === 2 && !formData.ageGroup) ||
-                  (step === 3 && (!formData.culture || !formData.language))
+                  (step === 2 && formData.focus_areas.length === 0) ||
+                  (step === 3 && (formData.core_values.length < 3 || formData.core_values.length > 5))
                 }
               >
-                {step === 4 ? "Afronden" : "Volgende"}
+                {loading ? <Loader2 className="animate-spin" /> : (step === TOTAL_STEPS ? "Afronden" : "Volgende")}
               </Button>
             </div>
           </CardContent>

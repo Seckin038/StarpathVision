@@ -20,12 +20,17 @@ import { useTarotDeck, TarotDeckCard } from "@/hooks/useTarotDeck";
 import { useTranslation } from "react-i18next";
 import { Locale } from "@/types/tarot";
 import TarotCardDetailModal from "@/components/TarotCardDetailModal";
+import { getMyProfile } from "@/lib/profile";
 
 type Reading = {
   id: string;
   title: string | null;
   method: string;
   created_at: string;
+};
+
+type Profile = {
+  focus_areas?: string[];
 };
 
 const Dashboard = () => {
@@ -37,6 +42,7 @@ const Dashboard = () => {
   const [loadingReadings, setLoadingReadings] = useState(true);
   const [dailyCard, setDailyCard] = useState<TarotDeckCard | null>(null);
   const [viewingCard, setViewingCard] = useState<TarotDeckCard | null>(null);
+  const [profile, setProfile] = useState<Profile | null>(null);
 
   const { deck, loading: deckLoading } = useTarotDeck(locale);
 
@@ -61,23 +67,28 @@ const Dashboard = () => {
   }, [deck, deckLoading]);
 
   useEffect(() => {
-    const fetchRecentReadings = async () => {
+    const fetchData = async () => {
       if (!user) return;
       setLoadingReadings(true);
-      const { data, error } = await supabase
-        .from('readings')
-        .select('id, title, method, created_at')
-        .eq('user_id', user.id)
-        .order('created_at', { ascending: false })
-        .limit(3);
-      if (error) {
+      const [readingsResult, profileResult] = await Promise.all([
+        supabase
+          .from('readings')
+          .select('id, title, method, created_at')
+          .eq('user_id', user.id)
+          .order('created_at', { ascending: false })
+          .limit(3),
+        getMyProfile()
+      ]);
+
+      if (readingsResult.error) {
         showError("Kon recente lezingen niet ophalen.");
       } else {
-        setRecentReadings(data || []);
+        setRecentReadings(readingsResult.data || []);
       }
+      setProfile(profileResult);
       setLoadingReadings(false);
     };
-    fetchRecentReadings();
+    fetchData();
   }, [user]);
 
   const choosePathActions = [
@@ -88,15 +99,23 @@ const Dashboard = () => {
     { title: t("dashboard.path.numerology"), icon: <Star className="h-6 w-6 text-yellow-400" />, path: "/readings/numerology" }
   ];
 
+  const focusMap: Record<string, string> = {
+    love: 'Liefde & Relaties', career: 'Carrière & Werk', growth: 'Persoonlijke Groei',
+    health: 'Gezondheid & Welzijn', spirituality: 'Spiritualiteit', finance: 'Financiën',
+  };
+
+  const welcomeSubtitle = profile?.focus_areas && profile.focus_areas.length > 0
+    ? `We zien dat je focus ligt op ${profile.focus_areas.map(f => focusMap[f] || f).join(' & ')}. Laten we kijken wat de kosmos je daarover te vertellen heeft.`
+    : t('dashboard.welcomeSubtitle');
+
   return (
     <div className="max-w-6xl mx-auto space-y-12">
       <div>
         <h1 className="text-4xl font-bold text-amber-200 tracking-wider">{t('dashboard.welcomeMessage', { name: user?.email?.split('@')[0] || "Zoeker" })}</h1>
-        <p className="text-stone-400">{t('dashboard.welcomeSubtitle')}</p>
+        <p className="text-stone-400">{welcomeSubtitle}</p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        {/* Daily Card */}
         <Card 
           className="bg-stone-900/50 backdrop-blur-sm border-stone-800 hover:border-amber-700/50 cursor-pointer transition-colors"
           onClick={() => setViewingCard(dailyCard)}
@@ -109,7 +128,7 @@ const Dashboard = () => {
               <div className="flex items-center justify-center h-full min-h-[160px]"><Loader2 className="h-6 w-6 animate-spin text-amber-500" /></div>
             ) : (
               <div className="flex items-center gap-6">
-                <img src={(dailyCard as any).image_url || dailyCard.imageUrl || '/tarot/back.svg'} alt={dailyCard.name} className="w-24 h-auto rounded-lg border border-stone-700" />
+                <img src={dailyCard.imageUrl || '/tarot/back.svg'} alt={dailyCard.name} className="w-24 h-auto rounded-lg border border-stone-700" />
                 <div className="flex-1">
                   <h3 className="text-2xl font-bold text-stone-100">{dailyCard.name}</h3>
                   <p className="text-stone-400 mt-2 text-sm">{dailyCard.meaning_up || t('dashboard.noMeaningAvailable')}</p>
@@ -119,7 +138,6 @@ const Dashboard = () => {
           </CardContent>
         </Card>
 
-        {/* Recent Readings */}
         <Card className="bg-stone-900/50 backdrop-blur-sm border-stone-800 flex flex-col">
           <CardHeader>
             <CardTitle className="text-amber-300 flex items-center gap-2 text-xl"><BookMarked className="h-5 w-5" /> {t('dashboard.recentReadingsTitle')}</CardTitle>
