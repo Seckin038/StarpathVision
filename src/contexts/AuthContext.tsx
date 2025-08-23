@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { supabase } from "@/lib/supabaseClient";
 import { Session, User } from "@supabase/supabase-js";
+import { Loader2 } from "lucide-react";
 
 type Profile = {
   plan: string;
@@ -24,8 +25,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // onAuthStateChange fires once with the initial session state, then for any changes.
-    // This is the most reliable way to handle auth state.
     const { data: { subscription } } = supabase.auth.onAuthStateChange(async (_event, session) => {
       setSession(session);
       
@@ -39,7 +38,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       } else {
         setProfile(null);
       }
-      // Set loading to false only after the initial check is complete.
       setLoading(false);
     });
 
@@ -58,9 +56,18 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     },
   };
 
+  // Show a loader while the initial session is being fetched
+  if (loading) {
+    return (
+      <div className="fixed inset-0 z-50 flex items-center justify-center bg-stone-950">
+        <Loader2 className="h-8 w-8 animate-spin text-amber-500" />
+      </div>
+    );
+  }
+
   return (
     <Ctx.Provider value={value}>
-      {!loading && children}
+      {children}
     </Ctx.Provider>
   );
 }
