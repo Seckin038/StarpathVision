@@ -30,7 +30,7 @@ export default function AdminCards() {
   const [editing, setEditing] = useState<TarotCard | null>(null);
   const [isUploading, setIsUploading] = useState(false);
   const singleFileRef = useRef<HTMLInputElement>(null);
-  const { t, i18n } = useTranslation('admin');
+  const { t, i18n } = useTranslation();
   const locale = i18n.language;
 
   const fetchCards = async () => {
@@ -97,16 +97,16 @@ export default function AdminCards() {
     <div className="space-y-6">
       <Card className="bg-stone-900/60 border-stone-800">
         <CardHeader>
-          <CardTitle className="text-amber-200">{t('cards.importTitle')}</CardTitle>
-          <CardDescription>{t('cards.importDesc')}</CardDescription>
+          <CardTitle className="text-amber-200">{t('admin:cards.importTitle')}</CardTitle>
+          <CardDescription>{t('admin:cards.importDesc')}</CardDescription>
         </CardHeader>
         <CardContent>
           <FileImporter onDone={fetchCards} />
         </CardContent>
       </Card>
 
-      <h2 className="text-xl font-serif text-stone-300">{t('cards.editListTitle')}</h2>
-      <p className="text-stone-400 -mt-4">{t('cards.editListDesc')}</p>
+      <h2 className="text-xl font-serif text-stone-300">{t('admin:cards.editListTitle')}</h2>
+      <p className="text-stone-400 -mt-4">{t('admin:cards.editListDesc')}</p>
       
       {loading ? (
         <div className="flex justify-center py-12"><Loader2 className="h-6 w-6 animate-spin text-amber-400" /></div>
@@ -131,8 +131,8 @@ export default function AdminCards() {
       <Dialog open={!!editing} onOpenChange={(isOpen) => !isOpen && setEditing(null)}>
         <DialogContent className="max-w-3xl bg-stone-950 border-stone-800 text-stone-200">
           <DialogHeader>
-            <DialogTitle className="text-amber-200">{t('cards.editTitle', { name: editing?.name[locale] || editing?.id })}</DialogTitle>
-            <DialogDescription>{t('cards.editDesc')}</DialogDescription>
+            <DialogTitle className="text-amber-200">{t('admin:cards.editTitle', { name: editing?.name[locale] || editing?.id })}</DialogTitle>
+            <DialogDescription>{t('admin:cards.editDesc')}</DialogDescription>
           </DialogHeader>
           {editing && (
             <div className="grid grid-cols-3 gap-6 py-4">
@@ -156,30 +156,30 @@ export default function AdminCards() {
                   {(['nl', 'en', 'tr'] as const).map(lang => (
                     <TabsContent key={lang} value={lang} className="space-y-4 pt-4">
                       <div>
-                        <Label htmlFor={`name_${lang}`}>{t('cards.name')}</Label>
+                        <Label htmlFor={`name_${lang}`}>{t('admin:cards.name')}</Label>
                         <Input id={`name_${lang}`} value={editing.name?.[lang] || ""} onChange={e => setEditing({ ...editing, name: {...editing.name, [lang]: e.target.value} })} />
                       </div>
                       <div>
-                        <Label htmlFor={`meaning_up_${lang}`}>{t('cards.meaningUp')}</Label>
+                        <Label htmlFor={`meaning_up_${lang}`}>{t('admin:cards.meaningUp')}</Label>
                         <Textarea id={`meaning_up_${lang}`} rows={3} value={editing.meaning_up?.[lang] || ""} onChange={e => setEditing({ ...editing, meaning_up: {...editing.meaning_up, [lang]: e.target.value} })} />
                       </div>
                       <div>
-                        <Label htmlFor={`meaning_rev_${lang}`}>{t('cards.meaningRev')}</Label>
+                        <Label htmlFor={`meaning_rev_${lang}`}>{t('admin:cards.meaningRev')}</Label>
                         <Textarea id={`meaning_rev_${lang}`} rows={3} value={editing.meaning_rev?.[lang] || ""} onChange={e => setEditing({ ...editing, meaning_rev: {...editing.meaning_rev, [lang]: e.target.value} })} />
                       </div>
                     </TabsContent>
                   ))}
                 </Tabs>
                  <div className="mt-4">
-                  <Label htmlFor="keywords">{t('cards.keywords')}</Label>
+                  <Label htmlFor="keywords">{t('admin:cards.keywords')}</Label>
                   <Input id="keywords" value={(editing.keywords || []).join(", ")} onChange={e => setEditing({ ...editing, keywords: e.target.value.split(",").map(k => k.trim()) })} />
                 </div>
               </div>
             </div>
           )}
           <DialogFooter>
-            <Button variant="outline" onClick={() => setEditing(null)}>{t('common:cancel', 'Annuleren')}</Button>
-            <Button onClick={handleSave}>{t('common:save', 'Opslaan')}</Button>
+            <Button variant="outline" onClick={() => setEditing(null)}>{t('common.cancel')}</Button>
+            <Button onClick={handleSave}>{t('common.save')}</Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
@@ -192,7 +192,7 @@ type Item = { file: File; status: "pending"|"uploading"|"processing"|"done"|"err
 function FileImporter({ onDone }: { onDone: () => void }) {
   const inputRef = useRef<HTMLInputElement>(null);
   const [items, setItems] = useState<Item[]>([]);
-  const { t } = useTranslation('admin');
+  const { t } = useTranslation();
 
   const onFiles = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = Array.from(e.target.files ?? []);
@@ -206,12 +206,12 @@ function FileImporter({ onDone }: { onDone: () => void }) {
         const tmpBucket = 'tarot-card-uploads';
         const ext = file.name.split(".").pop()?.toLowerCase() || "png";
         const tmpPath = `admin/${crypto.randomUUID()}.${ext}`;
-        setItems((prev) => prev.map((it, i) => i === idx ? { ...it, status: "uploading", message: t('cards.importer.uploading') } : it));
+        setItems((prev) => prev.map((it, i) => i === idx ? { ...it, status: "uploading", message: t('admin:cards.importer.uploading') } : it));
         const { error: uploadError, data: uploadData } = await supabase.storage.from(tmpBucket).upload(tmpPath, file);
         if (uploadError) throw uploadError;
 
         // 2. Invoke new function
-        setItems((prev) => prev.map((it, i) => i === idx ? { ...it, status: "processing", message: t('cards.importer.processing') } : it));
+        setItems((prev) => prev.map((it, i) => i === idx ? { ...it, status: "processing", message: t('admin:cards.importer.processing') } : it));
         const { data, error: invokeError } = await supabase.functions.invoke('cards-import', { body: { path: uploadData.path } });
 
         if (invokeError) throw new Error(`Invoke failed: ${invokeError.message}`);
@@ -229,7 +229,7 @@ function FileImporter({ onDone }: { onDone: () => void }) {
   return (
     <div className="space-y-3 pt-4">
       <input ref={inputRef} type="file" accept="image/*" multiple hidden onChange={onFiles} />
-      <Button onClick={() => inputRef.current?.click()}><UploadCloud className="h-4 w-4 mr-2" /> {t('cards.chooseFiles')}</Button>
+      <Button onClick={() => inputRef.current?.click()}><UploadCloud className="h-4 w-4 mr-2" /> {t('admin:cards.chooseFiles')}</Button>
 
       {items.length > 0 && (
         <div className="border border-stone-800 rounded-md p-2 max-h-64 overflow-auto text-sm">
