@@ -3,7 +3,8 @@
     "admin": "Admin",
     "dashboard": "Dashboard",
     "logout": "Uitloggen",
-    "login": "Inloggen"
+    "login": "Inloggen",
+    "myProfile": "Mijn Profiel"
   },
   "common": {
     "back": "Terug",
@@ -45,31 +46,19 @@
   },
   "dashboard": {
     "welcomeMessage": "Welkom terug, {{name}}",
-    "welcomeSubtitle": "Klaar om de mysteries van vandaag te onthullen?",
-    "dailyCardTitle": "Dagelijkse Kaart",
-    "viewDetails": "Bekijk Details",
+    "welcomeSubtitle": "Ontdek wat de kosmos vandaag voor je in petto heeft",
+    "dailyCardTitle": "Energie van de Dag",
     "recentReadingsTitle": "Recente Lezingen",
-    "startNewReadingTitle": "Start een Nieuwe Lezing",
-    "myProfile": "Mijn Profiel",
-    "tarot": {
-      "title": "Tarot Legging",
-      "description": "Krijg inzicht met de kaarten."
-    },
-    "coffee": {
-      "title": "Koffiedik Kijken",
-      "description": "Ontdek symbolen in je kopje."
-    },
-    "dream": {
-      "title": "Droom Duiding",
-      "description": "Vind betekenis in je dromen."
-    },
-    "numerology": {
-      "title": "Numerologie",
-      "description": "De kracht van jouw getallen."
-    },
-    "dayEnergy": "Energie van de Dag",
-    "yourCardToday": "Jouw kaart voor vandaag is...",
-    "noReadings": "Je hebt nog geen lezingen gedaan."
+    "noReadings": "Je hebt nog geen lezingen gedaan.",
+    "choosePath": "Kies Je Pad",
+    "view": "Bekijk",
+    "path": {
+      "3card": "3-Kaarten Legging",
+      "coffee": "Koffiedik Kijken",
+      "tarot": "Tarot Legging",
+      "dream": "Droom Duiding",
+      "numerology": "Numerologie"
+    }
   },
   "tarotChoice": {
     "loading": "Leggingen worden geladen...",

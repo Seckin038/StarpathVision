@@ -3,7 +3,8 @@
     "admin": "Yönetici",
     "dashboard": "Panel",
     "logout": "Çıkış Yap",
-    "login": "Giriş Yap"
+    "login": "Giriş Yap",
+    "myProfile": "Profilim"
   },
   "common": {
     "back": "Geri",
@@ -46,30 +47,18 @@
   "dashboard": {
     "welcomeMessage": "Tekrar hoş geldin, {{name}}",
     "welcomeSubtitle": "Bugünün gizemlerini açığa çıkarmaya hazır mısın?",
-    "dailyCardTitle": "Günün Kartı",
-    "viewDetails": "Detayları Görüntüle",
+    "dailyCardTitle": "Günün Enerjisi",
     "recentReadingsTitle": "Son Okumalar",
-    "startNewReadingTitle": "Yeni Bir Okuma Başlat",
-    "myProfile": "Profilim",
-    "tarot": {
-      "title": "Tarot Okuması",
-      "description": "Kartlarla içgörü kazanın."
-    },
-    "coffee": {
-      "title": "Kahve Falı",
-      "description": "Fincanınızdaki sembolleri keşfedin."
-    },
-    "dream": {
-      "title": "Rüya Yorumu",
-      "description": "Rüyalarınızda anlam bulun."
-    },
-    "numerology": {
-      "title": "Numeroloji",
-      "description": "Sayılarınızın gücü."
-    },
-    "dayEnergy": "Günün Enerjisi",
-    "yourCardToday": "Bugünkü kartın...",
-    "noReadings": "Henüz bir okuma yapmadın."
+    "noReadings": "Henüz bir okuma yapmadın.",
+    "choosePath": "Yolunu Seç",
+    "view": "Görüntüle",
+    "path": {
+      "3card": "3 Kart Açılımı",
+      "coffee": "Kahve Falı",
+      "tarot": "Tarot Okuması",
+      "dream": "Rüya Yorumu",
+      "numerology": "Numeroloji"
+    }
   },
   "tarotChoice": {
     "loading": "Açılımlar yükleniyor...",
