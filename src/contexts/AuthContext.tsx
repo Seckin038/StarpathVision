@@ -25,45 +25,58 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const getSessionAndProfile = async () => {
-      const { data: { session } } = await supabase.auth.getSession();
+    // This function runs once on mount to get the initial session.
+    const getInitialSession = async () => {
+      try {
+        const { data, error } = await supabase.auth.getSession();
+        if (error) throw error;
+
+        const currentSession = data.session;
+        setSession(currentSession);
+        const currentUser = currentSession?.user ?? null;
+        setUser(currentUser);
+
+        if (currentUser) {
+          const { data: profileData, error: profileError } = await supabase.from('profiles').select('*').eq('id', currentUser.id).single();
+          if (profileError) console.warn("Could not fetch initial profile:", profileError.message);
+          setProfile(profileData as Profile | null);
+        } else {
+          setProfile(null);
+        }
+      } catch (error) {
+        console.error("Error getting initial session:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    getInitialSession();
+
+    // This listener runs on every auth state change.
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (_event, session) => {
       setSession(session);
       const currentUser = session?.user ?? null;
       setUser(currentUser);
 
       if (currentUser) {
-        const { data: profileData } = await supabase.from('profiles').select('*').eq('id', currentUser.id).single();
+        // Fetch profile when user logs in or session is refreshed
+        const { data: profileData, error: profileError } = await supabase.from('profiles').select('*').eq('id', currentUser.id).single();
+        if (profileError) console.warn("Could not fetch profile on auth change:", profileError.message);
         setProfile(profileData as Profile | null);
       } else {
+        // Clear profile when user logs out
         setProfile(null);
       }
-      setLoading(false);
-    };
-    
-    getSessionAndProfile();
-
-    const { data: sub } = supabase.auth.onAuthStateChange(async (_evt, sess) => {
-      setSession(sess);
-      const currentUser = sess?.user ?? null;
-      setUser(currentUser);
-
-      if (currentUser) {
-        const { data: profileData } = await supabase.from('profiles').select('*').eq('id', currentUser.id).single();
-        setProfile(profileData as Profile | null);
-      } else {
-        setProfile(null);
-      }
-      setLoading(false);
     });
 
     return () => {
-      sub.subscription.unsubscribe();
+      subscription.unsubscribe();
     };
   }, []);
 
   async function signOut() {
     await supabase.auth.signOut();
-    setProfile(null);
+    // The onAuthStateChange listener will handle clearing user, session, and profile state.
   }
 
   const value = {
