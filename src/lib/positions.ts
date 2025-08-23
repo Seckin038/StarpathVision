@@ -19,13 +19,30 @@ export function normalizePositions(raw: any[] = []): Position[] {
   });
 }
 
-/** Cirkels */
+/** Cirkels - now adaptive for large numbers of cards */
 export function circlePositions(n:number, opts?:{cx?:number;cy?:number;r?:number;startDeg?:number}): Position[] {
-  const cx = opts?.cx ?? 0.5, cy = opts?.cy ?? 0.5, r = opts?.r ?? 0.36;
+  const cx = opts?.cx ?? 0.5;
+  let cy = opts?.cy ?? 0.5;
+  let rx = opts?.r ?? 0.36;
+  let ry = opts?.r ?? 0.36;
+  
+  // For larger numbers of cards, switch to an elliptical layout that's higher up to prevent overlap at the bottom.
+  if (n > 20) {
+    rx = 0.48; // Wider radius to spread cards horizontally
+    ry = 0.32; // Shorter radius to prevent vertical overlap
+    cy = 0.45; // Move the center of the ellipse up
+  }
+  if (n > 40) {
+    rx = 0.49; // Even wider for very large spreads
+    ry = 0.38; // Use a bit more vertical space
+    cy = 0.48; // Center it slightly lower than the 20+ case, but still high
+  }
+
   const start = (opts?.startDeg ?? -90) * Math.PI/180;
+  
   return Array.from({length:n}, (_,i)=>{
     const t = start + i*2*Math.PI/n;
-    return { x: cx + r*Math.cos(t), y: cy + r*Math.sin(t) };
+    return { x: cx + rx*Math.cos(t), y: cy + ry*Math.sin(t) };
   });
 }
 

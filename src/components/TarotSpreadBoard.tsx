@@ -57,7 +57,15 @@ export default function TarotSpreadBoard({
     positions = positionsFor('custom', desired);
   }
 
-  const widthPct = cardWidthPct ?? DEFAULT_CARD_WIDTH[kind];
+  let widthPct = cardWidthPct ?? DEFAULT_CARD_WIDTH[kind];
+  // For custom layouts with many cards, reduce card size to prevent overlap.
+  if (kind === 'custom' && cards.length > 20) {
+    widthPct = 6;
+  }
+  if (kind === 'custom' && cards.length > 40) {
+    widthPct = 5;
+  }
+
   const halfW = widthPct / 2;
   const halfH = (widthPct * HEIGHT_PCT_PER_WIDTH_PCT) / 2;
 
