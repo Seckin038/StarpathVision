@@ -27,16 +27,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    setLoading(true);
-    setError(null);
+    const initializeAuth = async () => {
+      setLoading(true);
+      setError(null);
+      try {
+        const { data: { session }, error: sessionError } = await supabase.auth.getSession();
+        if (sessionError) throw sessionError;
 
-    const sessionPromise = supabase.auth.getSession();
-    const timeoutPromise = new Promise((_, reject) => 
-      setTimeout(() => reject(new Error("Supabase connection timed out. Please check your network and Supabase configuration.")), 8000)
-    );
-
-    Promise.race([sessionPromise, timeoutPromise])
-      .then(async ({ data: { session } }: any) => {
         setSession(session);
         if (session?.user) {
           const { data, error: profileError } = await supabase
@@ -46,24 +43,25 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             .single();
           setProfile(profileError ? null : data as Profile);
         }
-      })
-      .catch((err) => {
+      } catch (err: any) {
         console.error("Auth init error:", err);
         setError(err.message);
-      })
-      .finally(() => {
+      } finally {
         setLoading(false);
-      });
+      }
+    };
+
+    initializeAuth();
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange(async (_event, session) => {
       setSession(session);
       if (session?.user) {
-        const { data: profileError } = await supabase
+        const { data, error: profileError } = await supabase
           .from('profiles')
           .select('*')
           .eq('id', session.user.id)
           .single();
-        setProfile(profileError ? null : (profileError as any));
+        setProfile(profileError ? null : (data as Profile));
       } else {
         setProfile(null);
       }
