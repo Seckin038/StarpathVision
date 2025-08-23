@@ -8,13 +8,16 @@ export type TarotDeckCard = {
   imageUrl?: string; 
   meaning_up?: string | null;
   meaning_rev?: string | null;
+  keywords?: string[] | null;
+  element?: string | null;
+  astrology?: string | null;
 };
 
 const fetchTarotDeck = async (locale: Locale): Promise<TarotDeckCard[]> => {
   try {
     const { data, error } = await supabase
       .from("tarot_cards")
-      .select("id, name, image_url, meaning_up, meaning_rev, number")
+      .select("id, name, image_url, meaning_up, meaning_rev, number, keywords, element, astrology")
       .order("number");
 
     if (error) {
@@ -27,6 +30,9 @@ const fetchTarotDeck = async (locale: Locale): Promise<TarotDeckCard[]> => {
       imageUrl: card.image_url,
       meaning_up: card.meaning_up?.[locale] ?? card.meaning_up?.['en'] ?? null,
       meaning_rev: card.meaning_rev?.[locale] ?? card.meaning_rev?.['en'] ?? null,
+      keywords: card.keywords,
+      element: card.element,
+      astrology: card.astrology,
     }));
 
   } catch (error) {
@@ -47,6 +53,9 @@ const fetchTarotDeck = async (locale: Locale): Promise<TarotDeckCard[]> => {
         meaning_rev: (typeof card.meaning_rev === 'object' && card.meaning_rev !== null)
           ? (card.meaning_rev[locale] ?? card.meaning_rev['en'] ?? null)
           : (card.meaning_rev || null),
+        keywords: card.keywords,
+        element: card.element,
+        astrology: card.astrology,
       }));
     } catch (fallbackError) {
       console.error("Fallback to local JSON also failed:", fallbackError);
