@@ -187,7 +187,7 @@ export default function AdminCards() {
   );
 }
 
-type Item = { file: File; status: "pending"|"uploading"|"processing"|"done"|"error"; message?: string };
+type Item = { file: File; status: "pending"|"uploading"|"queued"|"done"|"error"; message?: string };
 
 function FileImporter({ onDone }: { onDone: () => void }) {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -207,28 +207,28 @@ function FileImporter({ onDone }: { onDone: () => void }) {
         const ext = file.name.split(".").pop()?.toLowerCase() || "png";
         const tmpPath = `admin/${crypto.randomUUID()}.${ext}`;
         setItems((prev) => prev.map((it, i) => i === idx ? { ...it, status: "uploading", message: t('admin:cards.importer.uploading') } : it));
-        const { error: uploadError, data: uploadData } = await supabase.storage.from(tmpBucket).upload(tmpPath, file);
+        const { error: uploadError } = await supabase.storage.from(tmpBucket).upload(tmpPath, file);
         if (uploadError) throw uploadError;
 
-        // 2. Invoke new function
-        setItems((prev) => prev.map((it, i) => i === idx ? { ...it, status: "processing", message: t('admin:cards.importer.processing') } : it));
-        const { data, error: invokeError } = await supabase.functions.invoke('cards-import', { 
-          body: { 
-            path: uploadData.path,
-            originalFilename: file.name 
-          } 
+        // 2. Add to queue table
+        setItems((prev) => prev.map((it, i) => i === idx ? { ...it, status: "queued", message: t('admin:cards.importer.queued') } : it));
+        const { error: queueError } = await supabase.from('card_import_queue').insert({
+          storage_path: tmpPath,
+          original_filename: file.name,
         });
+        if (queueError) throw queueError;
 
-        if (invokeError) throw new Error(`Invoke failed: ${invokeError.message}`);
-        if (!data?.ok) throw new Error(data?.error || 'Function failed');
+        // 3. Update UI (processing will happen in the background)
+        // We can't easily track "done" here, so we'll just show it's queued.
+        // A more advanced version could use Supabase Realtime to listen for updates.
+        setItems((prev) => prev.map((it, i) => i === idx ? { ...it, status: "done", message: "Verwerking gestart" } : it));
 
-        // 3. Update UI
-        setItems((prev) => prev.map((it, i) => i === idx ? { ...it, status: "done", message: `Matched: ${data.matched}` } : it));
       } catch (err: any) {
         setItems((prev) => prev.map((it, i) => i === idx ? { ...it, status: "error", message: err.message } : it));
       }
     }
-    onDone();
+    // Refresh after a short delay to allow background processing to start
+    setTimeout(() => onDone(), 3000);
   };
 
   return (
@@ -242,7 +242,7 @@ function FileImporter({ onDone }: { onDone: () => void }) {
             <div key={i} className="flex items-center gap-2 py-1">
               {it.status === "pending" && <Loader2 className="h-4 w-4 text-stone-500 animate-pulse" />}
               {it.status === "uploading" && <Loader2 className="h-4 w-4 text-amber-500 animate-spin" />}
-              {it.status === "processing" && <Loader2 className="h-4 w-4 text-blue-500 animate-spin" />}
+              {it.status === "queued" && <Loader2 className="h-4 w-4 text-blue-500 animate-spin" />}
               {it.status === "done" && <CheckCircle className="h-4 w-4 text-green-500" />}
               {it.status === "error" && <XCircle className="h-4 w-4 text-red-500" />}
               <span className="flex-1 truncate">{it.file.name}</span>
