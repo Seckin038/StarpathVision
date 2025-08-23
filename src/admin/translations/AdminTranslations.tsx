@@ -23,9 +23,10 @@ export default function AdminTranslations() {
     const { data, error } = await supabase.storage.from(BUCKET).download(filePath);
     
     if (error) {
+      const errorMessage = typeof error.message === 'string' ? error.message : JSON.stringify(error);
       // Don't show an error toast if the file simply doesn't exist yet (Not Found).
-      if (error.message && !error.message.includes('Not Found')) {
-        showError(`Fout bij laden: ${error.message}`);
+      if (!errorMessage.includes('Not Found')) {
+        showError(`Fout bij laden: ${errorMessage}`);
       }
       setJsonText("{}");
     } else {
