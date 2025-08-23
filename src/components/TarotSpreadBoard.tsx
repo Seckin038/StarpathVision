@@ -15,6 +15,7 @@ type Props = {
   annotations?: Annotation[];
   cardsFlipped?: boolean;
   debugGrid?: boolean;
+  onCardClick?: (card: CardItem) => void;
 };
 
 const DEFAULT_CARD_WIDTH: Record<SpreadKind, number> = {
@@ -43,20 +44,16 @@ const HEIGHT_PCT_PER_WIDTH_PCT = 8/3;
 
 export default function TarotSpreadBoard({
   cards, kind="ppf-3", customPositions, cardWidthPct, className,
-  annotations, cardsFlipped, debugGrid
+  annotations, cardsFlipped, debugGrid, onCardClick
 }: Props) {
   const desired = cards.length;
   let positions: Position[];
 
-  // If a specific `kind` is provided (not 'custom'), always use its predefined layout.
-  // This ensures consistency for standard spreads.
-  // `customPositions` will only be used for `kind: 'custom'`.
   if (kind !== 'custom') {
     positions = positionsFor(kind, desired);
   } else if (customPositions && customPositions.length >= desired) {
     positions = normalizePositions(customPositions.slice(0, desired));
   } else {
-    // Fallback for 'custom' kind when positions are missing or insufficient.
     positions = positionsFor('custom', desired);
   }
 
@@ -83,7 +80,7 @@ export default function TarotSpreadBoard({
 
       {cards.map((card, i) => {
         const p = positions[i];
-        if (!p) return null; // Extra guard, zou niet meer nodig moeten zijn.
+        if (!p) return null;
 
         const targetX = (p.x ?? 0.5) * 100;
         const targetY = (p.y ?? 0.5) * 100;
@@ -94,7 +91,7 @@ export default function TarotSpreadBoard({
         const ann = annotations?.[i];
 
         return (
-          <div
+          <motion.div
             key={`${card.id}_${i}`}
             className="absolute"
             style={{
@@ -104,18 +101,23 @@ export default function TarotSpreadBoard({
               transform: `translate(-50%, -50%) rotate(${p.r ?? 0}deg)`,
               zIndex: p.z ?? (i+1),
             }}
+            whileHover={{ scale: 1.05, zIndex: 100 }}
+            transition={{ duration: 0.2 }}
           >
-            <div className="relative w-full rounded-xl overflow-hidden border border-white/10
-                            bg-gradient-to-b from-stone-800/40 to-stone-900/60"
-                 style={{ aspectRatio: "2 / 3" }}>
+            <button
+              onClick={() => onCardClick?.(card)}
+              className="w-full rounded-xl overflow-hidden border border-white/10
+                         bg-gradient-to-b from-stone-800/40 to-stone-900/60"
+              style={{ aspectRatio: "2 / 3" }}
+            >
               <img src={card.imageUrl || "/tarot/back.svg"} alt={card.name}
                    className="absolute inset-0 w-full h-full object-cover" />
               <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(255,255,255,.10),transparent_55%)]" />
-            </div>
+            </button>
 
             {ann && cardsFlipped && (
               <motion.div
-                className="absolute left-1/2 -translate-x-1/2 top-full mt-2 w-max max-w-[160px] text-center"
+                className="absolute left-1/2 -translate-x-1/2 top-full mt-2 w-max max-w-[160px] text-center pointer-events-none"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.4 + i*0.04 }}
@@ -127,7 +129,7 @@ export default function TarotSpreadBoard({
                 </div>
               </motion.div>
             )}
-          </div>
+          </motion.div>
         );
       })}
     </div>

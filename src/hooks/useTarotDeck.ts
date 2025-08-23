@@ -2,13 +2,19 @@ import { useQuery } from "@tanstack/react-query";
 import { Locale } from "@/types/tarot";
 import { supabase } from "@/lib/supabaseClient";
 
-export type TarotDeckCard = { id: string; name: string; imageUrl?: string; meaning_up?: string | null };
+export type TarotDeckCard = { 
+  id: string; 
+  name: string; 
+  imageUrl?: string; 
+  meaning_up?: string | null;
+  meaning_rev?: string | null;
+};
 
 const fetchTarotDeck = async (locale: Locale): Promise<TarotDeckCard[]> => {
   try {
     const { data, error } = await supabase
       .from("tarot_cards")
-      .select("id, name, image_url, meaning_up, number")
+      .select("id, name, image_url, meaning_up, meaning_rev, number")
       .order("number");
 
     if (error) {
@@ -20,6 +26,7 @@ const fetchTarotDeck = async (locale: Locale): Promise<TarotDeckCard[]> => {
       name: card.name?.[locale] ?? card.name?.['en'] ?? card.id,
       imageUrl: card.image_url,
       meaning_up: card.meaning_up?.[locale] ?? card.meaning_up?.['en'] ?? null,
+      meaning_rev: card.meaning_rev?.[locale] ?? card.meaning_rev?.['en'] ?? null,
     }));
 
   } catch (error) {
@@ -37,6 +44,9 @@ const fetchTarotDeck = async (locale: Locale): Promise<TarotDeckCard[]> => {
         meaning_up: (typeof card.meaning_up === 'object' && card.meaning_up !== null)
           ? (card.meaning_up[locale] ?? card.meaning_up['en'] ?? null)
           : (card.meaning_up || null),
+        meaning_rev: (typeof card.meaning_rev === 'object' && card.meaning_rev !== null)
+          ? (card.meaning_rev[locale] ?? card.meaning_rev['en'] ?? null)
+          : (card.meaning_rev || null),
       }));
     } catch (fallbackError) {
       console.error("Fallback to local JSON also failed:", fallbackError);

@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button";
 import { ChevronLeft, Loader2, AlertTriangle, Sparkles, RefreshCw } from "lucide-react";
 import TarotSpreadBoard from "@/components/TarotSpreadBoard";
 import { SpreadKind, positionsFor } from "@/lib/positions";
-import TarotGridDisplay from "@/components/TarotGridDisplay";
 import { useTranslation } from "react-i18next";
 import { Spread, DrawnCard, Locale, SpreadPosition } from "@/types/tarot";
 import { useTarotInterpretation, TarotInterpretationPayload } from "@/hooks/useTarotInterpretation";
@@ -13,31 +12,17 @@ import { usePersona } from "@/contexts/PersonaContext";
 import { PersonaPicker } from "@/components/PersonaPicker";
 import { PersonaBadge } from "@/components/PersonaBadge";
 import { Card, CardContent } from "@/components/ui/card";
-import { useTarotDeck } from "@/hooks/useTarotDeck";
+import { useTarotDeck, TarotDeckCard } from "@/hooks/useTarotDeck";
+import FlippableCard from "@/components/FlippableCard";
+import TarotCardDetailModal from "@/components/TarotCardDetailModal";
 
 type Phase = 'loading' | 'error' | 'picking' | 'reading';
 
-const DEFAULT_COUNT: Record<SpreadKind, number> = {
-  "daily-1": 1, "two-choice-2": 2, "ppf-3": 3, "line-3": 3,
-  "cross-5": 5, "pentagram-5": 5, "star-6": 6, "horseshoe-7": 7,
-  "chakra-7": 7, "planetary-7": 7, "week-7": 7, "cross-10": 10,
-  "career-10": 10, "tree-of-life-10": 10, "year-12": 12, "romani-21": 21,
-  "grand-tableau-36": 36, "full-deck-78": 78, "custom": 3,
+const shuffleArray = <T,>(array: T[]): T[] => {
+  return array.map(value => ({ value, sort: Math.random() }))
+    .sort((a, b) => a.sort - b.sort)
+    .map(({ value }) => value);
 };
-
-function mapSpreadIdToKind(id: string): SpreadKind {
-  const kindMap: Record<string, SpreadKind> = {
-    "daily-1": "daily-1", "two-choice-2": "two-choice-2", "ppf-3": "ppf-3",
-    "mind-body-spirit-3": "line-3", "sao-3": "line-3", "line-3": "line-3",
-    "relationship-5": "cross-5", "cross-of-truth-5": "cross-5", "pentagram-5": "pentagram-5",
-    "star-6": "star-6", "horseshoe-7": "horseshoe-7", "chakra-7": "chakra-7",
-    "planetary-7": "planetary-7", "week-7": "week-7", "celtic-cross-10": "cross-10",
-    "career-10": "career-10", "tree-of-life-10": "tree-of-life-10",
-    "astrological-12": "year-12", "year-12": "year-12", "romani-21": "romani-21",
-    "grand-tableau-36": "grand-tableau-36", "full-deck-78": "full-deck-78",
-  };
-  return kindMap[id] || 'custom';
-}
 
 export default function TarotReadingPage() {
   const params = useParams<Record<string, string>>();
@@ -52,23 +37,29 @@ export default function TarotReadingPage() {
   const [spread, setSpread] = useState<Spread | null>(null);
   const [draw, setDraw] = useState<DrawnCard[]>([]);
   const [error, setError] = useState<string | null>(null);
+  const [shuffledDeck, setShuffledDeck] = useState<TarotDeckCard[]>([]);
   const [selectedIndices, setSelectedIndices] = useState<number[]>([]);
   const [showPersonaPicker, setShowPersonaPicker] = useState(false);
   const [cardsFlipped, setCardsFlipped] = useState(false);
   const [readingLocale, setReadingLocale] = useState<string | null>(null);
+  const [viewingCard, setViewingCard] = useState<TarotDeckCard | null>(null);
 
   const { data: interpretation, isLoading: isLoadingInterpretation, error: interpretationError, getInterpretation, resetInterpretation } = useTarotInterpretation();
 
-  // Reset reading if language changes, but keep card selection
   useEffect(() => {
     if (interpretation && readingLocale && i18n.language !== readingLocale) {
       resetInterpretation();
       setPhase('picking');
       setDraw([]);
       setCardsFlipped(false);
-      // NOTE: We DO NOT reset selectedIndices here, to preserve user's choice.
     }
   }, [i18n.language, interpretation, readingLocale, resetInterpretation]);
+
+  useEffect(() => {
+    if (!deckLoading && deck.length > 0) {
+      setShuffledDeck(shuffleArray(deck));
+    }
+  }, [deck, deckLoading]);
 
   useEffect(() => {
     const initializeReading = async () => {
@@ -81,17 +72,6 @@ export default function TarotReadingPage() {
         
         const currentSpread = library.spreads.find((s: Spread) => s.id === spreadId);
         if (!currentSpread) throw new Error(`Legging '${spreadId}' niet gevonden.`);
-
-        const kind = mapSpreadIdToKind(currentSpread.id);
-        
-        currentSpread.cards_required = DEFAULT_COUNT[kind] || 1;
-
-        if (Array.isArray(currentSpread.positions) && currentSpread.positions.length > 0) {
-          currentSpread.cards_required = Math.min(
-            currentSpread.cards_required,
-            currentSpread.positions.length
-          );
-        }
 
         setSpread(currentSpread);
         setPhase('picking');
@@ -109,7 +89,6 @@ export default function TarotReadingPage() {
     if (hasValidPositionsInJson) {
         return spread.positions;
     }
-    // Fallback to generated positions
     return positionsFor(mapSpreadIdToKind(spread.id), spread.cards_required).map((p, i) => ({
         slot_key: p.label || `pos_${i + 1}`,
         idx: i + 1,
@@ -122,16 +101,15 @@ export default function TarotReadingPage() {
     }));
   }, [spread]);
 
+  const handleCardSelect = (index: number) => {
+    if (!spread || selectedIndices.length >= spread.cards_required || selectedIndices.includes(index)) return;
+    setSelectedIndices(prev => [...prev, index]);
+  };
+
   const handleConfirmSelection = () => {
-    if (!spread || selectedIndices.length !== spread.cards_required || deck.length === 0) return;
+    if (!spread || selectedIndices.length !== spread.cards_required || shuffledDeck.length === 0) return;
 
-    const selectedCards = selectedIndices.map(i => deck[i % deck.length]);
-    if (selectedCards.some(c => c === undefined)) {
-      setError("Fout bij het selecteren van kaarten. Probeer het opnieuw.");
-      setPhase('error');
-      return;
-    }
-
+    const selectedCards = selectedIndices.map(i => shuffledDeck[i]);
     const finalDraw: DrawnCard[] = selectedCards.map((card, index) => {
       const position = positionsToUse[index];
       return {
@@ -177,45 +155,31 @@ export default function TarotReadingPage() {
     }
   }, [phase, draw, interpretation, isLoadingInterpretation, handleGetInterpretation, cardsFlipped]);
 
-  const handlePersonaPicked = () => {
-    setShowPersonaPicker(false);
-  };
-
   const getPositionTitle = (pos: SpreadPosition) => {
     const rawTitle = pos.title?.[locale] || pos.slot_key;
     const translationKey = `tarot.${rawTitle.toLowerCase()}`;
     return i18n.exists(translationKey) ? t(translationKey) : rawTitle;
   };
 
-  const annotations =
-    phase === "reading" && spread
-      ? draw.map((d, i) => {
-          const pos = positionsToUse[i];
-          const title = getPositionTitle(pos);
-          const label = d.isReversed ? t("tarot.reversed") : t("tarot.upright");
-          return { title, label };
-        })
-      : [];
+  const annotations = phase === "reading" && spread ? draw.map((d, i) => {
+    const pos = positionsToUse[i];
+    return { title: getPositionTitle(pos), label: d.isReversed ? t("tarot.reversed") : t("tarot.upright") };
+  }) : [];
 
-  const panelItems =
-    phase === "reading" && spread
-      ? draw.map((d, i) => {
-          const pos = positionsToUse[i];
-          const title = getPositionTitle(pos);
-          const copy = (d.isReversed ? pos.reversed_copy?.[locale] : pos.upright_copy?.[locale]) || "";
-          return {
-            index: i + 1,
-            name: d.card.name,
-            imageUrl: d.card.imageUrl,
-            upright: !d.isReversed,
-            positionTitle: title,
-            positionCopy: copy,
-          };
-        })
-      : [];
+  const panelItems = phase === "reading" && spread ? draw.map((d, i) => {
+    const pos = positionsToUse[i];
+    return {
+      index: i + 1,
+      name: d.card.name,
+      imageUrl: d.card.imageUrl,
+      upright: !d.isReversed,
+      positionTitle: getPositionTitle(pos),
+      positionCopy: (d.isReversed ? pos.reversed_copy?.[locale] : pos.upright_copy?.[locale]) || "",
+    };
+  }) : [];
 
   const renderContent = () => {
-    if (phase === 'loading' || deckLoading) {
+    if (phase === 'loading' || deckLoading || shuffledDeck.length === 0) {
       return <div className="text-center py-12"><Loader2 className="h-8 w-8 text-amber-600 animate-spin" /></div>;
     }
 
@@ -234,21 +198,21 @@ export default function TarotReadingPage() {
             <p>{t('tarotReading.chooseCards', { count: spread.cards_required })}</p>
             <p className="text-sm text-stone-400">{t('tarotReading.selected', { selected: selectedIndices.length, total: spread.cards_required })}</p>
           </div>
-          <TarotGridDisplay
-            totalCards={78}
-            maxSelect={spread.cards_required}
-            selected={selectedIndices}
-            onChange={setSelectedIndices}
-            renderCard={(_index, isSelected) => (
-              <div className={`w-full h-full rounded-md sm:rounded-lg overflow-hidden transition-all duration-200 relative group ${isSelected ? 'ring-2 ring-amber-500 ring-offset-2 ring-offset-stone-950' : ''}`}>
-                <img src="/tarot/back.svg" alt="Tarot card back" className="w-full h-full object-cover group-hover:scale-105 transition-transform" />
-              </div>
-            )}
-          />
+          <div className="grid grid-cols-5 sm:grid-cols-8 md:grid-cols-10 lg:grid-cols-13 gap-2 md:gap-3">
+            {shuffledDeck.map((card, index) => (
+              <FlippableCard
+                key={card.id + index}
+                isFlipped={selectedIndices.includes(index)}
+                frontImg={card.imageUrl || "/tarot/back.svg"}
+                backImg="/tarot/back.svg"
+                onClick={() => handleCardSelect(index)}
+              />
+            ))}
+          </div>
           <div className="flex justify-center">
             <Button 
               onClick={handleConfirmSelection} 
-              disabled={selectedIndices.length !== spread.cards_required || deckLoading} 
+              disabled={selectedIndices.length !== spread.cards_required} 
               className="bg-amber-800 hover:bg-amber-700 text-stone-100 px-6 py-3"
             >
               <Sparkles className="h-4 w-4 mr-2" /> {t('common.confirmSelection')}
@@ -267,6 +231,7 @@ export default function TarotReadingPage() {
             customPositions={positionsToUse.map(p => ({ x: p.x, y: p.y, rot: p.rot, slot_key: p.slot_key }))}
             annotations={annotations}
             cardsFlipped={cardsFlipped}
+            onCardClick={(card) => setViewingCard(deck.find(c => c.id === card.id) || null)}
           />
           {isLoadingInterpretation && (
             <Card className="bg-stone-900/50"><CardContent className="pt-6 text-center"><Loader2 className="h-8 w-8 text-amber-600 animate-spin" /></CardContent></Card>
@@ -300,12 +265,27 @@ export default function TarotReadingPage() {
         {showPersonaPicker && (
           <div className="fixed inset-0 z-50 grid place-items-center bg-black/60 p-4" onClick={() => setShowPersonaPicker(false)}>
             <div className="w-full max-w-5xl rounded-3xl border border-white/10 bg-stone-950 p-6 overflow-y-auto max-h-[90vh]" onClick={e => e.stopPropagation()}>
-              <PersonaPicker method="tarot" onPicked={handlePersonaPicked} />
+              <PersonaPicker method="tarot" onPicked={() => setShowPersonaPicker(false)} />
             </div>
           </div>
         )}
         <main>{renderContent()}</main>
+        <TarotCardDetailModal card={viewingCard} isOpen={!!viewingCard} onClose={() => setViewingCard(null)} />
       </div>
     </div>
   );
+}
+
+function mapSpreadIdToKind(id: string): SpreadKind {
+  const kindMap: Record<string, SpreadKind> = {
+    "daily-1": "daily-1", "two-choice-2": "two-choice-2", "ppf-3": "ppf-3",
+    "mind-body-spirit-3": "line-3", "sao-3": "line-3", "line-3": "line-3",
+    "relationship-5": "cross-5", "cross-of-truth-5": "cross-5", "pentagram-5": "pentagram-5",
+    "star-6": "star-6", "horseshoe-7": "horseshoe-7", "chakra-7": "chakra-7",
+    "planetary-7": "planetary-7", "week-7": "week-7", "celtic-cross-10": "cross-10",
+    "career-10": "career-10", "tree-of-life-10": "tree-of-life-10",
+    "astrological-12": "year-12", "year-12": "year-12", "romani-21": "romani-21",
+    "grand-tableau-36": "grand-tableau-36", "full-deck-78": "full-deck-78",
+  };
+  return kindMap[id] || 'custom';
 }
