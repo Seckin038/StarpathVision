@@ -14,12 +14,19 @@ export async function uploadAvatar(file: File, userId: string) {
 
 export async function uploadTarotCardImage(file: File, cardId: string) {
   const ext = file.name.split(".").pop() || "png";
-  const path = `${cardId}.${ext}`; // Use card ID for a clean filename, e.g., maj01.png
+  const path = `${cardId}.${ext}`;
+  // Upload the file, overwriting if it exists. Set a short cache time.
   const { error } = await supabase.storage.from("tarot-cards").upload(path, file, {
-    cacheControl: "31536000", // Cache for 1 year
+    cacheControl: "60", // Cache for 60 seconds
     upsert: true,
   });
   if (error) throw error;
+
+  // Get the public URL
   const { data } = supabase.storage.from("tarot-cards").getPublicUrl(path);
-  return data.publicUrl;
+  
+  // Add a cache-busting query parameter to ensure the new image is always fetched
+  const urlWithCacheBuster = `${data.publicUrl}?t=${new Date().getTime()}`;
+  
+  return urlWithCacheBuster;
 }
