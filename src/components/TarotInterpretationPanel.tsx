@@ -77,7 +77,7 @@ export default function TarotInterpretationPanel({ items, data }: Props) {
                   <img
                     src={item.imageUrl || '/tarot/back.svg'}
                     alt={item.name}
-                    className="w-16 h-auto rounded-md border border-white/10 shrink-0"
+                    className="w-24 h-auto rounded-md border border-white/10 shrink-0"
                   />
                   <div>
                     <h4 className="font-bold text-amber-200">{item.index}. {item.name}</h4>

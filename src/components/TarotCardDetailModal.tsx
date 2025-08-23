@@ -34,13 +34,13 @@ export default function TarotCardDetailModal({ card, isOpen, onClose }: Props) {
           </div>
           <div className="space-y-4 max-h-[60vh] overflow-y-auto pr-2">
             <div>
-              <h3 className="font-semibold text-amber-300 text-lg mb-1">{t('tarot.upright')}</h3>
+              <h3 className="font-semibold text-amber-300 text-lg mb-1">Trefwoorden ({t('tarot.upright')})</h3>
               <DialogDescription className="text-stone-300 whitespace-pre-line">
                 {card.meaning_up || t('tarot.noMeaningAvailable')}
               </DialogDescription>
             </div>
             <div>
-              <h3 className="font-semibold text-rose-300 text-lg mb-1">{t('tarot.reversed')}</h3>
+              <h3 className="font-semibold text-rose-300 text-lg mb-1">Trefwoorden ({t('tarot.reversed')})</h3>
               <DialogDescription className="text-stone-300 whitespace-pre-line">
                 {card.meaning_rev || t('tarot.noMeaningAvailable')}
               </DialogDescription>
