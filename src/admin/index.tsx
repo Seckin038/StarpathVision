@@ -3,7 +3,6 @@ import AdminMainLayout from "./shell/AdminMainLayout";
 import RequireRole from "./shell/RequireRole";
 import AdminCards from "./cards/AdminCards";
 import AdminPersonas from "./personas/AdminPersonas";
-import AdminTranslations from "./translations/AdminTranslations";
 import AdminAudit from "./audit/AdminAudit";
 import AdminSpreads from "./spreads/AdminSpreads";
 import AdminUsers from "./users/AdminUsers";
@@ -18,7 +17,6 @@ export default function AdminRoutes() {
           <Route path="/" element={<AdminHome />} />
           <Route path="cards" element={<AdminCards />} />
           <Route path="personas" element={<AdminPersonas />} />
-          <Route path="translations" element={<AdminTranslations />} />
           <Route path="audit" element={<AdminAudit />} />
           <Route path="spreads" element={<AdminSpreads />} />
           <Route path="users" element={<RequireRole roles={["admin"]}><AdminUsers /></RequireRole>} />

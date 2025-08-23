@@ -29,7 +29,6 @@ const AdminMainLayout = () => {
               {link("/admin/spreads", t('admin:nav.spreads'))}
               {link("/admin/cards", t('admin:nav.cards'))}
               {link("/admin/personas", t('admin:nav.personas'))}
-              {link("/admin/translations", t('admin:nav.translations'))}
               {link("/admin/users", t('admin:nav.users'))}
               {link("/admin/features", t('admin:nav.features'))}
               {link("/admin/audit", t('admin:nav.audit'))}
