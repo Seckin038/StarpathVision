@@ -3,15 +3,9 @@ import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.45.0";
 import { GoogleGenerativeAI } from "npm:@google/generative-ai";
 
-const cors = (req: Request) => {
-  const origin = req.headers.get("Origin") ?? "*";
-  const acrh = req.headers.get("Access-Control-Request-Headers") ?? "authorization, x-client-info, apikey, content-type";
-  return {
-    "Access-Control-Allow-Origin": origin,
-    "Vary": "Origin",
-    "Access-Control-Allow-Methods": "POST, OPTIONS",
-    "Access-Control-Allow-Headers": acrh,
-  };
+const corsHeaders = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
 function extractAndParseJson(text: string): any {
@@ -39,8 +33,9 @@ function extractAndParseJson(text: string): any {
 }
 
 Deno.serve(async (req) => {
-  const corsHeaders = cors(req);
-  if (req.method === "OPTIONS") return new Response("ok", { headers: corsHeaders });
+  if (req.method === "OPTIONS") {
+    return new Response("ok", { headers: corsHeaders });
+  }
 
   try {
     const SUPABASE_URL = Deno.env.get("SUPABASE_URL")!;
