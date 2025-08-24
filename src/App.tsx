@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Routes, Route } from "react-router-dom";
 import MainLayout from "./components/MainLayout";
 import RequireAuth from "./components/RequireAuth";
+import { AppErrorBoundary } from "./components/AppErrorBoundary";
 
 import Index from "./pages/Index";
 import Onboarding from "./pages/Onboarding";
@@ -32,41 +33,43 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <Routes>
-        {/* Admin routes now use their own layout structure */}
-        <Route path="/admin/*" element={<AdminRoutes />} />
+      <AppErrorBoundary>
+        <Routes>
+          {/* Admin routes now use their own layout structure */}
+          <Route path="/admin/*" element={<AdminRoutes />} />
 
-        {/* Main site uses the MainLayout */}
-        <Route element={<MainLayout />}>
-          {/* --- PUBLIC ROUTES --- */}
-          <Route path="/" element={<Index />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/register" element={<RegisterPage />} />
-          <Route path="/forgot-password" element={<ForgotPasswordPage />} />
-          
-          {/* Public Daily Tarot */}
-          <Route path="/readings/tarot/spread/ppf-3" element={<TarotSpreadReading />} />
+          {/* Main site uses the MainLayout */}
+          <Route element={<MainLayout />}>
+            {/* --- PUBLIC ROUTES --- */}
+            <Route path="/" element={<Index />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/register" element={<RegisterPage />} />
+            <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+            
+            {/* Public Daily Tarot */}
+            <Route path="/readings/tarot/spread/ppf-3" element={<TarotSpreadReading />} />
 
-          {/* --- PROTECTED ROUTES --- */}
-          <Route path="/dashboard" element={<RequireAuth><Dashboard /></RequireAuth>} />
-          <Route path="/archive" element={<RequireAuth><Archive /></RequireAuth>} />
-          <Route path="/profile" element={<RequireAuth><ProfilePage /></RequireAuth>} />
-          <Route path="/reading/:id" element={<RequireAuth><ReadingDetailPage /></RequireAuth>} />
-          <Route path="/onboarding" element={<RequireAuth><Onboarding /></RequireAuth>} />
-          <Route path="/pricing" element={<RequireAuth><PricingPage /></RequireAuth>} />
-          
-          {/* Protected Reading Routes */}
-          <Route path="/readings/tarot" element={<RequireAuth><TarotChoice /></RequireAuth>} />
-          <Route path="/readings/tarot/spread/:spread" element={<RequireAuth><TarotSpreadReading /></RequireAuth>} />
-          <Route path="/readings/coffee" element={<RequireAuth><CoffeeReading /></RequireAuth>} />
-          <Route path="/readings/coffee/upload" element={<RequireAuth><CoffeeReadingWithUpload /></RequireAuth>} />
-          <Route path="/readings/numerology" element={<RequireAuth><NumerologyReading /></RequireAuth>} />
-          <Route path="/readings/dream" element={<RequireAuth><DreamReading /></RequireAuth>} />
-          
-          {/* Catch-all */}
-          <Route path="*" element={<NotFound />} />
-        </Route>
-      </Routes>
+            {/* --- PROTECTED ROUTES --- */}
+            <Route path="/dashboard" element={<RequireAuth><Dashboard /></RequireAuth>} />
+            <Route path="/archive" element={<RequireAuth><Archive /></RequireAuth>} />
+            <Route path="/profile" element={<RequireAuth><ProfilePage /></RequireAuth>} />
+            <Route path="/reading/:id" element={<RequireAuth><ReadingDetailPage /></RequireAuth>} />
+            <Route path="/onboarding" element={<RequireAuth><Onboarding /></RequireAuth>} />
+            <Route path="/pricing" element={<RequireAuth><PricingPage /></RequireAuth>} />
+            
+            {/* Protected Reading Routes */}
+            <Route path="/readings/tarot" element={<RequireAuth><TarotChoice /></RequireAuth>} />
+            <Route path="/readings/tarot/spread/:spread" element={<RequireAuth><TarotSpreadReading /></RequireAuth>} />
+            <Route path="/readings/coffee" element={<RequireAuth><CoffeeReading /></RequireAuth>} />
+            <Route path="/readings/coffee/upload" element={<RequireAuth><CoffeeReadingWithUpload /></RequireAuth>} />
+            <Route path="/readings/numerology" element={<RequireAuth><NumerologyReading /></RequireAuth>} />
+            <Route path="/readings/dream" element={<RequireAuth><DreamReading /></RequireAuth>} />
+            
+            {/* Catch-all */}
+            <Route path="*" element={<NotFound />} />
+          </Route>
+        </Routes>
+      </AppErrorBoundary>
     </TooltipProvider>
   </QueryClientProvider>
 );
